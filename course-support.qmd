@@ -1,0 +1,68 @@
+---
+title: "Course support"
+---
+
+We expect everyone will have questions at some point in the semester, so we encourage you to:
+
+-   Ask questions during lectures and lab
+-   Ask and answer questions on Conversations
+-   Attend office hours
+-   Reach out by email
+-   Consult textbooks
+-   Make use of resources for academic support
+-   Make use of resources for mental health and wellness
+
+Read below to find out more about how to best make use of each of these resources.
+
+## Lectures and lab
+
+If you have a question during lecture or lab, feel free to ask it!
+There are likely other students with the same question, so by asking you will create a learning opportunity for everyone.
+
+## Conversations
+
+Outside of class and office hours, any general questions about course content or assignments should be posted on [Conversations](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b).
+There is a chance another student has already asked a similar question, so please check the other posts on Ed Discussion before adding a new question.
+If you know the answer to a question that is posted, I encourage you to respond!
+
+## Office hours
+
+The teaching team is here to help you be successful in the course.
+You are encouraged to attend office hours during the times posted on the home page to ask questions about the course content and assignments.
+A lot of questions are most effectively answered in-person, so office hours are a valuable resource.
+Please use them!
+
+You can find the schedule for office hours and associated links for online office hours in Sakai.
+
+## Email
+
+If you have questions about personal matters that are not appropriate for the public forum on Conversations (e.g. illness, accommodations, etc.), you may email Dr. Mine Çetinkaya-Rundel at [mc301\@duke.edu](mailto:mc301@duke.edu).
+
+## Textbooks
+
+-   [R for Data Science](https://r4ds.had.co.nz/) by Garret Grolemund and Hadley Wickham
+
+-   [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Paul Roback and Julie Legler
+
+-   [Stat2: Modeling with Regression and ANOVA](https://www.amazon.com/STAT2-Modeling-Regression-Ann-Cannon-ebook-dp-B07K6Y99J3/dp/B07K6Y99J3/ref=mt_other?_encoding=UTF8&me=&qid=1629580711) by Ann Cannon et al.
+
+## Mental health and wellness
+
+-   **DukeReach**: Provides comprehensive outreach services to identify and support students in managing all aspects of well being.
+    If you have concerns about a student's behavior or health visit the website for resources and assistance.
+    Go to [studentaffairs.duke.edu/dukereach](http://studentaffairs.duke.edu/dukereach).
+
+-   **Counseling and Psychological Services (CAPS)**: CAPS services include individual, group, and couples counseling services, health coaching, psychiatric services, and workshops and discussions.
+    Contact CAPS at (919) 660-1000.
+
+-   **Blue Devils Care**.
+    A convenient and cost-effective way for Duke students to receive 24/7 mental health support through TalkNow.
+    Go to [bluedevilscare.duke.edu](https://www.timely.md/faq/blue-devils-care-faq/).
+
+## Academic support
+
+-   **The Academic Resource Center**: Contact the ARC at (919) 684-5917, [theARC\@duke.edu](mailto:theARC@duke.edu) or visit their website [arc.duke.edu](https://arc.duke.edu/).
+
+-   **DuWell**: Contact DuWell at (919) 681-8421, [duwell\@studentaffairs.duke.edu](mailto:duwell@studentaffairs.duke.edu), or [studentaffairs.duke.edu/duwell](https://studentaffairs.duke.edu/duwell).
+
+-   **WellTrack**: Contact WellTrack at [app.welltrack.com](https://app.welltrack.com/).
