@@ -33,6 +33,11 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
 
+      - name: Install quarto
+        run: |
+          install.packages("quarto")
+        shell: Rscript {0}
+
       - name: Build site 🔧
         run: Rscript scripts/build_website.R
 
