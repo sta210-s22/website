@@ -2,8 +2,7 @@ project:
   type: website
 
 website:
-  font: "Atkinson Hyperlegible"
-  title: "STA 210 - Spring 2022"
+  title: "STA 210 - Sp 2022"
 
   sidebar:
     background: "#D9E3E4"
@@ -42,8 +41,10 @@ website:
             text: Useful links
       - section: "Computing"
         contents:
-          - computing-access.qmd
-          - computing-troubleshooting.qmd
+          - href: computing-access.qmd
+            text: Access
+          - href: computing-troubleshooting.qmd
+            text: Troubleshooting
       - section: "Project"
         contents:
           - href: project-description.qmd

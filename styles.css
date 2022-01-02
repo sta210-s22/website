@@ -1,5 +1,9 @@
 /* css styles */
 
+body {
+  font-family: Atkinson Hyperlegible;
+}
+
 .navbar-title {
   color: white;
 }
