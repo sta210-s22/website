@@ -2,17 +2,21 @@ project:
   type: website
 
 website:
-
+  font: "Atkinson Hyperlegible"
   title: "STA 210 - Spring 2022"
 
   sidebar:
-
+    background: "#D9E3E4"
+    align: center
     tools:
       - icon: github
         href: https://github.com/sta210-s22
+        text: "GitHub organization"
       - icon: code-square
         href: https://cmgr.oit.duke.edu/containers
+        text: "RStudio Containers"
       - icon: person-fill
+        text: "Sakai"
         menu:
           - text: Discussion forum
             url: https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b
@@ -26,12 +30,12 @@ website:
     contents:
       - section: "Course information"
         contents:
+          - href: course-overview.qmd
+            text: Overview
           - href: course-syllabus.qmd
             text: Syllabus
           - href: course-team.qmd
             text: Teaching team
-          - href: course-schedule.qmd
-            text: Schedule
           - href: course-support.qmd
             text: Support
           - href: course-links.qmd

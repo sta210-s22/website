@@ -4,7 +4,7 @@ title: "Teaching team"
 
 ## Instructor
 
-![](images/mine.png){style="float:right;padding: 0 0 0 10px;" width="240" height="240"}
+![](images/mine.png){style="float:right;padding: 0 0 0 10px;" fig-alt="Headshot of Dr. Mine Çetinkaya-Rundel" width="240" height="240"}
 
 [**Dr. Mine Çetinkaya-Rundel**](http://mine-cr.com/) (she/her) is Professor of the Practice and Director of Undergraduate Studies at the Department of Statistical Science at Duke University.
 Mine also works with RStudio as a Data Scientist and Professional Educator at RStudio.
