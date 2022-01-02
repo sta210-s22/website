@@ -5,22 +5,24 @@ website:
 
   title: "STA 210 - Spring 2022"
 
-  navbar:
-    logo: "images/logo.png"
-    type: dark
-    background: "#44757A"
-    right:
-      - href: https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/
-        text: Sakai
-      - href: https://github.com/sta210-s22
-        icon: github
-      - href: https://cmgr.oit.duke.edu/containers
-        icon: code-square
-      - href: https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b
-        icon: chat
-
   sidebar:
-    style: "floating"
+
+    tools:
+      - icon: github
+        href: https://github.com/sta210-s22
+      - icon: code-square
+        href: https://cmgr.oit.duke.edu/containers
+      - icon: person-fill
+        menu:
+          - text: Discussion forum
+            url: https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b
+          - text: Gradescope
+            url: https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/aec742dc-2972-4f02-a35b-1dd3315af889
+          - text: Gradebook
+            url: https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/69078433-67a6-4054-a2e7-9e6c202ecdc3/
+
+    style: "docked"
+    search: true
     contents:
       - section: "Course information"
         contents:
@@ -32,7 +34,8 @@ website:
             text: Schedule
           - href: course-support.qmd
             text: Support
-          - course-links.qmd
+          - href: course-links.qmd
+            text: Useful links
       - section: "Computing"
         contents:
           - computing-access.qmd
@@ -46,6 +49,10 @@ website:
 
 format:
   html:
-    theme: flatly
+    theme:
+      light: cosmo
+      dark: cosmo
+    code-copy: true
+    code-overflow: wrap
     css: styles.css
     toc: true
