@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.2.413">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>STA 210 - Sp 2022 - Project tips + resources</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+  <script src="site_libs/quarto-nav/headroom.min.js"></script>
+  <script src="site_libs/clipboard/clipboard.min.js"></script>
+  <meta name="quarto:offset" content="./">
+  <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+  <script src="site_libs/quarto-search/fuse.min.js"></script>
+  <script src="site_libs/quarto-search/quarto-search.js"></script>
+  <script src="site_libs/quarto-html/quarto.js"></script>
+  <script src="site_libs/quarto-html/popper.min.js"></script>
+  <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="site_libs/quarto-html/anchor.min.js"></script>
+  <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+  <link class="quarto-color-scheme" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
+  <script src="site_libs/bootstrap/bootstrap.min.js"></script>
+  <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link class="quarto-color-scheme" href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="site_libs/bootstrap/bootstrap-dark.min.css">
+  <script id="quarto-search-options" type="application/json">{
+    "location": "sidebar",
+    "copy-button": false,
+    "collapse-after": 2,
+    "panel-placement": "start",
+    "type": "textbox",
+    "limit": 20,
+    "language": {
+      "search-no-results-text": "No results",
+      "search-matching-documents-text": "matching documents",
+      "search-copy-link-title": "Copy link to search",
+      "search-hide-matches-text": "Hide additional matches",
+      "search-more-match-text": "more match in this document",
+      "search-more-matches-text": "more matches in this document",
+      "search-clear-button-title": "Clear",
+      "search-detached-cancel-button-title": "Cancel",
+      "search-submit-button-title": "Submit"
+    }
+  }</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="docked">
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Project tips + resources</h1>
+      <button type="button" class="quarto-btn-toggle btn">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">STA 210 - Sp 2022</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/sta210-s22" title="GitHub organization" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="https://cmgr.oit.duke.edu/containers" title="RStudio Containers" class="sidebar-tool px-1"><i class="bi bi-code-square"></i></a>
+    <a href="" title="Sakai" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b">
+          Discussion forum
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/aec742dc-2972-4f02-a35b-1dd3315af889">
+          Gradescope
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/69078433-67a6-4054-a2e7-9e6c202ecdc3/">
+          Gradebook
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+  </div>
+    <div class="mt-2 flex-shrink-0 align-items-center">
+      <div class="sidebar-search">
+      <div id="quarto-search" class="" title="Search"></div>
+      </div>
+    </div>
+  <div class="sidebar-menu-container"> 
+  <ul class="list-unstyled mt-1">
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-course-information" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Course information</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="quarto-sidebar-section-course-information">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="./course-overview.html" class="">Overview</a>
+</li>
+          <li class="sidebar-item">
+  <a href="./course-syllabus.html" class="">Syllabus</a>
+</li>
+          <li class="sidebar-item">
+  <a href="./course-team.html" class="">Teaching team</a>
+</li>
+          <li class="sidebar-item">
+  <a href="./course-support.html" class="">Support</a>
+</li>
+          <li class="sidebar-item">
+  <a href="./course-links.html" class="">Useful links</a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-computing" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Computing</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="quarto-sidebar-section-computing">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="./computing-access.html" class="">Access</a>
+</li>
+          <li class="sidebar-item">
+  <a href="./computing-troubleshooting.html" class="">Troubleshooting</a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-project" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Project</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="quarto-sidebar-section-project">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="./project-description.html" class="">Description</a>
+</li>
+          <li class="sidebar-item">
+  <a href="./project-tips-resources.html" class="active">Tips + resources</a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  </ul>
+  </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+      <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#data-sources" class="nav-link active" data-scroll-target="#data-sources">Data sources</a>
+<ul class="collapse">
+<li><a href="#some-resources-that-may-be-helpful-as-you-find-data" class="nav-link" data-scroll-target="#some-resources-that-may-be-helpful-as-you-find-data">Some resources that may be helpful as you find data:</a></li>
+<li><a href="#other-data-repositories" class="nav-link" data-scroll-target="#other-data-repositories">Other data repositories</a></li>
+</ul></li>
+<li><a href="#tips" class="nav-link" data-scroll-target="#tips">Tips</a></li>
+<li><a href="#formatting-communication-tips" class="nav-link" data-scroll-target="#formatting-communication-tips">Formatting + communication tips</a>
+<ul class="collapse">
+<li><a href="#suppress-code-warnings-messages" class="nav-link" data-scroll-target="#suppress-code-warnings-messages">Suppress Code, Warnings, &amp; Messages</a></li>
+<li><a href="#headers" class="nav-link" data-scroll-target="#headers">Headers</a></li>
+<li><a href="#references" class="nav-link" data-scroll-target="#references">References</a></li>
+<li><a href="#appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+<li><a href="#resize-figures" class="nav-link" data-scroll-target="#resize-figures">Resize figures</a></li>
+<li><a href="#arranging-plots" class="nav-link" data-scroll-target="#arranging-plots">Arranging plots</a></li>
+<li><a href="#plot-titles-and-axis-labels" class="nav-link" data-scroll-target="#plot-titles-and-axis-labels">Plot titles and axis labels</a></li>
+<li><a href="#do-a-little-more-to-make-the-plot-look-professional" class="nav-link" data-scroll-target="#do-a-little-more-to-make-the-plot-look-professional">Do a little more to make the plot look professional!</a></li>
+<li><a href="#tables-and-model-output" class="nav-link" data-scroll-target="#tables-and-model-output">Tables and model output</a></li>
+<li><a href="#guidelines-for-communicating-results" class="nav-link" data-scroll-target="#guidelines-for-communicating-results">Guidelines for communicating results</a></li>
+</ul></li>
+<li><a href="#additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional resources</a></li>
+</ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content">
+<header id="title-block-header">
+<h1 class="title d-none d-lg-block display-7">Project tips + resources</h1>
+</header>
+
+<section id="data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources">Data sources</h2>
+<section id="some-resources-that-may-be-helpful-as-you-find-data" class="level3">
+<h3 class="anchored" data-anchor-id="some-resources-that-may-be-helpful-as-you-find-data">Some resources that may be helpful as you find data:</h3>
+<ul>
+<li><a href="https://rfun.library.duke.edu/blog/data-sources-for-regression-analysis/">R Data Sources for Regression Analysis</a></li>
+<li><a href="https://data.fivethirtyeight.com/">FiveThirtyEight data</a></li>
+<li><a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a></li>
+</ul>
+</section>
+<section id="other-data-repositories" class="level3">
+<h3 class="anchored" data-anchor-id="other-data-repositories">Other data repositories</h3>
+<ul>
+<li><a href="https://www.who.int/gho/database/en/">World Health Organization</a></li>
+<li><a href="https://data.nber.org/data/">The National Bureau of Economic Research</a></li>
+<li><a href="https://data.imf.org/?sk=388DFA60-1D26-4ADE-B505-A05A558D9A42&amp;sId=1479329328660">International Monetary Fund</a></li>
+<li><a href="http://gss.norc.org/">General Social Survey</a></li>
+<li><a href="http://data.un.org/">United Nations Data</a></li>
+<li><a href="https://unstats.un.org/home/">United Nations Statistics Division</a></li>
+<li><a href="https://data.gov.uk/">U.K. Data</a></li>
+<li><a href="https://www.data.gov/">U.S. Data</a></li>
+<li><a href="https://www.census.gov/data.html">U.S. Census Data</a></li>
+<li><a href="https://ec.europa.eu/eurostat/">European Statistics</a></li>
+<li><a href="https://www.statcan.gc.ca/eng/start">Statistics Canada</a></li>
+<li><a href="https://www.pewresearch.org/download-datasets/">Pew Research</a></li>
+<li><a href="https://data.unicef.org/">UNICEF</a></li>
+<li><a href="https://www.cdc.gov/datastatistics/index.html">CDC</a></li>
+<li><a href="https://datacatalog.worldbank.org/">World Bank</a></li>
+<li><a href="https://electionstudies.org//">Election Studies</a></li>
+</ul>
+</section>
+</section>
+<section id="tips" class="level2">
+<h2 class="anchored" data-anchor-id="tips">Tips</h2>
+<ul>
+<li><p>Ask questions if any of the expectations are unclear.</p></li>
+<li><p><strong>Code:</strong> In your write up your code should be hidden (<code>echo = FALSE</code>) so that your document is neat and easy to read. However your document should include all your code such that if I re-knit your Rmd file I should be able to obtain the results you presented.</p>
+<ul>
+<li><strong>Exception:</strong> If you want to highlight something specific about a piece of code, you’re welcome to show that portion.</li>
+</ul></li>
+<li><p>Merge conflicts will happen, issues will arise, and that’s fine! Commit and push often, and ask questions when stuck.</p></li>
+<li><p>Make sure each team member is contributing, both in terms of quality and quantity of contribution (we will be reviewing commits from different team members).</p></li>
+<li><p>All team members are expected to contribute equally to the completion of this assignment and group assessments will be given at its completion - anyone judged to not have sufficient contributed to the final product will have their grade penalized. While different teams members may have different backgrounds and abilities, it is the responsibility of every team member to understand how and why all code and approaches in the assignment works.</p></li>
+</ul>
+</section>
+<section id="formatting-communication-tips" class="level2">
+<h2 class="anchored" data-anchor-id="formatting-communication-tips">Formatting + communication tips</h2>
+<section id="suppress-code-warnings-messages" class="level3">
+<h3 class="anchored" data-anchor-id="suppress-code-warnings-messages">Suppress Code, Warnings, &amp; Messages</h3>
+<ul>
+<li>Include the following code in a code chunk at the top of your .Rmd file to suppress all code, warnings, and other messages. Use the code chunk header <code>{r set-up, include = FALSE}</code> to suppress this set up code.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">warning =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">message =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="headers" class="level3">
+<h3 class="anchored" data-anchor-id="headers">Headers</h3>
+<ul>
+<li>Use headers to clearly label each section. Make sure there is a space between the last <code>#</code> and the title, so the header renders correctly. For example, <code>###Section Title</code> will not render as header, but <code>### Section Title</code> will.</li>
+</ul>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ul>
+<li>Include all references in a section called “References” at the end of the report.</li>
+<li>This course does not have specific requirements for formatting citations and references.</li>
+<li>See <a href="https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html">Section 4.5</a> of the R Markdown Cookbook to learn about the citation functionality in R Markdown.</li>
+</ul>
+</section>
+<section id="appendix" class="level3">
+<h3 class="anchored" data-anchor-id="appendix">Appendix</h3>
+<ul>
+<li>If you have additional work that does not fit or does not belong in the body of the report, you may put it at the end of the document in section called “Appendix”.</li>
+<li>The items in the appendix should be properly labeled.</li>
+<li>The appendix should only be for additional material. The reader should be able to fully understand your report without viewing content in the appendix.</li>
+</ul>
+</section>
+<section id="resize-figures" class="level3">
+<h3 class="anchored" data-anchor-id="resize-figures">Resize figures</h3>
+<ul>
+<li><p>Resize plots and figures, so you have more space for the narrative.</p>
+<ul>
+<li><strong>Resize individual figures</strong>: Use the code chunk header <code>{r plot1, fig.height = 3, fig.width = 5}</code>, replacing <code>plot1</code> with a meaningful label and the height and width with values appropriate for your write up.</li>
+<li><strong>Resize all figures</strong>: Include the <code>fig_width</code> and <code>fig_height</code> options in your YAML header as shown below:</li>
+</ul></li>
+</ul>
+<!-- -->
+<pre><code>---
+title: "Your Title"
+author: "Team Name + Group Members"
+output: 
+  pdf_document:
+    fig_width: 5
+    fig_height: 3
+---</code></pre>
+<p>Replace the height and width values with values appropriate for your write up.</p>
+</section>
+<section id="arranging-plots" class="level3">
+<h3 class="anchored" data-anchor-id="arranging-plots">Arranging plots</h3>
+<p>Arrange plots in a grid, instead of one after the other. This is especially useful when displaying plots for exploratory data analysis and to check assumptions.</p>
+<ul>
+<li><p>If you’re using ggplot2 functions, the <code>patchwork</code> package makes it easy to arrange plots in a grid. See the documentation and examples <a href="https://patchwork.data-imaginist.com/">here</a>.</p></li>
+<li><p>If you’re using base R function, i.e.&nbsp;when using the <code>emplogit</code> functions, put the code <code>par(mfrow = c(rows,columns))</code> before the code to make the plots. For example, <code>par(mfrow = c(2,3))</code> will arrange plots in a grid with 2 rows and 3 columns.</p></li>
+</ul>
+</section>
+<section id="plot-titles-and-axis-labels" class="level3">
+<h3 class="anchored" data-anchor-id="plot-titles-and-axis-labels">Plot titles and axis labels</h3>
+<p>Be sure all plot titles and axis labels are visible and easy to read.</p>
+<ul>
+<li>Use informative titles, <u>not</u> variable names, for titles and axis labels.</li>
+<li>Use <code>coord_flip()</code> to flip the <em>x</em> and <em>y</em> axes on the plot. This is useful if you a bar plot with an x-axis that is difficult to read due to overlapping text.</li>
+</ul>
+<p>❌ <strong>NO! The x-axis is hard to read because the names overlap.</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> manufacturer)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project-tips-resources_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>✅ <strong>YES! Names are readable</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> manufacturer)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project-tips-resources_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="do-a-little-more-to-make-the-plot-look-professional" class="level3">
+<h3 class="anchored" data-anchor-id="do-a-little-more-to-make-the-plot-look-professional">Do a little more to make the plot look professional!</h3>
+<ul>
+<li>Informative title and axis labels</li>
+<li>Flipped coordinates to make names readable</li>
+<li>Arranged bars based on count</li>
+<li>Capitalized manufacturer names</li>
+<li><em>Optional: Added color - Use a coordinated color scheme throughout paper / presentation</em></li>
+<li><em>Optional: Applied a theme - Use same theme throughout paper / presentation</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(manufacturer) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">manufacturer =</span> <span class="fu">str_to_title</span>(manufacturer)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(manufacturer,n), <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Manufacturer"</span>, </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"The most common manufacturer is Dodge"</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project-tips-resources_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="tables-and-model-output" class="level3">
+<h3 class="anchored" data-anchor-id="tables-and-model-output">Tables and model output</h3>
+<ul>
+<li><p>Use the <code>kable</code> function from the knitr package to neatly output all tables and model output. This will also ensure all model coefficients are displayed.</p>
+<ul>
+<li>Use the <code>digits</code> argument to display only 3 or 4 significant digits.</li>
+<li>Use the <code>caption</code> argument to add captions to your table.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> hp, <span class="at">data =</span> mtcars)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">30.099</td>
+<td style="text-align: right;">1.634</td>
+<td style="text-align: right;">18.421</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hp</td>
+<td style="text-align: right;">-0.068</td>
+<td style="text-align: right;">0.010</td>
+<td style="text-align: right;">-6.742</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="guidelines-for-communicating-results" class="level3">
+<h3 class="anchored" data-anchor-id="guidelines-for-communicating-results">Guidelines for communicating results</h3>
+<ul>
+<li><p><strong>Don’t use variable names in your narrative!</strong> Use descriptive terms, so the reader understands your narrative without relying on the data dictionary.</p>
+<ul>
+<li>❌ There is a negative linear relationship between mpg and hp.</li>
+<li>✅ There is a negative linear relationship between a car’s fuel economy (in miles per gallon) and its horsepower.</li>
+</ul></li>
+<li><p><strong>Know your audience:</strong> Your report should be written for a general audience who has an understanding of statistics at the level of STA 210.</p></li>
+<li><p><strong>Avoid subject matter jargon:</strong> Don’t assume the audience knows all of the specific terminology related to your subject area. If you must use jargon, include a brief definition the first time you introduce a term.</p></li>
+<li><p><strong>Tell the “so what”:</strong> Your report and presentation should be more than a list of interpretations and technical definitions. Focus on what the results mean, i.e.&nbsp;what you want the audience to know about your topic after reading your report or viewing your presentation.</p>
+<ul>
+<li>❌ For every one unit increase in horsepower, we expect the miles per gallon to decrease by 0.068 units, on average.</li>
+<li>✅ If the priority is to have good fuel economy, then one should choose a car with lower horsepower. Based on our model, the fuel economy is expected to decrease, on average, by 0.68 miles per gallon for every 10 additional horsepower.</li>
+</ul></li>
+<li><p><strong>Tell a story:</strong> All visualizations, tables, model output, and narrative should tell a cohesive story!</p></li>
+<li><p><strong>Use one voice:</strong> Though multiple people are writing the report, it should read as if it’s from a single author. At least one team member should read through the report before submission to ensure it reads like a cohesive document.</p></li>
+</ul>
+</section>
+</section>
+<section id="additional-resources" class="level2">
+<h2 class="anchored" data-anchor-id="additional-resources">Additional resources</h2>
+<ul>
+<li><p><a href="https://r4ds.had.co.nz/">R for Data Science</a></p></li>
+<li><p><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">R Markdown Cookbook</a></p></li>
+<li><p><a href="https://slides.yihui.org/xaringan/#1">Slides in R using Xaringan</a></p></li>
+<li><p>Data visualization</p>
+<ul>
+<li><a href="https://ggplot2.tidyverse.org/reference/index.html">ggplot2 Reference</a></li>
+<li><a href="https://ggplot2-book.org/">ggplot2: Elegant Graphics for Data Analysis</a></li>
+<li><a href="https://socviz.co/index.html">Data Visualization: A Practice Introduction</a></li>
+<li><a href="https://patchwork.data-imaginist.com/index.html">Patchwork R Package</a></li>
+</ul></li>
+</ul>
+
+
+</section>
+</main> <!-- /main -->
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+    } else {
+      disableStylesheet(alternateStylesheets);
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      return window.localStorage.getItem("quarto-color-scheme");
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = null;
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.id = "quarto-color-scheme-toggle";
+    a.classList.add('top-right');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+</body></html>

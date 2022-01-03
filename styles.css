@@ -1,0 +1,13 @@
+/* css styles */
+
+body {
+  font-family: Atkinson Hyperlegible;
+}
+
+.navbar-title {
+  color: white;
+}
+
+.sidebar.sidebar-navigation .sidebar-item {
+  padding-left: 10px;
+}
