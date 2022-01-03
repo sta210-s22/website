@@ -1,5 +1,5 @@
 ---
-title: Page Not Found
+title: 404 Page Not Found
 ---
 
-![](images/404.jpg){fig-alt="Illustration of cat in a box with a speech bubble that says \"I can't find what you're looking for in here\"."}
+![](images/404.jpg){fig-alt="Illustration of cat in a box with a speech bubble that says \"I can't find what you're looking for in here\"." width="900"}
