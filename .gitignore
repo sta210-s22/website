@@ -5,3 +5,4 @@
 
 /.quarto/
 _site/
+*.key
