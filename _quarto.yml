@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "STA 210 - Sp 2022"
+  title: "STA 210 - Spring 2022"
   description: "Homepage for STA 210 - Regression Analysis at Duke University, Spring 2022."
   site-url: "https://sta210-s22.github.io/website/"
 
@@ -12,7 +12,7 @@ website:
   opengraph: true
   twitter-card:
     creator: "@minebocek"
-    image: "images/logo.png"
+    image: "images/twitter-card.png"
 
   sidebar:
     background: "#D9E3E4"
