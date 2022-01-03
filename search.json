@@ -207,14 +207,14 @@
     "href": "course-syllabus.html#course-info",
     "title": "Syllabus",
     "section": "Course info",
-    "text": "Course info\n\n\n\n\n\n\n\n\n\n\nDay\nTime\nLocation\n\n\n\n\nLectures\nTue & Thu\n1:45 pm - 3:00 pm\nReuben-Cooke Building 130\n\n\nSection 1\nMon\n1:45 pm - 3:00 pm\nPerkins LINK 087 (Classroom 3)\n\n\nSection 2\nMon\n3:30 pm - 4:45 pm\nOld Chemistry 003\n\n\nSection 3\nMon\n5:15 pm - 6:30 pm\nSocial Sciences 311"
+    "text": "Course info\n\n\n\n\nDay\nTime\nLocation\n\n\n\n\nLectures\nTue & Thu\n1:45 pm - 3:00 pm\nReuben-Cooke Building 130\n\n\nSection 1\nMon\n1:45 pm - 3:00 pm\nPerkins LINK 087 (Classroom 3)\n\n\nSection 2\nMon\n3:30 pm - 4:45 pm\nOld Chemistry 003\n\n\nSection 3\nMon\n5:15 pm - 6:30 pm\nSocial Sciences 311"
   },
   {
     "objectID": "course-syllabus.html#learning-objectives",
     "href": "course-syllabus.html#learning-objectives",
     "title": "Syllabus",
     "section": "Learning objectives",
-    "text": "Learning objectives\nBy the end of the semester, you will be able to…\n\nanalyze real-world data to answer questions about multivariable relationships.\nfit and evaluate linear and logistic regression models.\nassess whether a proposed model is appropriate and describe its limitations.\nuse R Markdown to write reproducible reports and GitHub for version control and collaboration.\ncommunicate results from statistical analyses to a general audience."
+    "text": "Learning objectives\nBy the end of the semester, you will be able to…\n\nanalyze real-world data to answer questions about multivariable relationships.\nfit and evaluate linear and logistic regression models.\nassess whether a proposed model is appropriate and describe its limitations.\nuse Quarto to write reproducible reports and GitHub for version control and collaboration.\ncommunicate results from statistical analyses to a general audience."
   },
   {
     "objectID": "course-syllabus.html#community",
