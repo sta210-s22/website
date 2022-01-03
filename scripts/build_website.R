@@ -1,1 +1,1 @@
-quarto::quarto_render("website", as_job = FALSE)
+quarto::quarto_render(".", as_job = FALSE)
