@@ -35,6 +35,8 @@ website:
             text: Syllabus
           - href: course-team.qmd
             text: Teaching team
+          - href: index.qmd
+            text: Schedule
           - href: course-support.qmd
             text: Support
           - href: course-links.qmd
