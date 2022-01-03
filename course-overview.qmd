@@ -7,4 +7,4 @@ Learn techniques for checking the appropriateness of proposed models, such as re
 Gain experience dealing with the challenges that arise in practice through assignments that utilize real-world data.
 This class emphasizes data analysis over mathematical theory.
 
-![](images/background-bikeshare.png){fig-alt="A series of six, generic data visualizations: a scatterplot, a density plot, a contour plot, a line plot, a box plot, and another scatterplot." width="700"}
+![](images/background-bikeshare.png){.preview-image fig-alt="A series of six, generic data visualizations: a scatterplot, a density plot, a contour plot, a line plot, a box plot, and another scatterplot." width="700"}
