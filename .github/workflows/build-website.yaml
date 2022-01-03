@@ -31,11 +31,10 @@ jobs:
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-renv@v2
-
-      - name: Install quarto
+      - name: Install quarto and tidyverse
         run: |
           install.packages("quarto")
+          install.packages("tidyverse")
         shell: Rscript {0}
 
       - name: Build site 🔧
