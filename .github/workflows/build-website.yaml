@@ -31,7 +31,7 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install quarto and tidyverse
+      - name: Install quarto and tidyverse 📦
         run: |
           install.packages("quarto")
           install.packages("tidyverse")
@@ -39,8 +39,7 @@ jobs:
 
       - name: Build site 🔧
         run: |
-          quarto::quarto_render(".", as_job = FALSE)
-        shell: Rscript {0}
+          R -e 'quarto::quarto_render(".", as_job = FALSE)'
 
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
