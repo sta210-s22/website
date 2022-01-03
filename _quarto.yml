@@ -3,10 +3,20 @@ project:
 
 website:
   title: "STA 210 - Sp 2022"
+  description: "Homepage for STA 210 - Regression Analysis at Duke University, Spring 2022."
+
+  site-url: "https://sta210-s22.github.io/website/"
+  repo-url: https://github.com/sta210-s22/website
+  repo-actions: [edit, issue]
+  twitter-card: true
+
+  body-footer: |
+    This page is built with ❤️ and [Quarto](https://quarto.org/).
 
   sidebar:
     background: "#D9E3E4"
     logo: "images/logo.png"
+    pinned: true
     align: center
     tools:
       - icon: github
