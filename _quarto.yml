@@ -6,6 +6,7 @@ website:
 
   sidebar:
     background: "#D9E3E4"
+    logo: "images/logo.png"
     align: center
     tools:
       - icon: github
