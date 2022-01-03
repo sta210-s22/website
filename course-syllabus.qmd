@@ -6,17 +6,12 @@ title: "Syllabus"
 
 ## Course info
 
-+-----------+-----------+-------------------+--------------------------------+
 |           | Day       | Time              | Location                       |
-+===========+===========+===================+================================+
+|-----------|-----------|-------------------|--------------------------------|
 | Lectures  | Tue & Thu | 1:45 pm - 3:00 pm | Reuben-Cooke Building 130      |
-+-----------+-----------+-------------------+--------------------------------+
 | Section 1 | Mon       | 1:45 pm - 3:00 pm | Perkins LINK 087 (Classroom 3) |
-+-----------+-----------+-------------------+--------------------------------+
 | Section 2 | Mon       | 3:30 pm - 4:45 pm | Old Chemistry 003              |
-+-----------+-----------+-------------------+--------------------------------+
 | Section 3 | Mon       | 5:15 pm - 6:30 pm | Social Sciences 311            |
-+-----------+-----------+-------------------+--------------------------------+
 
 ## Learning objectives
 
@@ -25,7 +20,7 @@ By the end of the semester, you will be able to...
 -   analyze real-world data to answer questions about multivariable relationships.
 -   fit and evaluate linear and logistic regression models.
 -   assess whether a proposed model is appropriate and describe its limitations.
--   use R Markdown to write reproducible reports and GitHub for version control and collaboration.
+-   use Quarto to write reproducible reports and GitHub for version control and collaboration.
 -   communicate results from statistical analyses to a general audience.
 
 ## Community
@@ -34,10 +29,10 @@ By the end of the semester, you will be able to...
 
 As a student in this course, you have agreed to uphold the [Duke Community Standard](https://studentaffairs.duke.edu/conduct/about-us/duke-community-standard) as well as the practices specific to this course.
 
+```{=html}
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_KN97j30ST4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-
 </iframe>
-
+```
 ### Inclusive community
 
 It is my intent that students from all diverse backgrounds and perspectives be well-served by this course, that students' learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength, and benefit.
