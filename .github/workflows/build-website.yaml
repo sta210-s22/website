@@ -38,11 +38,13 @@ jobs:
         shell: Rscript {0}
 
       - name: Build site 🔧
-        run: Rscript scripts/build_website.R
+        run: |
+          quarto::quarto_render(".", as_job = FALSE)
+        shell: Rscript {0}
 
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: website/_site # The folder the action should deploy.
+          folder: _site # The folder the action should deploy.
