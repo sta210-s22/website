@@ -9,6 +9,7 @@ website:
   repo-url: https://github.com/sta210-s22/website
   repo-actions: [edit, issue]
 
+  opengraph: true
   twitter-card:
     creator: "@minebocek"
     image: "images/logo.png"
