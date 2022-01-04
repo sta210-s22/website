@@ -53,86 +53,89 @@ If there is any portion of the course that is not accessible to you due to chall
 The [Student Disability Access Office (SDAO)](https://access.duke.edu/students) is available to ensure that students are able to engage with their courses and related assignments.
 Students should be in touch with the Student Disability Access Office to [request or update accommodations](https://access.duke.edu/requests) under these circumstances.
 
-### Attendance policy related to COVID symptoms, exposure, or infection
-
-Student health, safety, and well-being are the university's top priorities.
-To help ensure your well-being and the well-being of those around you, **please do not come to class if you have symptoms related to COVID-19, have had a known exposure to COVID-19, or have tested positive for COVID-19.** If any of these situations apply to you, you must follow university guidance related to the ongoing COVID-19 pandemic and current health and safety protocols.
-
-If you are experiencing any COVID-19 symptoms, contact student health at 919-681-9355.
-To keep the university community as safe and healthy as possible, you will be expected to follow these guidelines.
-Please reach out to me and your academic dean as soon as possible if you need to quarantine or isolate so that we can discuss arrangements for your continued participation in class.
-
 ### Communication
 
-All lecture notes, assignment instructions, an up-to-date schedule, and other course materials may be found on the course website, [sta210-fa21.netlify.app](https://sta210-fa21.netlify.app/) .
+All lecture notes, assignment instructions, an up-to-date schedule, and other course materials may be found on the course website at [sta210-s22.github.io/website](https://sta210-s22.github.io/website).
 
-Announcements will be emailed through Sakai Announcements periodically.
-Please check your email regularly to ensure you have the latest announcements for the course.
+I will regularly send course announcements via email and Sakai, make sure to check one or the other of these regularly.
+If an announcement is sent Monday through Thursday, I will assume that you have read the announcement by the next day.
+If an announcement is sent on a Friday or over the weekend, I will assume that you have read it by Monday.
 
 ### Where to get help
 
 -   If you have a question during lecture or lab, feel free to ask it! There are likely other students with the same question, so by asking you will create a learning opportunity for everyone.
 -   The teaching team is here to help you be successful in the course. You are encouraged to attend office hours to ask questions about the course content and assignments. Many questions are most effectively answered as you discuss them with others, so office hours are a valuable resource. Please use them!
--   Outside of class and office hours, any general questions about course content or assignments should be posted on [Ed Discussion](https://edstem.org/us/courses/8350/discussion/). There is a chance another student has already asked a similar question, so please check the other posts in Ed Discussion before adding a new question. If you know the answer to a question posted in the discussion forum, I encourage you to respond!
+-   Outside of class and office hours, any general questions about course content or assignments should be posted on the course forum [Conversations](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b). There is a chance another student has already asked a similar question, so please check the other posts in Conversations before adding a new question. If you know the answer to a question posted in the discussion forum, I encourage you to respond!
+-   Emails should be reserved for questions not appropriate for the public forum. **If you email me, please include "STA 210" in the subject line.** Barring extenuating circumstances, I will respond to STA 210 emails within 48 hours Monday - Friday. Response time may be slower for emails sent Friday evening - Sunday.
 
-Check out the [Help](/help/) tab for more resources.
+Check out the [Support](/course-support/) page for more resources.
 
-### Email
+## Textbooks
 
-If there is a question that's not appropriate for the public forum, you are welcome to email me directly.
-**If you email me, please include "STA 210" in the subject line.** Barring extenuating circumstances, I will respond to STA 210 emails within 48 hours Monday - Friday.
-Response time may be slower for emails sent Friday evening - Sunday.
+While there is no official textbook for the course, we will be assigning readings from the following textbooks.
 
-## Activities and assessment
+-   [R for Data Science](https://r4ds.had.co.nz/) by Garret Grolemund and Hadley Wickham
 
-The activities and assessments in this course are designed to help you successfully achieve the course learning objectives.
-They are designed to follow the **Prepare, Practice, Perform** format.
+-   [Introduction to Modern Statistics](https://openintro-ims.netlify.app/) by Mine Çetinkaya-Rundel and Johanna Hardin
 
--   **Prepare**: Includes short videos, reading assignments, and a short quiz to introduce new concepts and ensure a basic comprehension of the material.
-    The goal is to help you prepare for the in-class activities during lecture.
+-   [Tidy modeling with R](https://www.tmwr.org/) by Max Kuhn and Julia Silge
 
--   **Practice**: Includes in-class application exercises where you will begin to the concepts and methods introduced in the prepare assignment.
-    The activities will graded for completion, as they are designed for you to gain experience with the statistical and computing techniques before working on graded assignments.
+-   [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Paul Roback and Julie Legler
 
--   **Perform**: Includes labs, homework, exams, and the final project.
-    These assignments build upon the prepare and practice assignments and are the opportunity for you to demonstrate your understanding of the course material and how it is applied to analyze real-world data.
+## Lectures and labs
 
-### Prep quizzes (Prepare)
+The goal of both the lectures and the labs is for them to be as interactive as possible.
+My role as instructor is to introduce you new tools and techniques, but it is up to you to take them and make use of them.
+A lot of what you do in this course will involve writing code, and coding is a skill that is best learned by doing.
+Therefore, as much as possible, you will be working on a variety of tasks and activities throughout each lecture and lab.
+You are expected to attend all lecture and lab sessions and meaningfully contribute to in-class exercises and discussion.
+Additionally, some lectures will feature [application exercises] that will be graded.
+In addition to application exercises will be periodic activities help build a learning community.
+These will be short, fun activities that will help everyone in the class connect throughout the semester.
 
-These are low-stakes quizzes that will be completed at the beginning of each unit (about once per week) as part of the preparation for lecture.
-These quizzes include multiple choice and fill-in-the-blank questions.
-Each quiz will be administered in Sakai and may be taken up to three times.
-The quiz is due by the beginning of lecture on the specified due date.
-An overall score of 80% on all quizzes will result in full credit for prep quizzes in the final course grade.
+You are expected to bring a laptop to each class so that you can take part in the in-class exercises.
+Please make sure your laptop is fully charged before you come to class as the number of outlets in the classroom will not be sufficient to accommodate everyone.
+More information on loaner laptops can be found [here](https://keeplearning.duke.edu/technical-support/).
 
-### Application exercises (Practice)
+## Teams
 
-A majority of the in-class lectures will be dedicated to working on Application Exercises (AEs).
-These exercises which give you an opportunity to practice apply the statistical concepts and code introduced in the prepare assignment.
+You will be assigned to a team at the beginning of the semester.
+You are encouraged to sit with your teammates in lecture and you will also work with them in the lab sessions.
+All team members are expected to contribute equally to the completion of the labs and project and you will be asked to evaluate your team members throughout the semester.
+Failure to adequately contribute to an assignment will result in a penalty to your mark relative to the team's overall mark.
+
+You are expected to make use of the provided GitHub repository as their central collaborative platform.
+Commits to this repository will be used as a metric (one of several) of each team member's relative contribution for each project.
+
+## Assessment
+
+Assessment for the course is comprised of six components: application exercises, homework assignments, labs, exams, projects, and teamwork.
+
+### Application exercises
+
+Parts of some lectures will be dedicated to working on Application Exercises (AEs).
+These exercises which give you an opportunity to practice apply the statistical concepts and code introduced in the readings and lectures.
 These AEs are due within three days of the corresponding lecture period.
-Specifically, AEs from Monday lectures are due Thursday by 11:59p ET, and AEs from Wednesday lectures are due Saturday by 11:59p ET.
+Specifically, AEs from Tuesday lectures are due Friday by 11:59 pm ET, and AEs from Thursday lectures are due Sunday by 11:59 pm ET.
 
 Because these AEs are for practice, they will be graded based on completion, i.e., a good-faith effort has been made in attempting all parts.
 Successful on-time completion of at least 80% of AEs will result in full credit for AEs in the final course grade.
 
-In addition to AEs will be periodic activities help build a learning community.
-These will be short, fun activities that will help everyone in the class connect throughout the semester.
-
-### Labs (Perform)
+### Labs
 
 In labs, you will apply the concepts discussed in lecture to various data analysis scenarios, with a focus on the computation.
 Most lab assignments will be completed in teams, and all team members are expected to contribute equally to the completion of each assignment.
-You are expected to use the team's Git repository on the course's GitHub page as the central platform for collaboration.
+You are expected to use the team's GitHub repository on the course's GitHub organization as the central platform for collaboration.
 Commits to this repository will be used as a metric of each team member's relative contribution for each lab, and there will be periodic peer evaluation on the team collaboration.
-Lab assignments will be completed using R Markdown, correspond to an appropriate GitHub repository, and submitted for grading in Gradescope.
+Lab assignments will be completed using Quarto, correspond to an appropriate GitHub repository, and submitted for grading in Gradescope.
 
 *The lowest lab grade will be dropped at the end of the semester.*
 
-### Homework (Perform)
+### Homework
 
 In homework, you will apply what you've learned during lecture and lab to complete data analysis tasks.
 You may discuss homework assignments with other students; however, homework should be completed and submitted individually.
-Similar to lab assignments, homework must be typed up using R Markdown and GitHub and submitted as a PDF in Gradescope.
+Similar to lab assignments, homework must be typed up using Quarto and GitHub and submitted as a PDF in Gradescope.
 
 One homework assignment will be dedicated to a *statistics experience*.
 The statistics experience is an opportunity to engage with statistics and data science outside of the classroom through podcasts, books, seminars, data analysis competitions, and other activities.
@@ -140,7 +143,7 @@ As you complete these experiences, the goal is to consider how the material you'
 
 *The lowest homework grade will be dropped at the end of the semester.*
 
-### Exams (Perform)
+### Exams
 
 There will be three, take-home, open-note exams.
 Through these exams you have the opportunity to demonstrate what you've learned in the course thus far.
@@ -148,9 +151,9 @@ The exams will focus on the conceptual understanding of the content, and they ma
 The content of the exam will be related to the content in the prepare, practice, and perform assignments.
 More detail about the exams will be given during the semester.
 
-### Final project (Perform)
+### Project
 
-The purpose of the [final project](/project/) is to apply what you've learned throughout the semester to analyze an interesting data-driven research question.
+The purpose of the [project](/project-description/) is to apply what you've learned throughout the semester to analyze an interesting, data-driven research question.
 The project will be completed with your lab teams, and each team will present their work in video and in writing during the final exam period.
 More information about the project will be provided during the semester.
 
@@ -158,17 +161,16 @@ More information about the project will be provided during the semester.
 
 The final course grade will be calculated as follows:
 
-| Category              | Percentage |
-|-----------------------|------------|
-| Homework              | 30%        |
-| Final project         | 15%        |
-| Lab                   | 15%        |
-| Exam 01               | 10%        |
-| Exam 02               | 10%        |
-| Exam 03               | 10%        |
-| Prep quizzes          | 5%         |
-| Application Exercises | 2.5%       |
-| Teamwork              | 2.5%       |
+| Category              | Percentage   |
+|-----------------------|--------------|
+| Application exercises | 3%           |
+| Homework              | 35% (7% x 5) |
+| Project               | 15%          |
+| Lab                   | 14% (2% x 7) |
+| Exam 01               | 10%          |
+| Exam 02               | 10%          |
+| Exam 03               | 10%          |
+| Teamwork              | 3%           |
 
 The final letter grade will be determined based on the following thresholds:
 
@@ -189,30 +191,49 @@ The final letter grade will be determined based on the following thresholds:
 
 ## Course policies
 
-### Academic honesty
+### Academic integrity
 
 **TL;DR: Don't cheat!**
 
-Please abide by the following as you work on assignments in this course:
+All students must adhere to the [Duke Community Standard (DCS)](https://trinity.duke.edu/undergraduate/academic-policies/community-standard-student-conduct): Duke University is a community dedicated to scholarship, leadership, and service and to the principles of honesty, fairness, and accountability.
+Citizens of this community commit to reflect upon these principles in all academic and non-academic endeavors, and to protect and promote a culture of integrity.
 
--   You may discuss individual homework and lab assignments with other students; however, you may not directly share (or copy) code or write up with other students. For team assignments, you may collaborate freely within your team. You may discuss the assignment with other teams; however, you may not directly share (or copy) code or write up with another team. Unauthorized sharing (or copying) of the code or write up will be considered a violation for all students involved.
--   You may not discuss or otherwise work with others on the exams. Unauthorized collaboration or using unauthorized materials will be considered a violation for all students involved. More details will be given closer to the exam date.
--   **Reusing code**: Unless explicitly stated otherwise, you may make use of online resources (e.g. StackOverflow) for coding examples on assignments. If you directly use code from an outside source (or use it as inspiration), you must explicitly cite where you obtained the code. Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism.
+To uphold the Duke Community Standard:
 
-Any violations in academic honesty standards as outlined in the [Duke Community Standard](https://studentaffairs.duke.edu/conduct/about-us/duke-community-standard) and those specific to this course will automatically result in a 0 for the assignment and will be reported to the [Office of Student Conduct](https://studentaffairs.duke.edu/conduct) for further action.
+Students affirm their commitment to uphold the values of the Duke University community by signing a pledge that states:
 
-### Late work & extensions
+-   I will not lie, cheat, or steal in my academic endeavors;
+-   I will conduct myself honorably in all my endeavors;
+-   I will act if the Standard is compromised
+
+Regardless of course delivery format, it is your responsibility to understand and follow Duke policies regarding academic integrity, including doing one's own work, following proper citation of sources, and adhering to guidance around group work projects.
+Ignoring these requirements is a violation of the Duke Community Standard.
+If you have any questions about how to follow these requirements, please contact Jeanna McCullers ([jeanna.mccullers\@duke.edu](mailto:jeanna.mccullers@duke.edu)), Director of the Office of Student Conduct.
+
+### Collaboration policy
+
+Only work that is clearly assigned as team work should be completed collaboratively.
+
+-   The homework assignments must be completed individually and you are welcomed to discuss the assignment with classmates at a high level (e.g., discuss what's the best way for approaching a problem, what functions are useful for accomplishing a particular task, etc.). However you may not directly share answers to homework questions (including any code) with anyone other than myself and the teaching assistants.
+-   For the projects, collaboration within teams is not only allowed, but expected. Communication between teams at a high level is also allowed however you may not share code or components of the project across teams.
+
+### **Policy on sharing and reusing code**
+
+I am well aware that a huge volume of code is available on the web to solve any number of problems.
+Unless I explicitly tell you not to use something, the course's policy is that you may make use of any online resources (e.g. RStudio Community, StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration).
+Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism.
+On individual assignments you may not directly share code with another student in this class, and on team assignments you may not directly share code with another team in this class.
+
+### Late work policy
 
 The due dates for assignments are there to help you keep up with the course material and to ensure the teaching team can provide feedback within a timely manner.
 We understand that things come up periodically that could make it difficult to submit an assignment by the deadline.
 Note that the lowest homework and lab assignment will be dropped to accommodate such circumstances.
 
-### Late work policy
-
 -   Homework and labs may be submitted up to 3 days late.
     There will be a 5% deduction for each 24-hour period the assignment is late.
 
--   There is no late work accepted for prep quizzes or application exercises, since these are designed to help you prepare for labs and homework.
+-   There is no late work accepted for application exercises, since these are designed to help you prepare for labs and homework.
 
 -   The late work policy for exams will be provided with the exam instructions.
 
@@ -220,14 +241,14 @@ Note that the lowest homework and lab assignment will be dropped to accommodate 
 
 ### Waiver for extenuating circumstances
 
-If there are circumstances that prevent you from completing a lab or homework assignment by the stated due date, you may email Professor Tackett before the deadline to waive the late penalty.
+If there are circumstances that prevent you from completing a lab or homework assignment by the stated due date, you may email Dr. Çetinkaya-Rundel before the deadline to waive the late penalty.
 In your email, you only need to request the waiver; you do not need to provide explanation.
 This waiver may only be used for once in the semester, so only use it for a truly extenuating circumstance.
 
 If there are circumstances that are having a longer-term impact on your academic performance, please let your academic dean know, as they can be a resource.
-Please let Professor Tackett know if you need help contacting your academic dean.
+Please let Dr. Çetinkaya-Rundel know if you need help contacting your academic dean.
 
-### Regrade requests
+### Regrade request policy
 
 Regrade requests must be submitted on Gradescope within a week of when an assignment is returned.
 Regrade requests will be considered if there was an error in the grade calculation or if you feel a correct answer was mistakenly marked as incorrect.
@@ -236,27 +257,53 @@ Note that by submitting a regrade request, the entire question will be graded wh
 
 *No grades will be changed after the final project presentations.*
 
-## Additional resources
+### Attendance policy
 
-### Academic Resource Center
+Responsibility for class attendance rests with individual students.
+Since regular and punctual class attendance is expected, students must accept the consequences of failure to attend.
+More details on Trinity attendance policies are available [here](https://trinity.duke.edu/undergraduate/academic-policies/class-attendance-and-missed-work).
 
-There are times may need help with the class that is beyond what can be provided by the teaching team.
-In those instances, I encourage you to visit the Academic Resource Center.
-The [Academic Resource Center (ARC)](https://arc.duke.edu) offers free services to all students during their undergraduate careers at Duke.
-Services include Learning Consultations, Peer Tutoring and Study Groups, ADHD/LD Coaching, Outreach Workshops, and more.
-Because learning is a process unique to every individual, they work with each student to discover and develop their own academic strategy for success at Duke.
-Contact the ARC to schedule an appointment.
-Undergraduates in any year, studying any discipline can benefit!
-Contact [theARC\@duke.edu](mailto:theARC@duke.edu), 919-684-5917.
+However, there may be many reasons why you cannot be in class on a given day, particularly with possible extra personal and academic stress and health concerns this semester.
+All course lectures will be recorded and available to enrolled students after class.
+If you miss a lecture, make sure to watch the recording and review the material before the next class session.
+Lab time is dedicated to working on your lab assignments and collaborating with your teammates on your project.
+If you miss a lab session, make sure to communicate with your team about how you can make up your contribution.
+Given the technologies we use in the course, this is straightforward to do asynchronously.
+If you know you're going to miss a lab session and you're feeling well enough to do so, notify your teammates ahead of time.
+Overall these policies are put in place to ensure communication between team members, respect for each others' time, and also to give you a safety net in the case of illness or other reasons that keep you away from attending class.
 
-### CAPS
+### **Attendance policy related to COVID symptoms, exposure, or infection**
 
-[Duke Counseling & Pyschological Services (CAPS)](https://studentaffairs.duke.edu/caps) helps Duke Students enhance strengths and develop abilities to successfully live, grow and learn in their personal and academic lives.
-CAPS recognizes that we are living in unprecedented times and that the changes, challenges and stressors brought on by the COVID-19 pandemic have impacted everyone, often in ways that are tax our well-being.
-CAPS offers many services to Duke undergraduate students, including brief individual and group counseling, couples counseling and more.
-CAPS staff also provides outreach to student groups, particularly programs supportive of at-risk populations, on a wide range of issues impacting them in various aspects of campus life.
-CAPS provides services to students via Telehealth.
-To initiate services, you can contact their front desk at 919-660-1000.
+Student health, safety, and well-being are the university's top priorities.
+To help ensure your well-being and the well-being of those around you, please do not come to class if you have symptoms related to COVID-19, have had a known exposure to COVID-19, or have tested positive for COVID-19.
+If any of these situations apply to you, you must follow university guidance related to the ongoing COVID-19 pandemic and current health and safety protocols.
+If you are experiencing any COVID-19 symptoms, contact student health at 919-681-9355.
+To keep the university community as safe and healthy as possible, you will be expected to follow these guidelines.
+Please reach out to me and your academic dean as soon as possible if you need to quarantine or isolate so that we can discuss arrangements for your continued participation in class.
+
+### **Inclement weather policy**
+
+In the event of inclement weather or other connectivity-related events that prohibit class attendance, I will notify you how we will make up missed course content and work.
+This might entail holding the class on Zoom synchronously or watching a recording of the class.
+
+### **Policy on video recording course content**
+
+All lectures will be recorded and available on Panopto, so students should not need to create their own recordings of lectures.
+If you feel that you need record the lectures yourself, you must get permission from me ahead of time and these recordings should be used for personal study only, no for distribution.
+The full policy on recording of lectures falls under the Duke University Policy on Intellectual Property Rights, available at [provost.duke.edu/sites/default/files/FHB_App_P.pdf](https://provost.duke.edu/sites/default/files/FHB_App_P.pdf).
+Unauthorized distribution is a cause for disciplinary action by the Judicial Board.
+
+## **Learning during a pandemic**
+
+I want to make sure that you learn everything you were hoping to learn from this class.
+If this requires flexibility, please don't hesitate to ask.
+
+-   You *never* owe me personal information about your health (mental or physical) but you're always welcome to talk to me.
+    If I can't help, I likely know someone who can.
+
+-   I want you to learn lots of things from this class, but I primarily want you to stay healthy, balanced, and grounded during this crisis.
+
+*Note:* If you've read this far in the syllabus, email me a picture of your pet if you have one or your favourite meme!
 
 ## Important dates
 
