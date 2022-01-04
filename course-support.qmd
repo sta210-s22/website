@@ -5,7 +5,7 @@ title: "Course support"
 We expect everyone will have questions at some point in the semester, so we encourage you to:
 
 -   Ask questions during lectures and lab
--   Ask and answer questions on Conversations
+-   Ask and answer questions on the discussion forum
 -   Attend office hours
 -   Reach out by email
 -   Consult textbooks
@@ -19,32 +19,32 @@ Read below to find out more about how to best make use of each of these resource
 If you have a question during lecture or lab, feel free to ask it!
 There are likely other students with the same question, so by asking you will create a learning opportunity for everyone.
 
-## Conversations
-
-Outside of class and office hours, any general questions about course content or assignments should be posted on [Conversations](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b).
-There is a chance another student has already asked a similar question, so please check the other posts on Ed Discussion before adding a new question.
-If you know the answer to a question that is posted, I encourage you to respond!
-
 ## Office hours
 
 The teaching team is here to help you be successful in the course.
 You are encouraged to attend office hours during the times posted on the home page to ask questions about the course content and assignments.
 A lot of questions are most effectively answered in-person, so office hours are a valuable resource.
-Please use them!
+I encourage each and every one of you to take advantage of this resource!
+Make a pledge to stop by office hours at least once during the first three weeks of class.
+If you truly have no questions to ask, just stop by and say hi and introduce yourself.
 
-You can find the schedule for office hours and associated links for online office hours in Sakai.
+## Discussion forum
+
+Have a question that can't wait for office hours?
+Prefer to write out your question in detail rather than asking in person?
+The online discussion forum is the best venue for these!
+We will use [Conversations](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b) as the online discussion forum.
+There is a chance another student has already asked a similar question, so please check the other posts on Ed Discussion before adding a new question.
+If you know the answer to a question that is posted, I encourage you to respond!
 
 ## Email
 
-If you have questions about personal matters that are not appropriate for the public forum on Conversations (e.g. illness, accommodations, etc.), you may email Dr. Mine Çetinkaya-Rundel at [mc301\@duke.edu](mailto:mc301@duke.edu).
+Please refrain from emailing any course content questions (those should go [Conversations](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b)), and only use email for questions about personal matters that may not be appropriate for the public course forum (e.g., illness, accommodations, etc.).
+For such matters, you may email Dr. Mine Çetinkaya-Rundel at [mc301\@duke.edu](mailto:mc301@duke.edu).
 
-## Textbooks
-
--   [R for Data Science](https://r4ds.had.co.nz/) by Garret Grolemund and Hadley Wickham
-
--   [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Paul Roback and Julie Legler
-
--   [Stat2: Modeling with Regression and ANOVA](https://www.amazon.com/STAT2-Modeling-Regression-Ann-Cannon-ebook-dp-B07K6Y99J3/dp/B07K6Y99J3/ref=mt_other?_encoding=UTF8&me=&qid=1629580711) by Ann Cannon et al.
+If there is a question that's not appropriate for the public forum, you are welcome to email me directly.
+**If you email me, please include "STA 210" in the subject line.** Barring extenuating circumstances, I will respond to STA 210 emails within 48 hours Monday - Friday.
+Response time may be slower for emails sent Friday evening - Sunday.
 
 ## Mental health and wellness
 
@@ -66,3 +66,25 @@ If you have questions about personal matters that are not appropriate for the pu
 -   **DuWell**: Contact DuWell at (919) 681-8421, [duwell\@studentaffairs.duke.edu](mailto:duwell@studentaffairs.duke.edu), or [studentaffairs.duke.edu/duwell](https://studentaffairs.duke.edu/duwell).
 
 -   **WellTrack**: Contact WellTrack at [app.welltrack.com](https://app.welltrack.com/).
+
+## Additional resources
+
+### Academic Resource Center
+
+There are times may need help with the class that is beyond what can be provided by the teaching team.
+In those instances, I encourage you to visit the Academic Resource Center.
+The [Academic Resource Center (ARC)](https://arc.duke.edu) offers free services to all students during their undergraduate careers at Duke.
+Services include Learning Consultations, Peer Tutoring and Study Groups, ADHD/LD Coaching, Outreach Workshops, and more.
+Because learning is a process unique to every individual, they work with each student to discover and develop their own academic strategy for success at Duke.
+Contact the ARC to schedule an appointment.
+Undergraduates in any year, studying any discipline can benefit!
+Contact [theARC\@duke.edu](mailto:theARC@duke.edu), 919-684-5917.
+
+### CAPS
+
+[Duke Counseling & Pyschological Services (CAPS)](https://studentaffairs.duke.edu/caps) helps Duke Students enhance strengths and develop abilities to successfully live, grow and learn in their personal and academic lives.
+CAPS recognizes that we are living in unprecedented times and that the changes, challenges and stressors brought on by the COVID-19 pandemic have impacted everyone, often in ways that are tax our well-being.
+CAPS offers many services to Duke undergraduate students, including brief individual and group counseling, couples counseling and more.
+CAPS staff also provides outreach to student groups, particularly programs supportive of at-risk populations, on a wide range of issues impacting them in various aspects of campus life.
+CAPS provides services to students via Telehealth.
+To initiate services, you can contact their front desk at 919-660-1000.
