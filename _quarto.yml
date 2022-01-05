@@ -15,7 +15,10 @@ website:
     creator: "@minebocek"
     image: "images/twitter-card.png"
 
-  page-footer: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
+  page-footer:
+    right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
+    left: "&copy; Copyright 2022, Mine Çetinkaya-Rundel"
+    background: "#D9E3E4"
 
   sidebar:
     background: "#D9E3E4"
