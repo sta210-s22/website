@@ -2,6 +2,7 @@ project:
   type: website
 
 website:
+  page-navigation: true
   title: "STA 210 - Spring 2022"
   description: "Homepage for STA 210 - Regression Analysis at Duke University, Spring 2022."
   site-url: "https://sta210-s22.github.io/website/"
@@ -14,9 +15,10 @@ website:
     creator: "@minebocek"
     image: "images/twitter-card.png"
 
+  page-footer: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
+
   sidebar:
     background: "#D9E3E4"
-    footer: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
     logo: "images/logo.png"
     pinned: true
     align: center
@@ -39,6 +41,7 @@ website:
 
     style: "docked"
     search: true
+    collapse-level: 1
     contents:
       - section: "Course information"
         contents:
@@ -46,12 +49,12 @@ website:
             text: Overview
           - href: course-syllabus.qmd
             text: Syllabus
+          - href: course-support.qmd
+            text: Support
           - href: course-team.qmd
             text: Teaching team
           - href: index.qmd
             text: Schedule
-          - href: course-support.qmd
-            text: Support
           - href: course-links.qmd
             text: Useful links
       - section: "Computing"
@@ -60,6 +63,36 @@ website:
             text: Access
           - href: computing-troubleshooting.qmd
             text: Troubleshooting
+      - section: "Labs"
+        contents:
+          - href: labs/lab-0.qmd
+            text: "Lab 0"
+          - href: labs/lab-1.qmd
+            text: "Lab 1"
+          - href: labs/lab-2.qmd
+            text: "Lab 2"
+          - href: labs/lab-3.qmd
+            text: "Lab 3"
+          - href: labs/lab-4.qmd
+            text: "Lab 4"
+          - href: labs/lab-5.qmd
+            text: "Lab 5"
+          - href: labs/lab-6.qmd
+            text: "Lab 6"
+          - href: labs/lab-7.qmd
+            text: "Lab 7"
+      - section: "HW"
+        contents:
+          - href: hw/hw-1.qmd
+            text: "HW 1"
+          - href: hw/hw-2.qmd
+            text: "HW 2"
+          - href: hw/hw-3.qmd
+            text: "HW 3"
+          - href: hw/hw-4.qmd
+            text: "HW 4"
+          - href: hw/hw-5.qmd
+            text: "HW 5"
       - section: "Project"
         contents:
           - href: project-description.qmd
