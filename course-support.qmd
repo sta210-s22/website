@@ -81,27 +81,28 @@ Duke encourages all students to access these resources.
 -   **WellTrack**.
     Sign up for WellTrack at [app.welltrack.com](https://app.welltrack.com/).
 
-## Five tips for success
+## **Technology accommodations**
 
-Your success on this course depends very much on you and the effort you put into it.
-The
-course has been organized so that the burden of learning is on you.
-Your TAs and I will
-help you be providing you with materials and answering questions and setting a pace, but
-for this to work you must do the following:
+Students with demonstrated high financial need who have limited access to computers may request assistance in the form of loaner laptops.
+For technology assistance requests, please go [here](https://keeplearning.duke.edu/technical-support/).
+Please note that supplies are limited.
 
-1.  Complete all the preparation work before class.
-2.  Ask questions. As often as you can. In class, out of class. Ask me, ask the TAs,
-    ask your friends, ask the person sitting next to you. This will help you more than
-    anything else. If you get a question wrong on an assessment, ask us why. If you're not
-    sure about the homework, ask. If you hear something on the news that sounds
-    related to what we discussed, ask. If the reading is confusing, ask.
-3.  Do the readings.
-4.  Do the homework and lab.The earlier you start, the better. It's not enough to just
-    mechanically plow through the exercises. You should ask yourself how these
-    exercises relate to earlier material, and imagine how they might be changed (to
-    make questions for an exam, for example.)
-5.  Don't procrastinate. If something is confusing to you in Week 2, Week 3 will
-    become more confusing, Week 4 even worse, and eventually you won't know
-    where to begin asking questions. Don't let the week end with unanswered
-    questions. But if you find yourself falling behind and not knowing where to begin asking, come to office hours, and let me help you identify a good (re)starting point.
+Note that we will be using Duke's computational resources in this course.
+These resources are freely available to you.
+As long as your computer can connect to the internet and open a browser window, you can perform the necessary computing for this course.
+All software we use is open-source and/or freely available.
+
+## **Course materials costs**
+
+There are no costs associated with this course.
+All readings will come from freely available, open resources (open-source textbooks, journal articles, etc.).
+
+## **Assistance with Zoom or Sakai**
+
+For technical help with Sakai or Zoom, contact the Duke OIT Service Desk at [oit.duke.edu/help](https://oit.duke.edu/help).
+You can also access the self-service help documentation for Zoom [here](https://oit.duke.edu/help/articles/kb0029318) and for Sakai [here](https://sakai-duke.screenstepslive.com/s/sakai_support).
+
+Note that we will be making minimal use of Sakai in this course (primarily for announcements and grade book).
+All assignment submission and discussion will take place on GitHub instead.
+
+Zoom will be used for online office hours as well as as a backup option should we need to hold the course online instead of in person.

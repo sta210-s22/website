@@ -189,6 +189,18 @@ The final letter grade will be determined based on the following thresholds:
 | D-           | 60 - 62.99         |
 | F            | \< 60              |
 
+## Five tips for success
+
+Your success on this course depends very much on you and the effort you put into it.
+The course has been organized so that the burden of learning is on you.
+Your TAs and I will help you be providing you with materials and answering questions and setting a pace, but for this to work you must do the following:
+
+1.  Complete all the preparation work before class.
+2.  Ask questions. As often as you can. In class, out of class. Ask me, ask the TAs, ask your friends, ask the person sitting next to you. This will help you more than anything else. If you get a question wrong on an assessment, ask us why. If you're not sure about the homework, ask. If you hear something on the news that sounds related to what we discussed, ask. If the reading is confusing, ask.
+3.  Do the readings.
+4.  Do the homework and lab.The earlier you start, the better. It's not enough to just mechanically plow through the exercises. You should ask yourself how these exercises relate to earlier material, and imagine how they might be changed (to make questions for an exam, for example.)
+5.  Don't procrastinate. If something is confusing to you in Week 2, Week 3 will become more confusing, Week 4 even worse, and eventually you won't know where to begin asking questions. Don't let the week end with unanswered questions. But if you find yourself falling behind and not knowing where to begin asking, come to office hours, and let me help you identify a good (re)starting point.
+
 ## Course policies
 
 ### Academic integrity
