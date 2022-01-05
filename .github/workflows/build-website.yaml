@@ -35,6 +35,7 @@ jobs:
         run: |
           install.packages("quarto")
           install.packages("tidyverse")
+          install.packages("countdown")
         shell: Rscript {0}
 
       - name: Build site 🔧
