@@ -17,13 +17,13 @@ editor: visual
 library(countdown)
 ```
 
-# Welcome {.middle}
+## Welcome
 
 ## Meet the professor
 
 ::: columns
 ::: {.column width="50%"}
-![Dr. Mine Çetinkaya-Rundel (she/her)](images/lec-1/mine.png){fig-alt="Headshot of Dr. Mine Çetinkaya-Rundel" fig-align="center" width="300"}
+![Dr. Mine Çetinkaya-Rundel (she/her)](images/lec-1/mine.png){fig-alt="Headshot of Dr. Mine Çetinkaya-Rundel" fig-align="center" width="200"}
 :::
 
 ::: {.column width="50%"}
@@ -48,7 +48,7 @@ library(countdown)
 -   Go to [Conversations 💬](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b)
 -   Answer the discussion question: How are you doing?
 
-# Regression analysis
+## Regression analysis
 
 ## What is regression analysis
 
@@ -83,7 +83,7 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/Regression_analysis)
 -   [Why it's so freaking hard to make a good COVID-19 model](https://fivethirtyeight.com/features/why-its-so-freaking-hard-to-make-a-good-covid-19-model/)
 :::
 
-# Course overview
+## Course overview
 
 ## Homepage
 
@@ -106,18 +106,15 @@ All linked from the course website:
 Reserve an RStudio Container (titled STA 210) before lab on Monday!
 :::
 
-## Activities: Prepare, Participate, Practice, Perform
+## Activities: Prepare, Participate, Practice, Perform {.smaller}
 
 -   **Prepare:** Introduce new content and prepare for lectures by completing the readings (and sometimes watching the videos)
 -   **Participate:** Attend and actively participate in lectures and labs, office hours, team meetings
 -   **Practice:** Practice applying statistical concepts and computing with application exercises during lecture, graded for completion
 -   **Perform:** Put together what you've learned to analyze real-world data
     -   Lab assignments x 7 (first individual, later team-based)
-
     -   Homework assignments x 5 (individual)
-
     -   Three take-home exams
-
     -   Term project presented during the final exam period
 
 ## Cadence
@@ -132,17 +129,13 @@ Reserve an RStudio Container (titled STA 210) before lab on Monday!
 ## Teams
 
 -   Team assignments
-
-    -   In class exercises and projects
-    -   Assigned different teams for each project
+    -   Assigned by me
+    -   Application exercises, labs, and project
     -   Peer evaluation during teamwork and after completion
 
 -   Expectations and roles
-
     -   Everyone is expected to contribute equal *effort*
-
     -   Everyone is expected to understand *all* code turned in
-
     -   Individual contribution evaluated by peer evaluation, commits, etc.
 
 ## Grading {.smaller}
@@ -191,7 +184,7 @@ It is my intent that students from all diverse backgrounds and perspectives be w
 -   I am committed to making all course materials accessible and I'm always learning how to do this better.
     If any course component is not accessible to you in any way, please don't hesitate to let me know.
 
-# Course policies
+## Course policies
 
 ## COVID policies
 
@@ -204,7 +197,7 @@ It is my intent that students from all diverse backgrounds and perspectives be w
 -   We have policies!
 -   Read about them on the [course syllabus](https://sta210-s22.github.io/website/course-syllabus.html) and refer back to them when you need it
 
-## **Collaboration policy**
+## Collaboration policy
 
 -   Only work that is clearly assigned as team work should be completed collaboratively.
 
@@ -215,7 +208,7 @@ It is my intent that students from all diverse backgrounds and perspectives be w
     You may **not** discuss any aspect of the exam with peers.
     If you have questions, post as private questions on the course forum, only the teaching team will see and answer.
 
-## **Sharing / reusing code policy**
+## Sharing / reusing code policy
 
 -   We are aware that a huge volume of code is available on the web, and many tasks may have solutions posted
 
@@ -223,7 +216,7 @@ It is my intent that students from all diverse backgrounds and perspectives be w
 
 -   Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source
 
-## **Academic integrity**
+## Academic integrity
 
 > To uphold the Duke Community Standard:
 >
@@ -237,7 +230,7 @@ It is my intent that students from all diverse backgrounds and perspectives be w
 
 Ask if you're not sure if something violates a policy!
 
-# Making STA 210 a success
+## Making STA 210 a success
 
 ## Five tips for success
 
@@ -247,7 +240,7 @@ Ask if you're not sure if something violates a policy!
 4.  Do the homework and lab.
 5.  Don't procrastinate and don't let a week pass by with lingering questions.
 
-## **Learning during a pandemic**
+## Learning during a pandemic
 
 I want to make sure that you learn everything you were hoping to learn from this class.
 If this requires flexibility, please don't hesitate to ask.
