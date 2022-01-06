@@ -13,9 +13,9 @@ Get acquainted with each other, the course, the technology, the workflow, and th
 
 ## Prepare
 
-Due: Thursday, Jan 6
+**Due:** Thursday, Jan 6
 
-All required prepare activities are due **by the beginning of class (1:45 pm)** on the specified date.
+All required prepare activities are due by the beginning of class (1:45 pm) on the specified date.
 
 📖 Read the [syllabus](/course-syllabus/)
 
