@@ -145,8 +145,10 @@ It stands for "YAML Ain't Markup Language".
 It is a human friendly data serialization standard for all programming languages.
 All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
 
-Open the Quarto (.qmd) file in your project, change the author name to your name, and render the document.
+::: callout-important
+Open the Quarto (`.qmd`) file in your project, change the author name to your name, and render the document.
 Examine the rendered document.
+:::
 
 ### Committing changes
 
@@ -262,6 +264,14 @@ How many observations are in the `ikea` dataset?
 How many variables?
 :::
 
+::: callout-note
+In your `lab-1-ikea.qmd` document you'll see that we already added the code required for the exercise as well as a sentence where you can fill in the blanks to report the answer.
+Use this format for the remaining exercises.
+
+Also note that the code chunk as a label: `glimpse-data`.
+It's not required, but good practice and highly encouraged to label your code chunks in this way.
+:::
+
 ### Exercise 2
 
 We begin each regression analysis with exploratory data analysis (EDA) to help us "get to know" the data and examine the variable distributions and relationships between variables.
@@ -281,6 +291,12 @@ ggplot(data = ikea, aes(x = price_usd)) +
     In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers.
 
 -   Briefly explain why the median is more representative of the center of this distribution than the mean.
+:::
+
+::: callout-tip
+When using the visual editor you can insert a code chunk using the Insert menu on top or by using the catch-all `⌘ /` shortcut to insert just about anything.
+Just execute the shortcut then type what you want to insert.
+If you are at the beginning of a line you can also enter plain `/` to invoke the shortcut.
 :::
 
 ### Exercise 3
