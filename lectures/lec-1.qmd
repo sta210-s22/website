@@ -268,4 +268,8 @@ If this requires flexibility, please don't hesitate to ask.
 
 [![](images/lec-1/midori.jpeg){fig-alt="Picture of my cat, Midori, with a speech bubble that says \"Read the syllabus and make Mine happy!\"" fig-align="center" width="800"}](https://sta210-s22.github.io/website/course-syllabus.html)
 
-# Let's take a tour!
+# Application exercise
+
+Or more like a demo for today...
+
+[github.com/sta210-s22/ae-0-movies](https://github.com/sta210-s22/ae-0-movies)
