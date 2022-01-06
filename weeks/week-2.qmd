@@ -1,6 +1,6 @@
 ---
 title: "Week 2"
-subtitle: "TBA"
+subtitle: "Simple linear regression"
 editor: visual
 ---
 
@@ -17,7 +17,11 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 ## Participate
 
+🖥️ [Lab 1 - Meet the toolkit](/labs/lab-1-slides.html "Lab slides")
+
 ## Perform
+
+⌨️ [Lab 1 - Meet the toolkit](/labs/lab-1.html "Lab instructions")
 
 <br><br>
 

@@ -29,7 +29,7 @@ All required prepare activities are due by the beginning of class (1:45 pm) on t
 
 ## Perform
 
-⌨️ [Lab 0 - Meet + greet](/labs/lab0.html)
+⌨️ [Lab 0 - Meet + greet](/labs/lab-0.html)
 
 <br><br>
 
