@@ -25,7 +25,11 @@ All required prepare activities are due by the beginning of class (1:45 pm) on t
 
 🖥️ [Lab 0 - Meet + greet](/labs/lab-0-slides.html)
 
-🖥️ Lecture 1 - Welcome to STA 210
+🖥️ [Lecture 1 - Welcome to STA 210](/lectures/lec-1.html)
+
+## Practice
+
+📋 [AE 0 - Movies](https://github.com/sta210-s22/ae-0-movies)
 
 ## Perform
 
