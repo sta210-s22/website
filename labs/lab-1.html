@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.2.441">
+  <meta name="generator" content="quarto-0.2.444">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>STA 210 - Spring 2022 - Lab 1 - Meet the toolkit</title>
   <style>
@@ -323,8 +323,8 @@
 <li><a href="#yaml" class="nav-link" data-scroll-target="#yaml">YAML</a></li>
 <li><a href="#committing-changes" class="nav-link" data-scroll-target="#committing-changes">Committing changes</a></li>
 <li><a href="#push-changes" class="nav-link" data-scroll-target="#push-changes">Push changes</a></li>
-<li><a href="#packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
 </ul></li>
+<li><a href="#packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
 <li><a href="#data-ikea-furniture" class="nav-link" data-scroll-target="#data-ikea-furniture">Data: Ikea furniture</a>
 <ul class="collapse">
 <li><a href="#data-dictionary" class="nav-link" data-scroll-target="#data-dictionary">Data dictionary</a></li>
@@ -530,8 +530,9 @@ Important
 <p>Now that you have made an update and committed this change, it’s time to push these changes to your repo on GitHub.</p>
 <p>In order to push your changes to GitHub, you must have <strong>staged</strong> your <strong>commit</strong> to be pushed. click on <strong>Push</strong>.</p>
 </section>
-<section id="packages" class="level3">
-<h3 class="anchored" data-anchor-id="packages">Packages</h3>
+</section>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
 <p>We will use the following package in today’s lab.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -550,7 +551,19 @@ Important
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
 </div>
-</section>
+<p>The tidyverse is a meta-package. When you load it you get eight packages loaded for you:</p>
+<ul>
+<li><strong>ggplot2</strong>: for data visualization</li>
+<li><strong>dplyr</strong>: for data wrangling</li>
+<li><strong>tidyr</strong>: for data tidying and rectangling</li>
+<li><strong>readr</strong>: for reading and writing data</li>
+<li><strong>tibble</strong>: for modern, tidy data frames</li>
+<li><strong>stringr</strong>: for string manipulation</li>
+<li><strong>forcats</strong>: for dealing with factors</li>
+<li><strong>purrr</strong>: for iteration with functional programming</li>
+</ul>
+<p>The message that’s printed when you load the package tells you which versions of these packages are loaded as well as any conflicts they may have introduced, e.g., the <code>filter()</code> function from dplyr has now masked (overwritten) the <code>filter()</code> function available in base R (and that’s ok, we’ll use <code>dplyr::filter()</code> anyway).</p>
+<p>We’ll be using functionality from all of these packages throughout the semester, though we’ll always load them all at once with <code>library(tidyverse)</code>. You can find out more about the tidyverse and each of the packages that make it up <a href="https://www.tidyverse.org/">here</a>.</p>
 </section>
 <section id="data-ikea-furniture" class="level1">
 <h1>Data: Ikea furniture</h1>

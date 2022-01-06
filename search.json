@@ -525,11 +525,11 @@
     "text": "Tips\n\nYou do not have to finish the lab in class, they will always be due the following Friday at 5:00 pm. One work strategy is to get through portions that you think will be most challenging (which initially might be the coding component) during lab when a TA can help you on the spot and leave the narrative writing until later.\nWhen working in teams (later in the semester) do not pressure each other to finish early; use the time wisely to really learn the material and produce a quality report."
   },
   {
-    "objectID": "labs/lab-1-slides.html#check-do-you-have-the-lab-01-repo",
-    "href": "labs/lab-1-slides.html#check-do-you-have-the-lab-01-repo",
+    "objectID": "labs/lab-1-slides.html#check-do-you-have-the-lab-1-repo",
+    "href": "labs/lab-1-slides.html#check-do-you-have-the-lab-1-repo",
     "title": "Lab 1 - Meet the toolkit",
-    "section": "Check: Do you have the lab-01 repo?",
-    "text": "Check: Do you have the lab-01 repo?\n\nGo to the GitHub course organization: https://github.com/sta210-s22\nYou should see a repo with the prefix lab-01- followed by your GitHub username\nIf you do not have this repo, please let your TAs know!"
+    "section": "Check: Do you have the lab-1 repo?",
+    "text": "Check: Do you have the lab-1 repo?\n\nGo to the GitHub course organization: https://github.com/sta210-s22\nYou should see a repo with the prefix lab-1- followed by your GitHub username\nIf you do not have this repo, please let your TAs know!"
   },
   {
     "objectID": "labs/lab-1-slides.html#demo",
@@ -606,7 +606,14 @@
     "href": "labs/lab-1.html#getting-started",
     "title": "Lab 1 - Meet the toolkit",
     "section": "Getting started",
-    "text": "Getting started\n\n\n\n\n\n\nImportant\n\n\n\nYour lab TA will lead you through the Getting Started section.\n\n\n\nLog in to RStudio\n\nGo to https://vm-manage.oit.duke.edu/containers and login with your Duke NetID and Password.\nClick STA210 to log into the Docker container. You should now see the RStudio environment.\n\n\n\n\n\n\n\nWarning\n\n\n\nIf you haven’t yet done so, you will need to reserve a container for STA210 first.\n\n\n\n\nSet up your SSH key\nYou will authenticate GitHub using SSH. Below are an outline of the authentication steps; you are encouraged to follow along as your TA demonstrates the steps.\n\n\n\n\n\n\nNote\n\n\n\nYou only need to do this authentication process one time on a single system.\n\n\n\nType credentials::ssh_setup_github() into your console.\nR will ask “No SSH key found. Generate one now?” You should click 1 for yes.\nYou will generate a key. It will begin with “ssh-rsa….” R will then ask “Would you like to open a browser now?” You should click 1 for yes.\nYou may be asked to provide your GitHub username and password to log into GitHub. After entering this information, you should paste the key in and give it a name. You might name it in a way that indicates where the key will be used, e.g., sta210).\n\nYou can find more detailed instructions here if you’re interested.\n\n\nConfigure Git\nThere is one more thing we need to do before getting started on the assignment. Specifically, we need to configure your git so that RStudio can communicate with GitHub. This requires two pieces of information: your name and email address.\nTo do so, you will use the use_git_config() function from the usethis package.\nType the following lines of code in the console in RStudio filling in your name and the email address associated with your GitHub account.\n\nusethis::use_git_config(\n  user.name = \"GitHub username\", \n  user.email = \"Email associated with your GitHub account\"\n  )\n\nFor example, mine would be\n\nusethis::use_git_config(\n  user.name = \"mine-cetinkaya-rundel\", \n  user.email = \"cetinkaya.mine@gmail.com\"\n  )\n\nYou are now ready interact with GitHub via RStudio!\n\n\nClone the repo & start new RStudio project\n\nGo to the course organization at github.com/sta210-s22 organization on GitHub. Click on the repo with the prefix lab-1. It contains the starter documents you need to complete the lab.\nClick on the green CODE button, select Use SSH (this might already be selected by default, and if it is, you’ll see the text Clone with SSH). Click on the clipboard icon to copy the repo URL.\nIn RStudio, go to File ➛ New Project ➛Version Control ➛ Git.\nCopy and paste the URL of your assignment repo into the dialog box Repository URL. Again, please make sure to have SSH highlighted under Clone when you copy the address.\nClick Create Project, and the files from your GitHub repo will be displayed in the Files pane in RStudio.\nClick lab-1-ikea.qmd to open the template R Markdown file. This is where you will write up your code and narrative for the lab.\n\n\n\nR and R Studio\nBelow are the components of the RStudio IDE.\n\nBelow are the components of a Quarto (.qmd) file.\n\n\n\nYAML\nThe top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for “YAML Ain’t Markup Language”. It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.\n\n\n\n\n\n\nImportant\n\n\n\nOpen the Quarto (.qmd) file in your project, change the author name to your name, and render the document. Examine the rendered document.\n\n\n\n\nCommitting changes\nNow, go to the Git pane in your RStudio instance. This will be in the top right hand corner in a separate tab.\nIf you have made changes to your Rmd file, you should see it listed here. Click on it to select it in this list and then click on Diff. This shows you the difference between the last committed state of the document and its current state including changes. You should see deletions in red and additions in green.\nIf you’re happy with these changes, we’ll prepare the changes to be pushed to your remote repository. First, stage your changes by checking the appropriate box on the files you want to prepare. Next, write a meaningful commit message (for instance, “updated author name”) in the Commit message box. Finally, click Commit. Note that every commit needs to have a commit message associated with it.\nYou don’t have to commit after every change, as this would get quite tedious. You should commit states that are meaningful to you for inspection, comparison, or restoration.\nIn the first few assignments we will tell you exactly when to commit and in some cases, what commit message to use. As the semester progresses we will let you make these decisions.\nNow let’s make sure all the changes went to GitHub. Go to your GitHub repo and refresh the page. You should see your commit message next to the updated files. If you see this, all your changes are on GitHub and you’re good to go!\n\n\nPush changes\nNow that you have made an update and committed this change, it’s time to push these changes to your repo on GitHub.\nIn order to push your changes to GitHub, you must have staged your commit to be pushed. click on Push.\n\n\nPackages\nWe will use the following package in today’s lab.\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()"
+    "text": "Getting started\n\n\n\n\n\n\nImportant\n\n\n\nYour lab TA will lead you through the Getting Started section.\n\n\n\nLog in to RStudio\n\nGo to https://vm-manage.oit.duke.edu/containers and login with your Duke NetID and Password.\nClick STA210 to log into the Docker container. You should now see the RStudio environment.\n\n\n\n\n\n\n\nWarning\n\n\n\nIf you haven’t yet done so, you will need to reserve a container for STA210 first.\n\n\n\n\nSet up your SSH key\nYou will authenticate GitHub using SSH. Below are an outline of the authentication steps; you are encouraged to follow along as your TA demonstrates the steps.\n\n\n\n\n\n\nNote\n\n\n\nYou only need to do this authentication process one time on a single system.\n\n\n\nType credentials::ssh_setup_github() into your console.\nR will ask “No SSH key found. Generate one now?” You should click 1 for yes.\nYou will generate a key. It will begin with “ssh-rsa….” R will then ask “Would you like to open a browser now?” You should click 1 for yes.\nYou may be asked to provide your GitHub username and password to log into GitHub. After entering this information, you should paste the key in and give it a name. You might name it in a way that indicates where the key will be used, e.g., sta210).\n\nYou can find more detailed instructions here if you’re interested.\n\n\nConfigure Git\nThere is one more thing we need to do before getting started on the assignment. Specifically, we need to configure your git so that RStudio can communicate with GitHub. This requires two pieces of information: your name and email address.\nTo do so, you will use the use_git_config() function from the usethis package.\nType the following lines of code in the console in RStudio filling in your name and the email address associated with your GitHub account.\n\nusethis::use_git_config(\n  user.name = \"GitHub username\", \n  user.email = \"Email associated with your GitHub account\"\n  )\n\nFor example, mine would be\n\nusethis::use_git_config(\n  user.name = \"mine-cetinkaya-rundel\", \n  user.email = \"cetinkaya.mine@gmail.com\"\n  )\n\nYou are now ready interact with GitHub via RStudio!\n\n\nClone the repo & start new RStudio project\n\nGo to the course organization at github.com/sta210-s22 organization on GitHub. Click on the repo with the prefix lab-1. It contains the starter documents you need to complete the lab.\nClick on the green CODE button, select Use SSH (this might already be selected by default, and if it is, you’ll see the text Clone with SSH). Click on the clipboard icon to copy the repo URL.\nIn RStudio, go to File ➛ New Project ➛Version Control ➛ Git.\nCopy and paste the URL of your assignment repo into the dialog box Repository URL. Again, please make sure to have SSH highlighted under Clone when you copy the address.\nClick Create Project, and the files from your GitHub repo will be displayed in the Files pane in RStudio.\nClick lab-1-ikea.qmd to open the template R Markdown file. This is where you will write up your code and narrative for the lab.\n\n\n\nR and R Studio\nBelow are the components of the RStudio IDE.\n\nBelow are the components of a Quarto (.qmd) file.\n\n\n\nYAML\nThe top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for “YAML Ain’t Markup Language”. It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.\n\n\n\n\n\n\nImportant\n\n\n\nOpen the Quarto (.qmd) file in your project, change the author name to your name, and render the document. Examine the rendered document.\n\n\n\n\nCommitting changes\nNow, go to the Git pane in your RStudio instance. This will be in the top right hand corner in a separate tab.\nIf you have made changes to your Rmd file, you should see it listed here. Click on it to select it in this list and then click on Diff. This shows you the difference between the last committed state of the document and its current state including changes. You should see deletions in red and additions in green.\nIf you’re happy with these changes, we’ll prepare the changes to be pushed to your remote repository. First, stage your changes by checking the appropriate box on the files you want to prepare. Next, write a meaningful commit message (for instance, “updated author name”) in the Commit message box. Finally, click Commit. Note that every commit needs to have a commit message associated with it.\nYou don’t have to commit after every change, as this would get quite tedious. You should commit states that are meaningful to you for inspection, comparison, or restoration.\nIn the first few assignments we will tell you exactly when to commit and in some cases, what commit message to use. As the semester progresses we will let you make these decisions.\nNow let’s make sure all the changes went to GitHub. Go to your GitHub repo and refresh the page. You should see your commit message next to the updated files. If you see this, all your changes are on GitHub and you’re good to go!\n\n\nPush changes\nNow that you have made an update and committed this change, it’s time to push these changes to your repo on GitHub.\nIn order to push your changes to GitHub, you must have staged your commit to be pushed. click on Push."
+  },
+  {
+    "objectID": "labs/lab-1.html#packages",
+    "href": "labs/lab-1.html#packages",
+    "title": "Lab 1 - Meet the toolkit",
+    "section": "Packages",
+    "text": "Packages\nWe will use the following package in today’s lab.\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\n\nThe tidyverse is a meta-package. When you load it you get eight packages loaded for you:\n\nggplot2: for data visualization\ndplyr: for data wrangling\ntidyr: for data tidying and rectangling\nreadr: for reading and writing data\ntibble: for modern, tidy data frames\nstringr: for string manipulation\nforcats: for dealing with factors\npurrr: for iteration with functional programming\n\nThe message that’s printed when you load the package tells you which versions of these packages are loaded as well as any conflicts they may have introduced, e.g., the filter() function from dplyr has now masked (overwritten) the filter() function available in base R (and that’s ok, we’ll use dplyr::filter() anyway).\nWe’ll be using functionality from all of these packages throughout the semester, though we’ll always load them all at once with library(tidyverse). You can find out more about the tidyverse and each of the packages that make it up here."
   },
   {
     "objectID": "labs/lab-1.html#view-the-data",
@@ -768,5 +775,194 @@
     "title": "Useful links",
     "section": "",
     "text": "RStudio containers\n🔗 on Duke Container Manager\n\n\nCourse GitHub organization\n🔗 on GitHub\n\n\nDiscussion forum\n🔗 on Sakai\n\n\nLecture recordings\n🔗 on Panopto\n\n\nGradebook\n🔗 on Sakai\n\n\nVirtual office hours\n🔗 on Sakai"
+  },
+  {
+    "objectID": "lectures/lec-1.html#meet-the-professor",
+    "href": "lectures/lec-1.html#meet-the-professor",
+    "title": "Welcome to STA 210!",
+    "section": "Meet the professor",
+    "text": "Meet the professor\n\n\n\nProfessor of the Practice & Director of Undergraduate Studies, Department of Statistical Science\nAffiliated Faculty, Computational Media, Arts & Cultures\nFind out more at mine-cr.com"
+  },
+  {
+    "objectID": "lectures/lec-1.html#meet-the-tas",
+    "href": "lectures/lec-1.html#meet-the-tas",
+    "title": "Welcome to STA 210!",
+    "section": "Meet the TAs",
+    "text": "Meet the TAs\n\nMartha Aboagye (she/her, UG)\nRich Fremgen (he/him, MS)\nEmily Gentles (she/her, MS)\nSara Mehta (she/her, UG)\nRick Presman (he/him, PhD)\nShari Tian (she/her, UG)\nAaditya Warrier (he/him, UG)"
+  },
+  {
+    "objectID": "lectures/lec-1.html#check-out-conversations",
+    "href": "lectures/lec-1.html#check-out-conversations",
+    "title": "Welcome to STA 210!",
+    "section": "Check out Conversations",
+    "text": "Check out Conversations\n\nGo to Conversations 💬\nAnswer the discussion question: How are you doing?"
+  },
+  {
+    "objectID": "lectures/lec-1.html#what-is-regression-analysis",
+    "href": "lectures/lec-1.html#what-is-regression-analysis",
+    "title": "Welcome to STA 210!",
+    "section": "What is regression analysis",
+    "text": "What is regression analysis\n\n\n“In statistical modeling, regression analysis is a set of statistical processes for estimating the relationships among variables. It includes many techniques for modeling and analyzing several variables, when the focus is on the relationship between a dependent variable and one or more independent variables (or predictors). More specifically, regression analysis helps one understand how the typical value of the dependent variable (or ‘criterion variable’) changes when any one of the independent variables is varied, while the other independent variables are held fixed.”\n\n\nSource: Wikipedia"
+  },
+  {
+    "objectID": "lectures/lec-1.html#course-faq",
+    "href": "lectures/lec-1.html#course-faq",
+    "title": "Welcome to STA 210!",
+    "section": "Course FAQ",
+    "text": "Course FAQ\n\n\nWhat background is assumed for the course? Introductory statistics or probability course.\nWill we be doing computing? Yes. We will use R.\nWill we learn the mathematical theory of regression? Yes and No. The course is primarily focused on application; however, we will discuss some of the mathematics of simple linear regression. The 1-credit course STA 211: Mathematics of Regression you can take simultaneously / after dives into more of the mathematics."
+  },
+  {
+    "objectID": "lectures/lec-1.html#course-learning-objectives",
+    "href": "lectures/lec-1.html#course-learning-objectives",
+    "title": "Welcome to STA 210!",
+    "section": "Course learning objectives",
+    "text": "Course learning objectives\n\nAnalyze real-world data to answer questions about multivariable relationships.\nFit and evaluate linear and logistic regression models.\nAssess whether a proposed model is appropriate and describe its limitations.\nUse Quarto to write reproducible reports and GitHub for version control and collaboration.\nCommunicate results from statistical analyses to a general audience."
+  },
+  {
+    "objectID": "lectures/lec-1.html#examples-of-regression-in-practice",
+    "href": "lectures/lec-1.html#examples-of-regression-in-practice",
+    "title": "Welcome to STA 210!",
+    "section": "Examples of regression in practice",
+    "text": "Examples of regression in practice\n\n\nNew Yorkers Will Pay $56 A Month To Trim A Minute Off Their Commute\nHow FiveThirtyEight’s 2020 Presidential Forecast Works — And What’s Different Because Of COVID-19\nEffect of Forensic Evidence on Criminal Justice Case Processing\nWhy it’s so freaking hard to make a good COVID-19 model"
+  },
+  {
+    "objectID": "lectures/lec-1.html#homepage",
+    "href": "lectures/lec-1.html#homepage",
+    "title": "Welcome to STA 210!",
+    "section": "Homepage",
+    "text": "Homepage\nsta210-s22.github.io/website\n\nAll course materials\nLinks to Sakai, GitHub, RStudio containers, etc.\nLet’s take a tour!"
+  },
+  {
+    "objectID": "lectures/lec-1.html#course-toolkit",
+    "href": "lectures/lec-1.html#course-toolkit",
+    "title": "Welcome to STA 210!",
+    "section": "Course toolkit",
+    "text": "Course toolkit\nAll linked from the course website:\n\nGitHub organization: github.com/sta210-s22\nRStudio containers: cmgr.oit.duke.edu/containers\nDiscussion forum: Conversations\nAssignment submission and feedback: Gradescope\n\n\n\nImportant\nReserve an RStudio Container (titled STA 210) before lab on Monday!"
+  },
+  {
+    "objectID": "lectures/lec-1.html#activities-prepare-participate-practice-perform",
+    "href": "lectures/lec-1.html#activities-prepare-participate-practice-perform",
+    "title": "Welcome to STA 210!",
+    "section": "Activities: Prepare, Participate, Practice, Perform",
+    "text": "Activities: Prepare, Participate, Practice, Perform\n\nPrepare: Introduce new content and prepare for lectures by completing the readings (and sometimes watching the videos)\nParticipate: Attend and actively participate in lectures and labs, office hours, team meetings\nPractice: Practice applying statistical concepts and computing with application exercises during lecture, graded for completion\nPerform: Put together what you’ve learned to analyze real-world data\n\nLab assignments x 7 (first individual, later team-based)\nHomework assignments x 5 (individual)\nThree take-home exams\nTerm project presented during the final exam period"
+  },
+  {
+    "objectID": "lectures/lec-1.html#cadence",
+    "href": "lectures/lec-1.html#cadence",
+    "title": "Welcome to STA 210!",
+    "section": "Cadence",
+    "text": "Cadence\n\n\nLabs: Start and make large progress on Monday in lab section, finish up by Friday 5pm of that week\nHWs: Posted Friday morning, due following Friday 5pm\nExams: Exam review Thursday in class, exam posted Friday morning, no lab on Monday of following week, due Monday 11:59pm\nProject: Deadlines throughout the semester, with some lab and lecture time dedicated to working on them, and most work done in teams outside of class"
+  },
+  {
+    "objectID": "lectures/lec-1.html#teams",
+    "href": "lectures/lec-1.html#teams",
+    "title": "Welcome to STA 210!",
+    "section": "Teams",
+    "text": "Teams\n\nTeam assignments\n\nIn class exercises and projects\nAssigned different teams for each project\nPeer evaluation during teamwork and after completion\n\nExpectations and roles\n\nEveryone is expected to contribute equal effort\nEveryone is expected to understand all code turned in\nIndividual contribution evaluated by peer evaluation, commits, etc."
+  },
+  {
+    "objectID": "lectures/lec-1.html#grading",
+    "href": "lectures/lec-1.html#grading",
+    "title": "Welcome to STA 210!",
+    "section": "Grading",
+    "text": "Grading\n\n\n\nCategory\nPercentage\n\n\n\n\nApplication exercises\n3%\n\n\nHomework\n35% (7% x 5)\n\n\nProject\n15%\n\n\nLab\n14% (2% x 7)\n\n\nExam 01\n10%\n\n\nExam 02\n10%\n\n\nExam 03\n10%\n\n\nTeamwork\n3%\n\n\n\nSee course syllabus for how the final letter grade will be determined."
+  },
+  {
+    "objectID": "lectures/lec-1.html#support",
+    "href": "lectures/lec-1.html#support",
+    "title": "Welcome to STA 210!",
+    "section": "Support",
+    "text": "Support\n\nAttend office hours\nAsk and answer questions on the discussion forum\nReserve email for questions on personal matters and/or grades\nRead the course support page"
+  },
+  {
+    "objectID": "lectures/lec-1.html#announcements",
+    "href": "lectures/lec-1.html#announcements",
+    "title": "Welcome to STA 210!",
+    "section": "Announcements",
+    "text": "Announcements\n\nPosted on Sakai (Announcements tool) and sent via email, be sure to check both regularly\nI’ll assume that you’ve read an announcement by the next “business” day\nI’ll (try my best to) send a weekly update announcement each Friday, outlining the plan for the following week and reminding you what you need to do to prepare, practice, and perform"
+  },
+  {
+    "objectID": "lectures/lec-1.html#diversity-inclusion",
+    "href": "lectures/lec-1.html#diversity-inclusion",
+    "title": "Welcome to STA 210!",
+    "section": "Diversity + inclusion",
+    "text": "Diversity + inclusion\nIt is my intent that students from all diverse backgrounds and perspectives be well-served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit.\n\n\nIf you have a name that differs from those that appear in your official Duke records, please let me know!\nPlease let me know your preferred pronouns. You’ll also be able to note this in the Getting to know you survey.\nIf you feel like your performance in the class is being impacted by your experiences outside of class, please don’t hesitate to come and talk with me. I want to be a resource for you. If you prefer to speak with someone outside of the course, your advisers and deans are excellent resources.\nI (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it."
+  },
+  {
+    "objectID": "lectures/lec-1.html#accessibility",
+    "href": "lectures/lec-1.html#accessibility",
+    "title": "Welcome to STA 210!",
+    "section": "Accessibility",
+    "text": "Accessibility\n\nThe Student Disability Access Office (SDAO) is available to ensure that students are able to engage with their courses and related assignments.\nI am committed to making all course materials accessible and I’m always learning how to do this better. If any course component is not accessible to you in any way, please don’t hesitate to let me know."
+  },
+  {
+    "objectID": "lectures/lec-1.html#covid-policies",
+    "href": "lectures/lec-1.html#covid-policies",
+    "title": "Welcome to STA 210!",
+    "section": "COVID policies",
+    "text": "COVID policies\n\nWear a mask at all times!\nRead and follow university guidance"
+  },
+  {
+    "objectID": "lectures/lec-1.html#late-work-waivers-regrades-policy",
+    "href": "lectures/lec-1.html#late-work-waivers-regrades-policy",
+    "title": "Welcome to STA 210!",
+    "section": "Late work, waivers, regrades policy",
+    "text": "Late work, waivers, regrades policy\n\nWe have policies!\nRead about them on the course syllabus and refer back to them when you need it"
+  },
+  {
+    "objectID": "lectures/lec-1.html#collaboration-policy",
+    "href": "lectures/lec-1.html#collaboration-policy",
+    "title": "Welcome to STA 210!",
+    "section": "Collaboration policy",
+    "text": "Collaboration policy\n\nOnly work that is clearly assigned as team work should be completed collaboratively.\nHomeworks must be completed individually. You may not directly share answers / code with others, however you are welcome to discuss the problems in general and ask for advice.\nExams must be completed individually. You may not discuss any aspect of the exam with peers. If you have questions, post as private questions on the course forum, only the teaching team will see and answer."
+  },
+  {
+    "objectID": "lectures/lec-1.html#sharing-reusing-code-policy",
+    "href": "lectures/lec-1.html#sharing-reusing-code-policy",
+    "title": "Welcome to STA 210!",
+    "section": "Sharing / reusing code policy",
+    "text": "Sharing / reusing code policy\n\nWe are aware that a huge volume of code is available on the web, and many tasks may have solutions posted\nUnless explicitly stated otherwise, this course’s policy is that you may make use of any online resources (e.g. RStudio Community, StackOverflow, etc.) but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solution(s).\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source"
+  },
+  {
+    "objectID": "lectures/lec-1.html#academic-integrity",
+    "href": "lectures/lec-1.html#academic-integrity",
+    "title": "Welcome to STA 210!",
+    "section": "Academic integrity",
+    "text": "Academic integrity\n\nTo uphold the Duke Community Standard:\n\nI will not lie, cheat, or steal in my academic endeavors;\nI will conduct myself honorably in all my endeavors; and\nI will act if the Standard is compromised."
+  },
+  {
+    "objectID": "lectures/lec-1.html#most-importantly",
+    "href": "lectures/lec-1.html#most-importantly",
+    "title": "Welcome to STA 210!",
+    "section": "Most importantly!",
+    "text": "Most importantly!\nAsk if you’re not sure if something violates a policy!"
+  },
+  {
+    "objectID": "lectures/lec-1.html#five-tips-for-success",
+    "href": "lectures/lec-1.html#five-tips-for-success",
+    "title": "Welcome to STA 210!",
+    "section": "Five tips for success",
+    "text": "Five tips for success\n\nComplete all the preparation work before class.\nAsk questions.\nDo the readings.\nDo the homework and lab.\nDon’t procrastinate and don’t let a week pass by with lingering questions."
+  },
+  {
+    "objectID": "lectures/lec-1.html#learning-during-a-pandemic",
+    "href": "lectures/lec-1.html#learning-during-a-pandemic",
+    "title": "Welcome to STA 210!",
+    "section": "Learning during a pandemic",
+    "text": "Learning during a pandemic\nI want to make sure that you learn everything you were hoping to learn from this class. If this requires flexibility, please don’t hesitate to ask.\n\n\nYou never owe me personal information about your health (mental or physical) but you’re always welcome to talk to me. If I can’t help, I likely know someone who can.\nI want you to learn lots of things from this class, but I primarily want you to stay healthy, balanced, and grounded during this crisis."
+  },
+  {
+    "objectID": "lectures/lec-1.html#this-weeks-tasks",
+    "href": "lectures/lec-1.html#this-weeks-tasks",
+    "title": "Welcome to STA 210!",
+    "section": "This week’s tasks",
+    "text": "This week’s tasks\n\nGet a GitHub account if you don’t have one (some advice for choosing a username here)\nComplete the Getting to know you survey if you haven’t yet done so!\nRead the syllabus\nWatch out for next week’s announcement email, in your inbox sometime tomorrow"
+  },
+  {
+    "objectID": "lectures/lec-1.html#midori-says",
+    "href": "lectures/lec-1.html#midori-says",
+    "title": "Welcome to STA 210!",
+    "section": "Midori says…",
+    "text": "Midori says…"
   }
 ]
