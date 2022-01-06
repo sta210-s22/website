@@ -10,26 +10,23 @@ title: "Teaching team"
 Mine's work focuses on innovation in statistics and data science pedagogy, with an emphasis on computing, reproducible research, student-centered learning, and open-source education as well as pedagogical approaches for enhancing retention of women and under-represented minorities in STEM.
 Mine also works with RStudio as a Developer Educator.
 
-+-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| Office hours                  | Location                                                                                                                                        |
-+===============================+=================================================================================================================================================+
-| Mondays 10:30 am - 11:30 am   | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                       |
-+-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| Thursdays 11:00 am - 12:00 pm | Old Chem 214                                                                                                                                    |
-|                               |                                                                                                                                                 |
-|                               | (On [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562) until January 18) |
-+-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| Office hours                  | Location                                                                                                                                                     |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Mondays 10:30 am - 11:30 am   | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                    |
+| Thursdays 11:00 am - 12:00 pm | Old Chem 214 (On [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562) until January 18) |
 
 If these times don't work for you or you'd like to schedule a one-on-one meeting, you can do so at [bit.ly/meet-mine](https://bit.ly/meet-mine).
 
 ## Teaching assistants
 
-| Name            | Office hours | Location |
-|-----------------|--------------|----------|
-| Martha Aboagye  |              |          |
-| Richard Fremgen |              |          |
-| Emily Gentles   |              |          |
-| Sara Mehta      |              |          |
-| Rick Presman    |              |          |
-| Shari Tian      |              |          |
-| Aaditya Warrier |              |          |
+| Name            | Office hours       | Location                                                                                                                                                      |
+|-----------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Martha Aboagye  | Thursday 7 - 9 pm  | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Richard Fremgen | Tues 7 - 9 pm      | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Emily Gentles   | Wednesday 1 - 3 pm | Old Chem 203B (On [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562) until January 18) |
+| Sara Mehta      | Mon 2 - 4 pm       | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Rick Presman    | Thursday 2 - 3 pm  | Old Chem 203B (On [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562) until January 18) |
+|                 | Fri 9 - 10 am      | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Shari Tian      | Tue 8-10 am        | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Aaditya Warrier | Mon 12pm - 1pm     | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+|                 | Fri 1:30 - 2:30 pm | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
