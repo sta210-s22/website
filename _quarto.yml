@@ -66,42 +66,44 @@ website:
             text: Access
           - href: computing-troubleshooting.qmd
             text: Troubleshooting
-      - section: "Labs"
-        contents:
-          - href: labs/lab-0.qmd
-            text: "Lab 0"
-          - href: labs/lab-1.qmd
-            text: "Lab 1"
-          - href: labs/lab-2.qmd
-            text: "Lab 2"
-          - href: labs/lab-3.qmd
-            text: "Lab 3"
-          - href: labs/lab-4.qmd
-            text: "Lab 4"
-          - href: labs/lab-5.qmd
-            text: "Lab 5"
-          - href: labs/lab-6.qmd
-            text: "Lab 6"
-          - href: labs/lab-7.qmd
-            text: "Lab 7"
-      - section: "HW"
-        contents:
-          - href: hw/hw-1.qmd
-            text: "HW 1"
-          - href: hw/hw-2.qmd
-            text: "HW 2"
-          - href: hw/hw-3.qmd
-            text: "HW 3"
-          - href: hw/hw-4.qmd
-            text: "HW 4"
-          - href: hw/hw-5.qmd
-            text: "HW 5"
       - section: "Project"
         contents:
           - href: project-description.qmd
             text: Description
           - href: project-tips-resources.qmd
             text: Tips + resources
+      - section: "Weekly materials"
+        contents:
+          - href: weeks/week-1.qmd
+            text: "Week 1"
+          - href: weeks/week-2.qmd
+            text: "Week 2"
+          - href: weeks/week-3.qmd
+            text: "Week 3"
+          - href: weeks/week-4.qmd
+            text: "Week 4"
+          - href: weeks/week-5.qmd
+            text: "Week 5"
+          - href: weeks/week-6.qmd
+            text: "Week 6"
+          - href: weeks/week-7.qmd
+            text: "Week 7"
+          - href: weeks/week-8.qmd
+            text: "Week 8"
+          - href: weeks/week-9.qmd
+            text: "Week 9"
+          - href: weeks/week-10.qmd
+            text: "Week 10"
+          - href: weeks/week-11.qmd
+            text: "Week 11"
+          - href: weeks/week-12.qmd
+            text: "Week 12"
+          - href: weeks/week-13.qmd
+            text: "Week 13"
+          - href: weeks/week-14.qmd
+            text: "Week 14"
+          - href: weeks/week-15.qmd
+            text: "Week 15"
 
 format:
   html:

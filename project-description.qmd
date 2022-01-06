@@ -2,29 +2,21 @@
 title: "Project description"
 ---
 
-```{r include = F}
-library(tidyverse)
-library(knitr)
-library(broom)
-```
-
 ## Timeline
 
-(TO DO: Update timeline)
+[Topic ideas](#topic-ideas) due Fri, Feb 18
 
-[Topic ideas](#topic-ideas) due **Monday, October 11**
+[Proposal](#project-proposal) due Fri, Mar 18
 
-[Proposal](#project-proposal) due **Friday, October 29**
+[Draft report](#draft-report) due Fri, Apr 8
 
-[Draft report](#draft-report) due **Tuesday, November 16**
+[Peer review](#peer-review) due Fri, Apr 15
 
-[Peer review](#peer-review) due **Wednesday, November 17**
+[Final report](#written-report) due Mon, Apr 25
 
-[Final report](#written-report) due **Friday, December 3** (accepted until December 5)
+[Video presentation + slides](#video-presentation--slides) and [final GitHub repo](#reproducibility---organization) due Thu, Apr 28
 
-[Video presentation + slides](#video-presentation--slides) and [final GitHub repo](#reproducibility---organization) due **Thursday, December 9**
-
-[Presentation comments](#presentation-comments) due **Saturday, December 11**
+[Presentation comments](#presentation-comments) due Sat, Apr 30
 
 ## Introduction
 
@@ -167,7 +159,7 @@ Each component will be graded as follows:
 The purpose of the draft and peer review is to give you an opportunity to get early feedback on your analysis.
 Therefore, the draft and peer review will focus primarily on the exploratory data analysis, modeling, and initial interpretations.
 
-Write the draft in the **written-report.Rmd** file in your project repo.
+Write the draft in the **written-report.qmd** file in your project repo.
 You do not need to submit the draft on Gradescope.
 
 Below is a brief description of the sections to focus on in the draft:
@@ -195,18 +187,16 @@ This section also includes initial interpretations and conclusions drawn from th
 
 Critically reviewing others' work is a crucial part of the scientific process, and STA 210 is no exception.
 Each lab team will be assigned another team's project to review.
-Each team should push their draft to their GitHub repo by **Tuesday, November 16**.
-The lecture on Wednesday, November 17 be dedicated to the peer review, and all reviews will be **due by November 17 at 11:59pm**.
+Each team should push their draft to their GitHub repo by the due date.
+One lecture in the following week will be dedicated to the peer review, and all reviews will be due by the end of that week.
 
 During the peer review process, you will be provided read-only access to your partner team's GitHub repo.
 Provide your review in the form of GitHub issues to your partner team's GitHub repo.
 The peer review will be graded on the extent to which it comprehensively and constructively addresses the components of the partner team's report: the research context and motivation, exploratory data analysis, modeling, interpretations, and conclusions.
 
-[Click here](peer-review.html) for peer review instructions.
-
 ## Written report {#written-report}
 
-Your written report must be completed in the `written-report.Rmd` file and must be reproducible.
+Your written report must be completed in the `written-report.qmd` file and must be reproducible.
 All team members should contribute to the GitHub repository, with regular meaningful commits.
 
 Before you finalize your write up, make sure the printing of code chunks is off with the option `echo = FALSE`.
@@ -236,7 +226,7 @@ The written report is worth 40 points, broken down as follows
 | **Discussion + conclusion**   | 6 pts  |
 | **Organization + formatting** | 4 pts  |
 
-[Click here](project-report-rubric.pdf) for a PDF of the written report rubric.
+[Click here](/documents/project-report-rubric.pdf "Project rubric") for a PDF of the written report rubric.
 
 ### Introduction and data
 
@@ -316,7 +306,7 @@ These slides should serve as a brief visual addition to your written report and 
 **For submission, convert these slides to a .pdf document, and submit the PDF of the slides on Gradescope.**
 
 The slide deck should have no more than 6 content slides + 1 title slide.
-Here is a *suggested* outline as you think through the slides; you [**do not**]{.ul} have to use this exact format for the 6 slides.
+Here is a *suggested* outline as you think through the slides; you [**do not**]{.underline} have to use this exact format for the 6 slides.
 
 -   Title Slide
 -   Slide 1: Introduce the topic and motivation
@@ -359,18 +349,16 @@ Once your video is ready, upload the video to Warpwire, then embed the video in 
 -   You're done!
 
 You can see the Teaching Team example in Sakai.
+\[**TO DO:** Post example\]
 
 ## Presentation comments {#presentation-comments}
 
 Each student will be assigned 2 presentations to watch.
-[Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EdJpsc-oSeZMp44DfunZJXoBHi-46BOCUh44JoILIoekMg?e=Up1ZJS) to see your viewing assignments.
+Your viewing assignments will be posted later in the semester.
 
 Watch the group's video, then click "Reply" to post a question for the group.
 You may not post a question that's already been asked on the discussion thread.
 Additionally, the question should be (i) substantive (i.e. it shouldn't be "Why did you use a bar plot instead of a pie chart"?), (ii) demonstrate your understanding of the content from the course, and (iii) relevant to that group's specific presentation, i.e demonstrating that you've watched the presentation.
-
-You may start posting questions and comments on Friday, December 10.
-**All comments must be posted by Saturday, December 11 at 11:59pm. (TO DO: UPDATE DATES)**
 
 *This portion of the project will be assessed individually.*
 
@@ -382,7 +370,7 @@ The GitHub repo should have the following structure:
 
 -   `README`: Short project description and data dictionary
 
--   `written-report.Rmd` & `written-report.pdf`: Final written report
+-   `written-report.qmd` & `written-report.pdf`: Final written report
 
 -   `/data`: Folder that contains the data set for the final project.
 
@@ -402,9 +390,7 @@ Filling out the survey is a prerequisite for getting credit on the team member e
 If you are suggesting that an individual did less than half the expected contribution given your team size (e.g., for a team of four students, if a student contributed less than 12.5% of the total effort), please provide some explanation.
 If any individual gets an average peer score indicating that this was the case, their grade will be assessed accordingly.
 
-**Update (12/9/2021)**
-
-If you have concerns with the teamwork and/or contribution from any team members, please email me by Saturday, December 11 at 11:59pm with a brief description of your concerns.
+If you have concerns with the teamwork and/or contribution from any team members, please email me by the project video deadline.
 **You only need to email me if you have concerns**.
 Otherwise, I will assume everyone on the team equally contributed and will receive full credit for the teamwork portion of the grade.
 

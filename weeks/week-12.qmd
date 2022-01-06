@@ -1,0 +1,26 @@
+---
+title: "Week 12"
+subtitle: "TBA"
+editor: visual
+---
+
+::: callout-important
+:::
+
+To be posted.
+
+## Prepare
+
+Due: \_\_\_
+
+All required prepare activities are due **by the beginning of class (1:45 pm)** on the specified date.
+
+## Participate
+
+## Perform
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::

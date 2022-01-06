@@ -40,7 +40,7 @@ library(broom)
 -   Ask questions if any of the expectations are unclear.
 
 -   **Code:** In your write up your code should be hidden (`echo = FALSE`) so that your document is neat and easy to read.
-    However your document should include all your code such that if I re-knit your Rmd file I should be able to obtain the results you presented.
+    However your document should include all your code such that if I re-knit your qmd file I should be able to obtain the results you presented.
 
     -   **Exception:** If you want to highlight something specific about a piece of code, you're welcome to show that portion.
 
@@ -56,7 +56,7 @@ library(broom)
 
 ### Suppress Code, Warnings, & Messages
 
--   Include the following code in a code chunk at the top of your .Rmd file to suppress all code, warnings, and other messages. Use the code chunk header `{r set-up, include = FALSE}` to suppress this set up code.
+-   Include the following code in a code chunk at the top of your .qmd file to suppress all code, warnings, and other messages. Use the code chunk header `{r set-up, include = FALSE}` to suppress this set up code.
 
 ``` r
 knitr::opts_chunk$set(echo = FALSE,
@@ -66,13 +66,13 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ### Headers
 
--   Use headers to clearly label each section. Make sure there is a space between the last `#` and the title, so the header renders correctly. For example, `###Section Title` will not render as header, but `### Section Title` will.
+-   Use headers to clearly label each section.
+-   Inspect the document outline to review your headers and sub-headers.
 
 ### References
 
 -   Include all references in a section called "References" at the end of the report.
 -   This course does not have specific requirements for formatting citations and references.
--   See [Section 4.5](https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html) of the R Markdown Cookbook to learn about the citation functionality in R Markdown.
 
 ### Appendix
 
@@ -82,41 +82,21 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ### Resize figures
 
--   Resize plots and figures, so you have more space for the narrative.
-
-    -   **Resize individual figures**: Use the code chunk header `{r plot1, fig.height = 3, fig.width = 5}`, replacing `plot1` with a meaningful label and the height and width with values appropriate for your write up.
-    -   **Resize all figures**: Include the `fig_width` and `fig_height` options in your YAML header as shown below:
-
-<!-- -->
-
-    ---
-    title: "Your Title"
-    author: "Team Name + Group Members"
-    output: 
-      pdf_document:
-        fig_width: 5
-        fig_height: 3
-    ---
-
-Replace the height and width values with values appropriate for your write up.
+Resize plots and figures, so you have more space for the narrative.
 
 ### Arranging plots
 
 Arrange plots in a grid, instead of one after the other.
 This is especially useful when displaying plots for exploratory data analysis and to check assumptions.
 
--   If you're using ggplot2 functions, the `patchwork` package makes it easy to arrange plots in a grid.
-    See the documentation and examples [here](https://patchwork.data-imaginist.com/).
-
--   If you're using base R function, i.e. when using the `emplogit` functions, put the code `par(mfrow = c(rows,columns))` before the code to make the plots.
-    For example, `par(mfrow = c(2,3))` will arrange plots in a grid with 2 rows and 3 columns.
+If you're using ggplot2 functions, the `patchwork` package makes it easy to arrange plots in a grid.
+See the documentation and examples [here](https://patchwork.data-imaginist.com/).
 
 ### Plot titles and axis labels
 
 Be sure all plot titles and axis labels are visible and easy to read.
 
--   Use informative titles, <u>not</u> variable names, for titles and axis labels.
--   Use `coord_flip()` to flip the *x* and *y* axes on the plot. This is useful if you a bar plot with an x-axis that is difficult to read due to overlapping text.
+-   Use informative titles, *not* variable names, for titles and axis labels.
 
 ❌ **NO! The x-axis is hard to read because the names overlap.**
 
@@ -128,9 +108,8 @@ ggplot(data = mpg, aes(x = manufacturer)) +
 ✅ **YES! Names are readable**
 
 ```{r}
-ggplot(data = mpg, aes(x = manufacturer)) +
-  geom_bar() +
-  coord_flip()
+ggplot(data = mpg, aes(y = manufacturer)) +
+  geom_bar()
 ```
 
 ### Do a little more to make the plot look professional!
@@ -146,13 +125,12 @@ ggplot(data = mpg, aes(x = manufacturer)) +
 mpg %>%
   count(manufacturer) %>%
   mutate(manufacturer = str_to_title(manufacturer)) %>%
-  ggplot(aes(x = fct_reorder(manufacturer,n), y = n)) +
+  ggplot(aes(y = fct_reorder(manufacturer,n), x = n)) +
   geom_bar(stat = "identity", fill = "steelblue") +
-  coord_flip() +
   labs(x = "Manufacturer", 
        y = "Count", 
        title = "The most common manufacturer is Dodge") +
-  theme_bw() 
+  theme_minimal() 
 ```
 
 ### Tables and model output
@@ -196,9 +174,7 @@ tidy(model) %>%
 
 -   [R for Data Science](https://r4ds.had.co.nz/)
 
--   [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
-
--   [Slides in R using Xaringan](https://slides.yihui.org/xaringan/#1)
+-   [Quarto Documentation](https://quarto.org/)
 
 -   Data visualization
 
