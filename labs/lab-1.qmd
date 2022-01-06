@@ -66,13 +66,10 @@ You only need to do this authentication process one time on a single system.
 
 -   Type `credentials::ssh_setup_github()` into your console.
 
--   R will ask "No SSH key found.
-    Generate one now?"
-    You should click 1 for yes.
+-   R will ask "No SSH key found. Generate one now?" You should click 1 for yes.
 
 -   You will generate a key.
-    It will begin with "ssh-rsa...." R will then ask "Would you like to open a browser now?"
-    You should click 1 for yes.
+    It will begin with "ssh-rsa...." R will then ask "Would you like to open a browser now?" You should click 1 for yes.
 
 -   You may be asked to provide your GitHub username and password to log into GitHub.
     After entering this information, you should paste the key in and give it a name.
@@ -184,13 +181,30 @@ Now that you have made an update and committed this change, it's time to push th
 In order to push your changes to GitHub, you must have **staged** your **commit** to be pushed.
 click on **Push**.
 
-### Packages
+## Packages
 
 We will use the following package in today's lab.
 
 ```{r}
 library(tidyverse)
 ```
+
+The tidyverse is a meta-package.
+When you load it you get eight packages loaded for you:
+
+-   **ggplot2**: for data visualization
+-   **dplyr**: for data wrangling
+-   **tidyr**: for data tidying and rectangling
+-   **readr**: for reading and writing data
+-   **tibble**: for modern, tidy data frames
+-   **stringr**: for string manipulation
+-   **forcats**: for dealing with factors
+-   **purrr**: for iteration with functional programming
+
+The message that's printed when you load the package tells you which versions of these packages are loaded as well as any conflicts they may have introduced, e.g., the `filter()` function from dplyr has now masked (overwritten) the `filter()` function available in base R (and that's ok, we'll use `dplyr::filter()` anyway).
+
+We'll be using functionality from all of these packages throughout the semester, though we'll always load them all at once with `library(tidyverse)`.
+You can find out more about the tidyverse and each of the packages that make it up [here](https://www.tidyverse.org/).
 
 # Data: Ikea furniture
 
@@ -447,8 +461,7 @@ Describe how the relationship between price and width of Ikea furniture differs 
 ::: callout-warning
 🧶 ✅ ⬆️ You're done and ready to submit your work!
 Knit, commit, and push all remaining changes.
-You can use the commit message "Done with Lab 1!"
-, and make sure you have committed and pushed all changed files to GitHub (your Git pane in RStudio should be empty) and that **all** documents are updated in your repo on GitHub.
+You can use the commit message "Done with Lab 1!" , and make sure you have committed and pushed all changed files to GitHub (your Git pane in RStudio should be empty) and that **all** documents are updated in your repo on GitHub.
 The PDF document you submit to Gradescope should be identical to the one in your GitHub repo.
 :::
 

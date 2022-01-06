@@ -29,11 +29,11 @@ editor: visual
 
 -   When working in teams (later in the semester) do not pressure each other to finish early; use the time wisely to really learn the material and produce a quality report.
 
-## **Check: Do you have the lab-01 repo?**
+## **Check: Do you have the lab-1 repo?**
 
 -   Go to the GitHub course organization: <https://github.com/sta210-s22>
 
--   You should see a repo with the prefix **`lab-01-`** followed by your GitHub username
+-   You should see a repo with the prefix **`lab-1-`** followed by your GitHub username
 
 -   If you do not have this repo, please let your TAs know!
 

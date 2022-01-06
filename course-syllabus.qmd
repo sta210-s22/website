@@ -2,7 +2,7 @@
 title: "Syllabus"
 ---
 
-[**Click here**]() **to download a PDF copy of the syllabus.** (TO DO: ADD LINK)
+[**Click here**](/documents/sta210-s22-syllabus.pdf "PDF of syllabus") **to download a PDF copy of the syllabus.**
 
 ## Course info
 
@@ -229,7 +229,7 @@ Only work that is clearly assigned as team work should be completed collaborativ
 -   The homework assignments must be completed individually and you are welcomed to discuss the assignment with classmates at a high level (e.g., discuss what's the best way for approaching a problem, what functions are useful for accomplishing a particular task, etc.). However you may not directly share answers to homework questions (including any code) with anyone other than myself and the teaching assistants.
 -   For the projects, collaboration within teams is not only allowed, but expected. Communication between teams at a high level is also allowed however you may not share code or components of the project across teams.
 
-### **Policy on sharing and reusing code**
+### Policy on sharing and reusing code
 
 I am well aware that a huge volume of code is available on the web to solve any number of problems.
 Unless I explicitly tell you not to use something, the course's policy is that you may make use of any online resources (e.g. RStudio Community, StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration).
@@ -284,7 +284,7 @@ Given the technologies we use in the course, this is straightforward to do async
 If you know you're going to miss a lab session and you're feeling well enough to do so, notify your teammates ahead of time.
 Overall these policies are put in place to ensure communication between team members, respect for each others' time, and also to give you a safety net in the case of illness or other reasons that keep you away from attending class.
 
-### **Attendance policy related to COVID symptoms, exposure, or infection**
+### Attendance policy related to COVID symptoms, exposure, or infection
 
 Student health, safety, and well-being are the university's top priorities.
 To help ensure your well-being and the well-being of those around you, please do not come to class if you have symptoms related to COVID-19, have had a known exposure to COVID-19, or have tested positive for COVID-19.
@@ -293,12 +293,12 @@ If you are experiencing any COVID-19 symptoms, contact student health at 919-681
 To keep the university community as safe and healthy as possible, you will be expected to follow these guidelines.
 Please reach out to me and your academic dean as soon as possible if you need to quarantine or isolate so that we can discuss arrangements for your continued participation in class.
 
-### **Inclement weather policy**
+### Inclement weather policy
 
 In the event of inclement weather or other connectivity-related events that prohibit class attendance, I will notify you how we will make up missed course content and work.
 This might entail holding the class on Zoom synchronously or watching a recording of the class.
 
-### **Policy on video recording course content**
+### Policy on video recording course content
 
 All lectures will be recorded and available on Panopto, so students should not need to create their own recordings of lectures.
 If you feel that you need record the lectures yourself, you must get permission from me ahead of time and these recordings should be used for personal study only, no for distribution.
