@@ -21,13 +21,6 @@
     "text": "Learn approaches for analyzing multivariate data sets, emphasizing analysis of variance, linear regression, and logistic regression. Learn techniques for checking the appropriateness of proposed models, such as residual analyses and case influence diagnostics, and techniques for selecting models. Gain experience dealing with the challenges that arise in practice through assignments that utilize real-world data. This class emphasizes data analysis over mathematical theory."
   },
   {
-    "objectID": "prep/prep-1.html",
-    "href": "prep/prep-1.html",
-    "title": "Prepare - Week 1",
-    "section": "",
-    "text": "All required prepare activities are due by the beginning of class (1:45 pm) on the specified date.\n📖 Read the syllabus\n📖 Read the support resources\n\n\nBack to course schedule ⏎"
-  },
-  {
     "objectID": "course-team.html#instructor",
     "href": "course-team.html#instructor",
     "title": "Teaching team",
@@ -431,14 +424,14 @@
     "href": "weeks/week-2.html#prepare",
     "title": "Week 2",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare\nDue: Jan 11\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date.\n📖 Read Introduction to Modern Statistics, Chp 7: Linear regression with a single predictor"
   },
   {
     "objectID": "weeks/week-2.html#participate",
     "href": "weeks/week-2.html#participate",
     "title": "Week 2",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lab 1 - Meet the toolkit"
+    "text": "Participate\n🖥️ Lab 1 - Meet the toolkit\n🖥️ Lecture 2 - Slides to be posted\n🖥️ Lecture 3 - Slides to be posted"
   },
   {
     "objectID": "weeks/week-2.html#perform",
@@ -781,7 +774,7 @@
     "href": "course-links.html",
     "title": "Useful links",
     "section": "",
-    "text": "RStudio containers\n🔗 on Duke Container Manager\n\n\nCourse GitHub organization\n🔗 on GitHub\n\n\nDiscussion forum\n🔗 on Sakai\n\n\nLecture recordings\n🔗 on Panopto\n\n\nGradebook\n🔗 on Sakai\n\n\nVirtual office hours\n🔗 on Sakai"
+    "text": "RStudio containers\n🔗 on Duke Container Manager\n\n\nCourse GitHub organization\n🔗 on GitHub\n\n\nDiscussion forum\n🔗 on Sakai\n\n\nLecture recordings\n🔗 on Panopto\n\n\nGradebook\n🔗 on Sakai\n\n\nVirtual meetings\n🔗 on Sakai"
   },
   {
     "objectID": "lectures/lec-1.html#welcome",
