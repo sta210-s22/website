@@ -17,9 +17,9 @@ Get acquainted with each other, the course, the technology, the workflow, and th
 
 All required prepare activities are due by the beginning of class (1:45 pm) on the specified date.
 
-📖 Read the [syllabus](/course-syllabus/)
+📖 Read the [syllabus](/course-syllabus.html)
 
-📖 Read the [support](/course-support/) resources
+📖 Read the [support](/course-support.html) resources
 
 ## Participate
 
