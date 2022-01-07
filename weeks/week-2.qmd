@@ -5,19 +5,25 @@ editor: visual
 ---
 
 ::: callout-important
+Classes are virtual this week.
+Find Zoom links [here](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562 "Sakai - Zoom meetings").
 :::
-
-To be posted.
 
 ## Prepare
 
-Due: \_\_\_
+Due: Jan 11
 
 All required prepare activities are due **by the beginning of class (1:45 pm)** on the specified date.
+
+📖 Read Introduction to Modern Statistics, Chp 7: [Linear regression with a single predictor](https://openintro-ims.netlify.app/model-slr.html)
 
 ## Participate
 
 🖥️ [Lab 1 - Meet the toolkit](/labs/lab-1-slides.html "Lab slides")
+
+🖥️ Lecture 2 - Slides to be posted
+
+🖥️ Lecture 3 - Slides to be posted
 
 ## Perform
 
