@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.2.462">
+  <meta name="generator" content="quarto-0.2.465">
   <title>STA 210 - Spring 2022 - Lab 1 - Meet the toolkit</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -44,8 +44,14 @@
       margin-left: 1em;
       text-indent: -1em;
     }
-    .reveal .slide {
+    .reveal .slide:not(.center) {
       height: 100%;
+    }
+    .reveal #title-slide.center,
+    .reveal .title-slide.center,
+    .reveal .controls .navigate-left .controls-arrow,
+    .reveal .controls .navigate-right .controls-arrow {
+      margin-top: -15px;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
