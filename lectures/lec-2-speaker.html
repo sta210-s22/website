@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.2.465">
+  <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
+  <title>STA 210 - Spring 2022 - Simple Linear Regression</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
+
+  <script src="../site_libs/clipboard/clipboard.min.js"></script>
+  <script src="../site_libs/quarto-html/tabby.min.js"></script>
+  <script src="../site_libs/quarto-html/popper.min.js"></script>
+  <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+  <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+  <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
+  <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal-references {
+      display: none;
+    }
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal #title-slide.center,
+    .reveal .title-slide.center,
+    .reveal .controls .navigate-left .controls-arrow,
+    .reveal .controls .navigate-right .controls-arrow {
+      margin-top: -15px;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Simple Linear Regression">
+<meta name="twitter:description" content="STA 210 - Spring 2022">
+<meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
+<meta name="twitter:creator" content="@minebocek">
+<meta name="twitter:image-height" content="418">
+<meta name="twitter:image-width" content="800">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">Simple Linear Regression</h1>
+  <p class="subtitle">STA 210 - Spring 2022</p>
+  <p class="author">Dr.&nbsp;Mine Çetinkaya-Rundel</p>
+</section>
+
+<section id="topic" class="slide level2">
+<h2>Topic</h2>
+<ul>
+<li>Use simple linear regression to describe the relationship between a quantitative predictor and quantitative response variable.</li>
+<li>Estimate the slope and intercept of the regression line using the least squares method.</li>
+<li>Interpret the slope and intercept of the regression line.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="movie-ratings-data" class="slide level2">
+<h2>Movie ratings data</h2>
+<p>The data set contains the “Tomatometer” score (<code>critics</code>) and audience score (<code>audience</code>) for 146 movies rated on Rotten Tomatoes.</p>
+
+<img data-src="lec-2_files/figure-revealjs/unnamed-chunk-1-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="movie-ratings-data-1" class="slide level2">
+<h2>Movie ratings data</h2>
+<p>We want to fit a line to describe the relationship between the critics score and audience score.</p>
+
+<img data-src="lec-2_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="terminology" class="slide level2">
+<h2>Terminology</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p>The <strong>response, <em>Y</em></strong>, is the variable describing the outcome of interest.</p>
+<p>The <strong>predictor, X</strong>, is the variable we use to help understand the variability in the response.</p>
+</div><div class="column" style="width:70%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-2_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-model" class="slide level2">
+<h2>Regression model</h2>
+<p>A <strong>regression model</strong> is a function that describes the relationship between the response, <span class="math inline">\(Y\)</span>, and the predictor, <span class="math inline">\(X\)</span>.</p>
+<p><span class="math display">\[\begin{aligned} Y &amp;= \color{black}{\textbf{Model}} + \text{Error} \\[8pt]
+&amp;= \color{black}{\mathbf{f(X)}} + \epsilon \\[8pt]
+&amp;= \color{black}{\boldsymbol{\mu_{Y|X}}} + \epsilon \end{aligned}\]</span></p>
+</section>
+<section id="regression-model-1" class="slide level2">
+<h2>Regression model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
+&amp;= \color{purple}{\mathbf{f(X)}} + \epsilon \\[8pt]
+&amp;= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \epsilon \end{aligned}\]</span></p>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-2_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-model-residuals" class="slide level2">
+<h2>Regression model + residuals</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \color{blue}{\textbf{Error}} \\[5pt]
+&amp;= \color{purple}{\mathbf{f(X)}} + \color{blue}{\boldsymbol{\epsilon}} \\[5pt]
+&amp;= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \color{blue}{\boldsymbol{\epsilon}} \\[5pt]
+ \end{aligned}\]</span></p>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-2_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simple-linear-regression" class="slide level2">
+<h2>Simple linear regression</h2>
+<p>When we have a quantitative response, <span class="math inline">\(Y\)</span>, and a single quantitative predictor, <span class="math inline">\(X\)</span>, we can use a <a href="#/simple-linear-regression">Simple linear regression</a> model to describe the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned} Y &amp;= \mathbf{\beta_0 + \beta_1 X} + \epsilon \end{aligned}\]</span></p>
+<p><span class="math display">\[\boldsymbol{\beta}_1: \text{Slope} \hspace{20mm} \boldsymbol{\beta}_0: \text{Intercept}\]</span></p>
+</section>
+<section id="simple-linear-regression-1" class="slide level2">
+<h2><strong>Simple linear regression</strong></h2>
+<p><span class="math display">\[\Large{\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X}\]</span></p>
+</section>
+<section id="how-do-we-choose-values-for-hatbeta_1-and-hatbeta_0" class="slide level2">
+<h2>How do we choose values for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>?</h2>
+
+<img data-src="lec-2_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="residuals" class="slide level2">
+<h2>Residuals</h2>
+
+<p><span class="math display">\[\text{residual} = \text{observed} - \text{predicted} = y - \hat{y}\]</span></p>
+<img data-src="lec-2_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="least-squares-line" class="slide level2">
+<h2>Least squares line</h2>
+<ul>
+<li>The residual for the <span class="math inline">\(i^{th}\)</span> observation is</li>
+</ul>
+<p><span class="math display">\[e_i = \text{observed} - \text{predicted} = y_i - \hat{y}_i\]</span></p>
+<ul>
+<li>The <strong>sum of squared</strong> residuals is</li>
+</ul>
+<p><span class="math display">\[e^2_1 + e^2_2 + \dots + e^2_n\]</span></p>
+<ul>
+<li>The <strong>least squares line</strong> is the one that minimizes the sum of squared residuals</li>
+</ul>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="estimating-the-slope" class="slide level2">
+<h2>Estimating the slope</h2>
+<p><span class="math display">\[\large{\hat{\beta}_1 = r \frac{s_Y}{s_X}}\]</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[
+\begin{aligned} 
+&amp;s_X = 30.169 \\
+&amp;s_Y =  20.024 \\
+&amp;r = 0.781
+\end{aligned}
+\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\beta}_1 &amp;= 0.781 \times \frac{20.024}{30.169} \\
+&amp;= 0.518\end{aligned}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="estimating-the-intercept" class="slide level2">
+<h2>Estimating the intercept</h2>
+<p><span class="math display">\[\large{\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1\bar{X}}\]</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[\begin{aligned}
+&amp;\bar{x} = 60.850 \\
+&amp;\bar{y} = 63.877 \\
+&amp;\hat{\beta}_1 = 0.518 
+\end{aligned}\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[
+\begin{aligned}\hat{\beta}_0 &amp;= 63.877 - 0.518 \times 60.850 \\
+&amp;= 32.296
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="interpreting-slope-intercept-widehattextaudience-32.296-0.518-times-textcritics" class="slide level2">
+<h2>Interpreting slope &amp; intercept <span class="math display">\[\widehat{\text{audience}} = 32.296 + 0.518 \times \text{critics}\]</span></h2>
+<ul>
+<li><strong>Slope:</strong> For every one point increase in the critics score, we expect the audience score to increase by 0.518 points, on average.</li>
+<li><strong>Intercept:</strong> If the critics score is 0 points, we expect the audience score to be 32.296 points.</li>
+</ul>
+</section>
+<section id="does-it-make-sense-to-interpret-the-intercept" class="slide level2">
+<h2>Does it make sense to interpret the intercept?</h2>
+<p>✅ Interpret the intercept if - the predictor can feasibly take values equal to or near zero. - there are values near zero in the data.</p>
+<p>🛑 Otherwise, don’t interpret the intercept!</p>
+</section>
+<section id="recap" class="slide level2">
+<h2>Recap</h2>
+<ul>
+<li>Used simple linear regression to describe the relationship between a quantitative predictor and quantitative response variable.</li>
+<li>Used the least squares method to estimate the slope and intercept.</li>
+<li>We interpreted the slope and intercept.
+<ul>
+<li><strong>Slope:</strong> For every one unit increase in <span class="math inline">\(x\)</span>, we expect y to change by <span class="math inline">\(\hat{\beta}_1\)</span> units, on average.</li>
+<li><strong>Intercept:</strong> If <span class="math inline">\(x\)</span> is 0, then we expect <span class="math inline">\(y\)</span> to be <span class="math inline">\(\hat{\beta}_0\)</span> units.</li>
+</ul></li>
+</ul>
+
+
+<div class="footer footer-default">
+<p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
+</div>
+<img src="images/logo.png" class="slide-logo r-stretch"></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'multiplex': {"secret":"16417064785048879926","id":"6b70e205f8e69bdd","url":"https://reveal-multiplex.glitch.me/"},
+'smaller': false,
+
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        setTimeout(function() {
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+<div class="reveal-references"></div></body></html>
