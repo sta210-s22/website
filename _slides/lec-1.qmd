@@ -1,0 +1,268 @@
+---
+title: "Welcome to STA 210!"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer:  "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs: 
+    theme: slides.scss
+    transition: fade
+    multiplex: true
+    self-contained: true
+editor: visual
+---
+
+```{r}
+#| include: false
+library(countdown)
+```
+
+# Welcome
+
+## Meet the professor
+
+::: columns
+::: {.column width="50%"}
+![Dr. Mine Çetinkaya-Rundel (she/her)](images/lec-1/mine.png){fig-alt="Headshot of Dr. Mine Çetinkaya-Rundel" fig-align="center" width="200"}
+:::
+
+::: {.column width="50%"}
+-   Professor of the Practice & Director of Undergraduate Studies, Department of Statistical Science
+-   Affiliated Faculty, Computational Media, Arts & Cultures
+-   Find out more at [mine-cr.com](https://mine-cr.com)
+:::
+:::
+
+## Meet the TAs
+
+-   Martha Aboagye (she/her, UG)
+-   Rich Fremgen (he/him, MS)
+-   Emily Gentles (she/her, MS)
+-   Sara Mehta (she/her, UG)
+-   Rick Presman (he/him, PhD)
+-   Shari Tian (she/her, UG)
+-   Aaditya Warrier (he/him, UG)
+
+## Check out Conversations
+
+-   Go to [Conversations 💬](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b)
+-   Answer the discussion question: How are you doing?
+
+# Regression analysis
+
+## What is regression analysis
+
+::: {style="font-size: 0.8em;"}
+> "In statistical modeling, regression analysis is a set of statistical processes for estimating the relationships among variables. It includes many techniques for modeling and analyzing several variables, when **the focus is on the relationship between a dependent variable and one or more independent variables (or predictors)**. More specifically, regression analysis helps one understand how the typical value of the dependent variable (or 'criterion variable') changes when any one of the independent variables is varied, while the other independent variables are held fixed."
+:::
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Regression_analysis)
+
+## Course FAQ
+
+::: incremental
+-   **What background is assumed for the course?** Introductory statistics or probability course.
+-   **Will we be doing computing?** Yes. We will use R.
+-   **Will we learn the mathematical theory of regression?** Yes and No. The course is primarily focused on application; however, we will discuss some of the mathematics of simple linear regression. The 1-credit course [STA 211: Mathematics of Regression](https://stat.duke.edu/courses/mathematics-regression) you can take simultaneously / after dives into more of the mathematics.
+:::
+
+## Course learning objectives
+
+-   Analyze real-world data to answer questions about multivariable relationships.
+-   Fit and evaluate linear and logistic regression models.
+-   Assess whether a proposed model is appropriate and describe its limitations.
+-   Use [Quarto](https://quarto.org/) to write reproducible reports and GitHub for version control and collaboration.
+-   Communicate results from statistical analyses to a general audience.
+
+## Examples of regression in practice
+
+::: incremental
+-   [New Yorkers Will Pay \$56 A Month To Trim A Minute Off Their Commute](https://fivethirtyeight.com/features/new-yorkers-will-pay-56-a-month-to-trim-a-minute-off-their-commute/)
+-   [How FiveThirtyEight's 2020 Presidential Forecast Works --- And What's Different Because Of COVID-19](https://fivethirtyeight.com/features/how-fivethirtyeights-2020-presidential-forecast-works-and-whats-different-because-of-covid-19/)
+-   [Effect of Forensic Evidence on Criminal Justice Case Processing](https://onlinelibrary.wiley.com/doi/10.1111/1556-4029.12020)
+-   [Why it's so freaking hard to make a good COVID-19 model](https://fivethirtyeight.com/features/why-its-so-freaking-hard-to-make-a-good-covid-19-model/)
+:::
+
+# Course overview
+
+## Homepage
+
+[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)
+
+-   All course materials
+-   Links to Sakai, GitHub, RStudio containers, etc.
+-   Let's take a tour!
+
+## Course toolkit
+
+All linked from the course website:
+
+-   GitHub organization: [github.com/sta210-s22](https://github.com/sta210-s22)
+-   RStudio containers: [cmgr.oit.duke.edu/containers](https://cmgr.oit.duke.edu/containers)
+-   Discussion forum: [Conversations](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b)
+-   Assignment submission and feedback: [Gradescope](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/aec742dc-2972-4f02-a35b-1dd3315af889)
+
+::: callout-important
+Reserve an RStudio Container (titled STA 210) before lab on Monday!
+:::
+
+## Activities: Prepare, Participate, Practice, Perform {.smaller}
+
+-   **Prepare:** Introduce new content and prepare for lectures by completing the readings (and sometimes watching the videos)
+-   **Participate:** Attend and actively participate in lectures and labs, office hours, team meetings
+-   **Practice:** Practice applying statistical concepts and computing with application exercises during lecture, graded for completion
+-   **Perform:** Put together what you've learned to analyze real-world data
+    -   Lab assignments x 7 (first individual, later team-based)
+    -   Homework assignments x 5 (individual)
+    -   Three take-home exams
+    -   Term project presented during the final exam period
+
+## Cadence
+
+::: incremental
+-   **Labs:** Start and make large progress on Monday in lab section, finish up by Friday 5pm of that week
+-   **HWs:** Posted Friday morning, due following Friday 5pm
+-   **Exams:** Exam review Thursday in class, exam posted Friday morning, no lab on Monday of following week, due Monday 11:59pm
+-   **Project:** Deadlines throughout the semester, with some lab and lecture time dedicated to working on them, and most work done in teams outside of class
+:::
+
+## Teams
+
+-   Team assignments
+    -   Assigned by me
+    -   Application exercises, labs, and project
+    -   Peer evaluation during teamwork and after completion
+-   Expectations and roles
+    -   Everyone is expected to contribute equal *effort*
+    -   Everyone is expected to understand *all* code turned in
+    -   Individual contribution evaluated by peer evaluation, commits, etc.
+
+## Grading {.smaller}
+
+| Category              | Percentage   |
+|-----------------------|--------------|
+| Application exercises | 3%           |
+| Homework              | 35% (7% x 5) |
+| Project               | 15%          |
+| Lab                   | 14% (2% x 7) |
+| Exam 01               | 10%          |
+| Exam 02               | 10%          |
+| Exam 03               | 10%          |
+| Teamwork              | 3%           |
+
+See [course syllabus](https://sta210-s22.github.io/website/course-syllabus.html) for how the final letter grade will be determined.
+
+## Support
+
+-   Attend office hours
+-   Ask and answer questions on the discussion forum
+-   Reserve email for questions on personal matters and/or grades
+-   Read the [course support](https://sta210-s22.github.io/website/course-support.html) page
+
+## Announcements
+
+-   Posted on Sakai (Announcements tool) and sent via email, be sure to check both regularly
+-   I'll assume that you've read an announcement by the next "business" day
+-   I'll (try my best to) send a weekly update announcement each Friday, outlining the plan for the following week and reminding you what you need to do to prepare, practice, and perform
+
+## Diversity + inclusion {.smaller}
+
+It is my intent that students from all diverse backgrounds and perspectives be well-served by this course, that students' learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit.
+
+::: incremental
+-   If you have a name that differs from those that appear in your official Duke records, please let me know!
+-   Please let me know your preferred pronouns. You'll also be able to note this in the Getting to know you survey.
+-   If you feel like your performance in the class is being impacted by your experiences outside of class, please don't hesitate to come and talk with me. I want to be a resource for you. If you prefer to speak with someone outside of the course, your advisers and deans are excellent resources.
+-   I (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.
+:::
+
+## Accessibility
+
+-   The [Student Disability Access Office (SDAO)](https://access.duke.edu/students) is available to ensure that students are able to engage with their courses and related assignments.
+
+-   I am committed to making all course materials accessible and I'm always learning how to do this better.
+    If any course component is not accessible to you in any way, please don't hesitate to let me know.
+
+# Course policies
+
+## COVID policies
+
+-   Wear a mask at all times!
+
+-   Read and follow university guidance
+
+## Late work, waivers, regrades policy
+
+-   We have policies!
+-   Read about them on the [course syllabus](https://sta210-s22.github.io/website/course-syllabus.html) and refer back to them when you need it
+
+## Collaboration policy
+
+-   Only work that is clearly assigned as team work should be completed collaboratively.
+
+-   Homeworks must be completed individually.
+    You may **not** directly share answers / code with others, however you are welcome to discuss the problems in general and ask for advice.
+
+-   Exams must be completed individually.
+    You may **not** discuss any aspect of the exam with peers.
+    If you have questions, post as private questions on the course forum, only the teaching team will see and answer.
+
+## Sharing / reusing code policy
+
+-   We are aware that a huge volume of code is available on the web, and many tasks may have solutions posted
+
+-   Unless explicitly stated otherwise, this course's policy is that you may make use of any online resources (e.g. RStudio Community, StackOverflow, etc.) but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solution(s).
+
+-   Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source
+
+## Academic integrity
+
+> To uphold the Duke Community Standard:
+>
+> -   I will not lie, cheat, or steal in my academic endeavors;
+>
+> -   I will conduct myself honorably in all my endeavors; and
+>
+> -   I will act if the Standard is compromised.
+
+## Most importantly!
+
+Ask if you're not sure if something violates a policy!
+
+## Making STA 210 a success
+
+## Five tips for success
+
+1.  Complete all the preparation work before class.
+2.  Ask questions.
+3.  Do the readings.
+4.  Do the homework and lab.
+5.  Don't procrastinate and don't let a week pass by with lingering questions.
+
+## Learning during a pandemic
+
+I want to make sure that you learn everything you were hoping to learn from this class.
+If this requires flexibility, please don't hesitate to ask.
+
+::: incremental
+-   You never owe me personal information about your health (mental or physical) but you're always welcome to talk to me. If I can't help, I likely know someone who can.
+-   I want you to learn lots of things from this class, but I primarily want you to stay healthy, balanced, and grounded during this crisis.
+:::
+
+## This week's tasks
+
+-   Get a GitHub account if you don't have one (some advice for choosing a username [here](https://happygitwithr.com/github-acct.html#username-advice "Happy Git with R"))
+-   Complete the Getting to know you survey if you haven't yet done so!
+-   Read the syllabus
+-   Watch out for next week's announcement email, in your inbox sometime tomorrow
+
+## Midori says...
+
+[![](images/lec-1/midori.jpeg){fig-alt="Picture of my cat, Midori, with a speech bubble that says \"Read the syllabus and make Mine happy!\"" fig-align="center" width="700"}](https://sta210-s22.github.io/website/course-syllabus.html)
+
+# Application exercise
+
+Or more like a demo for today...
+
+[github.com/sta210-s22/ae-0-movies](https://github.com/sta210-s22/ae-0-movies)

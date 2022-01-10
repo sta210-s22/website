@@ -1,4 +1,0 @@
----
-title: "HW 4 - To be posted..."
-editor: visual
----

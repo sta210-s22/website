@@ -19,7 +19,7 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 ## Participate
 
-🖥️ [Lab 1 - Meet the toolkit](/labs/lab-1-slides.html "Lab slides")
+🖥️ [Lab 1 - Meet the toolkit](/_slides/lab-1.html "Lab slides")
 
 🖥️ Lecture 2 - Slides to be posted
 

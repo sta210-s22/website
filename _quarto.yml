@@ -1,10 +1,8 @@
 project:
   type: website
   resources:
-    - documents/*.pdf
-    - hw/*.html
-    - labs/*.html
-    - lectures/*.html
+    - _documents/*.pdf
+    - _slides/*[0-9].html
 
 website:
   page-navigation: true

@@ -1,4 +1,0 @@
----
-title: "Lab 2 - To be posted..."
-editor: visual
----
