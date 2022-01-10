@@ -1,7 +1,6 @@
 project:
   type: website
   resources:
-    - _documents/*.pdf
     - _slides/*[0-9].html
 
 website:
