@@ -1,5 +1,10 @@
 project:
   type: website
+  resources:
+    - lectures/*
+    - hw/*
+    - labs/*
+    - documents/*
 
 website:
   page-navigation: true
