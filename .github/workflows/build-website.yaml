@@ -35,8 +35,6 @@ jobs:
         run: |
           install.packages("quarto")
           install.packages("tidyverse")
-          install.packages("devtools")
-          devtools::install_github("gadenbuie/countdown")
         shell: Rscript {0}
 
       - name: Build site 🔧
