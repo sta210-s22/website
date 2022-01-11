@@ -1,0 +1,61 @@
+---
+title: "Lab 0 - Meet + greet"
+subtitle: "STA 210 - Spring 2022"
+footer:  "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs: 
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+editor: visual
+execute:
+  freeze: auto
+---
+
+```{r include = FALSE}
+library(countdown)
+```
+
+## Meet your TA!
+
+![](images/hello-sticker.jpeg){fig-alt="Red sticker with overlaid text \"Hello, my name is...\"" fig-align="center" width="400"}
+
+## Meet each other!
+
+In breakout rooms:
+
+-   Name, year, major, hometown
+-   What did you do over the winter break?
+-   What do you hope to get out of this course?
+-   Anything else you want to share/ask?
+
+```{r}
+countdown(minutes = 8)
+```
+
+## Take the survey
+
+-   Go to the course website:
+
+    [https://sta210-s22.github.io/website](sta210-s22.github.io/website)
+
+-   Click on the instructions for Lab 0 on the course schedule
+
+-   Take the *Getting to know you* survey
+
+## **What to expect in lab**
+
+-   Introduction to the lab assignment (\~ 5 - 10 minutes)
+
+-   Work on the lab assignment (individual at first, but in teams for the rest of the semester)
+
+-   Lab instructions posted on the [course website](https://sta210-s22.github.io/website/ "STA 210 Course website").
+
+-   Start each lab by finding your assignment repo in the course GitHub organization
+
+-   More on all of these tools in lecture tomorrow and in lab next week
+
+## Wrap up
+
+Any questions about the course?

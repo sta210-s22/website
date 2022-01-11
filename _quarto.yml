@@ -1,7 +1,5 @@
 project:
   type: website
-  resources:
-    - _slides/*[0-9].html
 
 website:
   page-navigation: true
