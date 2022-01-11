@@ -250,10 +250,10 @@ $$\Large{\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X}$$
 ggplot(data = movie_scores, 
        mapping = aes(x = critics, y = audience)) +
   geom_point(alpha = 0.4) + 
-  geom_abline(intercept = 32.3155, slope = 0.5187, color = "red", size = 1) +
-  geom_abline(intercept = 25, slope = 0.7, color = "steel blue") +
-  geom_abline(intercept = 21, slope = 0.9, color = "steel blue") +
-  geom_abline(intercept = 35, slope = 0.3, color = "steel blue") +
+  geom_abline(intercept = 32.3155, slope = 0.5187, color = "purple", size = 1) +
+  geom_abline(intercept = 25, slope = 0.7, color = "gray") +
+  geom_abline(intercept = 21, slope = 0.9, color = "gray") +
+  geom_abline(intercept = 35, slope = 0.3, color = "gray") +
   labs(x = "Critics Score", y = "Audience Score")
 ```
 
@@ -264,7 +264,7 @@ ggplot(data = movie_scores,
 #| message: false
 ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
   geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
   geom_segment(aes(x = critics, xend = critics, y = audience, yend = predict(m)), color = "steel blue") +
   labs(x = "Critics Score", y = "Audience Score") +
   theme(legend.position = "none")
