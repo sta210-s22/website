@@ -1,0 +1,489 @@
+---
+title: "Simple Linear Regression"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer:  "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs: 
+    theme: slides.scss
+    transition: fade
+    multiplex: true
+    slide-number: true
+editor: visual
+execute:
+  freeze: auto
+---
+
+```{r setup}
+#| include: false
+library(countdown)
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = 0.618,
+  fig.align = "center",
+  out.width = "90%"
+)
+```
+
+# Welcome
+
+## Announcements
+
+-   If you're just joining the class, welcome! Go to the [course website](https://sta210-s22.github.io/website) and review content you've missed, read the syllabus, and complete the *Getting to know you* survey.
+-   Lab 1 is due Friday, at 5pm, on Gradescope.
+
+## Dorianne Gray says...
+
+[![](images/lec-2/dorianne-gray.jpeg){fig-alt="Picture of my cat Dorianne Gray (a gray, furry tabby) with a speech bubble that says \"Read the syllabus and make Mine happy!\"" width="800"}](https://sta210-s22.github.io/website/course-syllabus.html)
+
+## Outline
+
+-   Use simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable
+-   Estimate the slope and intercept of the regression line using the least squares method
+-   Interpret the slope and intercept of the regression line
+
+## Computational setup
+
+```{r packages}
+#| echo: true
+#| message: false
+
+# load packages
+library(tidyverse)       # for data wrangling
+library(tidymodels)      # for modeling
+library(fivethirtyeight) # for the fandango dataset
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
+
+# set default figure parameters for knitr
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  dpi = 300,
+  out.width = "80%"
+)
+```
+
+# Data
+
+## Movie ratings
+
+::: columns
+::: {.column width="70%"}
+-   Data behind the FiveThirtyEight story [*Be Suspicious Of Online Movie Ratings, Especially Fandango's*](%22Be%20Suspicious%20Of%20Online%20Movie%20Ratings,%20Especially%20Fandango's%22)
+-   In the **fivethirtyeight** package: [`fandango`](https://fivethirtyeight-r.netlify.app/reference/fandango.html)
+-   Contains every film that has at least 30 fan reviews on Fandango, an IMDb score, Rotten Tomatoes critic and user ratings, and Metacritic critic and user scores
+:::
+
+::: {.column width="30%"}
+![](images/lec-2/fandango.png){fig-alt="Fandango logo" width="200"}
+
+![](images/lec-2/imdb.png){fig-alt="IMDB logo" width="200"}
+
+![](images/lec-2/rotten-tomatoes.png){fig-alt="Rotten Tomatoes logo" width="200"}
+
+![](images/lec-2/metacritic.png){fig-alt="Metacritic logo" width="200"}
+:::
+:::
+
+## Data prep
+
+-   Rename Rotten Tomatoes columns as `critics` and `audience`
+-   Rename the dataset as `movie_scores`
+
+```{r data-prep}
+#| echo: true
+movie_scores <- fandango %>%
+  rename(
+    critics = rottentomatoes, 
+    audience = rottentomatoes_user
+  )
+```
+
+## Data overview
+
+```{r data-overview}
+#| echo: true
+glimpse(movie_scores)
+```
+
+## Data visualization
+
+```{r}
+ggplot(movie_scores, 
+       aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  labs(
+    x = "Critics Score" , 
+    y = "Audience Score"
+    )
+```
+
+# Regression model
+
+## Fit a line
+
+... to *describe* the relationship between the critics and audience score
+
+```{r}
+#| out.width: "70%"
+p <- ggplot(data = movie_scores, 
+       mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  labs(
+    x = "Critics Score" , 
+    y = "Audience Score"
+    )
+
+p
+```
+
+## Terminology
+
+::: columns
+::: {.column width="30%"}
+-   **Outcome, *Y***: variable describing the outcome of interest
+-   **Predictor, X**: variable used to help understand the variability in the outcome
+:::
+
+::: {.column width="70%"}
+```{r}
+#| out.width: "100%"
+p
+```
+:::
+:::
+
+## Regression model {#regression-model-1}
+
+A **regression model** is a function that describes the relationship between the outcome, $Y$, and the predictor, $X$.
+
+$$\begin{aligned} Y &= \color{black}{\textbf{Model}} + \text{Error} \\[8pt]
+&= \color{black}{\mathbf{f(X)}} + \epsilon \\[8pt]
+&= \color{black}{\boldsymbol{\mu_{Y|X}}} + \epsilon \end{aligned}$$
+
+## Regression model
+
+::: columns
+::: {.column width="30%"}
+$$
+\begin{aligned} Y &= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
+&= \color{purple}{\mathbf{f(X)}} + \epsilon \\[8pt]
+&= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \epsilon 
+\end{aligned}
+$$
+:::
+
+::: {.column width="70%"}
+```{r}
+m <- lm(audience ~ critics, data = movie_scores)
+
+ggplot(data = movie_scores, 
+       mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  labs(x = "X", y = "Y") +
+  theme_minimal() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks.x = element_blank(), 
+    axis.ticks.y = element_blank()
+    )
+```
+:::
+:::
+
+## Regression model + residuals
+
+::: columns
+::: {.column width="30%"}
+$$\begin{aligned} Y &= \color{purple}{\textbf{Model}} + \color{blue}{\textbf{Error}} \\[8pt]
+&= \color{purple}{\mathbf{f(X)}} + \color{blue}{\boldsymbol{\epsilon}} \\[8pt]
+&= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \color{blue}{\boldsymbol{\epsilon}} \\[8pt]
+ \end{aligned}$$
+:::
+
+::: {.column width="70%"}
+```{r}
+#| echo: false
+ggplot(data = movie_scores,
+       mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "purple", se = FALSE) +
+  geom_segment(aes(x = critics, xend = critics, 
+                   y = audience, yend = predict(m)), 
+               color = "blue") +
+  labs(x = "X", y = "Y") +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+:::
+:::
+
+# Simple linear regression
+
+## Simple linear regression
+
+Use **simple linear regression** to model the relationthip between a quantitative outcome ($Y$) and a single quantitative predictor ($X$): $$\Large{Y = \beta_0 + \beta_1 X + \epsilon}$$
+
+::: incremental
+-   $\beta_1$: True slope of the relationship between $X$ and $Y$
+-   $\beta_0$: True intercept of the relationship between $X$ and $Y$
+-   $\epsilon$: Error (residual)
+:::
+
+## Simple linear regression
+
+$$\Large{\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X}$$
+
+-   $\hat{\beta}_1$: Estimated slope of the relationship between $X$ and $Y$
+-   $\hat{\beta}_0$: Estimated intercept of the relationship between $X$ and $Y$
+-   No error term!
+
+## Choosing values for $\hat{\beta}_1$ and $\hat{\beta}_0$
+
+```{r}
+ggplot(data = movie_scores, 
+       mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.4) + 
+  geom_abline(intercept = 32.3155, slope = 0.5187, color = "red", size = 1) +
+  geom_abline(intercept = 25, slope = 0.7, color = "steel blue") +
+  geom_abline(intercept = 21, slope = 0.9, color = "steel blue") +
+  geom_abline(intercept = 35, slope = 0.3, color = "steel blue") +
+  labs(x = "Critics Score", y = "Audience Score")
+```
+
+## Residuals
+
+```{r}
+#| warning: false
+#| message: false
+ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  geom_segment(aes(x = critics, xend = critics, y = audience, yend = predict(m)), color = "steel blue") +
+  labs(x = "Critics Score", y = "Audience Score") +
+  theme(legend.position = "none")
+```
+
+$$\text{residual} = \text{observed} - \text{predicted} = y - \hat{y}$$
+
+## Least squares line
+
+-   The residual for the $i^{th}$ observation is
+
+$$e_i = \text{observed} - \text{predicted} = y_i - \hat{y}_i$$
+
+-   The **sum of squared** residuals is
+
+$$e^2_1 + e^2_2 + \dots + e^2_n$$
+
+-   The **least squares line** is the one that minimizes the sum of squared residuals
+
+```{r}
+sx <- round(sqrt(var(movie_scores$critics)), 4)
+sy <- round(sqrt(var(movie_scores$audience)), 4)
+r <- round(cor(movie_scores$critics, movie_scores$audience), 4)
+xbar <- round(mean(movie_scores$critics), 4)
+ybar <- round(mean(movie_scores$audience), 4)
+```
+
+# Slope and intercept
+
+## Properties of least squares regression
+
+-   The regression line goes through the center of mass point, the coordinates corresponding to average $X$ and average $Y$: $\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1\bar{X}$
+
+-   The slope has the same sign as the correlation coefficient: $\hat{\beta}_1 = r \frac{s_Y}{s_X}$
+
+-   The sum of the residuals is zero: $\sum_{i = 1}^n \epsilon_i = 0$
+
+-   The residuals and $X$ values are uncorrelated
+
+## Estimating the slope
+
+$$\large{\hat{\beta}_1 = r \frac{s_Y}{s_X}}$$
+
+::: columns
+::: {.column width="50%"}
+$$
+\begin{aligned} 
+s_X &= 30.1688 \\
+s_Y &=  20.0244 \\
+r &= 0.7814
+\end{aligned}
+$$
+:::
+
+::: {.column width="50%"}
+$$
+\begin{aligned}
+\hat{\beta}_1 &= 0.7814 \times \frac{20.0244}{30.1688} \\
+&= 0.5187\end{aligned}
+$$
+:::
+:::
+
+## Estimating the intercept
+
+$$\large{\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1\bar{X}}$$
+
+::: columns
+::: {.column width="50%"}
+$$\begin{aligned}
+&\bar{x} = 60.8493 \\
+&\bar{y} = 63.8767 \\
+&\hat{\beta}_1 = 0.5187
+\end{aligned}$$
+:::
+
+::: {.column width="50%"}
+$$
+\begin{aligned}\hat{\beta}_0 &= 63.8767 - 0.5187 \times 60.8493 \\
+&= 32.3142
+\end{aligned}
+$$
+:::
+:::
+
+## Interpreting the slope {.smaller}
+
+**Poll:** The slope of the model for predicting audience score from critics score is 32.3142.
+Which of the following is the best interpretation of this value?
+
+-   For every one point increase in the critics score, the audience score goes up by 0.5187 points, on average.
+-   For every one point increase in the critics score, we expect the audience score to be higher by 0.5187 points, on average.
+-   For every one point increase in the critics score, the audience score goes up by 0.5187 points.
+-   For every one point increase in the audience score, the critics score goes up by 0.5187 points, on average.
+
+## Interpreting slope & intercept
+
+$$\widehat{\text{audience}} = 32.3142 + 0.5187 \times \text{critics}$$
+
+::: incremental
+-   **Slope:** For every one point increase in the critics score, we expect the audience score to be higher by 0.5187 points, on average.
+-   **Intercept:** If the critics score is 0 points, we expect the audience score to be 32.3142 points.
+:::
+
+## Is the intercept meaningful?
+
+✅ The intercept is meaningful in context of the data if
+
+-   the predictor can feasibly take values equal to or near zero or
+-   the predictor has values near zero in the observed data
+
+. . .
+
+🛑 Otherwise, it might not be meaningful!
+
+# Prediction
+
+## Making a prediction
+
+Suppose that a movie has a critics score of 50.
+According to this model, what is the movie's predicted audience score?
+
+$$
+\begin{aligned}
+\widehat{\text{audience}} &= 32.3142 + 0.5187 \times \text{critics} \\
+&= 32.3142 + 0.5187 \times 50 \\
+&= 58.2492
+\end{aligned}
+$$
+
+## Extrapolation
+
+Suppose that a movie has a critics score of 0.
+According to this model, what is the movie's predicted audience score?
+
+```{r}
+p + coord_cartesian(xlim = c(0, 100))
+```
+
+## Using R for SLR
+
+## Step 1: Specify model
+
+and confirm default engine
+
+```{r}
+#| echo: true
+linear_reg()
+```
+
+## Step 2: Fit model & estimate parameters
+
+using **formula syntax**
+
+```{r}
+#| echo: true
+linear_reg() %>%
+  fit(audience ~ critics, data = movie_scores)
+```
+
+## A closer look at model output
+
+```{r}
+movie_fit <- linear_reg() %>%
+  fit(audience ~ critics, data = movie_scores)
+
+movie_fit
+```
+
+$$\widehat{\text{audience}} = 32.3155 + 0.5187 \times \text{critics}$$
+
+. . .
+
+**Note:** The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation.
+
+## The regression output
+
+We'll focus on the first column for now...
+
+```{r}
+#| echo: true
+linear_reg() %>%
+  fit(audience ~ critics, data = movie_scores) %>%
+  tidy()
+```
+
+## Prediction
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2|5"
+
+# create a data frame for a new movie
+new_movie <- tibble(critics = 50)
+
+# predict the outcome for a new movie
+predict(movie_fit, new_movie)
+```
+
+# Recap
+
+## Recap {.smaller}
+
+-   Used simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.
+
+-   Used the least squares method to estimate the slope and intercept.
+
+-   We interpreted the slope and intercept.
+
+    ::: incremental
+    -   **Slope:** For every one unit increase in $x$, we expect y to be higher/lower by $\hat{\beta}_1$ units, on average.
+    -   **Intercept:** If $x$ is 0, then we expect $y$ to be $\hat{\beta}_0$ units.
+    :::
+
+-   Predicted the response given a value of the predictor variable.
+
+-   Defined extrapolation and why we should avoid it.
+
+-   Fit a simple linear regression model in R and made a prediction.
