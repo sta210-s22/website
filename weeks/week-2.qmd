@@ -19,9 +19,9 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 ## Participate
 
-🖥️ [Lab 1 - Meet the toolkit](/_slides/lab-1.html "Lab slides")
+🖥️ [Lab 1 - Meet ](/_slides/lab-1.html "Lab slides")[the](/slides/lab-1.html "Lab slides")[ toolkit](/_slides/lab-1.html "Lab slides")
 
-🖥️ Lecture 2 - Slides to be posted
+🖥️ [Lecture 2 - Simple linear regression](/slides/lec-2.html)
 
 🖥️ Lecture 3 - Slides to be posted
 

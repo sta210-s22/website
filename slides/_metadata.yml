@@ -1,0 +1,6 @@
+format:
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+search: false
