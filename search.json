@@ -182,6 +182,510 @@
     "text": "Assistance with Zoom or Sakai\nFor technical help with Sakai or Zoom, contact the Duke OIT Service Desk at oit.duke.edu/help. You can also access the self-service help documentation for Zoom here and for Sakai here.\nNote that we will be making minimal use of Sakai in this course (primarily for announcements and grade book). All assignment submission and discussion will take place on GitHub instead.\nZoom will be used for online office hours as well as as a backup option should we need to hold the course online instead of in person."
   },
   {
+    "objectID": "slides/lab-0.html#meet-your-ta",
+    "href": "slides/lab-0.html#meet-your-ta",
+    "title": "Lab 0 - Meet + greet",
+    "section": "Meet your TA!",
+    "text": "Meet your TA!"
+  },
+  {
+    "objectID": "slides/lab-0.html#meet-each-other",
+    "href": "slides/lab-0.html#meet-each-other",
+    "title": "Lab 0 - Meet + greet",
+    "section": "Meet each other!",
+    "text": "Meet each other!\nIn breakout rooms:\n\nName, year, major, hometown\nWhat did you do over the winter break?\nWhat do you hope to get out of this course?\nAnything else you want to share/ask?\n\n\n\n\n08:00"
+  },
+  {
+    "objectID": "slides/lab-0.html#take-the-survey",
+    "href": "slides/lab-0.html#take-the-survey",
+    "title": "Lab 0 - Meet + greet",
+    "section": "Take the survey",
+    "text": "Take the survey\n\nGo to the course website:\nhttps://sta210-s22.github.io/website\nClick on the instructions for Lab 0 on the course schedule\nTake the Getting to know you survey"
+  },
+  {
+    "objectID": "slides/lab-0.html#what-to-expect-in-lab",
+    "href": "slides/lab-0.html#what-to-expect-in-lab",
+    "title": "Lab 0 - Meet + greet",
+    "section": "What to expect in lab",
+    "text": "What to expect in lab\n\nIntroduction to the lab assignment (~ 5 - 10 minutes)\nWork on the lab assignment (individual at first, but in teams for the rest of the semester)\nLab instructions posted on the course website.\nStart each lab by finding your assignment repo in the course GitHub organization\nMore on all of these tools in lecture tomorrow and in lab next week"
+  },
+  {
+    "objectID": "slides/lab-0.html#wrap-up",
+    "href": "slides/lab-0.html#wrap-up",
+    "title": "Lab 0 - Meet + greet",
+    "section": "Wrap up",
+    "text": "Wrap up\nAny questions about the course?\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
+    "objectID": "slides/lab-1.html#what-to-expect-in-lab",
+    "href": "slides/lab-1.html#what-to-expect-in-lab",
+    "title": "Lab 1 - Meet the toolkit",
+    "section": "What to expect in lab",
+    "text": "What to expect in lab\n\nIntroduction to the lab assignment (~ 5 - 10 minutes)\nWork on the lab assignment (individual at first, but in teams for the rest of the semester)\nLab instructions posted on the course website.\nStart each lab by finding your assignment repo in the course GitHub organization\n\nThis is where you will find the Quarto document and data to get started"
+  },
+  {
+    "objectID": "slides/lab-1.html#tips",
+    "href": "slides/lab-1.html#tips",
+    "title": "Lab 1 - Meet the toolkit",
+    "section": "Tips",
+    "text": "Tips\n\nYou do not have to finish the lab in class, they will always be due the following Friday at 5:00 pm. One work strategy is to get through portions that you think will be most challenging (which initially might be the coding component) during lab when a TA can help you on the spot and leave the narrative writing until later.\nWhen working in teams (later in the semester) do not pressure each other to finish early; use the time wisely to really learn the material and produce a quality report."
+  },
+  {
+    "objectID": "slides/lab-1.html#check-do-you-have-the-lab-1-repo",
+    "href": "slides/lab-1.html#check-do-you-have-the-lab-1-repo",
+    "title": "Lab 1 - Meet the toolkit",
+    "section": "Check: Do you have the lab-1 repo?",
+    "text": "Check: Do you have the lab-1 repo?\n\nGo to the GitHub course organization: https://github.com/sta210-s22\nYou should see a repo with the prefix lab-1- followed by your GitHub username\nIf you do not have this repo, please let your TAs know!"
+  },
+  {
+    "objectID": "slides/lab-1.html#demo",
+    "href": "slides/lab-1.html#demo",
+    "title": "Lab 1 - Meet the toolkit",
+    "section": "Demo",
+    "text": "Demo\nFollow along as your TA demonstrates the following:\n\nConfigure Git using SSH\nClone RStudio repo and start new project\nRender document and produce PDF\nUpdate name in YAML\n\nRender, commit, push changes to GitHub\nSee updates in your GitHub repo"
+  },
+  {
+    "objectID": "slides/lab-1.html#when-youre-done-with-lab",
+    "href": "slides/lab-1.html#when-youre-done-with-lab",
+    "title": "Lab 1 - Meet the toolkit",
+    "section": "When you’re done with lab",
+    "text": "When you’re done with lab\n\nMake sure all your final changes have been pushed to your GitHub repo\nSubmit the PDF of your responses to Gradescope\n\nYou can access Gradescope through Sakai or the course website\nLogin using your Duke NetID credentials"
+  },
+  {
+    "objectID": "slides/lab-1.html#youre-now-ready-to-complete-the-rest-of-lab",
+    "href": "slides/lab-1.html#youre-now-ready-to-complete-the-rest-of-lab",
+    "title": "Lab 1 - Meet the toolkit",
+    "section": "You’re now ready to complete the rest of lab!",
+    "text": "You’re now ready to complete the rest of lab!\nPlease “raise your hand” if you need help as you work on the lab\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
+    "objectID": "slides/lec-1.html#meet-the-professor",
+    "href": "slides/lec-1.html#meet-the-professor",
+    "title": "Welcome to STA 210!",
+    "section": "Meet the professor",
+    "text": "Meet the professor\n\n\n\n\n\nDr. Mine Çetinkaya-Rundel (she/her)\n\n\n\n\nProfessor of the Practice & Director of Undergraduate Studies, Department of Statistical Science\nAffiliated Faculty, Computational Media, Arts & Cultures\nFind out more at mine-cr.com"
+  },
+  {
+    "objectID": "slides/lec-1.html#meet-the-tas",
+    "href": "slides/lec-1.html#meet-the-tas",
+    "title": "Welcome to STA 210!",
+    "section": "Meet the TAs",
+    "text": "Meet the TAs\n\nMartha Aboagye (she/her, UG)\nRich Fremgen (he/him, MS)\nEmily Gentles (she/her, MS)\nSara Mehta (she/her, UG)\nRick Presman (he/him, PhD)\nShari Tian (she/her, UG)\nAaditya Warrier (he/him, UG)"
+  },
+  {
+    "objectID": "slides/lec-1.html#check-out-conversations",
+    "href": "slides/lec-1.html#check-out-conversations",
+    "title": "Welcome to STA 210!",
+    "section": "Check out Conversations",
+    "text": "Check out Conversations\n\nGo to Conversations 💬\nAnswer the discussion question: How are you doing?"
+  },
+  {
+    "objectID": "slides/lec-1.html#what-is-regression-analysis",
+    "href": "slides/lec-1.html#what-is-regression-analysis",
+    "title": "Welcome to STA 210!",
+    "section": "What is regression analysis",
+    "text": "What is regression analysis\n\n\n“In statistical modeling, regression analysis is a set of statistical processes for estimating the relationships among variables. It includes many techniques for modeling and analyzing several variables, when the focus is on the relationship between a dependent variable and one or more independent variables (or predictors). More specifically, regression analysis helps one understand how the typical value of the dependent variable (or ‘criterion variable’) changes when any one of the independent variables is varied, while the other independent variables are held fixed.”\n\n\nSource: Wikipedia"
+  },
+  {
+    "objectID": "slides/lec-1.html#course-faq",
+    "href": "slides/lec-1.html#course-faq",
+    "title": "Welcome to STA 210!",
+    "section": "Course FAQ",
+    "text": "Course FAQ\n\n\nWhat background is assumed for the course? Introductory statistics or probability course.\nWill we be doing computing? Yes. We will use R.\nWill we learn the mathematical theory of regression? Yes and No. The course is primarily focused on application; however, we will discuss some of the mathematics of simple linear regression. The 1-credit course STA 211: Mathematics of Regression you can take simultaneously / after dives into more of the mathematics."
+  },
+  {
+    "objectID": "slides/lec-1.html#course-learning-objectives",
+    "href": "slides/lec-1.html#course-learning-objectives",
+    "title": "Welcome to STA 210!",
+    "section": "Course learning objectives",
+    "text": "Course learning objectives\n\nAnalyze real-world data to answer questions about multivariable relationships.\nFit and evaluate linear and logistic regression models.\nAssess whether a proposed model is appropriate and describe its limitations.\nUse Quarto to write reproducible reports and GitHub for version control and collaboration.\nCommunicate results from statistical analyses to a general audience."
+  },
+  {
+    "objectID": "slides/lec-1.html#examples-of-regression-in-practice",
+    "href": "slides/lec-1.html#examples-of-regression-in-practice",
+    "title": "Welcome to STA 210!",
+    "section": "Examples of regression in practice",
+    "text": "Examples of regression in practice\n\n\nNew Yorkers Will Pay $56 A Month To Trim A Minute Off Their Commute\nHow FiveThirtyEight’s 2020 Presidential Forecast Works — And What’s Different Because Of COVID-19\nEffect of Forensic Evidence on Criminal Justice Case Processing\nWhy it’s so freaking hard to make a good COVID-19 model"
+  },
+  {
+    "objectID": "slides/lec-1.html#homepage",
+    "href": "slides/lec-1.html#homepage",
+    "title": "Welcome to STA 210!",
+    "section": "Homepage",
+    "text": "Homepage\nsta210-s22.github.io/website\n\nAll course materials\nLinks to Sakai, GitHub, RStudio containers, etc.\nLet’s take a tour!"
+  },
+  {
+    "objectID": "slides/lec-1.html#course-toolkit",
+    "href": "slides/lec-1.html#course-toolkit",
+    "title": "Welcome to STA 210!",
+    "section": "Course toolkit",
+    "text": "Course toolkit\nAll linked from the course website:\n\nGitHub organization: github.com/sta210-s22\nRStudio containers: cmgr.oit.duke.edu/containers\nDiscussion forum: Conversations\nAssignment submission and feedback: Gradescope\n\n\n\nImportant\nReserve an RStudio Container (titled STA 210) before lab on Monday!"
+  },
+  {
+    "objectID": "slides/lec-1.html#activities-prepare-participate-practice-perform",
+    "href": "slides/lec-1.html#activities-prepare-participate-practice-perform",
+    "title": "Welcome to STA 210!",
+    "section": "Activities: Prepare, Participate, Practice, Perform",
+    "text": "Activities: Prepare, Participate, Practice, Perform\n\nPrepare: Introduce new content and prepare for lectures by completing the readings (and sometimes watching the videos)\nParticipate: Attend and actively participate in lectures and labs, office hours, team meetings\nPractice: Practice applying statistical concepts and computing with application exercises during lecture, graded for completion\nPerform: Put together what you’ve learned to analyze real-world data\n\nLab assignments x 7 (first individual, later team-based)\nHomework assignments x 5 (individual)\nThree take-home exams\nTerm project presented during the final exam period"
+  },
+  {
+    "objectID": "slides/lec-1.html#cadence",
+    "href": "slides/lec-1.html#cadence",
+    "title": "Welcome to STA 210!",
+    "section": "Cadence",
+    "text": "Cadence\n\n\nLabs: Start and make large progress on Monday in lab section, finish up by Friday 5pm of that week\nHWs: Posted Friday morning, due following Friday 5pm\nExams: Exam review Thursday in class, exam posted Friday morning, no lab on Monday of following week, due Monday 11:59pm\nProject: Deadlines throughout the semester, with some lab and lecture time dedicated to working on them, and most work done in teams outside of class"
+  },
+  {
+    "objectID": "slides/lec-1.html#teams",
+    "href": "slides/lec-1.html#teams",
+    "title": "Welcome to STA 210!",
+    "section": "Teams",
+    "text": "Teams\n\nTeam assignments\n\nAssigned by me\nApplication exercises, labs, and project\nPeer evaluation during teamwork and after completion\n\nExpectations and roles\n\nEveryone is expected to contribute equal effort\nEveryone is expected to understand all code turned in\nIndividual contribution evaluated by peer evaluation, commits, etc."
+  },
+  {
+    "objectID": "slides/lec-1.html#grading",
+    "href": "slides/lec-1.html#grading",
+    "title": "Welcome to STA 210!",
+    "section": "Grading",
+    "text": "Grading\n\n\n\nCategory\nPercentage\n\n\n\n\nApplication exercises\n3%\n\n\nHomework\n35% (7% x 5)\n\n\nProject\n15%\n\n\nLab\n14% (2% x 7)\n\n\nExam 01\n10%\n\n\nExam 02\n10%\n\n\nExam 03\n10%\n\n\nTeamwork\n3%\n\n\n\nSee course syllabus for how the final letter grade will be determined."
+  },
+  {
+    "objectID": "slides/lec-1.html#support",
+    "href": "slides/lec-1.html#support",
+    "title": "Welcome to STA 210!",
+    "section": "Support",
+    "text": "Support\n\nAttend office hours\nAsk and answer questions on the discussion forum\nReserve email for questions on personal matters and/or grades\nRead the course support page"
+  },
+  {
+    "objectID": "slides/lec-1.html#announcements",
+    "href": "slides/lec-1.html#announcements",
+    "title": "Welcome to STA 210!",
+    "section": "Announcements",
+    "text": "Announcements\n\nPosted on Sakai (Announcements tool) and sent via email, be sure to check both regularly\nI’ll assume that you’ve read an announcement by the next “business” day\nI’ll (try my best to) send a weekly update announcement each Friday, outlining the plan for the following week and reminding you what you need to do to prepare, practice, and perform"
+  },
+  {
+    "objectID": "slides/lec-1.html#diversity-inclusion",
+    "href": "slides/lec-1.html#diversity-inclusion",
+    "title": "Welcome to STA 210!",
+    "section": "Diversity + inclusion",
+    "text": "Diversity + inclusion\nIt is my intent that students from all diverse backgrounds and perspectives be well-served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit.\n\n\nIf you have a name that differs from those that appear in your official Duke records, please let me know!\nPlease let me know your preferred pronouns. You’ll also be able to note this in the Getting to know you survey.\nIf you feel like your performance in the class is being impacted by your experiences outside of class, please don’t hesitate to come and talk with me. I want to be a resource for you. If you prefer to speak with someone outside of the course, your advisers and deans are excellent resources.\nI (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it."
+  },
+  {
+    "objectID": "slides/lec-1.html#accessibility",
+    "href": "slides/lec-1.html#accessibility",
+    "title": "Welcome to STA 210!",
+    "section": "Accessibility",
+    "text": "Accessibility\n\nThe Student Disability Access Office (SDAO) is available to ensure that students are able to engage with their courses and related assignments.\nI am committed to making all course materials accessible and I’m always learning how to do this better. If any course component is not accessible to you in any way, please don’t hesitate to let me know."
+  },
+  {
+    "objectID": "slides/lec-1.html#covid-policies",
+    "href": "slides/lec-1.html#covid-policies",
+    "title": "Welcome to STA 210!",
+    "section": "COVID policies",
+    "text": "COVID policies\n\nWear a mask at all times!\nRead and follow university guidance"
+  },
+  {
+    "objectID": "slides/lec-1.html#late-work-waivers-regrades-policy",
+    "href": "slides/lec-1.html#late-work-waivers-regrades-policy",
+    "title": "Welcome to STA 210!",
+    "section": "Late work, waivers, regrades policy",
+    "text": "Late work, waivers, regrades policy\n\nWe have policies!\nRead about them on the course syllabus and refer back to them when you need it"
+  },
+  {
+    "objectID": "slides/lec-1.html#collaboration-policy",
+    "href": "slides/lec-1.html#collaboration-policy",
+    "title": "Welcome to STA 210!",
+    "section": "Collaboration policy",
+    "text": "Collaboration policy\n\nOnly work that is clearly assigned as team work should be completed collaboratively.\nHomeworks must be completed individually. You may not directly share answers / code with others, however you are welcome to discuss the problems in general and ask for advice.\nExams must be completed individually. You may not discuss any aspect of the exam with peers. If you have questions, post as private questions on the course forum, only the teaching team will see and answer."
+  },
+  {
+    "objectID": "slides/lec-1.html#sharing-reusing-code-policy",
+    "href": "slides/lec-1.html#sharing-reusing-code-policy",
+    "title": "Welcome to STA 210!",
+    "section": "Sharing / reusing code policy",
+    "text": "Sharing / reusing code policy\n\nWe are aware that a huge volume of code is available on the web, and many tasks may have solutions posted\nUnless explicitly stated otherwise, this course’s policy is that you may make use of any online resources (e.g. RStudio Community, StackOverflow, etc.) but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solution(s).\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source"
+  },
+  {
+    "objectID": "slides/lec-1.html#academic-integrity",
+    "href": "slides/lec-1.html#academic-integrity",
+    "title": "Welcome to STA 210!",
+    "section": "Academic integrity",
+    "text": "Academic integrity\n\nTo uphold the Duke Community Standard:\n\nI will not lie, cheat, or steal in my academic endeavors;\nI will conduct myself honorably in all my endeavors; and\nI will act if the Standard is compromised."
+  },
+  {
+    "objectID": "slides/lec-1.html#most-importantly",
+    "href": "slides/lec-1.html#most-importantly",
+    "title": "Welcome to STA 210!",
+    "section": "Most importantly!",
+    "text": "Most importantly!\nAsk if you’re not sure if something violates a policy!"
+  },
+  {
+    "objectID": "slides/lec-1.html#making-sta-210-a-success",
+    "href": "slides/lec-1.html#making-sta-210-a-success",
+    "title": "Welcome to STA 210!",
+    "section": "Making STA 210 a success",
+    "text": "Making STA 210 a success"
+  },
+  {
+    "objectID": "slides/lec-1.html#five-tips-for-success",
+    "href": "slides/lec-1.html#five-tips-for-success",
+    "title": "Welcome to STA 210!",
+    "section": "Five tips for success",
+    "text": "Five tips for success\n\nComplete all the preparation work before class.\nAsk questions.\nDo the readings.\nDo the homework and lab.\nDon’t procrastinate and don’t let a week pass by with lingering questions."
+  },
+  {
+    "objectID": "slides/lec-1.html#learning-during-a-pandemic",
+    "href": "slides/lec-1.html#learning-during-a-pandemic",
+    "title": "Welcome to STA 210!",
+    "section": "Learning during a pandemic",
+    "text": "Learning during a pandemic\nI want to make sure that you learn everything you were hoping to learn from this class. If this requires flexibility, please don’t hesitate to ask.\n\n\nYou never owe me personal information about your health (mental or physical) but you’re always welcome to talk to me. If I can’t help, I likely know someone who can.\nI want you to learn lots of things from this class, but I primarily want you to stay healthy, balanced, and grounded during this crisis."
+  },
+  {
+    "objectID": "slides/lec-1.html#this-weeks-tasks",
+    "href": "slides/lec-1.html#this-weeks-tasks",
+    "title": "Welcome to STA 210!",
+    "section": "This week’s tasks",
+    "text": "This week’s tasks\n\nGet a GitHub account if you don’t have one (some advice for choosing a username here)\nComplete the Getting to know you survey if you haven’t yet done so!\nRead the syllabus\nWatch out for next week’s announcement email, in your inbox sometime tomorrow"
+  },
+  {
+    "objectID": "slides/lec-1.html#midori-says",
+    "href": "slides/lec-1.html#midori-says",
+    "title": "Welcome to STA 210!",
+    "section": "Midori says…",
+    "text": "Midori says…"
+  },
+  {
+    "objectID": "slides/lec-2.html#announcements",
+    "href": "slides/lec-2.html#announcements",
+    "title": "Simple Linear Regression",
+    "section": "Announcements",
+    "text": "Announcements\n\nIf you’re just joining the class, welcome! Go to the course website and review content you’ve missed, read the syllabus, and complete the Getting to know you survey.\nLab 1 is due Friday, at 5pm, on Gradescope."
+  },
+  {
+    "objectID": "slides/lec-2.html#dorianne-gray-says",
+    "href": "slides/lec-2.html#dorianne-gray-says",
+    "title": "Simple Linear Regression",
+    "section": "Dorianne Gray says…",
+    "text": "Dorianne Gray says…"
+  },
+  {
+    "objectID": "slides/lec-2.html#outline",
+    "href": "slides/lec-2.html#outline",
+    "title": "Simple Linear Regression",
+    "section": "Outline",
+    "text": "Outline\n\nUse simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable\nEstimate the slope and intercept of the regression line using the least squares method\nInterpret the slope and intercept of the regression line"
+  },
+  {
+    "objectID": "slides/lec-2.html#computational-setup",
+    "href": "slides/lec-2.html#computational-setup",
+    "title": "Simple Linear Regression",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)       # for data wrangling\nlibrary(tidymodels)      # for modeling\nlibrary(fivethirtyeight) # for the fandango dataset\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))\n\n# set default figure parameters for knitr\nknitr::opts_chunk$set(\n  fig.width = 8,\n  fig.asp = 0.618,\n  fig.retina = 3,\n  dpi = 300,\n  out.width = \"80%\"\n)"
+  },
+  {
+    "objectID": "slides/lec-2.html#movie-ratings",
+    "href": "slides/lec-2.html#movie-ratings",
+    "title": "Simple Linear Regression",
+    "section": "Movie ratings",
+    "text": "Movie ratings\n\n\n\nData behind the FiveThirtyEight story Be Suspicious Of Online Movie Ratings, Especially Fandango’s\nIn the fivethirtyeight package: fandango\nContains every film that has at least 30 fan reviews on Fandango, an IMDb score, Rotten Tomatoes critic and user ratings, and Metacritic critic and user scores"
+  },
+  {
+    "objectID": "slides/lec-2.html#data-prep",
+    "href": "slides/lec-2.html#data-prep",
+    "title": "Simple Linear Regression",
+    "section": "Data prep",
+    "text": "Data prep\n\nRename Rotten Tomatoes columns as critics and audience\nRename the dataset as movie_scores\n\n\nmovie_scores <- fandango %>%\n  rename(\n    critics = rottentomatoes, \n    audience = rottentomatoes_user\n  )"
+  },
+  {
+    "objectID": "slides/lec-2.html#data-overview",
+    "href": "slides/lec-2.html#data-overview",
+    "title": "Simple Linear Regression",
+    "section": "Data overview",
+    "text": "Data overview\n\nglimpse(movie_scores)\n\nRows: 146\nColumns: 23\n$ film                       <chr> \"Avengers: Age of Ultron\", \"Cinderella\", \"A…\n$ year                       <dbl> 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2…\n$ critics                    <int> 74, 85, 80, 18, 14, 63, 42, 86, 99, 89, 84,…\n$ audience                   <int> 86, 80, 90, 84, 28, 62, 53, 64, 82, 87, 77,…\n$ metacritic                 <int> 66, 67, 64, 22, 29, 50, 53, 81, 81, 80, 71,…\n$ metacritic_user            <dbl> 7.1, 7.5, 8.1, 4.7, 3.4, 6.8, 7.6, 6.8, 8.8…\n$ imdb                       <dbl> 7.8, 7.1, 7.8, 5.4, 5.1, 7.2, 6.9, 6.5, 7.4…\n$ fandango_stars             <dbl> 5.0, 5.0, 5.0, 5.0, 3.5, 4.5, 4.0, 4.0, 4.5…\n$ fandango_ratingvalue       <dbl> 4.5, 4.5, 4.5, 4.5, 3.0, 4.0, 3.5, 3.5, 4.0…\n$ rt_norm                    <dbl> 3.70, 4.25, 4.00, 0.90, 0.70, 3.15, 2.10, 4…\n$ rt_user_norm               <dbl> 4.30, 4.00, 4.50, 4.20, 1.40, 3.10, 2.65, 3…\n$ metacritic_norm            <dbl> 3.30, 3.35, 3.20, 1.10, 1.45, 2.50, 2.65, 4…\n$ metacritic_user_nom        <dbl> 3.55, 3.75, 4.05, 2.35, 1.70, 3.40, 3.80, 3…\n$ imdb_norm                  <dbl> 3.90, 3.55, 3.90, 2.70, 2.55, 3.60, 3.45, 3…\n$ rt_norm_round              <dbl> 3.5, 4.5, 4.0, 1.0, 0.5, 3.0, 2.0, 4.5, 5.0…\n$ rt_user_norm_round         <dbl> 4.5, 4.0, 4.5, 4.0, 1.5, 3.0, 2.5, 3.0, 4.0…\n$ metacritic_norm_round      <dbl> 3.5, 3.5, 3.0, 1.0, 1.5, 2.5, 2.5, 4.0, 4.0…\n$ metacritic_user_norm_round <dbl> 3.5, 4.0, 4.0, 2.5, 1.5, 3.5, 4.0, 3.5, 4.5…\n$ imdb_norm_round            <dbl> 4.0, 3.5, 4.0, 2.5, 2.5, 3.5, 3.5, 3.5, 3.5…\n$ metacritic_user_vote_count <int> 1330, 249, 627, 31, 88, 34, 17, 124, 62, 54…\n$ imdb_user_vote_count       <int> 271107, 65709, 103660, 3136, 19560, 39373, …\n$ fandango_votes             <int> 14846, 12640, 12055, 1793, 1021, 397, 252, …\n$ fandango_difference        <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5…"
+  },
+  {
+    "objectID": "slides/lec-2.html#data-visualization",
+    "href": "slides/lec-2.html#data-visualization",
+    "title": "Simple Linear Regression",
+    "section": "Data visualization",
+    "text": "Data visualization"
+  },
+  {
+    "objectID": "slides/lec-2.html#fit-a-line",
+    "href": "slides/lec-2.html#fit-a-line",
+    "title": "Simple Linear Regression",
+    "section": "Fit a line",
+    "text": "Fit a line\n… to describe the relationship between the critics and audience score"
+  },
+  {
+    "objectID": "slides/lec-2.html#terminology",
+    "href": "slides/lec-2.html#terminology",
+    "title": "Simple Linear Regression",
+    "section": "Terminology",
+    "text": "Terminology\n\n\n\nOutcome, Y: variable describing the outcome of interest\nPredictor, X: variable used to help understand the variability in the outcome"
+  },
+  {
+    "objectID": "slides/lec-2.html#regression-model-1",
+    "href": "slides/lec-2.html#regression-model-1",
+    "title": "Simple Linear Regression",
+    "section": "Regression model",
+    "text": "Regression model\nA regression model is a function that describes the relationship between the outcome, \\(Y\\), and the predictor, \\(X\\).\n\\[\\begin{aligned} Y &= \\color{black}{\\textbf{Model}} + \\text{Error} \\\\[8pt]\n&= \\color{black}{\\mathbf{f(X)}} + \\epsilon \\\\[8pt]\n&= \\color{black}{\\boldsymbol{\\mu_{Y|X}}} + \\epsilon \\end{aligned}\\]"
+  },
+  {
+    "objectID": "slides/lec-2.html#regression-model-2",
+    "href": "slides/lec-2.html#regression-model-2",
+    "title": "Simple Linear Regression",
+    "section": "Regression model",
+    "text": "Regression model\n\n\n\\[\n\\begin{aligned} Y &= \\color{purple}{\\textbf{Model}} + \\text{Error} \\\\[8pt]\n&= \\color{purple}{\\mathbf{f(X)}} + \\epsilon \\\\[8pt]\n&= \\color{purple}{\\boldsymbol{\\mu_{Y|X}}} + \\epsilon \n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-2.html#regression-model-residuals",
+    "href": "slides/lec-2.html#regression-model-residuals",
+    "title": "Simple Linear Regression",
+    "section": "Regression model + residuals",
+    "text": "Regression model + residuals\n\n\n\\[\\begin{aligned} Y &= \\color{purple}{\\textbf{Model}} + \\color{blue}{\\textbf{Error}} \\\\[8pt]\n&= \\color{purple}{\\mathbf{f(X)}} + \\color{blue}{\\boldsymbol{\\epsilon}} \\\\[8pt]\n&= \\color{purple}{\\boldsymbol{\\mu_{Y|X}}} + \\color{blue}{\\boldsymbol{\\epsilon}} \\\\[8pt]\n \\end{aligned}\\]"
+  },
+  {
+    "objectID": "slides/lec-2.html#simple-linear-regression-1",
+    "href": "slides/lec-2.html#simple-linear-regression-1",
+    "title": "Simple Linear Regression",
+    "section": "Simple linear regression",
+    "text": "Simple linear regression\nUse simple linear regression to model the relationthip between a quantitative outcome (\\(Y\\)) and a single quantitative predictor (\\(X\\)): \\[\\Large{Y = \\beta_0 + \\beta_1 X + \\epsilon}\\]\n\n\n\\(\\beta_1\\): True slope of the relationship between \\(X\\) and \\(Y\\)\n\\(\\beta_0\\): True intercept of the relationship between \\(X\\) and \\(Y\\)\n\\(\\epsilon\\): Error (residual)"
+  },
+  {
+    "objectID": "slides/lec-2.html#simple-linear-regression-2",
+    "href": "slides/lec-2.html#simple-linear-regression-2",
+    "title": "Simple Linear Regression",
+    "section": "Simple linear regression",
+    "text": "Simple linear regression\n\\[\\Large{\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X}\\]\n\n\\(\\hat{\\beta}_1\\): Estimated slope of the relationship between \\(X\\) and \\(Y\\)\n\\(\\hat{\\beta}_0\\): Estimated intercept of the relationship between \\(X\\) and \\(Y\\)\nNo error term!"
+  },
+  {
+    "objectID": "slides/lec-2.html#choosing-values-for-hatbeta_1-and-hatbeta_0",
+    "href": "slides/lec-2.html#choosing-values-for-hatbeta_1-and-hatbeta_0",
+    "title": "Simple Linear Regression",
+    "section": "Choosing values for \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\)",
+    "text": "Choosing values for \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\)"
+  },
+  {
+    "objectID": "slides/lec-2.html#residuals",
+    "href": "slides/lec-2.html#residuals",
+    "title": "Simple Linear Regression",
+    "section": "Residuals",
+    "text": "Residuals\n\n\\[\\text{residual} = \\text{observed} - \\text{predicted} = y - \\hat{y}\\]"
+  },
+  {
+    "objectID": "slides/lec-2.html#least-squares-line",
+    "href": "slides/lec-2.html#least-squares-line",
+    "title": "Simple Linear Regression",
+    "section": "Least squares line",
+    "text": "Least squares line\n\nThe residual for the \\(i^{th}\\) observation is\n\n\\[e_i = \\text{observed} - \\text{predicted} = y_i - \\hat{y}_i\\]\n\nThe sum of squared residuals is\n\n\\[e^2_1 + e^2_2 + \\dots + e^2_n\\]\n\nThe least squares line is the one that minimizes the sum of squared residuals"
+  },
+  {
+    "objectID": "slides/lec-2.html#properties-of-least-squares-regression",
+    "href": "slides/lec-2.html#properties-of-least-squares-regression",
+    "title": "Simple Linear Regression",
+    "section": "Properties of least squares regression",
+    "text": "Properties of least squares regression\n\nThe regression line goes through the center of mass point, the coordinates corresponding to average \\(X\\) and average \\(Y\\): \\(\\hat{\\beta}_0 = \\bar{Y} - \\hat{\\beta}_1\\bar{X}\\)\nThe slope has the same sign as the correlation coefficient: \\(\\hat{\\beta}_1 = r \\frac{s_Y}{s_X}\\)\nThe sum of the residuals is zero: \\(\\sum_{i = 1}^n \\epsilon_i = 0\\)\nThe residuals and \\(X\\) values are uncorrelated"
+  },
+  {
+    "objectID": "slides/lec-2.html#estimating-the-slope",
+    "href": "slides/lec-2.html#estimating-the-slope",
+    "title": "Simple Linear Regression",
+    "section": "Estimating the slope",
+    "text": "Estimating the slope\n\\[\\large{\\hat{\\beta}_1 = r \\frac{s_Y}{s_X}}\\]\n\n\n\\[\n\\begin{aligned} \ns_X &= 30.1688 \\\\\ns_Y &=  20.0244 \\\\\nr &= 0.7814\n\\end{aligned}\n\\]\n\n\\[\n\\begin{aligned}\n\\hat{\\beta}_1 &= 0.7814 \\times \\frac{20.0244}{30.1688} \\\\\n&= 0.5187\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-2.html#estimating-the-intercept",
+    "href": "slides/lec-2.html#estimating-the-intercept",
+    "title": "Simple Linear Regression",
+    "section": "Estimating the intercept",
+    "text": "Estimating the intercept\n\\[\\large{\\hat{\\beta}_0 = \\bar{Y} - \\hat{\\beta}_1\\bar{X}}\\]\n\n\n\\[\\begin{aligned}\n&\\bar{x} = 60.8493 \\\\\n&\\bar{y} = 63.8767 \\\\\n&\\hat{\\beta}_1 = 0.5187\n\\end{aligned}\\]\n\n\\[\n\\begin{aligned}\\hat{\\beta}_0 &= 63.8767 - 0.5187 \\times 60.8493 \\\\\n&= 32.3142\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-2.html#interpreting-the-slope",
+    "href": "slides/lec-2.html#interpreting-the-slope",
+    "title": "Simple Linear Regression",
+    "section": "Interpreting the slope",
+    "text": "Interpreting the slope\nPoll: The slope of the model for predicting audience score from critics score is 32.3142. Which of the following is the best interpretation of this value?\n\nFor every one point increase in the critics score, the audience score goes up by 0.5187 points, on average.\nFor every one point increase in the critics score, we expect the audience score to be higher by 0.5187 points, on average.\nFor every one point increase in the critics score, the audience score goes up by 0.5187 points.\nFor every one point increase in the audience score, the critics score goes up by 0.5187 points, on average."
+  },
+  {
+    "objectID": "slides/lec-2.html#interpreting-slope-intercept",
+    "href": "slides/lec-2.html#interpreting-slope-intercept",
+    "title": "Simple Linear Regression",
+    "section": "Interpreting slope & intercept",
+    "text": "Interpreting slope & intercept\n\\[\\widehat{\\text{audience}} = 32.3142 + 0.5187 \\times \\text{critics}\\]\n\n\nSlope: For every one point increase in the critics score, we expect the audience score to be higher by 0.5187 points, on average.\nIntercept: If the critics score is 0 points, we expect the audience score to be 32.3142 points."
+  },
+  {
+    "objectID": "slides/lec-2.html#is-the-intercept-meaningful",
+    "href": "slides/lec-2.html#is-the-intercept-meaningful",
+    "title": "Simple Linear Regression",
+    "section": "Is the intercept meaningful?",
+    "text": "Is the intercept meaningful?\n✅ The intercept is meaningful in context of the data if\n\nthe predictor can feasibly take values equal to or near zero or\nthe predictor has values near zero in the observed data\n\n\n🛑 Otherwise, it might not be meaningful!"
+  },
+  {
+    "objectID": "slides/lec-2.html#making-a-prediction",
+    "href": "slides/lec-2.html#making-a-prediction",
+    "title": "Simple Linear Regression",
+    "section": "Making a prediction",
+    "text": "Making a prediction\nSuppose that a movie has a critics score of 50. According to this model, what is the movie’s predicted audience score?\n\\[\n\\begin{aligned}\n\\widehat{\\text{audience}} &= 32.3142 + 0.5187 \\times \\text{critics} \\\\\n&= 32.3142 + 0.5187 \\times 50 \\\\\n&= 58.2492\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-2.html#extrapolation",
+    "href": "slides/lec-2.html#extrapolation",
+    "title": "Simple Linear Regression",
+    "section": "Extrapolation",
+    "text": "Extrapolation\nSuppose that a movie has a critics score of 0. According to this model, what is the movie’s predicted audience score?"
+  },
+  {
+    "objectID": "slides/lec-2.html#using-r-for-slr",
+    "href": "slides/lec-2.html#using-r-for-slr",
+    "title": "Simple Linear Regression",
+    "section": "Using R for SLR",
+    "text": "Using R for SLR"
+  },
+  {
+    "objectID": "slides/lec-2.html#step-1-specify-model",
+    "href": "slides/lec-2.html#step-1-specify-model",
+    "title": "Simple Linear Regression",
+    "section": "Step 1: Specify model",
+    "text": "Step 1: Specify model\nand confirm default engine\n\nlinear_reg()\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
+  },
+  {
+    "objectID": "slides/lec-2.html#step-2-fit-model-estimate-parameters",
+    "href": "slides/lec-2.html#step-2-fit-model-estimate-parameters",
+    "title": "Simple Linear Regression",
+    "section": "Step 2: Fit model & estimate parameters",
+    "text": "Step 2: Fit model & estimate parameters\nusing formula syntax\n\nlinear_reg() %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+  },
+  {
+    "objectID": "slides/lec-2.html#a-closer-look-at-model-output",
+    "href": "slides/lec-2.html#a-closer-look-at-model-output",
+    "title": "Simple Linear Regression",
+    "section": "A closer look at model output",
+    "text": "A closer look at model output\n\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+  },
+  {
+    "objectID": "slides/lec-2.html#the-regression-output",
+    "href": "slides/lec-2.html#the-regression-output",
+    "title": "Simple Linear Regression",
+    "section": "The regression output",
+    "text": "The regression output\nWe’ll focus on the first column for now…\n\nlinear_reg() %>%\n  fit(audience ~ critics, data = movie_scores) %>%\n  tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  <chr>          <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)   32.3      2.34        13.8 4.03e-28\n2 critics        0.519    0.0345      15.0 2.70e-31"
+  },
+  {
+    "objectID": "slides/lec-2.html#prediction-1",
+    "href": "slides/lec-2.html#prediction-1",
+    "title": "Simple Linear Regression",
+    "section": "Prediction",
+    "text": "Prediction\n\n# create a data frame for a new movie\nnew_movie <- tibble(critics = 50)\n\n# predict the outcome for a new movie\npredict(movie_fit, new_movie)\n\n# A tibble: 1 × 1\n  .pred\n  <dbl>\n1  58.2"
+  },
+  {
+    "objectID": "slides/lec-2.html#recap-1",
+    "href": "slides/lec-2.html#recap-1",
+    "title": "Simple Linear Regression",
+    "section": "Recap",
+    "text": "Recap\n\nUsed simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.\nUsed the least squares method to estimate the slope and intercept.\nWe interpreted the slope and intercept.\n\n\nSlope: For every one unit increase in \\(x\\), we expect y to be higher/lower by \\(\\hat{\\beta}_1\\) units, on average.\nIntercept: If \\(x\\) is 0, then we expect \\(y\\) to be \\(\\hat{\\beta}_0\\) units.\n\n\nPredicted the response given a value of the predictor variable.\nDefined extrapolation and why we should avoid it.\nFit a simple linear regression model in R and made a prediction.\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
     "objectID": "weeks/week-1.html#prepare",
     "href": "weeks/week-1.html#prepare",
     "title": "Week 1",
