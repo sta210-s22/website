@@ -33,10 +33,6 @@ knitr::opts_chunk$set(
 -   If you're just joining the class, welcome! Go to the [course website](https://sta210-s22.github.io/website) and review content you've missed, read the syllabus, and complete the *Getting to know you* survey.
 -   Lab 1 is due Friday, at 5pm, on Gradescope.
 
-## Gradescope demo
-
-\[To be added...\]
-
 ## Recap of last lecture {.smaller}
 
 ::: incremental
@@ -215,6 +211,8 @@ predict(movie_fit, new_movie)
 # Application exercise
 
 [github.com/sta210-s22/ae-1-dcbikeshare](https://github.com/sta210-s22/ae-1-movies)
+
+followed by a demo of exporting your work and uploading to GradeScope
 
 # Recap
 
