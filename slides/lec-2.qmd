@@ -407,73 +407,14 @@ According to this model, what is the movie's predicted audience score?
 p + coord_cartesian(xlim = c(0, 100))
 ```
 
-## Using R for SLR
-
-## Step 1: Specify model
-
-and confirm default engine
-
-```{r}
-#| echo: true
-linear_reg()
-```
-
-## Step 2: Fit model & estimate parameters
-
-using **formula syntax**
-
-```{r}
-#| echo: true
-linear_reg() %>%
-  fit(audience ~ critics, data = movie_scores)
-```
-
-## A closer look at model output
-
-```{r}
-movie_fit <- linear_reg() %>%
-  fit(audience ~ critics, data = movie_scores)
-
-movie_fit
-```
-
-$$\widehat{\text{audience}} = 32.3155 + 0.5187 \times \text{critics}$$
-
-. . .
-
-**Note:** The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation.
-
-## The regression output
-
-We'll focus on the first column for now...
-
-```{r}
-#| echo: true
-linear_reg() %>%
-  fit(audience ~ critics, data = movie_scores) %>%
-  tidy()
-```
-
-## Prediction
-
-```{r}
-#| echo: true
-#| code-line-numbers: "|2|5"
-
-# create a data frame for a new movie
-new_movie <- tibble(critics = 50)
-
-# predict the outcome for a new movie
-predict(movie_fit, new_movie)
-```
-
 # Recap
 
 ## Recap {.smaller}
 
+::: incremental
 -   Used simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.
 
--   Used the least squares method to estimate the slope and intercept.
+-   Used the least squares method to estimate the slope and intercept.å
 
 -   We interpreted the slope and intercept.
 
@@ -485,5 +426,4 @@ predict(movie_fit, new_movie)
 -   Predicted the response given a value of the predictor variable.
 
 -   Defined extrapolation and why we should avoid it.
-
--   Fit a simple linear regression model in R and made a prediction.
+:::

@@ -550,95 +550,7 @@ r &amp;= 0.7814
 <h2>Extrapolation</h2>
 <p>Suppose that a movie has a critics score of 0. According to this model, what is the movie’s predicted audience score?</p>
 
-<img data-src="lec-2_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
-<section id="using-r-for-slr" class="slide level2">
-<h2>Using R for SLR</h2>
-</section>
-<section id="step-1-specify-model" class="slide level2">
-<h2>Step 1: Specify model</h2>
-<p>and confirm default engine</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">linear_reg</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>Linear Regression Model Specification (regression)
-
-Computational engine: lm </code></pre>
-</div>
-</div>
-</section>
-<section id="step-2-fit-model-estimate-parameters" class="slide level2">
-<h2>Step 2: Fit model &amp; estimate parameters</h2>
-<p>using <strong>formula syntax</strong></p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">fit</span>(audience <span class="sc">~</span> critics, <span class="at">data =</span> movie_scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>parsnip model object
-
-Fit time:  2ms 
-
-Call:
-stats::lm(formula = audience ~ critics, data = data)
-
-Coefficients:
-(Intercept)      critics  
-    32.3155       0.5187  </code></pre>
-</div>
-</div>
-</section>
-<section id="a-closer-look-at-model-output" class="slide level2">
-<h2>A closer look at model output</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
-<pre><code>parsnip model object
-
-Fit time:  2ms 
-
-Call:
-stats::lm(formula = audience ~ critics, data = data)
-
-Coefficients:
-(Intercept)      critics  
-    32.3155       0.5187  </code></pre>
-</div>
-</div>
-<p><span class="math display">\[\widehat{\text{audience}} = 32.3155 + 0.5187 \times \text{critics}\]</span></p>
-<div class="fragment">
-<p><strong>Note:</strong> The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation.</p>
-</div>
-</section>
-<section id="the-regression-output" class="slide level2">
-<h2>The regression output</h2>
-<p>We’ll focus on the first column for now…</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">fit</span>(audience <span class="sc">~</span> critics, <span class="at">data =</span> movie_scores) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term        estimate std.error statistic  p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)   32.3      2.34        13.8 4.03e-28
-2 critics        0.519    0.0345      15.0 2.70e-31</code></pre>
-</div>
-</div>
-</section>
-<section id="prediction-1" class="slide level2">
-<h2>Prediction</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12" data-code-line-numbers="|2|5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># create a data frame for a new movie</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>new_movie <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">critics =</span> <span class="dv">50</span>)</span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># predict the outcome for a new movie</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">predict</span>(movie_fit, new_movie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  .pred
-  &lt;dbl&gt;
-1  58.2</code></pre>
-</div>
-</div>
-</section></section>
+<img data-src="lec-2_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section></section>
 <section>
 <section id="recap" class="title-slide slide level1 center">
 <h1>Recap</h1>
@@ -646,20 +558,21 @@ Coefficients:
 </section>
 <section id="recap-1" class="slide level2 smaller">
 <h2>Recap</h2>
+<div>
 <ul>
-<li><p>Used simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.</p></li>
-<li><p>Used the least squares method to estimate the slope and intercept.</p></li>
-<li><p>We interpreted the slope and intercept.</p>
+<li class="fragment"><p>Used simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.</p></li>
+<li class="fragment"><p>Used the least squares method to estimate the slope and intercept.å</p></li>
+<li class="fragment"><p>We interpreted the slope and intercept.</p>
 <div>
 <ul>
 <li class="fragment"><strong>Slope:</strong> For every one unit increase in <span class="math inline">\(x\)</span>, we expect y to be higher/lower by <span class="math inline">\(\hat{\beta}_1\)</span> units, on average.</li>
 <li class="fragment"><strong>Intercept:</strong> If <span class="math inline">\(x\)</span> is 0, then we expect <span class="math inline">\(y\)</span> to be <span class="math inline">\(\hat{\beta}_0\)</span> units.</li>
 </ul>
 </div></li>
-<li><p>Predicted the response given a value of the predictor variable.</p></li>
-<li><p>Defined extrapolation and why we should avoid it.</p></li>
-<li><p>Fit a simple linear regression model in R and made a prediction.</p></li>
+<li class="fragment"><p>Predicted the response given a value of the predictor variable.</p></li>
+<li class="fragment"><p>Defined extrapolation and why we should avoid it.</p></li>
 </ul>
+</div>
 
 
 <div class="footer footer-default">
