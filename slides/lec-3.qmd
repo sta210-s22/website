@@ -168,6 +168,7 @@ linear_reg() %>%
 ## A closer look at model output
 
 ```{r}
+#| echo: true
 movie_fit <- linear_reg() %>%
   set_engine("lm") %>%
   fit(audience ~ critics, data = movie_scores)
@@ -210,7 +211,7 @@ predict(movie_fit, new_movie)
 
 # Application exercise
 
-[github.com/sta210-s22/ae-1-dcbikeshare](https://github.com/sta210-s22/ae-1-movies)
+[github.com/sta210-s22/ae-1-dcbikeshare](https://github.com/sta210-s22/ae-1-dcbikeshare)
 
 followed by a demo of exporting your work and uploading to GradeScope
 
