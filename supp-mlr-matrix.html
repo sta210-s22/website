@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.2.476">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - Course support</title>
+  <title>STA 210 - Spring 2022 - Matrix Notation for Multiple Linear Regression</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -13,6 +13,7 @@
     ul.task-list{list-style: none;}
   </style>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -22,8 +23,6 @@
   <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
   <script src="site_libs/quarto-search/fuse.min.js"></script>
   <script src="site_libs/quarto-search/quarto-search.js"></script>
-  <link href="./course-team.html" rel="next">
-  <link href="./course-syllabus.html" rel="prev">
   <script src="site_libs/quarto-html/quarto.js"></script>
   <script src="site_libs/quarto-html/popper.min.js"></script>
   <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -55,7 +54,7 @@
     }
   }</script>
   <link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Course support">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Matrix Notation for Multiple Linear Regression">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -67,7 +66,7 @@
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Course support</h1>
+      <h1 class="quarto-secondary-nav-title">Matrix Notation for Multiple Linear Regression</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -116,12 +115,12 @@
       <ul class="list-unstyled sidebar-section depth1">
     <li class="">
         <div class="me-auto">
-            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-course-information" aria-expanded="true">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-course-information" aria-expanded="false">
               <div class="me-auto sidebar-section-item">Course information</div>
             <div><i class="bi bi-chevron-right ms-2"></i></div>
             </a>
         </div>
-      <div class="collapse  show" id="quarto-sidebar-section-course-information">
+      <div class="collapse  " id="quarto-sidebar-section-course-information">
         <ul class="list-unstyled sidebar-item-contents">
           <li class="sidebar-item">
   <a href="./course-overview.html" class="">Overview</a>
@@ -130,7 +129,7 @@
   <a href="./course-syllabus.html" class="">Syllabus</a>
 </li>
           <li class="sidebar-item">
-  <a href="./course-support.html" class="active">Support</a>
+  <a href="./course-support.html" class="">Support</a>
 </li>
           <li class="sidebar-item">
   <a href="./course-team.html" class="">Teaching team</a>
@@ -272,76 +271,151 @@
       <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">On this page</h2>
 <ul>
-<li><a href="#lectures-and-labs" class="nav-link active" data-scroll-target="#lectures-and-labs">Lectures and labs</a></li>
-<li><a href="#office-hours" class="nav-link" data-scroll-target="#office-hours">Office hours</a></li>
-<li><a href="#discussion-forum" class="nav-link" data-scroll-target="#discussion-forum">Discussion forum</a></li>
-<li><a href="#email" class="nav-link" data-scroll-target="#email">Email</a></li>
-<li><a href="#academic-support" class="nav-link" data-scroll-target="#academic-support">Academic support</a></li>
-<li><a href="#mental-health-and-wellness" class="nav-link" data-scroll-target="#mental-health-and-wellness">Mental health and wellness</a></li>
-<li><a href="#technology-accommodations" class="nav-link" data-scroll-target="#technology-accommodations"><strong>Technology accommodations</strong></a></li>
-<li><a href="#course-materials-costs" class="nav-link" data-scroll-target="#course-materials-costs"><strong>Course materials costs</strong></a></li>
-<li><a href="#assistance-with-zoom-or-sakai" class="nav-link" data-scroll-target="#assistance-with-zoom-or-sakai"><strong>Assistance with Zoom or Sakai</strong></a></li>
+<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+<li><a href="#matrix-representation-for-the-regression-model" class="nav-link" data-scroll-target="#matrix-representation-for-the-regression-model">Matrix Representation for the Regression Model</a></li>
+<li><a href="#estimating-the-coefficients" class="nav-link" data-scroll-target="#estimating-the-coefficients">Estimating the Coefficients</a></li>
+<li><a href="#variance-covariance-matrix-of-the-coefficients" class="nav-link" data-scroll-target="#variance-covariance-matrix-of-the-coefficients">Variance-covariance matrix of the coefficients</a></li>
 </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/course-support.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/supp-mlr-matrix.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content">
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7">Course support</h1>
+<h1 class="title d-none d-lg-block display-7">Matrix Notation for Multiple Linear Regression</h1>
 </header>
 
-<p>Most of you will need help at some point and we want to make sure you can identify when that is without getting too frustrated and feel comfortable seeking help.</p>
-<section id="lectures-and-labs" class="level2">
-<h2 class="anchored" data-anchor-id="lectures-and-labs">Lectures and labs</h2>
-<p>If you have a question during lecture or lab, feel free to ask it! There are likely other students with the same question, so by asking you will create a learning opportunity for everyone.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The following supplemental notes were created by <a href="https://www.mariatackett.net/">Dr.&nbsp;Maria Tackett</a> for STA 210. They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression. Additional supplemental notes will be added throughout the semester.</p>
+</div>
+</div>
+<p>This document provides the details for the matrix notation for multiple linear regression. We assume the reader has familiarity with some linear algebra. Please see Chapter 1 of <a href="https://www-bcf.usc.edu/~gareth/ISL/"><em>An Introduction to Statistical Learning</em></a> for a brief review of linear algebra.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Suppose we have <span class="math inline">\(n\)</span> observations. Let the <span class="math inline">\(i^{th}\)</span> be <span class="math inline">\((x_{i1}, \ldots, x_{ip}, y_i)\)</span>, such that <span class="math inline">\(x_{i1}, \ldots, x_{ip}\)</span> are the explanatory variables (predictors) and <span class="math inline">\(y_i\)</span> is the response variable. We assume the data can be modeled using the least-squares regression model, such that the mean response for a given combination of explanatory variables follows the form in <a href="#eq-basic_model">eq.&nbsp;1</a>.</p>
+<p><span id="eq-basic_model"><span class="math display">\[
+y = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p 
+ \qquad(1)\]</span></span></p>
+<p>We can write the response for the <span class="math inline">\(i^{th}\)</span> observation as shown in <a href="#eq-ind_response">eq.&nbsp;2</a></p>
+<p><span id="eq-ind_response"><span class="math display">\[
+y_i = \beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \epsilon_i 
+ \qquad(2)\]</span></span></p>
+<p>such that <span class="math inline">\(\epsilon_i\)</span> is the amount <span class="math inline">\(y_i\)</span> deviates from <span class="math inline">\(\mu\{y|x_{i1}, \ldots, x_{ip}\}\)</span>, the mean response for a given combination of explanatory variables. We assume each <span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span>, where <span class="math inline">\(\sigma^2\)</span> is a constant variance for the distribution of the response <span class="math inline">\(y\)</span> for any combination of explanatory variables <span class="math inline">\(x_1, \ldots, x_p\)</span>.</p>
 </section>
-<section id="office-hours" class="level2">
-<h2 class="anchored" data-anchor-id="office-hours">Office hours</h2>
-<p>The teaching team is here to help you be successful in the course. You are encouraged to attend office hours during the times posted on the home page to ask questions about the course content and assignments. A lot of questions are most effectively answered in-person, so office hours are a valuable resource. I encourage each and every one of you to take advantage of this resource! Make a pledge to stop by office hours at least once during the first three weeks of class. If you truly have no questions to ask, just stop by and say hi and introduce yourself. You can find a list of everyone’s office hours <a href="./course-team.html">here</a>.</p>
+<section id="matrix-representation-for-the-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-representation-for-the-regression-model">Matrix Representation for the Regression Model</h2>
+<p>We can represent the <a href="#eq-basic_model">eq.&nbsp;1</a> and <a href="#eq-ind_response">eq.&nbsp;2</a> using matrix notation. Let</p>
+<p><span id="eq-matrix-notation"><span class="math display">\[
+\mathbf{Y} = \begin{bmatrix}y_1 \\ y_2 \\ \vdots \\y_n\end{bmatrix} 
+\hspace{15mm}
+\mathbf{X} = \begin{bmatrix}x_{11} &amp; x_{12} &amp; \dots &amp; x_{1p} \\
+x_{21} &amp; x_{22} &amp; \dots &amp; x_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np} \end{bmatrix}
+\hspace{15mm}
+\boldsymbol{\beta}= \begin{bmatrix}\beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{bmatrix} 
+\hspace{15mm}
+\boldsymbol{\epsilon}= \begin{bmatrix}\epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix}
+ \qquad(3)\]</span></span></p>
+<p>Thus,</p>
+<p><span class="math display">\[\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{\epsilon}\]</span></p>
+<p>Therefore the estimated response for a given combination of explanatory variables and the associated residuals can be written as</p>
+<p><span id="eq-matrix_mean"><span class="math display">\[
+\hat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}} \hspace{10mm} \mathbf{e} = \mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}
+ \qquad(4)\]</span></span></p>
 </section>
-<section id="discussion-forum" class="level2">
-<h2 class="anchored" data-anchor-id="discussion-forum">Discussion forum</h2>
-<p>Have a question that can’t wait for office hours? Prefer to write out your question in detail rather than asking in person? The online discussion forum is the best venue for these! We will use <a href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b">Conversations</a> as the online discussion forum. There is a chance another student has already asked a similar question, so please check the other posts on Ed Discussion before adding a new question. If you know the answer to a question that is posted, I encourage you to respond!</p>
+<section id="estimating-the-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-the-coefficients">Estimating the Coefficients</h2>
+<p>The least-squares model is the one that minimizes the sum of the squared residuals. Therefore, we want to find the coefficients, <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that minimizes</p>
+<p><span id="eq-sum_sq_resid"><span class="math display">\[
+\sum\limits_{i=1}^{n} e_{i}^2 = \mathbf{e}^T\mathbf{e} = (\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})^T(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})
+ \qquad(5)\]</span></span></p>
+<p>where <span class="math inline">\(\mathbf{e}^T\)</span>, the transpose of the matrix <span class="math inline">\(\mathbf{e}\)</span>.</p>
+<p><span id="eq-model_equation"><span class="math display">\[
+(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})^T(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}) = (\mathbf{Y}^T\mathbf{Y} - 
+\mathbf{Y}^T \mathbf{X}\hat{\boldsymbol{\beta}} - (\hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y} +
+\hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}
+\hat{\boldsymbol{\beta}})
+ \qquad(6)\]</span></span></p>
+<p>Note that <span class="math inline">\((\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}})^T = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Since these are both constants (i.e.&nbsp;<span class="math inline">\(1\times 1\)</span> vectors), <span class="math inline">\(\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}} = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Thus, <a href="#eq-model_equation">eq.&nbsp;7</a> becomes</p>
+<p><span id="eq-model_equation"><span class="math display">\[
+\mathbf{Y}^T\mathbf{Y} - 2 \mathbf{X}^T\hat{\boldsymbol{\beta}}{}^{T}\mathbf{Y} + \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}
+\hat{\boldsymbol{\beta}}
+ \qquad(7)\]</span></span></p>
+<p>Since we want to find the <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that minimizes <a href="#eq-sum_sq_resid">eq.&nbsp;5</a>, will find the value of <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> such that the derivative with respect to <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> is equal to 0.</p>
+<p><span id="eq-ete"><span class="math display">\[
+\begin{aligned}
+\frac{\partial \mathbf{e}^T\mathbf{e}}{\partial \hat{\boldsymbol{\beta}}} &amp; = \frac{\partial}{\partial \hat{\boldsymbol{\beta}}}(\mathbf{Y}^T\mathbf{Y} - 2 \mathbf{X}^T\hat{\boldsymbol{\beta}}{}^T\mathbf{Y} + \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}}) = 0 \\
+&amp;\Rightarrow - 2 \mathbf{X}^T\mathbf{Y} + 2 \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} = 0 \\
+&amp; \Rightarrow 2 \mathbf{X}^T\mathbf{Y} = 2 \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
+&amp; \Rightarrow \mathbf{X}^T\mathbf{Y} = \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
+&amp; \Rightarrow (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
+&amp; \Rightarrow (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} = \mathbf{I}\hat{\boldsymbol{\beta}}
+\end{aligned}
+ \qquad(8)\]</span></span></p>
+<p>Thus, the estimate of the model coefficients is <span class="math inline">\(\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}\)</span>.</p>
 </section>
-<section id="email" class="level2">
-<h2 class="anchored" data-anchor-id="email">Email</h2>
-<p>Please refrain from emailing any course content questions (those should go <a href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b">Conversations</a>), and only use email for questions about personal matters that may not be appropriate for the public course forum (e.g., illness, accommodations, etc.). For such matters, you may email Dr.&nbsp;Mine Çetinkaya-Rundel at <a href="mailto:mc301@duke.edu">mc301@duke.edu</a>.</p>
-<p>If there is a question that’s not appropriate for the public forum, you are welcome to email me directly. <strong>If you email me, please include “STA 210” in the subject line.</strong> Barring extenuating circumstances, I will respond to STA 210 emails within 48 hours Monday - Friday. Response time may be slower for emails sent Friday evening - Sunday.</p>
-</section>
-<section id="academic-support" class="level2">
-<h2 class="anchored" data-anchor-id="academic-support">Academic support</h2>
-<p>There are times you may need help with the class that is beyond what can be provided by the teaching team. In those instances, I encourage you to visit the <strong>Academic Resource Center</strong>. The <a href="https://arc.duke.edu">Academic Resource Center (ARC)</a> offers free services to all students during their undergraduate careers at Duke. Services include Learning Consultations, Peer Tutoring and Study Groups, ADHD/LD Coaching, Outreach Workshops, and more. Because learning is a process unique to every individual, they work with each student to discover and develop their own academic strategy for success at Duke. ARC services are available free to any Duke undergraduate student, in any year, studying in any discipline. Contact the ARC to schedule an appointment. Undergraduates in any year, studying any discipline can benefit! Contact <a href="mailto:theARC@duke.edu">theARC@duke.edu</a>, 919-684-5917.</p>
-</section>
-<section id="mental-health-and-wellness" class="level2">
-<h2 class="anchored" data-anchor-id="mental-health-and-wellness">Mental health and wellness</h2>
-<p>Student mental health and wellness is of primary importance at Duke, and the university offers resources to support students in managing daily stress and self-care. Duke offers several resources for students to seek assistance on coursework and to nurture daily habits that support overall well-being, some of which are listed below:</p>
-<ul>
-<li><p><strong>The Academic Resource Center</strong>: (919) 684-5917, <a href="mailto:theARC@duke.edu">theARC@duke.edu</a>, or <a href="https://arc.duke.edu/">arc.duke.edu</a>,</p></li>
-<li><p><strong>DuWell</strong>: (919) 681-8421, <a href="mailto:duwell@studentaffairs.duke.edu">duwell@studentaffairs.duke.edu</a>, or <a href="https://studentaffairs.duke.edu/duwell">studentaffairs.duke.edu/duwell</a></p></li>
-</ul>
-<p>If your mental health concerns and/or stressful events negatively affect your daily emotional state, academic performance, or ability to participate in your daily activities, many resources are available to help you through difficult times. Duke encourages all students to access these resources.</p>
-<ul>
-<li><p><strong>DukeReach.</strong> Provides comprehensive outreach services to identify and support students in managing all aspects of well-being. If you have concerns about a student’s behavior or health visit the website for resources and assistance. <a href="http://studentaffairs.duke.edu/dukereach">studentaffairs.duke.edu/dukereach</a></p></li>
-<li><p><strong>Counseling and Psychological Services (CAPS).</strong> CAPS helps Duke Students enhance strengths and develop abilities to successfully live, grow and learn in their personal and academic lives. CAPS recognizes that we are living in unprecedented times and that the changes, challenges and stressors brought on by the COVID-19 pandemic have impacted everyone, often in ways that are tax our well-being. CAPS offers many services to Duke undergraduate students, including brief individual and group counseling, couples counseling and more. CAPS staff also provides outreach to student groups, particularly programs supportive of at-risk populations, on a wide range of issues impacting them in various aspects of campus life. CAPS provides services to students via Telehealth. To initiate services, you can contact their front desk at 919-660-1000. <a href="https://studentaffairs.duke.edu/caps">studentaffairs.duke.edu/caps</a></p></li>
-<li><p><strong>Blue Devils Care.</strong> A convenient and cost-effective way for Duke students to receive 24/7 mental health support through TalkNow and scheduled counseling. <a href="https://bluedevilscare.duke.edu/">bluedevilscare.duke.edu</a></p></li>
-<li><p><strong>Two-Click Support.</strong> Duke Student Government and DukeReach partnership that connects students to help in just two clicks. <a href="https://bit.ly/TwoClickSupport">bit.ly/TwoClickSupport</a></p></li>
-<li><p><strong>WellTrack</strong>. Sign up for WellTrack at <a href="https://app.welltrack.com/">app.welltrack.com</a>.</p></li>
-</ul>
-</section>
-<section id="technology-accommodations" class="level2">
-<h2 class="anchored" data-anchor-id="technology-accommodations"><strong>Technology accommodations</strong></h2>
-<p>Students with demonstrated high financial need who have limited access to computers may request assistance in the form of loaner laptops. For technology assistance requests, please go <a href="https://keeplearning.duke.edu/technical-support/">here</a>. Please note that supplies are limited.</p>
-<p>Note that we will be using Duke’s computational resources in this course. These resources are freely available to you. As long as your computer can connect to the internet and open a browser window, you can perform the necessary computing for this course. All software we use is open-source and/or freely available.</p>
-</section>
-<section id="course-materials-costs" class="level2">
-<h2 class="anchored" data-anchor-id="course-materials-costs"><strong>Course materials costs</strong></h2>
-<p>There are no costs associated with this course. All readings will come from freely available, open resources (open-source textbooks, journal articles, etc.).</p>
-</section>
-<section id="assistance-with-zoom-or-sakai" class="level2">
-<h2 class="anchored" data-anchor-id="assistance-with-zoom-or-sakai"><strong>Assistance with Zoom or Sakai</strong></h2>
-<p>For technical help with Sakai or Zoom, contact the Duke OIT Service Desk at <a href="https://oit.duke.edu/help">oit.duke.edu/help</a>. You can also access the self-service help documentation for Zoom <a href="https://oit.duke.edu/help/articles/kb0029318">here</a> and for Sakai <a href="https://sakai-duke.screenstepslive.com/s/sakai_support">here</a>.</p>
-<p>Note that we will be making minimal use of Sakai in this course (primarily for announcements and grade book). All assignment submission and discussion will take place on GitHub instead.</p>
-<p>Zoom will be used for online office hours as well as as a backup option should we need to hold the course online instead of in person.</p>
+<section id="variance-covariance-matrix-of-the-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="variance-covariance-matrix-of-the-coefficients">Variance-covariance matrix of the coefficients</h2>
+<p>We will use two properties to derive the form of the variance-covariance matrix of the coefficients:</p>
+<ol type="1">
+<li><span class="math inline">\(E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T] = \sigma^2I\)</span></li>
+<li><span class="math inline">\(\hat{\boldsymbol{\beta}} = \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\epsilon\)</span></li>
+</ol>
+<p>First, we will show that <span class="math inline">\(E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T] = \sigma^2I\)</span></p>
+<p><span id="eq-expected_error"><span class="math display">\[
+\begin{aligned}
+E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T] &amp;= E \begin{bmatrix}\epsilon_1  &amp; \epsilon_2 &amp; \dots &amp; \epsilon_n \end{bmatrix}\begin{bmatrix}\epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix}  \\
+&amp; = E \begin{bmatrix} \epsilon_1^2  &amp; \epsilon_1 \epsilon_2 &amp; \dots &amp; \epsilon_1 \epsilon_n \\
+\epsilon_2 \epsilon_1 &amp; \epsilon_2^2 &amp; \dots &amp; \epsilon_2 \epsilon_n \\ 
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+\epsilon_n \epsilon_1 &amp; \epsilon_n \epsilon_2 &amp; \dots &amp; \epsilon_n^2 
+\end{bmatrix} \\
+&amp; = \begin{bmatrix} E[\epsilon_1^2]  &amp; E[\epsilon_1 \epsilon_2] &amp; \dots &amp; E[\epsilon_1 \epsilon_n] \\
+E[\epsilon_2 \epsilon_1] &amp; E[\epsilon_2^2] &amp; \dots &amp; E[\epsilon_2 \epsilon_n] \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+E[\epsilon_n \epsilon_1] &amp; E[\epsilon_n \epsilon_2] &amp; \dots &amp; E[\epsilon_n^2]
+\end{bmatrix}
+\end{aligned}
+ \qquad(9)\]</span></span></p>
+<p>Recall, the regression assumption that the errors <span class="math inline">\(\epsilon_i's\)</span> are Normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>. Thus, <span class="math inline">\(E(\epsilon_i^2) = Var(\epsilon_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>. Additionally, recall the regression assumption that the errors are uncorrelated, i.e.&nbsp;<span class="math inline">\(E(\epsilon_i \epsilon_j) = Cov(\epsilon_i, \epsilon_j) = 0\)</span> for all <span class="math inline">\(i,j\)</span>. Using these assumptions, we can write <a href="#eq-expected_error">eq.&nbsp;9</a> as</p>
+<p><span id="eq-expected_error2"><span class="math display">\[
+E[\mathbf{\epsilon}\mathbf{\epsilon}^T]  = \begin{bmatrix} \sigma^2  &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; \sigma^2  &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \dots &amp; \sigma^2
+\end{bmatrix} = \sigma^2 \mathbf{I}
+ \qquad(10)\]</span></span></p>
+<p>where <span class="math inline">\(\mathbf{I}\)</span> is the <span class="math inline">\(n \times n\)</span> identity matrix.</p>
+<p>Next, we show that <span class="math inline">\(\hat{\boldsymbol{\beta}} = \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\epsilon\)</span>.</p>
+<p>Recall that the <span class="math inline">\(\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}\)</span> and <span class="math inline">\(\mathbf{Y} = \mathbf{X}\mathbf{\beta} + \mathbf{\epsilon}\)</span>. Then,</p>
+<p><span id="eq-est-beta"><span class="math display">\[
+\begin{aligned}
+\hat{\boldsymbol{\beta}} &amp;= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} \\
+&amp;= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T(\mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}) \\
+&amp;= \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \mathbf{\epsilon} \\
+\end{aligned}
+ \qquad(11)\]</span></span></p>
+<p>Using these two properties, we derive the form of the variance-covariance matrix for the coefficients. Note that the covariance matrix is <span class="math inline">\(E[(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})^T]\)</span></p>
+<p><span id="eq-var-cov"><span class="math display">\[
+\begin{aligned}
+E[(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})^T] &amp;= E[(\boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon} - \boldsymbol{\beta})(\boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon} - \boldsymbol{\beta})^T]\\
+&amp; = E[(\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon}\boldsymbol{\epsilon}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}] \\
+&amp; = (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T]\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\\
+&amp; = (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T (\sigma^2\mathbf{I})\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\\
+&amp;= \sigma^2\mathbf{I}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\\
+&amp; = \sigma^2\mathbf{I}(\mathbf{X}^T\mathbf{X})^{-1}\\
+&amp;  = \sigma^2(\mathbf{X}^T\mathbf{X})^{-1} \\
+\end{aligned}
+ \qquad(12)\]</span></span></p>
 
 
 </section>
@@ -520,14 +594,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./course-syllabus.html">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Syllabus</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./course-team.html">
-        <span class="nav-page-text">Teaching team</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

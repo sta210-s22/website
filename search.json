@@ -7,11 +7,39 @@
     "text": "If you’re having difficulty launching an RStudio session from your reserved container, go to status.oit.duke.edu and scroll down to Teaching and Learning Tools. Under this heading you’ll find an entry called Container Manager (CMGR Coursework Containers).\n\nIf the status shows something other than Operational, this means there is a known incident with the containers. Check back later to see if it’s been resolved. If there’s a deadline coming up soon, post on the course forum to let us know that there’s an issue. We can look into how quickly it might get resolved and decide on what to do about the deadline accordingly. Note: We don’t anticipate this to happen regularly, the systems are Operational a huge majority of the time!\nIf the status shows Operational, this means the system is expected to be working. Check your internet connection, if need be, restart your computer to ensure a fresh new connection. If your issue persists, post on the course forum with details on what you’ve tried and the errors you see (including verbatim errors and/or screenshots).\nEither way you can also fill out the form here, which will notify our the R TA for the department as well as our undergraduate coordinator. They’ll be able to help diagnose the issue."
   },
   {
+    "objectID": "supp-mlr-matrix.html#introduction",
+    "href": "supp-mlr-matrix.html#introduction",
+    "title": "Matrix Notation for Multiple Linear Regression",
+    "section": "Introduction",
+    "text": "Introduction\nSuppose we have \\(n\\) observations. Let the \\(i^{th}\\) be \\((x_{i1}, \\ldots, x_{ip}, y_i)\\), such that \\(x_{i1}, \\ldots, x_{ip}\\) are the explanatory variables (predictors) and \\(y_i\\) is the response variable. We assume the data can be modeled using the least-squares regression model, such that the mean response for a given combination of explanatory variables follows the form in eq. 1.\n\\[\ny = \\beta_0 + \\beta_1 x_1 + \\dots + \\beta_p x_p \n \\qquad(1)\\]\nWe can write the response for the \\(i^{th}\\) observation as shown in eq. 2\n\\[\ny_i = \\beta_0 + \\beta_1 x_{i1} + \\dots + \\beta_p x_{ip} + \\epsilon_i \n \\qquad(2)\\]\nsuch that \\(\\epsilon_i\\) is the amount \\(y_i\\) deviates from \\(\\mu\\{y|x_{i1}, \\ldots, x_{ip}\\}\\), the mean response for a given combination of explanatory variables. We assume each \\(\\epsilon_i \\sim N(0,\\sigma^2)\\), where \\(\\sigma^2\\) is a constant variance for the distribution of the response \\(y\\) for any combination of explanatory variables \\(x_1, \\ldots, x_p\\)."
+  },
+  {
+    "objectID": "supp-mlr-matrix.html#matrix-representation-for-the-regression-model",
+    "href": "supp-mlr-matrix.html#matrix-representation-for-the-regression-model",
+    "title": "Matrix Notation for Multiple Linear Regression",
+    "section": "Matrix Representation for the Regression Model",
+    "text": "Matrix Representation for the Regression Model\nWe can represent the eq. 1 and eq. 2 using matrix notation. Let\n\\[\n\\mathbf{Y} = \\begin{bmatrix}y_1 \\\\ y_2 \\\\ \\vdots \\\\y_n\\end{bmatrix} \n\\hspace{15mm}\n\\mathbf{X} = \\begin{bmatrix}x_{11} & x_{12} & \\dots & x_{1p} \\\\\nx_{21} & x_{22} & \\dots & x_{2p} \\\\\n\\vdots & \\vdots & \\ddots & \\vdots\\\\\nx_{n1} & x_{n2} & \\dots & x_{np} \\end{bmatrix}\n\\hspace{15mm}\n\\boldsymbol{\\beta}= \\begin{bmatrix}\\beta_0 \\\\ \\beta_1 \\\\ \\vdots \\\\ \\beta_p \\end{bmatrix} \n\\hspace{15mm}\n\\boldsymbol{\\epsilon}= \\begin{bmatrix}\\epsilon_1 \\\\ \\epsilon_2 \\\\ \\vdots \\\\ \\epsilon_n \\end{bmatrix}\n \\qquad(3)\\]\nThus,\n\\[\\mathbf{Y} = \\mathbf{X}\\boldsymbol{\\beta} + \\mathbf{\\epsilon}\\]\nTherefore the estimated response for a given combination of explanatory variables and the associated residuals can be written as\n\\[\n\\hat{\\mathbf{Y}} = \\mathbf{X}\\hat{\\boldsymbol{\\beta}} \\hspace{10mm} \\mathbf{e} = \\mathbf{Y} - \\mathbf{X}\\hat{\\boldsymbol{\\beta}}\n \\qquad(4)\\]"
+  },
+  {
+    "objectID": "supp-mlr-matrix.html#estimating-the-coefficients",
+    "href": "supp-mlr-matrix.html#estimating-the-coefficients",
+    "title": "Matrix Notation for Multiple Linear Regression",
+    "section": "Estimating the Coefficients",
+    "text": "Estimating the Coefficients\nThe least-squares model is the one that minimizes the sum of the squared residuals. Therefore, we want to find the coefficients, \\(\\hat{\\boldsymbol{\\beta}}\\) that minimizes\n\\[\n\\sum\\limits_{i=1}^{n} e_{i}^2 = \\mathbf{e}^T\\mathbf{e} = (\\mathbf{Y} - \\mathbf{X}\\hat{\\boldsymbol{\\beta}})^T(\\mathbf{Y} - \\mathbf{X}\\hat{\\boldsymbol{\\beta}})\n \\qquad(5)\\]\nwhere \\(\\mathbf{e}^T\\), the transpose of the matrix \\(\\mathbf{e}\\).\n\\[\n(\\mathbf{Y} - \\mathbf{X}\\hat{\\boldsymbol{\\beta}})^T(\\mathbf{Y} - \\mathbf{X}\\hat{\\boldsymbol{\\beta}}) = (\\mathbf{Y}^T\\mathbf{Y} - \n\\mathbf{Y}^T \\mathbf{X}\\hat{\\boldsymbol{\\beta}} - (\\hat{\\boldsymbol{\\beta}}{}^{T}\\mathbf{X}^T\\mathbf{Y} +\n\\hat{\\boldsymbol{\\beta}}{}^{T}\\mathbf{X}^T\\mathbf{X}\n\\hat{\\boldsymbol{\\beta}})\n \\qquad(6)\\]\nNote that \\((\\mathbf{Y^T}\\mathbf{X}\\hat{\\boldsymbol{\\beta}})^T = \\hat{\\boldsymbol{\\beta}}{}^{T}\\mathbf{X}^T\\mathbf{Y}\\). Since these are both constants (i.e. \\(1\\times 1\\) vectors), \\(\\mathbf{Y^T}\\mathbf{X}\\hat{\\boldsymbol{\\beta}} = \\hat{\\boldsymbol{\\beta}}{}^{T}\\mathbf{X}^T\\mathbf{Y}\\). Thus, eq. 7 becomes\n\\[\n\\mathbf{Y}^T\\mathbf{Y} - 2 \\mathbf{X}^T\\hat{\\boldsymbol{\\beta}}{}^{T}\\mathbf{Y} + \\hat{\\boldsymbol{\\beta}}{}^{T}\\mathbf{X}^T\\mathbf{X}\n\\hat{\\boldsymbol{\\beta}}\n \\qquad(7)\\]\nSince we want to find the \\(\\hat{\\boldsymbol{\\beta}}\\) that minimizes eq. 5, will find the value of \\(\\hat{\\boldsymbol{\\beta}}\\) such that the derivative with respect to \\(\\hat{\\boldsymbol{\\beta}}\\) is equal to 0.\n\\[\n\\begin{aligned}\n\\frac{\\partial \\mathbf{e}^T\\mathbf{e}}{\\partial \\hat{\\boldsymbol{\\beta}}} & = \\frac{\\partial}{\\partial \\hat{\\boldsymbol{\\beta}}}(\\mathbf{Y}^T\\mathbf{Y} - 2 \\mathbf{X}^T\\hat{\\boldsymbol{\\beta}}{}^T\\mathbf{Y} + \\hat{\\boldsymbol{\\beta}}{}^{T}\\mathbf{X}^T\\mathbf{X}\\hat{\\boldsymbol{\\beta}}) = 0 \\\\\n&\\Rightarrow - 2 \\mathbf{X}^T\\mathbf{Y} + 2 \\mathbf{X}^T\\mathbf{X}\\hat{\\boldsymbol{\\beta}} = 0 \\\\\n& \\Rightarrow 2 \\mathbf{X}^T\\mathbf{Y} = 2 \\mathbf{X}^T\\mathbf{X}\\hat{\\boldsymbol{\\beta}} \\\\\n& \\Rightarrow \\mathbf{X}^T\\mathbf{Y} = \\mathbf{X}^T\\mathbf{X}\\hat{\\boldsymbol{\\beta}} \\\\\n& \\Rightarrow (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{Y} = (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{X}\\hat{\\boldsymbol{\\beta}} \\\\\n& \\Rightarrow (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{Y} = \\mathbf{I}\\hat{\\boldsymbol{\\beta}}\n\\end{aligned}\n \\qquad(8)\\]\nThus, the estimate of the model coefficients is \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{Y}\\)."
+  },
+  {
+    "objectID": "supp-mlr-matrix.html#variance-covariance-matrix-of-the-coefficients",
+    "href": "supp-mlr-matrix.html#variance-covariance-matrix-of-the-coefficients",
+    "title": "Matrix Notation for Multiple Linear Regression",
+    "section": "Variance-covariance matrix of the coefficients",
+    "text": "Variance-covariance matrix of the coefficients\nWe will use two properties to derive the form of the variance-covariance matrix of the coefficients:\n\n\\(E[\\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T] = \\sigma^2I\\)\n\\(\\hat{\\boldsymbol{\\beta}} = \\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1}\\epsilon\\)\n\nFirst, we will show that \\(E[\\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T] = \\sigma^2I\\)\n\\[\n\\begin{aligned}\nE[\\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T] &= E \\begin{bmatrix}\\epsilon_1  & \\epsilon_2 & \\dots & \\epsilon_n \\end{bmatrix}\\begin{bmatrix}\\epsilon_1 \\\\ \\epsilon_2 \\\\ \\vdots \\\\ \\epsilon_n \\end{bmatrix}  \\\\\n& = E \\begin{bmatrix} \\epsilon_1^2  & \\epsilon_1 \\epsilon_2 & \\dots & \\epsilon_1 \\epsilon_n \\\\\n\\epsilon_2 \\epsilon_1 & \\epsilon_2^2 & \\dots & \\epsilon_2 \\epsilon_n \\\\ \n\\vdots & \\vdots & \\ddots & \\vdots \\\\ \n\\epsilon_n \\epsilon_1 & \\epsilon_n \\epsilon_2 & \\dots & \\epsilon_n^2 \n\\end{bmatrix} \\\\\n& = \\begin{bmatrix} E[\\epsilon_1^2]  & E[\\epsilon_1 \\epsilon_2] & \\dots & E[\\epsilon_1 \\epsilon_n] \\\\\nE[\\epsilon_2 \\epsilon_1] & E[\\epsilon_2^2] & \\dots & E[\\epsilon_2 \\epsilon_n] \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\ \nE[\\epsilon_n \\epsilon_1] & E[\\epsilon_n \\epsilon_2] & \\dots & E[\\epsilon_n^2]\n\\end{bmatrix}\n\\end{aligned}\n \\qquad(9)\\]\nRecall, the regression assumption that the errors \\(\\epsilon_i's\\) are Normally distributed with mean 0 and variance \\(\\sigma^2\\). Thus, \\(E(\\epsilon_i^2) = Var(\\epsilon_i) = \\sigma^2\\) for all \\(i\\). Additionally, recall the regression assumption that the errors are uncorrelated, i.e. \\(E(\\epsilon_i \\epsilon_j) = Cov(\\epsilon_i, \\epsilon_j) = 0\\) for all \\(i,j\\). Using these assumptions, we can write eq. 9 as\n\\[\nE[\\mathbf{\\epsilon}\\mathbf{\\epsilon}^T]  = \\begin{bmatrix} \\sigma^2  & 0 & \\dots & 0 \\\\\n0 & \\sigma^2  & \\dots & 0 \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\n0 & 0 & \\dots & \\sigma^2\n\\end{bmatrix} = \\sigma^2 \\mathbf{I}\n \\qquad(10)\\]\nwhere \\(\\mathbf{I}\\) is the \\(n \\times n\\) identity matrix.\nNext, we show that \\(\\hat{\\boldsymbol{\\beta}} = \\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1}\\epsilon\\).\nRecall that the \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{Y}\\) and \\(\\mathbf{Y} = \\mathbf{X}\\mathbf{\\beta} + \\mathbf{\\epsilon}\\). Then,\n\\[\n\\begin{aligned}\n\\hat{\\boldsymbol{\\beta}} &= (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{Y} \\\\\n&= (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T(\\mathbf{X}\\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}) \\\\\n&= \\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T \\mathbf{\\epsilon} \\\\\n\\end{aligned}\n \\qquad(11)\\]\nUsing these two properties, we derive the form of the variance-covariance matrix for the coefficients. Note that the covariance matrix is \\(E[(\\hat{\\boldsymbol{\\beta}} - \\boldsymbol{\\beta})(\\hat{\\boldsymbol{\\beta}} - \\boldsymbol{\\beta})^T]\\)\n\\[\n\\begin{aligned}\nE[(\\hat{\\boldsymbol{\\beta}} - \\boldsymbol{\\beta})(\\hat{\\boldsymbol{\\beta}} - \\boldsymbol{\\beta})^T] &= E[(\\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T \\boldsymbol{\\epsilon} - \\boldsymbol{\\beta})(\\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T \\boldsymbol{\\epsilon} - \\boldsymbol{\\beta})^T]\\\\\n& = E[(\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T \\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T\\mathbf{X}(\\mathbf{X}^T\\mathbf{X})^{-1}] \\\\\n& = (\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T E[\\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T]\\mathbf{X}(\\mathbf{X}^T\\mathbf{X})^{-1}\\\\\n& = (\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T (\\sigma^2\\mathbf{I})\\mathbf{X}(\\mathbf{X}^T\\mathbf{X})^{-1}\\\\\n&= \\sigma^2\\mathbf{I}(\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{X}(\\mathbf{X}^T\\mathbf{X})^{-1}\\\\\n& = \\sigma^2\\mathbf{I}(\\mathbf{X}^T\\mathbf{X})^{-1}\\\\\n&  = \\sigma^2(\\mathbf{X}^T\\mathbf{X})^{-1} \\\\\n\\end{aligned}\n \\qquad(12)\\]"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + partitioning variability\n\n\n\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Inference + conditions for regression\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n\n\n\n\n\n\n\nTue, Jan 25\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Prediction + partitioning variability\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n\n\n\n\n\n\n\nTue, Jan 25\nSLR: Inference + conditions for regression\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "course-overview.html",
@@ -215,6 +243,111 @@
     "title": "Lab 0 - Meet + greet",
     "section": "Wrap up",
     "text": "Wrap up\nAny questions about the course?\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
+    "objectID": "slides/lec-3.html#announcements",
+    "href": "slides/lec-3.html#announcements",
+    "title": "Simple Linear Regression",
+    "section": "Announcements",
+    "text": "Announcements\n\nIf you’re just joining the class, welcome! Go to the course website and review content you’ve missed, read the syllabus, and complete the Getting to know you survey.\nLab 1 is due Friday, at 5pm, on Gradescope."
+  },
+  {
+    "objectID": "slides/lec-3.html#gradescope-demo",
+    "href": "slides/lec-3.html#gradescope-demo",
+    "title": "Simple Linear Regression",
+    "section": "Gradescope demo",
+    "text": "Gradescope demo\n[To be added…]"
+  },
+  {
+    "objectID": "slides/lec-3.html#recap-of-last-lecture",
+    "href": "slides/lec-3.html#recap-of-last-lecture",
+    "title": "Simple Linear Regression",
+    "section": "Recap of last lecture",
+    "text": "Recap of last lecture\n\n\nUsed simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.\nUsed the least squares method to estimate the slope and intercept.\nWe interpreted the slope and intercept.\n\n\nSlope: For every one unit increase in \\(x\\), we expect y to be higher/lower by \\(\\hat{\\beta}_1\\) units, on average.\nIntercept: If \\(x\\) is 0, then we expect \\(y\\) to be \\(\\hat{\\beta}_0\\) units.\n\n\nPredicted the response given a value of the predictor variable.\nDefined extrapolation and why we should avoid it."
+  },
+  {
+    "objectID": "slides/lec-3.html#interested-in-the-math-behind-it-all",
+    "href": "slides/lec-3.html#interested-in-the-math-behind-it-all",
+    "title": "Simple Linear Regression",
+    "section": "Interested in the math behind it all?",
+    "text": "Interested in the math behind it all?\nSee the supplemental notes on Deriving the Least-Squares Estimates for Simple Linear Regression for more mathematical details on the derivations of the estimates of \\(\\beta_0\\) and \\(\\beta_1\\)."
+  },
+  {
+    "objectID": "slides/lec-3.html#outline",
+    "href": "slides/lec-3.html#outline",
+    "title": "Simple Linear Regression",
+    "section": "Outline",
+    "text": "Outline\n\nUse tidymodels to fit and summarize regression models in R\nComplete an application exercise on exploratory data analysis and modeling"
+  },
+  {
+    "objectID": "slides/lec-3.html#computational-setup",
+    "href": "slides/lec-3.html#computational-setup",
+    "title": "Simple Linear Regression",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)       # for data wrangling\nlibrary(tidymodels)      # for modeling\nlibrary(fivethirtyeight) # for the fandango dataset\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))\n\n# set default figure parameters for knitr\nknitr::opts_chunk$set(\n  fig.width = 8,\n  fig.asp = 0.618,\n  fig.retina = 3,\n  dpi = 300,\n  out.width = \"80%\"\n)"
+  },
+  {
+    "objectID": "slides/lec-3.html#movie-ratings",
+    "href": "slides/lec-3.html#movie-ratings",
+    "title": "Simple Linear Regression",
+    "section": "Movie ratings",
+    "text": "Movie ratings\n\n\n\nData behind the FiveThirtyEight story Be Suspicious Of Online Movie Ratings, Especially Fandango’s\nIn the fivethirtyeight package: fandango\nContains every film that has at least 30 fan reviews on Fandango, an IMDb score, Rotten Tomatoes critic and user ratings, and Metacritic critic and user scores"
+  },
+  {
+    "objectID": "slides/lec-3.html#data-prep",
+    "href": "slides/lec-3.html#data-prep",
+    "title": "Simple Linear Regression",
+    "section": "Data prep",
+    "text": "Data prep\n\nRename Rotten Tomatoes columns as critics and audience\nRename the dataset as movie_scores\n\n\nmovie_scores <- fandango %>%\n  rename(\n    critics = rottentomatoes, \n    audience = rottentomatoes_user\n  )"
+  },
+  {
+    "objectID": "slides/lec-3.html#data-visualization",
+    "href": "slides/lec-3.html#data-visualization",
+    "title": "Simple Linear Regression",
+    "section": "Data visualization",
+    "text": "Data visualization"
+  },
+  {
+    "objectID": "slides/lec-3.html#step-1-specify-model",
+    "href": "slides/lec-3.html#step-1-specify-model",
+    "title": "Simple Linear Regression",
+    "section": "Step 1: Specify model",
+    "text": "Step 1: Specify model\n\nlinear_reg()\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
+  },
+  {
+    "objectID": "slides/lec-3.html#step-2-set-model-fitting-engine",
+    "href": "slides/lec-3.html#step-2-set-model-fitting-engine",
+    "title": "Simple Linear Regression",
+    "section": "Step 2: Set model fitting engine",
+    "text": "Step 2: Set model fitting engine\n\nlinear_reg() %>%\n  set_engine(\"lm\") # lm: linear model\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
+  },
+  {
+    "objectID": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
+    "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
+    "title": "Simple Linear Regression",
+    "section": "Step 3: Fit model & estimate parameters",
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+  },
+  {
+    "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
+    "href": "slides/lec-3.html#a-closer-look-at-model-output",
+    "title": "Simple Linear Regression",
+    "section": "A closer look at model output",
+    "text": "A closer look at model output\n\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+  },
+  {
+    "objectID": "slides/lec-3.html#the-regression-output",
+    "href": "slides/lec-3.html#the-regression-output",
+    "title": "Simple Linear Regression",
+    "section": "The regression output",
+    "text": "The regression output\nWe’ll focus on the first column for now…\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores) %>%\n  tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  <chr>          <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)   32.3      2.34        13.8 4.03e-28\n2 critics        0.519    0.0345      15.0 2.70e-31"
+  },
+  {
+    "objectID": "slides/lec-3.html#prediction",
+    "href": "slides/lec-3.html#prediction",
+    "title": "Simple Linear Regression",
+    "section": "Prediction",
+    "text": "Prediction\n\n# create a data frame for a new movie\nnew_movie <- tibble(critics = 50)\n\n# predict the outcome for a new movie\npredict(movie_fit, new_movie)\n\n# A tibble: 1 × 1\n  .pred\n  <dbl>\n1  58.2"
   },
   {
     "objectID": "slides/lab-1.html#what-to-expect-in-lab",
@@ -637,53 +770,11 @@
     "text": "Extrapolation\nSuppose that a movie has a critics score of 0. According to this model, what is the movie’s predicted audience score?"
   },
   {
-    "objectID": "slides/lec-2.html#using-r-for-slr",
-    "href": "slides/lec-2.html#using-r-for-slr",
-    "title": "Simple Linear Regression",
-    "section": "Using R for SLR",
-    "text": "Using R for SLR"
-  },
-  {
-    "objectID": "slides/lec-2.html#step-1-specify-model",
-    "href": "slides/lec-2.html#step-1-specify-model",
-    "title": "Simple Linear Regression",
-    "section": "Step 1: Specify model",
-    "text": "Step 1: Specify model\nand confirm default engine\n\nlinear_reg()\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
-  },
-  {
-    "objectID": "slides/lec-2.html#step-2-fit-model-estimate-parameters",
-    "href": "slides/lec-2.html#step-2-fit-model-estimate-parameters",
-    "title": "Simple Linear Regression",
-    "section": "Step 2: Fit model & estimate parameters",
-    "text": "Step 2: Fit model & estimate parameters\nusing formula syntax\n\nlinear_reg() %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
-  },
-  {
-    "objectID": "slides/lec-2.html#a-closer-look-at-model-output",
-    "href": "slides/lec-2.html#a-closer-look-at-model-output",
-    "title": "Simple Linear Regression",
-    "section": "A closer look at model output",
-    "text": "A closer look at model output\n\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
-  },
-  {
-    "objectID": "slides/lec-2.html#the-regression-output",
-    "href": "slides/lec-2.html#the-regression-output",
-    "title": "Simple Linear Regression",
-    "section": "The regression output",
-    "text": "The regression output\nWe’ll focus on the first column for now…\n\nlinear_reg() %>%\n  fit(audience ~ critics, data = movie_scores) %>%\n  tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  <chr>          <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)   32.3      2.34        13.8 4.03e-28\n2 critics        0.519    0.0345      15.0 2.70e-31"
-  },
-  {
-    "objectID": "slides/lec-2.html#prediction-1",
-    "href": "slides/lec-2.html#prediction-1",
-    "title": "Simple Linear Regression",
-    "section": "Prediction",
-    "text": "Prediction\n\n# create a data frame for a new movie\nnew_movie <- tibble(critics = 50)\n\n# predict the outcome for a new movie\npredict(movie_fit, new_movie)\n\n# A tibble: 1 × 1\n  .pred\n  <dbl>\n1  58.2"
-  },
-  {
     "objectID": "slides/lec-2.html#recap-1",
     "href": "slides/lec-2.html#recap-1",
     "title": "Simple Linear Regression",
     "section": "Recap",
-    "text": "Recap\n\nUsed simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.\nUsed the least squares method to estimate the slope and intercept.\nWe interpreted the slope and intercept.\n\n\nSlope: For every one unit increase in \\(x\\), we expect y to be higher/lower by \\(\\hat{\\beta}_1\\) units, on average.\nIntercept: If \\(x\\) is 0, then we expect \\(y\\) to be \\(\\hat{\\beta}_0\\) units.\n\n\nPredicted the response given a value of the predictor variable.\nDefined extrapolation and why we should avoid it.\nFit a simple linear regression model in R and made a prediction.\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Recap\n\n\nUsed simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.\nUsed the least squares method to estimate the slope and intercept.å\nWe interpreted the slope and intercept.\n\n\nSlope: For every one unit increase in \\(x\\), we expect y to be higher/lower by \\(\\hat{\\beta}_1\\) units, on average.\nIntercept: If \\(x\\) is 0, then we expect \\(y\\) to be \\(\\hat{\\beta}_0\\) units.\n\n\nPredicted the response given a value of the predictor variable.\nDefined extrapolation and why we should avoid it.\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "weeks/week-1.html#prepare",
@@ -935,14 +1026,14 @@
     "href": "weeks/week-2.html#participate",
     "title": "Week 2",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lab 1 - Meetthetoolkit\n🖥️ Lecture 2 - Simple linear regression\n🖥️ Lecture 3 - Slides to be posted"
+    "text": "Participate\n🖥️ Lab 1 - Meet the toolkit\n🖥️ Lecture 2 - Simple linear regression\n🖥️ Lecture 3 - Model fitting in R with tidymodels"
   },
   {
     "objectID": "weeks/week-2.html#perform",
     "href": "weeks/week-2.html#perform",
     "title": "Week 2",
     "section": "Perform",
-    "text": "Perform\n⌨️ Lab 1 - Meet the toolkit\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n⌨️ Lab 1 - Meet the toolkit\n📋 Application Exercise 1 - Bike rentals in DC\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-8.html#prepare",
@@ -1111,6 +1202,13 @@
     "title": "Project tips + resources",
     "section": "Additional resources",
     "text": "Additional resources\n\nR for Data Science\nQuarto Documentation\nData visualization\n\nggplot2 Reference\nggplot2: Elegant Graphics for Data Analysis\nData Visualization: A Practice Introduction\nPatchwork R Package"
+  },
+  {
+    "objectID": "supp-slr-derivations.html",
+    "href": "supp-slr-derivations.html",
+    "title": "Deriving the Least-Squares Estimates for Simple Linear Regression",
+    "section": "",
+    "text": "Note\n\n\n\nThe following supplemental notes were created by Dr. Maria Tackett for STA 210. They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression. Additional supplemental notes will be added throughout the semester.\n\n\nThis document contains the mathematical details for deriving the least-squares estimates for slope (\\(\\beta_1\\)) and intercept (\\(\\beta_0\\)). We obtain the estimates, \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) by finding the values that minimize the sum of squared residuals, as shown in eq. 1.\n\\[\nSSR = \\sum\\limits_{i=1}^{n}[y_i - \\hat{y}_i]^2 = [y_i - (\\hat{\\beta}_0 + \\hat{\\beta}_1 x_i)]^2 = [y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i]^2\n \\qquad(1)\\]\nRecall that we can find the values of \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) that minimize /eq-ssr by taking the partial derivatives of eq. 1 and setting them to 0. Thus, the values of \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) that minimize the respective partial derivative also minimize the sum of squared residuals. The partial derivatives are shown in eq. 2.\n\\[\n\\begin{aligned}\n\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_1} &= -2 \\sum\\limits_{i=1}^{n}x_i(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i)  \\\\\n\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_0} &= -2 \\sum\\limits_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i)\n\\end{aligned}\n \\qquad(2)\\]\nThe derivation of deriving \\(\\hat{\\beta}_0\\) is shown in eq. 3.\n\\[\n\\begin{aligned}\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_0} &= -2 \\sum\\limits_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i) = 0 \\\\&\\Rightarrow -\\sum\\limits_{i=1}^{n}(y_i + \\hat{\\beta}_0 + \\hat{\\beta}_1 x_i) = 0 \\\\&\\Rightarrow - \\sum\\limits_{i=1}^{n}y_i + n\\hat{\\beta}_0 + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i = 0 \\\\&\\Rightarrow n\\hat{\\beta}_0  = \\sum\\limits_{i=1}^{n}y_i - \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i \\\\&\\Rightarrow \\hat{\\beta}_0  = \\frac{1}{n}\\Big(\\sum\\limits_{i=1}^{n}y_i - \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i\\Big)\\\\&\\Rightarrow \\hat{\\beta}_0  = \\bar{y} - \\hat{\\beta}_1 \\bar{x} \\\\\\end{aligned}\n \\qquad(3)\\]\nThe derivation of \\(\\hat{\\beta}_1\\) using the \\(\\hat{\\beta}_0\\) we just derived is shown in eq. 4.\n\\[\n\\begin{aligned}&\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_1} = -2 \\sum\\limits_{i=1}^{n}x_i(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i) = 0  \\\\&\\Rightarrow -\\sum\\limits_{i=1}^{n}x_iy_i + \\hat{\\beta}_0\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = 0 \\\\\\text{(Fill in }\\hat{\\beta}_0\\text{)}&\\Rightarrow -\\sum\\limits_{i=1}^{n}x_iy_i + (\\bar{y} - \\hat{\\beta}_1\\bar{x})\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = 0 \\\\&\\Rightarrow  (\\bar{y} - \\hat{\\beta}_1\\bar{x})\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow \\bar{y}\\sum\\limits_{i=1}^{n}x_i - \\hat{\\beta}_1\\bar{x}\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow n\\bar{y}\\bar{x} - \\hat{\\beta}_1n\\bar{x}^2 + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 - \\hat{\\beta}_1n\\bar{x}^2  = \\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x} \\\\&\\Rightarrow \\hat{\\beta}_1\\Big(\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2\\Big)  = \\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x} \\\\ &\\hat{\\beta}_1 = \\frac{\\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x}}{\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2}\\end{aligned}\n \\qquad(4)\\]\nTo write \\(\\hat{\\beta}_1\\) in a form that’s more recognizable, we will use the following:\n\\[\n\\sum x_iy_i - n\\bar{y}\\bar{x} = \\sum(x - \\bar{x})(y - \\bar{y}) = (n-1)\\text{Cov}(x,y)\n \\qquad(5)\\]\n\\[\n\\sum x_i^2 - n\\bar{x}^2 - \\sum(x - \\bar{x})^2 = (n-1)s_x^2\n \\qquad(6)\\]\nwhere \\(\\text{Cov}(x,y)\\) is the covariance of \\(x\\) and \\(y\\), and \\(s_x^2\\) is the sample variance of \\(x\\) (\\(s_x\\) is the sample standard deviation).\nThus, applying eq. 5 and eq. 6, we have\n\\[\n\\begin{aligned}\\hat{\\beta}_1 &= \\frac{\\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x}}{\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2} \\\\&= \\frac{\\sum\\limits_{i=1}^{n}(x-\\bar{x})(y-\\bar{y})}{\\sum\\limits_{i=1}^{n}(x-\\bar{x})^2}\\\\&= \\frac{(n-1)\\text{Cov}(x,y)}{(n-1)s_x^2}\\\\&= \\frac{\\text{Cov}(x,y)}{s_x^2}\\end{aligned}\n \\qquad(7)\\]\nThe correlation between \\(x\\) and \\(y\\) is \\(r = \\frac{\\text{Cov}(x,y)}{s_x s_y}\\). Thus, \\(\\text{Cov}(x,y) = r s_xs_y\\). Plugging this into eq. 7, we have\n\\[\n\\hat{\\beta}_1 = \\frac{\\text{Cov}(x,y)}{s_x^2} = r\\frac{s_ys_x}{s_x^2} = r\\frac{s_y}{s_x}\n \\qquad(8)\\]"
   },
   {
     "objectID": "course-syllabus.html#course-info",
