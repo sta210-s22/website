@@ -1,0 +1,157 @@
+---
+title: "Matrix Notation for Multiple Linear Regression"
+---
+
+::: callout-note
+The following supplemental notes were created by [Dr. Maria Tackett](https://www.mariatackett.net/) for STA 210.
+They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression.
+Additional supplemental notes will be added throughout the semester.
+:::
+
+This document provides the details for the matrix notation for multiple linear regression. We assume the reader has familiarity with some linear algebra. Please see Chapter 1 of [*An Introduction to Statistical Learning*](https://www-bcf.usc.edu/~gareth/ISL/) for a brief review of linear algebra. 
+
+## Introduction 
+
+
+Suppose we have $n$ observations. Let the $i^{th}$ be $(x_{i1}, \ldots, x_{ip}, y_i)$, such that $x_{i1}, \ldots, x_{ip}$ are the explanatory variables (predictors) and $y_i$ is the response variable. We assume the data can be modeled using the least-squares regression model, such that the mean response for a given combination of explanatory variables follows the form in @eq-basic_model.
+
+$$
+y = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p 
+$$ {#eq-basic_model}
+
+We can write the response for the $i^{th}$ observation as shown in @eq-ind_response
+
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \epsilon_i 
+$$ {#eq-ind_response}
+
+such that $\epsilon_i$ is the amount $y_i$ deviates from $\mu\{y|x_{i1}, \ldots, x_{ip}\}$, the mean response for a given combination of explanatory variables. We assume each $\epsilon_i \sim N(0,\sigma^2)$, where $\sigma^2$ is a constant variance for the distribution of the response $y$ for any combination of explanatory variables $x_1, \ldots, x_p$. 
+
+## Matrix Representation for the Regression Model
+
+We can represent the @eq-basic_model and @eq-ind_response using matrix notation. Let 
+
+$$
+\mathbf{Y} = \begin{bmatrix}y_1 \\ y_2 \\ \vdots \\y_n\end{bmatrix} 
+\hspace{15mm}
+\mathbf{X} = \begin{bmatrix}x_{11} & x_{12} & \dots & x_{1p} \\
+x_{21} & x_{22} & \dots & x_{2p} \\
+\vdots & \vdots & \ddots & \vdots\\
+x_{n1} & x_{n2} & \dots & x_{np} \end{bmatrix}
+\hspace{15mm}
+\boldsymbol{\beta}= \begin{bmatrix}\beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{bmatrix} 
+\hspace{15mm}
+\boldsymbol{\epsilon}= \begin{bmatrix}\epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix}
+$$ {#eq-matrix-notation}
+
+Thus, 
+
+$$\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{\epsilon}$$
+
+Therefore the estimated response for a given combination of explanatory variables and the associated residuals can be written as
+
+$$
+\hat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}} \hspace{10mm} \mathbf{e} = \mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}
+$$ {#eq-matrix_mean}
+
+## Estimating the Coefficients
+
+The least-squares model is the one that minimizes the sum of the squared residuals. Therefore, we want to find the coefficients, $\hat{\boldsymbol{\beta}}$ that minimizes
+
+$$
+\sum\limits_{i=1}^{n} e_{i}^2 = \mathbf{e}^T\mathbf{e} = (\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})^T(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})
+$$ {#eq-sum_sq_resid}
+
+where $\mathbf{e}^T$, the transpose of the matrix $\mathbf{e}$. 
+
+$$
+(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})^T(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}) = (\mathbf{Y}^T\mathbf{Y} - 
+\mathbf{Y}^T \mathbf{X}\hat{\boldsymbol{\beta}} - (\hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y} +
+\hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}
+\hat{\boldsymbol{\beta}})
+$$ {#eq-model_equation}
+
+Note that $(\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}})^T = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}$. Since these are both constants (i.e. $1\times 1$ vectors), $\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}} = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}$. Thus, @eq-model_equation becomes
+
+$$
+\mathbf{Y}^T\mathbf{Y} - 2 \mathbf{X}^T\hat{\boldsymbol{\beta}}{}^{T}\mathbf{Y} + \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}
+\hat{\boldsymbol{\beta}}
+$$ {#eq-model_equation}
+
+Since we want to find the $\hat{\boldsymbol{\beta}}$ that minimizes @eq-sum_sq_resid, will find the value of $\hat{\boldsymbol{\beta}}$ such that the derivative with respect to $\hat{\boldsymbol{\beta}}$ is equal to 0. 
+
+$$
+\begin{aligned}
+\frac{\partial \mathbf{e}^T\mathbf{e}}{\partial \hat{\boldsymbol{\beta}}} & = \frac{\partial}{\partial \hat{\boldsymbol{\beta}}}(\mathbf{Y}^T\mathbf{Y} - 2 \mathbf{X}^T\hat{\boldsymbol{\beta}}{}^T\mathbf{Y} + \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}}) = 0 \\
+&\Rightarrow - 2 \mathbf{X}^T\mathbf{Y} + 2 \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} = 0 \\
+& \Rightarrow 2 \mathbf{X}^T\mathbf{Y} = 2 \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
+& \Rightarrow \mathbf{X}^T\mathbf{Y} = \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
+& \Rightarrow (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
+& \Rightarrow (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} = \mathbf{I}\hat{\boldsymbol{\beta}}
+\end{aligned}
+$$ {#eq-ete}
+
+Thus, the estimate of the model coefficients is $\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}$.
+
+## Variance-covariance matrix of the coefficients
+
+We will use two properties to derive the form of the variance-covariance matrix of the coefficients: 
+
+1. $E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T] = \sigma^2I$
+2. $\hat{\boldsymbol{\beta}} = \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\epsilon$
+
+First, we will show that $E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T] = \sigma^2I$
+
+$$
+\begin{aligned}
+E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T] &= E \begin{bmatrix}\epsilon_1  & \epsilon_2 & \dots & \epsilon_n \end{bmatrix}\begin{bmatrix}\epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix}  \\
+& = E \begin{bmatrix} \epsilon_1^2  & \epsilon_1 \epsilon_2 & \dots & \epsilon_1 \epsilon_n \\
+\epsilon_2 \epsilon_1 & \epsilon_2^2 & \dots & \epsilon_2 \epsilon_n \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+\epsilon_n \epsilon_1 & \epsilon_n \epsilon_2 & \dots & \epsilon_n^2 
+\end{bmatrix} \\
+& = \begin{bmatrix} E[\epsilon_1^2]  & E[\epsilon_1 \epsilon_2] & \dots & E[\epsilon_1 \epsilon_n] \\
+E[\epsilon_2 \epsilon_1] & E[\epsilon_2^2] & \dots & E[\epsilon_2 \epsilon_n] \\
+\vdots & \vdots & \ddots & \vdots \\ 
+E[\epsilon_n \epsilon_1] & E[\epsilon_n \epsilon_2] & \dots & E[\epsilon_n^2]
+\end{bmatrix}
+\end{aligned}
+$$ {#eq-expected_error}
+
+Recall, the regression assumption that the errors $\epsilon_i's$ are Normally distributed with mean 0 and variance $\sigma^2$. Thus, $E(\epsilon_i^2) = Var(\epsilon_i) = \sigma^2$ for all $i$. Additionally, recall the regression assumption that the errors are uncorrelated, i.e. $E(\epsilon_i \epsilon_j) = Cov(\epsilon_i, \epsilon_j) = 0$ for all $i,j$. Using these assumptions, we can write @eq-expected_error as 
+
+$$
+E[\mathbf{\epsilon}\mathbf{\epsilon}^T]  = \begin{bmatrix} \sigma^2  & 0 & \dots & 0 \\
+0 & \sigma^2  & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & \sigma^2
+\end{bmatrix} = \sigma^2 \mathbf{I}
+$$ {#eq-expected_error2}
+
+where $\mathbf{I}$ is the $n \times n$ identity matrix.
+
+Next, we show that $\hat{\boldsymbol{\beta}} = \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\epsilon$.
+
+Recall that the $\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}$ and $\mathbf{Y} = \mathbf{X}\mathbf{\beta} + \mathbf{\epsilon}$.  Then,
+
+$$
+\begin{aligned}
+\hat{\boldsymbol{\beta}} &= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} \\
+&= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T(\mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}) \\
+&= \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \mathbf{\epsilon} \\
+\end{aligned}
+$$ {#eq-est-beta}
+
+Using these two properties, we derive the form of the variance-covariance matrix for the coefficients. Note that the covariance matrix is $E[(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})^T]$
+
+$$
+\begin{aligned}
+E[(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})^T] &= E[(\boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon} - \boldsymbol{\beta})(\boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon} - \boldsymbol{\beta})^T]\\
+& = E[(\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon}\boldsymbol{\epsilon}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}] \\
+& = (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T]\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\\
+& = (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T (\sigma^2\mathbf{I})\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\\
+&= \sigma^2\mathbf{I}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\\
+& = \sigma^2\mathbf{I}(\mathbf{X}^T\mathbf{X})^{-1}\\
+&  = \sigma^2(\mathbf{X}^T\mathbf{X})^{-1} \\
+\end{aligned}
+$$ {#eq-var-cov}

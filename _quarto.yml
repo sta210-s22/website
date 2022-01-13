@@ -104,6 +104,12 @@ website:
             text: "Week 14"
           - href: weeks/week-15.qmd
             text: "Week 15"
+      - section: "Supplemental notes"
+        contents:
+          - href: supp-slr-derivations.qmd
+            text: SLR derivations
+          - href: supp-slr-matrix.qmd
+            text: MLR matrix notation
 
 format:
   html:

@@ -1,0 +1,65 @@
+---
+title: "Deriving the Least-Squares Estimates for Simple Linear Regression"
+---
+
+::: callout-note
+The following supplemental notes were created by [Dr. Maria Tackett](https://www.mariatackett.net/) for STA 210.
+They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression.
+Additional supplemental notes will be added throughout the semester.
+:::
+
+This document contains the mathematical details for deriving the least-squares estimates for slope ($\beta_1$) and intercept ($\beta_0$).
+We obtain the estimates, $\hat{\beta}_1$ and $\hat{\beta}_0$ by finding the values that minimize the sum of squared residuals, as shown in @eq-ssr.
+
+$$
+SSR = \sum\limits_{i=1}^{n}[y_i - \hat{y}_i]^2 = [y_i - (\hat{\beta}_0 + \hat{\beta}_1 x_i)]^2 = [y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i]^2
+$$ {#eq-ssr}
+
+Recall that we can find the values of $\hat{\beta}_1$ and $\hat{\beta}_0$ that minimize /eq-ssr by taking the partial derivatives of @eq-ssr and setting them to 0.
+Thus, the values of $\hat{\beta}_1$ and $\hat{\beta}_0$ that minimize the respective partial derivative also minimize the sum of squared residuals.
+The partial derivatives are shown in @eq-par-deriv.
+
+$$
+\begin{aligned}
+\frac{\partial \text{SSR}}{\partial \hat{\beta}_1} &= -2 \sum\limits_{i=1}^{n}x_i(y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)  \\
+\frac{\partial \text{SSR}}{\partial \hat{\beta}_0} &= -2 \sum\limits_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)
+\end{aligned}
+$$ {#eq-par-deriv}
+
+The derivation of deriving $\hat{\beta}_0$ is shown in @eq-est-beta0.
+
+$$
+\begin{aligned}\frac{\partial \text{SSR}}{\partial \hat{\beta}_0} &= -2 \sum\limits_{i=1}^{n}(y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i) = 0 \\&\Rightarrow -\sum\limits_{i=1}^{n}(y_i + \hat{\beta}_0 + \hat{\beta}_1 x_i) = 0 \\&\Rightarrow - \sum\limits_{i=1}^{n}y_i + n\hat{\beta}_0 + \hat{\beta}_1\sum\limits_{i=1}^{n}x_i = 0 \\&\Rightarrow n\hat{\beta}_0  = \sum\limits_{i=1}^{n}y_i - \hat{\beta}_1\sum\limits_{i=1}^{n}x_i \\&\Rightarrow \hat{\beta}_0  = \frac{1}{n}\Big(\sum\limits_{i=1}^{n}y_i - \hat{\beta}_1\sum\limits_{i=1}^{n}x_i\Big)\\&\Rightarrow \hat{\beta}_0  = \bar{y} - \hat{\beta}_1 \bar{x} \\\end{aligned}
+$$ {#eq-est-beta0}
+
+The derivation of $\hat{\beta}_1$ using the $\hat{\beta}_0$ we just derived is shown in @eq-est-beta1-pt1.
+
+$$
+\begin{aligned}&\frac{\partial \text{SSR}}{\partial \hat{\beta}_1} = -2 \sum\limits_{i=1}^{n}x_i(y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i) = 0  \\&\Rightarrow -\sum\limits_{i=1}^{n}x_iy_i + \hat{\beta}_0\sum\limits_{i=1}^{n}x_i + \hat{\beta}_1\sum\limits_{i=1}^{n}x_i^2 = 0 \\\text{(Fill in }\hat{\beta}_0\text{)}&\Rightarrow -\sum\limits_{i=1}^{n}x_iy_i + (\bar{y} - \hat{\beta}_1\bar{x})\sum\limits_{i=1}^{n}x_i + \hat{\beta}_1\sum\limits_{i=1}^{n}x_i^2 = 0 \\&\Rightarrow  (\bar{y} - \hat{\beta}_1\bar{x})\sum\limits_{i=1}^{n}x_i + \hat{\beta}_1\sum\limits_{i=1}^{n}x_i^2 = \sum\limits_{i=1}^{n}x_iy_i \\&\Rightarrow \bar{y}\sum\limits_{i=1}^{n}x_i - \hat{\beta}_1\bar{x}\sum\limits_{i=1}^{n}x_i + \hat{\beta}_1\sum\limits_{i=1}^{n}x_i^2 = \sum\limits_{i=1}^{n}x_iy_i \\&\Rightarrow n\bar{y}\bar{x} - \hat{\beta}_1n\bar{x}^2 + \hat{\beta}_1\sum\limits_{i=1}^{n}x_i^2 = \sum\limits_{i=1}^{n}x_iy_i \\&\Rightarrow \hat{\beta}_1\sum\limits_{i=1}^{n}x_i^2 - \hat{\beta}_1n\bar{x}^2  = \sum\limits_{i=1}^{n}x_iy_i - n\bar{y}\bar{x} \\&\Rightarrow \hat{\beta}_1\Big(\sum\limits_{i=1}^{n}x_i^2 -n\bar{x}^2\Big)  = \sum\limits_{i=1}^{n}x_iy_i - n\bar{y}\bar{x} \\ &\hat{\beta}_1 = \frac{\sum\limits_{i=1}^{n}x_iy_i - n\bar{y}\bar{x}}{\sum\limits_{i=1}^{n}x_i^2 -n\bar{x}^2}\end{aligned}
+$$ {#eq-est-beta1-pt1}
+
+To write $\hat{\beta}_1$ in a form that's more recognizable, we will use the following:
+
+$$
+\sum x_iy_i - n\bar{y}\bar{x} = \sum(x - \bar{x})(y - \bar{y}) = (n-1)\text{Cov}(x,y)
+$$ {#eq-cov}
+
+$$
+\sum x_i^2 - n\bar{x}^2 - \sum(x - \bar{x})^2 = (n-1)s_x^2
+$$ {#eq-var_x}
+
+where $\text{Cov}(x,y)$ is the covariance of $x$ and $y$, and $s_x^2$ is the sample variance of $x$ ($s_x$ is the sample standard deviation).
+
+Thus, applying @eq-cov and @eq-var_x, we have
+
+$$
+\begin{aligned}\hat{\beta}_1 &= \frac{\sum\limits_{i=1}^{n}x_iy_i - n\bar{y}\bar{x}}{\sum\limits_{i=1}^{n}x_i^2 -n\bar{x}^2} \\&= \frac{\sum\limits_{i=1}^{n}(x-\bar{x})(y-\bar{y})}{\sum\limits_{i=1}^{n}(x-\bar{x})^2}\\&= \frac{(n-1)\text{Cov}(x,y)}{(n-1)s_x^2}\\&= \frac{\text{Cov}(x,y)}{s_x^2}\end{aligned}
+$$ {#eq-est-beta1-pt2}
+
+The correlation between $x$ and $y$ is $r = \frac{\text{Cov}(x,y)}{s_x s_y}$.
+Thus, $\text{Cov}(x,y) = r s_xs_y$.
+Plugging this into @eq-est-beta1-pt2, we have
+
+$$
+\hat{\beta}_1 = \frac{\text{Cov}(x,y)}{s_x^2} = r\frac{s_ys_x}{s_x^2} = r\frac{s_y}{s_x}
+$$ {#eq-est-beta1}

@@ -19,15 +19,17 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 ## Participate
 
-🖥️ [Lab 1 - Meet](/_slides/lab-1.html "Lab slides")[the](/slides/lab-1.html "Lab slides")[toolkit](/_slides/lab-1.html "Lab slides")
+🖥️ [Lab 1 - Meet the toolkit](/slides/lab-1.html)
 
 🖥️ [Lecture 2 - Simple linear regression](/slides/lec-2.html)
 
-🖥️ Lecture 3 - Slides to be posted
+🖥️ [Lecture 3 - Model fitting in R with tidymodels](/slides/lec-3.html)
 
 ## Perform
 
 ⌨️ [Lab 1 - Meet the toolkit](/labs/lab-1.html "Lab instructions")
+
+📋 [Application Exercise 1 - Bike rentals in DC](https://github.com/sta210-s22/ae-1-dcbikeshare)
 
 <br><br>
 
