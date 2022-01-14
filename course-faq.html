@@ -276,6 +276,8 @@
 <h2 id="toc-title">On this page</h2>
 <ul>
 <li><a href="#how-do-i-export-my-assignment-pdf-from-rstudio-to-upload-to-gradescope" class="nav-link active" data-scroll-target="#how-do-i-export-my-assignment-pdf-from-rstudio-to-upload-to-gradescope">How do I export my assignment PDF from RStudio to upload to Gradescope?</a></li>
+<li><a href="#how-can-i-submit-my-assignment-to-gradescope" class="nav-link" data-scroll-target="#how-can-i-submit-my-assignment-to-gradescope">How can I submit my assignment to Gradescope?</a></li>
+<li><a href="#can-i-use-a-local-install-of-r-and-rstudio-instead-of-using-the-rstudio-containers" class="nav-link" data-scroll-target="#can-i-use-a-local-install-of-r-and-rstudio-instead-of-using-the-rstudio-containers">Can I use a local install of R and RStudio instead of using the RStudio containers?</a></li>
 </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/course-faq.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -288,7 +290,25 @@
 <section id="how-do-i-export-my-assignment-pdf-from-rstudio-to-upload-to-gradescope" class="level2">
 <h2 class="anchored" data-anchor-id="how-do-i-export-my-assignment-pdf-from-rstudio-to-upload-to-gradescope">How do I export my assignment PDF from RStudio to upload to Gradescope?</h2>
 <p>Go to your <em>Files</em> tab, check the box next to the file you want to download, then click on the blue gear icon on the Files tab to reveal the drop down menu, and select <em>Export</em>… If you have selected multiple files to export, RStudio will zip them up into a single zip file for you. If you’ve selected just a single file, it will only download that. The downloaded file will go to wherever files you download off the internet goes on your computer (usually your Downloads folder).</p>
-<iframe width="750" height="422" src="https://www.youtube.com/embed/cAHCMpPJx3k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<iframe width="700" height="394" src="https://www.youtube.com/embed/cAHCMpPJx3k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="how-can-i-submit-my-assignment-to-gradescope" class="level2">
+<h2 class="anchored" data-anchor-id="how-can-i-submit-my-assignment-to-gradescope">How can I submit my assignment to Gradescope?</h2>
+<p>The instructions for submitting your assignment to Gradescope can be found <a href="https://help.gradescope.com/article/ccbpppziu9-student-submit-work#submitting_a_pdf">here</a>. In a nutshell, you’ll upload your PDF and them mark the page(s) where each question can be found. It’s OK if a question spans multiple pages, just mark them all. It’s also OK if a page includes multiple questions.</p>
+<iframe width="700" height="394" src="https://www.youtube.com/embed/u-pK4GzpId0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="can-i-use-a-local-install-of-r-and-rstudio-instead-of-using-the-rstudio-containers" class="level2">
+<h2 class="anchored" data-anchor-id="can-i-use-a-local-install-of-r-and-rstudio-instead-of-using-the-rstudio-containers">Can I use a local install of R and RStudio instead of using the RStudio containers?</h2>
+<p>The short answer is, I’d rather you didn’t, to save yourself some headache. But, the long answer is, sure! But you will need to install a specific versions of R and RStudio for everything to work as expected. You will also need to install the R packages we’re using as well as have Git installed on your computer. These are not extremely challenging things to get right, but they are not trivial either, particularly on certain operating systems. Myself and the TAs are always happy to provide help with any computational questions when you’re working in the containers we have provided for you. If you’re working on your local setup, we can’t guarantee being able to resolve your issues, though we’re happy to try.</p>
+<p>If you want to take this path, here is what you need to do:</p>
+<ul>
+<li>Download and install R 4.1.2: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
+<li>Download and install a daily build of RStudio: <a href="https://dailies.rstudio.com/" class="uri">https://dailies.rstudio.com/</a></li>
+<li>Install Quarto CLI: <a href="https://quarto.org/docs/getting-started/installation.html" class="uri">https://quarto.org/docs/getting-started/installation.html</a></li>
+<li>Install Git: <a href="https://happygitwithr.com/install-git.html" class="uri">https://happygitwithr.com/install-git.html</a></li>
+<li>Install any necessary packages with <code>install.packages("___")</code></li>
+</ul>
+<p>And I’d like to reiterate again that successful installation of these software is <strong>not</strong> a learning goal of this course. So if any of this seems tedious or intimidating in any way, just use the computing environment we have set up for you. More on that <a href="./computing-access.html">here</a>.</p>
 
 
 </section>
