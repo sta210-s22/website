@@ -5,17 +5,31 @@ editor: visual
 ---
 
 ::: callout-important
+We're back to in person classes this week!
+See [here](/course-syllabus.html#course-info) for class locations.
+And don't forget to wear your mask!
+😷
 :::
 
 To be posted.
 
 ## Prepare
 
-Due: \_\_\_
+Due: Jan 18
 
 All required prepare activities are due **by the beginning of class (1:45 pm)** on the specified date.
 
+📖 Read Introduction to Modern Statistics, Sec 24.1: [Case study: Sandwich store](https://openintro-ims.netlify.app/inf-model-slr.html#case-study-sandwich-store)
+
+📖 Read Introduction to Modern Statistics, Sec 24.2: [Randomization test for the slope](https://openintro-ims.netlify.app/inf-model-slr.html#randslope)
+
+📖 Read Introduction to Modern Statistics, Sec 24.3: [Bootstrap confidence interval for the slope](https://openintro-ims.netlify.app/inf-model-slr.html#bootbeta1)
+
 ## Participate
+
+🖥️ Lecture 4 - SLR: Prediction + model evaluation (to be posted)
+
+🖥️ Lecture 5 - SLR: Simulation-based inference (to be posted)
 
 ## Perform
 

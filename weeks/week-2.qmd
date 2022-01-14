@@ -29,7 +29,7 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 ⌨️ [Lab 1 - Meet the toolkit](/labs/lab-1.html "Lab instructions")
 
-📋 [Application Exercise 1 - Bike rentals in DC](https://github.com/sta210-s22/ae-1-dcbikeshare)
+📋 [Application Exercise 1 - Bike rentals in DC](https://github.com/sta210-s22/ae-1-dcbikeshare) *(Post-class note: complete only Part 1 - Daily counts and temperature)*
 
 <br><br>
 
