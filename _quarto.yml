@@ -114,7 +114,7 @@ website:
 format:
   html:
     theme:
-      light: cosmo
+      light: [cosmo, theme.scss]
       dark: [cosmo, theme-dark.scss]
     mainfont: "Atkinson Hyperlegible"
     code-copy: true
