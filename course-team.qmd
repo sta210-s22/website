@@ -19,14 +19,14 @@ If these times don't work for you or you'd like to schedule a one-on-one meeting
 
 ## Teaching assistants
 
-| Name            | Office hours       | Location                                                                                                                                                      |
-|-----------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Martha Aboagye  | Thursday 7 - 9 pm  | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
-| Richard Fremgen | Tues 7 - 9 pm      | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
-| Emily Gentles   | Wednesday 1 - 3 pm | Old Chem 203B (On [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562) until January 18) |
-| Sara Mehta      | Mon 2 - 4 pm       | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
-| Rick Presman    | Thursday 2 - 3 pm  | Old Chem 203B (On [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562) until January 18) |
-|                 | Fri 9 - 10 am      | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
-| Shari Tian      | Tue 8-10 am        | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
-| Aaditya Warrier | Mon 12pm - 1pm     | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
-|                 | Fri 1:30 - 2:30 pm | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Name            | Office hours            | Location                                                                                                                                                      |
+|-----------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Martha Aboagye  | Thursday 7 - 9 pm       | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Richard Fremgen | Tues 7 - 9 pm           | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Emily Gentles   | Wednesday 1 - 3 pm      | Old Chem 203B (On [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562) until January 18) |
+| Sara Mehta      | Mon 2 - 4 pm            | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Rick Presman    | Thursday 3:30 - 4:30 pm | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+|                 | Fri 9 - 10 am           | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Shari Tian      | Tue 8 - 10 am           | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+| Aaditya Warrier | Mon 12pm - 1pm          | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
+|                 | Fri 1:30 - 2:30 pm      | [Zoom](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562)                                     |
