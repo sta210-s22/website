@@ -108,7 +108,7 @@ website:
         contents:
           - href: supp-slr-derivations.qmd
             text: SLR derivations
-          - href: supp-slr-matrix.qmd
+          - href: supp-mlr-matrix.qmd
             text: MLR matrix notation
 
 format:
