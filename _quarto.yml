@@ -60,6 +60,8 @@ website:
             text: Schedule
           - href: course-links.qmd
             text: Useful links
+          - href: course-faq.qmd
+            text: FAQ
       - section: "Computing"
         contents:
           - href: computing-access.qmd

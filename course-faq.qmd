@@ -1,0 +1,13 @@
+---
+title: "FAQ"
+---
+
+## How do I export my assignment PDF from RStudio to upload to Gradescope?
+
+Go to your *Files* tab, check the box next to the file you want to download, then click on the blue gear icon on the Files tab to reveal the drop down menu, and select *Export*... If you have selected multiple files to export, RStudio will zip them up into a single zip file for you.
+If you've selected just a single file, it will only download that.
+The downloaded file will go to wherever files you download off the internet goes on your computer (usually your Downloads folder).
+
+```{=html}
+<iframe width="750" height="422" src="https://www.youtube.com/embed/cAHCMpPJx3k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
