@@ -9,5 +9,36 @@ If you've selected just a single file, it will only download that.
 The downloaded file will go to wherever files you download off the internet goes on your computer (usually your Downloads folder).
 
 ```{=html}
-<iframe width="750" height="422" src="https://www.youtube.com/embed/cAHCMpPJx3k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="700" height="394" src="https://www.youtube.com/embed/cAHCMpPJx3k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 ```
+## How can I submit my assignment to Gradescope?
+
+The instructions for submitting your assignment to Gradescope can be found [here](https://help.gradescope.com/article/ccbpppziu9-student-submit-work#submitting_a_pdf).
+In a nutshell, you'll upload your PDF and them mark the page(s) where each question can be found.
+It's OK if a question spans multiple pages, just mark them all.
+It's also OK if a page includes multiple questions.
+
+```{=html}
+<iframe width="700" height="394" src="https://www.youtube.com/embed/u-pK4GzpId0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
+## Can I use a local install of R and RStudio instead of using the RStudio containers?
+
+The short answer is, I'd rather you didn't, to save yourself some headache.
+But, the long answer is, sure!
+But you will need to install a specific versions of R and RStudio for everything to work as expected.
+You will also need to install the R packages we're using as well as have Git installed on your computer.
+These are not extremely challenging things to get right, but they are not trivial either, particularly on certain operating systems.
+Myself and the TAs are always happy to provide help with any computational questions when you're working in the containers we have provided for you.
+If you're working on your local setup, we can't guarantee being able to resolve your issues, though we're happy to try.
+
+If you want to take this path, here is what you need to do:
+
+-   Download and install R 4.1.2: <https://cran.r-project.org/>
+-   Download and install a daily build of RStudio: <https://dailies.rstudio.com/>
+-   Install Quarto CLI: <https://quarto.org/docs/getting-started/installation.html>
+-   Install Git: <https://happygitwithr.com/install-git.html>
+-   Install any necessary packages with `install.packages("___")`
+
+And I'd like to reiterate again that successful installation of these software is **not** a learning goal of this course.
+So if any of this seems tedious or intimidating in any way, just use the computing environment we have set up for you.
+More on that [here](/computing-access.html).
