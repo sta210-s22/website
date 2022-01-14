@@ -5,7 +5,7 @@ title: "STA 210: Regression Analysis"
 This page contains an outline of the topics, content, and assignments for the semester.
 Note that this schedule will be updated as the semester progresses, with all changes documented here.
 
-::: column-screen-right
+::: column-body-outset-right
 |           Week           | Date        | Topic                                      |                             Prepare                              |                                  Slides                                   |                                                     AE                                                      |                                    Lab                                    | HW  | Exam | Project |
 |:------------------------:|-------------|--------------------------------------------|:----------------------------------------------------------------:|:-------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------:|:---:|:----:|:-------:|
 |  [1](/weeks/week1.html)  | Wed, Jan 5  | Lab 0 - Meet + greet                       |                                                                  |   [🖥️](/slides/lab-0.html "Lab slides"){style="text-decoration: none;"}   |                                                                                                             | [💻](/labs/lab-0.html "Lab instructions"){style="text-decoration: none;"} |     |      |         |
