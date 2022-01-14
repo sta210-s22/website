@@ -298,20 +298,6 @@
       "Hash": "0a6a65d92bd45b47b94b84244b528d17",
       "Requirements": []
     },
-    "credentials": {
-      "Package": "credentials",
-      "Version": "1.3.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "93762d0a34d78e6a025efdbfb5c6bb41",
-      "Requirements": [
-        "askpass",
-        "curl",
-        "jsonlite",
-        "openssl",
-        "sys"
-      ]
-    },
     "curl": {
       "Package": "curl",
       "Version": "4.3.2",
@@ -350,18 +336,6 @@
         "tidyselect",
         "vctrs",
         "withr"
-      ]
-    },
-    "desc": {
-      "Package": "desc",
-      "Version": "1.4.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "28763d08fadd0b733e3cee9dab4e12fe",
-      "Requirements": [
-        "R6",
-        "crayon",
-        "rprojroot"
       ]
     },
     "dials": {
@@ -577,21 +551,6 @@
       "Hash": "3f6bcfb0ee5d671d9fd1893d2faa79cb",
       "Requirements": []
     },
-    "gert": {
-      "Package": "gert",
-      "Version": "1.4.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "3a3f29a74f8bd85ed8d53ab039b18bcd",
-      "Requirements": [
-        "askpass",
-        "credentials",
-        "openssl",
-        "rstudioapi",
-        "sys",
-        "zip"
-      ]
-    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.3.5",
@@ -610,28 +569,6 @@
         "tibble",
         "withr"
       ]
-    },
-    "gh": {
-      "Package": "gh",
-      "Version": "1.3.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "38c2580abbda249bd6afeec00d14f531",
-      "Requirements": [
-        "cli",
-        "gitcreds",
-        "httr",
-        "ini",
-        "jsonlite"
-      ]
-    },
-    "gitcreds": {
-      "Package": "gitcreds",
-      "Version": "0.1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "f3aefccc1cc50de6338146b62f115de8",
-      "Requirements": []
     },
     "globals": {
       "Package": "globals",
@@ -829,14 +766,6 @@
         "tibble",
         "tidyr"
       ]
-    },
-    "ini": {
-      "Package": "ini",
-      "Version": "0.3.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "6154ec2223172bce8162d4153cda21f7",
-      "Requirements": []
     },
     "ipred": {
       "Package": "ipred",
@@ -1365,10 +1294,10 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.15.0",
+      "Version": "0.15.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "36c1a644e5b0ba8050f40f07ea1dae62",
+      "Hash": "c38694b67e7f7091f7d073b3766258cc",
       "Requirements": []
     },
     "reprex": {
@@ -1422,14 +1351,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "9787c1fcb680e655d062e7611cadf78e",
-      "Requirements": []
-    },
-    "rprojroot": {
-      "Package": "rprojroot",
-      "Version": "2.0.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "249d8cd1e74a8f6a26194a91b47f21d1",
       "Requirements": []
     },
     "rsample": {
@@ -1733,34 +1654,6 @@
         "cpp11"
       ]
     },
-    "usethis": {
-      "Package": "usethis",
-      "Version": "2.1.5",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c499f488e6dd7718accffaee5bc5a79b",
-      "Requirements": [
-        "cli",
-        "clipr",
-        "crayon",
-        "curl",
-        "desc",
-        "fs",
-        "gert",
-        "gh",
-        "glue",
-        "jsonlite",
-        "lifecycle",
-        "purrr",
-        "rappdirs",
-        "rlang",
-        "rprojroot",
-        "rstudioapi",
-        "whisker",
-        "withr",
-        "yaml"
-      ]
-    },
     "utf8": {
       "Package": "utf8",
       "Version": "1.2.2",
@@ -1926,14 +1819,6 @@
         "tidyselect",
         "vctrs"
       ]
-    },
-    "zip": {
-      "Package": "zip",
-      "Version": "2.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c7eef2996ac270a18c2715c997a727c5",
-      "Requirements": []
     }
   }
 }

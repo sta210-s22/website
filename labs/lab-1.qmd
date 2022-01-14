@@ -436,7 +436,8 @@ After you push the changes, the Git pane in RStudio should be empty.
 Next, let's look at the relationship between the price and width of Ikea furniture.
 Fill in the code below to visualize the relationship between the two variables using a scatterplot.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 ggplot(data = _____, aes(x = width, y = _____)) +
   geom_point() + 
   labs(
