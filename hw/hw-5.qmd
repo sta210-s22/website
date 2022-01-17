@@ -68,8 +68,10 @@ Many of these books are available through Duke library.
 
 -   *Weapons of Math Destruction* by Cathy O'Neil
 -   *How Charts Lie: Getting Smarter about Visual Information* by Alberto Cairo
+-   *The Theory that Would Not Die* by Sharon Bertsch McGrayne
 -   *The Art of Statistics: How to learn from data* by David Spiegelhalter
 -   *The Signal and the Noise: Why so many predictions fail - but some don't* by Nate Silver
+-   *How Charts Lie* by Alberto Cairo
 -   [List of books about data science ethics](https://teachdatascience.com/bookclub/)
 
 ### Category 6: TidyTuesday
