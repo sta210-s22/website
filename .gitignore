@@ -12,3 +12,4 @@ staging/
 /.quarto/
 _site/
 *.key
+slides/*speaker.html
