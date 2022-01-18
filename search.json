@@ -273,13 +273,6 @@
     "text": "Most importantly!\nAsk if you’re not sure if something violates a policy!"
   },
   {
-    "objectID": "slides/lec-1.html#making-sta-210-a-success",
-    "href": "slides/lec-1.html#making-sta-210-a-success",
-    "title": "Welcome to STA 210!",
-    "section": "Making STA 210 a success",
-    "text": "Making STA 210 a success"
-  },
-  {
     "objectID": "slides/lec-1.html#five-tips-for-success",
     "href": "slides/lec-1.html#five-tips-for-success",
     "title": "Welcome to STA 210!",
@@ -541,100 +534,268 @@
   {
     "objectID": "slides/lec-3.html#announcements",
     "href": "slides/lec-3.html#announcements",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Announcements",
     "text": "Announcements\n\nIf you’re just joining the class, welcome! Go to the course website and review content you’ve missed, read the syllabus, and complete the Getting to know you survey.\nLab 1 is due Friday, at 5pm, on Gradescope."
   },
   {
     "objectID": "slides/lec-3.html#recap-of-last-lecture",
     "href": "slides/lec-3.html#recap-of-last-lecture",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Recap of last lecture",
     "text": "Recap of last lecture\n\n\nUsed simple linear regression to describe the relationship between a quantitative predictor and quantitative outcome variable.\nUsed the least squares method to estimate the slope and intercept.\nWe interpreted the slope and intercept.\n\n\nSlope: For every one unit increase in \\(x\\), we expect y to be higher/lower by \\(\\hat{\\beta}_1\\) units, on average.\nIntercept: If \\(x\\) is 0, then we expect \\(y\\) to be \\(\\hat{\\beta}_0\\) units.\n\n\nPredicted the response given a value of the predictor variable.\nDefined extrapolation and why we should avoid it."
   },
   {
     "objectID": "slides/lec-3.html#interested-in-the-math-behind-it-all",
     "href": "slides/lec-3.html#interested-in-the-math-behind-it-all",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Interested in the math behind it all?",
     "text": "Interested in the math behind it all?\nSee the supplemental notes on Deriving the Least-Squares Estimates for Simple Linear Regression for more mathematical details on the derivations of the estimates of \\(\\beta_0\\) and \\(\\beta_1\\)."
   },
   {
     "objectID": "slides/lec-3.html#outline",
     "href": "slides/lec-3.html#outline",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Outline",
     "text": "Outline\n\nUse tidymodels to fit and summarize regression models in R\nComplete an application exercise on exploratory data analysis and modeling"
   },
   {
     "objectID": "slides/lec-3.html#computational-setup",
     "href": "slides/lec-3.html#computational-setup",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Computational setup",
     "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)       # for data wrangling\nlibrary(tidymodels)      # for modeling\nlibrary(fivethirtyeight) # for the fandango dataset\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))\n\n# set default figure parameters for knitr\nknitr::opts_chunk$set(\n  fig.width = 8,\n  fig.asp = 0.618,\n  fig.retina = 3,\n  dpi = 300,\n  out.width = \"80%\"\n)"
   },
   {
     "objectID": "slides/lec-3.html#movie-ratings",
     "href": "slides/lec-3.html#movie-ratings",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Movie ratings",
     "text": "Movie ratings\n\n\n\nData behind the FiveThirtyEight story Be Suspicious Of Online Movie Ratings, Especially Fandango’s\nIn the fivethirtyeight package: fandango\nContains every film that has at least 30 fan reviews on Fandango, an IMDb score, Rotten Tomatoes critic and user ratings, and Metacritic critic and user scores"
   },
   {
     "objectID": "slides/lec-3.html#data-prep",
     "href": "slides/lec-3.html#data-prep",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Data prep",
     "text": "Data prep\n\nRename Rotten Tomatoes columns as critics and audience\nRename the dataset as movie_scores\n\n\nmovie_scores <- fandango %>%\n  rename(\n    critics = rottentomatoes, \n    audience = rottentomatoes_user\n  )"
   },
   {
     "objectID": "slides/lec-3.html#data-visualization",
     "href": "slides/lec-3.html#data-visualization",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Data visualization",
     "text": "Data visualization"
   },
   {
     "objectID": "slides/lec-3.html#step-1-specify-model",
     "href": "slides/lec-3.html#step-1-specify-model",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 1: Specify model",
     "text": "Step 1: Specify model\n\nlinear_reg()\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
   },
   {
     "objectID": "slides/lec-3.html#step-2-set-model-fitting-engine",
     "href": "slides/lec-3.html#step-2-set-model-fitting-engine",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 2: Set model fitting engine",
     "text": "Step 2: Set model fitting engine\n\nlinear_reg() %>%\n  set_engine(\"lm\") # lm: linear model\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
   },
   {
     "objectID": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
     "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
     "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
     "href": "slides/lec-3.html#the-regression-output",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "The regression output",
     "text": "The regression output\nWe’ll focus on the first column for now…\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores) %>%\n  tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  <chr>          <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)   32.3      2.34        13.8 4.03e-28\n2 critics        0.519    0.0345      15.0 2.70e-31"
   },
   {
     "objectID": "slides/lec-3.html#prediction",
     "href": "slides/lec-3.html#prediction",
-    "title": "Simple Linear Regression",
+    "title": "SLR: Model fitting in R with tidymodels",
     "section": "Prediction",
     "text": "Prediction\n\n# create a data frame for a new movie\nnew_movie <- tibble(critics = 50)\n\n# predict the outcome for a new movie\npredict(movie_fit, new_movie)\n\n# A tibble: 1 × 1\n  .pred\n  <dbl>\n1  58.2"
+  },
+  {
+    "objectID": "slides/lec-4.html#announcements",
+    "href": "slides/lec-4.html#announcements",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Announcements",
+    "text": "Announcements\n\nNew on the course website: FAQ\nNew communication tool: Slack\n\nFind the invite link in your inbox / on Sakai announcements\nUse #general for questions, #random for random 🤪\nUse code formatting for for questions involving code (see Course FAQ for a demo video)\n\nMy office hours: All virtual for now, hope to move 1 hour / week to in person later in the semester"
+  },
+  {
+    "objectID": "slides/lec-4.html#hybrid-teaching",
+    "href": "slides/lec-4.html#hybrid-teaching",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Hybrid teaching",
+    "text": "Hybrid teaching\n\nLectures:\n\nIn person as long as university says so (and I don’t have COVID)\nIf you can’t be in class (and you’re well enough to follow along), watch live (or the recording later) on Panopto\nWatching live and have questions? Post on Slack!\nIn class and see someone ask a question on Slack? Please raise it to me!\n\nLabs:\n\nNot live streamed / recorded\nLab 2 (next Monday) - individual\nLab 3 onwards - in teams, if teammates are in isolation, set up team Zoom calls"
+  },
+  {
+    "objectID": "slides/lec-4.html#computational-setup",
+    "href": "slides/lec-4.html#computational-setup",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)   # for data wrangling\nlibrary(tidymodels)  # for modeling\nlibrary(openintro)   # for the county_2019 dataset\nlibrary(scales)      # for pretty axis labels\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))\n\n# set default figure parameters for knitr\nknitr::opts_chunk$set(\n  fig.width = 8,\n  fig.asp = 0.618,\n  fig.retina = 3,\n  dpi = 300,\n  out.width = \"80%\"\n)"
+  },
+  {
+    "objectID": "slides/lec-4.html#data-source",
+    "href": "slides/lec-4.html#data-source",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Data source",
+    "text": "Data source\n\nThe data come from usdata::county_2019\nThese data have been compiled from the 2019 American Community Survey"
+  },
+  {
+    "objectID": "slides/lec-4.html#uninsurance-rate",
+    "href": "slides/lec-4.html#uninsurance-rate",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Uninsurance rate",
+    "text": "Uninsurance rate"
+  },
+  {
+    "objectID": "slides/lec-4.html#high-school-graduation-rate",
+    "href": "slides/lec-4.html#high-school-graduation-rate",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "High school graduation rate",
+    "text": "High school graduation rate"
+  },
+  {
+    "objectID": "slides/lec-4.html#examining-the-relationship",
+    "href": "slides/lec-4.html#examining-the-relationship",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Examining the relationship",
+    "text": "Examining the relationship\n\nThe NC Labor and Economic Analysis Division (LEAD), which “administers and collects data, conducts research, and publishes information on the state’s economy, labor force, educational, and workforce-related issues”.\nSuppose that an analyst working for LEAD is interested in the relationship between uninsurance and high school graduation rates in NC counties.\n\n\n\nWhat type of visualization should the analyst make to examine the relationship between these two variables?"
+  },
+  {
+    "objectID": "slides/lec-4.html#data-prep",
+    "href": "slides/lec-4.html#data-prep",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Data prep",
+    "text": "Data prep\n\ncounty_2019_nc <- county_2019 %>%\n  as_tibble() %>%\n  filter(state == \"North Carolina\") %>%\n  select(name, hs_grad, uninsured)\n\ncounty_2019_nc\n\n# A tibble: 100 × 3\n   name             hs_grad uninsured\n   <chr>              <dbl>     <dbl>\n 1 Alamance County     86.3      11.2\n 2 Alexander County    82.4       8.9\n 3 Alleghany County    77.5      11.3\n 4 Anson County        80.7      11.1\n 5 Ashe County         85.1      12.6\n 6 Avery County        83.6      15.9\n 7 Beaufort County     87.7      12  \n 8 Bertie County       78.4      11.9\n 9 Bladen County       81.3      12.9\n10 Brunswick County    91.3       9.8\n# … with 90 more rows"
+  },
+  {
+    "objectID": "slides/lec-4.html#uninsurance-vs.-hs-graduation-rates",
+    "href": "slides/lec-4.html#uninsurance-vs.-hs-graduation-rates",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Uninsurance vs. HS graduation rates",
+    "text": "Uninsurance vs. HS graduation rates\n\n\nCode\nggplot(county_2019_nc,\n       aes(x = hs_grad, y = uninsured)) +\n  geom_point() +\n  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  labs(\n    x = \"High school graduate\", y = \"Uninsured\",\n    title = \"Uninsurance vs. HS graduation rates\",\n    subtitle = \"North Carolina counties, 2015 - 2019\"\n  ) +\n  geom_point(data = county_2019_nc %>% filter(name == \"Durham County\"), aes(x = hs_grad, y = uninsured), shape = \"circle open\", color = \"#8F2D56\", size = 4, stroke = 2) +\n  geom_text(data = county_2019_nc %>% filter(name == \"Durham County\"), aes(x = hs_grad, y = uninsured, label = name), color = \"#8F2D56\", fontface = \"bold\", nudge_y = 3, nudge_x = 2)"
+  },
+  {
+    "objectID": "slides/lec-4.html#modeling-the-relationship",
+    "href": "slides/lec-4.html#modeling-the-relationship",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Modeling the relationship",
+    "text": "Modeling the relationship\n\n\nCode\nggplot(county_2019_nc, aes(x = hs_grad, y = uninsured)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"#8F2D56\") +\n  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  labs(\n    x = \"High school graduate\", y = \"Uninsured\",\n    title = \"Uninsurance vs. HS graduation rates\",\n    subtitle = \"North Carolina counties, 2015 - 2019\"\n  )"
+  },
+  {
+    "objectID": "slides/lec-4.html#fitting-the-model",
+    "href": "slides/lec-4.html#fitting-the-model",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Fitting the model",
+    "text": "Fitting the model\nWith fit():\n\nnc_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(uninsured ~ hs_grad, data = county_2019_nc)\n\ntidy(nc_fit)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  <chr>          <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)   33.9      3.99        8.50 2.12e-13\n2 hs_grad       -0.262    0.0468     -5.61 1.88e- 7"
+  },
+  {
+    "objectID": "slides/lec-4.html#augmenting-the-data-with-the-model",
+    "href": "slides/lec-4.html#augmenting-the-data-with-the-model",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Augmenting the data with the model",
+    "text": "Augmenting the data with the model\nWith augment():\n\nnc_aug <- augment(nc_fit$fit)\nnc_aug\n\n# A tibble: 100 × 8\n   uninsured hs_grad .fitted  .resid   .hat .sigma    .cooksd .std.resid\n       <dbl>   <dbl>   <dbl>   <dbl>  <dbl>  <dbl>      <dbl>      <dbl>\n 1      11.2    86.3   11.3  -0.0633 0.0107   2.10 0.00000501    -0.0305\n 2       8.9    82.4   12.3  -3.39   0.0138   2.07 0.0186        -1.63  \n 3      11.3    77.5   13.6  -2.27   0.0393   2.09 0.0252        -1.11  \n 4      11.1    80.7   12.7  -1.63   0.0199   2.09 0.00633       -0.790 \n 5      12.6    85.1   11.6   1.02   0.0100   2.10 0.00122        0.492 \n 6      15.9    83.6   12.0   3.93   0.0112   2.06 0.0203         1.89  \n 7      12      87.7   10.9   1.10   0.0133   2.10 0.00191        0.532 \n 8      11.9    78.4   13.3  -1.44   0.0328   2.09 0.00830       -0.700 \n 9      12.9    81.3   12.6   0.324  0.0174   2.10 0.000218       0.157 \n10       9.8    91.3    9.95 -0.151  0.0291   2.10 0.0000806     -0.0734\n# … with 90 more rows"
+  },
+  {
+    "objectID": "slides/lec-4.html#visualizing-the-model",
+    "href": "slides/lec-4.html#visualizing-the-model",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Visualizing the model",
+    "text": "Visualizing the model\n\n\n\n\nBlack circles: Observed values (y = uninsured)\nGray dashed lines: Residuals\nMaroon triangles: Predicted values (y = .fitted)\nPink solid line: Least squares regression line"
+  },
+  {
+    "objectID": "slides/lec-4.html#evaluating-the-model-fit",
+    "href": "slides/lec-4.html#evaluating-the-model-fit",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Evaluating the model fit",
+    "text": "Evaluating the model fit\n\nHow can we evaluate whether the model for predicting uninsurance rate from high school graduation rate for NC counties is a good fit?"
+  },
+  {
+    "objectID": "slides/lec-4.html#two-statistics",
+    "href": "slides/lec-4.html#two-statistics",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Two statistics",
+    "text": "Two statistics\n\nR-squared, \\(R^2\\) : Percentage of variability in the outcome explained by the regression model (in the context of SLR, the predictor)\nRoot mean square error, RMSE: A measure of the average error (average difference between observed and predicted values of the outcome)\n\\[\nRMSE = \\sqrt{\\frac{\\sum_{i = 1}^n (y_i - \\hat{y}_i)^2}{n}}\n\\]\n\n\n\nWhat indicates a good model fit? Higher or lower \\(R^2\\)? Higher or lower RMSE?"
+  },
+  {
+    "objectID": "slides/lec-4.html#r-squared",
+    "href": "slides/lec-4.html#r-squared",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "R-squared",
+    "text": "R-squared\n\nRanges between 0 (terrible predictor) and 1 (perfect predictor)\nUse rsq() to calculate:\n\nrsq(nc_aug, truth = uninsured, estimate = .fitted)\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 rsq     standard       0.243\n\n\n\n\n\nAlternatively, use glance() to construct a single row summary of the model fit, including \\(R^2\\):\n\nglance(nc_fit)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic     p.value    df logLik   AIC   BIC\n      <dbl>         <dbl> <dbl>     <dbl>       <dbl> <dbl>  <dbl> <dbl> <dbl>\n1     0.243         0.235  2.09      31.5 0.000000188     1  -214.  435.  443.\n# … with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>"
+  },
+  {
+    "objectID": "slides/lec-4.html#interpreting-r-squared",
+    "href": "slides/lec-4.html#interpreting-r-squared",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Interpreting R-squared",
+    "text": "Interpreting R-squared\n\n\n\n\n🗳️ Vote on Slack\nThe \\(R^2\\) of the model for predicting uninsurance rate from high school graduation rate for NC counties is 24.3%. Which of the following is the correct interpretation of this value?\n\n\nHigh school graduation rates correctly predict 24.3% of uninsurance rates in NC counties.\n24.3% of the variability in uninsurance rates in NC counties can be explained by high school graduation rates.\n24.3% of the variability in high school graduation rates in NC counties can be explained by uninsurance rates.\n24.3% of the time uninsurance rates in NC counties can be predicted by high school graduation rates."
+  },
+  {
+    "objectID": "slides/lec-4.html#rmse",
+    "href": "slides/lec-4.html#rmse",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "RMSE",
+    "text": "RMSE\n\nRanges between 0 (perfect predictor) and infinity (terrible predictor)\nUse rmse() to calculate:\n\nrmse(nc_aug, truth = uninsured, estimate = .fitted)\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 rmse    standard        2.07"
+  },
+  {
+    "objectID": "slides/lec-4.html#purpose-of-model-evaluation",
+    "href": "slides/lec-4.html#purpose-of-model-evaluation",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Purpose of model evaluation",
+    "text": "Purpose of model evaluation\n\n\\(R^2\\) tells us how our model is doing to predict the data we already have\nBut generally we are interested in prediction for a new observation, not for one that is already in our sample, i.e. out-of-sample prediction\nWe have a couple ways of simulating out-of-sample prediction before actually getting new data to evaluate the performance of our models"
+  },
+  {
+    "objectID": "slides/lec-4.html#spending-our-data",
+    "href": "slides/lec-4.html#spending-our-data",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Spending our data",
+    "text": "Spending our data\n\nThere are several steps to create a useful model: parameter estimation, model selection, performance assessment, etc.\nDoing all of this on the entire data we have available leaves us with no other data to assess our choices\nWe can allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we’ve done so far)"
+  },
+  {
+    "objectID": "slides/lec-4.html#simulation-data-splitting",
+    "href": "slides/lec-4.html#simulation-data-splitting",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Simulation: data splitting",
+    "text": "Simulation: data splitting\n\n\n\n\nTake a random sample of 10% of the data and set aside (testing data)\nFit a model on the remaining 90% of the data (training data)\nUse the coefficients from this model to make predictions for the testing data\nRepeat 10 times"
+  },
+  {
+    "objectID": "slides/lec-4.html#predictive-performance",
+    "href": "slides/lec-4.html#predictive-performance",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Predictive performance",
+    "text": "Predictive performance\n\n\n\n\n\nHow consistent are the predictions for different testing datasets?\nHow consistent are the predictions for counties with high school graduation rates in the middle of the plot vs. in the edges?"
+  },
+  {
+    "objectID": "slides/lec-4.html#resampling-the-data",
+    "href": "slides/lec-4.html#resampling-the-data",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Resampling the data",
+    "text": "Resampling the data\n\n\n\n\n\nTake a bootstrap sample – sample with replacement from the original data, same size as the original data\nFit models to each of the samples"
+  },
+  {
+    "objectID": "slides/lec-4.html#predictive-performance-1",
+    "href": "slides/lec-4.html#predictive-performance-1",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Predictive performance",
+    "text": "Predictive performance\n\n\n\n\n\nHow consistent are the predictions for different bootstrap datasets?\nHow consistent are the predictions for counties with high school graduation rates in the middle of the plot vs. in the edges?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "computing-troubleshooting.html",
