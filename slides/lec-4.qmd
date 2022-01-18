@@ -18,12 +18,15 @@ execute:
 
 ```{r setup}
 #| include: false
+
 library(countdown)
+
 knitr::opts_chunk$set(
-  fig.width = 6,
+  fig.width = 8,
   fig.asp = 0.618,
-  fig.align = "center",
-  out.width = "90%"
+  fig.retina = 3,
+  dpi = 300,
+  out.width = "80%"
 )
 ```
 
@@ -57,22 +60,14 @@ knitr::opts_chunk$set(
 #| message: false
 
 # load packages
-library(tidyverse)   # for data wrangling
+library(tidyverse)   # for data wrangling and visualization
 library(tidymodels)  # for modeling
-library(openintro)   # for the county_2019 dataset
+library(usdata)      # for the county_2019 dataset
 library(scales)      # for pretty axis labels
+library(glue)        # for constructing character strings
 
 # set default theme and larger font size for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
-
-# set default figure parameters for knitr
-knitr::opts_chunk$set(
-  fig.width = 8,
-  fig.asp = 0.618,
-  fig.retina = 3,
-  dpi = 300,
-  out.width = "80%"
-)
 ```
 
 # Application exercise
@@ -190,6 +185,7 @@ county_2019_nc
 ```{r nc-uninsured-hsgrad-scatter}
 #| code-fold: true
 #| echo: true
+
 ggplot(county_2019_nc,
        aes(x = hs_grad, y = uninsured)) +
   geom_point() +
@@ -235,9 +231,9 @@ nc_fit <- linear_reg() %>%
 tidy(nc_fit)
 ```
 
-## Augmenting the data with the model
+## Augmenting the data
 
-With `augment()`:
+With `augment()` to add columns for predicted values (`.fitted`), residuals (`.resid`), etc.:
 
 ```{r}
 #| echo: true
@@ -246,14 +242,36 @@ nc_aug <- augment(nc_fit$fit)
 nc_aug
 ```
 
-## Visualizing the model {.smaller}
+## Visualizing the model I {.smaller}
 
 ::: columns
 ::: {.column width="25%"}
 ::: nonincremental
 -   **Black circles:** Observed values (`y = uninsured`)
--   **Gray dashed lines:** Residuals
--   **Maroon triangles:** Predicted values (`y = .fitted`)
+:::
+:::
+
+::: {.column width="75%"}
+```{r}
+#| out-width: "100%"
+
+p_nc_aug_base <- ggplot(nc_aug, aes(x = hs_grad)) +
+  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  labs(x = "High school graduate", y = "Uninsured")
+
+p_nc_aug_base +
+  geom_point(aes(y = uninsured))
+```
+:::
+:::
+
+## Visualizing the model II {.smaller}
+
+::: columns
+::: {.column width="25%"}
+::: nonincremental
+-   Black circles: Observed values (`y = uninsured`)
 -   **Pink solid line:** Least squares regression line
 :::
 :::
@@ -261,14 +279,58 @@ nc_aug
 ::: {.column width="75%"}
 ```{r}
 #| out-width: "100%"
-ggplot(nc_aug, aes(x = hs_grad)) +
-  geom_segment(aes(xend = hs_grad, y = uninsured, yend = .fitted), size = 0.3, linetype = "dashed", color = "gray20") +
-  geom_smooth(aes(y = uninsured), method = "lm", se = FALSE, color = "pink") +
+
+p_nc_aug_base +
   geom_point(aes(y = uninsured)) +
-  geom_point(aes(y = .fitted), color = "maroon", shape = "triangle", size = 2) +
-  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
-  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
-  labs(x = "High school graduate", y = "Uninsured")
+  geom_smooth(aes(y = uninsured), method = "lm", se = FALSE, color = "pink")
+```
+:::
+:::
+
+## Visualizing the model III {.smaller}
+
+::: columns
+::: {.column width="25%"}
+::: nonincremental
+-   Black circles: Observed values (`y = uninsured`)
+-   Pink solid line: Least squares regression line
+-   **Maroon triangles:** Predicted values (`y = .fitted`)
+:::
+:::
+
+::: {.column width="75%"}
+```{r}
+#| out-width: "100%"
+
+p_nc_aug_base +
+  geom_point(aes(y = uninsured)) +
+  geom_smooth(aes(y = uninsured), method = "lm", se = FALSE, color = "pink") +
+  geom_point(aes(y = .fitted), color = "maroon", shape = "triangle", size = 2)
+```
+:::
+:::
+
+## Visualizing the model IV {.smaller}
+
+::: columns
+::: {.column width="25%"}
+::: nonincremental
+-   Black circles: Observed values (`y = uninsured`)
+-   Pink solid line: Least squares regression line
+-   Maroon triangles: Predicted values (`y = .fitted`)
+-   **Gray dashed lines:** Residuals
+:::
+:::
+
+::: {.column width="75%"}
+```{r}
+#| out-width: "100%"
+
+p_nc_aug_base +
+  geom_segment(aes(xend = hs_grad, y = uninsured, yend = .fitted), size = 0.3, linetype = "dashed", color = "gray20") +
+  geom_point(aes(y = uninsured)) +
+  geom_smooth(aes(y = uninsured), method = "lm", se = FALSE, color = "pink") +
+  geom_point(aes(y = .fitted), color = "maroon", shape = "triangle", size = 2)
 ```
 :::
 :::
@@ -284,6 +346,10 @@ How can we evaluate whether the model for predicting uninsurance rate from high 
 ## Two statistics {.smaller}
 
 -   **R-squared**, $R^2$ : Percentage of variability in the outcome explained by the regression model (in the context of SLR, the predictor)
+
+    $$
+    R^2 = Cor(x,y)^2 = Cor(y, \hat{y})^2
+    $$
 
 -   **Root mean square error, RMSE**: A measure of the average error (average difference between observed and predicted values of the outcome)
 
@@ -303,20 +369,13 @@ Higher or lower RMSE?
 
 -   Ranges between 0 (terrible predictor) and 1 (perfect predictor)
 
--   Use `rsq()` to calculate:
+-   Unitless
+
+-   Calculate with `rsq()`:
 
     ```{r}
     #| echo: true
     rsq(nc_aug, truth = uninsured, estimate = .fitted)
-    ```
-
-<!-- -->
-
--   Alternatively, use `glance()` to construct a single row summary of the model fit, including $R^2$:
-
-    ```{r}
-    #| echo: true
-    glance(nc_fit)
     ```
 
 ## Interpreting R-squared {.smaller}
@@ -339,20 +398,53 @@ Which of the following is the correct interpretation of this value?
 :::
 :::
 
+## Alternative approach for R-squared
+
+Alternatively, use `glance()` to construct a single row summary of the model fit, including $R^2$:
+
+```{r}
+#| echo: true
+
+glance(nc_fit)
+glance(nc_fit)$r.squared
+```
+
 ## RMSE
 
 -   Ranges between 0 (perfect predictor) and infinity (terrible predictor)
 
--   Use `rmse()` to calculate:
+-   Same units as the outcome variable
+
+-   Calculate with `rmse()`:
 
     ```{r}
     #| echo: true
+
     rmse(nc_aug, truth = uninsured, estimate = .fitted)
     ```
 
+-   The value of RMSE is not very meaningful on its own, but it's useful for comparing across models (more on this when we get to regression with multiple predictors)
+
+## Obtaining R-squared and RMSE
+
+-   Use `rsq()` and `rmse()`, respectively
+
+    ```{r}
+    #| echo: true
+
+    rsq(nc_aug, truth = uninsured, estimate = .fitted)
+    rmse(nc_aug, truth = uninsured, estimate = .fitted)
+    ```
+
+<!-- -->
+
+-   First argument: data frame containing `truth` and `estimate` columns
+-   Second argument: name of the column containing `truth` (observed outcome)
+-   Third argument: name of the column containing `estimate` (predicted outcome)
+
 ## Purpose of model evaluation
 
--   $R^2$ tells us how our model is doing to predict the data we *already* have
+-   $R^2$ tells us how our model is doing to predict the data we *already have*
 -   But generally we are interested in prediction for a new observation, not for one that is already in our sample, i.e. **out-of-sample prediction**
 -   We have a couple ways of *simulating* out-of-sample prediction before actually getting new data to evaluate the performance of our models
 
@@ -381,9 +473,12 @@ Which of the following is the correct interpretation of this value?
 #| out.width: "100%"
 
 set.seed(345)
+
+n_folds <- 10
+
 county_2019_nc_folds <- county_2019_nc %>%
   slice_sample(n = nrow(county_2019_nc)) %>%
-  mutate(fold = rep(1:10, 10)) %>%
+  mutate(fold = rep(1:n_folds, n_folds)) %>%
   arrange(fold)
 
 predict_folds <- function(i) {
@@ -392,16 +487,16 @@ predict_folds <- function(i) {
     bind_cols(county_2019_nc_folds %>% filter(fold == i), .fitted = .)
 }
 
-nc_fits <- map_df(1:10, predict_folds)
+nc_fits <- map_df(1:n_folds, predict_folds)
 
 p_nc_fits <- ggplot(nc_fits, aes(x = hs_grad, y = .fitted, group = fold)) +
-  geom_smooth(method = "lm", se = FALSE, size = 0.3, color = "gray50") +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, size = 0.3, alpha = 0.5) +
   scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
   scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
   labs(
     x = "High school graduate", y = "Uninsured",
-    title = "Predicted uninsurance rate",
-    subtitle = "For 10 different testing datasets"
+    title = "Predicted uninsurance rate in NC",
+    subtitle = glue("For {n_folds} different testing datasets")
     )
 
 p_nc_fits
@@ -424,6 +519,7 @@ p_nc_fits
 ::: {.column width="75%"}
 ```{r}
 #| out.width: "100%"
+
 p_nc_fits
 ```
 :::
@@ -431,21 +527,30 @@ p_nc_fits
 
 # Bootstrapping
 
-## Resampling the data {.smaller}
+## Bootstrapping our data
+
+-   The idea behind bootstrapping is that if a given observation exists in a sample, there may be more like it in the population
+-   With bootstrapping, we simulate resampling from the population by resampling from the sample we observed
+-   Bootstrap samples are the sampled *with replacement* from the original sample and same size as the original sample
+    -   For example, if our sample consists of the observations {A, B, C}, bootstrap samples could be {A, A, B}, {A, C, A}, {B, C, C}, {A, B, C}, etc.
+
+## Simulation: bootstrapping {.smaller}
 
 ::: columns
 ::: {.column width="25%"}
-::: question
 ::: nonincremental
 -   Take a bootstrap sample -- sample with replacement from the original data, same size as the original data
--   Fit models to each of the samples
-:::
+-   Fit model to the sample and make predictions for that sample
+-   Repeat many times
 :::
 :::
 
 ::: {.column width="75%"}
 ```{r}
 #| out.width: "100%"
+
+n_boot <- 100
+
 predict_boots <- function(i){
   boot <- county_2019_nc %>%
     slice_sample(n = nrow(county_2019_nc), replace = TRUE) %>%
@@ -455,16 +560,16 @@ predict_boots <- function(i){
 }
 
 set.seed(1234)
-county_2019_nc_boots <- map_df(1:10, predict_boots)
+county_2019_nc_boots <- map_df(1:n_boot, predict_boots)
 
 p_nc_boots <- ggplot(county_2019_nc_boots, aes(x = hs_grad, y = .fitted, group = boot_samp)) +
-  geom_smooth(method = "lm", se = FALSE, size = 0.3, color = "gray50") +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, size = 0.3, alpha = 0.5) +
   scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
   scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
   labs(
     x = "High school graduate", y = "Uninsured",
-    title = "Predicted uninsurance rate",
-    subtitle = "For 10 different bootstrap samples"
+    title = "Predicted uninsurance rate in NC",
+    subtitle = glue("For {n_boot} bootstrap samples")
     )
 
 p_nc_boots
@@ -487,6 +592,149 @@ p_nc_boots
 ::: {.column width="75%"}
 ```{r}
 #| out.width: "100%"
+
+p_nc_boots
+```
+:::
+:::
+
+# Uninsurance and high school graduation rates in New York
+
+## Uninsurance vs. HS graduation rates
+
+```{r ny-uninsured-hsgrad-scatter}
+#| code-fold: true
+#| echo: true
+
+county_2019_ny <- county_2019 %>%
+  as_tibble() %>%
+  filter(state == "New York") %>%
+  select(name, hs_grad, uninsured)
+
+ggplot(county_2019_ny,
+       aes(x = hs_grad, y = uninsured)) +
+  geom_point() +
+  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  labs(
+    x = "High school graduate", y = "Uninsured",
+    title = "Uninsurance vs. HS graduation rates",
+    subtitle = "New York counties, 2015 - 2019"
+  ) +
+  geom_smooth(method = "lm", se = FALSE, color = "pink")
+```
+
+## Data splitting
+
+```{r}
+#| out.width: "100%"
+
+set.seed(123)
+
+n_folds <- 10
+
+county_2019_ny_folds <- county_2019_ny %>%
+  slice_sample(n = nrow(county_2019_ny)) %>%
+  mutate(fold = c(rep(1:n_folds, 6), 1, 2)) %>%
+  arrange(fold)
+
+predict_folds <- function(i) {
+  fit <- lm(uninsured ~ hs_grad, data = county_2019_ny_folds %>% filter(fold != i))
+  predict(fit, newdata = county_2019_ny_folds %>% filter(fold == i)) %>%
+    bind_cols(county_2019_ny_folds %>% filter(fold == i), .fitted = .)
+}
+
+ny_fits <- map_df(1:n_folds, predict_folds)
+
+p_ny_fits <- ggplot(ny_fits, aes(x = hs_grad, y = .fitted, group = fold)) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, size = 0.3, alpha = 0.5) +
+  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  labs(
+    x = "High school graduate", y = "Uninsured",
+    title = "Predicted uninsurance rate in NY",
+    subtitle = glue("For {n_folds} different testing datasets")
+    )
+
+p_ny_fits
+```
+
+## Bootstrapping
+
+```{r}
+#| out.width: "100%"
+
+n_boot <- 100
+
+predict_boots <- function(i){
+  boot <- county_2019_ny %>%
+    slice_sample(n = nrow(county_2019_ny), replace = TRUE) %>%
+    mutate(boot_samp = i)
+  fit <- lm(uninsured ~ hs_grad, data = boot)
+  predict(fit) %>% bind_cols(boot, .fitted = .)
+}
+
+set.seed(1234)
+county_2019_ny_boots <- map_df(1:n_boot, predict_boots)
+
+p_ny_boots <- ggplot(county_2019_ny_boots, aes(x = hs_grad, y = .fitted, group = boot_samp)) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, size = 0.3, alpha = 0.2) +
+  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  labs(
+    x = "High school graduate", y = "Uninsured",
+    title = "Predicted uninsurance rate in NY",
+    subtitle = glue("For {n_boot} bootstrap samples")
+    )
+
+p_ny_boots
+```
+
+## Comparing NY and NC
+
+::: question
+Why are the fits from the NY models more variable than those from the NC models?
+:::
+
+# Recap
+
+## Terminology
+
+-   Outcome: y
+-   Predictor: x
+-   Observed y, $y$: truth
+-   Predicted y, $\hat{y}$: fitted, estimated
+-   Residual: difference between observed and predicted outcome for a given value of predictor
+
+## Model evaluation {.smaller}
+
+-   One concern in evaluating models is how well they do for prediction
+-   We're generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)
+-   Evaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to "new" data
+-   Quantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to "new" data
+-   Today we introduced these concepts, throughout the semester we'll learn how to implement them (i.e., write the code) and how to interpret their results
+
+## Splitting vs. bootstrapping
+
+::: question
+**Food for thought:** On the right are fits from various splits of the data into testing and training.
+On the left are fits to bootstrap samples of the data.
+Which one shows more variability and why?
+:::
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_nc_fits
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
 p_nc_boots
 ```
 :::
