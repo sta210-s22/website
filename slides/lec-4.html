@@ -573,32 +573,17 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 <li class="fragment"><p>The value of RMSE is not very meaningful on its own, but it’s useful for comparing across models (more on this when we get to regression with multiple predictors)</p></li>
 </ul>
 </section>
-<section id="obtaining-r-squared-and-rmse" class="slide level2">
+<section id="obtaining-r-squared-and-rmse" class="slide level2 smaller">
 <h2>Obtaining R-squared and RMSE</h2>
 <ul>
 <li class="fragment"><p>Use <code>rsq()</code> and <code>rmse()</code>, respectively</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">rsq</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric .estimator .estimate
-  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-1 rsq     standard       0.243</code></pre>
-</div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">rmse</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric .estimator .estimate
-  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-1 rmse    standard        2.07</code></pre>
-</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">rsq</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">rmse</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
-</ul>
-<!-- -->
-<ul>
-<li class="fragment">First argument: data frame containing <code>truth</code> and <code>estimate</code> columns</li>
-<li class="fragment">Second argument: name of the column containing <code>truth</code> (observed outcome)</li>
-<li class="fragment">Third argument: name of the column containing <code>estimate</code> (predicted outcome)</li>
+<li class="fragment"><p>First argument: data frame containing <code>truth</code> and <code>estimate</code> columns</p></li>
+<li class="fragment"><p>Second argument: name of the column containing <code>truth</code> (observed outcome)</p></li>
+<li class="fragment"><p>Third argument: name of the column containing <code>estimate</code> (predicted outcome)</p></li>
 </ul>
 </section>
 <section id="purpose-of-model-evaluation" class="slide level2">
@@ -669,7 +654,7 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 <h1>Bootstrapping</h1>
 
 </section>
-<section id="bootstrapping-our-data" class="slide level2">
+<section id="bootstrapping-our-data" class="slide level2 smaller">
 <h2>Bootstrapping our data</h2>
 <ul>
 <li class="fragment">The idea behind bootstrapping is that if a given observation exists in a sample, there may be more like it in the population</li>
@@ -731,22 +716,22 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 <div class="cell">
 <p></p><details>
 <summary>Code</summary><p></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>county_2019_ny <span class="ot">&lt;-</span> county_2019 <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"New York"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">select</span>(name, hs_grad, uninsured)</span>
-<span id="cb22-5"><a href="#cb22-5"></a></span>
-<span id="cb22-6"><a href="#cb22-6"></a><span class="fu">ggplot</span>(county_2019_ny,</span>
-<span id="cb22-7"><a href="#cb22-7"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hs_grad, <span class="at">y =</span> uninsured)) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb22-10"><a href="#cb22-10"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a>  <span class="fu">labs</span>(</span>
-<span id="cb22-12"><a href="#cb22-12"></a>    <span class="at">x =</span> <span class="st">"High school graduate"</span>, <span class="at">y =</span> <span class="st">"Uninsured"</span>,</span>
-<span id="cb22-13"><a href="#cb22-13"></a>    <span class="at">title =</span> <span class="st">"Uninsurance vs. HS graduation rates"</span>,</span>
-<span id="cb22-14"><a href="#cb22-14"></a>    <span class="at">subtitle =</span> <span class="st">"New York counties, 2015 - 2019"</span></span>
-<span id="cb22-15"><a href="#cb22-15"></a>  ) <span class="sc">+</span></span>
-<span id="cb22-16"><a href="#cb22-16"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"pink"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>county_2019_ny <span class="ot">&lt;-</span> county_2019 <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"New York"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">select</span>(name, hs_grad, uninsured)</span>
+<span id="cb19-5"><a href="#cb19-5"></a></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="fu">ggplot</span>(county_2019_ny,</span>
+<span id="cb19-7"><a href="#cb19-7"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hs_grad, <span class="at">y =</span> uninsured)) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-12"><a href="#cb19-12"></a>    <span class="at">x =</span> <span class="st">"High school graduate"</span>, <span class="at">y =</span> <span class="st">"Uninsured"</span>,</span>
+<span id="cb19-13"><a href="#cb19-13"></a>    <span class="at">title =</span> <span class="st">"Uninsurance vs. HS graduation rates"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14"></a>    <span class="at">subtitle =</span> <span class="st">"New York counties, 2015 - 2019"</span></span>
+<span id="cb19-15"><a href="#cb19-15"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"pink"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -789,33 +774,12 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 <li class="fragment">Quantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to “new” data</li>
 <li class="fragment">Today we introduced these concepts, throughout the semester we’ll learn how to implement them (i.e., write the code) and how to interpret their results</li>
 </ul>
-</section>
-<section id="splitting-vs.-bootstrapping" class="slide level2">
-<h2>Splitting vs.&nbsp;bootstrapping</h2>
-<div class="question">
-<p><strong>Food for thought:</strong> On the right are fits from various splits of the data into testing and training. On the left are fits to bootstrap samples of the data. Which one shows more variability and why?</p>
-</div>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:100.0%"></p>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%"></p>
-</div>
-</div>
-</div>
-</div>
 
-<p><img src="images/logo.png" class="slide-logo"></p>
+
 <div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
-</section></section>
+<img src="images/logo.png" class="slide-logo r-stretch"></section></section>
     </div>
   </div>
 
@@ -851,7 +815,7 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 'autoAnimateUnmatched': true,
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"6b7068f5c6e392f4","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"85e9ce544759f65b","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
