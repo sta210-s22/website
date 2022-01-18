@@ -265,6 +265,8 @@ If this requires flexibility, please don't hesitate to ask.
 
 # Application exercise
 
-Or more like a demo for today...
+::: appex
+Or more like demo for today...
 
-[github.com/sta210-s22/ae-0-movies](https://github.com/sta210-s22/ae-0-movies)
+📋 [github.com/sta210-s22/ae-0-movies](https://github.com/sta210-s22/ae-0-movies)
+:::
