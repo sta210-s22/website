@@ -45,7 +45,7 @@ knitr::opts_chunk$set(
 
 -   Lectures:
     -   In person as long as university says so (and I don't have COVID)
-    -   If you can't be in class (and you're well enough to follow along), watch live (or the recording later) on Panopto
+    -   If you can't be in class (and you're well enough to follow along), watch live (or the recording later) on [Panopto](https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22d6c1d58a-cb6d-4732-9d4b-ae0c011bf767%22)
     -   Watching live and have questions? Post on Slack!
     -   In class and see someone ask a question on Slack? Please raise it to me!
 -   Labs:

@@ -300,7 +300,7 @@ This might entail holding the class on Zoom synchronously or watching a recordin
 
 ### Policy on video recording course content
 
-All lectures will be recorded and available on Panopto, so students should not need to create their own recordings of lectures.
+All lectures will be recorded and available on [Panopto](https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22d6c1d58a-cb6d-4732-9d4b-ae0c011bf767%22), so students should not need to create their own recordings of lectures.
 If you feel that you need record the lectures yourself, you must get permission from me ahead of time and these recordings should be used for personal study only, no for distribution.
 The full policy on recording of lectures falls under the Duke University Policy on Intellectual Property Rights, available at [provost.duke.edu/sites/default/files/FHB_App_P.pdf](https://provost.duke.edu/sites/default/files/FHB_App_P.pdf).
 Unauthorized distribution is a cause for disciplinary action by the Judicial Board.
