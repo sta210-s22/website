@@ -94,6 +94,14 @@
       "Hash": "0cf10dab0d023d5b46a5a14387556891",
       "Requirements": []
     },
+    "airports": {
+      "Package": "airports",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "14e997c91e0cdca32231b04143e0904c",
+      "Requirements": []
+    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.1",
@@ -209,6 +217,14 @@
         "rematch",
         "tibble"
       ]
+    },
+    "cherryblossom": {
+      "Package": "cherryblossom",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ef936debf27cd40d667339a6ad89cd75",
+      "Requirements": []
     },
     "class": {
       "Package": "class",
@@ -924,6 +940,14 @@
       "Hash": "41287f1ac7d28a92f0a286ed507928d3",
       "Requirements": []
     },
+    "maps": {
+      "Package": "maps",
+      "Version": "3.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b3d98a967ec17c80f795719529812fa0",
+      "Requirements": []
+    },
     "memoise": {
       "Package": "memoise",
       "Version": "2.0.1",
@@ -1014,6 +1038,22 @@
       "Repository": "CRAN",
       "Hash": "df58958f293b166e4ab885ebcad90e02",
       "Requirements": []
+    },
+    "openintro": {
+      "Package": "openintro",
+      "Version": "2.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fab5873428cb42ac7afc12592845dcbb",
+      "Requirements": [
+        "airports",
+        "cherryblossom",
+        "ggplot2",
+        "readr",
+        "rmarkdown",
+        "tibble",
+        "usdata"
+      ]
     },
     "openssl": {
       "Package": "openssl",
@@ -1652,6 +1692,16 @@
       "Hash": "5e069fb033daf2317bd628d3100b75c5",
       "Requirements": [
         "cpp11"
+      ]
+    },
+    "usdata": {
+      "Package": "usdata",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9cc31e3592089bfd82c69a65260f1e37",
+      "Requirements": [
+        "tibble"
       ]
     },
     "utf8": {
