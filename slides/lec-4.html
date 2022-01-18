@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.18">
+  <meta name="generator" content="quarto-0.3.22">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - SLR: Prediction + model evaluation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -232,24 +232,16 @@
 </section>
 <section id="computational-setup" class="slide level2">
 <h2>Computational setup</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)   <span class="co"># for data wrangling</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)   <span class="co"># for data wrangling and visualization</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)  <span class="co"># for modeling</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(openintro)   <span class="co"># for the county_2019 dataset</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(usdata)      <span class="co"># for the county_2019 dataset</span></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(scales)      <span class="co"># for pretty axis labels</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>))</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># set default figure parameters for knitr</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="at">fig.width =</span> <span class="dv">8</span>,</span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="at">fig.asp =</span> <span class="fl">0.618</span>,</span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="at">fig.retina =</span> <span class="dv">3</span>,</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="at">dpi =</span> <span class="dv">300</span>,</span>
-<span id="cb1-16"><a href="#cb1-16"></a>  <span class="at">out.width =</span> <span class="st">"80%"</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(glue)        <span class="co"># for constructing character strings</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section id="application-exercise" class="title-slide slide level1 center">
@@ -270,18 +262,18 @@
 <li class="fragment">The data come from <a href="https://openintrostat.github.io/usdata/reference/county_2019.html"><code>usdata::county_2019</code></a></li>
 <li class="fragment">These data have been compiled from the 2019 American Community Survey</li>
 </ul>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 
 </div>
 </section>
 <section id="uninsurance-rate" class="slide level2">
 <h2>Uninsurance rate</h2>
 
-<img data-src="lec-4_files/figure-revealjs/unnamed-chunk-1-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lec-4_files/figure-revealjs/unnamed-chunk-1-1.png" style="width:100.0%" class="r-stretch"></section>
 <section id="high-school-graduation-rate" class="slide level2">
 <h2>High school graduation rate</h2>
 
-<img data-src="lec-4_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lec-4_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:100.0%" class="r-stretch"></section>
 <section id="examining-the-relationship" class="slide level2">
 <h2>Examining the relationship</h2>
 <ul>
@@ -296,7 +288,7 @@
 </section>
 <section id="data-prep" class="slide level2">
 <h2>Data prep</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>county_2019_nc <span class="ot">&lt;-</span> county_2019 <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"North Carolina"</span>) <span class="sc">%&gt;%</span></span>
@@ -323,7 +315,7 @@
 </section>
 <section id="uninsurance-vs.-hs-graduation-rates" class="slide level2">
 <h2>Uninsurance vs.&nbsp;HS graduation rates</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <p></p><details>
 <summary>Code</summary><p></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(county_2019_nc,</span>
@@ -341,10 +333,10 @@
 </details>
 
 </div>
-<img data-src="lec-4_files/figure-revealjs/nc-uninsured-hsgrad-scatter-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lec-4_files/figure-revealjs/nc-uninsured-hsgrad-scatter-1.png" style="width:80.0%" class="r-stretch"></section>
 <section id="modeling-the-relationship" class="slide level2">
 <h2>Modeling the relationship</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <p></p><details>
 <summary>Code</summary><p></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(county_2019_nc, <span class="fu">aes</span>(<span class="at">x =</span> hs_grad, <span class="at">y =</span> uninsured)) <span class="sc">+</span></span>
@@ -360,11 +352,11 @@
 </details>
 
 </div>
-<img data-src="lec-4_files/figure-revealjs/nc-uninsured-hsgrad-scatter-line-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lec-4_files/figure-revealjs/nc-uninsured-hsgrad-scatter-line-1.png" style="width:80.0%" class="r-stretch"></section>
 <section id="fitting-the-model" class="slide level2">
 <h2>Fitting the model</h2>
 <p>With <code>fit()</code>:</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>nc_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">fit</span>(uninsured <span class="sc">~</span> hs_grad, <span class="at">data =</span> county_2019_nc)</span>
@@ -379,10 +371,10 @@
 </div>
 </div>
 </section>
-<section id="augmenting-the-data-with-the-model" class="slide level2">
-<h2>Augmenting the data with the model</h2>
-<p>With <code>augment()</code>:</p>
-<div class="cell" data-layout-align="center">
+<section id="augmenting-the-data" class="slide level2">
+<h2>Augmenting the data</h2>
+<p>With <code>augment()</code> to add columns for predicted values (<code>.fitted</code>), residuals (<code>.resid</code>), etc.:</p>
+<div class="cell">
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>nc_aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(nc_fit<span class="sc">$</span>fit)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>nc_aug</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
@@ -403,26 +395,79 @@
 </div>
 </div>
 </section>
-<section id="visualizing-the-model" class="slide level2 smaller">
-<h2>Visualizing the model</h2>
+<section id="visualizing-the-model-i" class="slide level2 smaller">
+<h2>Visualizing the model I</h2>
 <div class="columns">
 <div class="column" style="width:25%;">
 <div>
 <ul>
 <li><strong>Black circles:</strong> Observed values (<code>y = uninsured</code>)</li>
-<li><strong>Gray dashed lines:</strong> Residuals</li>
-<li><strong>Maroon triangles:</strong> Predicted values (<code>y = .fitted</code>)</li>
+</ul>
+</div>
+</div><div class="column" style="width:75%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-the-model-ii" class="slide level2 smaller">
+<h2>Visualizing the model II</h2>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div>
+<ul>
+<li>Black circles: Observed values (<code>y = uninsured</code>)</li>
 <li><strong>Pink solid line:</strong> Least squares regression line</li>
 </ul>
 </div>
 </div><div class="column" style="width:75%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:100.0%"></p>
-</figure>
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:100.0%"></p>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-the-model-iii" class="slide level2 smaller">
+<h2>Visualizing the model III</h2>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div>
+<ul>
+<li>Black circles: Observed values (<code>y = uninsured</code>)</li>
+<li>Pink solid line: Least squares regression line</li>
+<li><strong>Maroon triangles:</strong> Predicted values (<code>y = .fitted</code>)</li>
+</ul>
+</div>
+</div><div class="column" style="width:75%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-the-model-iv" class="slide level2 smaller">
+<h2>Visualizing the model IV</h2>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div>
+<ul>
+<li>Black circles: Observed values (<code>y = uninsured</code>)</li>
+<li>Pink solid line: Least squares regression line</li>
+<li>Maroon triangles: Predicted values (<code>y = .fitted</code>)</li>
+<li><strong>Gray dashed lines:</strong> Residuals</li>
+</ul>
+</div>
+</div><div class="column" style="width:75%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -442,7 +487,10 @@
 <section id="two-statistics" class="slide level2 smaller">
 <h2>Two statistics</h2>
 <ul>
-<li class="fragment"><p><strong>R-squared</strong>, <span class="math inline">\(R^2\)</span> : Percentage of variability in the outcome explained by the regression model (in the context of SLR, the predictor)</p></li>
+<li class="fragment"><p><strong>R-squared</strong>, <span class="math inline">\(R^2\)</span> : Percentage of variability in the outcome explained by the regression model (in the context of SLR, the predictor)</p>
+<p><span class="math display">\[
+R^2 = Cor(x,y)^2 = Cor(y, \hat{y})^2
+\]</span></p></li>
 <li class="fragment"><p><strong>Root mean square error, RMSE</strong>: A measure of the average error (average difference between observed and predicted values of the outcome)</p>
 <p><span class="math display">\[
 RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
@@ -458,8 +506,9 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 <h2>R-squared</h2>
 <ul>
 <li class="fragment"><p>Ranges between 0 (terrible predictor) and 1 (perfect predictor)</p></li>
-<li class="fragment"><p>Use <code>rsq()</code> to calculate:</p>
-<div class="cell" data-layout-align="center">
+<li class="fragment"><p>Unitless</p></li>
+<li class="fragment"><p>Calculate with <code>rsq()</code>:</p>
+<div class="cell">
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">rsq</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -469,24 +518,10 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 </div>
 </div></li>
 </ul>
-<!-- -->
-<ul>
-<li class="fragment"><p>Alternatively, use <code>glance()</code> to construct a single row summary of the model fit, including <span class="math inline">\(R^2\)</span>:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">glance</span>(nc_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic     p.value    df logLik   AIC   BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1     0.243         0.235  2.09      31.5 0.000000188     1  -214.  435.  443.
-# … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
-</div>
-</div></li>
-</ul>
 </section>
 <section id="interpreting-r-squared" class="slide level2 smaller">
 <h2>Interpreting R-squared</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 
 </div>
 <div class="poll">
@@ -502,13 +537,55 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 </div>
 </div>
 </section>
+<section id="alternative-approach-for-r-squared" class="slide level2">
+<h2>Alternative approach for R-squared</h2>
+<p>Alternatively, use <code>glance()</code> to construct a single row summary of the model fit, including <span class="math inline">\(R^2\)</span>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">glance</span>(nc_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic     p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.243         0.235  2.09      31.5 0.000000188     1  -214.  435.  443.
+# … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">glance</span>(nc_fit)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 0.2430694</code></pre>
+</div>
+</div>
+</section>
 <section id="rmse" class="slide level2">
 <h2>RMSE</h2>
 <ul>
 <li class="fragment"><p>Ranges between 0 (perfect predictor) and infinity (terrible predictor)</p></li>
-<li class="fragment"><p>Use <code>rmse()</code> to calculate:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">rmse</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<li class="fragment"><p>Same units as the outcome variable</p></li>
+<li class="fragment"><p>Calculate with <code>rmse()</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">rmse</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 rmse    standard        2.07</code></pre>
+</div>
+</div></li>
+<li class="fragment"><p>The value of RMSE is not very meaningful on its own, but it’s useful for comparing across models (more on this when we get to regression with multiple predictors)</p></li>
+</ul>
+</section>
+<section id="obtaining-r-squared-and-rmse" class="slide level2">
+<h2>Obtaining R-squared and RMSE</h2>
+<ul>
+<li class="fragment"><p>Use <code>rsq()</code> and <code>rmse()</code>, respectively</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">rsq</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 rsq     standard       0.243</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">rmse</span>(nc_aug, <span class="at">truth =</span> uninsured, <span class="at">estimate =</span> .fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
@@ -517,11 +594,17 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 </div>
 </div></li>
 </ul>
+<!-- -->
+<ul>
+<li class="fragment">First argument: data frame containing <code>truth</code> and <code>estimate</code> columns</li>
+<li class="fragment">Second argument: name of the column containing <code>truth</code> (observed outcome)</li>
+<li class="fragment">Third argument: name of the column containing <code>estimate</code> (predicted outcome)</li>
+</ul>
 </section>
 <section id="purpose-of-model-evaluation" class="slide level2">
 <h2>Purpose of model evaluation</h2>
 <ul>
-<li class="fragment"><span class="math inline">\(R^2\)</span> tells us how our model is doing to predict the data we <em>already</em> have</li>
+<li class="fragment"><span class="math inline">\(R^2\)</span> tells us how our model is doing to predict the data we <em>already have</em></li>
 <li class="fragment">But generally we are interested in prediction for a new observation, not for one that is already in our sample, i.e.&nbsp;<strong>out-of-sample prediction</strong></li>
 <li class="fragment">We have a couple ways of <em>simulating</em> out-of-sample prediction before actually getting new data to evaluate the performance of our models</li>
 </ul>
@@ -552,13 +635,9 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 </ul>
 </div>
 </div><div class="column" style="width:70%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:100.0%"></p>
-</figure>
-</div>
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -577,13 +656,9 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 </div>
 </div>
 </div><div class="column" style="width:75%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:100.0%"></p>
-</figure>
-</div>
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -594,26 +669,32 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 <h1>Bootstrapping</h1>
 
 </section>
-<section id="resampling-the-data" class="slide level2 smaller">
-<h2>Resampling the data</h2>
+<section id="bootstrapping-our-data" class="slide level2">
+<h2>Bootstrapping our data</h2>
+<ul>
+<li class="fragment">The idea behind bootstrapping is that if a given observation exists in a sample, there may be more like it in the population</li>
+<li class="fragment">With bootstrapping, we simulate resampling from the population by resampling from the sample we observed</li>
+<li class="fragment">Bootstrap samples are the sampled <em>with replacement</em> from the original sample and same size as the original sample
+<ul>
+<li class="fragment">For example, if our sample consists of the observations {A, B, C}, bootstrap samples could be {A, A, B}, {A, C, A}, {B, C, C}, {A, B, C}, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="simulation-bootstrapping" class="slide level2 smaller">
+<h2>Simulation: bootstrapping</h2>
 <div class="columns">
 <div class="column" style="width:25%;">
-<div class="question">
 <div>
 <ul>
 <li>Take a bootstrap sample – sample with replacement from the original data, same size as the original data</li>
-<li>Fit models to each of the samples</li>
+<li>Fit model to the sample and make predictions for that sample</li>
+<li>Repeat many times</li>
 </ul>
 </div>
-</div>
 </div><div class="column" style="width:75%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:100.0%"></p>
-</figure>
-</div>
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -632,13 +713,99 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 </div>
 </div>
 </div><div class="column" style="width:75%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:100.0%"></p>
-</figure>
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:100.0%"></p>
 </div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="uninsurance-and-high-school-graduation-rates-in-new-york" class="title-slide slide level1 center">
+<h1>Uninsurance and high school graduation rates in New York</h1>
+
+</section>
+<section id="uninsurance-vs.-hs-graduation-rates-1" class="slide level2">
+<h2>Uninsurance vs.&nbsp;HS graduation rates</h2>
+<div class="cell">
+<p></p><details>
+<summary>Code</summary><p></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>county_2019_ny <span class="ot">&lt;-</span> county_2019 <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"New York"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">select</span>(name, hs_grad, uninsured)</span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="fu">ggplot</span>(county_2019_ny,</span>
+<span id="cb22-7"><a href="#cb22-7"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hs_grad, <span class="at">y =</span> uninsured)) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-12"><a href="#cb22-12"></a>    <span class="at">x =</span> <span class="st">"High school graduate"</span>, <span class="at">y =</span> <span class="st">"Uninsured"</span>,</span>
+<span id="cb22-13"><a href="#cb22-13"></a>    <span class="at">title =</span> <span class="st">"Uninsurance vs. HS graduation rates"</span>,</span>
+<span id="cb22-14"><a href="#cb22-14"></a>    <span class="at">subtitle =</span> <span class="st">"New York counties, 2015 - 2019"</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"pink"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="lec-4_files/figure-revealjs/ny-uninsured-hsgrad-scatter-1.png" style="width:80.0%" class="r-stretch"></section>
+<section id="data-splitting" class="slide level2">
+<h2>Data splitting</h2>
+
+<img data-src="lec-4_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="bootstrapping-1" class="slide level2">
+<h2>Bootstrapping</h2>
+
+<img data-src="lec-4_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="comparing-ny-and-nc" class="slide level2">
+<h2>Comparing NY and NC</h2>
+<div class="question">
+<p>Why are the fits from the NY models more variable than those from the NC models?</p>
+</div>
+</section></section>
+<section>
+<section id="recap" class="title-slide slide level1 center">
+<h1>Recap</h1>
+
+</section>
+<section id="terminology" class="slide level2">
+<h2>Terminology</h2>
+<ul>
+<li class="fragment">Outcome: y</li>
+<li class="fragment">Predictor: x</li>
+<li class="fragment">Observed y, <span class="math inline">\(y\)</span>: truth</li>
+<li class="fragment">Predicted y, <span class="math inline">\(\hat{y}\)</span>: fitted, estimated</li>
+<li class="fragment">Residual: difference between observed and predicted outcome for a given value of predictor</li>
+</ul>
+</section>
+<section id="model-evaluation-1" class="slide level2 smaller">
+<h2>Model evaluation</h2>
+<ul>
+<li class="fragment">One concern in evaluating models is how well they do for prediction</li>
+<li class="fragment">We’re generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)</li>
+<li class="fragment">Evaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to “new” data</li>
+<li class="fragment">Quantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to “new” data</li>
+<li class="fragment">Today we introduced these concepts, throughout the semester we’ll learn how to implement them (i.e., write the code) and how to interpret their results</li>
+</ul>
+</section>
+<section id="splitting-vs.-bootstrapping" class="slide level2">
+<h2>Splitting vs.&nbsp;bootstrapping</h2>
+<div class="question">
+<p><strong>Food for thought:</strong> On the right are fits from various splits of the data into testing and training. On the left are fits to bootstrap samples of the data. Which one shows more variability and why?</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lec-4_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -684,7 +851,7 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 'autoAnimateUnmatched': true,
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"0fd97e2861f88973","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"6b7068f5c6e392f4","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner

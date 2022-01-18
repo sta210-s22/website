@@ -648,7 +648,7 @@
     "href": "slides/lec-4.html#computational-setup",
     "title": "SLR: Prediction + model evaluation",
     "section": "Computational setup",
-    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)   # for data wrangling\nlibrary(tidymodels)  # for modeling\nlibrary(openintro)   # for the county_2019 dataset\nlibrary(scales)      # for pretty axis labels\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))\n\n# set default figure parameters for knitr\nknitr::opts_chunk$set(\n  fig.width = 8,\n  fig.asp = 0.618,\n  fig.retina = 3,\n  dpi = 300,\n  out.width = \"80%\"\n)"
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)   # for data wrangling and visualization\nlibrary(tidymodels)  # for modeling\nlibrary(usdata)      # for the county_2019 dataset\nlibrary(scales)      # for pretty axis labels\nlibrary(glue)        # for constructing character strings\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))"
   },
   {
     "objectID": "slides/lec-4.html#data-source",
@@ -707,18 +707,39 @@
     "text": "Fitting the model\nWith fit():\n\nnc_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(uninsured ~ hs_grad, data = county_2019_nc)\n\ntidy(nc_fit)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  <chr>          <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)   33.9      3.99        8.50 2.12e-13\n2 hs_grad       -0.262    0.0468     -5.61 1.88e- 7"
   },
   {
-    "objectID": "slides/lec-4.html#augmenting-the-data-with-the-model",
-    "href": "slides/lec-4.html#augmenting-the-data-with-the-model",
+    "objectID": "slides/lec-4.html#augmenting-the-data",
+    "href": "slides/lec-4.html#augmenting-the-data",
     "title": "SLR: Prediction + model evaluation",
-    "section": "Augmenting the data with the model",
-    "text": "Augmenting the data with the model\nWith augment():\n\nnc_aug <- augment(nc_fit$fit)\nnc_aug\n\n# A tibble: 100 × 8\n   uninsured hs_grad .fitted  .resid   .hat .sigma    .cooksd .std.resid\n       <dbl>   <dbl>   <dbl>   <dbl>  <dbl>  <dbl>      <dbl>      <dbl>\n 1      11.2    86.3   11.3  -0.0633 0.0107   2.10 0.00000501    -0.0305\n 2       8.9    82.4   12.3  -3.39   0.0138   2.07 0.0186        -1.63  \n 3      11.3    77.5   13.6  -2.27   0.0393   2.09 0.0252        -1.11  \n 4      11.1    80.7   12.7  -1.63   0.0199   2.09 0.00633       -0.790 \n 5      12.6    85.1   11.6   1.02   0.0100   2.10 0.00122        0.492 \n 6      15.9    83.6   12.0   3.93   0.0112   2.06 0.0203         1.89  \n 7      12      87.7   10.9   1.10   0.0133   2.10 0.00191        0.532 \n 8      11.9    78.4   13.3  -1.44   0.0328   2.09 0.00830       -0.700 \n 9      12.9    81.3   12.6   0.324  0.0174   2.10 0.000218       0.157 \n10       9.8    91.3    9.95 -0.151  0.0291   2.10 0.0000806     -0.0734\n# … with 90 more rows"
+    "section": "Augmenting the data",
+    "text": "Augmenting the data\nWith augment() to add columns for predicted values (.fitted), residuals (.resid), etc.:\n\nnc_aug <- augment(nc_fit$fit)\nnc_aug\n\n# A tibble: 100 × 8\n   uninsured hs_grad .fitted  .resid   .hat .sigma    .cooksd .std.resid\n       <dbl>   <dbl>   <dbl>   <dbl>  <dbl>  <dbl>      <dbl>      <dbl>\n 1      11.2    86.3   11.3  -0.0633 0.0107   2.10 0.00000501    -0.0305\n 2       8.9    82.4   12.3  -3.39   0.0138   2.07 0.0186        -1.63  \n 3      11.3    77.5   13.6  -2.27   0.0393   2.09 0.0252        -1.11  \n 4      11.1    80.7   12.7  -1.63   0.0199   2.09 0.00633       -0.790 \n 5      12.6    85.1   11.6   1.02   0.0100   2.10 0.00122        0.492 \n 6      15.9    83.6   12.0   3.93   0.0112   2.06 0.0203         1.89  \n 7      12      87.7   10.9   1.10   0.0133   2.10 0.00191        0.532 \n 8      11.9    78.4   13.3  -1.44   0.0328   2.09 0.00830       -0.700 \n 9      12.9    81.3   12.6   0.324  0.0174   2.10 0.000218       0.157 \n10       9.8    91.3    9.95 -0.151  0.0291   2.10 0.0000806     -0.0734\n# … with 90 more rows"
   },
   {
-    "objectID": "slides/lec-4.html#visualizing-the-model",
-    "href": "slides/lec-4.html#visualizing-the-model",
+    "objectID": "slides/lec-4.html#visualizing-the-model-i",
+    "href": "slides/lec-4.html#visualizing-the-model-i",
     "title": "SLR: Prediction + model evaluation",
-    "section": "Visualizing the model",
-    "text": "Visualizing the model\n\n\n\n\nBlack circles: Observed values (y = uninsured)\nGray dashed lines: Residuals\nMaroon triangles: Predicted values (y = .fitted)\nPink solid line: Least squares regression line"
+    "section": "Visualizing the model I",
+    "text": "Visualizing the model I\n\n\n\n\nBlack circles: Observed values (y = uninsured)"
+  },
+  {
+    "objectID": "slides/lec-4.html#visualizing-the-model-ii",
+    "href": "slides/lec-4.html#visualizing-the-model-ii",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Visualizing the model II",
+    "text": "Visualizing the model II\n\n\n\n\nBlack circles: Observed values (y = uninsured)\nPink solid line: Least squares regression line"
+  },
+  {
+    "objectID": "slides/lec-4.html#visualizing-the-model-iii",
+    "href": "slides/lec-4.html#visualizing-the-model-iii",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Visualizing the model III",
+    "text": "Visualizing the model III\n\n\n\n\nBlack circles: Observed values (y = uninsured)\nPink solid line: Least squares regression line\nMaroon triangles: Predicted values (y = .fitted)"
+  },
+  {
+    "objectID": "slides/lec-4.html#visualizing-the-model-iv",
+    "href": "slides/lec-4.html#visualizing-the-model-iv",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Visualizing the model IV",
+    "text": "Visualizing the model IV\n\n\n\n\nBlack circles: Observed values (y = uninsured)\nPink solid line: Least squares regression line\nMaroon triangles: Predicted values (y = .fitted)\nGray dashed lines: Residuals"
   },
   {
     "objectID": "slides/lec-4.html#evaluating-the-model-fit",
@@ -732,14 +753,14 @@
     "href": "slides/lec-4.html#two-statistics",
     "title": "SLR: Prediction + model evaluation",
     "section": "Two statistics",
-    "text": "Two statistics\n\nR-squared, \\(R^2\\) : Percentage of variability in the outcome explained by the regression model (in the context of SLR, the predictor)\nRoot mean square error, RMSE: A measure of the average error (average difference between observed and predicted values of the outcome)\n\\[\nRMSE = \\sqrt{\\frac{\\sum_{i = 1}^n (y_i - \\hat{y}_i)^2}{n}}\n\\]\n\n\n\nWhat indicates a good model fit? Higher or lower \\(R^2\\)? Higher or lower RMSE?"
+    "text": "Two statistics\n\nR-squared, \\(R^2\\) : Percentage of variability in the outcome explained by the regression model (in the context of SLR, the predictor)\n\\[\nR^2 = Cor(x,y)^2 = Cor(y, \\hat{y})^2\n\\]\nRoot mean square error, RMSE: A measure of the average error (average difference between observed and predicted values of the outcome)\n\\[\nRMSE = \\sqrt{\\frac{\\sum_{i = 1}^n (y_i - \\hat{y}_i)^2}{n}}\n\\]\n\n\n\nWhat indicates a good model fit? Higher or lower \\(R^2\\)? Higher or lower RMSE?"
   },
   {
     "objectID": "slides/lec-4.html#r-squared",
     "href": "slides/lec-4.html#r-squared",
     "title": "SLR: Prediction + model evaluation",
     "section": "R-squared",
-    "text": "R-squared\n\nRanges between 0 (terrible predictor) and 1 (perfect predictor)\nUse rsq() to calculate:\n\nrsq(nc_aug, truth = uninsured, estimate = .fitted)\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 rsq     standard       0.243\n\n\n\n\n\nAlternatively, use glance() to construct a single row summary of the model fit, including \\(R^2\\):\n\nglance(nc_fit)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic     p.value    df logLik   AIC   BIC\n      <dbl>         <dbl> <dbl>     <dbl>       <dbl> <dbl>  <dbl> <dbl> <dbl>\n1     0.243         0.235  2.09      31.5 0.000000188     1  -214.  435.  443.\n# … with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>"
+    "text": "R-squared\n\nRanges between 0 (terrible predictor) and 1 (perfect predictor)\nUnitless\nCalculate with rsq():\n\nrsq(nc_aug, truth = uninsured, estimate = .fitted)\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 rsq     standard       0.243"
   },
   {
     "objectID": "slides/lec-4.html#interpreting-r-squared",
@@ -749,11 +770,25 @@
     "text": "Interpreting R-squared\n\n\n\n\n🗳️ Vote on Slack\nThe \\(R^2\\) of the model for predicting uninsurance rate from high school graduation rate for NC counties is 24.3%. Which of the following is the correct interpretation of this value?\n\n\nHigh school graduation rates correctly predict 24.3% of uninsurance rates in NC counties.\n24.3% of the variability in uninsurance rates in NC counties can be explained by high school graduation rates.\n24.3% of the variability in high school graduation rates in NC counties can be explained by uninsurance rates.\n24.3% of the time uninsurance rates in NC counties can be predicted by high school graduation rates."
   },
   {
+    "objectID": "slides/lec-4.html#alternative-approach-for-r-squared",
+    "href": "slides/lec-4.html#alternative-approach-for-r-squared",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Alternative approach for R-squared",
+    "text": "Alternative approach for R-squared\nAlternatively, use glance() to construct a single row summary of the model fit, including \\(R^2\\):\n\nglance(nc_fit)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic     p.value    df logLik   AIC   BIC\n      <dbl>         <dbl> <dbl>     <dbl>       <dbl> <dbl>  <dbl> <dbl> <dbl>\n1     0.243         0.235  2.09      31.5 0.000000188     1  -214.  435.  443.\n# … with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>\n\nglance(nc_fit)$r.squared\n\n[1] 0.2430694"
+  },
+  {
     "objectID": "slides/lec-4.html#rmse",
     "href": "slides/lec-4.html#rmse",
     "title": "SLR: Prediction + model evaluation",
     "section": "RMSE",
-    "text": "RMSE\n\nRanges between 0 (perfect predictor) and infinity (terrible predictor)\nUse rmse() to calculate:\n\nrmse(nc_aug, truth = uninsured, estimate = .fitted)\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 rmse    standard        2.07"
+    "text": "RMSE\n\nRanges between 0 (perfect predictor) and infinity (terrible predictor)\nSame units as the outcome variable\nCalculate with rmse():\n\nrmse(nc_aug, truth = uninsured, estimate = .fitted)\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 rmse    standard        2.07\n\n\nThe value of RMSE is not very meaningful on its own, but it’s useful for comparing across models (more on this when we get to regression with multiple predictors)"
+  },
+  {
+    "objectID": "slides/lec-4.html#obtaining-r-squared-and-rmse",
+    "href": "slides/lec-4.html#obtaining-r-squared-and-rmse",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Obtaining R-squared and RMSE",
+    "text": "Obtaining R-squared and RMSE\n\nUse rsq() and rmse(), respectively\n\nrsq(nc_aug, truth = uninsured, estimate = .fitted)\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 rsq     standard       0.243\n\nrmse(nc_aug, truth = uninsured, estimate = .fitted)\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 rmse    standard        2.07\n\n\n\n\n\nFirst argument: data frame containing truth and estimate columns\nSecond argument: name of the column containing truth (observed outcome)\nThird argument: name of the column containing estimate (predicted outcome)"
   },
   {
     "objectID": "slides/lec-4.html#purpose-of-model-evaluation",
@@ -784,18 +819,74 @@
     "text": "Predictive performance\n\n\n\n\n\nHow consistent are the predictions for different testing datasets?\nHow consistent are the predictions for counties with high school graduation rates in the middle of the plot vs. in the edges?"
   },
   {
-    "objectID": "slides/lec-4.html#resampling-the-data",
-    "href": "slides/lec-4.html#resampling-the-data",
+    "objectID": "slides/lec-4.html#bootstrapping-our-data",
+    "href": "slides/lec-4.html#bootstrapping-our-data",
     "title": "SLR: Prediction + model evaluation",
-    "section": "Resampling the data",
-    "text": "Resampling the data\n\n\n\n\n\nTake a bootstrap sample – sample with replacement from the original data, same size as the original data\nFit models to each of the samples"
+    "section": "Bootstrapping our data",
+    "text": "Bootstrapping our data\n\nThe idea behind bootstrapping is that if a given observation exists in a sample, there may be more like it in the population\nWith bootstrapping, we simulate resampling from the population by resampling from the sample we observed\nBootstrap samples are the sampled with replacement from the original sample and same size as the original sample\n\nFor example, if our sample consists of the observations {A, B, C}, bootstrap samples could be {A, A, B}, {A, C, A}, {B, C, C}, {A, B, C}, etc."
+  },
+  {
+    "objectID": "slides/lec-4.html#simulation-bootstrapping",
+    "href": "slides/lec-4.html#simulation-bootstrapping",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Simulation: bootstrapping",
+    "text": "Simulation: bootstrapping\n\n\n\n\nTake a bootstrap sample – sample with replacement from the original data, same size as the original data\nFit model to the sample and make predictions for that sample\nRepeat many times"
   },
   {
     "objectID": "slides/lec-4.html#predictive-performance-1",
     "href": "slides/lec-4.html#predictive-performance-1",
     "title": "SLR: Prediction + model evaluation",
     "section": "Predictive performance",
-    "text": "Predictive performance\n\n\n\n\n\nHow consistent are the predictions for different bootstrap datasets?\nHow consistent are the predictions for counties with high school graduation rates in the middle of the plot vs. in the edges?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Predictive performance\n\n\n\n\n\nHow consistent are the predictions for different bootstrap datasets?\nHow consistent are the predictions for counties with high school graduation rates in the middle of the plot vs. in the edges?"
+  },
+  {
+    "objectID": "slides/lec-4.html#uninsurance-vs.-hs-graduation-rates-1",
+    "href": "slides/lec-4.html#uninsurance-vs.-hs-graduation-rates-1",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Uninsurance vs. HS graduation rates",
+    "text": "Uninsurance vs. HS graduation rates\n\n\nCode\ncounty_2019_ny <- county_2019 %>%\n  as_tibble() %>%\n  filter(state == \"New York\") %>%\n  select(name, hs_grad, uninsured)\n\nggplot(county_2019_ny,\n       aes(x = hs_grad, y = uninsured)) +\n  geom_point() +\n  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  labs(\n    x = \"High school graduate\", y = \"Uninsured\",\n    title = \"Uninsurance vs. HS graduation rates\",\n    subtitle = \"New York counties, 2015 - 2019\"\n  ) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"pink\")"
+  },
+  {
+    "objectID": "slides/lec-4.html#data-splitting",
+    "href": "slides/lec-4.html#data-splitting",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Data splitting",
+    "text": "Data splitting"
+  },
+  {
+    "objectID": "slides/lec-4.html#bootstrapping-1",
+    "href": "slides/lec-4.html#bootstrapping-1",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Bootstrapping",
+    "text": "Bootstrapping"
+  },
+  {
+    "objectID": "slides/lec-4.html#comparing-ny-and-nc",
+    "href": "slides/lec-4.html#comparing-ny-and-nc",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Comparing NY and NC",
+    "text": "Comparing NY and NC\n\nWhy are the fits from the NY models more variable than those from the NC models?"
+  },
+  {
+    "objectID": "slides/lec-4.html#terminology",
+    "href": "slides/lec-4.html#terminology",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Terminology",
+    "text": "Terminology\n\nOutcome: y\nPredictor: x\nObserved y, \\(y\\): truth\nPredicted y, \\(\\hat{y}\\): fitted, estimated\nResidual: difference between observed and predicted outcome for a given value of predictor"
+  },
+  {
+    "objectID": "slides/lec-4.html#model-evaluation-1",
+    "href": "slides/lec-4.html#model-evaluation-1",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Model evaluation",
+    "text": "Model evaluation\n\nOne concern in evaluating models is how well they do for prediction\nWe’re generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)\nEvaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to “new” data\nQuantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to “new” data\nToday we introduced these concepts, throughout the semester we’ll learn how to implement them (i.e., write the code) and how to interpret their results"
+  },
+  {
+    "objectID": "slides/lec-4.html#splitting-vs.-bootstrapping",
+    "href": "slides/lec-4.html#splitting-vs.-bootstrapping",
+    "title": "SLR: Prediction + model evaluation",
+    "section": "Splitting vs. bootstrapping",
+    "text": "Splitting vs. bootstrapping\n\nFood for thought: On the right are fits from various splits of the data into testing and training. On the left are fits to bootstrap samples of the data. Which one shows more variability and why?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "computing-troubleshooting.html",
@@ -816,7 +907,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n\n\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "hw/hw-5.html#part-1-experience-statistics-outside-of-the-classroom",
@@ -1061,7 +1152,7 @@
     "href": "weeks/week-3.html#participate",
     "title": "Week 3",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lecture 4 - SLR: Prediction + model evaluation (to be posted)\n🖥️ Lecture 5 - SLR: Simulation-based inference (to be posted)"
+    "text": "Participate\n🖥️ Lecture 4 - SLR: Prediction + model evaluation\n🖥️ Lecture 5 - SLR: Simulation-based inference (to be posted)"
   },
   {
     "objectID": "weeks/week-3.html#perform",
