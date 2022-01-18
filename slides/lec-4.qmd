@@ -425,21 +425,22 @@ glance(nc_fit)$r.squared
 
 -   The value of RMSE is not very meaningful on its own, but it's useful for comparing across models (more on this when we get to regression with multiple predictors)
 
-## Obtaining R-squared and RMSE
+## Obtaining R-squared and RMSE {.smaller}
 
 -   Use `rsq()` and `rmse()`, respectively
 
     ```{r}
     #| echo: true
+    #| eval: false
 
     rsq(nc_aug, truth = uninsured, estimate = .fitted)
     rmse(nc_aug, truth = uninsured, estimate = .fitted)
     ```
 
-<!-- -->
-
 -   First argument: data frame containing `truth` and `estimate` columns
+
 -   Second argument: name of the column containing `truth` (observed outcome)
+
 -   Third argument: name of the column containing `estimate` (predicted outcome)
 
 ## Purpose of model evaluation
@@ -527,7 +528,7 @@ p_nc_fits
 
 # Bootstrapping
 
-## Bootstrapping our data
+## Bootstrapping our data {.smaller}
 
 -   The idea behind bootstrapping is that if a given observation exists in a sample, there may be more like it in the population
 -   With bootstrapping, we simulate resampling from the population by resampling from the sample we observed
@@ -713,29 +714,3 @@ Why are the fits from the NY models more variable than those from the NC models?
 -   Evaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to "new" data
 -   Quantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to "new" data
 -   Today we introduced these concepts, throughout the semester we'll learn how to implement them (i.e., write the code) and how to interpret their results
-
-## Splitting vs. bootstrapping
-
-::: question
-**Food for thought:** On the right are fits from various splits of the data into testing and training.
-On the left are fits to bootstrap samples of the data.
-Which one shows more variability and why?
-:::
-
-::: columns
-::: {.column width="50%"}
-```{r}
-#| out.width: "100%"
-
-p_nc_fits
-```
-:::
-
-::: {.column width="50%"}
-```{r}
-#| out.width: "100%"
-
-p_nc_boots
-```
-:::
-:::
