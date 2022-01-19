@@ -269,10 +269,7 @@ Run the code below to use the `glimpse()` function to see a summary of the `ikea
 glimpse(ikea)
 ```
 
-::: {.callout-note appearance="minimal"}
-How many observations are in the `ikea` dataset?
-How many variables?
-:::
+**How many observations are in the `ikea` dataset? How many variables?**
 
 ::: callout-note
 In your `lab-1-ikea.qmd` document you'll see that we already added the code required for the exercise as well as a sentence where you can fill in the blanks to report the answer.
@@ -296,12 +293,7 @@ ggplot(data = ikea, aes(x = price_usd)) +
   geom_histogram()
 ```
 
-::: {.callout-note appearance="minimal"}
--   Use the visualization to describe the distribution of price.
-    In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers.
-
--   Briefly explain why the median is more representative of the center of this distribution than the mean.
-:::
+**Use the visualization to describe the distribution of price. In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers. Briefly explain why the median is more representative of the center of this distribution than the mean.**
 
 ::: callout-tip
 When using the visual editor you can insert a code chunk using the Insert menu on top or by using the catch-all `⌘ /` shortcut to insert just about anything.
@@ -358,10 +350,7 @@ ikea_sub <- ikea %>%
   ))
 ```
 
-::: {.callout-note appearance="minimal"}
-How many observations are in the `ikea_sub` dataset?
-How many variables?
-:::
+**How many observations are in the `ikea_sub` dataset? How many variables?**
 
 ### Exercise 5
 
@@ -382,10 +371,7 @@ ggplot(data = ikea_sub, aes(x = price_usd, fill = category)) +
   geom_density(alpha = 0.8)
 ```
 
-::: {.callout-note appearance="minimal"}
-Recreate the density plot using a more suitable alpha level, so we can more easily see the distribution of all the categories.
-Include an informative title and informative axis labels.
-:::
+**Recreate the density plot using a more suitable alpha level, so we can more easily see the distribution of all the categories. Include an informative title and informative axis labels.**
 
 ::: callout-warning
 🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub.
@@ -395,18 +381,13 @@ After you push the changes, the Git pane in RStudio should be empty.
 
 ### Exercise 6
 
-::: {.callout-note appearance="minimal"}
-Briefly describe why we defined the fill of the curves by mapping aesthetics of the plot (inside the `aes` function) but we defined the alpha level as a characteristic of the plotting `geom`.
-:::
+**Briefly describe why we defined the fill of the curves by mapping aesthetics of the plot (inside the `aes` function) but we defined the alpha level as a characteristic of the plotting `geom`.**
 
 ### Exercise 7
 
 Overlapping density plots are not the only way to visualize the relationship between a quantitative and categorical variable.
 
-::: callout-exercise
-Use a different type of plot to visualize the relationship between `price_usd` and `category`.
-Include an informative title and informative axis labels.
-:::
+**Use a different type of plot to visualize the relationship between `price_usd` and `category`. Include an informative title and informative axis labels.**
 
 ::: callout-tip
 You can use the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/data-visualization.pdf) and [from Data to Viz](https://www.data-to-viz.com) for inspiration.
@@ -414,12 +395,7 @@ You can use the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/raw/
 
 ### Exercise 8
 
-::: {.callout-note appearance="minimal"}
-Compare and contrast your plots from the previous exercise to the overlapping density plots from Exercise 5.
-What features are apparent in the plot from the previous exercise that aren't in the overlapping density plots?
-What features are apparent in the overlapping density plots that aren't in the plot from the previous exercise?
-What features are apparent in both?
-:::
+**Compare and contrast your plots from the previous exercise to the overlapping density plots from [Exercise 5]. What features are apparent in the plot from the previous exercise that aren't in the overlapping density plots? What features are apparent in the overlapping density plots that aren't in the plot from the previous exercise? What features are apparent in both?**
 
 ::: callout-warning
 🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub.
@@ -443,16 +419,11 @@ ggplot(data = _____, aes(x = width, y = _____)) +
     )
 ```
 
-::: {.callout-note appearance="minimal"}
-Use your visualization to describe the relationship between the width and price of Ikea furniture.
-:::
+**Use your visualization to describe the relationship between the width and price of Ikea furniture.**
 
 ### Exercise 10
 
-::: {.callout-note appearance="minimal"}
-Color the points of the scatterplot by category.
-Describe how the relationship between price and width of Ikea furniture differs by category, if at all.
-:::
+**Color the points of the scatterplot by category. Describe how the relationship between price and width of Ikea furniture differs by category, if at all.**
 
 ::: callout-warning
 🧶 ✅ ⬆️ You're done and ready to submit your work!
@@ -460,8 +431,6 @@ Knit, commit, and push all remaining changes.
 You can use the commit message "Done with Lab 1!" , and make sure you have committed and pushed all changed files to GitHub (your Git pane in RStudio should be empty) and that **all** documents are updated in your repo on GitHub.
 The PDF document you submit to Gradescope should be identical to the one in your GitHub repo.
 :::
-
-See the instructions below to submit your work on Gradescope.
 
 ## Submission
 
