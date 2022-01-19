@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.23">
+  <meta name="generator" content="quarto-0.3.26">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>STA 210 - Spring 2022 - Lab 1 - Meet the toolkit</title>
   <style>
@@ -336,8 +336,10 @@
       <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">On this page</h2>
 <ul>
-<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+<ul class="collapse">
 <li><a href="#learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+</ul></li>
 <li><a href="#getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a>
 <ul class="collapse">
 <li><a href="#log-in-to-rstudio" class="nav-link" data-scroll-target="#log-in-to-rstudio">Log in to RStudio</a></li>
@@ -357,8 +359,6 @@
 </ul></li>
 <li><a href="#exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
 <ul class="collapse">
-<li><a href="#instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a>
-<ul class="collapse">
 <li><a href="#exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
 <li><a href="#exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
 <li><a href="#exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
@@ -373,7 +373,6 @@
 <li><a href="#submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
 <li><a href="#grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
 <li><a href="#resources-for-additional-practice-optional" class="nav-link" data-scroll-target="#resources-for-additional-practice-optional">Resources for additional practice (optional)</a></li>
-</ul></li>
 </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/labs/lab-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -415,17 +414,17 @@ Note
 </div>
 <p>As the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer. Before we get to that stage, however, you need to build some basic fluency in R. Today we begin with the fundamental building blocks of R and RStudio: the interface, reading in data, and basic commands.</p>
 <p>To make versioning simpler, this is a solo lab. In the future, you’ll learn about collaborating on GitHub and producing a single lab report for your lab team, but for now, concentrate on getting the basics down.</p>
-</section>
-<section id="learning-goals" class="level2">
-<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<section id="learning-goals" class="level3">
+<h3 class="anchored" data-anchor-id="learning-goals">Learning goals</h3>
 <p>By the end of the lab, you will…</p>
 <ul>
-<li><p>Be familiar with the workflow using R, RStudio, Git, and GitHub</p></li>
-<li><p>Gain practice writing a reproducible report using RMarkdown</p></li>
-<li><p>Practice version control using GitHub</p></li>
-<li><p>Be able to create data visualizations using <code>ggplot2</code></p></li>
-<li><p>Be able to describe variable distributions and the relationship between multiple variables</p></li>
+<li>Be familiar with the workflow using R, RStudio, Git, and GitHub</li>
+<li>Gain practice writing a reproducible report using RMarkdown</li>
+<li>Practice version control using GitHub</li>
+<li>Be able to create data visualizations using <code>ggplot2</code></li>
+<li>Be able to describe variable distributions and the relationship between multiple variables</li>
 </ul>
+</section>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
@@ -520,9 +519,9 @@ Note
 <section id="r-and-r-studio" class="level3">
 <h3 class="anchored" data-anchor-id="r-and-r-studio">R and R Studio</h3>
 <p>Below are the components of the RStudio IDE.</p>
-<!--# INSERT SCREENSHOT OF IDE -->
+<p><img src="images/lab-1/rstudio.png" class="img-fluid" alt="RStudio IDE"></p>
 <p>Below are the components of a Quarto (.qmd) file.</p>
-<!--# INSERT SCREENSHOT OF QUARTO DOCUMENT -->
+<p><img src="images/lab-1/quarto.png" class="img-fluid" alt="Quarto document"></p>
 </section>
 <section id="yaml" class="level3">
 <h3 class="anchored" data-anchor-id="yaml">YAML</h3>
@@ -590,8 +589,8 @@ Important
 <p>The message that’s printed when you load the package tells you which versions of these packages are loaded as well as any conflicts they may have introduced, e.g., the <code>filter()</code> function from dplyr has now masked (overwritten) the <code>filter()</code> function available in base R (and that’s ok, we’ll use <code>dplyr::filter()</code> anyway).</p>
 <p>We’ll be using functionality from all of these packages throughout the semester, though we’ll always load them all at once with <code>library(tidyverse)</code>. You can find out more about the tidyverse and each of the packages that make it up <a href="https://www.tidyverse.org/">here</a>.</p>
 </section>
-<section id="data-ikea-furniture" class="level1">
-<h1>Data: Ikea furniture</h1>
+<section id="data-ikea-furniture" class="level2">
+<h2 class="anchored" data-anchor-id="data-ikea-furniture">Data: Ikea furniture</h2>
 <p>Today’s data is all about <a href="https://www.ikea.com/">Ikea</a> furniture. The data was obtained from the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-11-03/readme.md">TidyTuesday</a> data collection.</p>
 <p>Use the code below to read in the data.</p>
 <div class="cell">
@@ -601,11 +600,6 @@ Important
 <h3 class="anchored" data-anchor-id="data-dictionary">Data dictionary</h3>
 <p>The variable definitions are as follows:</p>
 <table class="table">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 8%">
-<col style="width: 75%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>variable</th>
@@ -677,18 +671,16 @@ Important
 </tbody>
 </table>
 </section>
-<section id="view-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="view-the-data">View the data</h2>
+<section id="view-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="view-the-data">View the data</h3>
 <p>Before doing any analysis, you may want to get quick view of the data. This is useful when you’ve imported data to see if your data imported correctly. We can use the <code>view()</code> function to see the entire data set in RStudio. Type the code below in the <strong>Console</strong> to view the entire dataset.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(ikea)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="exercises" class="level1 page-columns page-full">
-<h1>Exercises</h1>
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <p>Write all code and narrative in your R Markdown file. Write all narrative in complete sentences. Throughout the assignment, you should periodically <strong>Render</strong> your Quarto document to produce the updated PDF, <strong>commit</strong> the changes in the Git pane, and <strong>push</strong> the updated files to GitHub.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -709,16 +701,7 @@ Tip
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ikea)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>How many observations are in the <code>ikea</code> dataset? How many variables?</p>
-</div>
-</div>
-</div>
+<p><strong>How many observations are in the <code>ikea</code> dataset? How many variables?</strong></p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -748,19 +731,7 @@ Note
 <p><img src="lab-1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<ul>
-<li><p>Use the visualization to describe the distribution of price. In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers.</p></li>
-<li><p>Briefly explain why the median is more representative of the center of this distribution than the mean.</p></li>
-</ul>
-</div>
-</div>
-</div>
+<p><strong>Use the visualization to describe the distribution of price. In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers. Briefly explain why the median is more representative of the center of this distribution than the mean.</strong></p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -827,16 +798,7 @@ Caution
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sofas &amp; armchairs"</span>, <span class="st">"Children's furniture"</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>How many observations are in the <code>ikea_sub</code> dataset? How many variables?</p>
-</div>
-</div>
-</div>
+<p><strong>How many observations are in the <code>ikea_sub</code> dataset? How many variables?</strong></p>
 </section>
 <section id="exercise-5" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
@@ -856,16 +818,7 @@ Caution
 <p><img src="lab-1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Recreate the density plot using a more suitable alpha level, so we can more easily see the distribution of all the categories. Include an informative title and informative axis labels.</p>
-</div>
-</div>
-</div>
+<p><strong>Recreate the density plot using a more suitable alpha level, so we can more easily see the distribution of all the categories. Include an informative title and informative axis labels.</strong></p>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -882,33 +835,12 @@ Warning
 </section>
 <section id="exercise-6" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Briefly describe why we defined the fill of the curves by mapping aesthetics of the plot (inside the <code>aes</code> function) but we defined the alpha level as a characteristic of the plotting <code>geom</code>.</p>
-</div>
-</div>
-</div>
+<p><strong>Briefly describe why we defined the fill of the curves by mapping aesthetics of the plot (inside the <code>aes</code> function) but we defined the alpha level as a characteristic of the plotting <code>geom</code>.</strong></p>
 </section>
 <section id="exercise-7" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-7">Exercise 7</h3>
 <p>Overlapping density plots are not the only way to visualize the relationship between a quantitative and categorical variable.</p>
-<div class="callout-exercise callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Exercise
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Use a different type of plot to visualize the relationship between <code>price_usd</code> and <code>category</code>. Include an informative title and informative axis labels.</p>
-</div>
-</div>
+<p><strong>Use a different type of plot to visualize the relationship between <code>price_usd</code> and <code>category</code>. Include an informative title and informative axis labels.</strong></p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -925,16 +857,7 @@ Tip
 </section>
 <section id="exercise-8" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-8">Exercise 8</h3>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Compare and contrast your plots from the previous exercise to the overlapping density plots from Exercise 5. What features are apparent in the plot from the previous exercise that aren’t in the overlapping density plots? What features are apparent in the overlapping density plots that aren’t in the plot from the previous exercise? What features are apparent in both?</p>
-</div>
-</div>
-</div>
+<p><strong>Compare and contrast your plots from the previous exercise to the overlapping density plots from <a href="#exercise-5">Exercise 5</a>. What features are apparent in the plot from the previous exercise that aren’t in the overlapping density plots? What features are apparent in the overlapping density plots that aren’t in the plot from the previous exercise? What features are apparent in both?</strong></p>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -961,29 +884,11 @@ Warning
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"_____"</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Use your visualization to describe the relationship between the width and price of Ikea furniture.</p>
-</div>
-</div>
-</div>
+<p><strong>Use your visualization to describe the relationship between the width and price of Ikea furniture.</strong></p>
 </section>
 <section id="exercise-10" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-10">Exercise 10</h3>
-<div class="callout-note callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Color the points of the scatterplot by category. Describe how the relationship between price and width of Ikea furniture differs by category, if at all.</p>
-</div>
-</div>
-</div>
+<p><strong>Color the points of the scatterplot by category. Describe how the relationship between price and width of Ikea furniture differs by category, if at all.</strong></p>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -997,7 +902,6 @@ Warning
 <p>🧶 ✅ ⬆️ You’re done and ready to submit your work! Knit, commit, and push all remaining changes. You can use the commit message “Done with Lab 1!” , and make sure you have committed and pushed all changed files to GitHub (your Git pane in RStudio should be empty) and that <strong>all</strong> documents are updated in your repo on GitHub. The PDF document you submit to Gradescope should be identical to the one in your GitHub repo.</p>
 </div>
 </div>
-<p>See the instructions below to submit your work on Gradescope.</p>
 </section>
 </section>
 <section id="submission" class="level2">
@@ -1063,7 +967,6 @@ Warning
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
