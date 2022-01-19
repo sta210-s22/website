@@ -19,6 +19,8 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 ## Perform
 
+⌨️ [Lab 2 - College scorecard](/labs/lab-2.html "Lab instructions")
+
 <br><br>
 
 ::: {style="font-size: 0.875em;"}

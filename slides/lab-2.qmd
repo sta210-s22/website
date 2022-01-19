@@ -1,0 +1,71 @@
+---
+title: "Lab 1 - Meet the toolkit"
+subtitle: "STA 210 - Spring 2022"
+footer:  "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+editor: visual
+format: 
+  revealjs: 
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+execute:
+  freeze: auto
+---
+
+## **What to expect in lab**
+
+-   Introduction to the lab assignment (\~ 5 - 10 minutes)
+
+-   Work on the lab assignment (individual at first, but in teams for the rest of the semester)
+
+-   Lab instructions posted on the [course website](https://sta210-s22.github.io/website/ "STA 210 Course website").
+
+-   Start each lab by finding your assignment repo in the [course GitHub organization](https://github.com/sta210-s22)
+
+    -   This is where you will find the Quarto document and data to get started
+
+## **Tips**
+
+-   You do not have to finish the lab in class, they will always be due the following **Friday at 5:00 pm**.
+    One work strategy is to get through portions that you think will be most challenging (which initially might be the coding component) during lab when a TA can help you on the spot and leave the narrative writing until later.
+
+-   When working in teams (later in the semester) do not pressure each other to finish early; use the time wisely to really learn the material and produce a quality report.
+
+## **Check: Do you have the lab-1 repo?**
+
+-   Go to the GitHub course organization: <https://github.com/sta210-s22>
+
+-   You should see a repo with the prefix **`lab-1-`** followed by your GitHub username
+
+-   If you do not have this repo, please let your TAs know!
+
+## Demo
+
+**Follow along as your TA demonstrates the following:**
+
+-   Configure Git using SSH
+
+-   Clone RStudio repo and start new project
+
+-   Render document and produce PDF
+
+-   Update name in YAML
+
+    -   Render, commit, push changes to GitHub
+
+    -   See updates in your GitHub repo
+
+## **When you're done with lab**
+
+-   Make sure all your final changes have been pushed to your GitHub repo
+
+-   Submit the PDF of your responses to [**Gradescope**](https://www.gradescope.com/)
+
+    -   You can access Gradescope through Sakai or the course website
+
+    -   Login using your Duke NetID credentials
+
+## **You're now ready to complete the rest of lab!**
+
+Please "raise your hand" if you need help as you work on the lab
