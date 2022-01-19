@@ -4,7 +4,7 @@ editor: visual
 reference-location: margin
 ---
 
-## Introduction
+# Introduction
 
 This lab will go through much of the same workflow we've demonstrated in class.
 The main goal is to reinforce our understanding of R and RStudio, which we will be using throughout the course both to learn the statistical concepts discussed in the course and to analyze real data and come to informed conclusions.
@@ -31,22 +31,18 @@ In the future, you'll learn about collaborating on GitHub and producing a single
 By the end of the lab, you will...
 
 -   Be familiar with the workflow using R, RStudio, Git, and GitHub
-
 -   Gain practice writing a reproducible report using RMarkdown
-
 -   Practice version control using GitHub
-
 -   Be able to create data visualizations using `ggplot2`
-
 -   Be able to describe variable distributions and the relationship between multiple variables
 
-## Getting started
+# Getting started
 
 ::: callout-important
 Your lab TA will lead you through the Getting Started section.
 :::
 
-### Log in to RStudio
+## Log in to RStudio
 
 -   Go to <https://vm-manage.oit.duke.edu/containers> and login with your Duke NetID and Password.
 -   Click **STA210** to log into the Docker container. You should now see the RStudio environment.
@@ -55,7 +51,7 @@ Your lab TA will lead you through the Getting Started section.
 If you haven't yet done so, you will need to reserve a container for STA210 first.
 :::
 
-### Set up your SSH key
+## Set up your SSH key
 
 You will authenticate GitHub using SSH.
 Below are an outline of the authentication steps; you are encouraged to follow along as your TA demonstrates the steps.
@@ -77,7 +73,7 @@ You only need to do this authentication process one time on a single system.
 
 You can find more detailed instructions [here](https://github.com/DukeStatSci/github_auth_guide) if you're interested.
 
-### Configure Git
+## Configure Git
 
 There is one more thing we need to do before getting started on the assignment.
 Specifically, we need to configure your git so that RStudio can communicate with GitHub.
@@ -107,7 +103,7 @@ usethis::use_git_config(
 
 You are now ready interact with GitHub via RStudio!
 
-### Clone the repo & start new RStudio project
+## Clone the repo & start new RStudio project
 
 -   Go to the course organization at [github.com/sta210-s22](https://github.com/sta210-s22 "Course GitHub organization") organization on GitHub.
     Click on the repo with the prefix **lab-1**.
@@ -125,17 +121,17 @@ You are now ready interact with GitHub via RStudio!
 -   Click *lab-1-ikea.qmd* to open the template R Markdown file.
     This is where you will write up your code and narrative for the lab.
 
-### R and R Studio
+## R and R Studio
 
 Below are the components of the RStudio IDE.
 
-<!--# INSERT SCREENSHOT OF IDE -->
+![](images/lab-1/rstudio.png){fig-alt="RStudio IDE"}
 
 Below are the components of a Quarto (.qmd) file.
 
-<!--# INSERT SCREENSHOT OF QUARTO DOCUMENT -->
+![](images/lab-1/quarto.png){fig-alt="Quarto document"}
 
-### YAML
+## YAML
 
 The top portion of your R Markdown file (between the three dashed lines) is called **YAML**.
 It stands for "YAML Ain't Markup Language".
@@ -147,7 +143,7 @@ Open the Quarto (`.qmd`) file in your project, change the author name to your na
 Examine the rendered document.
 :::
 
-### Committing changes
+## Committing changes
 
 Now, go to the Git pane in your RStudio instance.
 This will be in the top right hand corner in a separate tab.
@@ -174,14 +170,14 @@ Go to your GitHub repo and refresh the page.
 You should see your commit message next to the updated files.
 If you see this, all your changes are on GitHub and you're good to go!
 
-### Push changes
+## Push changes
 
 Now that you have made an update and committed this change, it's time to push these changes to your repo on GitHub.
 
 In order to push your changes to GitHub, you must have **staged** your **commit** to be pushed.
 click on **Push**.
 
-## Packages
+# Packages
 
 We will use the following package in today's lab.
 
