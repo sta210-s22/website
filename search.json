@@ -32,7 +32,7 @@
     "href": "labs/lab-1.html#data-ikea-furniture",
     "title": "Lab 1 - Meet the toolkit",
     "section": "Data: Ikea furniture",
-    "text": "Data: Ikea furniture\nToday’s data is all about Ikea furniture. The data was obtained from the TidyTuesday data collection.\nUse the code below to read in the data.\n\nikea <- read_csv(\"data/ikea.csv\")\n\n\nData dictionary\nThe variable definitions are as follows:\n\n\n\nvariable\nclass\ndescription\n\n\n\n\nitem_id\ndouble\nitem id which can be used later to merge with other IKEA data frames\n\n\nname\ncharacter\nthe commercial name of items\n\n\ncategory\ncharacter\nthe furniture category that the item belongs to (Sofas, beds, chairs, Trolleys,…)\n\n\nsellable_online\nlogical\nSellable online TRUE or FALSE\n\n\nlink\ncharacter\nthe web link of the item\n\n\nother_colors\ncharacter\nif other colors are available for the item, or just one color as displayed in the website (Boolean)\n\n\nshort_description\ncharacter\na brief description of the item\n\n\ndesigner\ncharacter\nThe name of the designer who designed the item. this is extracted from the full_description column.\n\n\ndepth\ndouble\nDepth of the item in Centimeter\n\n\nheight\ndouble\nHeight of the item in Centimeter\n\n\nwidth\ndouble\nWidth of the item in Centimeter\n\n\nprice_usd\ndouble\nthe current price in US dollars as it is shown in the website by 4/20/2020\n\n\n\n\n\nView the data\nBefore doing any analysis, you may want to get quick view of the data. This is useful when you’ve imported data to see if your data imported correctly. We can use the view() function to see the entire data set in RStudio. Type the code below in the Console to view the entire dataset.\n\nview(ikea)"
+    "text": "Data: Ikea furniture\nToday’s data is all about Ikea furniture. The data was obtained from the TidyTuesday data collection.\nUse the code below to read in the data.\n\nikea <- read_csv(\"data/ikea.csv\")\n\n\nData dictionary\nThe variable definitions are as follows:\n\n\n\n\n\n\n\n\nvariable\nclass\ndescription\n\n\n\n\nitem_id\ndouble\nitem id which can be used later to merge with other IKEA data frames\n\n\nname\ncharacter\nthe commercial name of items\n\n\ncategory\ncharacter\nthe furniture category that the item belongs to (Sofas, beds, chairs, Trolleys,…)\n\n\nsellable_online\nlogical\nSellable online TRUE or FALSE\n\n\nlink\ncharacter\nthe web link of the item\n\n\nother_colors\ncharacter\nif other colors are available for the item, or just one color as displayed in the website (Boolean)\n\n\nshort_description\ncharacter\na brief description of the item\n\n\ndesigner\ncharacter\nThe name of the designer who designed the item. this is extracted from the full_description column.\n\n\ndepth\ndouble\nDepth of the item in Centimeter\n\n\nheight\ndouble\nHeight of the item in Centimeter\n\n\nwidth\ndouble\nWidth of the item in Centimeter\n\n\nprice_usd\ndouble\nthe current price in US dollars as it is shown in the website by 4/20/2020\n\n\n\n\n\nView the data\nBefore doing any analysis, you may want to get quick view of the data. This is useful when you’ve imported data to see if your data imported correctly. We can use the view() function to see the entire data set in RStudio. Type the code below in the Console to view the entire dataset.\n\nview(ikea)"
   },
   {
     "objectID": "labs/lab-1.html#exercises",
@@ -383,6 +383,279 @@
     "title": "Lab 1 - Meet the toolkit",
     "section": "You’re now ready to complete the rest of lab!",
     "text": "You’re now ready to complete the rest of lab!\nPlease “raise your hand” if you need help as you work on the lab\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
+    "objectID": "slides/lec-5.html#announcements",
+    "href": "slides/lec-5.html#announcements",
+    "title": "SLR: Simulation based-inference",
+    "section": "Announcements",
+    "text": "Announcements\n\nHW 5 posted tomorrow, due next Friday"
+  },
+  {
+    "objectID": "slides/lec-5.html#computational-setup",
+    "href": "slides/lec-5.html#computational-setup",
+    "title": "SLR: Simulation based-inference",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)   # for data wrangling and visualization\nlibrary(tidymodels)  # for modeling\nlibrary(usdata)      # for the county_2019 dataset\nlibrary(openintro)   # for the duke_forest dataset\nlibrary(scales)      # for pretty axis labels\nlibrary(glue)        # for constructing character strings\nlibrary(knitr)       # for pretty tables\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))"
+  },
+  {
+    "objectID": "slides/lec-5.html#terminology",
+    "href": "slides/lec-5.html#terminology",
+    "title": "SLR: Simulation based-inference",
+    "section": "Terminology",
+    "text": "Terminology\n\nOutcome: y\nPredictor: x\nObserved y, \\(y\\): truth\nPredicted y, \\(\\hat{y}\\): fitted, estimated\nResidual: difference between observed and predicted outcome for a given value of predictor"
+  },
+  {
+    "objectID": "slides/lec-5.html#model-evaluation",
+    "href": "slides/lec-5.html#model-evaluation",
+    "title": "SLR: Simulation based-inference",
+    "section": "Model evaluation",
+    "text": "Model evaluation\n\nOne concern in evaluating models is how well they do for prediction\nWe’re generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)\nEvaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to “new” data\nQuantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to “new” data\nToday we introduced these concepts, throughout the semester we’ll learn how to implement them (i.e., write the code) and how to interpret their results"
+  },
+  {
+    "objectID": "slides/lec-5.html#uninsurance-vs.-hs-graduation-in-ny",
+    "href": "slides/lec-5.html#uninsurance-vs.-hs-graduation-in-ny",
+    "title": "SLR: Simulation based-inference",
+    "section": "Uninsurance vs. HS graduation in NY",
+    "text": "Uninsurance vs. HS graduation in NY\n\n\nCode\ncounty_2019_ny <- county_2019 %>%\n  as_tibble() %>%\n  filter(state == \"New York\") %>%\n  select(name, hs_grad, uninsured)\n\nggplot(county_2019_ny,\n       aes(x = hs_grad, y = uninsured)) +\n  geom_point() +\n  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  labs(\n    x = \"High school graduate\", y = \"Uninsured\",\n    title = \"Uninsurance vs. HS graduation rates\",\n    subtitle = \"New York counties, 2015 - 2019\"\n  ) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"pink\")"
+  },
+  {
+    "objectID": "slides/lec-5.html#data-splitting",
+    "href": "slides/lec-5.html#data-splitting",
+    "title": "SLR: Simulation based-inference",
+    "section": "Data splitting",
+    "text": "Data splitting"
+  },
+  {
+    "objectID": "slides/lec-5.html#bootstrapping",
+    "href": "slides/lec-5.html#bootstrapping",
+    "title": "SLR: Simulation based-inference",
+    "section": "Bootstrapping",
+    "text": "Bootstrapping"
+  },
+  {
+    "objectID": "slides/lec-5.html#comparing-ny-and-nc",
+    "href": "slides/lec-5.html#comparing-ny-and-nc",
+    "title": "SLR: Simulation based-inference",
+    "section": "Comparing NY and NC",
+    "text": "Comparing NY and NC\n\nWhy are the fits from the NY models more variable than those from the NC models?"
+  },
+  {
+    "objectID": "slides/lec-5.html#data-sale-prices-of-houses-in-duke-forest",
+    "href": "slides/lec-5.html#data-sale-prices-of-houses-in-duke-forest",
+    "title": "SLR: Simulation based-inference",
+    "section": "Data: Sale prices of houses in Duke Forest",
+    "text": "Data: Sale prices of houses in Duke Forest\n\n\n\nData on houses that were sold in the Duke Forest neighborhood of Durham, NC around November 2020\nScraped from Zillow\nSource: openintro::duke_forest"
+  },
+  {
+    "objectID": "slides/lec-5.html#exploratory-analysis",
+    "href": "slides/lec-5.html#exploratory-analysis",
+    "title": "SLR: Simulation based-inference",
+    "section": "Exploratory analysis",
+    "text": "Exploratory analysis"
+  },
+  {
+    "objectID": "slides/lec-5.html#modeling",
+    "href": "slides/lec-5.html#modeling",
+    "title": "SLR: Simulation based-inference",
+    "section": "Modeling",
+    "text": "Modeling\n\ndf_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(price ~ area, data = duke_forest)\n\ntidy(df_fit) %>%\n  kable(digits = 2)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n116652.33\n53302.46\n2.19\n0.03\n\n\narea\n159.48\n18.17\n8.78\n0.00\n\n\n\n\n\n\n\n\n\n\nIntercept: Duke Forest houses that are 0 square feet are expected to sell, on average, for $116,652.\nSlope: For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159."
+  },
+  {
+    "objectID": "slides/lec-5.html#sample-to-population",
+    "href": "slides/lec-5.html#sample-to-population",
+    "title": "SLR: Simulation based-inference",
+    "section": "Sample to population",
+    "text": "Sample to population\n\nFor each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159.\n\n\nThis estimate is valid for the single sample of 98 houses.\nBut what if we’re not interested quantifying the relationship between the size and price of a house in this single sample?\nWhat if we want to say something about the relationship between these variables for all houses in Duke Forest?"
+  },
+  {
+    "objectID": "slides/lec-5.html#statistical-inference-1",
+    "href": "slides/lec-5.html#statistical-inference-1",
+    "title": "SLR: Simulation based-inference",
+    "section": "Statistical inference",
+    "text": "Statistical inference\n\nStatistical inference allows provide methods and tools for us to use the single sample we have observed to make valid statements (inferences) about the population it comes from\nFor our inferences to be valid, the sample should be random and representative of the population we’re interested in"
+  },
+  {
+    "objectID": "slides/lec-5.html#inference-for-simple-linear-regression",
+    "href": "slides/lec-5.html#inference-for-simple-linear-regression",
+    "title": "SLR: Simulation based-inference",
+    "section": "Inference for simple linear regression",
+    "text": "Inference for simple linear regression\n\nCalculate a confidence interval for the slope, \\(\\beta_1\\)\nConduct a hypothesis test for the interval \\(\\beta_1\\)"
+  },
+  {
+    "objectID": "slides/lec-5.html#confidence-interval",
+    "href": "slides/lec-5.html#confidence-interval",
+    "title": "SLR: Simulation based-inference",
+    "section": "Confidence interval",
+    "text": "Confidence interval\n\nA plausible range of values for a population parameter is called a confidence interval\nUsing only a single point estimate is like fishing in a murky lake with a spear, and using a confidence interval is like fishing with a net\n\nWe can throw a spear where we saw a fish but we will probably miss, if we toss a net in that area, we have a good chance of catching the fish\nSimilarly, if we report a point estimate, we probably will not hit the exact population parameter, but if we report a range of plausible values we have a good shot at capturing the parameter"
+  },
+  {
+    "objectID": "slides/lec-5.html#confidence-interval-for-the-slope-1",
+    "href": "slides/lec-5.html#confidence-interval-for-the-slope-1",
+    "title": "SLR: Simulation based-inference",
+    "section": "Confidence interval for the slope",
+    "text": "Confidence interval for the slope\nA confidence interval will allow us to make a statement like “for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take X dollars.”\n\nShould X be $10? $100? $1000?\nIf we were to take another sample of 98 would we expect the slope calculated based on that sample to be exactly $159? Off by $10? $100? $1000?\nThe answer depends on how variable (from one sample to another sample) the sample statistic (the slope) is\nWe need a way to quantify the variability of the sample statistic"
+  },
+  {
+    "objectID": "slides/lec-5.html#quantifying-the-variability-of-the-slope",
+    "href": "slides/lec-5.html#quantifying-the-variability-of-the-slope",
+    "title": "SLR: Simulation based-inference",
+    "section": "Quantifying the variability of the slope",
+    "text": "Quantifying the variability of the slope\n\nTwo approaches:\n\nVia simulation (what we’ll do today)\nVia mathematical models (what we’ll do in the next class)\n\n\n\n\nSimulate to quantify the variability of the slope: - Bootstrap new samples from the original sample\n\n\n-   Fit models to each of the samples and estimate the slope\n\n-   Calculate the variability of the slopes"
+  },
+  {
+    "objectID": "slides/lec-5.html#bootstrap-sample-1",
+    "href": "slides/lec-5.html#bootstrap-sample-1",
+    "title": "SLR: Simulation based-inference",
+    "section": "Bootstrap sample 1",
+    "text": "Bootstrap sample 1"
+  },
+  {
+    "objectID": "slides/lec-5.html#bootstrap-sample-2",
+    "href": "slides/lec-5.html#bootstrap-sample-2",
+    "title": "SLR: Simulation based-inference",
+    "section": "Bootstrap sample 2",
+    "text": "Bootstrap sample 2"
+  },
+  {
+    "objectID": "slides/lec-5.html#bootstrap-sample-3",
+    "href": "slides/lec-5.html#bootstrap-sample-3",
+    "title": "SLR: Simulation based-inference",
+    "section": "Bootstrap sample 3",
+    "text": "Bootstrap sample 3"
+  },
+  {
+    "objectID": "slides/lec-5.html#bootstrap-sample-4",
+    "href": "slides/lec-5.html#bootstrap-sample-4",
+    "title": "SLR: Simulation based-inference",
+    "section": "Bootstrap sample 4",
+    "text": "Bootstrap sample 4"
+  },
+  {
+    "objectID": "slides/lec-5.html#bootstrap-sample-5",
+    "href": "slides/lec-5.html#bootstrap-sample-5",
+    "title": "SLR: Simulation based-inference",
+    "section": "Bootstrap sample 5",
+    "text": "Bootstrap sample 5\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nso on and so forth…"
+  },
+  {
+    "objectID": "slides/lec-5.html#bootstrap-samples-1---10",
+    "href": "slides/lec-5.html#bootstrap-samples-1---10",
+    "title": "SLR: Simulation based-inference",
+    "section": "Bootstrap samples 1 - 10",
+    "text": "Bootstrap samples 1 - 10"
+  },
+  {
+    "objectID": "slides/lec-5.html#bootstrap-samples-1---100",
+    "href": "slides/lec-5.html#bootstrap-samples-1---100",
+    "title": "SLR: Simulation based-inference",
+    "section": "Bootstrap samples 1 - 100",
+    "text": "Bootstrap samples 1 - 100"
+  },
+  {
+    "objectID": "slides/lec-5.html#slopes-of-bootstrap-samples",
+    "href": "slides/lec-5.html#slopes-of-bootstrap-samples",
+    "title": "SLR: Simulation based-inference",
+    "section": "Slopes of bootstrap samples",
+    "text": "Slopes of bootstrap samples\n\nFill in the blank: For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars."
+  },
+  {
+    "objectID": "slides/lec-5.html#slopes-of-bootstrap-samples-1",
+    "href": "slides/lec-5.html#slopes-of-bootstrap-samples-1",
+    "title": "SLR: Simulation based-inference",
+    "section": "Slopes of bootstrap samples",
+    "text": "Slopes of bootstrap samples\n\nFill in the blank: For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars."
+  },
+  {
+    "objectID": "slides/lec-5.html#confidence-level",
+    "href": "slides/lec-5.html#confidence-level",
+    "title": "SLR: Simulation based-inference",
+    "section": "Confidence level",
+    "text": "Confidence level\n\nHow confident are you that the true slope is between $0 and $250? How about $150 and $170? How about $90 and $210?"
+  },
+  {
+    "objectID": "slides/lec-5.html#confidence-interval-1",
+    "href": "slides/lec-5.html#confidence-interval-1",
+    "title": "SLR: Simulation based-inference",
+    "section": "95% confidence interval",
+    "text": "95% confidence interval\n\n\nA 95% confidence interval is bounded by the middle 95% of the bootstrap distribution\nWe are 95% confident that for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $90.43 to $205.77."
+  },
+  {
+    "objectID": "slides/lec-5.html#computing-the-ci-for-the-slope-i",
+    "href": "slides/lec-5.html#computing-the-ci-for-the-slope-i",
+    "title": "SLR: Simulation based-inference",
+    "section": "Computing the CI for the slope I",
+    "text": "Computing the CI for the slope I\nCalculate the observed slope:\n\nobserved_fit <- duke_forest %>%\n  specify(price ~ area) %>%\n  fit()\n\nobserved_fit\n\n# A tibble: 2 × 2\n  term      estimate\n  <chr>        <dbl>\n1 intercept  116652.\n2 area          159."
+  },
+  {
+    "objectID": "slides/lec-5.html#computing-the-ci-for-the-slope-ii",
+    "href": "slides/lec-5.html#computing-the-ci-for-the-slope-ii",
+    "title": "SLR: Simulation based-inference",
+    "section": "Computing the CI for the slope II",
+    "text": "Computing the CI for the slope II\nTake 100 bootstrap samples and fit models to each one:\n\nset.seed(1120)\n\nboot_fits <- duke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 100, type = \"bootstrap\") %>%\n  fit()\n\nboot_fits\n\n# A tibble: 200 × 3\n# Groups:   replicate [100]\n   replicate term      estimate\n       <int> <chr>        <dbl>\n 1         1 intercept   47819.\n 2         1 area          191.\n 3         2 intercept  144645.\n 4         2 area          134.\n 5         3 intercept  114008.\n 6         3 area          161.\n 7         4 intercept  100639.\n 8         4 area          166.\n 9         5 intercept  215264.\n10         5 area          125.\n# … with 190 more rows"
+  },
+  {
+    "objectID": "slides/lec-5.html#computing-the-ci-for-the-slope-iii",
+    "href": "slides/lec-5.html#computing-the-ci-for-the-slope-iii",
+    "title": "SLR: Simulation based-inference",
+    "section": "Computing the CI for the slope III",
+    "text": "Computing the CI for the slope III\nCompute the 95% CI as the middle 95% of the bootstrap distribution:\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
+  },
+  {
+    "objectID": "slides/lec-5.html#computing-the-ci-for-the-slope-iv",
+    "href": "slides/lec-5.html#computing-the-ci-for-the-slope-iv",
+    "title": "SLR: Simulation based-inference",
+    "section": "Computing the CI for the slope IV",
+    "text": "Computing the CI for the slope IV\nAlternatively, computer the 95% CI as the point estimate \\(\\pm\\) 2 standard deviations of the bootstrap distribution:\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"se\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          90.8     228.\n2 intercept -56788.   290093."
+  },
+  {
+    "objectID": "slides/lec-5.html#precision-vs.-accuracy",
+    "href": "slides/lec-5.html#precision-vs.-accuracy",
+    "title": "SLR: Simulation based-inference",
+    "section": "Precision vs. accuracy",
+    "text": "Precision vs. accuracy\n\nIf we want to be very certain that we capture the population parameter, should we use a wider or a narrower interval? What drawbacks are associated with using a wider interval?\n\n\n\n\nHow can we get best of both worlds – high precision and high accuracy?"
+  },
+  {
+    "objectID": "slides/lec-5.html#changing-confidence-level",
+    "href": "slides/lec-5.html#changing-confidence-level",
+    "title": "SLR: Simulation based-inference",
+    "section": "Changing confidence level",
+    "text": "Changing confidence level\n\nHow would you modify the following code to calculate a 90% confidence interval? How would you modify it for a 99% confidence interval?\n\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
+  },
+  {
+    "objectID": "slides/lec-5.html#recap",
+    "href": "slides/lec-5.html#recap",
+    "title": "SLR: Simulation based-inference",
+    "section": "Recap",
+    "text": "Recap\n\nPopulation: Complete set of observations of whatever we are studying, e.g., people, tweets, photographs, etc. (population size = \\(N\\))\nSample: Subset of the population, ideally random and representative (sample size = \\(n\\))\nSample statistic \\(\\ne\\) population parameter, but if the sample is good, it can be a good estimate\nStatistical inference: Discipline that concerns itself with the development of procedures, methods, and theorems that allow us to extract meaning and information from data that has been generated by stochastic (random) process\nWe report the estimate with a confidence interval, and the width of this interval depends on the variability of sample statistics from different samples from the population\nSince we can’t continue sampling from the population, we bootstrap from the one sample we have to estimate sampling variability"
+  },
+  {
+    "objectID": "slides/lec-5.html#sampling-is-natural",
+    "href": "slides/lec-5.html#sampling-is-natural",
+    "title": "SLR: Simulation based-inference",
+    "section": "Sampling is natural",
+    "text": "Sampling is natural\n\n\nWhen you taste a spoonful of soup and decide the spoonful you tasted isn’t salty enough, that’s exploratory analysis\nIf you generalize and conclude that your entire soup needs salt, that’s an inference\nFor your inference to be valid, the spoonful you tasted (the sample) needs to be representative of the entire pot (the population)"
+  },
+  {
+    "objectID": "slides/lec-5.html#statistical-significance",
+    "href": "slides/lec-5.html#statistical-significance",
+    "title": "SLR: Simulation based-inference",
+    "section": "Statistical significance",
+    "text": "Statistical significance\n\n\nDoes the data provide sufficient evidence that β1β1 is significantly different from 0?"
+  },
+  {
+    "objectID": "slides/lec-5.html#outline-of-a-hypothesis-test",
+    "href": "slides/lec-5.html#outline-of-a-hypothesis-test",
+    "title": "SLR: Simulation based-inference",
+    "section": "Outline of a hypothesis test",
+    "text": "Outline of a hypothesis test\n1️⃣ State the hypothesesm\n2️⃣ Calculate the test statistic\n3️⃣ Calculate the p-value\n4️⃣ State the conclusion"
+  },
+  {
+    "objectID": "slides/lec-5.html#state-the-hypotheses",
+    "href": "slides/lec-5.html#state-the-hypotheses",
+    "title": "SLR: Simulation based-inference",
+    "section": "1️⃣ State the hypotheses",
+    "text": "1️⃣ State the hypotheses\n\\[\nH_0: \\beta_1 = 0 \\\\\nH_0: \\beta_1 \\ne 0\n\\]\n\nNull hypothesis: The true slope is 0.\nAltentative hypothesis:\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lab-2.html#what-to-expect-in-lab",
@@ -921,49 +1194,7 @@
     "href": "slides/lec-4.html#predictive-performance-1",
     "title": "SLR: Prediction + model evaluation",
     "section": "Predictive performance",
-    "text": "Predictive performance\n\n\n\n\n\nHow consistent are the predictions for different bootstrap datasets?\nHow consistent are the predictions for counties with high school graduation rates in the middle of the plot vs. in the edges?"
-  },
-  {
-    "objectID": "slides/lec-4.html#uninsurance-vs.-hs-graduation-rates-1",
-    "href": "slides/lec-4.html#uninsurance-vs.-hs-graduation-rates-1",
-    "title": "SLR: Prediction + model evaluation",
-    "section": "Uninsurance vs. HS graduation rates",
-    "text": "Uninsurance vs. HS graduation rates\n\n\nCode\ncounty_2019_ny <- county_2019 %>%\n  as_tibble() %>%\n  filter(state == \"New York\") %>%\n  select(name, hs_grad, uninsured)\n\nggplot(county_2019_ny,\n       aes(x = hs_grad, y = uninsured)) +\n  geom_point() +\n  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +\n  labs(\n    x = \"High school graduate\", y = \"Uninsured\",\n    title = \"Uninsurance vs. HS graduation rates\",\n    subtitle = \"New York counties, 2015 - 2019\"\n  ) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"pink\")"
-  },
-  {
-    "objectID": "slides/lec-4.html#data-splitting",
-    "href": "slides/lec-4.html#data-splitting",
-    "title": "SLR: Prediction + model evaluation",
-    "section": "Data splitting",
-    "text": "Data splitting"
-  },
-  {
-    "objectID": "slides/lec-4.html#bootstrapping-1",
-    "href": "slides/lec-4.html#bootstrapping-1",
-    "title": "SLR: Prediction + model evaluation",
-    "section": "Bootstrapping",
-    "text": "Bootstrapping"
-  },
-  {
-    "objectID": "slides/lec-4.html#comparing-ny-and-nc",
-    "href": "slides/lec-4.html#comparing-ny-and-nc",
-    "title": "SLR: Prediction + model evaluation",
-    "section": "Comparing NY and NC",
-    "text": "Comparing NY and NC\n\nWhy are the fits from the NY models more variable than those from the NC models?"
-  },
-  {
-    "objectID": "slides/lec-4.html#terminology",
-    "href": "slides/lec-4.html#terminology",
-    "title": "SLR: Prediction + model evaluation",
-    "section": "Terminology",
-    "text": "Terminology\n\nOutcome: y\nPredictor: x\nObserved y, \\(y\\): truth\nPredicted y, \\(\\hat{y}\\): fitted, estimated\nResidual: difference between observed and predicted outcome for a given value of predictor"
-  },
-  {
-    "objectID": "slides/lec-4.html#model-evaluation-1",
-    "href": "slides/lec-4.html#model-evaluation-1",
-    "title": "SLR: Prediction + model evaluation",
-    "section": "Model evaluation",
-    "text": "Model evaluation\n\nOne concern in evaluating models is how well they do for prediction\nWe’re generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)\nEvaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to “new” data\nQuantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to “new” data\nToday we introduced these concepts, throughout the semester we’ll learn how to implement them (i.e., write the code) and how to interpret their results\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Predictive performance\n\n\n\n\n\nHow consistent are the predictions for different bootstrap datasets?\nHow consistent are the predictions for counties with high school graduation rates in the middle of the plot vs. in the edges?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "computing-troubleshooting.html",
@@ -984,7 +1215,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "hw/hw-5.html#part-1-experience-statistics-outside-of-the-classroom",
@@ -1096,7 +1327,7 @@
     "href": "course-syllabus.html#course-info",
     "title": "Syllabus",
     "section": "Course info",
-    "text": "Course info\n\n\n\n\nDay\nTime\nLocation\n\n\n\n\nLectures\nTue & Thu\n1:45 pm - 3:00 pm\nReuben-Cooke Building 130\n\n\nSection 1\nMon\n1:45 pm - 3:00 pm\nPerkins LINK 087 (Classroom 3)\n\n\nSection 2\nMon\n3:30 pm - 4:45 pm\nOld Chemistry 003\n\n\nSection 3\nMon\n5:15 pm - 6:30 pm\nSocial Sciences 311"
+    "text": "Course info\n\n\n\n\n\n\n\n\n\n\nDay\nTime\nLocation\n\n\n\n\nLectures\nTue & Thu\n1:45 pm - 3:00 pm\nReuben-Cooke Building 130\n\n\nSection 1\nMon\n1:45 pm - 3:00 pm\nPerkins LINK 087 (Classroom 3)\n\n\nSection 2\nMon\n3:30 pm - 4:45 pm\nOld Chemistry 003\n\n\nSection 3\nMon\n5:15 pm - 6:30 pm\nSocial Sciences 311"
   },
   {
     "objectID": "course-syllabus.html#learning-objectives",
@@ -1180,14 +1411,14 @@
     "href": "course-team.html#instructor",
     "title": "Teaching team",
     "section": "Instructor",
-    "text": "Instructor\n\nDr. Mine Çetinkaya-Rundel (she/her) is Professor of the Practice and Director of Undergraduate Studies at the Department of Statistical Science at Duke University. Mine’s work focuses on innovation in statistics and data science pedagogy, with an emphasis on computing, reproducible research, student-centered learning, and open-source education as well as pedagogical approaches for enhancing retention of women and under-represented minorities in STEM. Mine also works with RStudio as a Developer Educator.\n\n\n\nOffice hours\nLocation\n\n\n\n\nMondays 10:30 am - 11:30 am\nZoom\n\n\nThursdays 11:00 am - 12:00 pm\nOld Chem 214 (On Zoom until January 18)\n\n\n\nIf these times don’t work for you or you’d like to schedule a one-on-one meeting, you can do so at bit.ly/meet-mine."
+    "text": "Instructor\n\nDr. Mine Çetinkaya-Rundel (she/her) is Professor of the Practice and Director of Undergraduate Studies at the Department of Statistical Science at Duke University. Mine’s work focuses on innovation in statistics and data science pedagogy, with an emphasis on computing, reproducible research, student-centered learning, and open-source education as well as pedagogical approaches for enhancing retention of women and under-represented minorities in STEM. Mine also works with RStudio as a Developer Educator.\n\n\n\n\n\n\n\nOffice hours\nLocation\n\n\n\n\nMondays 10:30 am - 11:30 am\nZoom\n\n\nThursdays 11:00 am - 12:00 pm\nOld Chem 214 (On Zoom until January 18)\n\n\n\nIf these times don’t work for you or you’d like to schedule a one-on-one meeting, you can do so at bit.ly/meet-mine."
   },
   {
     "objectID": "course-team.html#teaching-assistants",
     "href": "course-team.html#teaching-assistants",
     "title": "Teaching team",
     "section": "Teaching assistants",
-    "text": "Teaching assistants\n\n\n\nName\nOffice hours\nLocation\n\n\n\n\nMartha Aboagye\nThursday 7 - 9 pm\nZoom\n\n\nRichard Fremgen\nTues 7 - 9 pm\nZoom\n\n\nEmily Gentles\nWednesday 1 - 3 pm\nOld Chem 203B (On Zoom until January 18)\n\n\nSara Mehta\nMon 2 - 4 pm\nZoom\n\n\nRick Presman\nThursday 3:30 - 4:30 pm\nZoom\n\n\n\nFri 9 - 10 am\nZoom\n\n\nShari Tian\nTue 8 - 10 am\nZoom\n\n\nAaditya Warrier\nMon 12pm - 1pm\nZoom\n\n\n\nFri 1:30 - 2:30 pm\nZoom"
+    "text": "Teaching assistants\n\n\n\n\n\n\n\n\nName\nOffice hours\nLocation\n\n\n\n\nMartha Aboagye\nThursday 7 - 9 pm\nZoom\n\n\nRichard Fremgen\nTues 7 - 9 pm\nZoom\n\n\nEmily Gentles\nWednesday 1 - 3 pm\nOld Chem 203B (On Zoom until January 18)\n\n\nSara Mehta\nMon 2 - 4 pm\nZoom\n\n\nRick Presman\nThursday 3:30 - 4:30 pm\nZoom\n\n\n\nFri 9 - 10 am\nZoom\n\n\nShari Tian\nTue 8 - 10 am\nZoom\n\n\nAaditya Warrier\nMon 12pm - 1pm\nZoom\n\n\n\nFri 1:30 - 2:30 pm\nZoom"
   },
   {
     "objectID": "project-tips-resources.html#data-sources",

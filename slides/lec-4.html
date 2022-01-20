@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.26">
+  <meta name="generator" content="quarto-0.3.28">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - SLR: Prediction + model evaluation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -385,27 +385,6 @@
       display: block;
       margin-left: auto;
       margin-right: 0; 
-    }
-    .reveal .callout.callout-style-simple .callout-body {
-      font-size: 2rem;
-    }
-    .reveal .callout.callout-style-default .callout-body {
-      font-size: 2rem;
-    }
-    .reveal .callout.callout-style-simple div.callout-caption {
-      font-size: 2rem;
-    }
-    .reveal .callout.callout-style-default div.callout-caption {
-      font-size: 2rem;
-    }
-    .reveal .callout.callout-captioned .callout-caption p {
-      margin-top: 0.3em;
-    }
-    .reveal .callout.callout-captioned.callout-style-default .callout-content p {
-      margin-top: 0.5em;
-    }
-    .reveal .callout .callout-icon {
-      display: none;
     }
   </style>
 <meta name="twitter:title" content="STA 210 - Spring 2022 - SLR: Prediction + model evaluation">
@@ -937,81 +916,12 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="uninsurance-and-high-school-graduation-rates-in-new-york" class="title-slide slide level1 center">
-<h1>Uninsurance and high school graduation rates in New York</h1>
 
-</section>
-<section id="uninsurance-vs.-hs-graduation-rates-1" class="slide level2">
-<h2>Uninsurance vs.&nbsp;HS graduation rates</h2>
-<div class="cell">
-<p></p><details>
-<summary>Code</summary><p></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>county_2019_ny <span class="ot">&lt;-</span> county_2019 <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"New York"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">select</span>(name, hs_grad, uninsured)</span>
-<span id="cb19-5"><a href="#cb19-5"></a></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="fu">ggplot</span>(county_2019_ny,</span>
-<span id="cb19-7"><a href="#cb19-7"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hs_grad, <span class="at">y =</span> uninsured)) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb19-11"><a href="#cb19-11"></a>  <span class="fu">labs</span>(</span>
-<span id="cb19-12"><a href="#cb19-12"></a>    <span class="at">x =</span> <span class="st">"High school graduate"</span>, <span class="at">y =</span> <span class="st">"Uninsured"</span>,</span>
-<span id="cb19-13"><a href="#cb19-13"></a>    <span class="at">title =</span> <span class="st">"Uninsurance vs. HS graduation rates"</span>,</span>
-<span id="cb19-14"><a href="#cb19-14"></a>    <span class="at">subtitle =</span> <span class="st">"New York counties, 2015 - 2019"</span></span>
-<span id="cb19-15"><a href="#cb19-15"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-16"><a href="#cb19-16"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"pink"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="lec-4_files/figure-revealjs/ny-uninsured-hsgrad-scatter-1.png" style="width:80.0%" class="r-stretch"></section>
-<section id="data-splitting" class="slide level2">
-<h2>Data splitting</h2>
-
-<img data-src="lec-4_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%" class="r-stretch"></section>
-<section id="bootstrapping-1" class="slide level2">
-<h2>Bootstrapping</h2>
-
-<img data-src="lec-4_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:100.0%" class="r-stretch"></section>
-<section id="comparing-ny-and-nc" class="slide level2">
-<h2>Comparing NY and NC</h2>
-<div class="question">
-<p>Why are the fits from the NY models more variable than those from the NC models?</p>
-</div>
-</section></section>
-<section>
-<section id="recap" class="title-slide slide level1 center">
-<h1>Recap</h1>
-
-</section>
-<section id="terminology" class="slide level2">
-<h2>Terminology</h2>
-<ul>
-<li class="fragment">Outcome: y</li>
-<li class="fragment">Predictor: x</li>
-<li class="fragment">Observed y, <span class="math inline">\(y\)</span>: truth</li>
-<li class="fragment">Predicted y, <span class="math inline">\(\hat{y}\)</span>: fitted, estimated</li>
-<li class="fragment">Residual: difference between observed and predicted outcome for a given value of predictor</li>
-</ul>
-</section>
-<section id="model-evaluation-1" class="slide level2 smaller">
-<h2>Model evaluation</h2>
-<ul>
-<li class="fragment">One concern in evaluating models is how well they do for prediction</li>
-<li class="fragment">We’re generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)</li>
-<li class="fragment">Evaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to “new” data</li>
-<li class="fragment">Quantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to “new” data</li>
-<li class="fragment">Today we introduced these concepts, throughout the semester we’ll learn how to implement them (i.e., write the code) and how to interpret their results</li>
-</ul>
-
-
+<p><img src="images/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
-<img src="images/logo.png" class="slide-logo r-stretch"></section></section>
+</section></section>
     </div>
   </div>
 
@@ -1047,7 +957,7 @@ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}}
 'autoAnimateUnmatched': true,
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"45d8c8fc390e717d","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"0ad419a92552924c","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
