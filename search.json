@@ -641,7 +641,7 @@
     "href": "slides/lec-5.html#changing-confidence-level-1",
     "title": "SLR: Simulation based-inference",
     "section": "Changing confidence level",
-    "text": "Changing confidence level\n\n## confidence level: 90%\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.90,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          104.     212.\n2 intercept  -24380.  256730.\n\n## confidence level: 99%\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.99,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          56.3     226.\n2 intercept -61950.   370395."
+    "text": "Changing confidence level\n\n## confidence level: 90%\nget_confidence_interval(\n  boot_fits, point_estimate = observed_fit, \n  level = 0.90, type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          104.     212.\n2 intercept  -24380.  256730.\n\n## confidence level: 99%\nget_confidence_interval(\n  boot_fits, point_estimate = observed_fit, \n  level = 0.99, type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          56.3     226.\n2 intercept -61950.   370395."
   },
   {
     "objectID": "slides/lec-5.html#recap",
