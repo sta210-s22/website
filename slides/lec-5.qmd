@@ -274,20 +274,18 @@ A confidence interval will allow us to make a statement like "*for each addition
 
 ## Quantifying the variability of the slope
 
+**for estimation**
+
 -   Two approaches:
     1.  Via simulation (what we'll do today)
 
     2.  Via mathematical models (what we'll do in the next class)
-
-<!-- -->
-
--   Simulate to quantify the variability of the slope: - Bootstrap new samples from the original sample
-
-<!-- -->
+-   Bootstrapping to quantify the variability of the slope for the purpose of estimation:
+    -   Bootstrap new samples from the original sample
 
     -   Fit models to each of the samples and estimate the slope
 
-    -   Calculate the variability of the slopes
+    -   Use features of the distribution of the bootstrapped slopes to construct a confidence interval
 
 ```{r}
 set.seed(119)
@@ -727,7 +725,7 @@ get_confidence_interval(
 
 ::: columns
 ::: {.column width="50%"}
-Does the data provide sufficient evidence that β1β1 is significantly different from 0?
+Do the data provide sufficient evidence that $\beta_1$ (the true slope for the population) is different from 0?
 :::
 
 ::: {.column width="50%"}
@@ -741,9 +739,86 @@ p_df_obs +
 :::
 :::
 
+## Hypotheses
+
+-   We want to answer the question "Do the data provide sufficient evidence that $\beta_1$ (the true slope for the population) is different from 0?"
+-   **Null hypothesis** - $H_0: \beta_1 = 0$, there is no linear relationship between `area` and `price`
+-   **Alternative hypothesis** - $H_A: \beta_1 \ne 0$, there is a linear relationship between `area` and `price`
+
+## **Hypothesis testing as a court trial**
+
+-   **Null hypothesis**, $H_0$: Defendant is innocent
+-   **Alternative hypothesis**, $H_A$: Defendant is guilty
+-   **Present the evidence:** Collect data
+-   **Judge the evidence:** "Could these data plausibly have happened by chance if the null hypothesis were true?"
+    -   Yes: Fail to reject $H_0$
+
+    -   No: Reject $H_0$
+
+## Hypothesis testing framework
+
+-   Start with a null hypothesis, $H_0$ that represents the status quo
+-   Set an alternative hypothesis, $H_A$ that represents the research question, i.e. what we're testing for
+-   Conduct a hypothesis test under the assumption that the null hypothesis is true and calculate a **p-value** (probability of observed or more extreme outcome given that the null hypothesis is true)
+    -   if the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis
+
+    -   if they do, then reject the null hypothesis in favor of the alternative
+
+## Quantifying the variability of the slope
+
+**for testing**
+
+-   Two approaches:
+    1.  Via simulation (what we'll do today)
+
+    2.  Via mathematical models (what we'll do in the next class)
+-   Randomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:
+    -   Randomize new samples from the original sample
+
+    -   Fit models to each of the samples and estimate the slope
+
+    -   Use features of the distribution of the randomized slopes to conduct a hypothesis test
+
+## Randomization test {.smaller}
+
+-   For a randomization test, we permute one variable to eliminate any existing relationship between the variables
+-   That is, we set the null hypothesis to be true, and we measure the natural variability in the data due to sampling but **not** due to variables being correlated
+
+::: columns
+::: {.column width="50%"}
+-   Each of the observed values for `area` (and for `price`) exist in both the original data plot as well as the permuted `price` plot, but the `area` and `price` are no longer matched for a given house
+-   That is, each `price` value is randomly assigned to `area` of a given hourse.
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+set.seed(1234)
+
+duke_forest_rand <- duke_forest %>%
+  mutate(
+    price_Observed = price,
+    price_Randomized = sample(price, size = nrow(duke_forest))
+    ) %>%
+  select(address, contains("price_"), area)
+
+duke_forest_rand %>%
+  pivot_longer(cols = contains("price_"), names_to = "price_type", names_prefix = "price_", values_to = "price") %>%
+  ggplot(aes(x = area, y = price)) +
+  geom_point() +
+  geom_smooth(aes(color = price_type), method = "lm", se = FALSE, show.legend = FALSE) +
+  facet_wrap(~price_type, nrow = 2) +
+  scale_color_manual(values = c("#8F2D56", "gray")) +
+  scale_x_continuous(labels = label_number()) +
+  scale_y_continuous(labels = label_dollar()) +
+  labs(x = "Area", y = "Price")
+```
+:::
+:::
+
 ## Outline of a hypothesis test
 
-1️⃣ State the hypothesesm
+1️⃣ State the hypotheses
 
 2️⃣ Calculate the test statistic
 
