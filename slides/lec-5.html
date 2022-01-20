@@ -457,6 +457,10 @@
 <li class="fragment">Today we introduced these concepts, throughout the semester we’ll learn how to implement them (i.e., write the code) and how to interpret their results</li>
 </ul>
 </section>
+<section id="uninsurance-vs.-hs-graduation-in-nc" class="slide level2">
+<h2>Uninsurance vs.&nbsp;HS graduation in NC</h2>
+
+<img data-src="lec-5_files/figure-revealjs/nc-uninsured-hsgrad-scatter-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="uninsurance-vs.-hs-graduation-in-ny" class="slide level2">
 <h2>Uninsurance vs.&nbsp;HS graduation in NY</h2>
 <div class="cell" data-layout-align="center">
@@ -523,7 +527,7 @@
 <h2>Exploratory analysis</h2>
 
 <img data-src="lec-5_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
-<section id="modeling" class="slide level2">
+<section id="modeling" class="slide level2 smaller">
 <h2>Modeling</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
@@ -572,7 +576,7 @@
 </ul>
 </div>
 </section>
-<section id="sample-to-population" class="slide level2">
+<section id="sample-to-population" class="slide level2 smaller">
 <h2>Sample to population</h2>
 <blockquote>
 <p>For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159.</p>
@@ -594,7 +598,7 @@
 <h2>Inference for simple linear regression</h2>
 <ul>
 <li class="fragment"><p>Calculate a confidence interval for the slope, <span class="math inline">\(\beta_1\)</span></p></li>
-<li class="fragment"><p>Conduct a hypothesis test for the interval <span class="math inline">\(\beta_1\)</span></p></li>
+<li class="fragment"><p>Conduct a hypothesis test for the interval, <span class="math inline">\(\beta_1\)</span></p></li>
 </ul>
 </section></section>
 <section>
@@ -623,20 +627,20 @@
 <li class="fragment"><p>We need a way to quantify the variability of the sample statistic</p></li>
 </ul>
 </section>
-<section id="quantifying-the-variability-of-the-slope" class="slide level2">
-<h2>Quantifying the variability of the slope</h2>
+<section id="quantify-the-variability-of-the-slope" class="slide level2 smaller">
+<h2>Quantify the variability of the slope</h2>
 <p><strong>for estimation</strong></p>
 <ul>
 <li class="fragment">Two approaches:
 <ol type="1">
-<li class="fragment"><p>Via simulation (what we’ll do today)</p></li>
-<li class="fragment"><p>Via mathematical models (what we’ll do in the next class)</p></li>
+<li class="fragment">Via simulation (what we’ll do today)</li>
+<li class="fragment">Via mathematical models (what we’ll do in the next class)</li>
 </ol></li>
 <li class="fragment">Bootstrapping to quantify the variability of the slope for the purpose of estimation:
 <ul>
-<li class="fragment"><p>Bootstrap new samples from the original sample</p></li>
-<li class="fragment"><p>Fit models to each of the samples and estimate the slope</p></li>
-<li class="fragment"><p>Use features of the distribution of the bootstrapped slopes to construct a confidence interval</p></li>
+<li class="fragment">Bootstrap new samples from the original sample</li>
+<li class="fragment">Fit models to each of the samples and estimate the slope</li>
+<li class="fragment">Use features of the distribution of the bootstrapped slopes to construct a confidence interval</li>
 </ul></li>
 </ul>
 <div class="cell" data-layout-align="center">
@@ -776,8 +780,8 @@
 <p><em>so on and so forth…</em></p>
 </div>
 </section>
-<section id="bootstrap-samples-1---10" class="slide level2">
-<h2>Bootstrap samples 1 - 10</h2>
+<section id="bootstrap-samples-1---5" class="slide level2">
+<h2>Bootstrap samples 1 - 5</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
@@ -911,7 +915,7 @@
 </section>
 <section id="computing-the-ci-for-the-slope-iii" class="slide level2">
 <h2>Computing the CI for the slope III</h2>
-<p>Compute the 95% CI as the middle 95% of the bootstrap distribution:</p>
+<p><strong>Percentile method:</strong> Compute the 95% CI as the middle 95% of the bootstrap distribution:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb8" data-code-line-numbers="5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">get_confidence_interval</span>(</span>
 <span id="cb8-2"><a href="#cb8-2"></a>  boot_fits, </span>
@@ -930,7 +934,7 @@
 </section>
 <section id="computing-the-ci-for-the-slope-iv" class="slide level2">
 <h2>Computing the CI for the slope IV</h2>
-<p>Alternatively, computer the 95% CI as the point estimate <span class="math inline">\(\pm\)</span> 2 standard deviations of the bootstrap distribution:</p>
+<p><strong>Standard error method:</strong> Alternatively, compute the 95% CI as the point estimate <span class="math inline">\(\pm\)</span> ~2 standard deviations of the bootstrap distribution:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb10" data-code-line-numbers="5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">get_confidence_interval</span>(</span>
 <span id="cb10-2"><a href="#cb10-2"></a>  boot_fits, </span>
@@ -953,12 +957,13 @@
 <p>If we want to be very certain that we capture the population parameter, should we use a wider or a narrower interval? What drawbacks are associated with using a wider interval?</p>
 </div>
 
-<div class="fragment">
+<img data-src="images/lec-5/garfield.png" alt="Garfield comic" width="600" class="r-stretch quarto-figure-center"></section>
+<section id="precision-vs.-accuracy-1" class="slide level2">
+<h2>Precision vs.&nbsp;accuracy</h2>
 <div class="question">
 <p>How can we get best of both worlds – high precision and high accuracy?</p>
 </div>
-</div>
-<img data-src="images/lec-5/garfield.png" alt="Garfield comic" width="600" class="r-stretch quarto-figure-center"></section>
+</section>
 <section id="changing-confidence-level" class="slide level2">
 <h2>Changing confidence level</h2>
 <div class="question">
@@ -977,6 +982,39 @@
   &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
 1 area          92.1     223.
 2 intercept -36765.   296528.</code></pre>
+</div>
+</div>
+</section>
+<section id="changing-confidence-level-1" class="slide level2">
+<h2>Changing confidence level</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="do">## confidence level: 90%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">get_confidence_interval</span>(</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  boot_fits, </span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="at">point_estimate =</span> observed_fit, </span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="at">level =</span> <span class="fl">0.90</span>,</span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="at">type =</span> <span class="st">"percentile"</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  term      lower_ci upper_ci
+  &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+1 area          104.     212.
+2 intercept  -24380.  256730.</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="do">## confidence level: 99%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">get_confidence_interval</span>(</span>
+<span id="cb16-3"><a href="#cb16-3"></a>  boot_fits, </span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="at">point_estimate =</span> observed_fit, </span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="at">level =</span> <span class="fl">0.99</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="at">type =</span> <span class="st">"percentile"</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  term      lower_ci upper_ci
+  &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+1 area          56.3     226.
+2 intercept -61950.   370395.</code></pre>
 </div>
 </div>
 </section>
@@ -1008,14 +1046,14 @@
 <section id="statistical-significance" class="slide level2">
 <h2>Statistical significance</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:30%;">
 <p>Do the data provide sufficient evidence that <span class="math inline">\(\beta_1\)</span> (the true slope for the population) is different from 0?</p>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="lec-5_files/figure-revealjs/unnamed-chunk-31-1.png" style="width:80.0%"></p>
+<p><img data-src="lec-5_files/figure-revealjs/unnamed-chunk-32-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1032,7 +1070,7 @@
 </ul>
 </section>
 <section id="hypothesis-testing-as-a-court-trial" class="slide level2">
-<h2><strong>Hypothesis testing as a court trial</strong></h2>
+<h2>Hypothesis testing as a court trial</h2>
 <ul>
 <li class="fragment"><strong>Null hypothesis</strong>, <span class="math inline">\(H_0\)</span>: Defendant is innocent</li>
 <li class="fragment"><strong>Alternative hypothesis</strong>, <span class="math inline">\(H_A\)</span>: Defendant is guilty</li>
@@ -1044,53 +1082,79 @@
 </ul></li>
 </ul>
 </section>
-<section id="hypothesis-testing-framework" class="slide level2">
+<section id="hypothesis-testing-framework" class="slide level2 smaller">
 <h2>Hypothesis testing framework</h2>
 <ul>
 <li class="fragment">Start with a null hypothesis, <span class="math inline">\(H_0\)</span> that represents the status quo</li>
 <li class="fragment">Set an alternative hypothesis, <span class="math inline">\(H_A\)</span> that represents the research question, i.e.&nbsp;what we’re testing for</li>
 <li class="fragment">Conduct a hypothesis test under the assumption that the null hypothesis is true and calculate a <strong>p-value</strong> (probability of observed or more extreme outcome given that the null hypothesis is true)
 <ul>
-<li class="fragment"><p>if the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis</p></li>
-<li class="fragment"><p>if they do, then reject the null hypothesis in favor of the alternative</p></li>
+<li class="fragment">if the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis</li>
+<li class="fragment">if they do, then reject the null hypothesis in favor of the alternative</li>
 </ul></li>
 </ul>
 </section>
-<section id="quantifying-the-variability-of-the-slope-1" class="slide level2">
-<h2>Quantifying the variability of the slope</h2>
+<section id="quantify-the-variability-of-the-slope-1" class="slide level2 smaller">
+<h2>Quantify the variability of the slope</h2>
 <p><strong>for testing</strong></p>
 <ul>
 <li class="fragment">Two approaches:
 <ol type="1">
-<li class="fragment"><p>Via simulation (what we’ll do today)</p></li>
-<li class="fragment"><p>Via mathematical models (what we’ll do in the next class)</p></li>
+<li class="fragment">Via simulation (what we’ll do today)</li>
+<li class="fragment">Via mathematical models (what we’ll do in the next class)</li>
 </ol></li>
 <li class="fragment">Randomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:
 <ul>
-<li class="fragment"><p>Randomize new samples from the original sample</p></li>
-<li class="fragment"><p>Fit models to each of the samples and estimate the slope</p></li>
-<li class="fragment"><p>Use features of the distribution of the randomized slopes to conduct a hypothesis test</p></li>
+<li class="fragment">Simulate new samples from the original sample via permutation</li>
+<li class="fragment">Fit models to each of the samples and estimate the slope</li>
+<li class="fragment">Use features of the distribution of the permuted slopes to conduct a hypothesis test</li>
 </ul></li>
 </ul>
 </section>
-<section id="randomization-test" class="slide level2 smaller">
-<h2>Randomization test</h2>
+<section id="permutation-described" class="slide level2 smaller">
+<h2>Permutation, described</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
-<li class="fragment">For a randomization test, we permute one variable to eliminate any existing relationship between the variables</li>
-<li class="fragment">That is, we set the null hypothesis to be true, and we measure the natural variability in the data due to sampling but <strong>not</strong> due to variables being correlated</li>
+<li class="fragment">Set the null hypothesis to be true, and measure the natural variability in the data due to sampling but <strong>not</strong> due to variables being correlated by permuting permute one variable to eliminate any existing relationship between the variables</li>
+<li class="fragment">Each <code>price</code> value is randomly assigned to <code>area</code> of a given house, i.e.&nbsp;<code>area</code> and <code>price</code> are no longer matched for a given house</li>
 </ul>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-stdout">
+<pre><code># A tibble: 98 × 3
+   price_Observed price_Permuted  area
+            &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt;
+ 1        1520000         342500  6040
+ 2        1030000         750000  4475
+ 3         420000         645000  1745
+ 4         680000         697500  2091
+ 5         428500         428500  1772
+ 6         456000         481000  1950
+ 7        1270000         610000  3909
+ 8         557450         680000  2841
+ 9         697500         485000  3924
+10         650000         105000  2173
+# … with 88 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="permutation-visualized" class="slide level2">
+<h2>Permutation, visualized</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment">Each of the observed values for <code>area</code> (and for <code>price</code>) exist in both the original data plot as well as the permuted <code>price</code> plot, but the <code>area</code> and <code>price</code> are no longer matched for a given house</li>
-<li class="fragment">That is, each <code>price</code> value is randomly assigned to <code>area</code> of a given hourse.</li>
+<li class="fragment">Each of the observed values for <code>area</code> (and for <code>price</code>) exist in both the observed data plot as well as the permuted <code>price</code> plot</li>
+<li class="fragment">The permutation removes the linear relationship between <code>area</code> and <code>price</code></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="lec-5_files/figure-revealjs/unnamed-chunk-32-1.png" style="width:100.0%"></p>
+<p><img data-src="lec-5_files/figure-revealjs/unnamed-chunk-34-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1098,29 +1162,31 @@
 </div>
 </div>
 </section>
-<section id="outline-of-a-hypothesis-test" class="slide level2">
-<h2>Outline of a hypothesis test</h2>
-<p>1️⃣ State the hypotheses</p>
-<p>2️⃣ Calculate the test statistic</p>
-<p>3️⃣ Calculate the p-value</p>
-<p>4️⃣ State the conclusion</p>
-</section>
-<section id="state-the-hypotheses" class="slide level2">
-<h2>1️⃣ State the hypotheses</h2>
-<p><span class="math display">\[
-H_0: \beta_1 = 0 \\
-H_0: \beta_1 \ne 0
-\]</span></p>
-<ul>
-<li class="fragment"><p>Null hypothesis: The true slope is 0.</p>
-<p>Altentative hypothesis:</p></li>
-</ul>
+<section id="permuation-repeated" class="slide level2">
+<h2>Permuation, repeated</h2>
+<p>Repeated permutations allow for quantifying the variability in the slope under the condition that there is no linear relationship (i.e., that the null hypothesis is true)</p>
 
+<img data-src="lec-5_files/figure-revealjs/unnamed-chunk-35-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="concluding-the-hypothesis-test" class="slide level2 smaller">
+<h2>Concluding the hypothesis test</h2>
+<div class="question">
+<p>Is the observed slope of <span class="math inline">\(\hat{\beta_1} = 159\)</span> (or an even more extreme slope) a likely outcome under the null hypothesis that <span class="math inline">\(\beta = 0\)</span>? What does this mean for our original question: “Do the data provide sufficient evidence that <span class="math inline">\(\beta_1\)</span> (the true slope for the population) is different from 0?”</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-5_files/figure-revealjs/unnamed-chunk-36-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 
+<p><img src="images/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
-<img src="images/logo.png" class="slide-logo r-stretch"></section></section>
+</section></section>
     </div>
   </div>
 
@@ -1156,7 +1222,7 @@ H_0: \beta_1 \ne 0
 'autoAnimateUnmatched': true,
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"ba7260d8f7b5ec36","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"ed3e46c56eae2d7b","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner

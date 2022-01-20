@@ -413,6 +413,13 @@
     "text": "Model evaluation\n\nOne concern in evaluating models is how well they do for prediction\nWe’re generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)\nEvaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to “new” data\nQuantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to “new” data\nToday we introduced these concepts, throughout the semester we’ll learn how to implement them (i.e., write the code) and how to interpret their results"
   },
   {
+    "objectID": "slides/lec-5.html#uninsurance-vs.-hs-graduation-in-nc",
+    "href": "slides/lec-5.html#uninsurance-vs.-hs-graduation-in-nc",
+    "title": "SLR: Simulation based-inference",
+    "section": "Uninsurance vs. HS graduation in NC",
+    "text": "Uninsurance vs. HS graduation in NC"
+  },
+  {
     "objectID": "slides/lec-5.html#uninsurance-vs.-hs-graduation-in-ny",
     "href": "slides/lec-5.html#uninsurance-vs.-hs-graduation-in-ny",
     "title": "SLR: Simulation based-inference",
@@ -480,7 +487,7 @@
     "href": "slides/lec-5.html#inference-for-simple-linear-regression",
     "title": "SLR: Simulation based-inference",
     "section": "Inference for simple linear regression",
-    "text": "Inference for simple linear regression\n\nCalculate a confidence interval for the slope, \\(\\beta_1\\)\nConduct a hypothesis test for the interval \\(\\beta_1\\)"
+    "text": "Inference for simple linear regression\n\nCalculate a confidence interval for the slope, \\(\\beta_1\\)\nConduct a hypothesis test for the interval, \\(\\beta_1\\)"
   },
   {
     "objectID": "slides/lec-5.html#confidence-interval",
@@ -497,11 +504,11 @@
     "text": "Confidence interval for the slope\nA confidence interval will allow us to make a statement like “for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take X dollars.”\n\nShould X be $10? $100? $1000?\nIf we were to take another sample of 98 would we expect the slope calculated based on that sample to be exactly $159? Off by $10? $100? $1000?\nThe answer depends on how variable (from one sample to another sample) the sample statistic (the slope) is\nWe need a way to quantify the variability of the sample statistic"
   },
   {
-    "objectID": "slides/lec-5.html#quantifying-the-variability-of-the-slope",
-    "href": "slides/lec-5.html#quantifying-the-variability-of-the-slope",
+    "objectID": "slides/lec-5.html#quantify-the-variability-of-the-slope",
+    "href": "slides/lec-5.html#quantify-the-variability-of-the-slope",
     "title": "SLR: Simulation based-inference",
-    "section": "Quantifying the variability of the slope",
-    "text": "Quantifying the variability of the slope\nfor estimation\n\nTwo approaches:\n\nVia simulation (what we’ll do today)\nVia mathematical models (what we’ll do in the next class)\n\nBootstrapping to quantify the variability of the slope for the purpose of estimation:\n\nBootstrap new samples from the original sample\nFit models to each of the samples and estimate the slope\nUse features of the distribution of the bootstrapped slopes to construct a confidence interval"
+    "section": "Quantify the variability of the slope",
+    "text": "Quantify the variability of the slope\nfor estimation\n\nTwo approaches:\n\nVia simulation (what we’ll do today)\nVia mathematical models (what we’ll do in the next class)\n\nBootstrapping to quantify the variability of the slope for the purpose of estimation:\n\nBootstrap new samples from the original sample\nFit models to each of the samples and estimate the slope\nUse features of the distribution of the bootstrapped slopes to construct a confidence interval"
   },
   {
     "objectID": "slides/lec-5.html#bootstrap-sample-1",
@@ -539,11 +546,11 @@
     "text": "Bootstrap sample 5\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nso on and so forth…"
   },
   {
-    "objectID": "slides/lec-5.html#bootstrap-samples-1---10",
-    "href": "slides/lec-5.html#bootstrap-samples-1---10",
+    "objectID": "slides/lec-5.html#bootstrap-samples-1---5",
+    "href": "slides/lec-5.html#bootstrap-samples-1---5",
     "title": "SLR: Simulation based-inference",
-    "section": "Bootstrap samples 1 - 10",
-    "text": "Bootstrap samples 1 - 10"
+    "section": "Bootstrap samples 1 - 5",
+    "text": "Bootstrap samples 1 - 5"
   },
   {
     "objectID": "slides/lec-5.html#bootstrap-samples-1---100",
@@ -599,21 +606,28 @@
     "href": "slides/lec-5.html#computing-the-ci-for-the-slope-iii",
     "title": "SLR: Simulation based-inference",
     "section": "Computing the CI for the slope III",
-    "text": "Computing the CI for the slope III\nCompute the 95% CI as the middle 95% of the bootstrap distribution:\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
+    "text": "Computing the CI for the slope III\nPercentile method: Compute the 95% CI as the middle 95% of the bootstrap distribution:\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
   },
   {
     "objectID": "slides/lec-5.html#computing-the-ci-for-the-slope-iv",
     "href": "slides/lec-5.html#computing-the-ci-for-the-slope-iv",
     "title": "SLR: Simulation based-inference",
     "section": "Computing the CI for the slope IV",
-    "text": "Computing the CI for the slope IV\nAlternatively, computer the 95% CI as the point estimate \\(\\pm\\) 2 standard deviations of the bootstrap distribution:\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"se\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          90.8     228.\n2 intercept -56788.   290093."
+    "text": "Computing the CI for the slope IV\nStandard error method: Alternatively, compute the 95% CI as the point estimate \\(\\pm\\) ~2 standard deviations of the bootstrap distribution:\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"se\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          90.8     228.\n2 intercept -56788.   290093."
   },
   {
     "objectID": "slides/lec-5.html#precision-vs.-accuracy",
     "href": "slides/lec-5.html#precision-vs.-accuracy",
     "title": "SLR: Simulation based-inference",
     "section": "Precision vs. accuracy",
-    "text": "Precision vs. accuracy\n\nIf we want to be very certain that we capture the population parameter, should we use a wider or a narrower interval? What drawbacks are associated with using a wider interval?\n\n\n\n\nHow can we get best of both worlds – high precision and high accuracy?"
+    "text": "Precision vs. accuracy\n\nIf we want to be very certain that we capture the population parameter, should we use a wider or a narrower interval? What drawbacks are associated with using a wider interval?"
+  },
+  {
+    "objectID": "slides/lec-5.html#precision-vs.-accuracy-1",
+    "href": "slides/lec-5.html#precision-vs.-accuracy-1",
+    "title": "SLR: Simulation based-inference",
+    "section": "Precision vs. accuracy",
+    "text": "Precision vs. accuracy\n\nHow can we get best of both worlds – high precision and high accuracy?"
   },
   {
     "objectID": "slides/lec-5.html#changing-confidence-level",
@@ -621,6 +635,13 @@
     "title": "SLR: Simulation based-inference",
     "section": "Changing confidence level",
     "text": "Changing confidence level\n\nHow would you modify the following code to calculate a 90% confidence interval? How would you modify it for a 99% confidence interval?\n\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
+  },
+  {
+    "objectID": "slides/lec-5.html#changing-confidence-level-1",
+    "href": "slides/lec-5.html#changing-confidence-level-1",
+    "title": "SLR: Simulation based-inference",
+    "section": "Changing confidence level",
+    "text": "Changing confidence level\n\n## confidence level: 90%\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.90,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          104.     212.\n2 intercept  -24380.  256730.\n\n## confidence level: 99%\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.99,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          56.3     226.\n2 intercept -61950.   370395."
   },
   {
     "objectID": "slides/lec-5.html#recap",
@@ -665,32 +686,39 @@
     "text": "Hypothesis testing framework\n\nStart with a null hypothesis, \\(H_0\\) that represents the status quo\nSet an alternative hypothesis, \\(H_A\\) that represents the research question, i.e. what we’re testing for\nConduct a hypothesis test under the assumption that the null hypothesis is true and calculate a p-value (probability of observed or more extreme outcome given that the null hypothesis is true)\n\nif the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis\nif they do, then reject the null hypothesis in favor of the alternative"
   },
   {
-    "objectID": "slides/lec-5.html#quantifying-the-variability-of-the-slope-1",
-    "href": "slides/lec-5.html#quantifying-the-variability-of-the-slope-1",
+    "objectID": "slides/lec-5.html#quantify-the-variability-of-the-slope-1",
+    "href": "slides/lec-5.html#quantify-the-variability-of-the-slope-1",
     "title": "SLR: Simulation based-inference",
-    "section": "Quantifying the variability of the slope",
-    "text": "Quantifying the variability of the slope\nfor testing\n\nTwo approaches:\n\nVia simulation (what we’ll do today)\nVia mathematical models (what we’ll do in the next class)\n\nRandomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:\n\nRandomize new samples from the original sample\nFit models to each of the samples and estimate the slope\nUse features of the distribution of the randomized slopes to conduct a hypothesis test"
+    "section": "Quantify the variability of the slope",
+    "text": "Quantify the variability of the slope\nfor testing\n\nTwo approaches:\n\nVia simulation (what we’ll do today)\nVia mathematical models (what we’ll do in the next class)\n\nRandomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:\n\nSimulate new samples from the original sample via permutation\nFit models to each of the samples and estimate the slope\nUse features of the distribution of the permuted slopes to conduct a hypothesis test"
   },
   {
-    "objectID": "slides/lec-5.html#randomization-test",
-    "href": "slides/lec-5.html#randomization-test",
+    "objectID": "slides/lec-5.html#permutation-described",
+    "href": "slides/lec-5.html#permutation-described",
     "title": "SLR: Simulation based-inference",
-    "section": "Randomization test",
-    "text": "Randomization test\n\nFor a randomization test, we permute one variable to eliminate any existing relationship between the variables\nThat is, we set the null hypothesis to be true, and we measure the natural variability in the data due to sampling but not due to variables being correlated\n\n\n\n\nEach of the observed values for area (and for price) exist in both the original data plot as well as the permuted price plot, but the area and price are no longer matched for a given house\nThat is, each price value is randomly assigned to area of a given hourse."
+    "section": "Permutation, described",
+    "text": "Permutation, described\n\n\n\nSet the null hypothesis to be true, and measure the natural variability in the data due to sampling but not due to variables being correlated by permuting permute one variable to eliminate any existing relationship between the variables\nEach price value is randomly assigned to area of a given house, i.e. area and price are no longer matched for a given house\n\n\n\n\n# A tibble: 98 × 3\n   price_Observed price_Permuted  area\n            <dbl>          <dbl> <dbl>\n 1        1520000         342500  6040\n 2        1030000         750000  4475\n 3         420000         645000  1745\n 4         680000         697500  2091\n 5         428500         428500  1772\n 6         456000         481000  1950\n 7        1270000         610000  3909\n 8         557450         680000  2841\n 9         697500         485000  3924\n10         650000         105000  2173\n# … with 88 more rows"
   },
   {
-    "objectID": "slides/lec-5.html#outline-of-a-hypothesis-test",
-    "href": "slides/lec-5.html#outline-of-a-hypothesis-test",
+    "objectID": "slides/lec-5.html#permutation-visualized",
+    "href": "slides/lec-5.html#permutation-visualized",
     "title": "SLR: Simulation based-inference",
-    "section": "Outline of a hypothesis test",
-    "text": "Outline of a hypothesis test\n1️⃣ State the hypotheses\n2️⃣ Calculate the test statistic\n3️⃣ Calculate the p-value\n4️⃣ State the conclusion"
+    "section": "Permutation, visualized",
+    "text": "Permutation, visualized\n\n\n\nEach of the observed values for area (and for price) exist in both the observed data plot as well as the permuted price plot\nThe permutation removes the linear relationship between area and price"
   },
   {
-    "objectID": "slides/lec-5.html#state-the-hypotheses",
-    "href": "slides/lec-5.html#state-the-hypotheses",
+    "objectID": "slides/lec-5.html#permuation-repeated",
+    "href": "slides/lec-5.html#permuation-repeated",
     "title": "SLR: Simulation based-inference",
-    "section": "1️⃣ State the hypotheses",
-    "text": "1️⃣ State the hypotheses\n\\[\nH_0: \\beta_1 = 0 \\\\\nH_0: \\beta_1 \\ne 0\n\\]\n\nNull hypothesis: The true slope is 0.\nAltentative hypothesis:\n\n\n\n\nsta210-s22.github.io/website"
+    "section": "Permuation, repeated",
+    "text": "Permuation, repeated\nRepeated permutations allow for quantifying the variability in the slope under the condition that there is no linear relationship (i.e., that the null hypothesis is true)"
+  },
+  {
+    "objectID": "slides/lec-5.html#concluding-the-hypothesis-test",
+    "href": "slides/lec-5.html#concluding-the-hypothesis-test",
+    "title": "SLR: Simulation based-inference",
+    "section": "Concluding the hypothesis test",
+    "text": "Concluding the hypothesis test\n\nIs the observed slope of \\(\\hat{\\beta_1} = 159\\) (or an even more extreme slope) a likely outcome under the null hypothesis that \\(\\beta = 0\\)? What does this mean for our original question: “Do the data provide sufficient evidence that \\(\\beta_1\\) (the true slope for the population) is different from 0?”\n\n\n\n\n\n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lab-2.html#what-to-expect-in-lab",
@@ -1250,7 +1278,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "hw/hw-5.html#part-1-experience-statistics-outside-of-the-classroom",
@@ -1495,7 +1523,7 @@
     "href": "weeks/week-3.html#participate",
     "title": "Week 3",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lecture 4 - SLR: Prediction + model evaluation\n🖥️ Lecture 5 - SLR: Simulation-based inference (to be posted)"
+    "text": "Participate\n🖥️ Lecture 4 - SLR: Prediction + model evaluation\n🖥️ Lecture 5 - SLR: Simulation-based inference"
   },
   {
     "objectID": "weeks/week-3.html#perform",
