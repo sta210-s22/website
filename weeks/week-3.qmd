@@ -29,7 +29,7 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 🖥️ [Lecture 4 - SLR: Prediction + model evaluation](/slides/lec-4.html)
 
-🖥️ Lecture 5 - SLR: Simulation-based inference (to be posted)
+🖥️ [Lecture 5 - SLR: Simulation-based inference](/slides/lec-5.html)
 
 ## Perform
 
