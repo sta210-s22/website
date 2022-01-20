@@ -729,18 +729,14 @@ get_confidence_interval(
 
 ## confidence level: 90%
 get_confidence_interval(
-  boot_fits, 
-  point_estimate = observed_fit, 
-  level = 0.90,
-  type = "percentile"
+  boot_fits, point_estimate = observed_fit, 
+  level = 0.90, type = "percentile"
 )
 
 ## confidence level: 99%
 get_confidence_interval(
-  boot_fits, 
-  point_estimate = observed_fit, 
-  level = 0.99,
-  type = "percentile"
+  boot_fits, point_estimate = observed_fit, 
+  level = 0.99, type = "percentile"
 )
 ```
 
