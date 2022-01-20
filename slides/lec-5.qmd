@@ -1,0 +1,763 @@
+---
+title: "SLR: Simulation based-inference"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer:  "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true
+    transition: fade
+    slide-number: true
+    incremental: true 
+editor: visual
+execute:
+  freeze: auto
+---
+
+```{r setup}
+#| include: false
+
+library(countdown)
+
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  dpi = 300,
+  out.width = "80%",
+  fig.align = "center"
+)
+
+options(scipen = 100)
+```
+
+# Welcome
+
+## Announcements
+
+-   HW 5 posted tomorrow, due next Friday
+
+## Computational setup
+
+```{r packages}
+#| echo: true
+#| message: false
+
+# load packages
+library(tidyverse)   # for data wrangling and visualization
+library(tidymodels)  # for modeling
+library(usdata)      # for the county_2019 dataset
+library(openintro)   # for the duke_forest dataset
+library(scales)      # for pretty axis labels
+library(glue)        # for constructing character strings
+library(knitr)       # for pretty tables
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
+```
+
+# Recap of last lecture
+
+## Terminology
+
+-   Outcome: y
+-   Predictor: x
+-   Observed y, $y$: truth
+-   Predicted y, $\hat{y}$: fitted, estimated
+-   Residual: difference between observed and predicted outcome for a given value of predictor
+
+## Model evaluation {.smaller}
+
+-   One concern in evaluating models is how well they do for prediction
+-   We're generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)
+-   Evaluating predictive performance: Split the data into testing and training sets, build models using only the training set, and evaluate their performance on the testing set, and repeat many times to see how your model holds up to "new" data
+-   Quantifying variability of of estimates: Bootstrap the data, fit a model, obtain coefficient estimates and/or measures of strength of fit, and repeat many times to see how your model holds up to "new" data
+-   Today we introduced these concepts, throughout the semester we'll learn how to implement them (i.e., write the code) and how to interpret their results
+
+## Uninsurance vs. HS graduation in NY
+
+```{r ny-uninsured-hsgrad-scatter}
+#| code-fold: true
+#| echo: true
+#| out.width: "100%"
+
+county_2019_ny <- county_2019 %>%
+  as_tibble() %>%
+  filter(state == "New York") %>%
+  select(name, hs_grad, uninsured)
+
+ggplot(county_2019_ny,
+       aes(x = hs_grad, y = uninsured)) +
+  geom_point() +
+  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  labs(
+    x = "High school graduate", y = "Uninsured",
+    title = "Uninsurance vs. HS graduation rates",
+    subtitle = "New York counties, 2015 - 2019"
+  ) +
+  geom_smooth(method = "lm", se = FALSE, color = "pink")
+```
+
+## Data splitting
+
+```{r}
+#| out.width: "100%"
+
+set.seed(123)
+
+n_folds <- 10
+
+county_2019_ny_folds <- county_2019_ny %>%
+  slice_sample(n = nrow(county_2019_ny)) %>%
+  mutate(fold = c(rep(1:n_folds, 6), 1, 2)) %>%
+  arrange(fold)
+
+predict_folds <- function(i) {
+  fit <- lm(uninsured ~ hs_grad, data = county_2019_ny_folds %>% filter(fold != i))
+  predict(fit, newdata = county_2019_ny_folds %>% filter(fold == i)) %>%
+    bind_cols(county_2019_ny_folds %>% filter(fold == i), .fitted = .)
+}
+
+ny_fits <- map_df(1:n_folds, predict_folds)
+
+p_ny_fits <- ggplot(ny_fits, aes(x = hs_grad, y = .fitted, group = fold)) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, size = 0.3, alpha = 0.5) +
+  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  labs(
+    x = "High school graduate", y = "Uninsured",
+    title = "Predicted uninsurance rate in NY",
+    subtitle = glue("For {n_folds} different testing datasets")
+    )
+
+p_ny_fits
+```
+
+## Bootstrapping
+
+```{r}
+#| out.width: "100%"
+
+n_boot <- 100
+
+predict_boots <- function(i){
+  boot <- county_2019_ny %>%
+    slice_sample(n = nrow(county_2019_ny), replace = TRUE) %>%
+    mutate(boot_samp = i)
+  fit <- lm(uninsured ~ hs_grad, data = boot)
+  predict(fit) %>% bind_cols(boot, .fitted = .)
+}
+
+set.seed(1234)
+county_2019_ny_boots <- map_df(1:n_boot, predict_boots)
+
+p_ny_boots <- ggplot(county_2019_ny_boots, aes(x = hs_grad, y = .fitted, group = boot_samp)) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, size = 0.3, alpha = 0.2) +
+  scale_x_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1, accuracy = 1)) +
+  labs(
+    x = "High school graduate", y = "Uninsured",
+    title = "Predicted uninsurance rate in NY",
+    subtitle = glue("For {n_boot} bootstrap samples")
+    )
+
+p_ny_boots
+```
+
+## Comparing NY and NC
+
+::: question
+Why are the fits from the NY models more variable than those from the NC models?
+:::
+
+# Statistical inference
+
+## Data: Sale prices of houses in Duke Forest
+
+::: columns
+::: {.column width="50%"}
+-   Data on houses that were sold in the Duke Forest neighborhood of Durham, NC around November 2020
+-   Scraped from Zillow
+-   Source: [`openintro::duke_forest`](http://openintrostat.github.io/openintro/reference/duke_forest.html)
+:::
+
+::: {.column width="50%"}
+![](images/lec-5/duke_forest_home.jpg){fig-alt="Home in Duke Forest" fig-align="center" width="400"}
+:::
+:::
+
+## Exploratory analysis
+
+```{r}
+ggplot(duke_forest, aes(x = area, y = price)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = "Price and area of houses in Duke Forest"
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+```
+
+## Modeling
+
+```{r}
+#| echo: true
+
+df_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(price ~ area, data = duke_forest)
+
+tidy(df_fit) %>%
+  kable(digits = 2)
+```
+
+. . .
+
+```{r}
+intercept <- tidy(df_fit) %>% filter(term == "(Intercept)") %>% pull(estimate) %>% round()
+slope <- tidy(df_fit) %>% filter(term == "area") %>% pull(estimate) %>% round()
+```
+
+-   **Intercept:** Duke Forest houses that are 0 square feet are expected to sell, on average, for `r dollar(intercept)`.
+-   **Slope:** For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`.
+
+## Sample to population
+
+> For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`.
+
+-   This estimate is valid for the single sample of `r nrow(duke_forest)` houses.
+-   But what if we're not interested quantifying the relationship between the size and price of a house in this single sample?
+-   What if we want to say something about the relationship between these variables for all houses in Duke Forest?
+
+## Statistical inference
+
+-   Statistical inference allows provide methods and tools for us to use the single sample we have observed to make valid statements (inferences) about the population it comes from
+
+-   For our inferences to be valid, the sample should be random and representative of the population we're interested in
+
+## Inference for simple linear regression
+
+-   Calculate a confidence interval for the slope, $\beta_1$
+
+-   Conduct a hypothesis test for the interval $\beta_1$
+
+# Confidence interval for the slope
+
+## Confidence interval {.smaller}
+
+-   A plausible range of values for a population parameter is called a **confidence interval**
+-   Using only a single point estimate is like fishing in a murky lake with a spear, and using a confidence interval is like fishing with a net
+    -   We can throw a spear where we saw a fish but we will probably miss, if we toss a net in that area, we have a good chance of catching the fish
+    -   Similarly, if we report a point estimate, we probably will not hit the exact population parameter, but if we report a range of plausible values we have a good shot at capturing the parameter
+
+## Confidence interval for the slope {.smaller}
+
+A confidence interval will allow us to make a statement like "*for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take X dollars.*"
+
+-   Should X be \$10?
+    \$100?
+    \$1000?
+
+-   If we were to take another sample of `r nrow(duke_forest)` would we expect the slope calculated based on that sample to be exactly `r dollar(slope)`?
+    Off by \$10?
+    \$100?
+    \$1000?
+
+-   The answer depends on how variable (from one sample to another sample) the sample statistic (the slope) is
+
+-   We need a way to quantify the variability of the sample statistic
+
+## Quantifying the variability of the slope
+
+-   Two approaches:
+    1.  Via simulation (what we'll do today)
+
+    2.  Via mathematical models (what we'll do in the next class)
+
+<!-- -->
+
+-   Simulate to quantify the variability of the slope: - Bootstrap new samples from the original sample
+
+<!-- -->
+
+    -   Fit models to each of the samples and estimate the slope
+
+    -   Calculate the variability of the slopes
+
+```{r}
+set.seed(119)
+
+df_boot_samples_5 <- duke_forest %>%
+  specify(price ~ area) %>%
+  generate(reps = 5, type = "bootstrap")
+```
+
+## Bootstrap sample 1
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_df_obs <- ggplot(duke_forest, aes(x = area, y = price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = "Price and area of houses in Duke Forest"
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+
+p_df_obs
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+replicate_no = 1
+
+ggplot(df_boot_samples_5 %>% filter(replicate == replicate_no), 
+       aes(x = area, y = price)) +
+  geom_point(alpha = 0.5) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.8) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = glue("Bootstrap sample {replicate_no}")
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+```
+:::
+:::
+
+## Bootstrap sample 2
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_df_obs
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+replicate_no = 2
+
+ggplot(df_boot_samples_5 %>% filter(replicate == replicate_no), 
+       aes(x = area, y = price)) +
+  geom_point(alpha = 0.5) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.8) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = glue("Bootstrap sample {replicate_no}")
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+```
+:::
+:::
+
+## Bootstrap sample 3
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_df_obs
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+replicate_no = 3
+
+ggplot(df_boot_samples_5 %>% filter(replicate == replicate_no), 
+       aes(x = area, y = price)) +
+  geom_point(alpha = 0.5) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.8) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = glue("Bootstrap sample {replicate_no}")
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+```
+:::
+:::
+
+## Bootstrap sample 4
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_df_obs
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+replicate_no = 4
+
+ggplot(df_boot_samples_5 %>% filter(replicate == replicate_no), 
+       aes(x = area, y = price)) +
+  geom_point(alpha = 0.5) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.8) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = glue("Bootstrap sample {replicate_no}")
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+```
+:::
+:::
+
+## Bootstrap sample 5
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_df_obs
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+replicate_no = 5
+
+ggplot(df_boot_samples_5 %>% filter(replicate == replicate_no), 
+       aes(x = area, y = price)) +
+  geom_point(alpha = 0.5) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.8) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = glue("Bootstrap sample {replicate_no}")
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+```
+:::
+:::
+
+. . .
+
+*so on and so forth...*
+
+## Bootstrap samples 1 - 10
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_df_obs
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+ggplot(df_boot_samples_5, aes(x = area, y = price, group = replicate)) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.5) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = glue("Bootstrap samples 1 - 5")
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+```
+:::
+:::
+
+## Bootstrap samples 1 - 100
+
+```{r}
+set.seed(119)
+
+df_boot_samples_100 <- duke_forest %>%
+  specify(price ~ area) %>%
+  generate(reps = 100, type = "bootstrap")
+```
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_df_obs
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_df_boot_samples_100 <- ggplot(df_boot_samples_100, aes(x = area, y = price, group = replicate)) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.05) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = glue("Bootstrap samples 1 - 100")
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+
+p_df_boot_samples_100
+```
+:::
+:::
+
+## Slopes of bootstrap samples
+
+::: question
+**Fill in the blank:** For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take \_\_\_ dollars.
+:::
+
+```{r}
+p_df_boot_samples_100 +
+  geom_abline(intercept = intercept, slope = slope, color = "#8F2D56")
+```
+
+## Slopes of bootstrap samples
+
+::: question
+**Fill in the blank:** For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take \_\_\_ dollars.
+:::
+
+```{r}
+df_boot_samples_100_fit <- df_boot_samples_100 %>%
+  fit()
+
+df_boot_samples_100_hist <- ggplot(df_boot_samples_100_fit %>% filter(term == "area"), aes(x = estimate)) +
+  geom_histogram(binwidth = 10, color = "white") +
+  geom_vline(xintercept = slope, color = "#8F2D56", size = 1) +
+  labs(x = "Slope", y = "Count",
+       title = "Slopes of 1,000 bootstrap samples") +
+  scale_x_continuous(labels = label_dollar())
+
+df_boot_samples_100_hist
+```
+
+## Confidence level
+
+::: question
+How confident are you that the true slope is between \$0 and \$250?
+How about \$150 and \$170?
+How about \$90 and \$210?
+:::
+
+```{r}
+df_boot_samples_100_hist
+```
+
+## 95% confidence interval
+
+```{r}
+lower <- df_boot_samples_100_fit %>%
+  ungroup() %>%
+  filter(term == "area") %>%
+  summarise(quantile(estimate, 0.025)) %>%
+  pull()
+
+upper <- df_boot_samples_100_fit %>%
+  ungroup() %>%
+  filter(term == "area") %>%
+  summarise(quantile(estimate, 0.975)) %>%
+  pull()
+
+df_boot_samples_100_hist +
+  geom_vline(xintercept = lower, color = "#66CDAA", size = 1, linetype = "dashed") +
+  geom_vline(xintercept = upper, color = "#66CDAA", size = 1, linetype = "dashed")
+```
+
+-   A 95% confidence interval is bounded by the middle 95% of the bootstrap distribution
+-   We are 95% confident that for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(lower)` to `r dollar(upper)`.
+
+## Computing the CI for the slope I
+
+Calculate the observed slope:
+
+```{r}
+#| echo: true
+
+observed_fit <- duke_forest %>%
+  specify(price ~ area) %>%
+  fit()
+
+observed_fit
+```
+
+## Computing the CI for the slope II {.smaller}
+
+Take `100` bootstrap samples and fit models to each one:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1,5,6"
+
+set.seed(1120)
+
+boot_fits <- duke_forest %>%
+  specify(price ~ area) %>%
+  generate(reps = 100, type = "bootstrap") %>%
+  fit()
+
+boot_fits
+```
+
+## Computing the CI for the slope III
+
+Compute the 95% CI as the middle 95% of the bootstrap distribution:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "5"
+
+get_confidence_interval(
+  boot_fits, 
+  point_estimate = observed_fit, 
+  level = 0.95,
+  type = "percentile"
+)
+```
+
+## Computing the CI for the slope IV
+
+Alternatively, computer the 95% CI as the point estimate $\pm$ 2 standard deviations of the bootstrap distribution:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "5"
+
+get_confidence_interval(
+  boot_fits, 
+  point_estimate = observed_fit, 
+  level = 0.95,
+  type = "se"
+)
+```
+
+## Precision vs. accuracy
+
+::: question
+If we want to be very certain that we capture the population parameter, should we use a wider or a narrower interval?
+What drawbacks are associated with using a wider interval?
+:::
+
+. . .
+
+![](images/lec-5/garfield.png){fig-alt="Garfield comic" fig-align="center" width="600"}
+
+. . .
+
+::: question
+How can we get best of both worlds -- high precision and high accuracy?
+:::
+
+## Changing confidence level
+
+::: question
+How would you modify the following code to calculate a 90% confidence interval?
+How would you modify it for a 99% confidence interval?
+:::
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|4"
+
+get_confidence_interval(
+  boot_fits, 
+  point_estimate = observed_fit, 
+  level = 0.95,
+  type = "percentile"
+)
+```
+
+## Recap {.smaller}
+
+-   **Population:** Complete set of observations of whatever we are studying, e.g., people, tweets, photographs, etc. (population size = $N$)
+-   **Sample:** Subset of the population, ideally random and representative (sample size = $n$)
+-   Sample statistic $\ne$ population parameter, but if the sample is good, it can be a good estimate
+-   **Statistical inference:** Discipline that concerns itself with the development of procedures, methods, and theorems that allow us to extract meaning and information from data that has been generated by stochastic (random) process
+-   We report the estimate with a confidence interval, and the width of this interval depends on the variability of sample statistics from different samples from the population
+-   Since we can't continue sampling from the population, we bootstrap from the one sample we have to estimate sampling variability
+
+## Sampling is natural {.smaller}
+
+![](images/lec-5/soup.png){fig-alt="Illustration of a bowl of soup" fig-align="center" width="300"}
+
+-   When you taste a spoonful of soup and decide the spoonful you tasted isn't salty enough, that's exploratory analysis
+-   If you generalize and conclude that your entire soup needs salt, that's an inference
+-   For your inference to be valid, the spoonful you tasted (the sample) needs to be representative of the entire pot (the population)
+
+# Hypothesis test for the slope
+
+## Statistical significance
+
+::: columns
+::: {.column width="50%"}
+Does the data provide sufficient evidence that β1β1 is significantly different from 0?
+:::
+
+::: {.column width="50%"}
+```{r}
+mean_price <- mean(duke_forest$price)
+
+p_df_obs +
+  geom_hline(yintercept = mean_price, color = "gray50") +
+  annotate("text", x = 5200, y = mean_price*1.1, label = expression(paste(beta[1], " = 0")), size = 8)
+```
+:::
+:::
+
+## Outline of a hypothesis test
+
+1️⃣ State the hypothesesm
+
+2️⃣ Calculate the test statistic
+
+3️⃣ Calculate the p-value
+
+4️⃣ State the conclusion
+
+## 1️⃣ State the hypotheses
+
+$$
+H_0: \beta_1 = 0 \\
+H_0: \beta_1 \ne 0
+$$
+
+-   Null hypothesis: The true slope is 0.
+
+    Altentative hypothesis:
