@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.28">
+  <meta name="generator" content="quarto-0.3.31">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - SLR: Simulation based-inference</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -625,21 +625,20 @@
 </section>
 <section id="quantifying-the-variability-of-the-slope" class="slide level2">
 <h2>Quantifying the variability of the slope</h2>
+<p><strong>for estimation</strong></p>
 <ul>
 <li class="fragment">Two approaches:
 <ol type="1">
 <li class="fragment"><p>Via simulation (what we’ll do today)</p></li>
 <li class="fragment"><p>Via mathematical models (what we’ll do in the next class)</p></li>
 </ol></li>
-</ul>
-<!-- -->
+<li class="fragment">Bootstrapping to quantify the variability of the slope for the purpose of estimation:
 <ul>
-<li class="fragment">Simulate to quantify the variability of the slope: - Bootstrap new samples from the original sample</li>
+<li class="fragment"><p>Bootstrap new samples from the original sample</p></li>
+<li class="fragment"><p>Fit models to each of the samples and estimate the slope</p></li>
+<li class="fragment"><p>Use features of the distribution of the bootstrapped slopes to construct a confidence interval</p></li>
+</ul></li>
 </ul>
-<!-- -->
-<pre><code>-   Fit models to each of the samples and estimate the slope
-
--   Calculate the variability of the slopes</code></pre>
 <div class="cell" data-layout-align="center">
 
 </div>
@@ -865,11 +864,11 @@
 <h2>Computing the CI for the slope I</h2>
 <p>Calculate the observed slope:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>observed_fit <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">fit</span>()</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>observed_fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>observed_fit <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">fit</span>()</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a>observed_fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   term      estimate
@@ -883,14 +882,14 @@
 <h2>Computing the CI for the slope II</h2>
 <p>Take <code>100</code> bootstrap samples and fit models to each one:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7" data-code-line-numbers="1,5,6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">set.seed</span>(<span class="dv">1120</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a></span>
-<span id="cb7-3"><a href="#cb7-3"></a>boot_fits <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">100</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">fit</span>()</span>
-<span id="cb7-7"><a href="#cb7-7"></a></span>
-<span id="cb7-8"><a href="#cb7-8"></a>boot_fits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-code-line-numbers="1,5,6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">set.seed</span>(<span class="dv">1120</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>boot_fits <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">100</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">fit</span>()</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a>boot_fits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 200 × 3
 # Groups:   replicate [100]
@@ -914,12 +913,12 @@
 <h2>Computing the CI for the slope III</h2>
 <p>Compute the 95% CI as the middle 95% of the bootstrap distribution:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9" data-code-line-numbers="5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">get_confidence_interval</span>(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  boot_fits, </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="at">point_estimate =</span> observed_fit, </span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="at">type =</span> <span class="st">"percentile"</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8" data-code-line-numbers="5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">get_confidence_interval</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  boot_fits, </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="at">point_estimate =</span> observed_fit, </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="at">type =</span> <span class="st">"percentile"</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   term      lower_ci upper_ci
@@ -933,12 +932,12 @@
 <h2>Computing the CI for the slope IV</h2>
 <p>Alternatively, computer the 95% CI as the point estimate <span class="math inline">\(\pm\)</span> 2 standard deviations of the bootstrap distribution:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11" data-code-line-numbers="5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">get_confidence_interval</span>(</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  boot_fits, </span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">point_estimate =</span> observed_fit, </span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="at">type =</span> <span class="st">"se"</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-code-line-numbers="5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">get_confidence_interval</span>(</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  boot_fits, </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="at">point_estimate =</span> observed_fit, </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="at">type =</span> <span class="st">"se"</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   term      lower_ci upper_ci
@@ -966,12 +965,12 @@
 <p>How would you modify the following code to calculate a 90% confidence interval? How would you modify it for a 99% confidence interval?</p>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13" data-code-line-numbers="|4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">get_confidence_interval</span>(</span>
-<span id="cb13-2"><a href="#cb13-2"></a>  boot_fits, </span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="at">point_estimate =</span> observed_fit, </span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb13-5"><a href="#cb13-5"></a>  <span class="at">type =</span> <span class="st">"percentile"</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12" data-code-line-numbers="|4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">get_confidence_interval</span>(</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  boot_fits, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">point_estimate =</span> observed_fit, </span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="at">type =</span> <span class="st">"percentile"</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   term      lower_ci upper_ci
@@ -1010,7 +1009,7 @@
 <h2>Statistical significance</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Does the data provide sufficient evidence that β1β1 is significantly different from 0?</p>
+<p>Do the data provide sufficient evidence that <span class="math inline">\(\beta_1\)</span> (the true slope for the population) is different from 0?</p>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1024,9 +1023,84 @@
 </div>
 </div>
 </section>
+<section id="hypotheses" class="slide level2">
+<h2>Hypotheses</h2>
+<ul>
+<li class="fragment">We want to answer the question “Do the data provide sufficient evidence that <span class="math inline">\(\beta_1\)</span> (the true slope for the population) is different from 0?”</li>
+<li class="fragment"><strong>Null hypothesis</strong> - <span class="math inline">\(H_0: \beta_1 = 0\)</span>, there is no linear relationship between <code>area</code> and <code>price</code></li>
+<li class="fragment"><strong>Alternative hypothesis</strong> - <span class="math inline">\(H_A: \beta_1 \ne 0\)</span>, there is a linear relationship between <code>area</code> and <code>price</code></li>
+</ul>
+</section>
+<section id="hypothesis-testing-as-a-court-trial" class="slide level2">
+<h2><strong>Hypothesis testing as a court trial</strong></h2>
+<ul>
+<li class="fragment"><strong>Null hypothesis</strong>, <span class="math inline">\(H_0\)</span>: Defendant is innocent</li>
+<li class="fragment"><strong>Alternative hypothesis</strong>, <span class="math inline">\(H_A\)</span>: Defendant is guilty</li>
+<li class="fragment"><strong>Present the evidence:</strong> Collect data</li>
+<li class="fragment"><strong>Judge the evidence:</strong> “Could these data plausibly have happened by chance if the null hypothesis were true?”
+<ul>
+<li class="fragment"><p>Yes: Fail to reject <span class="math inline">\(H_0\)</span></p></li>
+<li class="fragment"><p>No: Reject <span class="math inline">\(H_0\)</span></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="hypothesis-testing-framework" class="slide level2">
+<h2>Hypothesis testing framework</h2>
+<ul>
+<li class="fragment">Start with a null hypothesis, <span class="math inline">\(H_0\)</span> that represents the status quo</li>
+<li class="fragment">Set an alternative hypothesis, <span class="math inline">\(H_A\)</span> that represents the research question, i.e.&nbsp;what we’re testing for</li>
+<li class="fragment">Conduct a hypothesis test under the assumption that the null hypothesis is true and calculate a <strong>p-value</strong> (probability of observed or more extreme outcome given that the null hypothesis is true)
+<ul>
+<li class="fragment"><p>if the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis</p></li>
+<li class="fragment"><p>if they do, then reject the null hypothesis in favor of the alternative</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="quantifying-the-variability-of-the-slope-1" class="slide level2">
+<h2>Quantifying the variability of the slope</h2>
+<p><strong>for testing</strong></p>
+<ul>
+<li class="fragment">Two approaches:
+<ol type="1">
+<li class="fragment"><p>Via simulation (what we’ll do today)</p></li>
+<li class="fragment"><p>Via mathematical models (what we’ll do in the next class)</p></li>
+</ol></li>
+<li class="fragment">Randomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:
+<ul>
+<li class="fragment"><p>Randomize new samples from the original sample</p></li>
+<li class="fragment"><p>Fit models to each of the samples and estimate the slope</p></li>
+<li class="fragment"><p>Use features of the distribution of the randomized slopes to conduct a hypothesis test</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="randomization-test" class="slide level2 smaller">
+<h2>Randomization test</h2>
+<ul>
+<li class="fragment">For a randomization test, we permute one variable to eliminate any existing relationship between the variables</li>
+<li class="fragment">That is, we set the null hypothesis to be true, and we measure the natural variability in the data due to sampling but <strong>not</strong> due to variables being correlated</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment">Each of the observed values for <code>area</code> (and for <code>price</code>) exist in both the original data plot as well as the permuted <code>price</code> plot, but the <code>area</code> and <code>price</code> are no longer matched for a given house</li>
+<li class="fragment">That is, each <code>price</code> value is randomly assigned to <code>area</code> of a given hourse.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-5_files/figure-revealjs/unnamed-chunk-32-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="outline-of-a-hypothesis-test" class="slide level2">
 <h2>Outline of a hypothesis test</h2>
-<p>1️⃣ State the hypothesesm</p>
+<p>1️⃣ State the hypotheses</p>
 <p>2️⃣ Calculate the test statistic</p>
 <p>3️⃣ Calculate the p-value</p>
 <p>4️⃣ State the conclusion</p>
@@ -1082,7 +1156,7 @@ H_0: \beta_1 \ne 0
 'autoAnimateUnmatched': true,
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"bdec3ca6d89e8d4d","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"ba7260d8f7b5ec36","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
@@ -1344,6 +1418,7 @@ H_0: \beta_1 \ne 0
           placement: 'bottom-start'
         };
           config['offset'] = [0,0];
+          config['maxWidth'] = 700;
         window.tippy(el, config); 
       }
       const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
