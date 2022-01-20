@@ -904,7 +904,7 @@ What does this mean for our original question: "Do the data provide sufficient e
 :::
 
 ```{r}
-#| out.width: "70%"
+#| out.width: "60%"
 #| fig.asp: 0.618
 
 perm_fits <- df_perm_samples_100 %>%
