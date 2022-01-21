@@ -11,8 +11,6 @@ And don't forget to wear your mask!
 😷
 :::
 
-To be posted.
-
 ## Prepare
 
 Due: Jan 18
@@ -34,6 +32,8 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 ## Perform
 
 📋 [Application Exercise 2 - Bike rentals in DC](https://github.com/sta210-s22?q=ae-2-dcbikeshare&type=all&language=&sort=)
+
+✍️ [HW 1 - In-person voting trends](/hw/hw-1.html)
 
 <br><br>
 

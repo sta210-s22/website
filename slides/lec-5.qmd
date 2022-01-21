@@ -37,7 +37,7 @@ options(scipen = 100)
 
 ## Announcements
 
--   HW 5 posted tomorrow, due next Friday
+-   HW 1 posted tomorrow, due next Friday
 
 ## Computational setup
 
@@ -247,11 +247,11 @@ slope <- tidy(df_fit) %>% filter(term == "area") %>% pull(estimate) %>% round()
 ```
 
 -   **Intercept:** Duke Forest houses that are 0 square feet are expected to sell, on average, for `r dollar(intercept)`.
--   **Slope:** For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`.
+-   **Slope:** For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`.
 
 ## Sample to population {.smaller}
 
-> For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`.
+> For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`.
 
 -   This estimate is valid for the single sample of `r nrow(duke_forest)` houses.
 -   But what if we're not interested quantifying the relationship between the size and price of a house in this single sample?
@@ -280,7 +280,7 @@ slope <- tidy(df_fit) %>% filter(term == "area") %>% pull(estimate) %>% round()
 
 ## Confidence interval for the slope {.smaller}
 
-A confidence interval will allow us to make a statement like "*for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take X dollars.*"
+A confidence interval will allow us to make a statement like "*For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take X dollars.*"
 
 -   Should X be \$10?
     \$100?
@@ -559,7 +559,7 @@ p_df_boot_samples_100
 ## Slopes of bootstrap samples
 
 ::: question
-**Fill in the blank:** For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take \_\_\_ dollars.
+**Fill in the blank:** For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take \_\_\_ dollars.
 :::
 
 ```{r}
@@ -570,7 +570,7 @@ p_df_boot_samples_100 +
 ## Slopes of bootstrap samples
 
 ::: question
-**Fill in the blank:** For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take \_\_\_ dollars.
+**Fill in the blank:** For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`, give or take \_\_\_ dollars.
 :::
 
 ```{r}
@@ -620,7 +620,7 @@ df_boot_samples_100_hist +
 ```
 
 -   A 95% confidence interval is bounded by the middle 95% of the bootstrap distribution
--   We are 95% confident that for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(lower)` to `r dollar(upper)`.
+-   We are 95% confident that For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(lower)` to `r dollar(upper)`.
 
 ## Computing the CI for the slope I
 
@@ -802,115 +802,3 @@ p_df_obs +
 -   Conduct a hypothesis test under the assumption that the null hypothesis is true and calculate a **p-value** (probability of observed or more extreme outcome given that the null hypothesis is true)
     -   if the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis
     -   if they do, then reject the null hypothesis in favor of the alternative
-
-## Quantify the variability of the slope {.smaller}
-
-**for testing**
-
--   Two approaches:
-    1.  Via simulation (what we'll do today)
-    2.  Via mathematical models (what we'll do in the next class)
--   Randomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:
-    -   Simulate new samples from the original sample via permutation
-    -   Fit models to each of the samples and estimate the slope
-    -   Use features of the distribution of the permuted slopes to conduct a hypothesis test
-
-## Permutation, described {.smaller}
-
-::: columns
-::: {.column width="40%"}
--   Set the null hypothesis to be true, and measure the natural variability in the data due to sampling but **not** due to variables being correlated by permuting permute one variable to eliminate any existing relationship between the variables
--   Each `price` value is randomly assigned to `area` of a given house, i.e. `area` and `price` are no longer matched for a given house
-:::
-
-::: {.column width="60%"}
-```{r}
-set.seed(1234)
-
-duke_forest_rand <- duke_forest %>%
-  mutate(
-    price_Observed = price,
-    price_Permuted = sample(price, size = nrow(duke_forest))
-    ) %>%
-  select(contains("price_"), area)
-
-duke_forest_rand
-```
-:::
-:::
-
-## Permutation, visualized
-
-::: columns
-::: {.column width="50%"}
--   Each of the observed values for `area` (and for `price`) exist in both the observed data plot as well as the permuted `price` plot
--   The permutation removes the linear relationship between `area` and `price`
-:::
-
-::: {.column width="50%"}
-```{r}
-#| out.width: "100%"
-#| fig.asp: 1.2
-
-duke_forest_rand %>%
-  pivot_longer(cols = contains("price_"), names_to = "price_type", names_prefix = "price_", values_to = "price") %>%
-  ggplot(aes(x = area, y = price)) +
-  geom_point() +
-  geom_smooth(aes(color = price_type), method = "lm", se = FALSE, show.legend = FALSE) +
-  facet_wrap(~price_type, nrow = 2) +
-  scale_color_manual(values = c("#8F2D56", "gray")) +
-  scale_x_continuous(labels = label_number()) +
-  scale_y_continuous(labels = label_dollar()) +
-  labs(x = "Area", y = "Price")
-```
-:::
-:::
-
-## Permuation, repeated
-
-Repeated permutations allow for quantifying the variability in the slope under the condition that there is no linear relationship (i.e., that the null hypothesis is true)
-
-```{r}
-set.seed(1120)
-
-df_perm_samples_100 <- duke_forest %>%
-  specify(price ~ area) %>%
-  hypothesize(null = "independence") %>%
-  generate(reps = 100, type = "permute")
-
-p_df_boot_samples_100 <- ggplot(df_perm_samples_100, aes(x = area, y = price, group = replicate)) +
-  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.1) +
-  labs(
-    x = "Area (square feet)",
-    y = "Sale price (USD)",
-    title = glue("Permuted samples 1 - 100")
-  ) +
-  scale_y_continuous(labels = label_dollar()) +
-  scale_x_continuous(labels = label_number())
-
-p_df_boot_samples_100 +
-  geom_abline(intercept = intercept, slope = slope, color = "#8F2D56")
-```
-
-## Concluding the hypothesis test {.smaller}
-
-::: question
-Is the observed slope of $\hat{\beta_1} = 159$ (or an even more extreme slope) a likely outcome under the null hypothesis that $\beta = 0$?
-What does this mean for our original question: "Do the data provide sufficient evidence that $\beta_1$ (the true slope for the population) is different from 0?"
-:::
-
-```{r}
-#| out.width: "60%"
-#| fig.asp: 0.618
-
-perm_fits <- df_perm_samples_100 %>%
-  fit()
-
-ggplot(perm_fits %>% filter(term == "area"),
-       aes(x = estimate)) +
-  geom_histogram(binwidth = 10, color = "white") +
-  geom_vline(xintercept = slope, color = "#8F2D56", size = 1) +
-  labs(x = "Slope", y = "Count",
-       title = "Slopes of 1,000 permuted samples") +
-  scale_x_continuous(limits = c(-160, 160), labels = label_dollar())
-```

@@ -1,4 +1,227 @@
 ---
-title: "HW 1 - To be posted..."
+title: "HW 1 - In-person voting trends"
+subtitle: "Due Friday, January 28, 5pm on Gradescope"
 editor: visual
 ---
+
+## Introduction
+
+In this assignment, you'll use simple linear regression to explore the percent of votes cast in-person in the 2020 U.S. election based on the county's political leanings.
+
+### Learning goals
+
+In this assignment, you will...
+
+-   Fit and interpret simple linear regression models
+-   Assess the conditions for simple linear regression.
+-   Create and interpret spatial data visualizations using R.
+-   Continue developing a workflow for reproducible data analysis.
+
+## Getting started
+
+### Log in to RStudio
+
+-   Go to <https://vm-manage.oit.duke.edu/containers> and login with your Duke NetID and Password.
+-   Click **STA210** to log into the Docker container. You should now see the RStudio environment.
+
+### Clone the repo & start new RStudio project
+
+-   Go to the course organization at [github.com/sta210-s22](https://github.com/sta210-s22 "Course GitHub organization") organization on GitHub.
+    Click on the repo with the prefix **hw-1**.
+    It contains the starter documents you need to complete the lab.
+
+-   Click on the green **CODE** button, select **Use SSH** (this might already be selected by default, and if it is, you'll see the text **Clone with SSH**).
+    Click on the clipboard icon to copy the repo URL.
+
+-   In RStudio, go to *File* ➛ *New Project* ➛*Version Control* ➛ *Git*.
+
+-   Copy and paste the URL of your assignment repo into the dialog box *Repository URL*. Again, please make sure to have *SSH* highlighted under *Clone* when you copy the address.
+
+-   Click *Create Project*, and the files from your GitHub repo will be displayed in the *Files* pane in RStudio.
+
+-   Click *hw-1-voting.qmd* to open the template R Markdown file.
+    This is where you will write up your code and narrative for the lab.
+
+## Packages
+
+The following packages will be used in this assignment:
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+library(scales)
+```
+
+## Data: 2020 Election
+
+There are multiple data sets for this assignment.
+Use the code below to load the data.
+
+```{r}
+#| message: false
+
+election_nc <- read_csv("data/nc-election-2020.csv") %>%
+  mutate(fips = as.integer(FIPS))
+county_map_data <-  read_csv("data/nc-county-map-data.csv")
+election_sample <- read_csv("data/us-election-2020-sample.csv")
+```
+
+The county-level election data in `election_nc` and `election_sample` are from [The Economist GitHub repo](https://github.com/TheEconomist/in-person-voting-covid-19).
+The data were originally analyzed in the July 2021 article [In-person voting really did accelerate covid-19's spread in America](https://www-economist-com.proxy.lib.duke.edu/graphic-detail/2021/07/10/in-person-voting-really-did-accelerate-covid-19s-spread-in-america).
+For this analysis, we will focus on the following variables:
+
+-   `inperson_pct`: The proportion of a county's votes cast in-person in the 2020 election
+-   `pctTrump_2016`: The proportion of a county's votes cast for Donald Trump in the 2016 election
+
+The data in `county_map_data` were obtained from the **maps** package in R.
+We will not analyze any of the variables in this data set but will use it to help create maps in the assignment.
+[Click here](https://cran.r-project.org/web/packages/maps/maps.pdf) to see the documentation for the maps package.
+[Click here](https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html) for code examples.
+
+## Exercises
+
+Due to COVID-19 pandemic, many states made alternatives in-person voting, such as voting by mail, more widely available for the 2020 U.S. election.
+The general consensus was that voters who were more Democratic leaning would be more likely to vote by mail, while more Republican leaning voters would largely vote in-person.
+This was supported by multiple surveys, including [this survey](https://www.pewresearch.org/fact-tank/2020/09/08/americans-expectations-about-voting-in-2020-presidential-election-are-colored-by-partisan-differences/) conducted by Pew Research.
+
+The goal of this analysis is to use regression analysis to explore the relationship between a county's political leanings and the proportion of votes cast in-person in 2020.
+The ultimate question we want to answer is **"Did counties with more Republican leanings have a larger proportion of votes cast in-person in the 2020 election?"**
+
+We will use the proportion of votes cast for Donald Trump in 2016 (`pctTrump_2016`) as a measure of a county's political leaning.
+Counties with a higher proportion of votes for Trump in 2016 are considered to have more Republican leanings.
+
+::: callout-note
+All narrative should be written in complete sentences, and all visualizations should have informative titles and axis labels.
+:::
+
+### Part 1: Counties in North Carolina
+
+For this part of the analysis, we will focus on counties in North Carolina.
+We will use the data sets `election_nc` and `county_map_data`.
+
+1.  Visualize the distribution of the response variable `inperson_pct` and calculate appropriate summary statistics.
+    Use the visualization and summary statistics to describe the distribution.
+    Include an informative title and axis labels on the plot.
+
+2.  Let's view the data in another way.
+    Use the code below to make a map of North Carolina with the color of each county filled in based on the percentage of votes cast in-person in the 2020 election.
+    Fill in title and axis labels.
+
+    Then use the plot answer the following:
+
+    -   What are 2 - 3 observations you have from the plot?
+    -   What is a feature that is apparent in the map that wasn't apparent from the histogram in the previous exercise? What is a feature that is apparent in the histogram that is not apparent in the map?
+
+```{r}
+#| eval: false
+
+election_map_data <- left_join(election_nc, county_map_data)
+```
+
+```{r eval = FALSE}
+#| eval: false
+
+ggplot() +
+  geom_polygon(data = county_map_data,
+    mapping = aes(x = long, y = lat, group = group),
+    fill = "lightgray", color = "white"
+    ) +
+  geom_polygon(data = election_map_data, 
+    mapping = aes(x = long, y = lat, group = group,
+    fill = inperson_pct)
+    ) +
+  labs(
+    x = "___",
+    y = "___",
+    fill = "___",
+    title = "___"
+  ) +
+  scale_fill_viridis_c(labels = label_percent(scale = 1)) +
+  coord_quickmap()
+```
+
+3.  Create a visualization of the relationship between `inperson_pct` and `pctTrump_2016`.
+    Use the visualization to describe the relationship between the two variables.
+
+4.  We can use a linear regression model to better quantify the relationship between the variables.
+
+    -   Fit the linear model to understand variability in the percent of in-person votes based on the percent of votes for Trump in the 2016 election.
+        Neatly display the model output with 3 digits.
+
+    -   Write the regression equation using mathematical notation.
+
+5.  Now let's use the model coefficients to describe the relationship.
+
+    -   Interpret the slope. The interpretation should be written in a way that is meaningful in the context of the data.
+    -   Does it make sense to interpret the intercept? If so, write the interpretation in the context of the data. Otherwise, briefly explain why not.
+
+6.  If the linear model is a good fit to these data, there should be no structure left in the residuals and the residuals should have constant variance.
+    Augment the data with the model to obtain the residuals and predicted values for each observation.
+    Then, make a plot of the residuals vs. the fitted values, and based on this plot, and provide a brief explanation for whether these two conditions are met.
+    *Hint: Zoom out on the plot by extending the limits of the y-axis.*
+
+7.  We might also be interested in our observations being independent, particularly if we are to use these data for inference.
+    To evaluate whether the independence condition is met, we will examine a map of the counties in North Carolina with the color filled based on the value of the residuals.
+
+    -   Briefly explain why we may want to view the residuals on a map to assess independence.
+    -   Briefly explain what pattern (if any) we would expect to observe on the map if the independence condition is satisfied.
+
+8.  Fill in the name of your model in the code below to calculate the residuals and add them to `election_map_data`.
+    Then, a map with the color of each county filled in based on the value of the residual.
+    *Hint: Start with the code from Exercise 2.*
+
+    Is the independence condition satisfied?
+    Briefly explain based on what you observe from the plot.
+
+    ```{r}
+    #| eval: false
+
+    nc_election_aug <- nc_election_aug %>% 
+      bind_cols(fips = election_nc$fips)
+
+    election_map_data <- left_join(election_map_data, nc_election_aug)
+    ```
+
+### Part 2: Inference for the U.S.
+
+To get a better understanding of the trend across the entire United States, we analyze data from a random sample of 200 counties.
+This data is in the `election_sample` data frame.
+Because these counties were randomly selected out of the 3,006 counties in the United States, we can reasonably treat the counties as independent observations.
+
+9.  Fit the linear model to these sample data to understand variability in the percent of in-person votes based on the percent of votes for Trump in the 2016 election. Neatly display the model output with 3 digits.
+10. Conduct a hypothesis test for the slope using a permutation test. In your response, state the null and alternative hypotheses in words, and state the conclusion in the context of the data.
+11. Next, construct a 95% confidence interval for the slope using bootstrapping. Interpret the confidence interval in the context of the data.
+12. Comment on whether the hypothesis test and confidence interval support the general consensus that Republican voters were more likely to vote in-person in the 2020 election? A brief explanation is sufficient but it should be based on your conclusions from Exercises 10 and 11.
+
+## Submission
+
+::: callout-warning
+Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.
+We will be checking these to make sure you have been practicing how to commit and push changes.
+
+Remember -- you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.
+:::
+
+To submit your assignment:
+
+-   Go to [http://www.gradescope.com](http://www.gradescope.com/) and click *Log in* in the top right corner.
+-   Click *School Credentials* ➡️ *Duke NetID* and log in using your NetID credentials.
+-   Click on your *STA 210* course.
+-   Click on the assignment, and you'll be prompted to submit it.
+-   Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be "checked").
+-   Select the first page of your PDF submission to be associated with the *"Workflow & formatting"* section.
+
+## Grading
+
+Total points available: 50 points.
+
+| Component             | Points |
+|-----------------------|--------|
+| Ex 1 - 10             | 45     |
+| Workflow & formatting | 5[^1]  |
+
+[^1]: The "Workflow & formatting" grade is to assess the reproducible workflow.
+    This includes having at least 3 informative commit messages and updating the name and date in the YAML.

@@ -393,7 +393,7 @@ You can use the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/raw/
 
 ### Exercise 8
 
-**Compare and contrast your plots from the previous exercise to the overlapping density plots from [Exercise 5]. What features are apparent in the plot from the previous exercise that aren't in the overlapping density plots? What features are apparent in the overlapping density plots that aren't in the plot from the previous exercise? What features are apparent in both?**
+**Compare and contrast your plots from the previous exercise to the overlapping density plots from [Exercise 5](#). What features are apparent in the plot from the previous exercise that aren't in the overlapping density plots? What features are apparent in the overlapping density plots that aren't in the plot from the previous exercise? What features are apparent in both?**
 
 ::: callout-warning
 🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub.
