@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.31">
+  <meta name="generator" content="quarto-0.3.34">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - HW 1 - To be posted…</title>
+  <title>STA 210 - Spring 2022 - HW 1 - In-person voting trends</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -11,6 +11,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
   <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -53,7 +116,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
   <link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="STA 210 - Spring 2022 - HW 1 - To be posted…">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - HW 1 - In-person voting trends">
+<meta name="twitter:description" content="Due Friday, January 28, 5pm on Gradescope">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -65,7 +129,7 @@
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">HW 1 - To be posted…</h1>
+      <h1 class="quarto-secondary-nav-title">HW 1 - In-person voting trends</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -270,15 +334,245 @@
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-      <div id="quarto-toc-target"></div>
+      <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+<ul class="collapse">
+<li><a href="#learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+</ul></li>
+<li><a href="#getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a>
+<ul class="collapse">
+<li><a href="#log-in-to-rstudio" class="nav-link" data-scroll-target="#log-in-to-rstudio">Log in to RStudio</a></li>
+<li><a href="#clone-the-repo-start-new-rstudio-project" class="nav-link" data-scroll-target="#clone-the-repo-start-new-rstudio-project">Clone the repo &amp; start new RStudio project</a></li>
+</ul></li>
+<li><a href="#packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+<li><a href="#data-2020-election" class="nav-link" data-scroll-target="#data-2020-election">Data: 2020 Election</a></li>
+<li><a href="#exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+<ul class="collapse">
+<li><a href="#part-1-counties-in-north-carolina" class="nav-link" data-scroll-target="#part-1-counties-in-north-carolina">Part 1: Counties in North Carolina</a></li>
+<li><a href="#part-2-inference-for-the-u.s." class="nav-link" data-scroll-target="#part-2-inference-for-the-u.s.">Part 2: Inference for the U.S.</a></li>
+</ul></li>
+<li><a href="#submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+<li><a href="#grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+</ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/hw/hw-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content">
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7">HW 1 - To be posted…</h1>
+<h1 class="title d-none d-lg-block display-7">HW 1 - In-person voting trends</h1>
+<p class="subtitle lead">Due Friday, January 28, 5pm on Gradescope</p>
 </header>
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this assignment, you’ll use simple linear regression to explore the percent of votes cast in-person in the 2020 U.S. election based on the county’s political leanings.</p>
+<section id="learning-goals" class="level3">
+<h3 class="anchored" data-anchor-id="learning-goals">Learning goals</h3>
+<p>In this assignment, you will…</p>
+<ul>
+<li>Fit and interpret simple linear regression models</li>
+<li>Assess the conditions for simple linear regression.</li>
+<li>Create and interpret spatial data visualizations using R.</li>
+<li>Continue developing a workflow for reproducible data analysis.</li>
+</ul>
+</section>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<section id="log-in-to-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="log-in-to-rstudio">Log in to RStudio</h3>
+<ul>
+<li>Go to <a href="https://vm-manage.oit.duke.edu/containers" class="uri">https://vm-manage.oit.duke.edu/containers</a> and login with your Duke NetID and Password.</li>
+<li>Click <strong>STA210</strong> to log into the Docker container. You should now see the RStudio environment.</li>
+</ul>
+</section>
+<section id="clone-the-repo-start-new-rstudio-project" class="level3">
+<h3 class="anchored" data-anchor-id="clone-the-repo-start-new-rstudio-project">Clone the repo &amp; start new RStudio project</h3>
+<ul>
+<li><p>Go to the course organization at <a href="https://github.com/sta210-s22" title="Course GitHub organization">github.com/sta210-s22</a> organization on GitHub. Click on the repo with the prefix <strong>hw-1</strong>. It contains the starter documents you need to complete the lab.</p></li>
+<li><p>Click on the green <strong>CODE</strong> button, select <strong>Use SSH</strong> (this might already be selected by default, and if it is, you’ll see the text <strong>Clone with SSH</strong>). Click on the clipboard icon to copy the repo URL.</p></li>
+<li><p>In RStudio, go to <em>File</em> ➛ <em>New Project</em> ➛<em>Version Control</em> ➛ <em>Git</em>.</p></li>
+<li><p>Copy and paste the URL of your assignment repo into the dialog box <em>Repository URL</em>. Again, please make sure to have <em>SSH</em> highlighted under <em>Clone</em> when you copy the address.</p></li>
+<li><p>Click <em>Create Project</em>, and the files from your GitHub repo will be displayed in the <em>Files</em> pane in RStudio.</p></li>
+<li><p>Click <em>hw-1-voting.qmd</em> to open the template R Markdown file. This is where you will write up your code and narrative for the lab.</p></li>
+</ul>
+</section>
+</section>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<p>The following packages will be used in this assignment:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-2020-election" class="level2">
+<h2 class="anchored" data-anchor-id="data-2020-election">Data: 2020 Election</h2>
+<p>There are multiple data sets for this assignment. Use the code below to load the data.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>election_nc <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/nc-election-2020.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fips =</span> <span class="fu">as.integer</span>(FIPS))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>county_map_data <span class="ot">&lt;-</span>  <span class="fu">read_csv</span>(<span class="st">"data/nc-county-map-data.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>election_sample <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/us-election-2020-sample.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The county-level election data in <code>election_nc</code> and <code>election_sample</code> are from <a href="https://github.com/TheEconomist/in-person-voting-covid-19">The Economist GitHub repo</a>. The data were originally analyzed in the July 2021 article <a href="https://www-economist-com.proxy.lib.duke.edu/graphic-detail/2021/07/10/in-person-voting-really-did-accelerate-covid-19s-spread-in-america">In-person voting really did accelerate covid-19’s spread in America</a>. For this analysis, we will focus on the following variables:</p>
+<ul>
+<li><code>inperson_pct</code>: The proportion of a county’s votes cast in-person in the 2020 election</li>
+<li><code>pctTrump_2016</code>: The proportion of a county’s votes cast for Donald Trump in the 2016 election</li>
+</ul>
+<p>The data in <code>county_map_data</code> were obtained from the <strong>maps</strong> package in R. We will not analyze any of the variables in this data set but will use it to help create maps in the assignment. <a href="https://cran.r-project.org/web/packages/maps/maps.pdf">Click here</a> to see the documentation for the maps package. <a href="https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html">Click here</a> for code examples.</p>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<p>Due to COVID-19 pandemic, many states made alternatives in-person voting, such as voting by mail, more widely available for the 2020 U.S. election. The general consensus was that voters who were more Democratic leaning would be more likely to vote by mail, while more Republican leaning voters would largely vote in-person. This was supported by multiple surveys, including <a href="https://www.pewresearch.org/fact-tank/2020/09/08/americans-expectations-about-voting-in-2020-presidential-election-are-colored-by-partisan-differences/">this survey</a> conducted by Pew Research.</p>
+<p>The goal of this analysis is to use regression analysis to explore the relationship between a county’s political leanings and the proportion of votes cast in-person in 2020. The ultimate question we want to answer is <strong>“Did counties with more Republican leanings have a larger proportion of votes cast in-person in the 2020 election?”</strong></p>
+<p>We will use the proportion of votes cast for Donald Trump in 2016 (<code>pctTrump_2016</code>) as a measure of a county’s political leaning. Counties with a higher proportion of votes for Trump in 2016 are considered to have more Republican leanings.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All narrative should be written in complete sentences, and all visualizations should have informative titles and axis labels.</p>
+</div>
+</div>
+<section id="part-1-counties-in-north-carolina" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-counties-in-north-carolina">Part 1: Counties in North Carolina</h3>
+<p>For this part of the analysis, we will focus on counties in North Carolina. We will use the data sets <code>election_nc</code> and <code>county_map_data</code>.</p>
+<ol type="1">
+<li><p>Visualize the distribution of the response variable <code>inperson_pct</code> and calculate appropriate summary statistics. Use the visualization and summary statistics to describe the distribution. Include an informative title and axis labels on the plot.</p></li>
+<li><p>Let’s view the data in another way. Use the code below to make a map of North Carolina with the color of each county filled in based on the percentage of votes cast in-person in the 2020 election. Fill in title and axis labels.</p>
+<p>Then use the plot answer the following:</p>
+<ul>
+<li>What are 2 - 3 observations you have from the plot?</li>
+<li>What is a feature that is apparent in the map that wasn’t apparent from the histogram in the previous exercise? What is a feature that is apparent in the histogram that is not apparent in the map?</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>election_map_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(election_nc, county_map_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> county_map_data,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"lightgray"</span>, <span class="at">color =</span> <span class="st">"white"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> election_map_data, </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> inperson_pct)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"___"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"___"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"___"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"___"</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">labels =</span> <span class="fu">label_percent</span>(<span class="at">scale =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_quickmap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><p>Create a visualization of the relationship between <code>inperson_pct</code> and <code>pctTrump_2016</code>. Use the visualization to describe the relationship between the two variables.</p></li>
+<li><p>We can use a linear regression model to better quantify the relationship between the variables.</p>
+<ul>
+<li><p>Fit the linear model to understand variability in the percent of in-person votes based on the percent of votes for Trump in the 2016 election. Neatly display the model output with 3 digits.</p></li>
+<li><p>Write the regression equation using mathematical notation.</p></li>
+</ul></li>
+<li><p>Now let’s use the model coefficients to describe the relationship.</p>
+<ul>
+<li>Interpret the slope. The interpretation should be written in a way that is meaningful in the context of the data.</li>
+<li>Does it make sense to interpret the intercept? If so, write the interpretation in the context of the data. Otherwise, briefly explain why not.</li>
+</ul></li>
+<li><p>If the linear model is a good fit to these data, there should be no structure left in the residuals and the residuals should have constant variance. Augment the data with the model to obtain the residuals and predicted values for each observation. Then, make a plot of the residuals vs.&nbsp;the fitted values, and based on this plot, and provide a brief explanation for whether these two conditions are met. <em>Hint: Zoom out on the plot by extending the limits of the y-axis.</em></p></li>
+<li><p>We might also be interested in our observations being independent, particularly if we are to use these data for inference. To evaluate whether the independence condition is met, we will examine a map of the counties in North Carolina with the color filled based on the value of the residuals.</p>
+<ul>
+<li>Briefly explain why we may want to view the residuals on a map to assess independence.</li>
+<li>Briefly explain what pattern (if any) we would expect to observe on the map if the independence condition is satisfied.</li>
+</ul></li>
+<li><p>Fill in the name of your model in the code below to calculate the residuals and add them to <code>election_map_data</code>. Then, a map with the color of each county filled in based on the value of the residual. <em>Hint: Start with the code from Exercise 2.</em></p>
+<p>Is the independence condition satisfied? Briefly explain based on what you observe from the plot.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nc_election_aug <span class="ot">&lt;-</span> nc_election_aug <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="at">fips =</span> election_nc<span class="sc">$</span>fips)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>election_map_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(election_map_data, nc_election_aug)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ol>
+</section>
+<section id="part-2-inference-for-the-u.s." class="level3">
+<h3 class="anchored" data-anchor-id="part-2-inference-for-the-u.s.">Part 2: Inference for the U.S.</h3>
+<p>To get a better understanding of the trend across the entire United States, we analyze data from a random sample of 200 counties. This data is in the <code>election_sample</code> data frame. Because these counties were randomly selected out of the 3,006 counties in the United States, we can reasonably treat the counties as independent observations.</p>
+<ol start="9" type="1">
+<li>Fit the linear model to these sample data to understand variability in the percent of in-person votes based on the percent of votes for Trump in the 2016 election. Neatly display the model output with 3 digits.</li>
+<li>Conduct a hypothesis test for the slope using a permutation test. In your response, state the null and alternative hypotheses in words, and state the conclusion in the context of the data.</li>
+<li>Next, construct a 95% confidence interval for the slope using bootstrapping. Interpret the confidence interval in the context of the data.</li>
+<li>Comment on whether the hypothesis test and confidence interval support the general consensus that Republican voters were more likely to vote in-person in the 2020 election? A brief explanation is sufficient but it should be based on your conclusions from Exercises 10 and 11.</li>
+</ol>
+</section>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you wrap up the assignment, make sure all documents are updated on your GitHub repo. We will be checking these to make sure you have been practicing how to commit and push changes.</p>
+<p>Remember – you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.</p>
+</div>
+</div>
+<p>To submit your assignment:</p>
+<ul>
+<li>Go to <a href="http://www.gradescope.com/">http://www.gradescope.com</a> and click <em>Log in</em> in the top right corner.</li>
+<li>Click <em>School Credentials</em> ➡️ <em>Duke NetID</em> and log in using your NetID credentials.</li>
+<li>Click on your <em>STA 210</em> course.</li>
+<li>Click on the assignment, and you’ll be prompted to submit it.</li>
+<li>Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be “checked”).</li>
+<li>Select the first page of your PDF submission to be associated with the <em>“Workflow &amp; formatting”</em> section.</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<p>Total points available: 50 points.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ex 1 - 10</td>
+<td>45</td>
+</tr>
+<tr class="even">
+<td>Workflow &amp; formatting</td>
+<td>5<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+</tr>
+</tbody>
+</table>
 
+
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2>Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>The “Workflow &amp; formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

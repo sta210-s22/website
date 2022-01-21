@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.31">
+  <meta name="generator" content="quarto-0.3.34">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - SLR: Simulation based-inference</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -413,7 +413,7 @@
 <section id="announcements" class="slide level2">
 <h2>Announcements</h2>
 <ul>
-<li class="fragment">HW 5 posted tomorrow, due next Friday</li>
+<li class="fragment">HW 1 posted tomorrow, due next Friday</li>
 </ul>
 </section>
 <section id="computational-setup" class="slide level2">
@@ -572,14 +572,14 @@
 </div>
 <ul>
 <li class="fragment"><strong>Intercept:</strong> Duke Forest houses that are 0 square feet are expected to sell, on average, for $116,652.</li>
-<li class="fragment"><strong>Slope:</strong> For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159.</li>
+<li class="fragment"><strong>Slope:</strong> For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159.</li>
 </ul>
 </div>
 </section>
 <section id="sample-to-population" class="slide level2 smaller">
 <h2>Sample to population</h2>
 <blockquote>
-<p>For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159.</p>
+<p>For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159.</p>
 </blockquote>
 <ul>
 <li class="fragment">This estimate is valid for the single sample of 98 houses.</li>
@@ -619,7 +619,7 @@
 </section>
 <section id="confidence-interval-for-the-slope-1" class="slide level2 smaller">
 <h2>Confidence interval for the slope</h2>
-<p>A confidence interval will allow us to make a statement like “<em>for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take X dollars.</em>”</p>
+<p>A confidence interval will allow us to make a statement like “<em>For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take X dollars.</em>”</p>
 <ul>
 <li class="fragment"><p>Should X be $10? $100? $1000?</p></li>
 <li class="fragment"><p>If we were to take another sample of 98 would we expect the slope calculated based on that sample to be exactly $159? Off by $10? $100? $1000?</p></li>
@@ -838,14 +838,14 @@
 <section id="slopes-of-bootstrap-samples" class="slide level2">
 <h2>Slopes of bootstrap samples</h2>
 <div class="question">
-<p><strong>Fill in the blank:</strong> For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars.</p>
+<p><strong>Fill in the blank:</strong> For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars.</p>
 </div>
 
 <img data-src="lec-5_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
 <section id="slopes-of-bootstrap-samples-1" class="slide level2">
 <h2>Slopes of bootstrap samples</h2>
 <div class="question">
-<p><strong>Fill in the blank:</strong> For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars.</p>
+<p><strong>Fill in the blank:</strong> For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars.</p>
 </div>
 
 <img data-src="lec-5_files/figure-revealjs/unnamed-chunk-23-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
@@ -861,7 +861,7 @@
 
 <ul>
 <li class="fragment">A 95% confidence interval is bounded by the middle 95% of the bootstrap distribution</li>
-<li class="fragment">We are 95% confident that for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $90.43 to $205.77.</li>
+<li class="fragment">We are 95% confident that For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $90.43 to $205.77.</li>
 </ul>
 <img data-src="lec-5_files/figure-revealjs/unnamed-chunk-25-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
 <section id="computing-the-ci-for-the-slope-i" class="slide level2">
@@ -1089,100 +1089,12 @@
 <li class="fragment">if they do, then reject the null hypothesis in favor of the alternative</li>
 </ul></li>
 </ul>
-</section>
-<section id="quantify-the-variability-of-the-slope-1" class="slide level2 smaller">
-<h2>Quantify the variability of the slope</h2>
-<p><strong>for testing</strong></p>
-<ul>
-<li class="fragment">Two approaches:
-<ol type="1">
-<li class="fragment">Via simulation (what we’ll do today)</li>
-<li class="fragment">Via mathematical models (what we’ll do in the next class)</li>
-</ol></li>
-<li class="fragment">Randomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:
-<ul>
-<li class="fragment">Simulate new samples from the original sample via permutation</li>
-<li class="fragment">Fit models to each of the samples and estimate the slope</li>
-<li class="fragment">Use features of the distribution of the permuted slopes to conduct a hypothesis test</li>
-</ul></li>
-</ul>
-</section>
-<section id="permutation-described" class="slide level2 smaller">
-<h2>Permutation, described</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li class="fragment">Set the null hypothesis to be true, and measure the natural variability in the data due to sampling but <strong>not</strong> due to variables being correlated by permuting permute one variable to eliminate any existing relationship between the variables</li>
-<li class="fragment">Each <code>price</code> value is randomly assigned to <code>area</code> of a given house, i.e.&nbsp;<code>area</code> and <code>price</code> are no longer matched for a given house</li>
-</ul>
-</div><div class="column" style="width:60%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
-<pre><code># A tibble: 98 × 3
-   price_Observed price_Permuted  area
-            &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt;
- 1        1520000         342500  6040
- 2        1030000         750000  4475
- 3         420000         645000  1745
- 4         680000         697500  2091
- 5         428500         428500  1772
- 6         456000         481000  1950
- 7        1270000         610000  3909
- 8         557450         680000  2841
- 9         697500         485000  3924
-10         650000         105000  2173
-# … with 88 more rows</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="permutation-visualized" class="slide level2">
-<h2>Permutation, visualized</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li class="fragment">Each of the observed values for <code>area</code> (and for <code>price</code>) exist in both the observed data plot as well as the permuted <code>price</code> plot</li>
-<li class="fragment">The permutation removes the linear relationship between <code>area</code> and <code>price</code></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-5_files/figure-revealjs/unnamed-chunk-34-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="permuation-repeated" class="slide level2">
-<h2>Permuation, repeated</h2>
-<p>Repeated permutations allow for quantifying the variability in the slope under the condition that there is no linear relationship (i.e., that the null hypothesis is true)</p>
 
-<img data-src="lec-5_files/figure-revealjs/unnamed-chunk-35-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
-<section id="concluding-the-hypothesis-test" class="slide level2 smaller">
-<h2>Concluding the hypothesis test</h2>
-<div class="question">
-<p>Is the observed slope of <span class="math inline">\(\hat{\beta_1} = 159\)</span> (or an even more extreme slope) a likely outcome under the null hypothesis that <span class="math inline">\(\beta = 0\)</span>? What does this mean for our original question: “Do the data provide sufficient evidence that <span class="math inline">\(\beta_1\)</span> (the true slope for the population) is different from 0?”</p>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-5_files/figure-revealjs/unnamed-chunk-36-1.png" style="width:60.0%"></p>
-</figure>
-</div>
-</div>
-</div>
 
-<p><img src="images/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
-</section></section>
+<img src="images/logo.png" class="slide-logo r-stretch"></section></section>
     </div>
   </div>
 
@@ -1218,7 +1130,7 @@
 'autoAnimateUnmatched': true,
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"ae89cf99ecff19e8","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"6158e045a3114552","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner

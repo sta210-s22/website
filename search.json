@@ -109,7 +109,7 @@
     "href": "labs/lab-2.html#grading",
     "title": "Lab 2 - College scorecard",
     "section": "Grading",
-    "text": "Grading\nTotal points available: 50 points.\n\n\n\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 10\n45\n\n\nWorkflow & formatting\n51\n\n\n\n1 The “Workflow & formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML."
+    "text": "Grading\nTotal points available: 50 points.\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 10\n45\n\n\nWorkflow & formatting\n51\n\n\n\n1 The “Workflow & formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML.\nknitr::knit_exit()"
   },
   {
     "objectID": "computing-access.html",
@@ -389,7 +389,7 @@
     "href": "slides/lec-5.html#announcements",
     "title": "SLR: Simulation based-inference",
     "section": "Announcements",
-    "text": "Announcements\n\nHW 5 posted tomorrow, due next Friday"
+    "text": "Announcements\n\nHW 1 posted tomorrow, due next Friday"
   },
   {
     "objectID": "slides/lec-5.html#computational-setup",
@@ -466,14 +466,14 @@
     "href": "slides/lec-5.html#modeling",
     "title": "SLR: Simulation based-inference",
     "section": "Modeling",
-    "text": "Modeling\n\ndf_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(price ~ area, data = duke_forest)\n\ntidy(df_fit) %>%\n  kable(digits = 2)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n116652.33\n53302.46\n2.19\n0.03\n\n\narea\n159.48\n18.17\n8.78\n0.00\n\n\n\n\n\n\n\n\n\n\nIntercept: Duke Forest houses that are 0 square feet are expected to sell, on average, for $116,652.\nSlope: For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159."
+    "text": "Modeling\n\ndf_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(price ~ area, data = duke_forest)\n\ntidy(df_fit) %>%\n  kable(digits = 2)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n116652.33\n53302.46\n2.19\n0.03\n\n\narea\n159.48\n18.17\n8.78\n0.00\n\n\n\n\n\n\n\n\n\n\nIntercept: Duke Forest houses that are 0 square feet are expected to sell, on average, for $116,652.\nSlope: For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159."
   },
   {
     "objectID": "slides/lec-5.html#sample-to-population",
     "href": "slides/lec-5.html#sample-to-population",
     "title": "SLR: Simulation based-inference",
     "section": "Sample to population",
-    "text": "Sample to population\n\nFor each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159.\n\n\nThis estimate is valid for the single sample of 98 houses.\nBut what if we’re not interested quantifying the relationship between the size and price of a house in this single sample?\nWhat if we want to say something about the relationship between these variables for all houses in Duke Forest?"
+    "text": "Sample to population\n\nFor each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159.\n\n\nThis estimate is valid for the single sample of 98 houses.\nBut what if we’re not interested quantifying the relationship between the size and price of a house in this single sample?\nWhat if we want to say something about the relationship between these variables for all houses in Duke Forest?"
   },
   {
     "objectID": "slides/lec-5.html#statistical-inference-1",
@@ -501,7 +501,7 @@
     "href": "slides/lec-5.html#confidence-interval-for-the-slope-1",
     "title": "SLR: Simulation based-inference",
     "section": "Confidence interval for the slope",
-    "text": "Confidence interval for the slope\nA confidence interval will allow us to make a statement like “for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take X dollars.”\n\nShould X be $10? $100? $1000?\nIf we were to take another sample of 98 would we expect the slope calculated based on that sample to be exactly $159? Off by $10? $100? $1000?\nThe answer depends on how variable (from one sample to another sample) the sample statistic (the slope) is\nWe need a way to quantify the variability of the sample statistic"
+    "text": "Confidence interval for the slope\nA confidence interval will allow us to make a statement like “For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take X dollars.”\n\nShould X be $10? $100? $1000?\nIf we were to take another sample of 98 would we expect the slope calculated based on that sample to be exactly $159? Off by $10? $100? $1000?\nThe answer depends on how variable (from one sample to another sample) the sample statistic (the slope) is\nWe need a way to quantify the variability of the sample statistic"
   },
   {
     "objectID": "slides/lec-5.html#quantify-the-variability-of-the-slope",
@@ -564,14 +564,14 @@
     "href": "slides/lec-5.html#slopes-of-bootstrap-samples",
     "title": "SLR: Simulation based-inference",
     "section": "Slopes of bootstrap samples",
-    "text": "Slopes of bootstrap samples\n\nFill in the blank: For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars."
+    "text": "Slopes of bootstrap samples\n\nFill in the blank: For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars."
   },
   {
     "objectID": "slides/lec-5.html#slopes-of-bootstrap-samples-1",
     "href": "slides/lec-5.html#slopes-of-bootstrap-samples-1",
     "title": "SLR: Simulation based-inference",
     "section": "Slopes of bootstrap samples",
-    "text": "Slopes of bootstrap samples\n\nFill in the blank: For each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars."
+    "text": "Slopes of bootstrap samples\n\nFill in the blank: For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $159, give or take ___ dollars."
   },
   {
     "objectID": "slides/lec-5.html#confidence-level",
@@ -585,7 +585,7 @@
     "href": "slides/lec-5.html#confidence-interval-1",
     "title": "SLR: Simulation based-inference",
     "section": "95% confidence interval",
-    "text": "95% confidence interval\n\n\nA 95% confidence interval is bounded by the middle 95% of the bootstrap distribution\nWe are 95% confident that for each additional square feet, the model predicts the sale price of Duke Forest houses to be higher, on average, by $90.43 to $205.77."
+    "text": "95% confidence interval\n\n\nA 95% confidence interval is bounded by the middle 95% of the bootstrap distribution\nWe are 95% confident that For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by $90.43 to $205.77."
   },
   {
     "objectID": "slides/lec-5.html#computing-the-ci-for-the-slope-i",
@@ -683,42 +683,7 @@
     "href": "slides/lec-5.html#hypothesis-testing-framework",
     "title": "SLR: Simulation based-inference",
     "section": "Hypothesis testing framework",
-    "text": "Hypothesis testing framework\n\nStart with a null hypothesis, \\(H_0\\) that represents the status quo\nSet an alternative hypothesis, \\(H_A\\) that represents the research question, i.e. what we’re testing for\nConduct a hypothesis test under the assumption that the null hypothesis is true and calculate a p-value (probability of observed or more extreme outcome given that the null hypothesis is true)\n\nif the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis\nif they do, then reject the null hypothesis in favor of the alternative"
-  },
-  {
-    "objectID": "slides/lec-5.html#quantify-the-variability-of-the-slope-1",
-    "href": "slides/lec-5.html#quantify-the-variability-of-the-slope-1",
-    "title": "SLR: Simulation based-inference",
-    "section": "Quantify the variability of the slope",
-    "text": "Quantify the variability of the slope\nfor testing\n\nTwo approaches:\n\nVia simulation (what we’ll do today)\nVia mathematical models (what we’ll do in the next class)\n\nRandomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:\n\nSimulate new samples from the original sample via permutation\nFit models to each of the samples and estimate the slope\nUse features of the distribution of the permuted slopes to conduct a hypothesis test"
-  },
-  {
-    "objectID": "slides/lec-5.html#permutation-described",
-    "href": "slides/lec-5.html#permutation-described",
-    "title": "SLR: Simulation based-inference",
-    "section": "Permutation, described",
-    "text": "Permutation, described\n\n\n\nSet the null hypothesis to be true, and measure the natural variability in the data due to sampling but not due to variables being correlated by permuting permute one variable to eliminate any existing relationship between the variables\nEach price value is randomly assigned to area of a given house, i.e. area and price are no longer matched for a given house\n\n\n\n\n# A tibble: 98 × 3\n   price_Observed price_Permuted  area\n            <dbl>          <dbl> <dbl>\n 1        1520000         342500  6040\n 2        1030000         750000  4475\n 3         420000         645000  1745\n 4         680000         697500  2091\n 5         428500         428500  1772\n 6         456000         481000  1950\n 7        1270000         610000  3909\n 8         557450         680000  2841\n 9         697500         485000  3924\n10         650000         105000  2173\n# … with 88 more rows"
-  },
-  {
-    "objectID": "slides/lec-5.html#permutation-visualized",
-    "href": "slides/lec-5.html#permutation-visualized",
-    "title": "SLR: Simulation based-inference",
-    "section": "Permutation, visualized",
-    "text": "Permutation, visualized\n\n\n\nEach of the observed values for area (and for price) exist in both the observed data plot as well as the permuted price plot\nThe permutation removes the linear relationship between area and price"
-  },
-  {
-    "objectID": "slides/lec-5.html#permuation-repeated",
-    "href": "slides/lec-5.html#permuation-repeated",
-    "title": "SLR: Simulation based-inference",
-    "section": "Permuation, repeated",
-    "text": "Permuation, repeated\nRepeated permutations allow for quantifying the variability in the slope under the condition that there is no linear relationship (i.e., that the null hypothesis is true)"
-  },
-  {
-    "objectID": "slides/lec-5.html#concluding-the-hypothesis-test",
-    "href": "slides/lec-5.html#concluding-the-hypothesis-test",
-    "title": "SLR: Simulation based-inference",
-    "section": "Concluding the hypothesis test",
-    "text": "Concluding the hypothesis test\n\nIs the observed slope of \\(\\hat{\\beta_1} = 159\\) (or an even more extreme slope) a likely outcome under the null hypothesis that \\(\\beta = 0\\)? What does this mean for our original question: “Do the data provide sufficient evidence that \\(\\beta_1\\) (the true slope for the population) is different from 0?”\n\n\n\n\n\n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Hypothesis testing framework\n\nStart with a null hypothesis, \\(H_0\\) that represents the status quo\nSet an alternative hypothesis, \\(H_A\\) that represents the research question, i.e. what we’re testing for\nConduct a hypothesis test under the assumption that the null hypothesis is true and calculate a p-value (probability of observed or more extreme outcome given that the null hypothesis is true)\n\nif the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis\nif they do, then reject the null hypothesis in favor of the alternative\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lab-2.html#what-to-expect-in-lab",
@@ -1278,7 +1243,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\nWeek\n\n\n\n\nDate\n\n\n\n\nTopic\n\n\n\n\nPrepare\n\n\n\n\nSlides\n\n\n\n\nAE\n\n\n\n\nLab\n\n\n\n\nHW\n\n\n\n\nExam\n\n\n\n\nProject\n\n\n\n\n\n\n\n\n1\n\n\n\n\nWed, Jan 5\n\n\n\n\nLab 0 - Meet + greet\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 6\n\n\n\n\nWelcome to STA 210!\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\n\n\nMon, Jan 10\n\n\n\n\nLab 1 - Meet the toolkit\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 11\n\n\n\n\nSimple linear regression (SLR)\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 13\n\n\n\n\nSLR: Model fitting in R with tidymodels\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 14\n\n\n\n\nReleased: HW 5\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\n\n\nMon, Jan 17\n\n\n\n\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\n\n\n\n\nSLR: Prediction + model evaluation\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 20\n\n\n\n\nSLR: Simulation-based inference\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\n\n\n\n\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n4\n\n\n\n\nMon, Jan 24\n\n\n\n\nLab 2 - SLR\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 25\n\n\n\n\nSLR: Mathematical models for inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\n\n\n\n\nSLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\n\n\n\n\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n5\n\n\n\n\nMon, Jan 31\n\n\n\n\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\n\n\n\n\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\n\n\n\n\nExam 1 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\n\n\n\n\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n6\n\n\n\n\nMon, Feb 7\n\n\n\n\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\n\n\n\n\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\n\n\n\n\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\n\n\n\n\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n7\n\n\n\n\nMon, Feb 14\n\n\n\n\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\n\n\n\n\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\n\n\n\n\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\n\n\n\n\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n8\n\n\n\n\nMon, Feb 21\n\n\n\n\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\n\n\n\n\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\n\n\n\n\nExam 2 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\n\n\n\n\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9\n\n\n\n\nMon, Feb 28\n\n\n\n\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\n\n\n\n\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\n\n\n\n\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\n\n\n\n\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10\n\n\n\n\nMon, Mar 14\n\n\n\n\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\n\n\n\n\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\n\n\n\n\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\n\n\n\n\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n11\n\n\n\n\nMon, Mar 21\n\n\n\n\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\n\n\n\n\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\n\n\n\n\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\n\n\n\n\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n12\n\n\n\n\nMon, Mar 28\n\n\n\n\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\n\n\n\n\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\n\n\n\n\nTBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\n\n\n\n\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n13\n\n\n\n\nMon, Apr 4\n\n\n\n\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\n\n\n\n\nTBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\n\n\n\n\nExam 3 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\n\n\n\n\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n14\n\n\n\n\nMon, Apr 11\n\n\n\n\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\n\n\n\n\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\n\n\n\n\nTBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\n\n\n\n\nDue: HW 5 + Peer review\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n15\n\n\n\n\nMon, Apr 18\n\n\n\n\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\n\n\n\n\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n16\n\n\n\n\nMon, Apr 25\n\n\n\n\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\n\n\n\n\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\n\n\n\n\nDue: Video comments"
   },
   {
     "objectID": "hw/hw-5.html#part-1-experience-statistics-outside-of-the-classroom",
@@ -1300,6 +1265,55 @@
     "title": "HW 5 - Statistics Experience",
     "section": "Submission",
     "text": "Submission\nSubmit the reflection as a PDF under the HW 5 - Statistics Experience assignment on Gradescope by Fri, Apr 15 at 5 pm ET. It must be submitted by the deadline on Gradescope to be considered for grading."
+  },
+  {
+    "objectID": "hw/hw-1.html#introduction",
+    "href": "hw/hw-1.html#introduction",
+    "title": "HW 1 - In-person voting trends",
+    "section": "Introduction",
+    "text": "Introduction\nIn this assignment, you’ll use simple linear regression to explore the percent of votes cast in-person in the 2020 U.S. election based on the county’s political leanings.\n\nLearning goals\nIn this assignment, you will…\n\nFit and interpret simple linear regression models\nAssess the conditions for simple linear regression.\nCreate and interpret spatial data visualizations using R.\nContinue developing a workflow for reproducible data analysis."
+  },
+  {
+    "objectID": "hw/hw-1.html#getting-started",
+    "href": "hw/hw-1.html#getting-started",
+    "title": "HW 1 - In-person voting trends",
+    "section": "Getting started",
+    "text": "Getting started\n\nLog in to RStudio\n\nGo to https://vm-manage.oit.duke.edu/containers and login with your Duke NetID and Password.\nClick STA210 to log into the Docker container. You should now see the RStudio environment.\n\n\n\nClone the repo & start new RStudio project\n\nGo to the course organization at github.com/sta210-s22 organization on GitHub. Click on the repo with the prefix hw-1. It contains the starter documents you need to complete the lab.\nClick on the green CODE button, select Use SSH (this might already be selected by default, and if it is, you’ll see the text Clone with SSH). Click on the clipboard icon to copy the repo URL.\nIn RStudio, go to File ➛ New Project ➛Version Control ➛ Git.\nCopy and paste the URL of your assignment repo into the dialog box Repository URL. Again, please make sure to have SSH highlighted under Clone when you copy the address.\nClick Create Project, and the files from your GitHub repo will be displayed in the Files pane in RStudio.\nClick hw-1-voting.qmd to open the template R Markdown file. This is where you will write up your code and narrative for the lab."
+  },
+  {
+    "objectID": "hw/hw-1.html#packages",
+    "href": "hw/hw-1.html#packages",
+    "title": "HW 1 - In-person voting trends",
+    "section": "Packages",
+    "text": "Packages\nThe following packages will be used in this assignment:\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(scales)"
+  },
+  {
+    "objectID": "hw/hw-1.html#data-2020-election",
+    "href": "hw/hw-1.html#data-2020-election",
+    "title": "HW 1 - In-person voting trends",
+    "section": "Data: 2020 Election",
+    "text": "Data: 2020 Election\nThere are multiple data sets for this assignment. Use the code below to load the data.\n\nelection_nc <- read_csv(\"data/nc-election-2020.csv\") %>%\n  mutate(fips = as.integer(FIPS))\ncounty_map_data <-  read_csv(\"data/nc-county-map-data.csv\")\nelection_sample <- read_csv(\"data/us-election-2020-sample.csv\")\n\nThe county-level election data in election_nc and election_sample are from The Economist GitHub repo. The data were originally analyzed in the July 2021 article In-person voting really did accelerate covid-19’s spread in America. For this analysis, we will focus on the following variables:\n\ninperson_pct: The proportion of a county’s votes cast in-person in the 2020 election\npctTrump_2016: The proportion of a county’s votes cast for Donald Trump in the 2016 election\n\nThe data in county_map_data were obtained from the maps package in R. We will not analyze any of the variables in this data set but will use it to help create maps in the assignment. Click here to see the documentation for the maps package. Click here for code examples."
+  },
+  {
+    "objectID": "hw/hw-1.html#exercises",
+    "href": "hw/hw-1.html#exercises",
+    "title": "HW 1 - In-person voting trends",
+    "section": "Exercises",
+    "text": "Exercises\nDue to COVID-19 pandemic, many states made alternatives in-person voting, such as voting by mail, more widely available for the 2020 U.S. election. The general consensus was that voters who were more Democratic leaning would be more likely to vote by mail, while more Republican leaning voters would largely vote in-person. This was supported by multiple surveys, including this survey conducted by Pew Research.\nThe goal of this analysis is to use regression analysis to explore the relationship between a county’s political leanings and the proportion of votes cast in-person in 2020. The ultimate question we want to answer is “Did counties with more Republican leanings have a larger proportion of votes cast in-person in the 2020 election?”\nWe will use the proportion of votes cast for Donald Trump in 2016 (pctTrump_2016) as a measure of a county’s political leaning. Counties with a higher proportion of votes for Trump in 2016 are considered to have more Republican leanings.\n\n\n\n\n\n\nNote\n\n\n\nAll narrative should be written in complete sentences, and all visualizations should have informative titles and axis labels.\n\n\n\nPart 1: Counties in North Carolina\nFor this part of the analysis, we will focus on counties in North Carolina. We will use the data sets election_nc and county_map_data.\n\nVisualize the distribution of the response variable inperson_pct and calculate appropriate summary statistics. Use the visualization and summary statistics to describe the distribution. Include an informative title and axis labels on the plot.\nLet’s view the data in another way. Use the code below to make a map of North Carolina with the color of each county filled in based on the percentage of votes cast in-person in the 2020 election. Fill in title and axis labels.\nThen use the plot answer the following:\n\nWhat are 2 - 3 observations you have from the plot?\nWhat is a feature that is apparent in the map that wasn’t apparent from the histogram in the previous exercise? What is a feature that is apparent in the histogram that is not apparent in the map?\n\n\n\nelection_map_data <- left_join(election_nc, county_map_data)\n\n\nggplot() +\n  geom_polygon(data = county_map_data,\n    mapping = aes(x = long, y = lat, group = group),\n    fill = \"lightgray\", color = \"white\"\n    ) +\n  geom_polygon(data = election_map_data, \n    mapping = aes(x = long, y = lat, group = group,\n    fill = inperson_pct)\n    ) +\n  labs(\n    x = \"___\",\n    y = \"___\",\n    fill = \"___\",\n    title = \"___\"\n  ) +\n  scale_fill_viridis_c(labels = label_percent(scale = 1)) +\n  coord_quickmap()\n\n\nCreate a visualization of the relationship between inperson_pct and pctTrump_2016. Use the visualization to describe the relationship between the two variables.\nWe can use a linear regression model to better quantify the relationship between the variables.\n\nFit the linear model to understand variability in the percent of in-person votes based on the percent of votes for Trump in the 2016 election. Neatly display the model output with 3 digits.\nWrite the regression equation using mathematical notation.\n\nNow let’s use the model coefficients to describe the relationship.\n\nInterpret the slope. The interpretation should be written in a way that is meaningful in the context of the data.\nDoes it make sense to interpret the intercept? If so, write the interpretation in the context of the data. Otherwise, briefly explain why not.\n\nIf the linear model is a good fit to these data, there should be no structure left in the residuals and the residuals should have constant variance. Augment the data with the model to obtain the residuals and predicted values for each observation. Then, make a plot of the residuals vs. the fitted values, and based on this plot, and provide a brief explanation for whether these two conditions are met. Hint: Zoom out on the plot by extending the limits of the y-axis.\nWe might also be interested in our observations being independent, particularly if we are to use these data for inference. To evaluate whether the independence condition is met, we will examine a map of the counties in North Carolina with the color filled based on the value of the residuals.\n\nBriefly explain why we may want to view the residuals on a map to assess independence.\nBriefly explain what pattern (if any) we would expect to observe on the map if the independence condition is satisfied.\n\nFill in the name of your model in the code below to calculate the residuals and add them to election_map_data. Then, a map with the color of each county filled in based on the value of the residual. Hint: Start with the code from Exercise 2.\nIs the independence condition satisfied? Briefly explain based on what you observe from the plot.\n\nnc_election_aug <- nc_election_aug %>% \n  bind_cols(fips = election_nc$fips)\n\nelection_map_data <- left_join(election_map_data, nc_election_aug)\n\n\n\n\nPart 2: Inference for the U.S.\nTo get a better understanding of the trend across the entire United States, we analyze data from a random sample of 200 counties. This data is in the election_sample data frame. Because these counties were randomly selected out of the 3,006 counties in the United States, we can reasonably treat the counties as independent observations.\n\nFit the linear model to these sample data to understand variability in the percent of in-person votes based on the percent of votes for Trump in the 2016 election. Neatly display the model output with 3 digits.\nConduct a hypothesis test for the slope using a permutation test. In your response, state the null and alternative hypotheses in words, and state the conclusion in the context of the data.\nNext, construct a 95% confidence interval for the slope using bootstrapping. Interpret the confidence interval in the context of the data.\nComment on whether the hypothesis test and confidence interval support the general consensus that Republican voters were more likely to vote in-person in the 2020 election? A brief explanation is sufficient but it should be based on your conclusions from Exercises 10 and 11."
+  },
+  {
+    "objectID": "hw/hw-1.html#submission",
+    "href": "hw/hw-1.html#submission",
+    "title": "HW 1 - In-person voting trends",
+    "section": "Submission",
+    "text": "Submission\n\n\n\n\n\n\nWarning\n\n\n\nBefore you wrap up the assignment, make sure all documents are updated on your GitHub repo. We will be checking these to make sure you have been practicing how to commit and push changes.\nRemember – you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.\n\n\nTo submit your assignment:\n\nGo to http://www.gradescope.com and click Log in in the top right corner.\nClick School Credentials ➡️ Duke NetID and log in using your NetID credentials.\nClick on your STA 210 course.\nClick on the assignment, and you’ll be prompted to submit it.\nMark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be “checked”).\nSelect the first page of your PDF submission to be associated with the “Workflow & formatting” section."
+  },
+  {
+    "objectID": "hw/hw-1.html#grading",
+    "href": "hw/hw-1.html#grading",
+    "title": "HW 1 - In-person voting trends",
+    "section": "Grading",
+    "text": "Grading\nTotal points available: 50 points.\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 10\n45\n\n\nWorkflow & formatting\n51"
   },
   {
     "objectID": "course-faq.html#how-do-i-export-my-assignment-pdf-from-rstudio-to-upload-to-gradescope",
@@ -1530,7 +1544,7 @@
     "href": "weeks/week-3.html#perform",
     "title": "Week 3",
     "section": "Perform",
-    "text": "Perform\n📋 Application Exercise 2 - Bike rentals in DC\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n📋 Application Exercise 2 - Bike rentals in DC\n✍️ HW 1 - In-person voting trends\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-12.html#prepare",
