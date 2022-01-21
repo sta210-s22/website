@@ -116,13 +116,10 @@ We will use the data sets `election_nc` and `county_map_data`.
     -   What is a feature that is apparent in the map that wasn't apparent from the histogram in the previous exercise? What is a feature that is apparent in the histogram that is not apparent in the map?
 
 ```{r}
-#| eval: false
+#| fig.show: hide
+#| message: false
 
 election_map_data <- left_join(election_nc, county_map_data)
-```
-
-```{r eval = FALSE}
-#| eval: false
 
 ggplot() +
   geom_polygon(data = county_map_data,
@@ -163,7 +160,7 @@ If you haven't yet done so, now is a good time to render your document and commi
     -   Does it make sense to interpret the intercept? If so, write the interpretation in the context of the data. Otherwise, briefly explain why not.
 
 6.  If the linear model is a good fit to these data, there should be no structure left in the residuals and the residuals should have constant variance.
-    Augment the data with the model to obtain the residuals and predicted values for each observation.
+    Augment the data with the model to obtain the residuals and predicted values for each observation, and call the augmented data frame `nc_election_aug` (You will use this name in Exercise 8).
     Then, make a plot of the residuals vs. the fitted values, and based on this plot, and provide a brief explanation for whether these two conditions are met.
     *Hint: Zoom out on the plot by extending the limits of the y-axis.*
 
