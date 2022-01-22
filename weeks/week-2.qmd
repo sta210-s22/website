@@ -5,15 +5,13 @@ editor: visual
 ---
 
 ::: callout-important
-Classes are virtual this week.
-Find Zoom links [here](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562 "Sakai - Zoom meetings").
+-   Classes are virtual this week. Find Zoom links [here](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/d5eef508-07a4-4c6d-b7bd-4614a9631562 "Sakai - Zoom meetings").
+-   Due dates:
+    -   Lab 1: Fri, Jan 14, 5pm ET
+    -   AE 1: Sun, Jan 16, 11:59pm ET
 :::
 
 ## Prepare
-
-Due: Jan 11
-
-All required prepare activities are due **by the beginning of class (1:45 pm)** on the specified date.
 
 📖 Read Introduction to Modern Statistics, Chp 7: [Linear regression with a single predictor](https://openintro-ims.netlify.app/model-slr.html)
 
@@ -25,11 +23,13 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 🖥️ [Lecture 3 - Model fitting in R with tidymodels](/slides/lec-3.html)
 
+## Practice
+
+📋 [Application Exercise 1 - Bike rentals in DC](https://github.com/sta210-s22/ae-1-dcbikeshare) *(Post-class note: complete only Part 1 - Daily counts and temperature)*
+
 ## Perform
 
 ⌨️ [Lab 1 - Meet the toolkit](/labs/lab-1.html "Lab instructions")
-
-📋 [Application Exercise 1 - Bike rentals in DC](https://github.com/sta210-s22/ae-1-dcbikeshare) *(Post-class note: complete only Part 1 - Daily counts and temperature)*
 
 <br><br>
 

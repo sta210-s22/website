@@ -5,17 +5,16 @@ editor: visual
 ---
 
 ::: callout-important
+Due dates:
 :::
 
 To be posted.
 
 ## Prepare
 
-Due: \_\_\_
-
-All required prepare activities are due **by the beginning of class (1:45 pm)** on the specified date.
-
 ## Participate
+
+## Practice
 
 ## Perform
 

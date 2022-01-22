@@ -5,17 +5,12 @@ editor: visual
 ---
 
 ::: callout-important
-We're back to in person classes this week!
-See [here](/course-syllabus.html#course-info) for class locations.
-And don't forget to wear your mask!
-😷
+-   We're back to in person classes this week! See [here](/course-syllabus.html#course-info) for class locations. And don't forget to wear your mask! 😷
+-   Due dates:
+    -   AE 2: Fri, Jan 21, 11:59pm ET
 :::
 
 ## Prepare
-
-Due: Jan 18
-
-All required prepare activities are due **by the beginning of class (1:45 pm)** on the specified date.
 
 📖 Read Introduction to Modern Statistics, Sec 24.1: [Case study: Sandwich store](https://openintro-ims.netlify.app/inf-model-slr.html#case-study-sandwich-store)
 
@@ -29,9 +24,13 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 
 🖥️ [Lecture 5 - SLR: Simulation-based inference](/slides/lec-5.html)
 
-## Perform
+## Practice
 
 📋 [Application Exercise 2 - Bike rentals in DC](https://github.com/sta210-s22?q=ae-2-dcbikeshare&type=all&language=&sort=)
+
+## Perform
+
+None.
 
 <br><br>
 

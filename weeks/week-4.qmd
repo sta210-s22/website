@@ -5,16 +5,13 @@ editor: visual
 ---
 
 ::: callout-important
-If you can't be in class for the lectures, you can watch the live stream or watch the recording later on [Panopto](https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22d6c1d58a-cb6d-4732-9d4b-ae0c011bf767%22).
+-   If you can't be in class for the lectures, you can watch the live stream or watch the recording later on [Panopto](https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22d6c1d58a-cb6d-4732-9d4b-ae0c011bf767%22).
+-   Due dates:
+    -   HW 1: Fri, Jan 28, 5pm ET
+    -   Lab 1: Fri, Jan 28, 5pm ET
 :::
 
-To be posted.
-
 ## Prepare
-
-Due: Jan 24
-
-All required prepare activities are due **by the beginning of class (1:45 pm)** on the specified date.
 
 📖 Read Introduction to Modern Statistics, Sec 24.4: [Mathematical model for testing the slope](https://openintro-ims.netlify.app/inf-model-slr.html#mathslope)
 
@@ -29,6 +26,10 @@ All required prepare activities are due **by the beginning of class (1:45 pm)** 
 🖥️ Lecture 6 - SLR: Mathematical models for inference (to be posted)
 
 🖥️ Lecture 7 - SLR: Model diagnostic (to be posted)
+
+## Practice
+
+📋 Application Exercise 3 (to be posted)
 
 ## Perform
 
