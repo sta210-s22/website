@@ -1530,7 +1530,7 @@
     "href": "weeks/week-3.html#prepare",
     "title": "Week 3",
     "section": "Prepare",
-    "text": "Prepare\nDue: Jan 18\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date.\n📖 Read Introduction to Modern Statistics, Sec 24.1: Case study: Sandwich store\n📖 Read Introduction to Modern Statistics, Sec 24.2: Randomization test for the slope\n📖 Read Introduction to Modern Statistics, Sec 24.3: Bootstrap confidence interval for the slope"
+    "text": "Prepare\n📖 Read Introduction to Modern Statistics, Sec 24.1: Case study: Sandwich store\n📖 Read Introduction to Modern Statistics, Sec 24.2: Randomization test for the slope\n📖 Read Introduction to Modern Statistics, Sec 24.3: Bootstrap confidence interval for the slope"
   },
   {
     "objectID": "weeks/week-3.html#participate",
@@ -1540,18 +1540,25 @@
     "text": "Participate\n🖥️ Lecture 4 - SLR: Prediction + model evaluation\n🖥️ Lecture 5 - SLR: Simulation-based inference"
   },
   {
+    "objectID": "weeks/week-3.html#practice",
+    "href": "weeks/week-3.html#practice",
+    "title": "Week 3",
+    "section": "Practice",
+    "text": "Practice\n📋 Application Exercise 2 - Bike rentals in DC"
+  },
+  {
     "objectID": "weeks/week-3.html#perform",
     "href": "weeks/week-3.html#perform",
     "title": "Week 3",
     "section": "Perform",
-    "text": "Perform\n📋 Application Exercise 2 - Bike rentals in DC\n\n\nBack to course schedule ⏎"
+    "text": "Perform\nNone.\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-12.html#prepare",
     "href": "weeks/week-12.html#prepare",
     "title": "Week 12",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-12.html#participate",
@@ -1559,6 +1566,13 @@
     "title": "Week 12",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-12.html#practice",
+    "href": "weeks/week-12.html#practice",
+    "title": "Week 12",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-12.html#perform",
@@ -1572,7 +1586,7 @@
     "href": "weeks/week-1.html#prepare",
     "title": "Week 1",
     "section": "Prepare",
-    "text": "Prepare\nDue: Thursday, Jan 6\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date.\n📖 Read the syllabus\n📖 Read the support resources"
+    "text": "Prepare\n📖 Read the syllabus\n📖 Read the support resources"
   },
   {
     "objectID": "weeks/week-1.html#participate",
@@ -1600,7 +1614,7 @@
     "href": "weeks/week-8.html#prepare",
     "title": "Week 8",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-8.html#participate",
@@ -1608,6 +1622,13 @@
     "title": "Week 8",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-8.html#practice",
+    "href": "weeks/week-8.html#practice",
+    "title": "Week 8",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-8.html#perform",
@@ -1621,7 +1642,7 @@
     "href": "weeks/week-15.html#prepare",
     "title": "Week 15",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-15.html#participate",
@@ -1629,6 +1650,13 @@
     "title": "Week 15",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-15.html#practice",
+    "href": "weeks/week-15.html#practice",
+    "title": "Week 15",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-15.html#perform",
@@ -1642,7 +1670,7 @@
     "href": "weeks/week-14.html#prepare",
     "title": "Week 14",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-14.html#participate",
@@ -1650,6 +1678,13 @@
     "title": "Week 14",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-14.html#practice",
+    "href": "weeks/week-14.html#practice",
+    "title": "Week 14",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-14.html#perform",
@@ -1663,7 +1698,7 @@
     "href": "weeks/week-5.html#prepare",
     "title": "Week 5",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-5.html#participate",
@@ -1671,6 +1706,13 @@
     "title": "Week 5",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-5.html#practice",
+    "href": "weeks/week-5.html#practice",
+    "title": "Week 5",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-5.html#perform",
@@ -1684,7 +1726,7 @@
     "href": "weeks/week-4.html#prepare",
     "title": "Week 4",
     "section": "Prepare",
-    "text": "Prepare\nDue: Jan 24\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date.\n📖 Read Introduction to Modern Statistics, Sec 24.4: Mathematical model for testing the slope\n📖 Read Introduction to Modern Statistics, Sec 24.5: Mathematical model, interval for the slope\n📖 Read Introduction to Modern Statistics, Sec 24.6: Checking model conditions\n📖 Read Introduction to Modern Statistics, Sec 24.7: Chapter review"
+    "text": "Prepare\n📖 Read Introduction to Modern Statistics, Sec 24.4: Mathematical model for testing the slope\n📖 Read Introduction to Modern Statistics, Sec 24.5: Mathematical model, interval for the slope\n📖 Read Introduction to Modern Statistics, Sec 24.6: Checking model conditions\n📖 Read Introduction to Modern Statistics, Sec 24.7: Chapter review"
   },
   {
     "objectID": "weeks/week-4.html#participate",
@@ -1692,6 +1734,13 @@
     "title": "Week 4",
     "section": "Participate",
     "text": "Participate\n🖥️ Lecture 6 - SLR: Mathematical models for inference (to be posted)\n🖥️ Lecture 7 - SLR: Model diagnostic (to be posted)"
+  },
+  {
+    "objectID": "weeks/week-4.html#practice",
+    "href": "weeks/week-4.html#practice",
+    "title": "Week 4",
+    "section": "Practice",
+    "text": "Practice\n📋 Application Exercise 3 (to be posted)"
   },
   {
     "objectID": "weeks/week-4.html#perform",
@@ -1705,7 +1754,7 @@
     "href": "weeks/week-13.html#prepare",
     "title": "Week 13",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-13.html#participate",
@@ -1713,6 +1762,13 @@
     "title": "Week 13",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-13.html#practice",
+    "href": "weeks/week-13.html#practice",
+    "title": "Week 13",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-13.html#perform",
@@ -1726,7 +1782,7 @@
     "href": "weeks/week-10.html#prepare",
     "title": "Week 10",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-10.html#participate",
@@ -1734,6 +1790,13 @@
     "title": "Week 10",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-10.html#practice",
+    "href": "weeks/week-10.html#practice",
+    "title": "Week 10",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-10.html#perform",
@@ -1747,7 +1810,7 @@
     "href": "weeks/week-9.html#prepare",
     "title": "Week 9",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-9.html#participate",
@@ -1755,6 +1818,13 @@
     "title": "Week 9",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-9.html#practice",
+    "href": "weeks/week-9.html#practice",
+    "title": "Week 9",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-9.html#perform",
@@ -1768,7 +1838,7 @@
     "href": "weeks/week-7.html#prepare",
     "title": "Week 7",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-7.html#participate",
@@ -1776,6 +1846,13 @@
     "title": "Week 7",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-7.html#practice",
+    "href": "weeks/week-7.html#practice",
+    "title": "Week 7",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-7.html#perform",
@@ -1789,7 +1866,7 @@
     "href": "weeks/week-6.html#prepare",
     "title": "Week 6",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-6.html#participate",
@@ -1797,6 +1874,13 @@
     "title": "Week 6",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-6.html#practice",
+    "href": "weeks/week-6.html#practice",
+    "title": "Week 6",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-6.html#perform",
@@ -1810,7 +1894,7 @@
     "href": "weeks/week-11.html#prepare",
     "title": "Week 11",
     "section": "Prepare",
-    "text": "Prepare\nDue: ___\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date."
+    "text": "Prepare"
   },
   {
     "objectID": "weeks/week-11.html#participate",
@@ -1818,6 +1902,13 @@
     "title": "Week 11",
     "section": "Participate",
     "text": "Participate"
+  },
+  {
+    "objectID": "weeks/week-11.html#practice",
+    "href": "weeks/week-11.html#practice",
+    "title": "Week 11",
+    "section": "Practice",
+    "text": "Practice"
   },
   {
     "objectID": "weeks/week-11.html#perform",
@@ -1831,7 +1922,7 @@
     "href": "weeks/week-2.html#prepare",
     "title": "Week 2",
     "section": "Prepare",
-    "text": "Prepare\nDue: Jan 11\nAll required prepare activities are due by the beginning of class (1:45 pm) on the specified date.\n📖 Read Introduction to Modern Statistics, Chp 7: Linear regression with a single predictor"
+    "text": "Prepare\n📖 Read Introduction to Modern Statistics, Chp 7: Linear regression with a single predictor"
   },
   {
     "objectID": "weeks/week-2.html#participate",
@@ -1841,11 +1932,18 @@
     "text": "Participate\n🖥️ Lab 1 - Meet the toolkit\n🖥️ Lecture 2 - Simple linear regression\n🖥️ Lecture 3 - Model fitting in R with tidymodels"
   },
   {
+    "objectID": "weeks/week-2.html#practice",
+    "href": "weeks/week-2.html#practice",
+    "title": "Week 2",
+    "section": "Practice",
+    "text": "Practice\n📋 Application Exercise 1 - Bike rentals in DC (Post-class note: complete only Part 1 - Daily counts and temperature)"
+  },
+  {
     "objectID": "weeks/week-2.html#perform",
     "href": "weeks/week-2.html#perform",
     "title": "Week 2",
     "section": "Perform",
-    "text": "Perform\n⌨️ Lab 1 - Meet the toolkit\n📋 Application Exercise 1 - Bike rentals in DC (Post-class note: complete only Part 1 - Daily counts and temperature)\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n⌨️ Lab 1 - Meet the toolkit\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "project-description.html#timeline",
