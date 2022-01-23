@@ -112,6 +112,7 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -464,17 +465,68 @@ Note
 </section>
 <section id="exercise-9" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-9">Exercise 9</h3>
-<p>Does the data provide evidence of a statistically significant linear relationship between cost and admissions rate? Conduct a hypothesis test to answer this question. In your response</p>
-<ul>
-<li>State the null and alternative hypotheses used to answer this question in words and in mathematical notation.</li>
-<li>What is the test statistic? State with the test statistic means in context.</li>
-<li>What distribution was used to calculate the p-value?</li>
-<li>State your conclusion for the test in context.</li>
-</ul>
+<p>Construct a 95% confidence interval for the slope using bootstrapping. Interpret the confidence interval in the context of the data.</p>
 </section>
 <section id="exercise-10" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-10">Exercise 10</h3>
-<p>Interpret the 95% confidence interval for the slope in context. Then indicate whether or not it is consistent with the results of the hypothesis test from the previous exercise. Briefly explain your response.</p>
+<p>Finally, we want to answer the question “Do the data provide sufficient evidence of a linear relationship between cost and admissions rate, i.e.&nbsp;$\beta_1$ is different from 0?”</p>
+<p>To answer this question we will use a hypothesis test. We can conduct a hypothesis test via simulation (what we’ll do in this lab) or using mathematical models (what we’ll do in the next class).</p>
+<p>Before we can conduct the hypothesis test, let’s first set our hypotheses. Remember that the null hypothesis represents the status quo (nothing going on, i.e.&nbsp;there is no relationship) and the alternative hypothesis represents our research question (there is something going on, i.e.&nbsp;there is a relationship).</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: There is no linear relationship between cost and admissions rate, <span class="math inline">\(\beta_1 = 0\)</span></li>
+<li><span class="math inline">\(H_A\)</span>: There is a linear relationship between cost and admissions rate, <span class="math inline">\(\beta_1 \ne 0\)</span></li>
+</ul>
+<p>To test these hypotheses, we will use a permutation test, where we</p>
+<ul>
+<li>Simulate new samples from the original sample via permutation under the assumption that the null hypothesis is true</li>
+<li>Fit models to each of the samples and estimate the slope</li>
+<li>Use features of the distribution of the permuted slopes to calculate the p-value for the hypothesis test</li>
+</ul>
+<p>The major difference between constructing a confidence interval and conducting a hypothesis test is that for the hypothesis test we assume that the null hypothesis is true. This requires a simulation scheme that will allow us to measure the natural variability in the data due to sampling but <strong>not</strong> due to cost and admission rate being correlated by permuting permute one variable to eliminate any existing relationship between the variables. To do so, we randomly assign each <code>admrate</code> value to <code>cost</code> of a given university, i.e.&nbsp;<code>cost</code> and <code>admrate</code> are no longer matched for a given university.</p>
+<p>In the following code chunk we</p>
+<ul>
+<li>First set a seed for simulating reproducibly.</li>
+<li>Then, we start with our data frame and specify our model as <code>cost</code> vs.&nbsp;<code>admrate</code>.</li>
+<li>Then, we set our null hypothesis (<code>cost</code> and <code>admrate</code> are independent)</li>
+<li>And then we generate 1000 replicates of our data where, for each replicate, we permute values of <code>admrate</code> to randomly assign them to values of <code>cost</code></li>
+<li>Finally, we fit our model to each of our 1000 permuted datasets</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>perm_fits <span class="ot">&lt;-</span> scorecard <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(cost <span class="sc">~</span> admrate) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The resulting dataset <code>perm_fits</code> has <code>nrow(perm_fits)</code> and <code>ncol(perm_fits)</code> columns. The first column, <code>replicate</code> indicates the replicate number of the dataset the models were fit to; the values in this column range between 1 and 1000. The second column, <code>term</code>, tells us which term (intercept of the model or slope of <code>admrate</code>) the <code>estimate</code> value in the third column is for.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>perm_fits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2,000 × 3
+# Groups:   replicate [1,000]
+   replicate term      estimate
+       &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt;
+ 1         1 intercept  36857. 
+ 2         1 admrate     -781. 
+ 3         2 intercept  35901. 
+ 4         2 admrate      643. 
+ 5         3 intercept  36608. 
+ 6         3 admrate     -411. 
+ 7         4 intercept  35831. 
+ 8         4 admrate      746. 
+ 9         5 intercept  36367. 
+10         5 admrate      -51.7
+# … with 1,990 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>Create a histogram of the slope estimates in <code>perm_fits</code>. (Hint: Filter the dataset for just the slope values, <code>term == "admrate".</code>)</li>
+<li>Estimate the p-value of the hypothesis test based on this distribution.</li>
+<li>State your conclusion for the test in context.</li>
+<li>Indicate whether or not it is consistent with the results of the hypothesis test from the previous exercise. Briefly explain your response.</li>
+</ul>
 </section>
 </section>
 <section id="submission" class="level2">
@@ -524,12 +576,9 @@ Warning
 </tr>
 </tbody>
 </table>
-<div class="no-row-height column-margin column-container"><li id="fn1" role="doc-endnote"><p><sup>1</sup>&nbsp;The “Workflow &amp; formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML.</p></li></div><div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">knit_exit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 
 
-</section>
+<div class="no-row-height column-margin column-container"><li id="fn1" role="doc-endnote"><p><sup>1</sup>&nbsp;The “Workflow &amp; formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML.</p></li></div></section>
 
 </main> <!-- /main -->
 <script type="application/javascript">
