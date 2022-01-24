@@ -25,7 +25,7 @@ editor: visual
 
 ## Practice
 
-📋 [Application Exercise 1 - Bike rentals in DC](https://github.com/sta210-s22/ae-1-dcbikeshare) *(Post-class note: complete only Part 1 - Daily counts and temperature)*
+📋 [Application Exercise 1 - Bike rentals in DC](/ae/ae-1-dcbikeshare.html) *(Post-class note: complete only Part 1 - Daily counts and temperature)*
 
 ## Perform
 

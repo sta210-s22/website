@@ -26,7 +26,7 @@ editor: visual
 
 ## Practice
 
-📋 [Application Exercise 2 - Bike rentals in DC](https://github.com/sta210-s22?q=ae-2-dcbikeshare&type=all&language=&sort=)
+📋 [Application Exercise 2 - Bike rentals in DC](/ae/ae-2-dcbikeshare.html)
 
 ## Perform
 

@@ -1,0 +1,112 @@
+---
+title: "Movie budgets and revenues"
+editor: visual
+---
+
+::: callout-important
+This application exercise is a demo only.
+You do not have a corresponding repository for it and you're not expected to turn in anything for it.
+:::
+
+We will look at the relationship between budget and revenue for movies made in the United States in 1986 to 2020.
+The dataset is created based on data from the [Internet Movie Database (IMDB)](https://www.imdb.com/).
+
+```{r load-packages}
+#| warning: false
+#| message: false
+library(tidyverse) # for data analysis and visualisation
+library(scales)    # for pretty axis labels
+library(DT)        # for interactive table
+```
+
+## Data
+
+The `movies` data set includes basic information about each movie including budget, genre, movie studio, director, etc.
+A full list of the variables may be found [here](https://github.com/danielgrijalva/movie-stats).
+
+```{r read-data}
+#| message: false
+#| warning: false
+movies <- read_csv("https://raw.githubusercontent.com/danielgrijalva/movie-stats/master/movies.csv")
+```
+
+View the first 10 rows of data.
+
+```{r}
+movies
+```
+
+The \_\_\_ dataset has \_\_\_ observations and \_\_\_ variables.
+
+## Analysis
+
+### Gross over time
+
+We begin by looking at how the average gross revenue (`gross`) has changed over time.
+Since we want to visualize the results, we will choose a few genres of interest for the analysis.
+
+```{r genre-list}
+genre_list <- c("Comedy", "Action", "Animation", "Horror")
+```
+
+Then, we will filter for these genres and visualize the average gross revenue over time.
+
+```{r plot-rating}
+movies %>%
+  filter(genre %in% genre_list) %>% 
+  group_by(genre,year) %>%
+  summarise(avg_gross = mean(gross)) %>%
+  ggplot(mapping = aes(x = year, y = avg_gross, color= genre)) +
+    geom_point() + 
+    geom_line() +
+    scale_color_viridis_d() +
+    scale_y_continuous(labels = label_dollar()) +
+    labs(
+      x = "Year",
+      y = "Average Gross Revenue (US Dollars)",
+      color = "Genre",
+      title = "Gross Revenue Over Time"
+    )
+```
+
+The plot suggests ...
+
+### Budget and gross
+
+Next, let's see the relationship between a movie's budget and its gross revenue.
+
+```{r plot-revenue}
+movies %>%
+  filter(genre %in% genre_list, budget > 0) %>% 
+  ggplot(mapping = aes(x=log(budget), y = log(gross), color=genre)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ genre) + 
+  scale_color_viridis_d() +
+  labs(
+    x = "Log-transformed Budget",
+    y = "Log-transformed Gross Revenue"
+  )
+```
+
+## Exercises
+
+1.  Suppose we fit a regression model for each genre that uses budget to predict gross revenue.
+    What are the signs of the correlation between `budget` and `gross` and the slope in each regression equation?
+
+2.  Suppose we fit the regression model from the previous question.
+    Which genre would you expect to have the smallest residuals, on average (*residual = observed revenue - predicted revenue*)?
+
+3.  In the remaining time, discuss the following: Notice in the graph above that `budget` and `gross` are log-transformed.
+    Why are the log-transformed values of the variables displayed rather than the original values (in U.S. dollars)?
+
+## Appendix
+
+Below is a list of genres in the data set:
+
+```{r}
+movies %>% 
+  distinct(genre) %>%
+  arrange(genre) %>% 
+  datatable()
+```

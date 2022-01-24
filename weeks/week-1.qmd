@@ -23,7 +23,7 @@ Find Zoom links [here](https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd0
 
 ## Practice
 
-📋 [AE 0 - Movies](https://github.com/sta210-s22/ae-0-movies)
+📋 [AE 0 - Movies](/ae/ae-0-movies.html)
 
 ## Perform
 
