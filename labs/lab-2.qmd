@@ -101,7 +101,6 @@ Describe two new observations from the scatterplot in Exercise 5 that you didn't
 ### Exercise 7
 
 Fit the linear regression model.
-Display the confidence interval for the coefficients in the output.
 Use the `kable` function to neatly display the results.
 
 ### Exercise 8
@@ -118,7 +117,7 @@ Interpret the confidence interval in the context of the data.
 
 ### Exercise 10
 
-Finally, we want to answer the question "Do the data provide sufficient evidence of a linear relationship between cost and admissions rate, i.e. \$\\beta_1\$ is different from 0?"
+Finally, we want to answer the question "Do the data provide sufficient evidence of a linear relationship between cost and admissions rate, i.e. $\beta_1$ is different from 0?"
 
 To answer this question we will use a hypothesis test.
 We can conduct a hypothesis test via simulation (what we'll do in this lab) or using mathematical models (what we'll do in the next class).
