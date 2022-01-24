@@ -113,9 +113,13 @@ Consider the model from the previous exercise.
 ### Exercise 9
 
 Construct a 95% confidence interval for the slope using bootstrapping.
-To do this, first simulate the bootstrap distribution of the slope using 1,000 bootstrap samples.
-Then, visually estimate the bounds of the bootstrap interval based on a histogram of the distribution of the bootstrapped slopes, using the percentile method.
-Finally, interpret the confidence interval in the context of the data.
+Follow these steps to accomplish this:
+
+-   First set a seed for simulating reproducibly.
+-   Then, simulate the bootstrap distribution of the slope using 1,000 bootstrap samples.
+-   Then, visually estimate the bounds of the bootstrap interval based on a histogram of the distribution of the bootstrapped slopes, using the percentile method.
+-   And then, use the `get_confidence_interval()` function to explicitly calculate the bounds of the confidence interval using the percentile method.
+-   Finally, interpret the confidence interval in the context of the data.
 
 ### Exercise 10
 
@@ -127,8 +131,8 @@ We can conduct a hypothesis test via simulation (what we'll do in this lab) or u
 Before we can conduct the hypothesis test, let's first set our hypotheses.
 Remember that the null hypothesis represents the status quo (nothing going on, i.e. there is no relationship) and the alternative hypothesis represents our research question (there is something going on, i.e. there is a relationship).
 
--   $H_0$: There is no linear relationship between cost and admissions rate, $\beta_1 = 0$
--   $H_A$: There is a linear relationship between cost and admissions rate, $\beta_1 \ne 0$
+-   $H_0$: There is no linear relationship between the admissions rate and cost of colleges in the United States, $\beta_1 = 0$
+-   $H_A$: There is a linear relationship between the admissions rate and cost of colleges in the United States, $\beta_1 \ne 0$
 
 To test these hypotheses, we will use a permutation test, where we
 
