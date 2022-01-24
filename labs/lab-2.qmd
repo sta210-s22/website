@@ -101,7 +101,7 @@ Describe two new observations from the scatterplot in Exercise 5 that you didn't
 ### Exercise 7
 
 Fit the linear regression model.
-Use the `kable` function to neatly display the results.
+Use the `kable` function to neatly display the results with a reasonable number of decimals.
 
 ### Exercise 8
 
