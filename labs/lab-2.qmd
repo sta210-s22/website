@@ -113,7 +113,9 @@ Consider the model from the previous exercise.
 ### Exercise 9
 
 Construct a 95% confidence interval for the slope using bootstrapping.
-Interpret the confidence interval in the context of the data.
+To do this, first simulate the bootstrap distribution of the slope using 1,000 bootstrap samples.
+Then, visually estimate the bounds of the bootstrap interval based on a histogram of the distribution of the bootstrapped slopes, using the percentile method.
+Finally, interpret the confidence interval in the context of the data.
 
 ### Exercise 10
 
