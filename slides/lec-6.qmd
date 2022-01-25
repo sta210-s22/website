@@ -1,0 +1,759 @@
+---
+title: "SLR: Mathematical models for inference"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer:  "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+---
+
+```{r setup}
+#| include: false
+
+library(countdown)
+
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  dpi = 300,
+  out.width = "80%",
+  fig.align = "center"
+)
+
+options(scipen = 100)
+```
+
+# Welcome
+
+## Computational setup
+
+```{r packages}
+#| echo: true
+#| message: false
+
+# load packages
+library(tidyverse)   # for data wrangling and visualization
+library(tidymodels)  # for modeling
+library(openintro)   # for the duke_forest dataset
+library(scales)      # for pretty axis labels
+library(knitr)       # for pretty tables
+library(kableExtra)  # also for pretty tables
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+# Recap of last lecture
+
+## Data: Duke Forest houses
+
+```{r}
+ggplot(duke_forest, aes(x = area, y = price)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = "Price and area of houses in Duke Forest"
+  ) +
+  scale_y_continuous(labels = label_dollar()) +
+  scale_x_continuous(labels = label_number())
+```
+
+## The regression model {.smaller}
+
+```{r}
+#| echo: true
+
+df_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(price ~ area, data = duke_forest)
+
+tidy(df_fit) %>%
+  kable(digits = 3)
+```
+
+. . .
+
+```{r}
+intercept <- tidy(df_fit) %>% filter(term == "(Intercept)") %>% pull(estimate) %>% round()
+slope <- tidy(df_fit) %>% filter(term == "area") %>% pull(estimate) %>% round()
+```
+
+-   **Intercept:** Duke Forest houses that are 0 square feet are expected to sell, on average, for `r dollar(intercept)`.
+-   **Slope:** For each additional square foot, the model predicts the sale price of Duke Forest houses to be higher, on average, by `r dollar(slope)`.
+
+## Inference for simple linear regression
+
+-   Calculate a confidence interval for the slope, $\beta_1$
+
+-   Conduct a hypothesis test for the interval, $\beta_1$
+
+## Confidence interval via bootstrapping {.smaller}
+
+-   Bootstrap new samples from the original sample
+-   Fit models to each of the samples and estimate the slope
+-   Use features of the distribution of the bootstrapped slopes to construct a confidence interval
+
+## Bootstrapping pipeline I
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|3|4"
+#| 
+set.seed(119)
+
+duke_forest %>%
+  specify(price ~ area)
+```
+
+## Bootstrapping pipeline II
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|5"
+
+set.seed(119)
+
+duke_forest %>%
+  specify(price ~ area) %>%
+  generate(reps = 1000, type = "bootstrap")
+```
+
+## Bootstrapping pipeline III
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|6"
+
+set.seed(119)
+
+duke_forest %>%
+  specify(price ~ area) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  fit()
+```
+
+## Bootstrapping pipeline IV
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|3"
+
+set.seed(119)
+
+boot_dist <- duke_forest %>%
+  specify(price ~ area) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  fit()
+```
+
+## Visualize the bootstrap distribution
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2"
+
+boot_dist %>%
+  filter(term == "area") %>%
+  ggplot(aes(x = estimate)) +
+  geom_histogram(binwidth = 10)
+```
+
+## Compute the CI
+
+Two methods:
+
+::: nonincremental
+-   Percentile method
+-   Standard error method
+:::
+
+```{r}
+boot_dist %>%
+  filter(term == "area") %>%
+  ggplot(aes(x = estimate)) +
+  geom_histogram(binwidth = 10)
+```
+
+## But first...
+
+```{r}
+#| echo: true
+
+obs_fit <- duke_forest %>%
+  specify(price ~ area) %>%
+  fit()
+
+obs_fit
+```
+
+## Percentile method
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|4"
+
+boot_dist %>%
+  get_confidence_interval(
+    level = 0.95,
+    type = "percentile",
+    point_estimate = obs_fit
+  )
+```
+
+## Standard error method
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|4"
+
+boot_dist %>%
+  get_confidence_interval(
+    level = 0.95,
+    type = "se",
+    point_estimate = obs_fit
+  )
+```
+
+# Hypothesis test for the slope
+
+## Research question and hypotheses
+
+-   "Do the data provide sufficient evidence that $\beta_1$ (the true slope for the population) is different from 0?"
+-   **Null hypothesis** - $H_0: \beta_1 = 0$, there is no linear relationship between `area` and `price`
+-   **Alternative hypothesis** - $H_A: \beta_1 \ne 0$, there is a linear relationship between `area` and `price`
+
+## Hypothesis testing framework {.smaller}
+
+-   Start with a null hypothesis, $H_0$ that represents the status quo
+-   Set an alternative hypothesis, $H_A$ that represents the research question, i.e. what we're testing for
+-   Conduct a hypothesis test under the assumption that the null hypothesis is true and calculate a **p-value** (probability of observed or more extreme outcome given that the null hypothesis is true)
+    -   if the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis
+    -   if they do, then reject the null hypothesis in favor of the alternative
+
+## Quantify the variability of the slope {.smaller}
+
+**for testing**
+
+-   Two approaches:
+    1.  Via simulation (what we'll review from lab)
+    2.  Via mathematical models (what we'll cover in the remainder of class)
+-   Randomizing to quantify the variability of the slope for the purpose of testing, under the assumption that the null hypothesis is true:
+    -   Simulate new samples from the original sample via permutation
+    -   Fit models to each of the samples and estimate the slope
+    -   Use features of the distribution of the permuted slopes to conduct a hypothesis test
+
+## Permutation, described {.smaller}
+
+::: columns
+::: {.column width="40%"}
+-   Set the null hypothesis to be true, and measure the natural variability in the data due to sampling but **not** due to variables being correlated by permuting permute one variable to eliminate any existing relationship between the variables
+-   Each `price` value is randomly assigned to `area` of a given house, i.e. `area` and `price` are no longer matched for a given house
+:::
+
+::: {.column width="60%"}
+```{r}
+set.seed(1234)
+
+duke_forest_rand <- duke_forest %>%
+  mutate(
+    price_Observed = price,
+    price_Permuted = sample(price, size = nrow(duke_forest))
+    ) %>%
+  select(contains("price_"), area)
+duke_forest_rand
+```
+:::
+:::
+
+## Permutation, visualized
+
+::: columns
+::: {.column width="50%"}
+-   Each of the observed values for `area` (and for `price`) exist in both the observed data plot as well as the permuted `price` plot
+-   The permutation removes the linear relationship between `area` and `price`
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+#| fig.asp: 1.2
+
+duke_forest_rand %>%
+  pivot_longer(cols = contains("price_"), names_to = "price_type", names_prefix = "price_", values_to = "price") %>%
+  ggplot(aes(x = area, y = price)) +
+  geom_point() +
+  geom_smooth(aes(color = price_type), method = "lm", se = FALSE, show.legend = FALSE) +
+  facet_wrap(~price_type, nrow = 2) +
+  scale_color_manual(values = c("#8F2D56", "gray")) +
+  scale_x_continuous(labels = label_number()) +
+  scale_y_continuous(labels = label_dollar()) +
+  labs(x = "Area", y = "Price")
+```
+:::
+:::
+
+## Permutation, repeated
+
+Repeated permutations allow for quantifying the variability in the slope under the condition that there is no linear relationship (i.e., that the null hypothesis is true)
+
+```{r}
+set.seed(1125)
+
+df_perms_1000 <- duke_forest %>%
+  specify(price ~ area) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute")
+
+ggplot(df_perms_1000, 
+       aes(x = area, y = price, group = replicate)) +
+  geom_line(stat = "smooth", method = "lm", se = FALSE, alpha = 0.1) +
+  labs(
+    x = "Area (square feet)",
+    y = "Sale price (USD)",
+    title = "1,000 permuted samples"
+  ) +
+  scale_y_continuous(labels = label_dollar(), limits = c(min(duke_forest$price), max(duke_forest$price))) +
+  scale_x_continuous(labels = label_number(), limits = c(min(duke_forest$area), max(duke_forest$area))) +
+  geom_abline(intercept = intercept, slope = slope, color = "#8F2D56")
+```
+
+## Concluding the hypothesis test {.smaller}
+
+::: question
+Is the observed slope of $\hat{\beta_1} = 159$ (or an even more extreme slope) a likely outcome under the null hypothesis that $\beta = 0$?
+What does this mean for our original question: "Do the data provide sufficient evidence that $\beta_1$ (the true slope for the population) is different from 0?"
+:::
+
+```{r}
+#| out.width: "60%"
+#| fig.asp: 0.618
+
+null_dist <- df_perms_1000 %>%
+  fit()
+
+ggplot(null_dist %>% filter(term == "area"),
+       aes(x = estimate)) +
+  geom_histogram(binwidth = 10, color = "white") +
+  labs(x = "Slope", y = "Count",
+       title = "Slopes of 1000 permuted samples") +
+  geom_vline(xintercept = slope, color = "#8F2D56", size = 1) +
+  geom_vline(xintercept = -1*slope, color = "#8F2D56", size = 1, linetype = "dashed") +
+  scale_x_continuous(limits = c(-slope, slope), breaks = seq(-150, 150, 50))
+```
+
+## Permutation pipeline I
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|3|4"
+#| 
+set.seed(1125)
+
+duke_forest %>%
+  specify(price ~ area)
+```
+
+## Permutation pipeline II
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|5"
+
+set.seed(1125)
+
+duke_forest %>%
+  specify(price ~ area) %>%
+  hypothesize(null = "independence")
+```
+
+## Permutation pipeline III
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|6"
+
+set.seed(1125)
+
+duke_forest %>%
+  specify(price ~ area) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute")
+```
+
+## Permutation pipeline IV
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|7"
+
+set.seed(1125)
+
+duke_forest %>%
+  specify(price ~ area) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  fit()
+```
+
+## Permutation pipeline V
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|3"
+
+set.seed(1125)
+
+null_dist <- duke_forest %>%
+  specify(price ~ area) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  fit()
+```
+
+## Visualize the null distribution
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2"
+
+null_dist %>%
+  filter(term == "area") %>%
+  ggplot(aes(x = estimate)) +
+  geom_histogram(binwidth = 10, color = "white")
+```
+
+## Reason around the p-value {.smaller}
+
+::: question
+In a world where the there is no relationship between the area of a Duke Forest house and in its price ($\beta_1 = 0$), what is the probability that we observe a sample of `r nrow(duke_forest)` houses where the slope fo the model predicting price from area is 159 or even more extreme?
+:::
+
+```{r}
+null_dist %>%
+  filter(term == "area") %>%
+  ggplot(aes(x = estimate)) +
+  geom_histogram(binwidth = 10, color = "white") +
+  geom_vline(xintercept = slope, color = "#8F2D56", size = 1) +
+  geom_vline(xintercept = -1*slope, color = "#8F2D56", size = 1, linetype = "dashed") +
+  scale_x_continuous(limits = c(-slope, slope), breaks = seq(-150, 150, 50))
+```
+
+## Compute the p-value
+
+::: question
+What does this warning mean?
+:::
+
+```{r}
+#| echo: true
+#| warning: true
+
+get_p_value(
+  null_dist,
+  obs_stat = obs_fit,
+  direction = "two-sided"
+)
+```
+
+# Mathematical models for inference
+
+## The regression model, revisited
+
+```{r}
+#| echo: true
+
+df_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(price ~ area, data = duke_forest)
+
+tidy(df_fit) %>%
+  kable(digits = 3)
+```
+
+## HT and CI, recapped {.smaller}
+
+-   **Hypothesis test:**
+
+    ::: nonincremental
+    -   Do the data provide sufficient evidence that $\beta_1$ (the true slope for the population) is different from 0?
+    -   Null hypothesis - $H_0: \beta_1 = 0$, there is no linear relationship between `area` and `price`.
+    -   Alternative hypothesis - $H_A: \beta_1 \ne 0$, there is a linear relationship between `area` and `price`.
+    :::
+
+-   **Confidence interval:** Provide a plausible range of values for $\beta_1$ at a given confidence level.
+
+## HT and CI, revisited {.smaller}
+
+-   Earlier we computer a CI and conducted a HT via simulation:
+    -   CI: Bootstrap the observed sample to simulate the distribution of the slope
+    -   HT: Permute the observed sample to simulate the distribution of the slope under the assumption that the null hypothesis is true
+-   Now we'll do these based on theoretical results, i.e., by using the Central Limit Theorem to define the distribution of the slope and use features (shape, center, spread) of this distribution to compute bounds of the CI and the p-value for the HT
+
+## Mathematical representation of the model
+
+$$
+\begin{aligned}
+Y &= Model + Error \\
+&= f(X) + \epsilon \\
+&= \mu_{Y|X} + \epsilon \\
+&= \beta_0 + \beta_1 X + \epsilon
+\end{aligned}
+$$
+
+where the errors are independent and normally distributed:
+
+-   independent: Knowing the error term for one observation doesn't tell you anything about the error term for another observation
+-   normally distributed: $\epsilon \sim N(0, \sigma_\epsilon^2)$
+
+## Mathematical representation, visualized
+
+$$
+Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)
+$$
+
+::: columns
+::: {.column width="70%"}
+```{r}
+#| out.width: "100%"
+
+# Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+# Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
+set.seed(0)
+dat <- data.frame(
+  x = (x <- runif(10000, 0, 50)),
+  y = rnorm(10000, 10 * x, 100)
+)
+## breaks: where you want to compute densities
+breaks <- seq(0, max(dat$x), len = 5)
+dat$section <- cut(dat$x, breaks)
+## Get the residuals
+dat$res <- residuals(lm(y ~ x, data = dat))
+## Compute densities for each section, and flip the axes, and add means of sections
+## Note: the densities need to be scaled in relation to the section size (2000 here)
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+  d <- density(x$res, n = 50)
+  res <- data.frame(x = max(x$x) - d$y * 2000, y = d$x + mean(x$y))
+  res <- res[order(res$y), ]
+  ## Get some data for normal lines as well
+  xs <- seq(min(x$res), max(x$res), len = 50)
+  res <- rbind(res, data.frame(
+    y = xs + mean(x$y),
+    x = max(x$x) - 2000 * dnorm(xs, 0, sd(x$res))
+  ))
+  res$type <- rep(c("empirical", "normal"), each = 50)
+  res
+}))
+dens$section <- rep(levels(dat$section), each = 100)
+dens <- dens %>%
+  filter(type == "normal")
+
+ggplot(dat, aes(x, y)) +
+  geom_point(alpha = 0.05, size = 0.2) +
+  geom_smooth(method = "lm", fill = NA, se = FALSE, color = "steelblue") +
+  geom_path(data = dens, aes(x, y, group = interaction(section)), color = "#8F2D56", lwd = 1.1) +
+  geom_vline(xintercept = breaks, lty = 2, color = "grey") +
+  labs(
+    x = "x",
+    y = "y"
+  ) +
+  theme(
+    axis.title = element_text(size = 16),
+    axis.ticks = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank()
+  )
+```
+:::
+
+::: {.column width="30%"}
+-   Mean: $\beta_0 + \beta_1 X$, the predicted value based on the regression model
+-   Variance: $\sigma_\epsilon^2$, constant across the range of $X$
+    -   How do we estimate $\sigma_\epsilon^2$?
+:::
+:::
+
+## Regression standard error
+
+Once we fir the model, we can use the residuals to estimate the regression standard error (the spread of the distribution of the response, for a given value of the predictor variable):
+
+$$
+\hat{\sigma}_\epsilon = \sqrt{\frac{\sum_\limits{i=1}^n(y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{\sum_\limits{i=1}^ne_i^2}{n-2}}
+$$
+
+. . .
+
+::: question
+1.  Why divide by $n - 2$?
+2.  Why do we care about the value of the regression standard error?
+:::
+
+## Standard error of $\hat{\beta}_1$
+
+$$
+SE_{\hat{\beta}_1} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{(n-1)s_X^2}}
+$$
+
+. . .
+
+or...
+
+```{r}
+tidy(df_fit) %>%
+  kable(digits = 3)
+```
+
+## HT for the slope {.smaller}
+
+**Hypotheses:** $H_0: \beta_1 = 0$ vs. $H_A: \beta_1 \ne 0$
+
+. . .
+
+**Test statistic:** Number of standard errors the estimate is away from the null
+
+$$
+T = \frac{\text{Estimate - Null}}{\text{Standard error}} \\
+$$
+
+. . .
+
+**p-value:** Probability of observing a test statistic at least as extreme (in the direction of the alternative hypothesis) from the null value as the one observed
+
+$$
+p-value = P(|t| > |\text{test statistic}),
+$$
+
+calculated from a $t$ distribution with $n - 2$ degrees of freedom
+
+## HT: Test statistic
+
+```{r}
+tidy(df_fit) %>%
+  kable(digits = 3) %>%
+  row_spec(2, background = "#D9E3E4")
+```
+
+$$
+t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.483 - 0}{18.171} = 8.777
+$$
+
+## HT: p-value
+
+::: columns
+::: {.column width="70%"}
+```{r}
+tidy(df_fit) %>%
+  kable(digits = 3) %>%
+  row_spec(2, background = "#D9E3E4")
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+#| out.width: "100%"
+
+normTail(L = -8.777, U = 8.777, df = nrow(duke_forest) - 2, xlim = c(-9,9), col = "#D9E3E4")
+```
+:::
+:::
+
+## Understanding the p-value
+
+|  Magnitude of p-value   |            Interpretation             |
+|:-----------------------:|:-------------------------------------:|
+|     p-value \< 0.01     |     strong evidence against $H_0$     |
+| 0.01 \< p-value \< 0.05 |    moderate evidence against $H_0$    |
+| 0.05 \< p-value \< 0.1  |      weak evidence against $H_0$      |
+|     p-value \> 0.1      | effectively no evidence against $H_0$ |
+
+::: callout-important
+These are general guidelines.
+The strength of evidence depends on the context of the problem.
+:::
+
+## HT: Conclusion, in context
+
+```{r}
+tidy(df_fit) %>%
+  kable(digits = 3) %>%
+  row_spec(2, background = "#D9E3E4")
+```
+
+-   The data provide convincing evidence that the population slope $\beta_1$ is different from 0.
+-   The data provide convincing evidence of a linear relationship between area and price of houses in Duke Forest.
+
+## CI for the slope
+
+$$
+\text{Estimate} \pm \text{ (critical value) } \times \text{SE}
+$$
+
+. . .
+
+$$
+\hat{\beta}_1 \pm t^* \times SE_{\hat{\beta}_1}
+$$
+
+where $t^*$ is calculated from a $t$ distribution with $n-2$ degrees of freedom
+
+## CI: critical value
+
+::: columns
+::: {.column width="70%"}
+```{r}
+# confidence level: 95%
+qt(0.975, df = nrow(duke_forest) - 2)
+
+# confidence level: 90%
+qt(0.95, df = nrow(duke_forest) - 2)
+
+# confidence level: 99%
+qt(0.995, df = nrow(duke_forest) - 2)
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+#| out.width: "100%"
+
+normTail(M = c(-1.984984, 1.984984), df = nrow(duke_forest) - 2, col = "#D9E3E4")
+text(x = 0, y = 0.04, labels = "95%", cex = 2, col = "#5B888C")
+```
+:::
+:::
+
+## 95% CI: calculation
+
+```{r}
+tidy(df_fit) %>% 
+  kable(digits = 2) %>%
+  row_spec(2, background = "#D9E3E4")
+```
+
+$$\hat{\beta}_1 = 159.48 \hspace{15mm} t^* = 1.98 \hspace{15mm} SE_{\hat{\beta}_1} = 18.17$$
+
+. . .
+
+$$
+159.48 \pm 1.98 \times 18.17 = (123.50, 195.46)
+$$
+
+## 95% CI: computation
+
+```{r}
+#| echo: true
+
+tidy(df_fit, conf.int = TRUE, conf.level = 0.95) %>% 
+  kable(digits = 2)
+```
