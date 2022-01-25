@@ -1,0 +1,44 @@
+---
+title: "Pipelines"
+editor: visual
+---
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+```
+
+## Simple linear regression
+
+### Model fitting
+
+Fit model:
+
+```{r}
+penguins_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(body_mass_g ~ flipper_length_mm, data = penguins)
+```
+
+Tidy model output:
+
+```{r}
+tidy(penguins_fit)
+```
+
+Format model output as table:
+
+```{r}
+tidy(penguins_fit) %>%
+  kable(digits = 3)
+```
+
+Augment data with model:
+
+```{r}
+augment(penguins_fit$fit)
+```
+
+### Statistical inference

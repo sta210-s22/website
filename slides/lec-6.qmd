@@ -501,7 +501,7 @@ tidy(df_fit) %>%
     -   HT: Permute the observed sample to simulate the distribution of the slope under the assumption that the null hypothesis is true
 -   Now we'll do these based on theoretical results, i.e., by using the Central Limit Theorem to define the distribution of the slope and use features (shape, center, spread) of this distribution to compute bounds of the CI and the p-value for the HT
 
-## Mathematical representation of the model
+## Mathematical representation of the model {.smaller}
 
 $$
 \begin{aligned}
@@ -517,7 +517,7 @@ where the errors are independent and normally distributed:
 -   independent: Knowing the error term for one observation doesn't tell you anything about the error term for another observation
 -   normally distributed: $\epsilon \sim N(0, \sigma_\epsilon^2)$
 
-## Mathematical representation, visualized
+## Mathematical representation, visualized {.smaller}
 
 $$
 Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)
@@ -527,6 +527,7 @@ $$
 ::: {.column width="70%"}
 ```{r}
 #| out.width: "100%"
+#| fig.align: "center"
 
 # Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
 # Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
@@ -584,9 +585,9 @@ ggplot(dat, aes(x, y)) +
 :::
 :::
 
-## Regression standard error
+## Regression standard error {.smaller}
 
-Once we fir the model, we can use the residuals to estimate the regression standard error (the spread of the distribution of the response, for a given value of the predictor variable):
+Once we fit the model, we can use the residuals to estimate the regression standard error (the spread of the distribution of the response, for a given value of the predictor variable):
 
 $$
 \hat{\sigma}_\epsilon = \sqrt{\frac{\sum_\limits{i=1}^n(y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{\sum_\limits{i=1}^ne_i^2}{n-2}}
@@ -595,8 +596,10 @@ $$
 . . .
 
 ::: question
+::: nonincremental
 1.  Why divide by $n - 2$?
 2.  Why do we care about the value of the regression standard error?
+:::
 :::
 
 ## Standard error of $\hat{\beta}_1$
@@ -611,7 +614,8 @@ or...
 
 ```{r}
 tidy(df_fit) %>%
-  kable(digits = 3)
+  kable(digits = 2) %>%
+  row_spec(2, background = "#D9E3E4")
 ```
 
 ## HT for the slope {.smaller}
@@ -640,12 +644,12 @@ calculated from a $t$ distribution with $n - 2$ degrees of freedom
 
 ```{r}
 tidy(df_fit) %>%
-  kable(digits = 3) %>%
+  kable(digits = 2) %>%
   row_spec(2, background = "#D9E3E4")
 ```
 
 $$
-t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.483 - 0}{18.171} = 8.777
+t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.78
 $$
 
 ## HT: p-value
@@ -654,7 +658,7 @@ $$
 ::: {.column width="70%"}
 ```{r}
 tidy(df_fit) %>%
-  kable(digits = 3) %>%
+  kable(digits = 2) %>%
   row_spec(2, background = "#D9E3E4")
 ```
 :::
@@ -663,7 +667,7 @@ tidy(df_fit) %>%
 ```{r}
 #| out.width: "100%"
 
-normTail(L = -8.777, U = 8.777, df = nrow(duke_forest) - 2, xlim = c(-9,9), col = "#D9E3E4")
+normTail(L = -8.78, U = 8.78, df = nrow(duke_forest) - 2, xlim = c(-9,9), col = "#D9E3E4")
 ```
 :::
 :::
@@ -686,7 +690,7 @@ The strength of evidence depends on the context of the problem.
 
 ```{r}
 tidy(df_fit) %>%
-  kable(digits = 3) %>%
+  kable(digits = 2) %>%
   row_spec(2, background = "#D9E3E4")
 ```
 
@@ -707,11 +711,13 @@ $$
 
 where $t^*$ is calculated from a $t$ distribution with $n-2$ degrees of freedom
 
-## CI: critical value
+## CI: Critical value
 
 ::: columns
-::: {.column width="70%"}
+::: {.column width="60%"}
 ```{r}
+#| echo: true
+
 # confidence level: 95%
 qt(0.975, df = nrow(duke_forest) - 2)
 
@@ -723,7 +729,7 @@ qt(0.995, df = nrow(duke_forest) - 2)
 ```
 :::
 
-::: {.column width="30%"}
+::: {.column width="40%"}
 ```{r}
 #| out.width: "100%"
 
@@ -733,7 +739,7 @@ text(x = 0, y = 0.04, labels = "95%", cex = 2, col = "#5B888C")
 :::
 :::
 
-## 95% CI: calculation
+## 95% CI: Calculation
 
 ```{r}
 tidy(df_fit) %>% 
@@ -749,7 +755,7 @@ $$
 159.48 \pm 1.98 \times 18.17 = (123.50, 195.46)
 $$
 
-## 95% CI: computation
+## 95% CI: Computation {.smaller}
 
 ```{r}
 #| echo: true
