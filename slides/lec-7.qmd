@@ -220,14 +220,14 @@ tidy(df_fit, conf.int = TRUE, conf.level = 0.95) %>%
 
 ## Model conditions
 
-1.  **Linearity:** There is a linear relationship between the response and predictor variables.
-2.  **Constant Variance:** The variability of the errors is equal for all values of the predictor variable.
-3.  **Normality:** The errors follow a normal distribution.
-4.  **Independence:** The errors are independent from each other.
+1.  **Linearity:** There is a linear relationship between the response and predictor variables
+2.  **Constant variance:** The variability of the errors is equal for all values of the predictor variable, i.e. the errors are homeoscedastic
+3.  **Normality:** The errors follow a normal distribution
+4.  **Independence:** The errors are independent from each other
 
 ## Linearity
 
-If the relationship between the response and the predictor variables is linear, the residuals vs. fitted values plot will not show a random scatter of residuals (no distinguishable pattern or structure)
+✅ The residuals vs. fitted values plot should not show a random scatter of residuals (no distinguishable pattern or structure)
 
 ```{r res-vs-fit}
 df_aug <- augment(df_fit$fit)
@@ -256,17 +256,25 @@ ggplot(df_aug, aes(x = .fitted, y = .resid)) +
 📋 [github.com/sta210-s22/ae-3-duke-forest](https://github.com/sta210-s22/?q=ae-3-duke-forest&type=all&language=&sort=)
 :::
 
+```{r}
+countdown(minutes = 5, font_size = "2em")
+```
+
 ## Non-linear relationships
 
 ```{r}
 set.seed(1234)
 
+n = 100
+
 df <- tibble(
   x = -49:50,
-  e_curved = rnorm(100, 0, 150),
+  e_curved = rnorm(n, 0, 150),
   y_curved = x^2 + e_curved,
-  e_slight_curve = sort(rbeta(100, 5, 1)*200) + rnorm(100, 0, 5),
-  y_slight_curve = x + e_slight_curve
+  e_slight_curve = sort(rbeta(n, 5, 1) * 200) + rnorm(n, 0, 5),
+  y_slight_curve = x + e_slight_curve,
+  x_fan = seq(0, 3.99, 4 / n),
+  y_fan = c(rnorm(n / 8, 3, 1), rnorm(n / 8, 3.5, 2), rnorm(n / 8, 4, 2.5), rnorm(n / 8, 4.5, 3), rnorm(n / 4, 5, 4), rnorm((n / 4) + 2, 6, 5))
 )
 ```
 
@@ -303,6 +311,7 @@ p1 / p2 +
   plot_annotation(title = "Obviously curved")
 ```
 :::
+
 ::: {.column width="50%"}
 ```{r}
 #| out.width: "100%"
@@ -335,3 +344,112 @@ p1 / p2 +
 ```
 :::
 :::
+
+## Constant variance
+
+✅ The vertical spread of the residuals should be relatively constant across the plot
+
+```{r}
+#| ref.label: "res-vs-fit"
+```
+
+## Non-constant variance
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+ggplot(df, aes(x = x_fan, y = y_fan)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  labs(
+    x = "X", y = "Y",
+    title = "Observed data + model"
+    )
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+fan_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(y_fan ~ x_fan, data = df)
+
+fan_aug <- augment(fan_fit$fit)
+
+ggplot(fan_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    x = "Fitted value", y = "Residual",
+    title = "Residuals vs. fitted values"
+  ) +
+  ylim(-15, 15)
+```
+:::
+:::
+
+## Normality
+
+```{r}
+ggplot(df_aug, aes(x = .resid)) +
+  geom_histogram(aes(y = ..density..), binwidth = 100000, color = "white") +
+  geom_function(
+    #geom = "line",
+    fun = dnorm,
+    args = list(
+      mean = mean(df_aug$.resid), 
+      sd = sd(df_aug$.resid)
+      ),
+    lwd = 2,
+    col = "#8F2D5690"
+  ) +
+  labs(
+    x = "Residual",
+    y = "Density",
+    title = "Histogram of residuals"
+  )
+```
+
+## Independence
+
+-   We can often check the independence assumption based on the context of the data and how the observations were collected
+
+-   If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected
+
+✅ Based on available information, the error for one house does not tell us anything about the error for another use
+
+## Recap
+
+Used residual plots to check conditions for SLR:
+
+::: columns
+::: {.column width="50%"}
+::: nonincremental
+-   Linearity
+-   Constant variance
+:::
+:::
+
+::: {.column width="50%"}
+::: nonincremental
+-   Normality
+-   Independence
+:::
+:::
+:::
+
+. . .
+
+::: question
+Which of these conditions are required for fitting a SLR?
+Which for simulation-based inference for the slope for an SLR?
+Which for inference with mathematical models?
+:::
+
+```{r}
+countdown(minutes = 3, font_size = "2em")
+```
