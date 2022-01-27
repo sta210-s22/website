@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.45">
+  <meta name="generator" content="quarto-0.3.53">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>STA 210 - Spring 2022 - Matrix Notation for Multiple Linear Regression</title>
   <style>
@@ -77,7 +77,7 @@
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-  <div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
       <a href="./">
       <img src="./images/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
@@ -104,15 +104,15 @@
     </ul>
   <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-  </div>
-    <div class="mt-2 flex-shrink-0 align-items-center">
-      <div class="sidebar-search">
-      <div id="quarto-search" class="" title="Search"></div>
       </div>
-    </div>
-  <div class="sidebar-menu-container"> 
-  <ul class="list-unstyled mt-1">
-      <li class="sidebar-item sidebar-item-section">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text text-start  collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-course-information" aria-expanded="false">Course information</a>
       <a class="sidebar-item-toggle text-start collapsed " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-course-information" aria-expanded="false">
@@ -157,7 +157,7 @@
 </li>
     </ul>
   </li>
-      <li class="sidebar-item sidebar-item-section">
+        <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text text-start  collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-computing" aria-expanded="false">Computing</a>
       <a class="sidebar-item-toggle text-start collapsed " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-computing" aria-expanded="false">
@@ -177,7 +177,7 @@
 </li>
     </ul>
   </li>
-      <li class="sidebar-item sidebar-item-section">
+        <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text text-start  collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-project" aria-expanded="false">Project</a>
       <a class="sidebar-item-toggle text-start collapsed " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-project" aria-expanded="false">
@@ -197,7 +197,7 @@
 </li>
     </ul>
   </li>
-      <li class="sidebar-item sidebar-item-section">
+        <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text text-start  collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-weekly-materials" aria-expanded="false">Weekly materials</a>
       <a class="sidebar-item-toggle text-start collapsed " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-weekly-materials" aria-expanded="false">
@@ -282,7 +282,7 @@
 </li>
     </ul>
   </li>
-      <li class="sidebar-item sidebar-item-section">
+        <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text text-start  " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-supplemental-notes" aria-expanded="true">Supplemental notes</a>
       <a class="sidebar-item-toggle text-start  " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-supplemental-notes" aria-expanded="true">
@@ -302,12 +302,12 @@
 </li>
     </ul>
   </li>
-  </ul>
-  </div>
+    </ul>
+    </div>
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-      <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">On this page</h2>
 <ul>
 <li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
@@ -339,11 +339,11 @@ Note
 <p>This document provides the details for the matrix notation for multiple linear regression. We assume the reader has familiarity with some linear algebra. Please see Chapter 1 of <a href="https://www-bcf.usc.edu/~gareth/ISL/"><em>An Introduction to Statistical Learning</em></a> for a brief review of linear algebra.</p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Suppose we have <span class="math inline">\(n\)</span> observations. Let the <span class="math inline">\(i^{th}\)</span> be <span class="math inline">\((x_{i1}, \ldots, x_{ip}, y_i)\)</span>, such that <span class="math inline">\(x_{i1}, \ldots, x_{ip}\)</span> are the explanatory variables (predictors) and <span class="math inline">\(y_i\)</span> is the response variable. We assume the data can be modeled using the least-squares regression model, such that the mean response for a given combination of explanatory variables follows the form in <a href="#eq-basic_model">eq.&nbsp;1</a>.</p>
+<p>Suppose we have <span class="math inline">\(n\)</span> observations. Let the <span class="math inline">\(i^{th}\)</span> be <span class="math inline">\((x_{i1}, \ldots, x_{ip}, y_i)\)</span>, such that <span class="math inline">\(x_{i1}, \ldots, x_{ip}\)</span> are the explanatory variables (predictors) and <span class="math inline">\(y_i\)</span> is the response variable. We assume the data can be modeled using the least-squares regression model, such that the mean response for a given combination of explanatory variables follows the form in <a href="#eq-basic_model">Equation&nbsp;1</a>.</p>
 <p><span id="eq-basic_model"><span class="math display">\[
 y = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p
 \qquad(1)\]</span></span></p>
-<p>We can write the response for the <span class="math inline">\(i^{th}\)</span> observation as shown in <a href="#eq-ind_response">eq.&nbsp;2</a></p>
+<p>We can write the response for the <span class="math inline">\(i^{th}\)</span> observation as shown in <a href="#eq-ind_response">Equation&nbsp;2</a></p>
 <p><span id="eq-ind_response"><span class="math display">\[
 y_i = \beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \epsilon_i
 \qquad(2)\]</span></span></p>
@@ -351,7 +351,7 @@ y_i = \beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \epsilon_i
 </section>
 <section id="matrix-representation-for-the-regression-model" class="level2">
 <h2 class="anchored" data-anchor-id="matrix-representation-for-the-regression-model">Matrix Representation for the Regression Model</h2>
-<p>We can represent the <a href="#eq-basic_model">eq.&nbsp;1</a> and <a href="#eq-ind_response">eq.&nbsp;2</a> using matrix notation. Let</p>
+<p>We can represent the <a href="#eq-basic_model">Equation&nbsp;1</a> and <a href="#eq-ind_response">Equation&nbsp;2</a> using matrix notation. Let</p>
 <p><span id="eq-matrix-notation"><span class="math display">\[
 \mathbf{Y} = \begin{bmatrix}y_1 \\ y_2 \\ \vdots \\y_n\end{bmatrix}
 \hspace{15mm}
@@ -384,12 +384,12 @@ x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np} \end{bmatrix}
 \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}
 \hat{\boldsymbol{\beta}})
 \qquad(6)\]</span></span></p>
-<p>Note that <span class="math inline">\((\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}})^T = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Since these are both constants (i.e.&nbsp;<span class="math inline">\(1\times 1\)</span> vectors), <span class="math inline">\(\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}} = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Thus, <a href="#eq-model_equation">eq.&nbsp;7</a> becomes</p>
+<p>Note that <span class="math inline">\((\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}})^T = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Since these are both constants (i.e.&nbsp;<span class="math inline">\(1\times 1\)</span> vectors), <span class="math inline">\(\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}} = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Thus, <a href="#eq-model_equation">Equation&nbsp;7</a> becomes</p>
 <p><span id="eq-model_equation"><span class="math display">\[
 \mathbf{Y}^T\mathbf{Y} - 2 \mathbf{X}^T\hat{\boldsymbol{\beta}}{}^{T}\mathbf{Y} + \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}
 \hat{\boldsymbol{\beta}}
 \qquad(7)\]</span></span></p>
-<p>Since we want to find the <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that minimizes <a href="#eq-sum_sq_resid">eq.&nbsp;5</a>, will find the value of <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> such that the derivative with respect to <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> is equal to 0.</p>
+<p>Since we want to find the <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that minimizes <a href="#eq-sum_sq_resid">Equation&nbsp;5</a>, will find the value of <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> such that the derivative with respect to <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> is equal to 0.</p>
 <p><span id="eq-ete"><span class="math display">\[
 \begin{aligned}
 \frac{\partial \mathbf{e}^T\mathbf{e}}{\partial \hat{\boldsymbol{\beta}}} &amp; = \frac{\partial}{\partial \hat{\boldsymbol{\beta}}}(\mathbf{Y}^T\mathbf{Y} - 2 \mathbf{X}^T\hat{\boldsymbol{\beta}}{}^T\mathbf{Y} + \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}}) = 0 \\
@@ -425,7 +425,7 @@ E[\epsilon_n \epsilon_1] &amp; E[\epsilon_n \epsilon_2] &amp; \dots &amp; E[\eps
 \end{bmatrix}
 \end{aligned}
 \qquad(9)\]</span></span></p>
-<p>Recall, the regression assumption that the errors <span class="math inline">\(\epsilon_i's\)</span> are Normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>. Thus, <span class="math inline">\(E(\epsilon_i^2) = Var(\epsilon_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>. Additionally, recall the regression assumption that the errors are uncorrelated, i.e.&nbsp;<span class="math inline">\(E(\epsilon_i \epsilon_j) = Cov(\epsilon_i, \epsilon_j) = 0\)</span> for all <span class="math inline">\(i,j\)</span>. Using these assumptions, we can write <a href="#eq-expected_error">eq.&nbsp;9</a> as</p>
+<p>Recall, the regression assumption that the errors <span class="math inline">\(\epsilon_i's\)</span> are Normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>. Thus, <span class="math inline">\(E(\epsilon_i^2) = Var(\epsilon_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>. Additionally, recall the regression assumption that the errors are uncorrelated, i.e.&nbsp;<span class="math inline">\(E(\epsilon_i \epsilon_j) = Cov(\epsilon_i, \epsilon_j) = 0\)</span> for all <span class="math inline">\(i,j\)</span>. Using these assumptions, we can write <a href="#eq-expected_error">Equation&nbsp;9</a> as</p>
 <p><span id="eq-expected_error2"><span class="math display">\[
 E[\mathbf{\epsilon}\mathbf{\epsilon}^T]  = \begin{bmatrix} \sigma^2  &amp; 0 &amp; \dots &amp; 0 \\
 0 &amp; \sigma^2  &amp; \dots &amp; 0 \\
