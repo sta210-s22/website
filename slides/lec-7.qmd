@@ -106,32 +106,24 @@ $$
 
 ## HT: p-value
 
-::: columns
-::: {.column width="70%"}
 ```{r}
 tidy(df_fit) %>%
   kable(digits = 2) %>%
   row_spec(2, background = "#D9E3E4")
 ```
-:::
 
-::: {.column width="30%"}
 ```{r}
-#| out.width: "100%"
-
 normTail(L = -8.78, U = 8.78, df = nrow(duke_forest) - 2, xlim = c(-9,9), col = "#D9E3E4")
 ```
-:::
-:::
 
-## Understanding the p-value
+## Understanding the p-value {.smaller}
 
-|  Magnitude of p-value   |            Interpretation             |
-|:-----------------------:|:-------------------------------------:|
-|     p-value \< 0.01     |     strong evidence against $H_0$     |
-| 0.01 \< p-value \< 0.05 |    moderate evidence against $H_0$    |
-| 0.05 \< p-value \< 0.1  |      weak evidence against $H_0$      |
-|     p-value \> 0.1      | effectively no evidence against $H_0$ |
+| Magnitude of p-value    | Interpretation                        |
+|:------------------------|:--------------------------------------|
+| p-value \< 0.01         | strong evidence against $H_0$         |
+| 0.01 \< p-value \< 0.05 | moderate evidence against $H_0$       |
+| 0.05 \< p-value \< 0.1  | weak evidence against $H_0$           |
+| p-value \> 0.1          | effectively no evidence against $H_0$ |
 
 ::: callout-important
 These are general guidelines.
@@ -191,7 +183,7 @@ text(x = 0, y = 0.04, labels = "95%", cex = 2, col = "#5B888C")
 :::
 :::
 
-## 95% CI: Calculation
+## 95% CI for the slope: Calculation
 
 ```{r}
 tidy(df_fit) %>% 
@@ -207,7 +199,7 @@ $$
 159.48 \pm 1.98 \times 18.17 = (123.50, 195.46)
 $$
 
-## 95% CI: Computation {.smaller}
+## 95% CI for the slope: Computation {.smaller}
 
 ```{r}
 #| echo: true
@@ -216,11 +208,187 @@ tidy(df_fit, conf.int = TRUE, conf.level = 0.95) %>%
   kable(digits = 2)
 ```
 
+## Confidence interval for predictions {.smaller}
+
+-   Suppose we want to answer the question *"What is the predicted sale price of a Duke Forest house that is 2,800 square feet?"*
+-   We said reporting a single estimate for the slope is not wise, and we should report a plausible range instead
+-   Similarly, reporting a single prediction for a new value is not wise, and we should report a plausible range instead
+
+```{r}
+#| fig.width: 10
+
+x_new <- 2800
+y_hat_x_new <- predict(df_fit, new_data = tibble(area = x_new)) %>% pull()
+
+ggplot(duke_forest, aes(x = area, y = price)) +
+  geom_segment(
+    x = x_new, xend = x_new, y = y_hat_x_new-600000, yend = y_hat_x_new+600000,
+    color = "#CDDBDC", size = 4
+  ) +
+  geom_segment(
+    x = x_new, xend = x_new, y = y_hat_x_new-400000, yend = y_hat_x_new+400000,
+    color = "#ADC3C5", size = 4
+  ) +
+  geom_segment(
+    x = x_new, xend = x_new, y = y_hat_x_new-200000, yend = y_hat_x_new+200000,
+    color = "#7B9FA3", size = 4
+  ) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  geom_segment(
+    x = x_new, xend = x_new, y = 0, yend = y_hat_x_new,
+    linetype = "dashed", color = "#5B888C"
+  ) +
+  geom_segment(
+    x = 0, xend = x_new, y = y_hat_x_new, yend = y_hat_x_new,
+    linetype = "dashed", color = "#5B888C"
+  ) +
+  annotate("point", x = x_new, y = y_hat_x_new, size = 2, color = "magenta") +
+  annotate("point", x = x_new, y = y_hat_x_new, size = 5, shape = "circle open", color = "#5B888C", stroke = 2) +
+  scale_x_continuous(labels = label_number()) +
+  scale_y_continuous(labels = label_dollar(), limits = c(000000, 1500000)) +
+  labs(
+    x = "Area (square feet)", y = "Sale price",
+    title = "Houses in Duke Forest"
+    )
+```
+
+## Two types of predictions {.smaller}
+
+1.  Prediction for the mean: ""What is the average predicted sale price of Duke Forest houses that are 2,800 square feet?"
+
+2.  Prediction for an individual observation: "What is the predicted sale price of a Duke Forest house that is 2,800 square feet?"
+
+. . .
+
+::: question
+Which would you expect to be more variable?
+The average prediction or the prediction for an individual observation?
+Based on your answer, how would you expect the widths of plausible ranges for these two predictions to compare?
+:::
+
+## Uncertainty in predictions
+
+**Confidence interval for the mean outcome:** $$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE}_{\hat{\boldsymbol{\mu}}}}$$
+
+. . .
+
+**Prediction interval for an individual observation:** $$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}$$
+
+## Standard errors {.smaller}
+
+**Standard error of the mean outcome:** $$SE_{\hat{\mu}} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+
+. . .
+
+**Standard error of an individual outcome:** $$SE_{\hat{y}} = \hat{\sigma}_\epsilon\sqrt{1 + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+
+## Standard errors {.smaller}
+
+**Standard error of the mean outcome:** $$SE_{\hat{\mu}} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+
+**Standard error of an individual outcome:** $$SE_{\hat{y}} = \hat{\sigma}_\epsilon\sqrt{\mathbf{\color{purple}{\Large{1}}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+
+## Confidence interval
+
+The 95% **confidence interval** for the *mean* outcpme:
+
+```{r}
+#| echo: true
+new_house <- tibble(area = 2800)
+
+predict(df_fit, new_data = new_house, type = "conf_int", level = 0.95)
+```
+
+```{r}
+new_house_ci <- predict(df_fit, new_data = new_house, type = "conf_int", level = 0.95)
+```
+
+. . .
+
+We are 95% confident that mean sale price of Duke Forest houses that are 2,800 square feet is between `r dollar(new_house_ci$.pred_lower)` and `r dollar(new_house_ci$.pred_upper)`.
+
+## Prediction interval
+
+The 95% **prediction interval**for the *individual* outcome:
+
+```{r}
+#| echo: true
+predict(df_fit, new_data = new_house, type = "pred_int", level = 0.95)
+```
+
+```{r}
+new_house_pi <- predict(df_fit, new_data = new_house, type = "pred_int", level = 0.95)
+```
+
+. . .
+
+We are 95% confident that predicted sale price of a Duke Forest house that is 2,800 square feet is between `r dollar(new_house_pi$.pred_lower)` and `r dollar(new_house_pi$.pred_upper)`.
+
+## Comparing intervals
+
+```{r}
+#| out.width: "100%"
+#| fig.width: 10
+
+new_houses <- tibble(area = seq(1000, 6500, 50))
+new_houses_ci <- predict(df_fit, new_data = new_houses, type = "conf_int", level = 0.95) %>% 
+  mutate(
+    area = new_houses$area,
+    type = "Confidence interval"
+    )
+new_houses_pi <- predict(df_fit, new_data = new_houses, type = "pred_int", level = 0.95) %>% 
+  mutate(
+    area = new_houses$area,
+    type = "Prediction interval"
+    )
+new_houses_int <- bind_rows(new_houses_ci, new_houses_pi)
+
+ggplot(duke_forest, aes(x = area, y = price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  geom_line(data = new_houses_int,
+            aes(x = area, y = .pred_lower, linetype = type, color = type),
+            size = 1) +
+  geom_line(data = new_houses_int,
+            aes(x = area, y = .pred_upper, linetype = type, color = type),
+            size = 1) +
+  scale_x_continuous(labels = label_number()) +
+  scale_y_continuous(labels = label_dollar(), limits = c(000000, 1500000)) +
+  scale_color_manual(values = c("#5B888C", "#888c5b")) +
+  labs(
+    x = "Area (square feet)", y = "Sale price",
+    color = "Type of interval", linetype = "Type of interval",
+    title = "Houses in Duke Forest"
+    ) +
+  theme(
+    legend.position = c(0.2, 0.85)
+  )
+```
+
+## Extrapolation
+
+::: columns
+::: {.column width="45%"}
+::: question
+Calculate the prediction interval for the sale price of a "tiny house" in Duke Forest that is 225 square feet.
+:::
+:::
+
+::: {.column width="55%"}
+![](images/lec-7/tiny-house.jpeg){fig-alt="Black tiny house on wheels" fig-align="center" width="750"}
+:::
+:::
+
+. . .
+
+*No, thanks!*
+
 # Model conditions
 
 ## Model conditions
 
-1.  **Linearity:** There is a linear relationship between the response and predictor variables
+1.  **Linearity:** There is a linear relationship between the outcome and predictor variables
 2.  **Constant variance:** The variability of the errors is equal for all values of the predictor variable, i.e. the errors are homeoscedastic
 3.  **Normality:** The errors follow a normal distribution
 4.  **Independence:** The errors are independent from each other
@@ -420,7 +588,9 @@ ggplot(df_aug, aes(x = .resid)) +
 
 -   If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected
 
-✅ Based on available information, the error for one house does not tell us anything about the error for another use
+. . .
+
+✅ If this is a random sample of Duke Houses, the error for one house does not tell us anything about the error for another use
 
 ## Recap
 
@@ -453,3 +623,108 @@ Which for inference with mathematical models?
 ```{r}
 countdown(minutes = 3, font_size = "2em")
 ```
+
+# Model diagnostics
+
+## The data
+
+```{r}
+df <- tibble(
+  x = seq(1:100),
+  y = 2*x + 20 + rnorm(100, sd = 10)
+)
+
+p_data <- ggplot(df, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  coord_cartesian(xlim = c(0, 200), ylim = c(0, 500))
+
+p_data
+```
+
+## The data + an outlier
+
+```{r}
+df2 <- df %>%
+  mutate(type = "data") %>%
+  bind_rows(tibble(x = 40, y = 500, type = "outlier"))
+
+p_outlier <- ggplot(df2, aes(x = x, y = y, color = type)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  geom_smooth(data = df, method = "lm", se = FALSE, color = "#8F2D5630") +
+  scale_color_manual(values = c("black", "magenta")) +
+  coord_cartesian(xlim = c(0, 200), ylim = c(0, 500)) +
+  annotate("point", x = 40, y = 500, size = 3, color = "magenta", shape = "circle open")
+
+p_outlier
+```
+
+## The data + influential point
+
+```{r}
+df3 <- df %>%
+  mutate(type = "data") %>%
+  bind_rows(tibble(x = 200, y = 5, type = "influential"))
+
+p_influential <- ggplot(df3, aes(x = x, y = y, color = type)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  geom_smooth(data = df, method = "lm", se = FALSE, color = "#8F2D5630") +
+  scale_color_manual(values = c("black", "magenta")) +
+  coord_cartesian(xlim = c(0, 200), ylim = c(0, 500)) +
+  annotate("point", x = 200, y = 5, size = 3, color = "magenta", shape = "circle open")
+
+p_influential
+```
+
+## Influential point
+
+An observation is **influential** if removing it substantially changes the coefficients of the regression model.
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_data
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_influential
+```
+:::
+:::
+
+## Influential points
+
+-   Influential points have a large impact on the coefficients and standard errors used for inference
+
+-   These points can sometimes be identified in a scatterplot if there is only one predictor variable, this is often not the case when there are multiple predictors
+
+-   We will use measures to quantify an individual observation's influence on the regression model: **leverage**, **standardized residuals**, and **Cook's distance**
+
+## Remember `augment()`?
+
+```{r}
+augment(df_fit$fit)
+```
+
+## Model diagnostics {.smaller}
+
+Use the `augment()` function to output statistics that can be used to diagnose the model, along with the predicted values and residuals:
+
+::: nonincremental
+-   outcome and predictor variables in the model
+-   **`.fitted`**: predicted values
+-   **`.se.fit`**: standard errors of predicted values
+-   **`.resid`**: residuals
+-   **`.hat`**: leverage
+-   **`.sigma`**: estimate of residual standard deviation when the corresponding observation is dropped from model
+-   **`.cooksd`**: Cook's distance
+-   **`.std.resid`**: standardized residuals
+:::

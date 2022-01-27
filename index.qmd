@@ -6,18 +6,18 @@ This page contains an outline of the topics, content, and assignments for the se
 Note that this schedule will be updated as the semester progresses, with all changes documented here.
 
 ::: column-screen-inset-right
-<table style="width:79%;">
+<table style="width:69%;">
 <colgroup>
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -113,7 +113,7 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><a href="/labs/lab-1.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -195,8 +195,8 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td><p>Thu, Jan 27</p></td>
 <td><p>SLR: Model diagnostics</p></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><a href="/slides/lec-7.html" title="Lecture slides"><span class="emoji" data-emoji="desktop_computer">🖥️</span></a></p></td>
+<td style="text-align: center;"><p><a href="/ae/ae-3-duke-forest.html" title="Application exercise"><span class="emoji" data-emoji="clipboard">📋</span></a></p></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -209,9 +209,8 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><p><a href="/hw/hw-1.html"><span class="emoji" data-emoji="writing_hand">✍️</span></a></p>
-<p><a href="/labs/lab-2.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p></td>
+<td style="text-align: center;"><p><a href="/labs/lab-2.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p></td>
+<td style="text-align: center;"><p><a href="/hw/hw-1.html"><span class="emoji" data-emoji="writing_hand">✍️</span></a></p></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>

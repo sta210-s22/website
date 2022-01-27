@@ -1,0 +1,66 @@
+---
+title: "AE 3: Duke Forest houses"
+subtitle: "Checking model conditions"
+---
+
+::: callout-important
+Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-3-duke-forest-YOUR_GITHUB_USERNAME` to get started.
+:::
+
+## Packages
+
+```{r load-packages}
+#| message: false
+library(tidyverse)
+library(tidymodels)
+library(openintro)
+library(knitr)
+```
+
+## Predict sale price from area
+
+```{r}
+df_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(price ~ area, data = duke_forest)
+
+tidy(df_fit) %>%
+  kable(digits = 2)
+```
+
+## Model conditions
+
+### Exercise 1
+
+The following code produces the residuals vs. fitted values plot for this model.
+Comment out the layer that defines the y-axis limits and re-create the plot.
+How does the plot change?
+Why might we want to define the limits explicitly?
+
+```{r}
+df_aug <- augment(df_fit$fit)
+
+ggplot(df_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  ylim(-1000000, 1000000) +
+  labs(
+    x = "Fitted value", y = "Residual",
+    title = "Residuals vs. fitted values"
+  )
+```
+
+### Exercise 2
+
+Improve how the values on the axes of the plot are displayed by modifying the code below.
+
+```{r}
+ggplot(df_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  ylim(-1000000, 1000000) +
+  labs(
+    x = "Fitted value", y = "Residual",
+    title = "Residuals vs. fitted values"
+  )
+```

@@ -1,7 +1,6 @@
 ---
 title: "AE 2: Bike rentals in DC (continued)"
 subtitle: "Exploring and modeling relationships"
-editor: visual
 ---
 
 ::: callout-important
