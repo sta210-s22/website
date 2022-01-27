@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.53">
+  <meta name="generator" content="quarto-0.3.59">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - SLR: Model diagnostics</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -535,8 +535,6 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 </section>
 <section id="ht-p-value" class="slide level2">
 <h2>HT: p-value</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table>
@@ -569,44 +567,33 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 
 </div>
 </div>
-</div><div class="column" style="width:30%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="understanding-the-p-value" class="slide level2">
+
+<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="understanding-the-p-value" class="slide level2 smaller">
 <h2>Understanding the p-value</h2>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Magnitude of p-value</th>
-<th style="text-align: center;">Interpretation</th>
+<th style="text-align: left;">Magnitude of p-value</th>
+<th style="text-align: left;">Interpretation</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">p-value &lt; 0.01</td>
-<td style="text-align: center;">strong evidence against <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: left;">p-value &lt; 0.01</td>
+<td style="text-align: left;">strong evidence against <span class="math inline">\(H_0\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">0.01 &lt; p-value &lt; 0.05</td>
-<td style="text-align: center;">moderate evidence against <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: left;">0.01 &lt; p-value &lt; 0.05</td>
+<td style="text-align: left;">moderate evidence against <span class="math inline">\(H_0\)</span></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">0.05 &lt; p-value &lt; 0.1</td>
-<td style="text-align: center;">weak evidence against <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: left;">0.05 &lt; p-value &lt; 0.1</td>
+<td style="text-align: left;">weak evidence against <span class="math inline">\(H_0\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">p-value &gt; 0.1</td>
-<td style="text-align: center;">effectively no evidence against <span class="math inline">\(H_0\)</span></td>
+<td style="text-align: left;">p-value &gt; 0.1</td>
+<td style="text-align: left;">effectively no evidence against <span class="math inline">\(H_0\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -709,8 +696,8 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 </div>
 </div>
 </section>
-<section id="ci-calculation" class="slide level2">
-<h2>95% CI: Calculation</h2>
+<section id="ci-for-the-slope-calculation" class="slide level2">
+<h2>95% CI for the slope: Calculation</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table>
@@ -750,8 +737,8 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 \]</span></p>
 </div>
 </section>
-<section id="ci-computation" class="slide level2 smaller">
-<h2>95% CI: Computation</h2>
+<section id="ci-for-the-slope-computation" class="slide level2 smaller">
+<h2>95% CI for the slope: Computation</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">tidy</span>(df_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -792,6 +779,109 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 
 </div>
 </div>
+</section>
+<section id="confidence-interval-for-predictions" class="slide level2 smaller">
+<h2>Confidence interval for predictions</h2>
+<ul>
+<li class="fragment">Suppose we want to answer the question <em>“What is the predicted sale price of a Duke Forest house that is 2,800 square feet?”</em></li>
+<li class="fragment">We said reporting a single estimate for the slope is not wise, and we should report a plausible range instead</li>
+<li class="fragment">Similarly, reporting a single prediction for a new value is not wise, and we should report a plausible range instead</li>
+</ul>
+
+<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="two-types-of-predictions" class="slide level2 smaller">
+<h2>Two types of predictions</h2>
+<ol type="1">
+<li class="fragment"><p>Prediction for the mean: ““What is the average predicted sale price of Duke Forest houses that are 2,800 square feet?”</p></li>
+<li class="fragment"><p>Prediction for an individual observation: “What is the predicted sale price of a Duke Forest house that is 2,800 square feet?”</p></li>
+</ol>
+<div class="fragment">
+<div class="question">
+<p>Which would you expect to be more variable? The average prediction or the prediction for an individual observation? Based on your answer, how would you expect the widths of plausible ranges for these two predictions to compare?</p>
+</div>
+</div>
+</section>
+<section id="uncertainty-in-predictions" class="slide level2">
+<h2>Uncertainty in predictions</h2>
+<p><strong>Confidence interval for the mean outcome:</strong> <span class="math display">\[\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE}_{\hat{\boldsymbol{\mu}}}}\]</span></p>
+<div class="fragment">
+<p><strong>Prediction interval for an individual observation:</strong> <span class="math display">\[\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}\]</span></p>
+</div>
+</section>
+<section id="standard-errors" class="slide level2 smaller">
+<h2>Standard errors</h2>
+<p><strong>Standard error of the mean outcome:</strong> <span class="math display">\[SE_{\hat{\mu}} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}\]</span></p>
+<div class="fragment">
+<p><strong>Standard error of an individual outcome:</strong> <span class="math display">\[SE_{\hat{y}} = \hat{\sigma}_\epsilon\sqrt{1 + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}\]</span></p>
+</div>
+</section>
+<section id="standard-errors-1" class="slide level2 smaller">
+<h2>Standard errors</h2>
+<p><strong>Standard error of the mean outcome:</strong> <span class="math display">\[SE_{\hat{\mu}} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}\]</span></p>
+<p><strong>Standard error of an individual outcome:</strong> <span class="math display">\[SE_{\hat{y}} = \hat{\sigma}_\epsilon\sqrt{\mathbf{\color{purple}{\Large{1}}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}\]</span></p>
+</section>
+<section id="confidence-interval" class="slide level2">
+<h2>Confidence interval</h2>
+<p>The 95% <strong>confidence interval</strong> for the <em>mean</em> outcpme:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>new_house <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">area =</span> <span class="dv">2800</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">predict</span>(df_fit, <span class="at">new_data =</span> new_house, <span class="at">type =</span> <span class="st">"conf_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  .pred_lower .pred_upper
+        &lt;dbl&gt;       &lt;dbl&gt;
+1     529351.     597060.</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="fragment">
+<p>We are 95% confident that mean sale price of Duke Forest houses that are 2,800 square feet is between $529,351 and $597,060.</p>
+</div>
+</section>
+<section id="prediction-interval" class="slide level2">
+<h2>Prediction interval</h2>
+<p>The 95% <strong>prediction interval</strong>for the <em>individual</em> outcome:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">predict</span>(df_fit, <span class="at">new_data =</span> new_house, <span class="at">type =</span> <span class="st">"pred_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  .pred_lower .pred_upper
+        &lt;dbl&gt;       &lt;dbl&gt;
+1     226438.     899973.</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="fragment">
+<p>We are 95% confident that predicted sale price of a Duke Forest house that is 2,800 square feet is between $226,438 and $899,973.</p>
+</div>
+</section>
+<section id="comparing-intervals" class="slide level2">
+<h2>Comparing intervals</h2>
+
+<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="extrapolation" class="slide level2">
+<h2>Extrapolation</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="question">
+<p>Calculate the prediction interval for the sale price of a “tiny house” in Duke Forest that is 225 square feet.</p>
+</div>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/lec-7/tiny-house.jpeg" alt="Black tiny house on wheels" width="750"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><em>No, thanks!</em></p>
+</div>
 </section></section>
 <section>
 <section id="model-conditions" class="title-slide slide level1 center">
@@ -801,7 +891,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 <section id="model-conditions-1" class="slide level2">
 <h2>Model conditions</h2>
 <ol type="1">
-<li class="fragment"><strong>Linearity:</strong> There is a linear relationship between the response and predictor variables</li>
+<li class="fragment"><strong>Linearity:</strong> There is a linear relationship between the outcome and predictor variables</li>
 <li class="fragment"><strong>Constant variance:</strong> The variability of the errors is equal for all values of the predictor variable, i.e.&nbsp;the errors are homeoscedastic</li>
 <li class="fragment"><strong>Normality:</strong> The errors follow a normal distribution</li>
 <li class="fragment"><strong>Independence:</strong> The errors are independent from each other</li>
@@ -815,16 +905,16 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 <section id="residuals-vs.-fitted-values" class="slide level2">
 <h2>Residuals vs.&nbsp;fitted values</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>df_aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(df_fit<span class="sc">$</span>fit)</span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">ggplot</span>(df_aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1000000</span>, <span class="dv">1000000</span>) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-8"><a href="#cb10-8"></a>    <span class="at">x =</span> <span class="st">"Fitted value"</span>, <span class="at">y =</span> <span class="st">"Residual"</span>,</span>
-<span id="cb10-9"><a href="#cb10-9"></a>    <span class="at">title =</span> <span class="st">"Residuals vs. fitted values"</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>df_aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(df_fit<span class="sc">$</span>fit)</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="fu">ggplot</span>(df_aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1000000</span>, <span class="dv">1000000</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="at">x =</span> <span class="st">"Fitted value"</span>, <span class="at">y =</span> <span class="st">"Residual"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="at">title =</span> <span class="st">"Residuals vs. fitted values"</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="application-exercise" class="slide level2">
@@ -834,7 +924,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="countdown" id="timer_61f290e3" style="right:0;bottom:0;font-size:2em;" data-warnwhen="0">
+<div class="countdown" id="timer_61f2e1f5" style="right:0;bottom:0;font-size:2em;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 </div>
@@ -851,7 +941,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:100.0%"></p>
+<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -861,7 +951,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:100.0%"></p>
+<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -873,7 +963,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 <h2>Constant variance</h2>
 <p>✅ The vertical spread of the residuals should be relatively constant across the plot</p>
 
-<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
 <section id="non-constant-variance" class="slide level2">
 <h2>Non-constant variance</h2>
 <div class="columns">
@@ -882,7 +972,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:100.0%"></p>
+<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -892,7 +982,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%"></p>
+<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-23-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -903,14 +993,16 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 <section id="normality" class="slide level2">
 <h2>Normality</h2>
 
-<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
 <section id="independence" class="slide level2">
 <h2>Independence</h2>
 <ul>
 <li class="fragment"><p>We can often check the independence assumption based on the context of the data and how the observations were collected</p></li>
 <li class="fragment"><p>If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected</p></li>
 </ul>
-<p>✅ Based on available information, the error for one house does not tell us anything about the error for another use</p>
+<div class="fragment">
+<p>✅ If this is a random sample of Duke Houses, the error for one house does not tell us anything about the error for another use</p>
+</div>
 </section>
 <section id="recap" class="slide level2">
 <h2>Recap</h2>
@@ -938,16 +1030,105 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="countdown" id="timer_61f2945d" style="right:0;bottom:0;font-size:2em;" data-warnwhen="0">
+<div class="countdown" id="timer_61f2e156" style="right:0;bottom:0;font-size:2em;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 </div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="model-diagnostics" class="title-slide slide level1 center">
+<h1>Model diagnostics</h1>
+
+</section>
+<section id="the-data" class="slide level2">
+<h2>The data</h2>
+
+<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-26-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="the-data-an-outlier" class="slide level2">
+<h2>The data + an outlier</h2>
+
+<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-27-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="the-data-influential-point" class="slide level2">
+<h2>The data + influential point</h2>
+
+<img data-src="lec-7_files/figure-revealjs/unnamed-chunk-28-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="influential-point" class="slide level2">
+<h2>Influential point</h2>
+<p>An observation is <strong>influential</strong> if removing it substantially changes the coefficients of the regression model.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-29-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-7_files/figure-revealjs/unnamed-chunk-30-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="influential-points" class="slide level2">
+<h2>Influential points</h2>
+<ul>
+<li class="fragment"><p>Influential points have a large impact on the coefficients and standard errors used for inference</p></li>
+<li class="fragment"><p>These points can sometimes be identified in a scatterplot if there is only one predictor variable, this is often not the case when there are multiple predictors</p></li>
+<li class="fragment"><p>We will use measures to quantify an individual observation’s influence on the regression model: <strong>leverage</strong>, <strong>standardized residuals</strong>, and <strong>Cook’s distance</strong></p></li>
+</ul>
+</section>
+<section id="remember-augment" class="slide level2">
+<h2>Remember <code>augment()</code>?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-stdout">
+<pre><code># A tibble: 98 × 8
+     price  area  .fitted  .resid   .hat  .sigma   .cooksd .std.resid
+     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+ 1 1520000  6040 1079931. 440069. 0.133  162605. 0.604         2.80  
+ 2 1030000  4475  830340. 199660. 0.0435 168386. 0.0333        1.21  
+ 3  420000  1745  394951.  25049. 0.0226 169664. 0.000260      0.150 
+ 4  680000  2091  450132. 229868. 0.0157 168011. 0.0150        1.37  
+ 5  428500  1772  399257.  29243. 0.0220 169657. 0.000345      0.175 
+ 6  456000  1950  427645.  28355. 0.0182 169659. 0.000266      0.170 
+ 7 1270000  3909  740072. 529928. 0.0250 160502. 0.130         3.18  
+ 8  557450  2841  569744. -12294. 0.0102 169679. 0.0000277    -0.0732
+ 9  697500  3924  742465. -44965. 0.0254 169620. 0.000948     -0.270 
+10  650000  2173  463209. 186791. 0.0145 168582. 0.00912       1.11  
+# … with 88 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="model-diagnostics-1" class="slide level2 smaller">
+<h2>Model diagnostics</h2>
+<p>Use the <code>augment()</code> function to output statistics that can be used to diagnose the model, along with the predicted values and residuals:</p>
+<div>
+<ul>
+<li>outcome and predictor variables in the model</li>
+<li><strong><code>.fitted</code></strong>: predicted values</li>
+<li><strong><code>.se.fit</code></strong>: standard errors of predicted values</li>
+<li><strong><code>.resid</code></strong>: residuals</li>
+<li><strong><code>.hat</code></strong>: leverage</li>
+<li><strong><code>.sigma</code></strong>: estimate of residual standard deviation when the corresponding observation is dropped from model</li>
+<li><strong><code>.cooksd</code></strong>: Cook’s distance</li>
+<li><strong><code>.std.resid</code></strong>: standardized residuals</li>
+</ul>
 </div>
 
 
 <div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
-</div>
 </div>
 <img src="images/logo.png" class="slide-logo r-stretch"></section></section>
     </div>
@@ -987,7 +1168,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"55587cbe88eb2087","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"adae8188d478154e","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
