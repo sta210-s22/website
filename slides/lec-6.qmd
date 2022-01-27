@@ -80,7 +80,7 @@ df_fit <- linear_reg() %>%
   fit(price ~ area, data = duke_forest)
 
 tidy(df_fit) %>%
-  kable(digits = 3)
+  kable(digits = 2)
 ```
 
 . . .
@@ -496,7 +496,7 @@ tidy(df_fit) %>%
 
 ## HT and CI, revisited {.smaller}
 
--   Earlier we computer a CI and conducted a HT via simulation:
+-   Earlier we computed a CI and conducted a HT via simulation:
     -   CI: Bootstrap the observed sample to simulate the distribution of the slope
     -   HT: Permute the observed sample to simulate the distribution of the slope under the assumption that the null hypothesis is true
 -   Now we'll do these based on theoretical results, i.e., by using the Central Limit Theorem to define the distribution of the slope and use features (shape, center, spread) of this distribution to compute bounds of the CI and the p-value for the HT
