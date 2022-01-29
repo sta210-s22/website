@@ -18,6 +18,9 @@ execute:
 ## The data
 
 ```{r}
+library(tidyverse)
+library(tidymodels)
+
 df <- tibble(
   x = seq(1:100),
   y = 2*x + 20 + rnorm(100, sd = 10)
@@ -100,7 +103,13 @@ p_influential
 ## Remember `augment()`?
 
 ```{r}
-augment(df_fit$fit)
+#| echo: true
+
+mtcars_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(mpg ~ disp, data = mtcars)
+
+augment(mtcars_fit$fit)
 ```
 
 ## Model diagnostics {.smaller}
@@ -117,4 +126,3 @@ Use the `augment()` function to output statistics that can be used to diagnose t
 -   **`.cooksd`**: Cook's distance
 -   **`.std.resid`**: standardized residuals
 :::
-
