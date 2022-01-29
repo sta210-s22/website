@@ -642,7 +642,7 @@ Take `100` bootstrap samples and fit models to each one:
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "1,5,6"
+# #| code-line-numbers: "1,5,6"
 
 set.seed(1120)
 
@@ -660,7 +660,7 @@ boot_fits
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "5"
+# #| code-line-numbers: "5"
 
 get_confidence_interval(
   boot_fits, 
@@ -676,7 +676,7 @@ get_confidence_interval(
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "5"
+# #| code-line-numbers: "5"
 
 get_confidence_interval(
   boot_fits, 
@@ -712,7 +712,7 @@ How would you modify it for a 99% confidence interval?
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "|4"
+# #| code-line-numbers: "|4"
 
 get_confidence_interval(
   boot_fits, 

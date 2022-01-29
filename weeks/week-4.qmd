@@ -27,7 +27,7 @@ editor: visual
 
 🖥️ [Lecture 6 - SLR: Mathematical models for inference](/slides/lec-6.html)
 
-🖥️ L[ecture 7 - SLR: Model diagnostics](/slides/lec-7.html)
+🖥️ [Lecture 7 - SLR: Model diagnostics](/slides/lec-7.html)
 
 ## Practice
 

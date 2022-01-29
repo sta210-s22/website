@@ -5,18 +5,33 @@ editor: visual
 ---
 
 ::: callout-important
-Due dates:
+-   Due date: Lab 2 - Fri, Feb 4, 5pm ET
+-   Exam 1 released on Fri, Feb 4, due Mon, Feb 7 at 11:59pm
 :::
-
-To be posted.
 
 ## Prepare
 
+📖 Read Introduction to Modern Statistics, Sec 8.1: [Indicator and categorical predictors](https://openintro-ims.netlify.app/model-mlr.html#ind-and-cat-predictors)
+
+📖 Read Introduction to Modern Statistics, Sec 8.2: [Many predictors in a model](https://openintro-ims.netlify.app/model-mlr.html#many-predictors-in-a-model)
+
+📖 Read Introduction to Modern Statistics, Sec 8.3: [Adjusted R-squared](https://openintro-ims.netlify.app/model-mlr.html#adjusted-r-squared)
+
 ## Participate
+
+🖥️ Lab 3 - Coffee ratings (to be posted)
+
+🖥️ Lecture 8 - Multiple linear regression (MLR) (to be posted)
+
+🖥️ Lecture 9 - Exam 1 review
 
 ## Practice
 
+📋 Application Exercise 4 (to be posted)
+
 ## Perform
+
+⌨️ Lab 3 - Coffee ratings
 
 <br><br>
 

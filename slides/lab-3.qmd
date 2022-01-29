@@ -1,0 +1,120 @@
+---
+title: "Lab 3 - Coffee ratings"
+subtitle: "STA 210 - Spring 2022"
+footer:  "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+editor: visual
+format: 
+  revealjs: 
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+execute:
+  freeze: auto
+---
+
+# Model diagnostics
+
+## The data
+
+```{r}
+df <- tibble(
+  x = seq(1:100),
+  y = 2*x + 20 + rnorm(100, sd = 10)
+)
+
+p_data <- ggplot(df, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  coord_cartesian(xlim = c(0, 200), ylim = c(0, 500))
+
+p_data
+```
+
+## The data + an outlier
+
+```{r}
+df2 <- df %>%
+  mutate(type = "data") %>%
+  bind_rows(tibble(x = 40, y = 500, type = "outlier"))
+
+p_outlier <- ggplot(df2, aes(x = x, y = y, color = type)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  geom_smooth(data = df, method = "lm", se = FALSE, color = "#8F2D5630") +
+  scale_color_manual(values = c("black", "magenta")) +
+  coord_cartesian(xlim = c(0, 200), ylim = c(0, 500)) +
+  annotate("point", x = 40, y = 500, size = 3, color = "magenta", shape = "circle open")
+
+p_outlier
+```
+
+## The data + influential point
+
+```{r}
+df3 <- df %>%
+  mutate(type = "data") %>%
+  bind_rows(tibble(x = 200, y = 5, type = "influential"))
+
+p_influential <- ggplot(df3, aes(x = x, y = y, color = type)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, color = "#8F2D56") +
+  geom_smooth(data = df, method = "lm", se = FALSE, color = "#8F2D5630") +
+  scale_color_manual(values = c("black", "magenta")) +
+  coord_cartesian(xlim = c(0, 200), ylim = c(0, 500)) +
+  annotate("point", x = 200, y = 5, size = 3, color = "magenta", shape = "circle open")
+
+p_influential
+```
+
+## Influential point
+
+An observation is **influential** if removing it substantially changes the coefficients of the regression model.
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_data
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| out.width: "100%"
+
+p_influential
+```
+:::
+:::
+
+## Influential points
+
+-   Influential points have a large impact on the coefficients and standard errors used for inference
+
+-   These points can sometimes be identified in a scatterplot if there is only one predictor variable, this is often not the case when there are multiple predictors
+
+-   We will use measures to quantify an individual observation's influence on the regression model: **leverage**, **standardized residuals**, and **Cook's distance**
+
+## Remember `augment()`?
+
+```{r}
+augment(df_fit$fit)
+```
+
+## Model diagnostics {.smaller}
+
+Use the `augment()` function to output statistics that can be used to diagnose the model, along with the predicted values and residuals:
+
+::: nonincremental
+-   outcome and predictor variables in the model
+-   **`.fitted`**: predicted values
+-   **`.se.fit`**: standard errors of predicted values
+-   **`.resid`**: residuals
+-   **`.hat`**: leverage
+-   **`.sigma`**: estimate of residual standard deviation when the corresponding observation is dropped from model
+-   **`.cooksd`**: Cook's distance
+-   **`.std.resid`**: standardized residuals
+:::
+

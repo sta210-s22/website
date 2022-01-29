@@ -146,7 +146,7 @@ linear_reg()
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "|2"
+# #| code-line-numbers: "|2"
 
 linear_reg() %>%
   set_engine("lm") # lm: linear model
@@ -158,7 +158,7 @@ using **formula syntax**
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "|3"
+# #| code-line-numbers: "|3"
 
 linear_reg() %>%
   set_engine("lm") %>%
@@ -188,7 +188,7 @@ We'll focus on the first column for now...
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "|4"
+# #| code-line-numbers: "|4"
 
 linear_reg() %>%
   set_engine("lm") %>%
@@ -200,7 +200,7 @@ linear_reg() %>%
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "|2|5"
+# #| code-line-numbers: "|2|5"
 
 # create a data frame for a new movie
 new_movie <- tibble(critics = 50)
