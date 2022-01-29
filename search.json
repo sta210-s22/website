@@ -221,7 +221,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\n\n\n\n\nDate\n\n\n\n\nTopic\n\n\n\n\nPrepare\n\n\n\n\nSlides\n\n\n\n\nAE\n\n\n\n\nLab\n\n\n\n\nHW\n\n\n\n\nExam\n\n\n\n\nProject\n\n\n\n\n\n\n\n\n1\n\n\n\n\nWed, Jan 5\n\n\n\n\nLab 0 - Meet + greet\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 6\n\n\n\n\nWelcome to STA 210!\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\n\n\nMon, Jan 10\n\n\n\n\nLab 1 - Meet the toolkit\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 11\n\n\n\n\nSimple linear regression (SLR)\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 13\n\n\n\n\nSLR: Model fitting in R with tidymodels\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 14\n\n\n\n\nReleased: HW 5\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\n\n\nMon, Jan 17\n\n\n\n\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\n\n\n\n\nSLR: Prediction + model evaluation\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 20\n\n\n\n\nSLR: Simulation-based inference\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\n\n\n\n\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n4\n\n\n\n\nMon, Jan 24\n\n\n\n\nLab 2 - SLR\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 25\n\n\n\n\nSLR: Mathematical models for inference\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\n\n\n\n\nSLR: Model diagnostics\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\n\n\n\n\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n5\n\n\n\n\nMon, Jan 31\n\n\n\n\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\n\n\n\n\nMultiple linear regression (MLR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\n\n\n\n\nExam 1 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\n\n\n\n\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n6\n\n\n\n\nMon, Feb 7\n\n\n\n\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\n\n\n\n\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\n\n\n\n\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\n\n\n\n\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n7\n\n\n\n\nMon, Feb 14\n\n\n\n\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\n\n\n\n\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\n\n\n\n\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\n\n\n\n\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n8\n\n\n\n\nMon, Feb 21\n\n\n\n\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\n\n\n\n\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\n\n\n\n\nExam 2 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\n\n\n\n\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9\n\n\n\n\nMon, Feb 28\n\n\n\n\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\n\n\n\n\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\n\n\n\n\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\n\n\n\n\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10\n\n\n\n\nMon, Mar 14\n\n\n\n\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\n\n\n\n\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\n\n\n\n\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\n\n\n\n\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n11\n\n\n\n\nMon, Mar 21\n\n\n\n\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\n\n\n\n\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\n\n\n\n\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\n\n\n\n\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n12\n\n\n\n\nMon, Mar 28\n\n\n\n\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\n\n\n\n\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\n\n\n\n\nTBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\n\n\n\n\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n13\n\n\n\n\nMon, Apr 4\n\n\n\n\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\n\n\n\n\nTBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\n\n\n\n\nExam 3 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\n\n\n\n\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n14\n\n\n\n\nMon, Apr 11\n\n\n\n\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\n\n\n\n\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\n\n\n\n\nTBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\n\n\n\n\nDue: HW 5 + Peer review\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n15\n\n\n\n\nMon, Apr 18\n\n\n\n\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\n\n\n\n\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n16\n\n\n\n\nMon, Apr 25\n\n\n\n\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\n\n\n\n\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\n\n\n\n\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "project-description.html#timeline",
@@ -592,28 +592,28 @@
     "href": "weeks/week-5.html#prepare",
     "title": "Week 5",
     "section": "Prepare",
-    "text": "Prepare"
+    "text": "Prepare\n📖 Read Introduction to Modern Statistics, Sec 8.1: Indicator and categorical predictors\n📖 Read Introduction to Modern Statistics, Sec 8.2: Many predictors in a model\n📖 Read Introduction to Modern Statistics, Sec 8.3: Adjusted R-squared"
   },
   {
     "objectID": "weeks/week-5.html#participate",
     "href": "weeks/week-5.html#participate",
     "title": "Week 5",
     "section": "Participate",
-    "text": "Participate"
+    "text": "Participate\n🖥️ Lab 3 - Coffee ratings (to be posted)\n🖥️ Lecture 8 - Multiple linear regression (MLR) (to be posted)\n🖥️ Lecture 9 - Exam 1 review"
   },
   {
     "objectID": "weeks/week-5.html#practice",
     "href": "weeks/week-5.html#practice",
     "title": "Week 5",
     "section": "Practice",
-    "text": "Practice"
+    "text": "Practice\n📋 Application Exercise 4 (to be posted)"
   },
   {
     "objectID": "weeks/week-5.html#perform",
     "href": "weeks/week-5.html#perform",
     "title": "Week 5",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n⌨️ Lab 3 - Coffee ratings\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-11.html#prepare",
@@ -851,14 +851,14 @@
     "href": "slides/lec-3.html#step-2-set-model-fitting-engine",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 2: Set model fitting engine",
-    "text": "Step 2: Set model fitting engine\n\nlinear_reg() %>%\n  set_engine(\"lm\") # lm: linear model\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
+    "text": "Step 2: Set model fitting engine\n\n# #| code-line-numbers: \"|2\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") # lm: linear model\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
   },
   {
     "objectID": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
@@ -872,14 +872,14 @@
     "href": "slides/lec-3.html#the-regression-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "The regression output",
-    "text": "The regression output\nWe’ll focus on the first column for now…\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores) %>%\n  tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  <chr>          <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)   32.3      2.34        13.8 4.03e-28\n2 critics        0.519    0.0345      15.0 2.70e-31"
+    "text": "The regression output\nWe’ll focus on the first column for now…\n\n# #| code-line-numbers: \"|4\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores) %>%\n  tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  <chr>          <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)   32.3      2.34        13.8 4.03e-28\n2 critics        0.519    0.0345      15.0 2.70e-31"
   },
   {
     "objectID": "slides/lec-3.html#prediction",
     "href": "slides/lec-3.html#prediction",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Prediction",
-    "text": "Prediction\n\n# create a data frame for a new movie\nnew_movie <- tibble(critics = 50)\n\n# predict the outcome for a new movie\npredict(movie_fit, new_movie)\n\n# A tibble: 1 × 1\n  .pred\n  <dbl>\n1  58.2"
+    "text": "Prediction\n\n# #| code-line-numbers: \"|2|5\"\n\n# create a data frame for a new movie\nnew_movie <- tibble(critics = 50)\n\n# predict the outcome for a new movie\npredict(movie_fit, new_movie)\n\n# A tibble: 1 × 1\n  .pred\n  <dbl>\n1  58.2"
   },
   {
     "objectID": "slides/lab-2.html#what-to-expect-in-lab",
@@ -1572,21 +1572,21 @@
     "href": "slides/lec-5.html#computing-the-ci-for-the-slope-ii",
     "title": "SLR: Simulation based-inference",
     "section": "Computing the CI for the slope II",
-    "text": "Computing the CI for the slope II\nTake 100 bootstrap samples and fit models to each one:\n\nset.seed(1120)\n\nboot_fits <- duke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 100, type = \"bootstrap\") %>%\n  fit()\n\nboot_fits\n\n# A tibble: 200 × 3\n# Groups:   replicate [100]\n   replicate term      estimate\n       <int> <chr>        <dbl>\n 1         1 intercept   47819.\n 2         1 area          191.\n 3         2 intercept  144645.\n 4         2 area          134.\n 5         3 intercept  114008.\n 6         3 area          161.\n 7         4 intercept  100639.\n 8         4 area          166.\n 9         5 intercept  215264.\n10         5 area          125.\n# … with 190 more rows"
+    "text": "Computing the CI for the slope II\nTake 100 bootstrap samples and fit models to each one:\n\n# #| code-line-numbers: \"1,5,6\"\n\nset.seed(1120)\n\nboot_fits <- duke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 100, type = \"bootstrap\") %>%\n  fit()\n\nboot_fits\n\n# A tibble: 200 × 3\n# Groups:   replicate [100]\n   replicate term      estimate\n       <int> <chr>        <dbl>\n 1         1 intercept   47819.\n 2         1 area          191.\n 3         2 intercept  144645.\n 4         2 area          134.\n 5         3 intercept  114008.\n 6         3 area          161.\n 7         4 intercept  100639.\n 8         4 area          166.\n 9         5 intercept  215264.\n10         5 area          125.\n# … with 190 more rows"
   },
   {
     "objectID": "slides/lec-5.html#computing-the-ci-for-the-slope-iii",
     "href": "slides/lec-5.html#computing-the-ci-for-the-slope-iii",
     "title": "SLR: Simulation based-inference",
     "section": "Computing the CI for the slope III",
-    "text": "Computing the CI for the slope III\nPercentile method: Compute the 95% CI as the middle 95% of the bootstrap distribution:\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
+    "text": "Computing the CI for the slope III\nPercentile method: Compute the 95% CI as the middle 95% of the bootstrap distribution:\n\n# #| code-line-numbers: \"5\"\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
   },
   {
     "objectID": "slides/lec-5.html#computing-the-ci-for-the-slope-iv",
     "href": "slides/lec-5.html#computing-the-ci-for-the-slope-iv",
     "title": "SLR: Simulation based-inference",
     "section": "Computing the CI for the slope IV",
-    "text": "Computing the CI for the slope IV\nStandard error method: Alternatively, compute the 95% CI as the point estimate \\(\\pm\\) ~2 standard deviations of the bootstrap distribution:\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"se\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          90.8     228.\n2 intercept -56788.   290093."
+    "text": "Computing the CI for the slope IV\nStandard error method: Alternatively, compute the 95% CI as the point estimate \\(\\pm\\) ~2 standard deviations of the bootstrap distribution:\n\n# #| code-line-numbers: \"5\"\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"se\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          90.8     228.\n2 intercept -56788.   290093."
   },
   {
     "objectID": "slides/lec-5.html#precision-vs.-accuracy",
@@ -1607,7 +1607,7 @@
     "href": "slides/lec-5.html#changing-confidence-level",
     "title": "SLR: Simulation based-inference",
     "section": "Changing confidence level",
-    "text": "Changing confidence level\n\nHow would you modify the following code to calculate a 90% confidence interval? How would you modify it for a 99% confidence interval?\n\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
+    "text": "Changing confidence level\n\nHow would you modify the following code to calculate a 90% confidence interval? How would you modify it for a 99% confidence interval?\n\n\n# #| code-line-numbers: \"|4\"\n\nget_confidence_interval(\n  boot_fits, \n  point_estimate = observed_fit, \n  level = 0.95,\n  type = \"percentile\"\n)\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          92.1     223.\n2 intercept -36765.   296528."
   },
   {
     "objectID": "slides/lec-5.html#changing-confidence-level-1",
@@ -2055,54 +2055,54 @@
     "href": "slides/lec-7.html#recap",
     "title": "SLR: Model diagnostics",
     "section": "Recap",
-    "text": "Recap\nUsed residual plots to check conditions for SLR:\n\n\n\n\nLinearity\nConstant variance\n\n\n\n\n\nNormality\nIndependence\n\n\n\n\n\n\nWhich of these conditions are required for fitting a SLR? Which for simulation-based inference for the slope for an SLR? Which for inference with mathematical models?\n\n\n\n\n03:00"
+    "text": "Recap\nUsed residual plots to check conditions for SLR:\n\n\n\n\nLinearity\nConstant variance\n\n\n\n\n\nNormality\nIndependence\n\n\n\n\n\n\nWhich of these conditions are required for fitting a SLR? Which for simulation-based inference for the slope for an SLR? Which for inference with mathematical models?\n\n\n\n\n03:00\n\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
-    "objectID": "slides/lec-7.html#the-data",
-    "href": "slides/lec-7.html#the-data",
-    "title": "SLR: Model diagnostics",
+    "objectID": "slides/lab-3.html#the-data",
+    "href": "slides/lab-3.html#the-data",
+    "title": "Lab 3 - Coffee ratings",
     "section": "The data",
     "text": "The data"
   },
   {
-    "objectID": "slides/lec-7.html#the-data-an-outlier",
-    "href": "slides/lec-7.html#the-data-an-outlier",
-    "title": "SLR: Model diagnostics",
+    "objectID": "slides/lab-3.html#the-data-an-outlier",
+    "href": "slides/lab-3.html#the-data-an-outlier",
+    "title": "Lab 3 - Coffee ratings",
     "section": "The data + an outlier",
     "text": "The data + an outlier"
   },
   {
-    "objectID": "slides/lec-7.html#the-data-influential-point",
-    "href": "slides/lec-7.html#the-data-influential-point",
-    "title": "SLR: Model diagnostics",
+    "objectID": "slides/lab-3.html#the-data-influential-point",
+    "href": "slides/lab-3.html#the-data-influential-point",
+    "title": "Lab 3 - Coffee ratings",
     "section": "The data + influential point",
     "text": "The data + influential point"
   },
   {
-    "objectID": "slides/lec-7.html#influential-point",
-    "href": "slides/lec-7.html#influential-point",
-    "title": "SLR: Model diagnostics",
+    "objectID": "slides/lab-3.html#influential-point",
+    "href": "slides/lab-3.html#influential-point",
+    "title": "Lab 3 - Coffee ratings",
     "section": "Influential point",
     "text": "Influential point\nAn observation is influential if removing it substantially changes the coefficients of the regression model."
   },
   {
-    "objectID": "slides/lec-7.html#influential-points",
-    "href": "slides/lec-7.html#influential-points",
-    "title": "SLR: Model diagnostics",
+    "objectID": "slides/lab-3.html#influential-points",
+    "href": "slides/lab-3.html#influential-points",
+    "title": "Lab 3 - Coffee ratings",
     "section": "Influential points",
     "text": "Influential points\n\nInfluential points have a large impact on the coefficients and standard errors used for inference\nThese points can sometimes be identified in a scatterplot if there is only one predictor variable, this is often not the case when there are multiple predictors\nWe will use measures to quantify an individual observation’s influence on the regression model: leverage, standardized residuals, and Cook’s distance"
   },
   {
-    "objectID": "slides/lec-7.html#remember-augment",
-    "href": "slides/lec-7.html#remember-augment",
-    "title": "SLR: Model diagnostics",
+    "objectID": "slides/lab-3.html#remember-augment",
+    "href": "slides/lab-3.html#remember-augment",
+    "title": "Lab 3 - Coffee ratings",
     "section": "Remember augment()?",
-    "text": "Remember augment()?\n\n\n# A tibble: 98 × 8\n     price  area  .fitted  .resid   .hat  .sigma   .cooksd .std.resid\n     <dbl> <dbl>    <dbl>   <dbl>  <dbl>   <dbl>     <dbl>      <dbl>\n 1 1520000  6040 1079931. 440069. 0.133  162605. 0.604         2.80  \n 2 1030000  4475  830340. 199660. 0.0435 168386. 0.0333        1.21  \n 3  420000  1745  394951.  25049. 0.0226 169664. 0.000260      0.150 \n 4  680000  2091  450132. 229868. 0.0157 168011. 0.0150        1.37  \n 5  428500  1772  399257.  29243. 0.0220 169657. 0.000345      0.175 \n 6  456000  1950  427645.  28355. 0.0182 169659. 0.000266      0.170 \n 7 1270000  3909  740072. 529928. 0.0250 160502. 0.130         3.18  \n 8  557450  2841  569744. -12294. 0.0102 169679. 0.0000277    -0.0732\n 9  697500  3924  742465. -44965. 0.0254 169620. 0.000948     -0.270 \n10  650000  2173  463209. 186791. 0.0145 168582. 0.00912       1.11  \n# … with 88 more rows"
+    "text": "Remember augment()?\n\nmtcars_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(mpg ~ disp, data = mtcars)\n\naugment(mtcars_fit$fit)\n\n# A tibble: 32 × 9\n   .rownames           mpg  disp .fitted .resid   .hat .sigma .cooksd .std.resid\n   <chr>             <dbl> <dbl>   <dbl>  <dbl>  <dbl>  <dbl>   <dbl>      <dbl>\n 1 Mazda RX4          21    160     23.0 -2.01  0.0418   3.29 8.65e-3     -0.630\n 2 Mazda RX4 Wag      21    160     23.0 -2.01  0.0418   3.29 8.65e-3     -0.630\n 3 Datsun 710         22.8  108     25.1 -2.35  0.0629   3.28 1.87e-2     -0.746\n 4 Hornet 4 Drive     21.4  258     19.0  2.43  0.0328   3.27 9.83e-3      0.761\n 5 Hornet Sportabout  18.7  360     14.8  3.94  0.0663   3.22 5.58e-2      1.25 \n 6 Valiant            18.1  225     20.3 -2.23  0.0313   3.28 7.82e-3     -0.696\n 7 Duster 360         14.3  360     14.8 -0.462 0.0663   3.31 7.70e-4     -0.147\n 8 Merc 240D          24.4  147.    23.6  0.846 0.0461   3.30 1.72e-3      0.267\n 9 Merc 230           22.8  141.    23.8 -0.997 0.0482   3.30 2.50e-3     -0.314\n10 Merc 280           19.2  168.    22.7 -3.49  0.0396   3.24 2.48e-2     -1.10 \n# … with 22 more rows"
   },
   {
-    "objectID": "slides/lec-7.html#model-diagnostics-1",
-    "href": "slides/lec-7.html#model-diagnostics-1",
-    "title": "SLR: Model diagnostics",
+    "objectID": "slides/lab-3.html#model-diagnostics-1",
+    "href": "slides/lab-3.html#model-diagnostics-1",
+    "title": "Lab 3 - Coffee ratings",
     "section": "Model diagnostics",
     "text": "Model diagnostics\nUse the augment() function to output statistics that can be used to diagnose the model, along with the predicted values and residuals:\n\n\noutcome and predictor variables in the model\n.fitted: predicted values\n.se.fit: standard errors of predicted values\n.resid: residuals\n.hat: leverage\n.sigma: estimate of residual standard deviation when the corresponding observation is dropped from model\n.cooksd: Cook’s distance\n.std.resid: standardized residuals\n\n\n\n\n\nsta210-s22.github.io/website"
   },
@@ -2146,35 +2146,35 @@
     "href": "slides/lec-6.html#bootstrapping-pipeline-i",
     "title": "SLR: Mathematical models for inference",
     "section": "Bootstrapping pipeline I",
-    "text": "Bootstrapping pipeline I\n\nset.seed(119)\n\nduke_forest %>%\n  specify(price ~ area)\n\nResponse: price (numeric)\nExplanatory: area (numeric)\n# A tibble: 98 × 2\n     price  area\n     <dbl> <dbl>\n 1 1520000  6040\n 2 1030000  4475\n 3  420000  1745\n 4  680000  2091\n 5  428500  1772\n 6  456000  1950\n 7 1270000  3909\n 8  557450  2841\n 9  697500  3924\n10  650000  2173\n# … with 88 more rows"
+    "text": "Bootstrapping pipeline I\n\n# #| code-line-numbers: \"|1|3|4\"\n#| \nset.seed(119)\n\nduke_forest %>%\n  specify(price ~ area)\n\nResponse: price (numeric)\nExplanatory: area (numeric)\n# A tibble: 98 × 2\n     price  area\n     <dbl> <dbl>\n 1 1520000  6040\n 2 1030000  4475\n 3  420000  1745\n 4  680000  2091\n 5  428500  1772\n 6  456000  1950\n 7 1270000  3909\n 8  557450  2841\n 9  697500  3924\n10  650000  2173\n# … with 88 more rows"
   },
   {
     "objectID": "slides/lec-6.html#bootstrapping-pipeline-ii",
     "href": "slides/lec-6.html#bootstrapping-pipeline-ii",
     "title": "SLR: Mathematical models for inference",
     "section": "Bootstrapping pipeline II",
-    "text": "Bootstrapping pipeline II\n\nset.seed(119)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 1000, type = \"bootstrap\")\n\nResponse: price (numeric)\nExplanatory: area (numeric)\n# A tibble: 98,000 × 3\n# Groups:   replicate [1,000]\n   replicate   price  area\n       <int>   <dbl> <dbl>\n 1         1  535000  2334\n 2         1  520000  2637\n 3         1  540000  2165\n 4         1  155000  1620\n 5         1  567000  3931\n 6         1  420000  1745\n 7         1  400000  4769\n 8         1  579000  2926\n 9         1  615000  2203\n10         1 1030000  4475\n# … with 97,990 more rows"
+    "text": "Bootstrapping pipeline II\n\n# #| code-line-numbers: \"|5\"\n\nset.seed(119)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 1000, type = \"bootstrap\")\n\nResponse: price (numeric)\nExplanatory: area (numeric)\n# A tibble: 98,000 × 3\n# Groups:   replicate [1,000]\n   replicate   price  area\n       <int>   <dbl> <dbl>\n 1         1  535000  2334\n 2         1  520000  2637\n 3         1  540000  2165\n 4         1  155000  1620\n 5         1  567000  3931\n 6         1  420000  1745\n 7         1  400000  4769\n 8         1  579000  2926\n 9         1  615000  2203\n10         1 1030000  4475\n# … with 97,990 more rows"
   },
   {
     "objectID": "slides/lec-6.html#bootstrapping-pipeline-iii",
     "href": "slides/lec-6.html#bootstrapping-pipeline-iii",
     "title": "SLR: Mathematical models for inference",
     "section": "Bootstrapping pipeline III",
-    "text": "Bootstrapping pipeline III\n\nset.seed(119)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 1000, type = \"bootstrap\") %>%\n  fit()\n\n# A tibble: 2,000 × 3\n# Groups:   replicate [1,000]\n   replicate term      estimate\n       <int> <chr>        <dbl>\n 1         1 intercept  200401.\n 2         1 area          122.\n 3         2 intercept  120000.\n 4         2 area          156.\n 5         3 intercept  190879.\n 6         3 area          126.\n 7         4 intercept  206842.\n 8         4 area          127.\n 9         5 intercept  211231.\n10         5 area          124.\n# … with 1,990 more rows"
+    "text": "Bootstrapping pipeline III\n\n# #| code-line-numbers: \"|6\"\n\nset.seed(119)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 1000, type = \"bootstrap\") %>%\n  fit()\n\n# A tibble: 2,000 × 3\n# Groups:   replicate [1,000]\n   replicate term      estimate\n       <int> <chr>        <dbl>\n 1         1 intercept  200401.\n 2         1 area          122.\n 3         2 intercept  120000.\n 4         2 area          156.\n 5         3 intercept  190879.\n 6         3 area          126.\n 7         4 intercept  206842.\n 8         4 area          127.\n 9         5 intercept  211231.\n10         5 area          124.\n# … with 1,990 more rows"
   },
   {
     "objectID": "slides/lec-6.html#bootstrapping-pipeline-iv",
     "href": "slides/lec-6.html#bootstrapping-pipeline-iv",
     "title": "SLR: Mathematical models for inference",
     "section": "Bootstrapping pipeline IV",
-    "text": "Bootstrapping pipeline IV\n\nset.seed(119)\n\nboot_dist <- duke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 1000, type = \"bootstrap\") %>%\n  fit()"
+    "text": "Bootstrapping pipeline IV\n\n# #| code-line-numbers: \"|3\"\n\nset.seed(119)\n\nboot_dist <- duke_forest %>%\n  specify(price ~ area) %>%\n  generate(reps = 1000, type = \"bootstrap\") %>%\n  fit()"
   },
   {
     "objectID": "slides/lec-6.html#visualize-the-bootstrap-distribution",
     "href": "slides/lec-6.html#visualize-the-bootstrap-distribution",
     "title": "SLR: Mathematical models for inference",
     "section": "Visualize the bootstrap distribution",
-    "text": "Visualize the bootstrap distribution\n\nboot_dist %>%\n  filter(term == \"area\") %>%\n  ggplot(aes(x = estimate)) +\n  geom_histogram(binwidth = 10)"
+    "text": "Visualize the bootstrap distribution\n\n# #| code-line-numbers: \"|2\"\n\nboot_dist %>%\n  filter(term == \"area\") %>%\n  ggplot(aes(x = estimate)) +\n  geom_histogram(binwidth = 10)"
   },
   {
     "objectID": "slides/lec-6.html#compute-the-ci",
@@ -2195,14 +2195,14 @@
     "href": "slides/lec-6.html#percentile-method",
     "title": "SLR: Mathematical models for inference",
     "section": "Percentile method",
-    "text": "Percentile method\n\nboot_dist %>%\n  get_confidence_interval(\n    level = 0.95,\n    type = \"percentile\",\n    point_estimate = obs_fit\n  )\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          91.0     215.\n2 intercept -22046.   289004."
+    "text": "Percentile method\n\n# #| code-line-numbers: \"|4\"\n\nboot_dist %>%\n  get_confidence_interval(\n    level = 0.95,\n    type = \"percentile\",\n    point_estimate = obs_fit\n  )\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          91.0     215.\n2 intercept -22046.   289004."
   },
   {
     "objectID": "slides/lec-6.html#standard-error-method",
     "href": "slides/lec-6.html#standard-error-method",
     "title": "SLR: Mathematical models for inference",
     "section": "Standard error method",
-    "text": "Standard error method\n\nboot_dist %>%\n  get_confidence_interval(\n    level = 0.95,\n    type = \"se\",\n    point_estimate = obs_fit\n  )\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          96.1     223.\n2 intercept -39805.   273109."
+    "text": "Standard error method\n\n# #| code-line-numbers: \"|4\"\n\nboot_dist %>%\n  get_confidence_interval(\n    level = 0.95,\n    type = \"se\",\n    point_estimate = obs_fit\n  )\n\n# A tibble: 2 × 3\n  term      lower_ci upper_ci\n  <chr>        <dbl>    <dbl>\n1 area          96.1     223.\n2 intercept -39805.   273109."
   },
   {
     "objectID": "slides/lec-6.html#research-question-and-hypotheses",
@@ -2258,42 +2258,42 @@
     "href": "slides/lec-6.html#permutation-pipeline-i",
     "title": "SLR: Mathematical models for inference",
     "section": "Permutation pipeline I",
-    "text": "Permutation pipeline I\n\nset.seed(1125)\n\nduke_forest %>%\n  specify(price ~ area)\n\nResponse: price (numeric)\nExplanatory: area (numeric)\n# A tibble: 98 × 2\n     price  area\n     <dbl> <dbl>\n 1 1520000  6040\n 2 1030000  4475\n 3  420000  1745\n 4  680000  2091\n 5  428500  1772\n 6  456000  1950\n 7 1270000  3909\n 8  557450  2841\n 9  697500  3924\n10  650000  2173\n# … with 88 more rows"
+    "text": "Permutation pipeline I\n\n# #| code-line-numbers: \"|1|3|4\"\n#| \nset.seed(1125)\n\nduke_forest %>%\n  specify(price ~ area)\n\nResponse: price (numeric)\nExplanatory: area (numeric)\n# A tibble: 98 × 2\n     price  area\n     <dbl> <dbl>\n 1 1520000  6040\n 2 1030000  4475\n 3  420000  1745\n 4  680000  2091\n 5  428500  1772\n 6  456000  1950\n 7 1270000  3909\n 8  557450  2841\n 9  697500  3924\n10  650000  2173\n# … with 88 more rows"
   },
   {
     "objectID": "slides/lec-6.html#permutation-pipeline-ii",
     "href": "slides/lec-6.html#permutation-pipeline-ii",
     "title": "SLR: Mathematical models for inference",
     "section": "Permutation pipeline II",
-    "text": "Permutation pipeline II\n\nset.seed(1125)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  hypothesize(null = \"independence\")\n\nResponse: price (numeric)\nExplanatory: area (numeric)\nNull Hypothesis: independence\n# A tibble: 98 × 2\n     price  area\n     <dbl> <dbl>\n 1 1520000  6040\n 2 1030000  4475\n 3  420000  1745\n 4  680000  2091\n 5  428500  1772\n 6  456000  1950\n 7 1270000  3909\n 8  557450  2841\n 9  697500  3924\n10  650000  2173\n# … with 88 more rows"
+    "text": "Permutation pipeline II\n\n# #| code-line-numbers: \"|5\"\n\nset.seed(1125)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  hypothesize(null = \"independence\")\n\nResponse: price (numeric)\nExplanatory: area (numeric)\nNull Hypothesis: independence\n# A tibble: 98 × 2\n     price  area\n     <dbl> <dbl>\n 1 1520000  6040\n 2 1030000  4475\n 3  420000  1745\n 4  680000  2091\n 5  428500  1772\n 6  456000  1950\n 7 1270000  3909\n 8  557450  2841\n 9  697500  3924\n10  650000  2173\n# … with 88 more rows"
   },
   {
     "objectID": "slides/lec-6.html#permutation-pipeline-iii",
     "href": "slides/lec-6.html#permutation-pipeline-iii",
     "title": "SLR: Mathematical models for inference",
     "section": "Permutation pipeline III",
-    "text": "Permutation pipeline III\n\nset.seed(1125)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  hypothesize(null = \"independence\") %>%\n  generate(reps = 1000, type = \"permute\")\n\nResponse: price (numeric)\nExplanatory: area (numeric)\nNull Hypothesis: independence\n# A tibble: 98,000 × 3\n# Groups:   replicate [1,000]\n     price  area replicate\n     <dbl> <dbl>     <int>\n 1  465000  6040         1\n 2  481000  4475         1\n 3 1020000  1745         1\n 4  520000  2091         1\n 5  592000  1772         1\n 6  650000  1950         1\n 7  473000  3909         1\n 8  705000  2841         1\n 9  785000  3924         1\n10  671500  2173         1\n# … with 97,990 more rows"
+    "text": "Permutation pipeline III\n\n# #| code-line-numbers: \"|6\"\n\nset.seed(1125)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  hypothesize(null = \"independence\") %>%\n  generate(reps = 1000, type = \"permute\")\n\nResponse: price (numeric)\nExplanatory: area (numeric)\nNull Hypothesis: independence\n# A tibble: 98,000 × 3\n# Groups:   replicate [1,000]\n     price  area replicate\n     <dbl> <dbl>     <int>\n 1  465000  6040         1\n 2  481000  4475         1\n 3 1020000  1745         1\n 4  520000  2091         1\n 5  592000  1772         1\n 6  650000  1950         1\n 7  473000  3909         1\n 8  705000  2841         1\n 9  785000  3924         1\n10  671500  2173         1\n# … with 97,990 more rows"
   },
   {
     "objectID": "slides/lec-6.html#permutation-pipeline-iv",
     "href": "slides/lec-6.html#permutation-pipeline-iv",
     "title": "SLR: Mathematical models for inference",
     "section": "Permutation pipeline IV",
-    "text": "Permutation pipeline IV\n\nset.seed(1125)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  hypothesize(null = \"independence\") %>%\n  generate(reps = 1000, type = \"permute\") %>%\n  fit()\n\n# A tibble: 2,000 × 3\n# Groups:   replicate [1,000]\n   replicate term       estimate\n       <int> <chr>         <dbl>\n 1         1 intercept 553355.  \n 2         1 area           2.35\n 3         2 intercept 635824.  \n 4         2 area         -27.3 \n 5         3 intercept 536072.  \n 6         3 area           8.57\n 7         4 intercept 598649.  \n 8         4 area         -13.9 \n 9         5 intercept 556202.  \n10         5 area           1.33\n# … with 1,990 more rows"
+    "text": "Permutation pipeline IV\n\n# #| code-line-numbers: \"|7\"\n\nset.seed(1125)\n\nduke_forest %>%\n  specify(price ~ area) %>%\n  hypothesize(null = \"independence\") %>%\n  generate(reps = 1000, type = \"permute\") %>%\n  fit()\n\n# A tibble: 2,000 × 3\n# Groups:   replicate [1,000]\n   replicate term       estimate\n       <int> <chr>         <dbl>\n 1         1 intercept 553355.  \n 2         1 area           2.35\n 3         2 intercept 635824.  \n 4         2 area         -27.3 \n 5         3 intercept 536072.  \n 6         3 area           8.57\n 7         4 intercept 598649.  \n 8         4 area         -13.9 \n 9         5 intercept 556202.  \n10         5 area           1.33\n# … with 1,990 more rows"
   },
   {
     "objectID": "slides/lec-6.html#permutation-pipeline-v",
     "href": "slides/lec-6.html#permutation-pipeline-v",
     "title": "SLR: Mathematical models for inference",
     "section": "Permutation pipeline V",
-    "text": "Permutation pipeline V\n\nset.seed(1125)\n\nnull_dist <- duke_forest %>%\n  specify(price ~ area) %>%\n  hypothesize(null = \"independence\") %>%\n  generate(reps = 1000, type = \"permute\") %>%\n  fit()"
+    "text": "Permutation pipeline V\n\n# #| code-line-numbers: \"|3\"\n\nset.seed(1125)\n\nnull_dist <- duke_forest %>%\n  specify(price ~ area) %>%\n  hypothesize(null = \"independence\") %>%\n  generate(reps = 1000, type = \"permute\") %>%\n  fit()"
   },
   {
     "objectID": "slides/lec-6.html#visualize-the-null-distribution",
     "href": "slides/lec-6.html#visualize-the-null-distribution",
     "title": "SLR: Mathematical models for inference",
     "section": "Visualize the null distribution",
-    "text": "Visualize the null distribution\n\nnull_dist %>%\n  filter(term == \"area\") %>%\n  ggplot(aes(x = estimate)) +\n  geom_histogram(binwidth = 10, color = \"white\")"
+    "text": "Visualize the null distribution\n\n# #| code-line-numbers: \"|2\"\n\nnull_dist %>%\n  filter(term == \"area\") %>%\n  ggplot(aes(x = estimate)) +\n  geom_histogram(binwidth = 10, color = \"white\")"
   },
   {
     "objectID": "slides/lec-6.html#reason-around-the-p-value",
@@ -2356,70 +2356,7 @@
     "href": "slides/lec-6.html#standard-error-of-hatbeta_1",
     "title": "SLR: Mathematical models for inference",
     "section": "Standard error of \\(\\hat{\\beta}_1\\)",
-    "text": "Standard error of \\(\\hat{\\beta}_1\\)\n\\[\nSE_{\\hat{\\beta}_1} = \\hat{\\sigma}_\\epsilon\\sqrt{\\frac{1}{(n-1)s_X^2}}\n\\]\n\nor…\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n  \n \n\n  \n    (Intercept) \n    116652.33 \n    53302.46 \n    2.19 \n    0.03 \n  \n  \n    area \n    159.48 \n    18.17 \n    8.78 \n    0.00"
-  },
-  {
-    "objectID": "slides/lec-6.html#ht-for-the-slope",
-    "href": "slides/lec-6.html#ht-for-the-slope",
-    "title": "SLR: Mathematical models for inference",
-    "section": "HT for the slope",
-    "text": "HT for the slope\nHypotheses: \\(H_0: \\beta_1 = 0\\) vs. \\(H_A: \\beta_1 \\ne 0\\)\n\nTest statistic: Number of standard errors the estimate is away from the null\n\\[\nT = \\frac{\\text{Estimate - Null}}{\\text{Standard error}} \\\\\n\\]\n\n\np-value: Probability of observing a test statistic at least as extreme (in the direction of the alternative hypothesis) from the null value as the one observed\n\\[\np-value = P(|t| > |\\text{test statistic}),\n\\]\ncalculated from a \\(t\\) distribution with \\(n - 2\\) degrees of freedom"
-  },
-  {
-    "objectID": "slides/lec-6.html#ht-test-statistic",
-    "href": "slides/lec-6.html#ht-test-statistic",
-    "title": "SLR: Mathematical models for inference",
-    "section": "HT: Test statistic",
-    "text": "HT: Test statistic\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n  \n \n\n  \n    (Intercept) \n    116652.33 \n    53302.46 \n    2.19 \n    0.03 \n  \n  \n    area \n    159.48 \n    18.17 \n    8.78 \n    0.00 \n  \n\n\n\n\n\n\\[\nt = \\frac{\\hat{\\beta}_1 - 0}{SE_{\\hat{\\beta}_1}} = \\frac{159.48 - 0}{18.17} = 8.78\n\\]"
-  },
-  {
-    "objectID": "slides/lec-6.html#ht-p-value",
-    "href": "slides/lec-6.html#ht-p-value",
-    "title": "SLR: Mathematical models for inference",
-    "section": "HT: p-value",
-    "text": "HT: p-value\n\n\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n  \n \n\n  \n    (Intercept) \n    116652.33 \n    53302.46 \n    2.19 \n    0.03 \n  \n  \n    area \n    159.48 \n    18.17 \n    8.78 \n    0.00"
-  },
-  {
-    "objectID": "slides/lec-6.html#understanding-the-p-value",
-    "href": "slides/lec-6.html#understanding-the-p-value",
-    "title": "SLR: Mathematical models for inference",
-    "section": "Understanding the p-value",
-    "text": "Understanding the p-value\n\n\n\nMagnitude of p-value\nInterpretation\n\n\n\n\np-value < 0.01\nstrong evidence against \\(H_0\\)\n\n\n0.01 < p-value < 0.05\nmoderate evidence against \\(H_0\\)\n\n\n0.05 < p-value < 0.1\nweak evidence against \\(H_0\\)\n\n\np-value > 0.1\neffectively no evidence against \\(H_0\\)\n\n\n\n\n\n\n\n\n\nImportant\n\n\nThese are general guidelines. The strength of evidence depends on the context of the problem."
-  },
-  {
-    "objectID": "slides/lec-6.html#ht-conclusion-in-context",
-    "href": "slides/lec-6.html#ht-conclusion-in-context",
-    "title": "SLR: Mathematical models for inference",
-    "section": "HT: Conclusion, in context",
-    "text": "HT: Conclusion, in context\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n  \n \n\n  \n    (Intercept) \n    116652.33 \n    53302.46 \n    2.19 \n    0.03 \n  \n  \n    area \n    159.48 \n    18.17 \n    8.78 \n    0.00 \n  \n\n\n\n\n\n\nThe data provide convincing evidence that the population slope \\(\\beta_1\\) is different from 0.\nThe data provide convincing evidence of a linear relationship between area and price of houses in Duke Forest."
-  },
-  {
-    "objectID": "slides/lec-6.html#ci-for-the-slope",
-    "href": "slides/lec-6.html#ci-for-the-slope",
-    "title": "SLR: Mathematical models for inference",
-    "section": "CI for the slope",
-    "text": "CI for the slope\n\\[\n\\text{Estimate} \\pm \\text{ (critical value) } \\times \\text{SE}\n\\]\n\n\\[\n\\hat{\\beta}_1 \\pm t^* \\times SE_{\\hat{\\beta}_1}\n\\]\nwhere \\(t^*\\) is calculated from a \\(t\\) distribution with \\(n-2\\) degrees of freedom"
-  },
-  {
-    "objectID": "slides/lec-6.html#ci-critical-value",
-    "href": "slides/lec-6.html#ci-critical-value",
-    "title": "SLR: Mathematical models for inference",
-    "section": "CI: Critical value",
-    "text": "CI: Critical value\n\n\n\n# confidence level: 95%\nqt(0.975, df = nrow(duke_forest) - 2)\n\n[1] 1.984984\n\n# confidence level: 90%\nqt(0.95, df = nrow(duke_forest) - 2)\n\n[1] 1.660881\n\n# confidence level: 99%\nqt(0.995, df = nrow(duke_forest) - 2)\n\n[1] 2.628016"
-  },
-  {
-    "objectID": "slides/lec-6.html#ci-calculation",
-    "href": "slides/lec-6.html#ci-calculation",
-    "title": "SLR: Mathematical models for inference",
-    "section": "95% CI: Calculation",
-    "text": "95% CI: Calculation\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n  \n \n\n  \n    (Intercept) \n    116652.33 \n    53302.46 \n    2.19 \n    0.03 \n  \n  \n    area \n    159.48 \n    18.17 \n    8.78 \n    0.00 \n  \n\n\n\n\n\n\\[\\hat{\\beta}_1 = 159.48 \\hspace{15mm} t^* = 1.98 \\hspace{15mm} SE_{\\hat{\\beta}_1} = 18.17\\]\n\n\\[\n159.48 \\pm 1.98 \\times 18.17 = (123.50, 195.46)\n\\]"
-  },
-  {
-    "objectID": "slides/lec-6.html#ci-computation",
-    "href": "slides/lec-6.html#ci-computation",
-    "title": "SLR: Mathematical models for inference",
-    "section": "95% CI: Computation",
-    "text": "95% CI: Computation\n\ntidy(df_fit, conf.int = TRUE, conf.level = 0.95) %>% \n  kable(digits = 2)\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    116652.33 \n    53302.46 \n    2.19 \n    0.03 \n    10847.77 \n    222456.88 \n  \n  \n    area \n    159.48 \n    18.17 \n    8.78 \n    0.00 \n    123.41 \n    195.55 \n  \n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Standard error of \\(\\hat{\\beta}_1\\)\n\\[\nSE_{\\hat{\\beta}_1} = \\hat{\\sigma}_\\epsilon\\sqrt{\\frac{1}{(n-1)s_X^2}}\n\\]\n\nor…\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n  \n \n\n  \n    (Intercept) \n    116652.33 \n    53302.46 \n    2.19 \n    0.03 \n  \n  \n    area \n    159.48 \n    18.17 \n    8.78 \n    0.00 \n  \n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lab-1.html#what-to-expect-in-lab",

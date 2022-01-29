@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.59">
+  <meta name="generator" content="quarto-0.3.67">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - SLR: Model fitting in R with tidymodels</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -526,8 +526,10 @@ Computational engine: lm </code></pre>
 <section id="step-2-set-model-fitting-engine" class="slide level2">
 <h2>Step 2: <strong>Set model fitting <em>engine</em></strong></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5" data-code-line-numbers="|2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="co"># lm: linear model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># #| code-line-numbers: "|2"</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="co"># lm: linear model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>Linear Regression Model Specification (regression)
 
@@ -539,13 +541,15 @@ Computational engine: lm </code></pre>
 <h2>Step 3: Fit model &amp; estimate parameters</h2>
 <p>using <strong>formula syntax</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7" data-code-line-numbers="|3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">fit</span>(audience <span class="sc">~</span> critics, <span class="at">data =</span> movie_scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># #| code-line-numbers: "|3"</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">fit</span>(audience <span class="sc">~</span> critics, <span class="at">data =</span> movie_scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>parsnip model object
 
-Fit time:  4ms 
+Fit time:  5ms 
 
 Call:
 stats::lm(formula = audience ~ critics, data = data)
@@ -586,10 +590,12 @@ Coefficients:
 <h2>The regression output</h2>
 <p>We’ll focus on the first column for now…</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11" data-code-line-numbers="|4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">fit</span>(audience <span class="sc">~</span> critics, <span class="at">data =</span> movie_scores) <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># #| code-line-numbers: "|4"</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">fit</span>(audience <span class="sc">~</span> critics, <span class="at">data =</span> movie_scores) <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic  p.value
@@ -602,11 +608,13 @@ Coefficients:
 <section id="prediction" class="slide level2">
 <h2>Prediction</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13" data-code-line-numbers="|2|5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># create a data frame for a new movie</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>new_movie <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">critics =</span> <span class="dv">50</span>)</span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># predict the outcome for a new movie</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">predict</span>(movie_fit, new_movie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># #| code-line-numbers: "|2|5"</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co"># create a data frame for a new movie</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>new_movie <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">critics =</span> <span class="dv">50</span>)</span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co"># predict the outcome for a new movie</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="fu">predict</span>(movie_fit, new_movie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   .pred
@@ -670,7 +678,7 @@ Coefficients:
 'autoAnimateUnmatched': true,
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"55406b7589598f7a","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"5a8f666fd632d9c6","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner

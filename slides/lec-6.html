@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.59">
+  <meta name="generator" content="quarto-0.3.67">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - SLR: Mathematical models for inference</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -506,10 +506,12 @@
 <section id="bootstrapping-pipeline-i" class="slide level2">
 <h2>Bootstrapping pipeline I</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3" data-code-line-numbers="|1|3|4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># #| code-line-numbers: "|1|3|4"</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#| </span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>Response: price (numeric)
 Explanatory: area (numeric)
@@ -533,11 +535,13 @@ Explanatory: area (numeric)
 <section id="bootstrapping-pipeline-ii" class="slide level2">
 <h2>Bootstrapping pipeline II</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5" data-code-line-numbers="|5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># #| code-line-numbers: "|5"</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>Response: price (numeric)
 Explanatory: area (numeric)
@@ -562,12 +566,14 @@ Explanatory: area (numeric)
 <section id="bootstrapping-pipeline-iii" class="slide level2">
 <h2>Bootstrapping pipeline III</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7" data-code-line-numbers="|6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># #| code-line-numbers: "|6"</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
-<span id="cb7-3"><a href="#cb7-3"></a>duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2,000 × 3
 # Groups:   replicate [1,000]
@@ -590,21 +596,25 @@ Explanatory: area (numeric)
 <section id="bootstrapping-pipeline-iv" class="slide level2">
 <h2>Bootstrapping pipeline IV</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9" data-code-line-numbers="|3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># #| code-line-numbers: "|3"</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a>boot_dist <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>boot_dist <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualize-the-bootstrap-distribution" class="slide level2">
 <h2>Visualize the bootstrap distribution</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10" data-code-line-numbers="|2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>boot_dist <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"area"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># #| code-line-numbers: "|2"</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>boot_dist <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"area"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="lec-6_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
@@ -639,12 +649,14 @@ Explanatory: area (numeric)
 <section id="percentile-method" class="slide level2">
 <h2>Percentile method</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13" data-code-line-numbers="|4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>boot_dist <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">get_confidence_interval</span>(</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb13-4"><a href="#cb13-4"></a>    <span class="at">type =</span> <span class="st">"percentile"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">point_estimate =</span> obs_fit</span>
-<span id="cb13-6"><a href="#cb13-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># #| code-line-numbers: "|4"</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>boot_dist <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">get_confidence_interval</span>(</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">type =</span> <span class="st">"percentile"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="at">point_estimate =</span> obs_fit</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   term      lower_ci upper_ci
@@ -657,12 +669,14 @@ Explanatory: area (numeric)
 <section id="standard-error-method" class="slide level2">
 <h2>Standard error method</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb15" data-code-line-numbers="|4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>boot_dist <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">get_confidence_interval</span>(</span>
-<span id="cb15-3"><a href="#cb15-3"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb15-4"><a href="#cb15-4"></a>    <span class="at">type =</span> <span class="st">"se"</span>,</span>
-<span id="cb15-5"><a href="#cb15-5"></a>    <span class="at">point_estimate =</span> obs_fit</span>
-<span id="cb15-6"><a href="#cb15-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># #| code-line-numbers: "|4"</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a>boot_dist <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">get_confidence_interval</span>(</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb15-6"><a href="#cb15-6"></a>    <span class="at">type =</span> <span class="st">"se"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7"></a>    <span class="at">point_estimate =</span> obs_fit</span>
+<span id="cb15-8"><a href="#cb15-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   term      lower_ci upper_ci
@@ -780,10 +794,12 @@ Explanatory: area (numeric)
 <section id="permutation-pipeline-i" class="slide level2">
 <h2>Permutation pipeline I</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb18" data-code-line-numbers="|1|3|4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a>duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># #| code-line-numbers: "|1|3|4"</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co">#| </span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a>duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>Response: price (numeric)
 Explanatory: area (numeric)
@@ -807,11 +823,13 @@ Explanatory: area (numeric)
 <section id="permutation-pipeline-ii" class="slide level2">
 <h2>Permutation pipeline II</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb20" data-code-line-numbers="|5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># #| code-line-numbers: "|5"</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a></span>
-<span id="cb20-3"><a href="#cb20-3"></a>duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a>duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>Response: price (numeric)
 Explanatory: area (numeric)
@@ -836,12 +854,14 @@ Null Hypothesis: independence
 <section id="permutation-pipeline-iii" class="slide level2">
 <h2>Permutation pipeline III</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb22" data-code-line-numbers="|6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># #| code-line-numbers: "|6"</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a></span>
-<span id="cb22-3"><a href="#cb22-3"></a>duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<span id="cb22-4"><a href="#cb22-4"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a>duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>Response: price (numeric)
 Explanatory: area (numeric)
@@ -867,13 +887,15 @@ Null Hypothesis: independence
 <section id="permutation-pipeline-iv" class="slide level2">
 <h2>Permutation pipeline IV</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb24" data-code-line-numbers="|7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># #| code-line-numbers: "|7"</span></span>
 <span id="cb24-2"><a href="#cb24-2"></a></span>
-<span id="cb24-3"><a href="#cb24-3"></a>duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-5"><a href="#cb24-5"></a>duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 2,000 × 3
 # Groups:   replicate [1,000]
@@ -896,22 +918,26 @@ Null Hypothesis: independence
 <section id="permutation-pipeline-v" class="slide level2">
 <h2>Permutation pipeline V</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb26" data-code-line-numbers="|3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># #| code-line-numbers: "|3"</span></span>
 <span id="cb26-2"><a href="#cb26-2"></a></span>
-<span id="cb26-3"><a href="#cb26-3"></a>null_dist <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
+<span id="cb26-4"><a href="#cb26-4"></a></span>
+<span id="cb26-5"><a href="#cb26-5"></a>null_dist <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualize-the-null-distribution" class="slide level2">
 <h2>Visualize the null distribution</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb27" data-code-line-numbers="|2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>null_dist <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"area"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># #| code-line-numbers: "|2"</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a></span>
+<span id="cb27-3"><a href="#cb27-3"></a>null_dist <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"area"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="lec-6_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
@@ -1121,326 +1147,11 @@ SE_{\hat{\beta}_1} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{(n-1)s_X^2}}
 
 </div>
 </div>
-</div>
-</section>
-<section id="ht-for-the-slope" class="slide level2 smaller">
-<h2>HT for the slope</h2>
-<p><strong>Hypotheses:</strong> <span class="math inline">\(H_0: \beta_1 = 0\)</span> vs.&nbsp;<span class="math inline">\(H_A: \beta_1 \ne 0\)</span></p>
-<div class="fragment">
-<p><strong>Test statistic:</strong> Number of standard errors the estimate is away from the null</p>
-<p><span class="math display">\[
-T = \frac{\text{Estimate - Null}}{\text{Standard error}} \\
-\]</span></p>
-</div>
-<div class="fragment">
-<p><strong>p-value:</strong> Probability of observing a test statistic at least as extreme (in the direction of the alternative hypothesis) from the null value as the one observed</p>
-<p><span class="math display">\[
-p-value = P(|t| &gt; |\text{test statistic}),
-\]</span></p>
-<p>calculated from a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n - 2\)</span> degrees of freedom</p>
-</div>
-</section>
-<section id="ht-test-statistic" class="slide level2">
-<h2>HT: Test statistic</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 116652.33 </td>
-   <td style="text-align:right;"> 53302.46 </td>
-   <td style="text-align:right;"> 2.19 </td>
-   <td style="text-align:right;"> 0.03 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: #D9E3E4 !important;"> area </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 159.48 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 18.17 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 8.78 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.00 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-</div>
-<p><span class="math display">\[
-t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.78
-\]</span></p>
-</section>
-<section id="ht-p-value" class="slide level2">
-<h2>HT: p-value</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 116652.33 </td>
-   <td style="text-align:right;"> 53302.46 </td>
-   <td style="text-align:right;"> 2.19 </td>
-   <td style="text-align:right;"> 0.03 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: #D9E3E4 !important;"> area </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 159.48 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 18.17 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 8.78 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.00 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-6_files/figure-revealjs/unnamed-chunk-30-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="understanding-the-p-value" class="slide level2">
-<h2>Understanding the p-value</h2>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Magnitude of p-value</th>
-<th style="text-align: center;">Interpretation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">p-value &lt; 0.01</td>
-<td style="text-align: center;">strong evidence against <span class="math inline">\(H_0\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0.01 &lt; p-value &lt; 0.05</td>
-<td style="text-align: center;">moderate evidence against <span class="math inline">\(H_0\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0.05 &lt; p-value &lt; 0.1</td>
-<td style="text-align: center;">weak evidence against <span class="math inline">\(H_0\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">p-value &gt; 0.1</td>
-<td style="text-align: center;">effectively no evidence against <span class="math inline">\(H_0\)</span></td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-important callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Important</strong></p>
-</div>
-<div class="callout-content">
-<p>These are general guidelines. The strength of evidence depends on the context of the problem.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="ht-conclusion-in-context" class="slide level2">
-<h2>HT: Conclusion, in context</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 116652.33 </td>
-   <td style="text-align:right;"> 53302.46 </td>
-   <td style="text-align:right;"> 2.19 </td>
-   <td style="text-align:right;"> 0.03 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: #D9E3E4 !important;"> area </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 159.48 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 18.17 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 8.78 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.00 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-</div>
-<ul>
-<li class="fragment">The data provide convincing evidence that the population slope <span class="math inline">\(\beta_1\)</span> is different from 0.</li>
-<li class="fragment">The data provide convincing evidence of a linear relationship between area and price of houses in Duke Forest.</li>
-</ul>
-</section>
-<section id="ci-for-the-slope" class="slide level2">
-<h2>CI for the slope</h2>
-<p><span class="math display">\[
-\text{Estimate} \pm \text{ (critical value) } \times \text{SE}
-\]</span></p>
-<div class="fragment">
-<p><span class="math display">\[
-\hat{\beta}_1 \pm t^* \times SE_{\hat{\beta}_1}
-\]</span></p>
-<p>where <span class="math inline">\(t^*\)</span> is calculated from a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-2\)</span> degrees of freedom</p>
-</div>
-</section>
-<section id="ci-critical-value" class="slide level2">
-<h2>CI: Critical value</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># confidence level: 95%</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="fu">nrow</span>(duke_forest) <span class="sc">-</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 1.984984</code></pre>
-</div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># confidence level: 90%</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="fu">nrow</span>(duke_forest) <span class="sc">-</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 1.660881</code></pre>
-</div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># confidence level: 99%</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="fu">qt</span>(<span class="fl">0.995</span>, <span class="at">df =</span> <span class="fu">nrow</span>(duke_forest) <span class="sc">-</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 2.628016</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-6_files/figure-revealjs/unnamed-chunk-33-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ci-calculation" class="slide level2">
-<h2>95% CI: Calculation</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 116652.33 </td>
-   <td style="text-align:right;"> 53302.46 </td>
-   <td style="text-align:right;"> 2.19 </td>
-   <td style="text-align:right;"> 0.03 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: #D9E3E4 !important;"> area </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 159.48 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 18.17 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 8.78 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.00 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-</div>
-<p><span class="math display">\[\hat{\beta}_1 = 159.48 \hspace{15mm} t^* = 1.98 \hspace{15mm} SE_{\hat{\beta}_1} = 18.17\]</span></p>
-<div class="fragment">
-<p><span class="math display">\[
-159.48 \pm 1.98 \times 18.17 = (123.50, 195.46)
-\]</span></p>
-</div>
-</section>
-<section id="ci-computation" class="slide level2 smaller">
-<h2>95% CI: Computation</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">tidy</span>(df_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 116652.33 </td>
-   <td style="text-align:right;"> 53302.46 </td>
-   <td style="text-align:right;"> 2.19 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 10847.77 </td>
-   <td style="text-align:right;"> 222456.88 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> area </td>
-   <td style="text-align:right;"> 159.48 </td>
-   <td style="text-align:right;"> 18.17 </td>
-   <td style="text-align:right;"> 8.78 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 123.41 </td>
-   <td style="text-align:right;"> 195.55 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-</div>
 
 
 <div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
+</div>
 </div>
 <img src="images/logo.png" class="slide-logo r-stretch"></section></section>
     </div>
@@ -1480,7 +1191,7 @@ t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{159.48 - 0}{18.17} = 8.
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"da2ffe9963f9ffdc","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"f22ab108d3339f15","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner

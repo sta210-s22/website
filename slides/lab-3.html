@@ -2,7 +2,7 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.3.67">
-  <title>STA 210 - Spring 2022 - Lab 1 - Meet the toolkit</title>
+  <title>STA 210 - Spring 2022 - Lab 3 - Coffee ratings</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -18,6 +18,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
 
@@ -323,7 +386,7 @@
       margin-right: 0; 
     }
   </style>
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Lab 1 - Meet the toolkit">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Lab 3 - Coffee ratings">
 <meta name="twitter:description" content="STA 210 - Spring 2022">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
@@ -336,71 +399,101 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Lab 1 - Meet the toolkit</h1>
+  <h1 class="title">Lab 3 - Coffee ratings</h1>
   <p class="subtitle">STA 210 - Spring 2022</p>
 </section>
 
-<section id="what-to-expect-in-lab" class="slide level2">
-<h2><strong>What to expect in lab</strong></h2>
+<section>
+<section id="model-diagnostics" class="title-slide slide level1 center">
+<h1>Model diagnostics</h1>
+
+</section>
+<section id="the-data" class="slide level2">
+<h2>The data</h2>
+
+<img data-src="lab-3_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="the-data-an-outlier" class="slide level2">
+<h2>The data + an outlier</h2>
+
+<img data-src="lab-3_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="the-data-influential-point" class="slide level2">
+<h2>The data + influential point</h2>
+
+<img data-src="lab-3_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="influential-point" class="slide level2">
+<h2>Influential point</h2>
+<p>An observation is <strong>influential</strong> if removing it substantially changes the coefficients of the regression model.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lab-3_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lab-3_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:100.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="influential-points" class="slide level2">
+<h2>Influential points</h2>
 <ul>
-<li><p>Introduction to the lab assignment (~ 5 - 10 minutes)</p></li>
-<li><p>Work on the lab assignment (individual at first, but in teams for the rest of the semester)</p></li>
-<li><p>Lab instructions posted on the <a href="https://sta210-s22.github.io/website/" title="STA 210 Course website">course website</a>.</p></li>
-<li><p>Start each lab by finding your assignment repo in the <a href="https://github.com/sta210-s22">course GitHub organization</a></p>
-<ul>
-<li>This is where you will find the Quarto document and data to get started</li>
-</ul></li>
+<li><p>Influential points have a large impact on the coefficients and standard errors used for inference</p></li>
+<li><p>These points can sometimes be identified in a scatterplot if there is only one predictor variable, this is often not the case when there are multiple predictors</p></li>
+<li><p>We will use measures to quantify an individual observation’s influence on the regression model: <strong>leverage</strong>, <strong>standardized residuals</strong>, and <strong>Cook’s distance</strong></p></li>
 </ul>
 </section>
-<section id="tips" class="slide level2">
-<h2><strong>Tips</strong></h2>
-<ul>
-<li><p>You do not have to finish the lab in class, they will always be due the following <strong>Friday at 5:00 pm</strong>. One work strategy is to get through portions that you think will be most challenging (which initially might be the coding component) during lab when a TA can help you on the spot and leave the narrative writing until later.</p></li>
-<li><p>When working in teams (later in the semester) do not pressure each other to finish early; use the time wisely to really learn the material and produce a quality report.</p></li>
-</ul>
+<section id="remember-augment" class="slide level2">
+<h2>Remember <code>augment()</code>?</h2>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>mtcars_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">fit</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">augment</span>(mtcars_fit<span class="sc">$</span>fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 32 × 9
+   .rownames           mpg  disp .fitted .resid   .hat .sigma .cooksd .std.resid
+   &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Mazda RX4          21    160     23.0 -2.01  0.0418   3.29 8.65e-3     -0.630
+ 2 Mazda RX4 Wag      21    160     23.0 -2.01  0.0418   3.29 8.65e-3     -0.630
+ 3 Datsun 710         22.8  108     25.1 -2.35  0.0629   3.28 1.87e-2     -0.746
+ 4 Hornet 4 Drive     21.4  258     19.0  2.43  0.0328   3.27 9.83e-3      0.761
+ 5 Hornet Sportabout  18.7  360     14.8  3.94  0.0663   3.22 5.58e-2      1.25 
+ 6 Valiant            18.1  225     20.3 -2.23  0.0313   3.28 7.82e-3     -0.696
+ 7 Duster 360         14.3  360     14.8 -0.462 0.0663   3.31 7.70e-4     -0.147
+ 8 Merc 240D          24.4  147.    23.6  0.846 0.0461   3.30 1.72e-3      0.267
+ 9 Merc 230           22.8  141.    23.8 -0.997 0.0482   3.30 2.50e-3     -0.314
+10 Merc 280           19.2  168.    22.7 -3.49  0.0396   3.24 2.48e-2     -1.10 
+# … with 22 more rows</code></pre>
+</div>
+</div>
 </section>
-<section id="check-do-you-have-the-lab-1-repo" class="slide level2">
-<h2><strong>Check: Do you have the lab-1 repo?</strong></h2>
+<section id="model-diagnostics-1" class="slide level2 smaller">
+<h2>Model diagnostics</h2>
+<p>Use the <code>augment()</code> function to output statistics that can be used to diagnose the model, along with the predicted values and residuals:</p>
+<div>
 <ul>
-<li><p>Go to the GitHub course organization: <a href="https://github.com/sta210-s22" class="uri">https://github.com/sta210-s22</a></p></li>
-<li><p>You should see a repo with the prefix <strong><code>lab-1-</code></strong> followed by your GitHub username</p></li>
-<li><p>If you do not have this repo, please let your TAs know!</p></li>
+<li>outcome and predictor variables in the model</li>
+<li><strong><code>.fitted</code></strong>: predicted values</li>
+<li><strong><code>.se.fit</code></strong>: standard errors of predicted values</li>
+<li><strong><code>.resid</code></strong>: residuals</li>
+<li><strong><code>.hat</code></strong>: leverage</li>
+<li><strong><code>.sigma</code></strong>: estimate of residual standard deviation when the corresponding observation is dropped from model</li>
+<li><strong><code>.cooksd</code></strong>: Cook’s distance</li>
+<li><strong><code>.std.resid</code></strong>: standardized residuals</li>
 </ul>
-</section>
-<section id="demo" class="slide level2">
-<h2>Demo</h2>
-<p><strong>Follow along as your TA demonstrates the following:</strong></p>
-<ul>
-<li><p>Configure Git using SSH</p></li>
-<li><p>Clone RStudio repo and start new project</p></li>
-<li><p>Render document and produce PDF</p></li>
-<li><p>Update name in YAML</p>
-<ul>
-<li><p>Render, commit, push changes to GitHub</p></li>
-<li><p>See updates in your GitHub repo</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="when-youre-done-with-lab" class="slide level2">
-<h2><strong>When you’re done with lab</strong></h2>
-<ul>
-<li><p>Make sure all your final changes have been pushed to your GitHub repo</p></li>
-<li><p>Submit the PDF of your responses to <a href="https://www.gradescope.com/"><strong>Gradescope</strong></a></p>
-<ul>
-<li><p>You can access Gradescope through Sakai or the course website</p></li>
-<li><p>Login using your Duke NetID credentials</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="youre-now-ready-to-complete-the-rest-of-lab" class="slide level2">
-<h2><strong>You’re now ready to complete the rest of lab!</strong></h2>
-<p>Please “raise your hand” if you need help as you work on the lab</p>
+</div>
 
 
 <div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
-<img src="images/logo.png" class="slide-logo r-stretch"></section>
+<img src="images/logo.png" class="slide-logo r-stretch"></section></section>
     </div>
   </div>
 
@@ -613,6 +706,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
