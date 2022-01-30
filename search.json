@@ -150,15 +150,15 @@
     "objectID": "labs/lab-3.html#workflow-using-git-and-github-as-a-team",
     "href": "labs/lab-3.html#workflow-using-git-and-github-as-a-team",
     "title": "Lab 3 - Coffee ratings",
-    "section": "Workflow: Using git and GitHub as a team",
-    "text": "Workflow: Using git and GitHub as a team\n\n\n\n\n\n\nImportant\n\n\n\nAssign each person on your team a number 1 through 4. For teams of three, Team Member 1 can take on the role of Team Member 4.\n\n\nThe following exercises must be done in order. Only one person should type in the .qmd file, commit, and push updates at a time. When it is not your turn to type, you should still share ideas and contribute to the team’s discussion.\n\n\n\n\n\n\n⌨️ Team Member 1: Hands on the keyboard.\n🙅🏽 All other team members: Hands off the keyboard until otherwise instructed!1\n\n\n\nChange the author to your team name and include each team member’s name in the author field of the YAML in the following format: Team Name: Member 1, Member 2, Member 3, Member 4.\n\nTeam Member 1: Render the document and confirm that the changes are visible in the PDF. Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.\n\n\nTeam Members 2, 3, 4: Once Team Member 1 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team’s lab repo. Then, in RStudio, click the Pull button in the Git pane to get the updated document. You should see the updated name in your .qmd file."
+    "section": "Workflow: Using Git and GitHub as a team",
+    "text": "Workflow: Using Git and GitHub as a team\n\n\n\n\n\n\nImportant\n\n\n\nAssign each person on your team a number 1 through 4. For teams of three, Team Member 1 can take on the role of Team Member 4.\n\n\nThe following exercises must be done in order. Only one person should type in the .qmd file, commit, and push updates at a time. When it is not your turn to type, you should still share ideas and contribute to the team’s discussion.\n\n\n\n\n\n\n⌨️ Team Member 1: Hands on the keyboard.\n🙅🏽 All other team members: Hands off the keyboard until otherwise instructed!1\n\n\n\nChange the author to your team name and include each team member’s name in the author field of the YAML in the following format: Team Name: Member 1, Member 2, Member 3, Member 4.\n\nTeam Member 1: Render the document and confirm that the changes are visible in the PDF. Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.\n\n\nTeam Members 2, 3, 4: Once Team Member 1 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team’s lab repo. Then, in RStudio, click the Pull button in the Git pane to get the updated document. You should see the updated name in your .qmd file."
   },
   {
     "objectID": "labs/lab-3.html#packages",
     "href": "labs/lab-3.html#packages",
     "title": "Lab 3 - Coffee ratings",
     "section": "Packages",
-    "text": "Packages\nThe follow packages are used in the lab.\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)"
+    "text": "Packages\nThe following packages are used in the lab.\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)"
   },
   {
     "objectID": "labs/lab-3.html#data-coffee-ratings",
@@ -291,7 +291,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - MLR\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - SLR\n\n🖥️\n\n\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n\n\n💻\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "project-description.html#timeline",
@@ -669,7 +669,7 @@
     "href": "weeks/week-5.html#participate",
     "title": "Week 5",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lab 3 - Coffee ratings (to be posted)\n🖥️ Lecture 8 - Multiple linear regression (MLR) (to be posted)\n🖥️ Lecture 9 - Exam 1 review"
+    "text": "Participate\n🖥️ Lab 3 - Coffee ratings\n🖥️ Lecture 8 - Multiple linear regression (MLR) (to be posted)\n🖥️ Lecture 9 - Exam 1 review (to be posted)"
   },
   {
     "objectID": "weeks/week-5.html#practice",
@@ -2126,6 +2126,55 @@
     "title": "SLR: Model diagnostics",
     "section": "Recap",
     "text": "Recap\nUsed residual plots to check conditions for SLR:\n\n\n\n\nLinearity\nConstant variance\n\n\n\n\n\nNormality\nIndependence\n\n\n\n\n\n\nWhich of these conditions are required for fitting a SLR? Which for simulation-based inference for the slope for an SLR? Which for inference with mathematical models?\n\n\n\n\n03:00\n\n\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
+    "objectID": "slides/lab-3.html#goals",
+    "href": "slides/lab-3.html#goals",
+    "title": "Lab 3 - Coffee ratings",
+    "section": "Goals",
+    "text": "Goals\n\nMeet your team!\nIce breaker / get to know your team\nTeam agreement\nLab 3 - Coffee ratings"
+  },
+  {
+    "objectID": "slides/lab-3.html#meet-your-team",
+    "href": "slides/lab-3.html#meet-your-team",
+    "title": "Lab 3 - Coffee ratings",
+    "section": "Meet your team!",
+    "text": "Meet your team!\n\nClick here to find your team number.\n\n\n\n\n\n\n\nWarning\n\n\nTeam assignments to be posted!\n\n\n\n\nSit with your team."
+  },
+  {
+    "objectID": "slides/lab-3.html#icebreaker",
+    "href": "slides/lab-3.html#icebreaker",
+    "title": "Lab 3 - Coffee ratings",
+    "section": "Icebreaker",
+    "text": "Icebreaker\n\nQuick introductions: Name and hometown\nChoose a reporter: The person whose birthday is closest to January 31\nIdentify 8 things everyone in the group has in common:\n\nNot clothes, e.g., we’re all wearing shoes!\nNot body parts, e.g., we all have a nose!\n\n\n\n\n\n05:00"
+  },
+  {
+    "objectID": "slides/lab-3.html#team-name-agreement",
+    "href": "slides/lab-3.html#team-name-agreement",
+    "title": "Lab 3 - Coffee ratings",
+    "section": "Team name + agreement",
+    "text": "Team name + agreement\n\nCome up with a team name. You can’t have the same name as another group in the class, so be creative!\n\nYour TA will get your team name by the end of lab.\n\nFill out the team agreement. The goals of the agreement are to…\n\nGain a common understanding of the team’s goals and expectations for collaboration\nMake a plan for team communication\nMake a plan for working outside of lab"
+  },
+  {
+    "objectID": "slides/lab-3.html#team-workflow",
+    "href": "slides/lab-3.html#team-workflow",
+    "title": "Lab 3 - Coffee ratings",
+    "section": "Team workflow",
+    "text": "Team workflow\n\nOnly one team member should type at a time. There are markers in today’s lab to help you determine whose turn it is to type.\n\nEvery team member should still be engaged in discussion for all questions, even if it’s not your turn type.\n\nDon’t forget to pull to get your teammates’ updates before making changes to the .qmd file.\nOnly one submission for the team on Gradescope."
+  },
+  {
+    "objectID": "slides/lab-3.html#team-workflow-in-action",
+    "href": "slides/lab-3.html#team-workflow-in-action",
+    "title": "Lab 3 - Coffee ratings",
+    "section": "Team workflow, in action",
+    "text": "Team workflow, in action\n\nComplete the “Workflow: Using Git and GitHub as a team” section of the lab in your teams.\nWhen done, pause and wait for your TA to walk you through the rest of the slides before continuing to the following section.\n\n\n\n\n10:00"
+  },
+  {
+    "objectID": "slides/lab-3.html#tips-for-working-in-a-team",
+    "href": "slides/lab-3.html#tips-for-working-in-a-team",
+    "title": "Lab 3 - Coffee ratings",
+    "section": "Tips for working in a team",
+    "text": "Tips for working in a team\n\nDo not pressure each other to finish early; use the time wisely to really learn the material and produce a quality report.\nThe labs are structured to help you learn the steps of a data analysis. Do not split up the lab among the team members; work on it together in its entirety.\nEveryone has something to contribute! Use the lab groups as an opportunity to share ideas and learn from each other."
   },
   {
     "objectID": "slides/lab-3.html#the-data",
