@@ -39,7 +39,7 @@ Before you get started on the lab, your TA will walk you through the following:
 -   Go to the [sta210-s22](https://www.github.com/sta210-s22) organization on GitHub. Click on the repo with the prefix **lab-3**. It contains the starter documents you need to complete the lab.
 -   Each person on the team should clone the repository and open a new project in RStudio. **Do not make any changes to the `.qmd` file until the instructions tell you do to so.**
 
-## Workflow: Using git and GitHub as a team
+## Workflow: Using Git and GitHub as a team
 
 ::: callout-important
 Assign each person on your team a number 1 through 4.
@@ -74,7 +74,7 @@ You should see the updated name in your `.qmd` file.
 
 ## Packages
 
-The follow packages are used in the lab.
+The following packages are used in the lab.
 
 ```{r}
 #| label: load-packages

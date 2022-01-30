@@ -19,11 +19,11 @@ editor: visual
 
 ## Participate
 
-🖥️ Lab 3 - Coffee ratings (to be posted)
+🖥️ [Lab 3 - Coffee ratings](/slides/lab-3.html)
 
 🖥️ Lecture 8 - Multiple linear regression (MLR) (to be posted)
 
-🖥️ Lecture 9 - Exam 1 review
+🖥️ Lecture 9 - Exam 1 review (to be posted)
 
 ## Practice
 
@@ -31,7 +31,7 @@ editor: visual
 
 ## Perform
 
-⌨️ Lab 3 - Coffee ratings
+⌨️ [Lab 3 - Coffee ratings](labs/lab-3.html)
 
 <br><br>
 
