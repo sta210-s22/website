@@ -1,4 +1,302 @@
 ---
-title: "Lab 3 - To be posted..."
+title: "Lab 3 - Coffee ratings"
 editor: visual
+format: html
 ---
+
+## Introduction
+
+In today's lab you will analyze data from over 1,000 different coffees to explore the relationship between a coffee's aroma and it's overall quality.
+You will also begin working with your team and practicing a collaborative data analysis workflow.
+
+### Learning goals
+
+By the end of the lab you will...
+
+-   Create plots and calculate associated statistics to assess model diagnostics.
+-   Practice collaborating with others using a single Github repo.
+
+## Meet your team!
+
+**Click here** to see the team assignments for STA 210.
+This will be your team for labs and the final project.
+
+::: callout-warning
+Team assignments to be posted!
+:::
+
+Before you get started on the lab, your TA will walk you through the following:
+
+-   Icebreaker activity to get to know your teammates.
+-   Come up with a team name. You can't use the same name as another team, so I encourage you to be creative! Your TA will get your team name by the end of lab.
+-   Fill out the team agreement. This will help you figure out a plan for communication and working together during labs and outside of lab times. You can find the team agreement in the GitHub repo **team-agreement-\[github_team_name\]**.
+-   Have **one person** from the team clone the repo and start a new RStudio project. This person will type the team's responses as you discuss the sections of the agreement. No one else in the team should type at this point but should be contributing to the discussion.
+-   Be sure to push the completed agreement to GitHub. Each team member can refer to the document in this repo or download the PDF of the agreement for future reference. You do **not** need to submit the agreement on Gradescope.
+
+## Getting started
+
+-   A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
+-   Go to the [sta210-s22](https://www.github.com/sta210-s22) organization on GitHub. Click on the repo with the prefix **lab-3**. It contains the starter documents you need to complete the lab.
+-   Each person on the team should clone the repository and open a new project in RStudio. **Do not make any changes to the .qmd file until the instructions tell you do to so.**
+
+## Workflow: Using git and GitHub as a team
+
+::: callout-important
+Assign each person on your team a number 1 through 4.
+For teams of three, Team Member 1 can take on the role of Team Member 4.
+:::
+
+The following exercises must be done in order.
+**Only one person should type in the .qmd file, commit, and push updates at a time.** When it is not your turn to type, you should still share ideas and contribute to the team's discussion.
+
+::: {.callout-important appearance="simple"}
+⌨️ **Team Member 1: Hands on the keyboard.**
+
+🙅🏽 All other team members: Hands off the keyboard until otherwise instructed![^1]
+:::
+
+[^1]: Don't trust yourself to keep your hands off the keyboard?
+    Put them in your picket or cross your arms.
+    No matter how silly it might feel, resist the urge to touch your keyboard until otherwise instructed!
+
+Change the author to your team name and include each team member's name in the `author` field of the YAML in the following format: `Team Name: Member 1, Member 2, Member 3, Member 4`.
+
+::: render-commit-push
+**Team Member 1:** Render the document and confirm that the changes are visible in the PDF.
+Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+:::
+
+::: pull
+**Team Members 2, 3, 4:** Once Team Member 1 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
+Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
+You should see the updated name in your .qmd file.
+:::
+
+## Packages
+
+The follow packages are used in the lab.
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+```
+
+## Data: Coffee ratings
+
+The dataset for this lab comes from the [Coffee Quality Database](https://github.com/jldbc/coffee-quality-database) and was obtained from the [#TidyTuesday GitHub repo](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-07/readme.md).
+It includes information about the origin, producer, measures of various characteristics, and the quality measure for over 1000 coffees.
+
+This lab will focus on the following variables:
+
+-   `aroma`: Aroma grade, 0 - 10 scale
+-   `total_cup_points`: Measure of quality, 0 - 100 scale
+
+You can find the definitions for all variables in the data set [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-07/readme.md).
+[Click here](http://www.scaa.org/?page=resources&d=cupping-protocols&mod=article_inline) for more details about how these measures are obtained.
+
+```{r}
+#| label: load-data
+#| message: false
+
+coffee <- read_csv("data/coffee_ratings.csv")
+```
+
+## Exercises
+
+::: callout-note
+-   Include axis labels and an informative title for all plots.
+-   Use the `kable` function to neatly print tables and regression output. Write all interpretations in the context of the data.
+-   Do the following exercises in order, following each step carefully.
+-   Only one person at a time should type in the `.qmd` file and push updates.
+-   If you are working on any portion of the lab virtually, the person working should share their screen and the others should follow along.
+:::
+
+::: {.callout-important appearance="simple"}
+⌨️ **Team Member 1: Hands still on the keyboard. Write the answers to Exercises 1 and 2.**
+
+🙅🏽 All other team members: Hands off the keyboard until otherwise instructed!
+:::
+
+### Exercise 1
+
+Visualize the relationship between aroma and the total cup points.
+What do you observe from the plot?
+Use the plot the describe the relationship between the two variables.
+
+### Exercise 2
+
+Fit the linear model and neatly display the results using 3 digits.
+Interpret the slope in context of the data.
+
+::: render-commit-push
+**Team Member 1:** Render the document and confirm that the changes are visible in the PDF.
+Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Make sure to commit and push all changed files so that your Git pane is empty afterwards.
+:::
+
+::: pull
+**Team Members 2, 3, 4:** Once Team Member 1 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
+Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
+You should see the responses to Exercises 1 and 2 in your .qmd file.
+:::
+
+<br>
+
+Now it's time for a hand off...
+
+::: {.callout-important appearance="simple"}
+⌨️ **Team Member 2: Hands on the keyboard. Write the answers to Exercises 3 and 4.**
+
+🙅🏽 All other team members: Hands off the keyboard until otherwise instructed!
+:::
+
+### Exercise 3
+
+Would the members of your group drink a coffee represented by the intercept?
+Why or why not?
+Discuss as a group and write the group's consensus.
+
+### Exercise 4
+
+We will proceed assuming the model conditions hold, so let's focus on the model diagnostics.
+We'll start by examining if there are any points with high leverage in the data.
+
+-   What threshold will you use to determine if there are points with high leverage?
+-   Are there any observations with high leverage? If so, how many? Briefly explain, including any output, graphs, etc. you used to determine the response.
+
+::: render-commit-push
+**Team Member 2:** Render the document and confirm that the changes are visible in the PDF.
+Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Make sure to commit and push all changed files so that your Git pane is empty afterwards.
+:::
+
+::: pull
+**Team Members 1, 3, 4:** Once Team Member 2 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
+Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
+You should see the responses to Exercises 3 and 4 in your .qmd file.
+:::
+
+<br>
+
+Now it's time for another hand off...
+
+::: {.callout-important appearance="simple"}
+⌨️ **Team Member 3: Hands on the keyboard. Write the answers to Exercises 5.**
+
+🙅🏽 All other team members: Hands off the keyboard until otherwise instructed!
+:::
+
+### Exercise 5
+
+Next, let's examine if there are any points with standardized residuals that have large magnitude.
+Are there any such points in the data?
+If so, how many?
+Briefly explain, including any output, graphs, etc. you used to determine the response.
+
+::: render-commit-push
+**Team Member 3:** Render the document and confirm that the changes are visible in the PDF.
+Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Make sure to commit and push all changed files so that your Git pane is empty afterwards.
+:::
+
+::: pull
+**Team Members 1, 2, 4:** Once Team Member 3 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
+Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
+You should see the responses to Exercise 5 and 4 in your .qmd file.
+:::
+
+<br>
+
+Now it's time for another hand off...
+
+::: {.callout-important appearance="simple"}
+⌨️ **Team Member 4: Hands on the keyboard. Write the answers to Exercises 6.**
+
+🙅🏽 All other team members: Hands off the keyboard until otherwise instructed!
+:::
+
+### Exercise 6
+
+Lastly, let's analyze Cook's D to determine if there are influential points in the data.
+
+-   Based on Cook's D, are there any influential points in our data? Briefly explain, including any output, graphs, etc. you used to determine the response.
+-   If there are influential points, briefly explain why they are outliers, ie. not in the trend of the rest of the data.
+-   If there are influential points, remove those points from the data and refit the model. How do the model coefficients change, if at all?
+-   If there are influential points, would you recommend using the model fit with or without these points for inferential conclusions and predictions? Briefly explain why or why not. Additionally, briefly explain potential impacts your choice has on inferential conclusions and/or predictions.
+
+::: render-commit-push
+**Team Member 4:** Render the document and confirm that the changes are visible in the PDF.
+Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Make sure to commit and push all changed files so that your Git pane is empty afterwards.
+:::
+
+::: pull
+**Team Members 1, 2, 3:** Once Team Member 4 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
+Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
+You should see the responses to Exercise 6 and 4 in your .qmd file.
+:::
+
+<br>
+
+Now it's time for one last hand off...
+
+## Wrapping up
+
+::: callout-important
+⌨️ **Team Member 2: Hands on the keyboard. Make any edits as needed.**
+
+🙅🏽 All other team members: Hands off the keyboard until otherwise instructed!
+:::
+
+::: render-commit-push
+**Team Member 2:** Render the document and confirm that the changes are visible in the PDF.
+Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Make sure to commit and push all changed files so that your Git pane is empty afterwards.
+:::
+
+::: pull
+**Team Members 1, 3, 4:** Once Team Member 2 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
+Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
+You should see the final version of your .qmd file.
+:::
+
+## Submission
+
+::: callout-warning
+Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.
+We will be checking these to make sure you have been practicing how to commit and push changes.
+
+Remember -- you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.
+:::
+
+To submit your assignment:
+
+-   Select **one** team member to upload the team's PDF submission to Gradescope.
+-   Be sure to include every team member's name in the Gradescope submission.
+-   Go to [http://www.gradescope.com](http://www.gradescope.com/) and click *Log in* in the top right corner.
+-   Click *School Credentials* ➡️ *Duke NetID* and log in using your NetID credentials.
+-   Click on your *STA 210* course.
+-   Click on the assignment, and you'll be prompted to submit it.
+-   Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be "checked"). If any answer spans multiple pages, then mark all pages.
+-   Select the first page of your PDF submission to be associated with the *"Workflow & formatting"* section.
+
+::: callout-important
+There should only be **one** submission per team on Gradescope.
+:::
+
+## Grading (50 pts)
+
+Total points available: 50 points.
+
+| Component              | Points |
+|:-----------------------|:-------|
+| Ex 1 - 6               | 42     |
+| Workflow & formatting  | 5[^2]  |
+| Complete team contract | 3      |
+
+[^2]: The "Workflow & formatting" grade is to assess the reproducible workflow.
+    This includes having at least 3 informative commit messages and updating the name and date in the YAML.
