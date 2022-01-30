@@ -112,6 +112,7 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -487,7 +488,8 @@ Important
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-coffee-ratings" class="level2">
@@ -500,7 +502,7 @@ Important
 </ul>
 <p>You can find the definitions for all variables in the data set <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-07/readme.md">here</a>. <a href="http://www.scaa.org/?page=resources&amp;d=cupping-protocols&amp;mod=article_inline">Click here</a> for more details about how these measures are obtained.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>coffee <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/coffee_ratings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>coffee_ratings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/coffee_ratings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercises" class="level2">
@@ -568,10 +570,30 @@ Note
 </section>
 <section id="exercise-4" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
+<p>Leverage is the measure of the distance between an observation’s values of the predictor variables and the average values of the predictor variables for the entire data set. An observation s set if have <strong>high leverage</strong> if its combination of values for the predictor variables is very far from the typical combination of values in the data.An observation has high leverage if its combination of values for the predictor variables is very far from the typical combination of values in the data. Observations with high leverage should be considered as <em>potential</em> influential points.</p>
 <p>We will proceed assuming the model conditions hold, so let’s focus on the model diagnostics. We’ll start by examining if there are any points with high leverage in the data.</p>
+<p>Theoretically, the leverage of the <span class="math inline">\(i^{th}\)</span> observation as follows:</p>
+<p><span class="math display">\[
+h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{j = 1}^n (x_j - \bar{x})^2}
+\]</span></p>
+<p>Note that leverage only depends on values of the predictor variable(s).</p>
+<p>The sum of the leverages for all points is <span class="math inline">\(p + 1\)</span>, where</p>
 <ul>
-<li>What threshold will you use to determine if there are points with high leverage?</li>
-<li>Are there any observations with high leverage? If so, how many? Briefly explain, including any output, graphs, etc. you used to determine the response.</li>
+<li><span class="math inline">\(p\)</span> is the number of predictors</li>
+<li>In the case of SLR, <span class="math inline">\(\sum_{i = 1}^n h_i = 2\)</span></li>
+<li>The “typical” leverage is <span class="math inline">\(\frac{(p + 1)}{n}\)</span></li>
+</ul>
+<p>Therefore, an observation is said to have high leverage if</p>
+<p><span class="math display">\[
+h_i &gt; \frac{2(p + 1)}{n}
+\]</span></p>
+<p>In addition to comparing the leverage of points to a threshold, we also generally visualize standard residuals vs.&nbsp;leverage values our data. The <code>autoplot()</code> function from the <strong>ggfortify</strong> package is very useful for drawing these standard plots easily.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(coffee_fit<span class="sc">$</span>fit, <span class="at">which =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>What threshold will you use to determine if there are points with high leverage for this dataset?</li>
+<li>Are there any observations with high leverage? If so, how many? Briefly explain, including any output, graphs, etc. you used to determine the response. Improve your plot by adding a new year to draw a vertical line (with <code>geom_vline()</code>) at the value of the threshold you’re using to determine which points have high leverage.</li>
 </ul>
 <div class="render-commit-push">
 <p><strong>Team Member 2:</strong> Render the document and confirm that the changes are visible in the PDF. Then, commit (with an informative commit message) both the <code>.qmd</code> and PDF documents, and finally push the changes to GitHub. Make sure to commit and push all changed files so that your Git pane is empty afterwards.</p>
@@ -595,7 +617,30 @@ Note
 </section>
 <section id="exercise-5" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
-<p>Next, let’s examine if there are any points with standardized residuals that have large magnitude. Are there any such points in the data? If so, how many? Briefly explain, including any output, graphs, etc. you used to determine the response.</p>
+<p>Another standard model diagnostic involves identifying points that don’t fit the pattern from the regression line. We do this by determining which points have large <strong>standardized</strong> residuals (residual divided by the standard error of residuals).</p>
+<p><span class="math display">\[
+Std.~res_i = \frac{y_i - \hat{y}_1}{\hat{\sigma}_\epsilon ~ \sqrt{1 - h_i}},
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\sigma}_\epsilon\)</span> is the regression standard error.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These values are already calculated in the output of <code>augment()</code>.</p>
+</div>
+</div>
+<p>Observations that have standardized residuals of large magnitude (usually beyond <span class="math inline">\(\pm\)</span> 3) are potential outliers, since they don’t fit the pattern determined by the regression model. Therefore, a common practice is to plot standardized residuals vs.&nbsp;fitted values, to make it easier to identify outliers.</p>
+<p>We can obtain this plot with the following:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(coffee_fit<span class="sc">$</span>fit, <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create this visualization and horizontal lines (with <code>geom_hline()</code>) at the cutoff values for “large” standardized residuals (<span class="math inline">\(\pm\)</span> 3). Are there any such points in the data? If so, how many? Briefly explain, including any output, graphs, etc. you used to determine the response.</p>
 <div class="render-commit-push">
 <p><strong>Team Member 3:</strong> Render the document and confirm that the changes are visible in the PDF. Then, commit (with an informative commit message) both the <code>.qmd</code> and PDF documents, and finally push the changes to GitHub. Make sure to commit and push all changed files so that your Git pane is empty afterwards.</p>
 </div>
@@ -618,10 +663,37 @@ Note
 </section>
 <section id="exercise-6" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
-<p>Lastly, let’s analyze Cook’s D to determine if there are influential points in the data.</p>
+<p>Finally, we’ll examine Cook’s Distance. An observation’s influence on the regression line depends on how close it lies to the general trend of the data (i.e., its standardized residual) and it’s leverage (<span class="math inline">\(h_i\)</span>). <strong>Cook’s Distance</strong> is a statistic that includes both of these components to measure an observation’s overall impact on the model. Cook’s Distance for the <span class="math inline">\(i^{th}\)</span> observation is defined as the follows:</p>
+<p><span class="math display">\[
+D_i = \frac{(std.~res)^2}{p + 1} (\frac{h_i}{1-\frac{h_i})
+\]</span><br>
+An observation with large <span class="math inline">\(D_i\)</span> is said to have a strong influence on the predicted values. On that scale,</p>
+<ul>
+<li><span class="math inline">\(D_i\)</span> &gt; 0.5 is <strong>moderately influential</strong></li>
+<li><span class="math inline">\(D_i\)</span> &gt; 1 is <strong>very influential</strong></li>
+</ul>
+<p>We can plot of Cook’s distances vs.&nbsp;the observation number with the following:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(coffee_fit<span class="sc">$</span>fit, <span class="at">which =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab-3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Standardized residuals, leverage, and Cook’s Distance should all be examined together. So what do we do with observations identified as outliers or leverage points?</p>
+<p>It is <strong>OK</strong> to drop an observation based on the <strong>predictor variables</strong> if…</p>
+<ul>
+<li><p>It is meaningful to drop the observation given the context of the problem</p></li>
+<li><p>You intended to build a model on a smaller range of the predictor variables. You should mention this in the write up of the results and be careful to avoid extrapolation when making predictions.</p></li>
+</ul>
+<p>It is <strong>not OK</strong> to drop an observation based on the response variable if…</p>
+<ul>
+<li>These are legitimate observations and should be in the model.</li>
+<li>You can try transformations or increasing the sample size by collecting more data.</li>
+</ul>
+<p>So lastly, let’s analyze Cook’s D to determine if there are influential points in the data.</p>
 <ul>
 <li>Based on Cook’s D, are there any influential points in our data? Briefly explain, including any output, graphs, etc. you used to determine the response.</li>
-<li>If there are influential points, briefly explain why they are outliers, ie. not in the trend of the rest of the data.</li>
+<li>If there are influential points, briefly explain why they are outliers, i.e., not in the trend of the rest of the data.</li>
 <li>If there are influential points, remove those points from the data and refit the model. How do the model coefficients change, if at all?</li>
 <li>If there are influential points, would you recommend using the model fit with or without these points for inferential conclusions and predictions? Briefly explain why or why not. Additionally, briefly explain potential impacts your choice has on inferential conclusions and/or predictions.</li>
 </ul>
