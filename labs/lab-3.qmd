@@ -37,7 +37,7 @@ Before you get started on the lab, your TA will walk you through the following:
 
 -   A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
 -   Go to the [sta210-s22](https://www.github.com/sta210-s22) organization on GitHub. Click on the repo with the prefix **lab-3**. It contains the starter documents you need to complete the lab.
--   Each person on the team should clone the repository and open a new project in RStudio. **Do not make any changes to the .qmd file until the instructions tell you do to so.**
+-   Each person on the team should clone the repository and open a new project in RStudio. **Do not make any changes to the `.qmd` file until the instructions tell you do to so.**
 
 ## Workflow: Using git and GitHub as a team
 
@@ -47,7 +47,7 @@ For teams of three, Team Member 1 can take on the role of Team Member 4.
 :::
 
 The following exercises must be done in order.
-**Only one person should type in the .qmd file, commit, and push updates at a time.** When it is not your turn to type, you should still share ideas and contribute to the team's discussion.
+**Only one person should type in the `.qmd` file, commit, and push updates at a time.** When it is not your turn to type, you should still share ideas and contribute to the team's discussion.
 
 ::: {.callout-important appearance="simple"}
 ⌨️ **Team Member 1: Hands on the keyboard.**
@@ -63,13 +63,13 @@ Change the author to your team name and include each team member's name in the `
 
 ::: render-commit-push
 **Team Member 1:** Render the document and confirm that the changes are visible in the PDF.
-Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Then, commit (with an informative commit message) both the `.qmd` and PDF documents, and finally push the changes to GitHub.
 :::
 
 ::: pull
 **Team Members 2, 3, 4:** Once Team Member 1 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
 Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
-You should see the updated name in your .qmd file.
+You should see the updated name in your `.qmd` file.
 :::
 
 ## Packages
@@ -134,14 +134,14 @@ Interpret the slope in context of the data.
 
 ::: render-commit-push
 **Team Member 1:** Render the document and confirm that the changes are visible in the PDF.
-Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Then, commit (with an informative commit message) both the `.qmd` and PDF documents, and finally push the changes to GitHub.
 Make sure to commit and push all changed files so that your Git pane is empty afterwards.
 :::
 
 ::: pull
 **Team Members 2, 3, 4:** Once Team Member 1 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
 Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
-You should see the responses to Exercises 1 and 2 in your .qmd file.
+You should see the responses to Exercises 1 and 2 in your `.qmd` file.
 :::
 
 <br>
@@ -170,14 +170,14 @@ We'll start by examining if there are any points with high leverage in the data.
 
 ::: render-commit-push
 **Team Member 2:** Render the document and confirm that the changes are visible in the PDF.
-Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Then, commit (with an informative commit message) both the `.qmd` and PDF documents, and finally push the changes to GitHub.
 Make sure to commit and push all changed files so that your Git pane is empty afterwards.
 :::
 
 ::: pull
 **Team Members 1, 3, 4:** Once Team Member 2 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
 Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
-You should see the responses to Exercises 3 and 4 in your .qmd file.
+You should see the responses to Exercises 3 and 4 in your `.qmd` file.
 :::
 
 <br>
@@ -199,14 +199,14 @@ Briefly explain, including any output, graphs, etc. you used to determine the re
 
 ::: render-commit-push
 **Team Member 3:** Render the document and confirm that the changes are visible in the PDF.
-Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Then, commit (with an informative commit message) both the `.qmd` and PDF documents, and finally push the changes to GitHub.
 Make sure to commit and push all changed files so that your Git pane is empty afterwards.
 :::
 
 ::: pull
 **Team Members 1, 2, 4:** Once Team Member 3 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
 Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
-You should see the responses to Exercise 5 and 4 in your .qmd file.
+You should see the responses to Exercise 5 and 4 in your `.qmd` file.
 :::
 
 <br>
@@ -230,14 +230,14 @@ Lastly, let's analyze Cook's D to determine if there are influential points in t
 
 ::: render-commit-push
 **Team Member 4:** Render the document and confirm that the changes are visible in the PDF.
-Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Then, commit (with an informative commit message) both the `.qmd` and PDF documents, and finally push the changes to GitHub.
 Make sure to commit and push all changed files so that your Git pane is empty afterwards.
 :::
 
 ::: pull
 **Team Members 1, 2, 3:** Once Team Member 4 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
 Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
-You should see the responses to Exercise 6 and 4 in your .qmd file.
+You should see the responses to Exercise 6 and 4 in your `.qmd` file.
 :::
 
 <br>
@@ -254,14 +254,14 @@ Now it's time for one last hand off...
 
 ::: render-commit-push
 **Team Member 2:** Render the document and confirm that the changes are visible in the PDF.
-Then, commit (with an informative commit message) both the .qmd and PDF documents, and finally push the changes to GitHub.
+Then, commit (with an informative commit message) both the `.qmd` and PDF documents, and finally push the changes to GitHub.
 Make sure to commit and push all changed files so that your Git pane is empty afterwards.
 :::
 
 ::: pull
 **Team Members 1, 3, 4:** Once Team Member 2 is done rendering, committing, and pushing, confirm that the changes are visible on GitHub in your team's lab repo.
 Then, in RStudio, click the **Pull** button in the Git pane to get the updated document.
-You should see the final version of your .qmd file.
+You should see the final version of your `.qmd` file.
 :::
 
 ## Submission
@@ -288,7 +288,7 @@ To submit your assignment:
 There should only be **one** submission per team on Gradescope.
 :::
 
-## Grading (50 pts)
+## Grading
 
 Total points available: 50 points.
 

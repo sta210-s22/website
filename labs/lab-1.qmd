@@ -61,15 +61,9 @@ You only need to do this authentication process one time on a single system.
 :::
 
 -   Type `credentials::ssh_setup_github()` into your console.
-
 -   R will ask "No SSH key found. Generate one now?" You should click 1 for yes.
-
--   You will generate a key.
-    It will begin with "ssh-rsa...." R will then ask "Would you like to open a browser now?" You should click 1 for yes.
-
--   You may be asked to provide your GitHub username and password to log into GitHub.
-    After entering this information, you should paste the key in and give it a name.
-    You might name it in a way that indicates where the key will be used, e.g., `sta210`).
+-   You will generate a key. It will begin with "ssh-rsa...." R will then ask "Would you like to open a browser now?" You should click 1 for yes.
+-   You may be asked to provide your GitHub username and password to log into GitHub. After entering this information, you should paste the key in and give it a name. You might name it in a way that indicates where the key will be used, e.g., `sta210`).
 
 You can find more detailed instructions [here](https://github.com/DukeStatSci/github_auth_guide) if you're interested.
 
@@ -85,6 +79,7 @@ Type the following lines of code in the **console** in RStudio filling in your n
 
 ```{r}
 #| eval: false
+
 usethis::use_git_config(
   user.name = "GitHub username", 
   user.email = "Email associated with your GitHub account"
@@ -95,6 +90,7 @@ For example, mine would be
 
 ```{r}
 #| eval: false
+
 usethis::use_git_config(
   user.name = "mine-cetinkaya-rundel", 
   user.email = "cetinkaya.mine@gmail.com"
@@ -139,7 +135,7 @@ It is a human friendly data serialization standard for all programming languages
 All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
 
 ::: callout-important
-Open the Quarto (`.qmd`) file in your project, change the author name to your name, and render the document.
+Open the Quarto (\``` .qmd` ``) file in your project, change the author name to your name, and render the document.
 Examine the rendered document.
 :::
 
@@ -211,6 +207,7 @@ Use the code below to read in the data.
 
 ```{r}
 #| message: false
+
 ikea <- read_csv("data/ikea.csv")
 ```
 
@@ -241,6 +238,7 @@ We can use the `view()` function to see the entire data set in RStudio.
 Type the code below in the **Console** to view the entire dataset.
 
 ```{r}
+
 view(ikea)
 ```
 
@@ -262,12 +260,14 @@ The `view()` function helped us get a quick view of the dataset, but let's get m
 Viewing a summary of the data is a useful starting point for data analysis, especially if the dataset has a large number of observations (rows) or variables (columns).
 Run the code below to use the `glimpse()` function to see a summary of the `ikea` dataset.
 
+How many observations are in the `ikea` dataset?
+How many variables?
+
 ```{r}
 #| results: false
+
 glimpse(ikea)
 ```
-
-**How many observations are in the `ikea` dataset? How many variables?**
 
 ::: callout-note
 In your `lab-1-ikea.qmd` document you'll see that we already added the code required for the exercise as well as a sentence where you can fill in the blanks to report the answer.
@@ -291,7 +291,9 @@ ggplot(data = ikea, aes(x = price_usd)) +
   geom_histogram()
 ```
 
-**Use the visualization to describe the distribution of price. In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers. Briefly explain why the median is more representative of the center of this distribution than the mean.**
+Use the visualization to describe the distribution of price.
+In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers.
+Briefly explain why the median is more representative of the center of this distribution than the mean.
 
 ::: callout-tip
 When using the visual editor you can insert a code chunk using the Insert menu on top or by using the catch-all `⌘ /` shortcut to insert just about anything.
@@ -317,8 +319,8 @@ ggplot(data = ikea, aes(x = price_usd)) +
   )
 ```
 
-::: callout-warning
-🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub.
+::: render-commit-push
+This is a good place to fender, commit, and push changes to your remote lab-1 repo on GitHub.
 Click the checkbox next to each file in the Git pane to stage the updates you've made, write an informative commit message (e.g., "Completed exercises 1 - 3"), and push.
 After you push the changes, the Git pane in RStudio should be empty.
 :::
@@ -335,9 +337,8 @@ We'll focus on the five categories in the code below, since these include common
 Use the code below to create a new data frame that only includes the furniture categories of interest.
 We're assigning this data frame to an object with a new name, so we don't overwrite the original data.
 
-::: callout-caution
-You will use the following data frame, `ikea_sub` for the remainder of the lab.
-:::
+How many observations are in the `ikea_sub` dataset?
+How many variables?
 
 ```{r}
 ikea_sub <- ikea %>%
@@ -348,7 +349,9 @@ ikea_sub <- ikea %>%
   ))
 ```
 
-**How many observations are in the `ikea_sub` dataset? How many variables?**
+::: callout-important
+You will use this newly constructed data frame, `ikea_sub`, for the remainder of the lab.
+:::
 
 ### Exercise 5
 
@@ -364,28 +367,30 @@ We can change the transparency level of the fill color to help with this.
 The alpha argument takes values between 0 and 1: 0 is completely transparent and 1 is completely opaque.
 There is no way to tell what value will work best, so it's best to try a few.
 
+Recreate the density plot using a more suitable alpha level, so we can more easily see the distribution of all the categories.
+Include an informative title and informative axis labels.
+
 ```{r}
 ggplot(data = ikea_sub, aes(x = price_usd, fill = category)) +
   geom_density(alpha = 0.8)
 ```
 
-**Recreate the density plot using a more suitable alpha level, so we can more easily see the distribution of all the categories. Include an informative title and informative axis labels.**
-
-::: callout-warning
-🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub.
+::: render-commit-push
+This is a good place to render, commit, and push changes to your remote lab-1 repo on GitHub.
 Click the checkbox next to each file in the Git pane to stage the updates you've made, write an informative commit message (e.g., "Completed exercises 4 and 5"), and push.
 After you push the changes, the Git pane in RStudio should be empty.
 :::
 
 ### Exercise 6
 
-**Briefly describe why we defined the fill of the curves by mapping aesthetics of the plot (inside the `aes` function) but we defined the alpha level as a characteristic of the plotting `geom`.**
+Briefly describe why we defined the fill of the curves by mapping aesthetics of the plot (inside the `aes` function) but we defined the alpha level as a characteristic of the plotting `geom`.
 
 ### Exercise 7
 
 Overlapping density plots are not the only way to visualize the relationship between a quantitative and categorical variable.
 
-**Use a different type of plot to visualize the relationship between `price_usd` and `category`. Include an informative title and informative axis labels.**
+Use a different type of plot to visualize the relationship between `price_usd` and `category`.
+Include an informative title and informative axis labels.
 
 ::: callout-tip
 You can use the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/data-visualization.pdf) and [from Data to Viz](https://www.data-to-viz.com) for inspiration.
@@ -393,10 +398,13 @@ You can use the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/raw/
 
 ### Exercise 8
 
-**Compare and contrast your plots from the previous exercise to the overlapping density plots from [Exercise 5](#). What features are apparent in the plot from the previous exercise that aren't in the overlapping density plots? What features are apparent in the overlapping density plots that aren't in the plot from the previous exercise? What features are apparent in both?**
+Compare and contrast your plots from the previous exercise to the overlapping density plots from [Exercise 5].
+What features are apparent in the plot from the previous exercise that aren't in the overlapping density plots?
+What features are apparent in the overlapping density plots that aren't in the plot from the previous exercise?
+What features are apparent in both?
 
-::: callout-warning
-🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub.
+::: render-commit-push
+This is a good place to render, commit, and push changes to your remote lab-1 repo on GitHub.
 Click the checkbox next to each file in the Git pane to stage the updates you've made, write an informative commit message (e.g., "Completed exercises 6 - 8"), and push.
 After you push the changes, the Git pane in RStudio should be empty.
 :::
@@ -405,6 +413,8 @@ After you push the changes, the Git pane in RStudio should be empty.
 
 Next, let's look at the relationship between the price and width of Ikea furniture.
 Fill in the code below to visualize the relationship between the two variables using a scatterplot.
+
+Then, use your visualization to describe the relationship between the width and price of Ikea furniture.
 
 ```{r}
 #| eval: false
@@ -417,15 +427,14 @@ ggplot(data = _____, aes(x = width, y = _____)) +
     )
 ```
 
-**Use your visualization to describe the relationship between the width and price of Ikea furniture.**
-
 ### Exercise 10
 
-**Color the points of the scatterplot by category. Describe how the relationship between price and width of Ikea furniture differs by category, if at all.**
+Color the points of the scatterplot by category.
+Describe how the relationship between price and width of Ikea furniture differs by category, if at all.
 
-::: callout-warning
-🧶 ✅ ⬆️ You're done and ready to submit your work!
-Knit, commit, and push all remaining changes.
+::: render-commit-push
+You're done and ready to submit your work!
+Render, commit, and push all remaining changes.
 You can use the commit message "Done with Lab 1!" , and make sure you have committed and pushed all changed files to GitHub (your Git pane in RStudio should be empty) and that **all** documents are updated in your repo on GitHub.
 The PDF document you submit to Gradescope should be identical to the one in your GitHub repo.
 :::
@@ -444,16 +453,10 @@ Remember -- you must turn in a PDF file to the Gradescope page before the submis
 To submit your assignment:
 
 -   Go to [http://www.gradescope.com](http://www.gradescope.com/) and click *Log in* in the top right corner.
-
 -   Click *School Credentials* ➡️ *Duke NetID* and log in using your NetID credentials.
-
 -   Click on your *STA 210* course.
-
 -   Click on the assignment, and you'll be prompted to submit it.
-
--   Mark the pages associated with each exercise.
-    All of the pages of your lab should be associated with at least one question (i.e., should be "checked").
-
+-   Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be "checked").
 -   Select the first page of your PDF submission to be associated with the *"Workflow & formatting"* section.
 
 ## Grading
