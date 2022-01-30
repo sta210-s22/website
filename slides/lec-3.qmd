@@ -54,7 +54,7 @@ knitr::opts_chunk$set(
 
 ## Interested in the math behind it all?
 
-See the supplemental notes on [Deriving the Least-Squares Estimates for Simple Linear Regression](/supp-slr-derivations.html) for more mathematical details on the derivations of the estimates of $\beta_0$ and $\beta_1$.
+See the supplemental notes on [Deriving the Least-Squares Estimates for Simple Linear Regression](/supplemental/slr-derivations.html) for more mathematical details on the derivations of the estimates of $\beta_0$ and $\beta_1$.
 
 ## Outline
 
