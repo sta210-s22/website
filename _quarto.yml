@@ -108,9 +108,11 @@ website:
             text: "Week 15"
       - section: "Supplemental notes"
         contents:
-          - href: supp-slr-derivations.qmd
+          - href: supplemental/slr-derivations.qmd
             text: SLR derivations
-          - href: supp-mlr-matrix.qmd
+          - href: supplemental/model-diagnostics-matrix.qmd
+            text: MLR matrix notation
+          - href: supplemental/mlr-matrix.qmd
             text: MLR matrix notation
 
 format:
