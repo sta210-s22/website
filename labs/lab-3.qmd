@@ -83,6 +83,7 @@ The following packages are used in the lab.
 library(tidyverse)
 library(tidymodels)
 library(knitr)
+library(ggfortify)
 ```
 
 ## Data: Coffee ratings
@@ -102,7 +103,7 @@ You can find the definitions for all variables in the data set [here](https://gi
 #| label: load-data
 #| message: false
 
-coffee <- read_csv("data/coffee_ratings.csv")
+coffee_ratings <- read_csv("data/coffee_ratings.csv")
 ```
 
 ## Exercises
@@ -131,6 +132,14 @@ Use the plot the describe the relationship between the two variables.
 
 Fit the linear model and neatly display the results using 3 digits.
 Interpret the slope in context of the data.
+
+```{r}
+#| include: false
+
+coffee_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(total_cup_points ~ aroma, data = coffee_ratings)
+```
 
 ::: render-commit-push
 **Team Member 1:** Render the document and confirm that the changes are visible in the PDF.
@@ -162,11 +171,44 @@ Discuss as a group and write the group's consensus.
 
 ### Exercise 4
 
+Leverage is the measure of the distance between an observation's values of the predictor variables and the average values of the predictor variables for the entire data set.
+An observation s set if have **high leverage** if its combination of values for the predictor variables is very far from the typical combination of values in the data.An observation has high leverage if its combination of values for the predictor variables is very far from the typical combination of values in the data.
+Observations with high leverage should be considered as *potential* influential points.
+
 We will proceed assuming the model conditions hold, so let's focus on the model diagnostics.
 We'll start by examining if there are any points with high leverage in the data.
 
--   What threshold will you use to determine if there are points with high leverage?
--   Are there any observations with high leverage? If so, how many? Briefly explain, including any output, graphs, etc. you used to determine the response.
+Theoretically, the leverage of the $i^{th}$ observation as follows:
+
+$$
+h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{j = 1}^n (x_j - \bar{x})^2}
+$$
+
+Note that leverage only depends on values of the predictor variable(s).
+
+The sum of the leverages for all points is $p + 1$, where
+
+-   $p$ is the number of predictors
+-   In the case of SLR, $\sum_{i = 1}^n h_i = 2$
+-   The "typical" leverage is $\frac{(p + 1)}{n}$
+
+Therefore, an observation is said to have high leverage if
+
+$$
+h_i > \frac{2(p + 1)}{n}
+$$
+
+In addition to comparing the leverage of points to a threshold, we also generally visualize standard residuals vs. leverage values our data.
+The `autoplot()` function from the **ggfortify** package is very useful for drawing these standard plots easily.
+
+```{r}
+#| fig.show: hide
+
+autoplot(coffee_fit$fit, which = 5)
+```
+
+-   What threshold will you use to determine if there are points with high leverage for this dataset?
+-   Are there any observations with high leverage? If so, how many? Briefly explain, including any output, graphs, etc. you used to determine the response. Improve your plot by adding a new year to draw a vertical line (with `geom_vline()`) at the value of the threshold you're using to determine which points have high leverage.
 
 ::: render-commit-push
 **Team Member 2:** Render the document and confirm that the changes are visible in the PDF.
@@ -192,7 +234,31 @@ Now it's time for another hand off...
 
 ### Exercise 5
 
-Next, let's examine if there are any points with standardized residuals that have large magnitude.
+Another standard model diagnostic involves identifying points that don't fit the pattern from the regression line.
+We do this by determining which points have large **standardized** residuals (residual divided by the standard error of residuals).
+
+$$
+Std.~res_i = \frac{y_i - \hat{y}_1}{\hat{\sigma}_\epsilon ~ \sqrt{1 - h_i}},
+$$
+
+where $\hat{\sigma}_\epsilon$ is the regression standard error.
+
+::: callout-note
+These values are already calculated in the output of `augment()`.
+:::
+
+Observations that have standardized residuals of large magnitude (usually beyond $\pm$ 3) are potential outliers, since they don't fit the pattern determined by the regression model.
+Therefore, a common practice is to plot standardized residuals vs. fitted values, to make it easier to identify outliers.
+
+We can obtain this plot with the following:
+
+```{r}
+#| fig.show: hide
+
+autoplot(coffee_fit$fit, which = 3)
+```
+
+Create this visualization and horizontal lines (with `geom_hline()`) at the cutoff values for "large" standardized residuals ($\pm$ 3).
 Are there any such points in the data?
 If so, how many?
 Briefly explain, including any output, graphs, etc. you used to determine the response.
@@ -221,10 +287,47 @@ Now it's time for another hand off...
 
 ### Exercise 6
 
-Lastly, let's analyze Cook's D to determine if there are influential points in the data.
+Finally, we'll examine Cook's Distance.
+An observation's influence on the regression line depends on how close it lies to the general trend of the data (i.e., its standardized residual) and it's leverage ($h_i$).
+**Cook's Distance** is a statistic that includes both of these components to measure an observation's overall impact on the model.
+Cook's Distance for the $i^{th}$ observation is defined as the follows:
+
+$$
+D_i = \frac{(std.~res)^2}{p + 1} (\frac{h_i}{1-\frac{h_i})
+$$\
+An observation with large $D_i$ is said to have a strong influence on the predicted values.
+On that scale,
+
+-   $D_i$ \> 0.5 is **moderately influential**
+-   $D_i$ \> 1 is **very influential**
+
+We can plot of Cook's distances vs. the observation number with the following:
+
+```{r}
+#| fig.show: true
+
+autoplot(coffee_fit$fit, which = 4, ncol = 1)
+```
+
+Standardized residuals, leverage, and Cook's Distance should all be examined together.
+So what do we do with observations identified as outliers or leverage points?
+
+It is **OK** to drop an observation based on the **predictor variables** if...
+
+-   It is meaningful to drop the observation given the context of the problem
+
+-   You intended to build a model on a smaller range of the predictor variables.
+    You should mention this in the write up of the results and be careful to avoid extrapolation when making predictions.
+
+It is **not OK** to drop an observation based on the response variable if...
+
+-   These are legitimate observations and should be in the model.
+-   You can try transformations or increasing the sample size by collecting more data.
+
+So lastly, let's analyze Cook's D to determine if there are influential points in the data.
 
 -   Based on Cook's D, are there any influential points in our data? Briefly explain, including any output, graphs, etc. you used to determine the response.
--   If there are influential points, briefly explain why they are outliers, ie. not in the trend of the rest of the data.
+-   If there are influential points, briefly explain why they are outliers, i.e., not in the trend of the rest of the data.
 -   If there are influential points, remove those points from the data and refit the model. How do the model coefficients change, if at all?
 -   If there are influential points, would you recommend using the model fit with or without these points for inferential conclusions and predictions? Briefly explain why or why not. Additionally, briefly explain potential impacts your choice has on inferential conclusions and/or predictions.
 
