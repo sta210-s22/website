@@ -513,10 +513,10 @@ Note
 </div>
 </div>
 <ul>
-<li><p>Type <code>credentials::ssh_setup_github()</code> into your console.</p></li>
-<li><p>R will ask “No SSH key found. Generate one now?” You should click 1 for yes.</p></li>
-<li><p>You will generate a key. It will begin with “ssh-rsa….” R will then ask “Would you like to open a browser now?” You should click 1 for yes.</p></li>
-<li><p>You may be asked to provide your GitHub username and password to log into GitHub. After entering this information, you should paste the key in and give it a name. You might name it in a way that indicates where the key will be used, e.g., <code>sta210</code>).</p></li>
+<li>Type <code>credentials::ssh_setup_github()</code> into your console.</li>
+<li>R will ask “No SSH key found. Generate one now?” You should click 1 for yes.</li>
+<li>You will generate a key. It will begin with “ssh-rsa….” R will then ask “Would you like to open a browser now?” You should click 1 for yes.</li>
+<li>You may be asked to provide your GitHub username and password to log into GitHub. After entering this information, you should paste the key in and give it a name. You might name it in a way that indicates where the key will be used, e.g., <code>sta210</code>).</li>
 </ul>
 <p>You can find more detailed instructions <a href="https://github.com/DukeStatSci/github_auth_guide">here</a> if you’re interested.</p>
 </section>
@@ -571,7 +571,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Open the Quarto (<code>.qmd</code>) file in your project, change the author name to your name, and render the document. Examine the rendered document.</p>
+<p>Open the Quarto (`<code>.qmd`</code>) file in your project, change the author name to your name, and render the document. Examine the rendered document.</p>
 </div>
 </div>
 </section>
@@ -738,10 +738,10 @@ Tip
 <section id="exercise-1" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
 <p>The <code>view()</code> function helped us get a quick view of the dataset, but let’s get more detail about its structure. Viewing a summary of the data is a useful starting point for data analysis, especially if the dataset has a large number of observations (rows) or variables (columns). Run the code below to use the <code>glimpse()</code> function to see a summary of the <code>ikea</code> dataset.</p>
+<p>How many observations are in the <code>ikea</code> dataset? How many variables?</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ikea)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>How many observations are in the <code>ikea</code> dataset? How many variables?</strong></p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -771,7 +771,7 @@ Note
 <p><img src="lab-1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Use the visualization to describe the distribution of price. In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers. Briefly explain why the median is more representative of the center of this distribution than the mean.</strong></p>
+<p>Use the visualization to describe the distribution of price. In your narrative, include description of the shape, approximate center, approximate spread, and any presence of outliers. Briefly explain why the median is more representative of the center of this distribution than the mean.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -798,18 +798,8 @@ Tip
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"_____"</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message (e.g.,&nbsp;“Completed exercises 1 - 3”), and push. After you push the changes, the Git pane in RStudio should be empty.</p>
-</div>
+<div class="render-commit-push">
+<p>This is a good place to fender, commit, and push changes to your remote lab-1 repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message (e.g.,&nbsp;“Completed exercises 1 - 3”), and push. After you push the changes, the Git pane in RStudio should be empty.</p>
 </div>
 </section>
 <section id="exercise-4" class="level3">
@@ -817,19 +807,7 @@ Warning
 <p>Another way to visualize numeric data is using density plots. Make a density plot to visualize the distribution of <code>price_usd</code>. Be sure to include an informative title and informative axis labels.</p>
 <p>In this course, we’ll be most interested in the relationship between two or more variables, so let’s begin by looking at the distribution of price by category. We’ll focus on the five categories in the code below, since these include commonly purchased types of furniture.</p>
 <p>Use the code below to create a new data frame that only includes the furniture categories of interest. We’re assigning this data frame to an object with a new name, so we don’t overwrite the original data.</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You will use the following data frame, <code>ikea_sub</code> for the remainder of the lab.</p>
-</div>
-</div>
+<p>How many observations are in the <code>ikea_sub</code> dataset? How many variables?</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ikea_sub <span class="ot">&lt;-</span> ikea <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(category <span class="sc">%in%</span> <span class="fu">c</span>(</span>
@@ -838,7 +816,19 @@ Caution
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sofas &amp; armchairs"</span>, <span class="st">"Children's furniture"</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>How many observations are in the <code>ikea_sub</code> dataset? How many variables?</strong></p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You will use this newly constructed data frame, <code>ikea_sub</code>, for the remainder of the lab.</p>
+</div>
+</div>
 </section>
 <section id="exercise-5" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
@@ -851,6 +841,7 @@ Caution
 </div>
 </div>
 <p>The overlapping colors make it difficult to tell what’s happening with the distributions for the categories plotted first and hence covered by categories plotted over them. We can change the transparency level of the fill color to help with this. The alpha argument takes values between 0 and 1: 0 is completely transparent and 1 is completely opaque. There is no way to tell what value will work best, so it’s best to try a few.</p>
+<p>Recreate the density plot using a more suitable alpha level, so we can more easily see the distribution of all the categories. Include an informative title and informative axis labels.</p>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ikea_sub, <span class="fu">aes</span>(<span class="at">x =</span> price_usd, <span class="at">fill =</span> category)) <span class="sc">+</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -858,29 +849,18 @@ Caution
 <p><img src="lab-1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Recreate the density plot using a more suitable alpha level, so we can more easily see the distribution of all the categories. Include an informative title and informative axis labels.</strong></p>
-<div class="callout-warning callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message (e.g.,&nbsp;“Completed exercises 4 and 5”), and push. After you push the changes, the Git pane in RStudio should be empty.</p>
-</div>
+<div class="render-commit-push">
+<p>This is a good place to render, commit, and push changes to your remote lab-1 repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message (e.g.,&nbsp;“Completed exercises 4 and 5”), and push. After you push the changes, the Git pane in RStudio should be empty.</p>
 </div>
 </section>
 <section id="exercise-6" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
-<p><strong>Briefly describe why we defined the fill of the curves by mapping aesthetics of the plot (inside the <code>aes</code> function) but we defined the alpha level as a characteristic of the plotting <code>geom</code>.</strong></p>
+<p>Briefly describe why we defined the fill of the curves by mapping aesthetics of the plot (inside the <code>aes</code> function) but we defined the alpha level as a characteristic of the plotting <code>geom</code>.</p>
 </section>
 <section id="exercise-7" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-7">Exercise 7</h3>
 <p>Overlapping density plots are not the only way to visualize the relationship between a quantitative and categorical variable.</p>
-<p><strong>Use a different type of plot to visualize the relationship between <code>price_usd</code> and <code>category</code>. Include an informative title and informative axis labels.</strong></p>
+<p>Use a different type of plot to visualize the relationship between <code>price_usd</code> and <code>category</code>. Include an informative title and informative axis labels.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -897,24 +877,15 @@ Tip
 </section>
 <section id="exercise-8" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-8">Exercise 8</h3>
-<p><strong>Compare and contrast your plots from the previous exercise to the overlapping density plots from <a href="#">Exercise 5</a>. What features are apparent in the plot from the previous exercise that aren’t in the overlapping density plots? What features are apparent in the overlapping density plots that aren’t in the plot from the previous exercise? What features are apparent in both?</strong></p>
-<div class="callout-warning callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>🧶 ✅ ⬆️ This is a good place to knit, commit, and push changes to your remote lab-1 repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message (e.g.,&nbsp;“Completed exercises 6 - 8”), and push. After you push the changes, the Git pane in RStudio should be empty.</p>
-</div>
+<p>Compare and contrast your plots from the previous exercise to the overlapping density plots from <a href="#exercise-5">Exercise 5</a>. What features are apparent in the plot from the previous exercise that aren’t in the overlapping density plots? What features are apparent in the overlapping density plots that aren’t in the plot from the previous exercise? What features are apparent in both?</p>
+<div class="render-commit-push">
+<p>This is a good place to render, commit, and push changes to your remote lab-1 repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message (e.g.,&nbsp;“Completed exercises 6 - 8”), and push. After you push the changes, the Git pane in RStudio should be empty.</p>
 </div>
 </section>
 <section id="exercise-9" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-9">Exercise 9</h3>
 <p>Next, let’s look at the relationship between the price and width of Ikea furniture. Fill in the code below to visualize the relationship between the two variables using a scatterplot.</p>
+<p>Then, use your visualization to describe the relationship between the width and price of Ikea furniture.</p>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> _____, <span class="fu">aes</span>(<span class="at">x =</span> width, <span class="at">y =</span> _____)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
@@ -924,23 +895,12 @@ Warning
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"_____"</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Use your visualization to describe the relationship between the width and price of Ikea furniture.</strong></p>
 </section>
 <section id="exercise-10" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-10">Exercise 10</h3>
-<p><strong>Color the points of the scatterplot by category. Describe how the relationship between price and width of Ikea furniture differs by category, if at all.</strong></p>
-<div class="callout-warning callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>🧶 ✅ ⬆️ You’re done and ready to submit your work! Knit, commit, and push all remaining changes. You can use the commit message “Done with Lab 1!” , and make sure you have committed and pushed all changed files to GitHub (your Git pane in RStudio should be empty) and that <strong>all</strong> documents are updated in your repo on GitHub. The PDF document you submit to Gradescope should be identical to the one in your GitHub repo.</p>
-</div>
+<p>Color the points of the scatterplot by category. Describe how the relationship between price and width of Ikea furniture differs by category, if at all.</p>
+<div class="render-commit-push">
+<p>You’re done and ready to submit your work! Render, commit, and push all remaining changes. You can use the commit message “Done with Lab 1!” , and make sure you have committed and pushed all changed files to GitHub (your Git pane in RStudio should be empty) and that <strong>all</strong> documents are updated in your repo on GitHub. The PDF document you submit to Gradescope should be identical to the one in your GitHub repo.</p>
 </div>
 </section>
 </section>
@@ -963,12 +923,12 @@ Warning
 </div>
 <p>To submit your assignment:</p>
 <ul>
-<li><p>Go to <a href="http://www.gradescope.com/">http://www.gradescope.com</a> and click <em>Log in</em> in the top right corner.</p></li>
-<li><p>Click <em>School Credentials</em> ➡️ <em>Duke NetID</em> and log in using your NetID credentials.</p></li>
-<li><p>Click on your <em>STA 210</em> course.</p></li>
-<li><p>Click on the assignment, and you’ll be prompted to submit it.</p></li>
-<li><p>Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be “checked”).</p></li>
-<li><p>Select the first page of your PDF submission to be associated with the <em>“Workflow &amp; formatting”</em> section.</p></li>
+<li>Go to <a href="http://www.gradescope.com/">http://www.gradescope.com</a> and click <em>Log in</em> in the top right corner.</li>
+<li>Click <em>School Credentials</em> ➡️ <em>Duke NetID</em> and log in using your NetID credentials.</li>
+<li>Click on your <em>STA 210</em> course.</li>
+<li>Click on the assignment, and you’ll be prompted to submit it.</li>
+<li>Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be “checked”).</li>
+<li>Select the first page of your PDF submission to be associated with the <em>“Workflow &amp; formatting”</em> section.</li>
 </ul>
 </section>
 <section id="grading" class="level2 page-columns page-full">
