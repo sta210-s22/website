@@ -111,7 +111,7 @@ website:
           - href: supplemental/slr-derivations.qmd
             text: SLR derivations
           - href: supplemental/model-diagnostics-matrix.qmd
-            text: MLR matrix notation
+            text: Model diagnostics
           - href: supplemental/mlr-matrix.qmd
             text: MLR matrix notation
 
