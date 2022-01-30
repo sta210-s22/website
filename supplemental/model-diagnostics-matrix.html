@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.3.69">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - HW 5 - Statistics Experience</title>
+  <title>STA 210 - Spring 2022 - Model Diagnostics</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,8 @@
   <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
   <script src="../site_libs/quarto-search/fuse.min.js"></script>
   <script src="../site_libs/quarto-search/quarto-search.js"></script>
+  <link href="../supplemental/mlr-matrix.html" rel="next">
+  <link href="../supplemental/slr-derivations.html" rel="prev">
   <script src="../site_libs/quarto-html/quarto.js"></script>
   <script src="../site_libs/quarto-html/popper.min.js"></script>
   <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -49,11 +51,11 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-<meta name="twitter:title" content="STA 210 - Spring 2022 - HW 5 - Statistics Experience">
-<meta name="twitter:description" content="Due: Fri, Apr 15">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Model Diagnostics">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -65,7 +67,7 @@
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">HW 5 - Statistics Experience</h1>
+      <h1 class="quarto-secondary-nav-title">Model Diagnostics</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -283,12 +285,12 @@
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text text-start  collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-supplemental-notes" aria-expanded="false">Supplemental notes</a>
-      <a class="sidebar-item-toggle text-start collapsed " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-supplemental-notes" aria-expanded="false">
+        <a class="sidebar-item-text text-start  " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-supplemental-notes" aria-expanded="true">Supplemental notes</a>
+      <a class="sidebar-item-toggle text-start  " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-supplemental-notes" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-supplemental-notes" class="collapse list-unstyled sidebar-section depth1 ">  
+    <ul id="quarto-sidebar-section-supplemental-notes" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../supplemental/slr-derivations.html" class="sidebar-item-text ">SLR derivations</a>
@@ -296,7 +298,7 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../supplemental/model-diagnostics-matrix.html" class="sidebar-item-text ">Model diagnostics</a>
+  <a href="../supplemental/model-diagnostics-matrix.html" class="sidebar-item-text active">Model diagnostics</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -314,114 +316,138 @@
         <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">On this page</h2>
 <ul>
-<li><a href="#part-1-experience-statistics-outside-of-the-classroom" class="nav-link active" data-scroll-target="#part-1-experience-statistics-outside-of-the-classroom">Part 1: Experience statistics outside of the classroom</a>
-<ul class="collapse">
-<li><a href="#category-1-attend-a-talk-or-conference" class="nav-link" data-scroll-target="#category-1-attend-a-talk-or-conference">Category 1: Attend a talk or conference</a></li>
-<li><a href="#category-2-talk-with-a-statistician-data-scientist" class="nav-link" data-scroll-target="#category-2-talk-with-a-statistician-data-scientist">Category 2: Talk with a statistician/ data scientist</a></li>
-<li><a href="#category-3-listen-to-a-podcast-watch-video" class="nav-link" data-scroll-target="#category-3-listen-to-a-podcast-watch-video">Category 3: Listen to a podcast / watch video</a></li>
-<li><a href="#category-4-participate-in-a-data-science-competition-or-challenge" class="nav-link" data-scroll-target="#category-4-participate-in-a-data-science-competition-or-challenge">Category 4: Participate in a data science competition or challenge</a></li>
-<li><a href="#category-5-read-a-book-on-statisticsdata-science" class="nav-link" data-scroll-target="#category-5-read-a-book-on-statisticsdata-science">Category 5: Read a book on statistics/data science</a></li>
-<li><a href="#category-6-tidytuesday" class="nav-link" data-scroll-target="#category-6-tidytuesday">Category 6: TidyTuesday</a></li>
-<li><a href="#category-7-coding-out-loud" class="nav-link" data-scroll-target="#category-7-coding-out-loud">Category 7: Coding out loud</a></li>
-</ul></li>
-<li><a href="#part-2-summarize-your-experience" class="nav-link" data-scroll-target="#part-2-summarize-your-experience">Part 2: Summarize your experience</a></li>
-<li><a href="#submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+<li><a href="#matrix-form-for-the-regression-model" class="nav-link" data-scroll-target="#matrix-form-for-the-regression-model">Matrix Form for the Regression Model</a></li>
+<li><a href="#hat-matrix-leverage" class="nav-link" data-scroll-target="#hat-matrix-leverage">Hat Matrix &amp; Leverage</a></li>
+<li><a href="#standardized-residuals" class="nav-link" data-scroll-target="#standardized-residuals">Standardized Residuals</a></li>
+<li><a href="#cooks-distance" class="nav-link" data-scroll-target="#cooks-distance">Cook’s Distance</a></li>
 </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/hw/hw-5.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/supplemental/model-diagnostics-matrix.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content">
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7">HW 5 - Statistics Experience</h1>
-<p class="subtitle lead">Due: Fri, Apr 15</p>
+<h1 class="title d-none d-lg-block display-7">Model Diagnostics</h1>
 </header>
 
-<p>The world of statistics and data science is vast and continually growing! The goal of the statistics experience assignments is to help you engage with the statistics and data science communities outside of the classroom.</p>
-<p>You may submit the statistics experience assignment anytime between now and the deadline.</p>
-<p>Each experience has two parts:</p>
-<p>1️⃣ Have a statistics experience</p>
-<p>2️⃣ Make a slide summarizing on your experience</p>
-<p><strong>You must complete both parts to receive credit.</strong></p>
-<section id="part-1-experience-statistics-outside-of-the-classroom" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-experience-statistics-outside-of-the-classroom">Part 1: Experience statistics outside of the classroom</h2>
-<p>Complete an activity in one of the categories below. Under each category are suggested activities. You do not have to do one these suggested activities. You are welcome to find other activities as long as they are related to statistics/data science and they fit in one of the six categories. If there is an activity you’d like to do but you’re not sure if it qualifies for the statistics experience, just ask!</p>
-<section id="category-1-attend-a-talk-or-conference" class="level3">
-<h3 class="anchored" data-anchor-id="category-1-attend-a-talk-or-conference">Category 1: Attend a talk or conference</h3>
-<p>Attend an talk, panel, or conference related to statistics or data science. If you are attending a single talk or panel, it must be <em>at least 30 minutes</em> to count towards the statistics experience. The event can be in-person or online.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The following supplemental notes were created by <a href="https://www.mariatackett.net/">Dr.&nbsp;Maria Tackett</a> for STA 210. They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression. Additional supplemental notes will be added throughout the semester.</p>
+</div>
+</div>
+<p>This document discusses some of the mathematical details of the model diagnostics - leverage, standardized residuals, and Cook’s distance. We assume the reader knowledge of the matrix form for multiple linear regression. Please see <a href="../supplemental/mlr-matrix.html">Matrix Form of Linear Regression</a> for a review.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Suppose we have <span class="math inline">\(n\)</span> observations. Let the <span class="math inline">\(i^{th}\)</span> be <span class="math inline">\((x_{i1}, \ldots, x_{ip}, y_i)\)</span>, such that <span class="math inline">\(x_{i1}, \ldots, x_{ip}\)</span> are the explanatory variables (predictors) and <span class="math inline">\(y_i\)</span> is the response variable. We assume the data can be modeled using the least-squares regression model, such that the mean response for a given combination of explanatory variables follows the form in <a href="#eq-basic_model">Equation&nbsp;1</a>.</p>
+<p><span id="eq-basic_model"><span class="math display">\[
+y = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p
+\qquad(1)\]</span></span></p>
+<p>We can write the response for the <span class="math inline">\(i^{th}\)</span> observation as shown in <a href="#eq-ind_response">Equation&nbsp;2</a>.</p>
+<p><span id="eq-ind_response"><span class="math display">\[
+y_i = \beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \epsilon_i
+\qquad(2)\]</span></span></p>
+<p>such that <span class="math inline">\(\epsilon_i\)</span> is the amount <span class="math inline">\(y_i\)</span> deviates from <span class="math inline">\(\mu\{y|x_{i1}, \ldots, x_{ip}\}\)</span>, the mean response for a given combination of explanatory variables. We assume each <span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span>, where <span class="math inline">\(\sigma^2\)</span> is a constant variance for the distribution of the response <span class="math inline">\(y\)</span> for any combination of explanatory variables <span class="math inline">\(x_1, \ldots, x_p\)</span>.</p>
 </section>
-<section id="category-2-talk-with-a-statistician-data-scientist" class="level3">
-<h3 class="anchored" data-anchor-id="category-2-talk-with-a-statistician-data-scientist">Category 2: Talk with a statistician/ data scientist</h3>
-<p>Talk with someone who uses statistics in their daily work. This could include a professor, professional in industry, graduate student, etc.</p>
+<section id="matrix-form-for-the-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-form-for-the-regression-model">Matrix Form for the Regression Model</h2>
+<p>We can represent the <a href="#eq-basic_model">Equation&nbsp;1</a> and <a href="#eq-ind_response">Equation&nbsp;2</a> using matrix notation. Let</p>
+<p><span id="eq-matrix-notation"><span class="math display">\[
+\mathbf{Y} = \begin{bmatrix}y_1 \\ y_2 \\ \vdots \\y_n\end{bmatrix}
+\hspace{15mm}
+\mathbf{X} = \begin{bmatrix}x_{11} &amp; x_{12} &amp; \dots &amp; x_{1p} \\
+x_{21} &amp; x_{22} &amp; \dots &amp; x_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np} \end{bmatrix}
+\hspace{15mm}
+\boldsymbol{\beta}= \begin{bmatrix}\beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{bmatrix}
+\hspace{15mm}
+\boldsymbol{\epsilon}= \begin{bmatrix}\epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix}
+\qquad(3)\]</span></span></p>
+<p>Thus,</p>
+<p><span class="math display">\[\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{\epsilon}\]</span></p>
+<p>Therefore the estimated response for a given combination of explanatory variables and the associated residuals can be written as</p>
+<p><span id="eq-matrix_mean"><span class="math display">\[
+\hat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}} \hspace{10mm} \mathbf{e} = \mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}
+\qquad(4)\]</span></span></p>
 </section>
-<section id="category-3-listen-to-a-podcast-watch-video" class="level3">
-<h3 class="anchored" data-anchor-id="category-3-listen-to-a-podcast-watch-video">Category 3: Listen to a podcast / watch video</h3>
-<p>Listen to a podcast or watch a video about statistics and data science. The podcast or video must be <em>at least 30 minutes</em> to count towards the statistics experience. A few suggestions are below:</p>
+<section id="hat-matrix-leverage" class="level2">
+<h2 class="anchored" data-anchor-id="hat-matrix-leverage">Hat Matrix &amp; Leverage</h2>
+<p>Recall from the notes <a href="../supplemental/mlr-matrix.html">Matrix Form of Linear Regression</a> that <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> can be written as the following:</p>
+<p><span id="eq-beta-hat"><span class="math display">\[
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}
+\qquad(5)\]</span></span></p>
+<p>Combining <a href="#eq-matrix_mean">Equation&nbsp;4</a> and <a href="#eq-beta-hat">Equation&nbsp;5</a>, we can write <span class="math inline">\(\hat{\mathbf{Y}}\)</span> as the following:</p>
+<p><span id="eq-y-hat"><span class="math display">\[
+\begin{aligned}
+\hat{\mathbf{Y}} &amp;= \mathbf{X}\hat{\boldsymbol{\beta}} \\[10pt]
+&amp;= \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}\\
+\end{aligned}
+\qquad(6)\]</span></span></p>
+<p>We define the <strong>hat matrix</strong> as an <span class="math inline">\(n \times n\)</span> matrix of the form <span class="math inline">\(\mathbf{H} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\)</span>. Thus <a href="#eq-y-hat">Equation&nbsp;6</a> becomes</p>
+<p><span id="eq-y-hat-matrix"><span class="math display">\[
+\hat{\mathbf{Y}} = \mathbf{H}\mathbf{Y}
+\qquad(7)\]</span></span></p>
+<p>The diagonal elements of the hat matrix are a measure of how far the predictor variables of each observation are from the means of the predictor variables. For example, <span class="math inline">\(h_{ii}\)</span> is a measure of how far the values of the predictor variables for the <span class="math inline">\(i^{th}\)</span> observation, <span class="math inline">\(x_{i1}, x_{i2}, \ldots, x_{ip}\)</span>, are from the mean values of the predictor variables, <span class="math inline">\(\bar{x}_1, \bar{x}_2, \ldots, \bar{x}_p\)</span>. In the case of simple linear regression, the <span class="math inline">\(i^{th}\)</span> diagonal, <span class="math inline">\(h_{ii}\)</span>, can be written as</p>
+<p><span class="math display">\[
+h_{ii} =  \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{j=1}^{n}(x_j-\bar{x})^2}
+\]</span></p>
+<p>We call these diagonal elements, the <strong>leverage</strong> of each observation.</p>
+<p>The diagonal elements of the hat matrix have the following properties:</p>
 <ul>
-<li><a href="https://statsandstories.net/">Stats + Stories Podcast</a></li>
-<li><a href="https://casualinfer.libsyn.com/">Causal Inference Podcast</a></li>
-<li><a href="https://fivethirtyeight.com/tag/model-talk/">FiveThirtyEight Model Talk</a></li>
-<li><a href="https://www.rstudio.com/resources/rstudioglobal-2021/">rstudio::global 2021 talks</a></li>
-<li><a href="https://www.rstudio.com/resources/rstudioconf-2020/">rstudio::conf 2020 talks</a></li>
+<li><span class="math inline">\(0 \leq h_ii \leq 1\)</span></li>
+<li><span class="math inline">\(\sum\limits_{i=1}^{n} h_{ii} = p+1\)</span>, where <span class="math inline">\(p\)</span> is the number of predictor variables in the model.</li>
+<li>The mean hat value is <span class="math inline">\(\bar{h} = \frac{\sum\limits_{i=1}^{n} h_{ii}}{n} = \frac{p+1}{n}\)</span>.</li>
 </ul>
-<p>This list is not exhaustive. You may listen to other podcasts or watch other statistics/data science videos not included on this list. Ask your professor if you are unsure whether a particular podcast or video will count towards the statistics experience.</p>
+<p>Using these properties, we consider a point to have <strong>high leverage</strong> if it has a leverage value that is more than 2 times the average. In other words, observations with leverage greater than <span class="math inline">\(\frac{2(p+1)}{n}\)</span> are considered to be <strong>high leverage</strong> points, i.e.&nbsp;outliers in the predictor variables. We are interested in flagging high leverage points, because they may have an influence on the regression coefficients.</p>
+<p>When there are high leverage points in the data, the regression line will tend towards those points; therefore, one property of high leverage points is that they tend to have small residuals. We will show this by rewriting the residuals from <a href="#eq-matrix_mean">Equation&nbsp;4</a> using <a href="#eq-y-hat-matrix">Equation&nbsp;7</a>.</p>
+<p><span id="eq-resid-hat"><span class="math display">\[
+\begin{aligned}
+\mathbf{e} &amp;= \mathbf{Y} - \hat{\mathbf{Y}} \\[10pt]
+&amp; = \mathbf{Y} - \mathbf{H}\mathbf{Y} \\[10pt]
+&amp;= (1-\mathbf{H})\mathbf{Y}
+\end{aligned}
+\qquad(8)\]</span></span></p>
+<p>Note that the identity matrix and hat matrix are <strong>idempotent</strong>, i.e.&nbsp;<span class="math inline">\(\mathbf{I}\mathbf{I} = \mathbf{I}\)</span>, <span class="math inline">\(\mathbf{H}\mathbf{H} = \mathbf{H}\)</span>. Thus, <span class="math inline">\((\mathbf{I} - \mathbf{H})\)</span> is also idempotent. These matrices are also symmetric. Using these properties and <a href="#eq-resid-hat">Equation&nbsp;8</a>, we have that the variance-covariance matrix of the residuals <span class="math inline">\(\boldsymbol{e}\)</span>, is</p>
+<p><span id="eq-resid-var"><span class="math display">\[
+\begin{aligned}
+Var(\mathbf{e}) &amp;= \mathbf{e}\mathbf{e}^T \\[10pt]
+&amp;=  (1-\mathbf{H})Var(\mathbf{Y})^T(1-\mathbf{H})^T \\[10pt]
+&amp;= (1-\mathbf{H})\hat{\sigma}^2(1-\mathbf{H})^T  \\[10pt]
+&amp;= \hat{\sigma}^2(1-\mathbf{H})(1-\mathbf{H})  \\[10pt]
+&amp;= \hat{\sigma}^2(1-\mathbf{H})
+\end{aligned}
+\qquad(9)\]</span></span></p>
+<p>where <span class="math inline">\(\hat{\sigma}^2 = \frac{\sum_{i=1}^{n}e_i^2}{n-p-1}\)</span> is the estimated regression variance. Thus, the variance of the <span class="math inline">\(i^{th}\)</span> residual is <span class="math inline">\(Var(e_i) = \hat{\sigma}^2(1-h_{ii})\)</span>. Therefore, the higher the leverage, the smaller the variance of the residual. Because the expected value of the residuals is 0, we conclude that points with high leverage tend to have smaller residuals than points with lower leverage.</p>
 </section>
-<section id="category-4-participate-in-a-data-science-competition-or-challenge" class="level3">
-<h3 class="anchored" data-anchor-id="category-4-participate-in-a-data-science-competition-or-challenge">Category 4: Participate in a data science competition or challenge</h3>
-<p>Participate in a statistics or data science competition. You can participate individually or with a team. One option is DataFest, which will take place over the April 1-3, 2022 weekend. More information to follow <a href="https://www2.stat.duke.edu/datafest/">here</a>.</p>
+<section id="standardized-residuals" class="level2">
+<h2 class="anchored" data-anchor-id="standardized-residuals">Standardized Residuals</h2>
+<p>In general, we standardize a value by shifting by the expected value and rescaling by the standard deviation (or standard error). Thus, the <span class="math inline">\(i^{th}\)</span> standardized residual takes the form</p>
+<p><span class="math display">\[
+std.res_i = \frac{e_i - E(e_i)}{SE(e_i)}
+\]</span></p>
+<p>The expected value of the residuals is 0, i.e.&nbsp;<span class="math inline">\(E(e_i) = 0\)</span>. From <a href="#eq-resid-var">Equation&nbsp;9</a>), the standard error of the residual is <span class="math inline">\(SE(e_i) = \hat{\sigma}\sqrt{1-h_{ii}}\)</span>. Therefore,</p>
+<p><span id="eq-std-resid"><span class="math display">\[
+std.res_i = \frac{e_i}{\hat{\sigma}\sqrt{1-h_{ii}}}
+\qquad(10)\]</span></span></p>
 </section>
-<section id="category-5-read-a-book-on-statisticsdata-science" class="level3">
-<h3 class="anchored" data-anchor-id="category-5-read-a-book-on-statisticsdata-science">Category 5: Read a book on statistics/data science</h3>
-<p>There are <em>a lot</em> of books about statistics, data science, and related topics. A few suggestions are below. If you decide to read a book that isn’t on this list, ask your professor to make sure it counts toward the experience. Many of these books are available through Duke library.</p>
-<ul>
-<li><em>Weapons of Math Destruction</em> by Cathy O’Neil</li>
-<li><em>How Charts Lie: Getting Smarter about Visual Information</em> by Alberto Cairo</li>
-<li><em>The Theory that Would Not Die</em> by Sharon Bertsch McGrayne</li>
-<li><em>The Art of Statistics: How to learn from data</em> by David Spiegelhalter</li>
-<li><em>The Signal and the Noise: Why so many predictions fail - but some don’t</em> by Nate Silver</li>
-<li><em>How Charts Lie</em> by Alberto Cairo</li>
-<li><a href="https://teachdatascience.com/bookclub/">List of books about data science ethics</a></li>
-</ul>
-</section>
-<section id="category-6-tidytuesday" class="level3">
-<h3 class="anchored" data-anchor-id="category-6-tidytuesday">Category 6: TidyTuesday</h3>
-<p>You may also participate in a TidyTuesday challenge. New data sets are announced on Monday afternoons.You can find more information about TidyTuesday and see the data in the <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday GitHub repo</a>.</p>
-<p>A few guidelines:</p>
-<p>✅ Create a GitHub repo for your TidyTuesday submission. Your repo should include</p>
-<ul>
-<li>The R Markdown file with all the code needed to reproduce your visualization.</li>
-<li>A README that includes an image of your final visualization and a short summary (~ 1 paragraph) about your visualization.</li>
-</ul>
-<p>✅ The visualization should include features or customization that are beyond what we’ve done in class .</p>
-<p>✅ Include the link to your GitHub repo in the slide summarizing your experience.</p>
-</section>
-<section id="category-7-coding-out-loud" class="level3">
-<h3 class="anchored" data-anchor-id="category-7-coding-out-loud">Category 7: Coding out loud</h3>
-<p>Watch an episode of <a href="https://dukecct.github.io/coding-out-loud/">Coding out loud</a> (either live or pre-recorded) and work through the project.</p>
-<p>A few guidelines:</p>
-<p>✅ Create a GitHub repo for your Coding out loud submission. Your repo should include</p>
-<ul>
-<li>The Quarto file with all the code needed to reproduce your visualization.</li>
-<li>A README that includes an image of your final visualization and a short summary (~ 1 paragraph) about your visualization.</li>
-</ul>
-<p>✅ The final product (visualuzation, table, etc.) should include features or customization that are beyond what was achieved in the Coding out loud episode.</p>
-<p>✅ Include the link to your GitHub repo in the slide summarizing your experience.</p>
-</section>
-</section>
-<section id="part-2-summarize-your-experience" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-summarize-your-experience">Part 2: Summarize your experience</h2>
-<p>Make one slide summarizing your experience. Submit the slide as a PDF on Gradescope.</p>
-<p>Include the following on your slide:</p>
-<ul>
-<li>Name and brief description of the event/podcast/competition/etc.</li>
-<li>Something you found new, interesting, or unexpected</li>
-<li>How the event/podcast/competition/etc. connects to something we’ve done in class.</li>
-<li>Citation or link to web page for event/competition/etc.</li>
-</ul>
-<p><a href="https://docs.google.com/presentation/d/1Ua7rmAQn8FaRLxJpxaRvOZfBLIlEjYVxugEaaTcIjMQ/edit?usp=sharing">Click here</a> to see a template to help you get started on your slide. Your slide does not have to follow this exact format; it just needs to include the information mentioned above and be easily readable (i.e.&nbsp;use a reasonable font size!). Creativity is encouraged!</p>
-</section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submit the reflection as a PDF under the <strong>HW 5 - Statistics Experience</strong> assignment on Gradescope by <strong>Fri, Apr 15 at 5 pm ET.</strong> It must be submitted by the deadline on Gradescope to be considered for grading.</p>
+<section id="cooks-distance" class="level2">
+<h2 class="anchored" data-anchor-id="cooks-distance">Cook’s Distance</h2>
+<p>Cook’s distance is a measure of how much each observation influences the model coefficients, and thus the predicted values. The Cook’s distance for the <span class="math inline">\(i^{th}\)</span> observation can be written as</p>
+<p><span id="eq-cooksd"><span class="math display">\[
+D_i = \frac{(\hat{\mathbf{Y}} -\hat{\mathbf{Y}}_{(i)})^T(\hat{\mathbf{Y}} -\hat{\mathbf{Y}}_{(i)})}{(p+1)\hat{\sigma}}
+\qquad(11)\]</span></span></p>
+<p>where <span class="math inline">\(\hat{\mathbf{Y}}_{(i)}\)</span> is the vector of predicted values from the model fitted when the <span class="math inline">\(i^{th}\)</span> observation is deleted. Cook’s Distance can be calculated without deleting observations one at a time, since <a href="#eq-cooksd-v2">Equation&nbsp;12</a> below is mathematically equivalent to <a href="#eq-cooksd">Equation&nbsp;11</a>.</p>
+<p><span id="eq-cooksd-v2"><span class="math display">\[
+D_i = \frac{1}{p+1}std.res_i^2\Bigg[\frac{h_{ii}}{(1-h_{ii})}\Bigg] = \frac{e_i^2}{(p+1)\hat{\sigma}^2(1-h_{ii})}\Bigg[\frac{h_{ii}}{(1-h_{ii})}\Bigg]
+\qquad(12)\]</span></span></p>
 
 
 </section>
@@ -600,8 +626,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../supplemental/slr-derivations.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SLR derivations</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../supplemental/mlr-matrix.html">
+        <span class="nav-page-text">MLR matrix notation</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
