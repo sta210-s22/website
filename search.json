@@ -137,7 +137,7 @@
     "href": "labs/lab-3.html#meet-your-team",
     "title": "Lab 3 - Coffee ratings",
     "section": "Meet your team!",
-    "text": "Meet your team!\nClick here to see the team assignments for STA 210. This will be your team for labs and the final project.\n\n\n\n\n\n\nWarning\n\n\n\nTeam assignments to be posted!\n\n\nBefore you get started on the lab, your TA will walk you through the following:\n\nIcebreaker activity to get to know your teammates.\nCome up with a team name. You can’t use the same name as another team, so I encourage you to be creative! Your TA will get your team name by the end of lab.\nFill out the team agreement. This will help you figure out a plan for communication and working together during labs and outside of lab times. You can find the team agreement in the GitHub repo team-agreement-[github_team_name].\nHave one person from the team clone the repo and start a new RStudio project. This person will type the team’s responses as you discuss the sections of the agreement. No one else in the team should type at this point but should be contributing to the discussion.\nBe sure to push the completed agreement to GitHub. Each team member can refer to the document in this repo or download the PDF of the agreement for future reference. You do not need to submit the agreement on Gradescope."
+    "text": "Meet your team!\nClick here to see the team assignments for STA 210. This will be your team for labs and the final project.\nBefore you get started on the lab, your TA will walk you through the following:\n\nIcebreaker activity to get to know your teammates.\nCome up with a team name. You can’t use the same name as another team, so I encourage you to be creative! Your TA will get your team name by the end of lab.\nFill out the team agreement. This will help you figure out a plan for communication and working together during labs and outside of lab times. You can find the team agreement in the GitHub repo team-agreement-[github_team_name].\nHave one person from the team clone the repo and start a new RStudio project. This person will type the team’s responses as you discuss the sections of the agreement. No one else in the team should type at this point but should be contributing to the discussion.\nBe sure to push the completed agreement to GitHub. Each team member can refer to the document in this repo or download the PDF of the agreement for future reference. You do not need to submit the agreement on Gradescope."
   },
   {
     "objectID": "labs/lab-3.html#getting-started",
@@ -991,7 +991,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
@@ -2202,7 +2202,7 @@
     "href": "slides/lab-3.html#meet-your-team",
     "title": "Lab 3 - Coffee ratings",
     "section": "Meet your team!",
-    "text": "Meet your team!\n\nClick here to find your team number.\n\n\n\n\n\n\n\nWarning\n\n\nTeam assignments to be posted!\n\n\n\n\nSit with your team."
+    "text": "Meet your team!\n\nClick here to find your team.\nSit with your team."
   },
   {
     "objectID": "slides/lab-3.html#icebreaker",
