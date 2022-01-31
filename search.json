@@ -907,7 +907,7 @@
     "href": "course-team.html#teaching-assistants",
     "title": "Teaching team",
     "section": "Teaching assistants",
-    "text": "Teaching assistants\n\n\n\nName\nOffice hours\nLocation\n\n\n\n\nMartha Aboagye\nThursday 7 - 9 pm\nZoom\n\n\nRichard Fremgen\nTues 7 - 9 pm\nZoom\n\n\nEmily Gentles\nWednesday 1 - 3 pm\nOld Chem 203B (On Zoom until January 18)\n\n\nSara Mehta\nMon 2 - 4 pm\nZoom\n\n\nRick Presman\nThursday 3:30 - 4:30 pm\nZoom\n\n\n\nFri 9 - 10 am\nZoom\n\n\nShari Tian\nTue 8 - 10 am\nZoom\n\n\nAaditya Warrier\nMon 12pm - 1pm\nZoom\n\n\n\nFri 1:30 - 2:30 pm\nZoom"
+    "text": "Teaching assistants\n\n\n\n\nName\nOffice hours\nLocation\n\n\n\n\n\nMartha Aboagye\nThursday 7 - 9 pm\nZoom\n\n\n\nRichard Fremgen\nTues 7 - 9 pm\nZoom\n\n\n\nEmily Gentles\nWednesday 1 - 3 pm\nOld Chem 203B (On Zoom until January 18)\n\n\n\nSara Mehta\nMon 2 - 4 pm\nZoom\n\n\n\nRick Presman\nThursday 3:30 - 4:30 pm\nFri 9 - 10 am\nZoom\n\n\n\nShari Tian\nTue 8 - 10 am\nZoom\n\n\n\nAaditya Warrier\nMon 12pm - 1pm\nFri 1:30 - 2:30 pm\nZoom"
   },
   {
     "objectID": "computing-pipelines.html#simple-linear-regression",
@@ -991,14 +991,14 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
