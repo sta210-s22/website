@@ -30,11 +30,7 @@ library(countdown)
 
 ## Meet your team!
 
--   **Click here** to find your team number.
-
-::: callout-warning
-Team assignments to be posted!
-:::
+-   [**Click here**](https://github.com/sta210-s22/teams/blob/master/teams.csv) to find your team.
 
 -   Sit with your team.
 

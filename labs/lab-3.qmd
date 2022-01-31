@@ -18,12 +18,8 @@ By the end of the lab you will...
 
 ## Meet your team!
 
-**Click here** to see the team assignments for STA 210.
+[**Click here**](https://github.com/sta210-s22/teams/blob/master/teams.csv) to see the team assignments for STA 210.
 This will be your team for labs and the final project.
-
-::: callout-warning
-Team assignments to be posted!
-:::
 
 Before you get started on the lab, your TA will walk you through the following:
 
