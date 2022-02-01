@@ -2,7 +2,8 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.3.74">
-  <title>STA 210 - Spring 2022 - Lab 3 - Coffee ratings</title>
+  <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
+  <title>STA 210 - Spring 2022 - Multiple linear regression (MLR)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -94,6 +95,8 @@
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -386,9 +389,7 @@
       margin-right: 0; 
     }
   </style>
-  <link href="../site_libs/countdown-0.3.5/countdown.css" rel="stylesheet">
-  <script src="../site_libs/countdown-0.3.5/countdown.js"></script>
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Lab 3 - Coffee ratings">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Multiple linear regression (MLR)">
 <meta name="twitter:description" content="STA 210 - Spring 2022">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
@@ -401,8 +402,9 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Lab 3 - Coffee ratings</h1>
+  <h1 class="title">Multiple linear regression (MLR)</h1>
   <p class="subtitle">STA 210 - Spring 2022</p>
+  <p class="author">Dr.&nbsp;Mine Çetinkaya-Rundel</p>
 </section>
 
 <section>
@@ -410,172 +412,363 @@
 <h1>Welcome</h1>
 
 </section>
-<section id="goals" class="slide level2">
-<h2>Goals</h2>
+<section id="announcements" class="slide level2 smaller">
+<h2>Announcements</h2>
 <ul>
-<li>Meet your team!</li>
-<li>Ice breaker / get to know your team</li>
-<li>Team agreement</li>
-<li>Lab 3 - Coffee ratings</li>
-</ul>
-</section>
-<section id="meet-your-team" class="slide level2">
-<h2>Meet your team!</h2>
-<ul>
-<li><p><a href="https://github.com/sta210-s22/teams/blob/master/teams.csv"><strong>Click here</strong></a> to find your team.</p></li>
-<li><p>Sit with your team.</p></li>
-</ul>
-</section>
-<section id="icebreaker" class="slide level2">
-<h2>Icebreaker</h2>
-<ul>
-<li><p>Quick introductions: Name and hometown</p></li>
-<li><p>Choose a reporter: The person whose birthday is closest to January 31</p></li>
-<li><p>Identify 8 things everyone in the group has in common:</p>
-<ul>
-<li>Not clothes, e.g., we’re all wearing shoes!</li>
-<li>Not body parts, e.g., we all have a nose!</li>
-</ul></li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div class="countdown" id="timer_61f8b05b" style="right:0;bottom:0;font-size:2em;" data-warnwhen="0">
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
-</section>
-<section id="team-name-agreement" class="slide level2">
-<h2>Team name + agreement</h2>
-<ul>
-<li><p>Come up with a team name. You can’t have the same name as another group in the class, so be creative!</p>
-<ul>
-<li>Your TA will get your team name by the end of lab.</li>
-</ul></li>
-<li><p>Fill out the team agreement. The goals of the agreement are to…</p>
-<ul>
-<li>Gain a common understanding of the team’s goals and expectations for collaboration</li>
-<li>Make a plan for team communication</li>
-<li>Make a plan for working outside of lab</li>
-</ul></li>
-</ul>
-</section>
-<section id="team-workflow" class="slide level2">
-<h2>Team workflow</h2>
-<ul>
-<li><p>Only one team member should type at a time. There are markers in today’s lab to help you determine whose turn it is to type.</p>
-<ul>
-<li>Every team member should still be engaged in discussion for all questions, even if it’s not your turn type.</li>
-</ul></li>
-<li><p>Don’t forget to <strong>pull</strong> to get your teammates’ updates before making changes to the <code>.qmd</code> file.</p></li>
-<li><p>Only <strong>one</strong> submission for the team on Gradescope.</p></li>
-</ul>
-</section>
-<section id="team-workflow-in-action" class="slide level2">
-<h2>Team workflow, in action</h2>
-<ul>
-<li>Complete the “Workflow: Using Git and GitHub as a team” section of the lab in your teams.</li>
-<li>When done, pause and wait for your TA to walk you through the rest of the slides before continuing to the following section.</li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div class="countdown" id="timer_61f8b2f6" style="right:0;bottom:0;font-size:2em;" data-warnwhen="0">
-<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
-</section>
-<section id="tips-for-working-in-a-team" class="slide level2">
-<h2>Tips for working in a team</h2>
-<ul>
-<li>Do not pressure each other to finish early; use the time wisely to really learn the material and produce a quality report.</li>
-<li>The labs are structured to help you learn the steps of a data analysis. Do not split up the lab among the team members; work on it together in its entirety.</li>
-<li>Everyone has something to contribute! Use the lab groups as an opportunity to share ideas and learn from each other.</li>
-</ul>
-</section></section>
-<section>
-<section id="model-diagnostics" class="title-slide slide level1 center">
-<h1>Model diagnostics</h1>
-
-</section>
-<section id="the-data" class="slide level2">
-<h2>The data</h2>
-
-<img data-src="lab-3_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="the-data-an-outlier" class="slide level2">
-<h2>The data + an outlier</h2>
-
-<img data-src="lab-3_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="the-data-influential-point" class="slide level2">
-<h2>The data + influential point</h2>
-
-<img data-src="lab-3_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="influential-point" class="slide level2">
-<h2>Influential point</h2>
-<p>An observation is <strong>influential</strong> if removing it substantially changes the coefficients of the regression model.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="lab-3_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:100.0%"></p>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="lab-3_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:100.0%"></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="influential-points" class="slide level2">
-<h2>Influential points</h2>
-<ul>
-<li><p>Influential points have a large impact on the coefficients and standard errors used for inference</p></li>
-<li><p>These points can sometimes be identified in a scatterplot if there is only one predictor variable, this is often not the case when there are multiple predictors</p></li>
-<li><p>We will use measures to quantify an individual observation’s influence on the regression model: <strong>leverage</strong>, <strong>standardized residuals</strong>, and <strong>Cook’s distance</strong></p></li>
-</ul>
-</section>
-<section id="remember-augment" class="slide level2">
-<h2>Remember <code>augment()</code>?</h2>
-<div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>mtcars_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">fit</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">augment</span>(mtcars_fit<span class="sc">$</span>fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 32 × 9
-   .rownames           mpg  disp .fitted .resid   .hat .sigma .cooksd .std.resid
-   &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
- 1 Mazda RX4          21    160     23.0 -2.01  0.0418   3.29 8.65e-3     -0.630
- 2 Mazda RX4 Wag      21    160     23.0 -2.01  0.0418   3.29 8.65e-3     -0.630
- 3 Datsun 710         22.8  108     25.1 -2.35  0.0629   3.28 1.87e-2     -0.746
- 4 Hornet 4 Drive     21.4  258     19.0  2.43  0.0328   3.27 9.83e-3      0.761
- 5 Hornet Sportabout  18.7  360     14.8  3.94  0.0663   3.22 5.58e-2      1.25 
- 6 Valiant            18.1  225     20.3 -2.23  0.0313   3.28 7.82e-3     -0.696
- 7 Duster 360         14.3  360     14.8 -0.462 0.0663   3.31 7.70e-4     -0.147
- 8 Merc 240D          24.4  147.    23.6  0.846 0.0461   3.30 1.72e-3      0.267
- 9 Merc 230           22.8  141.    23.8 -0.997 0.0482   3.30 2.50e-3     -0.314
-10 Merc 280           19.2  168.    22.7 -3.49  0.0396   3.24 2.48e-2     -1.10 
-# … with 22 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="model-diagnostics-1" class="slide level2 smaller">
-<h2>Model diagnostics</h2>
-<p>Use the <code>augment()</code> function to output statistics that can be used to diagnose the model, along with the predicted values and residuals:</p>
+<li class="fragment"><p>Lab 3:</p>
 <div>
 <ul>
-<li>outcome and predictor variables in the model</li>
-<li><strong><code>.fitted</code></strong>: predicted values</li>
-<li><strong><code>.se.fit</code></strong>: standard errors of predicted values</li>
-<li><strong><code>.resid</code></strong>: residuals</li>
-<li><strong><code>.hat</code></strong>: leverage</li>
-<li><strong><code>.sigma</code></strong>: estimate of residual standard deviation when the corresponding observation is dropped from model</li>
-<li><strong><code>.cooksd</code></strong>: Cook’s distance</li>
-<li><strong><code>.std.resid</code></strong>: standardized residuals</li>
+<li>Any questions about lab / teamwork?</li>
+<li>Due Friday, Feb 4 at 5pm</li>
+</ul>
+</div></li>
+<li class="fragment"><p>Exam 1:</p>
+<div>
+<ul>
+<li>Released Friday, Feb 4</li>
+<li>Multiple choice questions (mostly conceptual) + open-ended exercises (like lab + homework)</li>
+<li>Open book, open internet, open questions to me + Rick (head TA) only</li>
+<li>No communication with others or posting questions on the internet allowed</li>
+<li>What can you do to start preparing?
+<ul>
+<li><p>Review readings, assignments, feedback returned</p></li>
+<li><p>Organize your notes</p></li>
+<li><p>Come to office hours with questions</p></li>
+</ul></li>
+</ul>
+</div></li>
+</ul>
+</section>
+<section id="computational-setup" class="slide level2">
+<h2>Computational setup</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)   <span class="co"># for data wrangling and visualization</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)  <span class="co"># for modeling</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(openintro)   <span class="co"># for the duke_forest dataset</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(scales)      <span class="co"># for pretty axis labels</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(knitr)       <span class="co"># for pretty tables</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(patchwork)   <span class="co"># for laying out plots</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="considering-multiple-variables" class="title-slide slide level1 center">
+<h1>Considering multiple variables</h1>
+
+</section>
+<section id="house-prices-in-levittown" class="slide level2">
+<h2>House prices in Levittown</h2>
+<ul>
+<li class="fragment">The data set contains the sales price and characteristics of 85 homes in Levittown, NY that sold between June 2010 and May 2011.</li>
+<li class="fragment">Levittown was built right after WWII and was the first planned suburban community built using mass production techniques.</li>
+<li class="fragment">The article <a href="https://www.theguardian.com/cities/2015/apr/28/levittown-america-prototypical-suburb-history-cities">“Levittown, the prototypical American suburb – a history of cities in 50 buildings, day 25”</a> gives an overview of Levittown’s controversial history.</li>
+</ul>
+</section>
+<section id="analysis-goals" class="slide level2">
+<h2>Analysis goals</h2>
+<ul>
+<li class="fragment"><p>We would like to use the characteristics of a house to understand variability in the sales price.</p></li>
+<li class="fragment"><p>To do so, we will fit a <strong>multiple linear regression model</strong>.</p></li>
+<li class="fragment"><p>Using our model, we can answers questions such as</p>
+<div>
+<ul>
+<li>What is the relationship between the characteristics of a house in Levittown and its sale price?</li>
+<li>Given its characteristics, what is the expected sale price of a house in Levittown?</li>
+</ul>
+</div></li>
+</ul>
+</section>
+<section id="the-data" class="slide level2 smaller">
+<h2>The data</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>levittown <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides/data/homeprices.csv"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a>levittown</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 85 × 7
+   bedrooms bathrooms living_area lot_size year_built property_tax sale_price
+      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+ 1        4       1          1380     6000       1948         8360     350000
+ 2        4       2          1761     7400       1951         5754     360000
+ 3        4       2          1564     6000       1948         8982     350000
+ 4        5       2          2904     9898       1949        11664     375000
+ 5        5       2.5        1942     7788       1948         8120     370000
+ 6        4       2          1830     6000       1948         8197     335000
+ 7        4       1          1585     6000       1948         6223     295000
+ 8        4       1           941     6800       1951         2448     250000
+ 9        4       1.5        1481     6000       1948         9087     299990
+10        3       2          1630     5998       1948         9430     375000
+# … with 75 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="variables" class="slide level2 smaller">
+<h2>Variables</h2>
+<p><strong>Predictors</strong>:</p>
+<div>
+<ul>
+<li><code>bedrooms</code>: Number of bedrooms</li>
+<li><code>bathrooms</code>: Number of bathrooms</li>
+<li><code>living_area</code>: Total living area of the house (in square feet)</li>
+<li><code>lot_size</code>: Total area of the lot (in square feet)</li>
+<li><code>year_built</code>: Year the house was built</li>
+<li><code>property_tax</code>: Annual property taxes (in USD)</li>
+</ul>
+</div>
+<p><strong>Response:</strong> <code>sale_price</code>: Sales price (in USD)</p>
+</section>
+<section id="eda-response-variable" class="slide level2">
+<h2>EDA: Response variable</h2>
+
+<img data-src="lec-8_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<section id="eda-predictor-variables" class="slide level2">
+<h2>EDA: Predictor variables</h2>
+
+<img data-src="lec-8_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="eda-response-vs.-predictors" class="slide level2">
+<h2>EDA: Response vs.&nbsp;Predictors</h2>
+
+<img data-src="lec-8_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="single-vs.-multiple-predictors" class="slide level2">
+<h2>Single vs.&nbsp;multiple predictors</h2>
+<p>So far we’ve used a <em>single predictor variable</em> to understand variation in a quantitative response variable</p>
+<div class="fragment">
+<p>Now we want to use <em>multiple predictor variables</em> to understand variation in a quantitative response variable</p>
+</div>
+</section></section>
+<section>
+<section id="multiple-linear-regression" class="title-slide slide level1 center">
+<h1>Multiple linear regression</h1>
+
+</section>
+<section id="multiple-linear-regression-mlr" class="slide level2 smaller">
+<h2>Multiple linear regression (MLR)</h2>
+<p>Based on the analysis goals, we will use a <strong>multiple linear regression</strong> model of the following form</p>
+<p><span class="math display">\[
+\begin{aligned}\hat{\text{sale_price}} ~ = &amp; ~
+\hat{\beta}_0 + \hat{\beta}_1 \text{bedrooms} + \hat{\beta}_2 \text{bathrooms} + \hat{\beta}_3 \text{living_area} \\
+&amp;+ \hat{\beta}_4 \text{lot_size} + \hat{\beta}_5 \text{year_built} + \hat{\beta}_6 \text{property_tax}\end{aligned}
+\]</span></p>
+<p>Similar to simple linear regression, this model assumes that at each combination of the predictor variables, the values <code>sale_price</code> follow a Normal distribution.</p>
+</section>
+<section id="regression-model" class="slide level2">
+<h2>Regression Model</h2>
+<p><strong>Recall:</strong> The simple linear regression model assumes</p>
+<p><span class="math display">\[
+Y|X\sim N(\beta_0 + \beta_1 X, \sigma_{\epsilon}^2)
+\]</span></p>
+<div class="fragment">
+<p><strong>Similarly:</strong> The multiple linear regression model assumes</p>
+<p><span class="math display">\[
+Y|X_1, X_2, \ldots, X_p \sim N(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p, \sigma_{\epsilon}^2)
+\]</span></p>
+</div>
+</section>
+<section id="the-mlr-model" class="slide level2">
+<h2>The MLR model</h2>
+<p>For a given observation <span class="math inline">\((x_{i1}, x_{i2} \ldots, x_{ip}, y_i)\)</span></p>
+<p><span class="math display">\[
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon_{i} \hspace{8mm} \epsilon_i \sim N(0,\sigma_\epsilon^2)
+\]</span></p>
+</section>
+<section id="prediction" class="slide level2">
+<h2>Prediction</h2>
+<p>At any combination of the predictors, the mean value of the response <span class="math inline">\(Y\)</span>, is</p>
+<p><span class="math display">\[
+\mu_{Y|X_1, \ldots, X_p} = \beta_0 + \beta_1 X_{1} + \beta_2 X_2 + \dots + \beta_p X_p
+\]</span></p>
+<div class="fragment">
+<p>Using multiple linear regression, we can estimate the mean response for any combination of predictors</p>
+<p><span class="math display">\[
+\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_{1} + \hat{\beta}_2 X_2 + \dots + \hat{\beta}_p X_{p}
+\]</span></p>
+</div>
+</section>
+<section id="model-fit" class="slide level2 smaller">
+<h2>Model fit</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>price_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">fit</span>(sale_price <span class="sc">~</span> bedrooms <span class="sc">+</span> bathrooms <span class="sc">+</span> living_area <span class="sc">+</span> lot_size <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>        year_built <span class="sc">+</span> property_tax, <span class="at">data =</span> levittown)</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">tidy</span>(price_fit) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-7148818.957</td>
+<td style="text-align: right;">3820093.694</td>
+<td style="text-align: right;">-1.871</td>
+<td style="text-align: right;">0.065</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bedrooms</td>
+<td style="text-align: right;">-12291.011</td>
+<td style="text-align: right;">9346.727</td>
+<td style="text-align: right;">-1.315</td>
+<td style="text-align: right;">0.192</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bathrooms</td>
+<td style="text-align: right;">51699.236</td>
+<td style="text-align: right;">13094.170</td>
+<td style="text-align: right;">3.948</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">living_area</td>
+<td style="text-align: right;">65.903</td>
+<td style="text-align: right;">15.979</td>
+<td style="text-align: right;">4.124</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lot_size</td>
+<td style="text-align: right;">-0.897</td>
+<td style="text-align: right;">4.194</td>
+<td style="text-align: right;">-0.214</td>
+<td style="text-align: right;">0.831</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">year_built</td>
+<td style="text-align: right;">3760.898</td>
+<td style="text-align: right;">1962.504</td>
+<td style="text-align: right;">1.916</td>
+<td style="text-align: right;">0.059</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">property_tax</td>
+<td style="text-align: right;">1.476</td>
+<td style="text-align: right;">2.832</td>
+<td style="text-align: right;">0.521</td>
+<td style="text-align: right;">0.604</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="model-equation" class="slide level2">
+<h2>Model equation</h2>
+<p><span class="math display">\[
+\begin{align}\hat{\text{price}} = &amp; -7148818.957 - 12291.011 \times \text{bedrooms}\\[5pt]  
+&amp;+ 51699.236 \times \text{bathrooms}  + 65.903 \times \text{living area}\\[5pt]
+&amp;- 0.897 \times \text{lot size} +  3760.898 \times \text{year built}\\[5pt]
+&amp;+ 1.476 \times \text{property tax}
+\end{align}
+\]</span></p>
+</section>
+<section id="interpreting-hatbeta_j" class="slide level2 smaller">
+<h2>Interpreting <span class="math inline">\(\hat{\beta}_j\)</span></h2>
+<ul>
+<li class="fragment">The estimated coefficient <span class="math inline">\(\hat{\beta}_j\)</span> is the expected change in the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(x_j\)</span> increases by one unit, <i>holding the values of all other predictor variables constant</i>.</li>
+</ul>
+<div class="fragment">
+<ul>
+<li class="fragment"><strong>Example:</strong> The estimated coefficient for <code>living_area</code> is 65.90. This means for each additional square foot of living area, we expect the sale price of a house in Levittown, NY to increase by $65.90, on average, holding all other predictor variables constant.</li>
+</ul>
+</div>
+</section>
+<section id="prediction-1" class="slide level2 smaller">
+<h2>Prediction</h2>
+<div class="question">
+<p>What is the predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1,050 square feet of living area, 6,000 square foot lot size, built in 1948 with $6,306 in property taxes?</p>
+</div>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="sc">-</span><span class="fl">7148818.957</span> <span class="sc">-</span> <span class="fl">12291.011</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">51699.236</span> <span class="sc">*</span> <span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fl">65.903</span> <span class="sc">*</span> <span class="dv">1050</span> <span class="sc">-</span> <span class="fl">0.897</span> <span class="sc">*</span> <span class="dv">6000</span> <span class="sc">+</span> <span class="fl">3760.898</span> <span class="sc">*</span> <span class="dv">1948</span> <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fl">1.476</span> <span class="sc">*</span> <span class="dv">6306</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 265360.4</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>The predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes is <strong>$265,360</strong>.</p>
+</div>
+</section>
+<section id="prediction-revisit" class="slide level2">
+<h2>Prediction, revisit</h2>
+<p>Just like with simple linear regression, we can use the <code>predict()</code> function in R to calculate the appropriate intervals for our predicted values:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>new_house <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="at">bedrooms =</span> <span class="dv">3</span>, <span class="at">bathrooms =</span> <span class="dv">1</span>, </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">living_area =</span> <span class="dv">1050</span>, <span class="at">lot_size =</span> <span class="dv">6000</span>, </span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="at">year_built =</span> <span class="dv">1948</span>, <span class="at">property_tax =</span> <span class="dv">6306</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  )</span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="fu">predict</span>(price_fit, new_house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+    .pred
+    &lt;dbl&gt;
+1 265360.</code></pre>
+</div>
+</div>
+</section>
+<section id="confidence-interval-for-hatmu_y" class="slide level2">
+<h2>Confidence interval for <span class="math inline">\(\hat{\mu}_y\)</span></h2>
+<div class="question">
+<p>Calculate a 95% confidence interval for the <strong>estimated mean price</strong> of houses in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes.</p>
+</div>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">predict</span>(price_fit, new_house, <span class="at">type =</span> <span class="st">"conf_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  .pred_lower .pred_upper
+        &lt;dbl&gt;       &lt;dbl&gt;
+1     238482.     292239.</code></pre>
+</div>
+</div>
+</section>
+<section id="prediction-interval-for-haty" class="slide level2">
+<h2>Prediction interval for <span class="math inline">\(\hat{y}\)</span></h2>
+<div class="question">
+<p>Calculate a 95% prediction interval for an individual house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes.</p>
+</div>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">predict</span>(price_fit, new_house, <span class="at">type =</span> <span class="st">"pred_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  .pred_lower .pred_upper
+        &lt;dbl&gt;       &lt;dbl&gt;
+1     167277.     363444.</code></pre>
+</div>
+</div>
+</section>
+<section id="cautions" class="slide level2">
+<h2>Cautions</h2>
+<ul>
+<li class="fragment"><strong>Do not extrapolate!</strong> Because there are multiple predictor variables, there is the potential to extrapolate in many directions</li>
+<li class="fragment">The multiple regression model only shows <strong>association, not causality</strong>
+<ul>
+<li class="fragment">To show causality, you must have a carefully designed experiment or carefully account for confounding variables in an observational study</li>
+</ul></li>
+</ul>
+</section>
+<section id="recap" class="slide level2">
+<h2>Recap</h2>
+<div>
+<ul>
+<li><p>Introduced multiple linear regression</p></li>
+<li><p>Interpreted a coefficient <span class="math inline">\(\hat{\beta}_j\)</span></p></li>
+<li><p>Used the model to calculate predicted values and the corresponding intervals</p></li>
 </ul>
 </div>
 
@@ -595,6 +788,9 @@
   <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
@@ -616,7 +812,9 @@
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'multiplex': {"secret":null,"id":"38121118e52e5514","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
@@ -787,10 +985,10 @@
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
-          RevealNotes,
+          
           RevealSearch,
           RevealZoom
         ]
