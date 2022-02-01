@@ -991,7 +991,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
@@ -1803,7 +1803,7 @@
     "href": "slides/lec-8.html#computational-setup",
     "title": "Multiple linear regression (MLR)",
     "section": "Computational setup",
-    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)   # for data wrangling and visualization\nlibrary(tidymodels)  # for modeling\nlibrary(openintro)   # for the duke_forest dataset\nlibrary(scales)      # for pretty axis labels\nlibrary(knitr)       # for pretty tables\nlibrary(patchwork)   # for laying out plots\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)   # for data wrangling and visualization\nlibrary(tidymodels)  # for modeling\nlibrary(openintro)   # for the duke_forest dataset\nlibrary(scales)      # for pretty axis labels\nlibrary(knitr)       # for pretty tables\nlibrary(patchwork)   # for laying out plots\nlibrary(GGally)      # for pairwise plots\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
   },
   {
     "objectID": "slides/lec-8.html#house-prices-in-levittown",
@@ -1853,6 +1853,13 @@
     "title": "Multiple linear regression (MLR)",
     "section": "EDA: Response vs. Predictors",
     "text": "EDA: Response vs. Predictors"
+  },
+  {
+    "objectID": "slides/lec-8.html#eda-all-variables",
+    "href": "slides/lec-8.html#eda-all-variables",
+    "title": "Multiple linear regression (MLR)",
+    "section": "EDA: All variables",
+    "text": "EDA: All variables\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggpairs(levittown) +\n  theme(\n    axis.text.y = element_text(size = 10),\n    axis.text.x = element_text(angle = 45, size = 10),\n    strip.text.y = element_text(angle = 0, hjust = 0)\n    )"
   },
   {
     "objectID": "slides/lec-8.html#single-vs.-multiple-predictors",

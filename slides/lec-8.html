@@ -449,9 +449,10 @@
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(scales)      <span class="co"># for pretty axis labels</span></span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(knitr)       <span class="co"># for pretty tables</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(patchwork)   <span class="co"># for laying out plots</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(GGally)      <span class="co"># for pairwise plots</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -531,6 +532,35 @@
 <h2>EDA: Response vs.&nbsp;Predictors</h2>
 
 <img data-src="lec-8_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="eda-all-variables" class="slide level2">
+<h2>EDA: All variables</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Plot</a></li><li><a href="#tabset-1-2">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-8_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell" data-layout-align="center" data-hash="lec-8_cache/revealjs/levittown-pairs_cd281d575ae5c06e79e7d321902ee297">
+<div class="sourceCode" id="cb4" data-code-line-numbers="|1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggpairs</span>(levittown) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">theme</span>(</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">strip.text.y =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>, <span class="at">hjust =</span> <span class="dv">0</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="single-vs.-multiple-predictors" class="slide level2">
 <h2>Single vs.&nbsp;multiple predictors</h2>
 <p>So far we’ve used a <em>single predictor variable</em> to understand variation in a quantitative response variable</p>
@@ -589,13 +619,13 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsi
 <section id="model-fit" class="slide level2 smaller">
 <h2>Model fit</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>price_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">fit</span>(sale_price <span class="sc">~</span> bedrooms <span class="sc">+</span> bathrooms <span class="sc">+</span> living_area <span class="sc">+</span> lot_size <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>        year_built <span class="sc">+</span> property_tax, <span class="at">data =</span> levittown)</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">tidy</span>(price_fit) <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>price_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">fit</span>(sale_price <span class="sc">~</span> bedrooms <span class="sc">+</span> bathrooms <span class="sc">+</span> living_area <span class="sc">+</span> lot_size <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>        year_built <span class="sc">+</span> property_tax, <span class="at">data =</span> levittown)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">tidy</span>(price_fit) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table>
 <thead>
@@ -690,9 +720,9 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsi
 </div>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="sc">-</span><span class="fl">7148818.957</span> <span class="sc">-</span> <span class="fl">12291.011</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">51699.236</span> <span class="sc">*</span> <span class="dv">1</span> <span class="sc">+</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fl">65.903</span> <span class="sc">*</span> <span class="dv">1050</span> <span class="sc">-</span> <span class="fl">0.897</span> <span class="sc">*</span> <span class="dv">6000</span> <span class="sc">+</span> <span class="fl">3760.898</span> <span class="sc">*</span> <span class="dv">1948</span> <span class="sc">+</span> </span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fl">1.476</span> <span class="sc">*</span> <span class="dv">6306</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="sc">-</span><span class="fl">7148818.957</span> <span class="sc">-</span> <span class="fl">12291.011</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">51699.236</span> <span class="sc">*</span> <span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fl">65.903</span> <span class="sc">*</span> <span class="dv">1050</span> <span class="sc">-</span> <span class="fl">0.897</span> <span class="sc">*</span> <span class="dv">6000</span> <span class="sc">+</span> <span class="fl">3760.898</span> <span class="sc">*</span> <span class="dv">1948</span> <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fl">1.476</span> <span class="sc">*</span> <span class="dv">6306</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 265360.4</code></pre>
 </div>
@@ -705,13 +735,13 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsi
 <h2>Prediction, revisit</h2>
 <p>Just like with simple linear regression, we can use the <code>predict()</code> function in R to calculate the appropriate intervals for our predicted values:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>new_house <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="at">bedrooms =</span> <span class="dv">3</span>, <span class="at">bathrooms =</span> <span class="dv">1</span>, </span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">living_area =</span> <span class="dv">1050</span>, <span class="at">lot_size =</span> <span class="dv">6000</span>, </span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="at">year_built =</span> <span class="dv">1948</span>, <span class="at">property_tax =</span> <span class="dv">6306</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  )</span>
-<span id="cb7-6"><a href="#cb7-6"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="fu">predict</span>(price_fit, new_house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>new_house <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="at">bedrooms =</span> <span class="dv">3</span>, <span class="at">bathrooms =</span> <span class="dv">1</span>, </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="at">living_area =</span> <span class="dv">1050</span>, <span class="at">lot_size =</span> <span class="dv">6000</span>, </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="at">year_built =</span> <span class="dv">1948</span>, <span class="at">property_tax =</span> <span class="dv">6306</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  )</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="fu">predict</span>(price_fit, new_house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 1
     .pred
@@ -727,7 +757,7 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsi
 </div>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">predict</span>(price_fit, new_house, <span class="at">type =</span> <span class="st">"conf_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">predict</span>(price_fit, new_house, <span class="at">type =</span> <span class="st">"conf_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   .pred_lower .pred_upper
@@ -743,7 +773,7 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsi
 </div>
 <p><br></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">predict</span>(price_fit, new_house, <span class="at">type =</span> <span class="st">"pred_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">predict</span>(price_fit, new_house, <span class="at">type =</span> <span class="st">"pred_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   .pred_lower .pred_upper
@@ -814,7 +844,7 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsi
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"38121118e52e5514","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"c7e0868e3b7b746e","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
