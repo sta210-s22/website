@@ -21,7 +21,7 @@ editor: visual
 
 🖥️ [Lab 3 - Coffee ratings](/slides/lab-3.html)
 
-🖥️ Lecture 8 - Multiple linear regression (MLR) (to be posted)
+🖥️ [Lecture 8 - Multiple linear regression (MLR)](/slides/lec-8.html)
 
 🖥️ Lecture 9 - Exam 1 review (to be posted)
 
