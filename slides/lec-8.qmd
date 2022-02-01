@@ -73,6 +73,7 @@ library(openintro)   # for the duke_forest dataset
 library(scales)      # for pretty axis labels
 library(knitr)       # for pretty tables
 library(patchwork)   # for laying out plots
+library(GGally)      # for pairwise plots
 
 # set default theme and larger font size for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
@@ -199,6 +200,35 @@ p6 <- ggplot(data = levittown, aes(x = property_tax, y = sale_price)) +
 
 (p1 + p2 + p3) / (p4 + p5 + p6)
 ```
+
+## EDA: All variables
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| ref.label: levittown-pairs
+#| out.width: "80%"
+#| fig.width: 12
+```
+
+## Code
+
+```{r}
+#| label: levittown-pairs
+#| cache: true
+#| echo: true
+#| fig.show: hide
+#| code-line-numbers: "|1"
+
+ggpairs(levittown) +
+  theme(
+    axis.text.y = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, size = 10),
+    strip.text.y = element_text(angle = 0, hjust = 0)
+    )
+```
+:::
 
 ## Single vs. multiple predictors
 

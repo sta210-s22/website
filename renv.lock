@@ -41,6 +41,27 @@
       "Hash": "b7b812ae4484d4bbf0a0baac72e8fc01",
       "Requirements": []
     },
+    "GGally": {
+      "Package": "GGally",
+      "Version": "2.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "022f78c8698724b326f1838b1a98cafa",
+      "Requirements": [
+        "RColorBrewer",
+        "dplyr",
+        "forcats",
+        "ggplot2",
+        "gtable",
+        "lifecycle",
+        "plyr",
+        "progress",
+        "reshape",
+        "rlang",
+        "scales",
+        "tidyr"
+      ]
+    },
     "GPfit": {
       "Package": "GPfit",
       "Version": "1.0-8",
@@ -1488,6 +1509,16 @@
         "rmarkdown",
         "rstudioapi",
         "withr"
+      ]
+    },
+    "reshape": {
+      "Package": "reshape",
+      "Version": "0.8.8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0f4d941129e00ed34a7d192b1da7ccef",
+      "Requirements": [
+        "plyr"
       ]
     },
     "rlang": {
