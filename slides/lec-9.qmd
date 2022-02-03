@@ -1,0 +1,405 @@
+---
+title: "Multiple linear regression (MLR)"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+---
+
+```{r setup}
+#| include: false
+
+library(countdown)
+
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  dpi = 300,
+  out.width = "80%",
+  fig.align = "center"
+)
+
+options(scipen = 100)
+```
+
+# Welcome
+
+## Announcements {.smaller}
+
+-   Lab 3:
+
+    ::: nonincremental
+    -   Any questions about lab / teamwork?
+    -   Due Friday, Feb 4 at 5pm
+    :::
+
+-   Exam 1:
+
+    ::: nonincremental
+    -   Released Friday, Feb 4
+    -   Multiple choice questions (mostly conceptual) + open-ended exercises (like lab + homework)
+    -   Open book, open internet, open questions to me + Rick (head TA) only
+    -   No communication with others or posting questions on the internet allowed
+    -   What can you do to start preparing?
+        -   Review readings, assignments, feedback returned
+
+        -   Organize your notes
+
+        -   Come to office hours with questions
+    :::
+
+## Computational setup
+
+```{r packages}
+#| echo: true
+#| message: false
+
+# load packages
+library(tidyverse)   # for data wrangling and visualization
+library(tidymodels)  # for modeling
+library(openintro)   # for the duke_forest dataset
+library(scales)      # for pretty axis labels
+library(knitr)       # for pretty tables
+library(patchwork)   # for laying out plots
+library(GGally)      # for pairwise plots
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+# Considering multiple variables
+
+## House prices in Levittown
+
+-   The data set contains the sales price and characteristics of 85 homes in Levittown, NY that sold between June 2010 and May 2011.
+-   Levittown was built right after WWII and was the first planned suburban community built using mass production techniques.
+-   The article ["Levittown, the prototypical American suburb -- a history of cities in 50 buildings, day 25"](https://www.theguardian.com/cities/2015/apr/28/levittown-america-prototypical-suburb-history-cities) gives an overview of Levittown's controversial history.
+
+## Analysis goals
+
+-   We would like to use the characteristics of a house to understand variability in the sales price.
+
+-   To do so, we will fit a **multiple linear regression model**.
+
+-   Using our model, we can answers questions such as
+
+    ::: nonincremental
+    -   What is the relationship between the characteristics of a house in Levittown and its sale price?
+    -   Given its characteristics, what is the expected sale price of a house in Levittown?
+    :::
+
+## The data {.smaller}
+
+```{r}
+#| echo: true
+
+levittown <- read_csv(here::here("slides/data/homeprices.csv"))
+levittown
+```
+
+## Variables {.smaller}
+
+**Predictors**:
+
+::: nonincremental
+-   `bedrooms`: Number of bedrooms
+-   `bathrooms`: Number of bathrooms
+-   `living_area`: Total living area of the house (in square feet)
+-   `lot_size`: Total area of the lot (in square feet)
+-   `year_built`: Year the house was built
+-   `property_tax`: Annual property taxes (in USD)
+:::
+
+**Response:** `sale_price`: Sales price (in USD)
+
+## EDA: Response variable
+
+```{r}
+ggplot(data = levittown, aes(x = sale_price)) +
+  geom_histogram(binwidth = 25000) +
+  scale_x_continuous(labels = label_dollar()) +
+  labs(
+    title = "Sale prices of homes in Levittown",
+    x = "Sale price (USD)",
+    y = "Count"
+  )
+```
+
+## EDA: Predictor variables
+
+```{r}
+#| out.width: "100%"
+#| fig.width: 10
+
+p1 <- ggplot(data = levittown, aes(x = bedrooms)) +
+  geom_histogram() +
+  scale_x_continuous(breaks = c(3, 4, 5))
+
+p2 <- ggplot(data = levittown, aes(x = bathrooms)) +
+  geom_histogram() +
+  scale_x_continuous(breaks = 1:3)
+
+p3 <- ggplot(data = levittown, aes(x = living_area)) +
+  geom_histogram() +
+  scale_x_continuous(breaks = c(1500, 2500))
+
+p4 <- ggplot(data = levittown, aes(x = lot_size)) +
+  geom_histogram()
+
+p5 <- ggplot(data = levittown, aes(x = year_built)) +
+  geom_histogram() +
+  scale_x_continuous(breaks = c(1950, 1955, 1960))
+
+p6 <- ggplot(data = levittown, aes(x = property_tax)) +
+  geom_histogram() +
+  scale_x_continuous(breaks = c(5000, 10000))
+
+(p1 + p2 + p3) / (p4 + p5 + p6)
+```
+
+## EDA: Response vs. Predictors
+
+```{r}
+#| out.width: "100%"
+#| fig.width: 10
+
+p1 <- ggplot(data = levittown, aes(x = bedrooms, y = sale_price)) +
+  geom_point() +
+  scale_x_continuous(breaks = c(3, 4, 5))
+
+p2 <- ggplot(data = levittown, aes(x = bathrooms, y = sale_price)) +
+  geom_point() +
+  scale_x_continuous(breaks = 1:3)
+
+p3 <- ggplot(data = levittown, aes(x = living_area, y = sale_price)) +
+  geom_point() +
+  scale_x_continuous(breaks = c(1500, 2500))
+
+p4 <- ggplot(data = levittown, aes(x = lot_size, y = sale_price)) +
+  geom_point()
+
+p5 <- ggplot(data = levittown, aes(x = year_built, y = sale_price)) +
+  geom_point() +
+  scale_x_continuous(breaks = c(1950, 1955, 1960))
+
+p6 <- ggplot(data = levittown, aes(x = property_tax, y = sale_price)) +
+  geom_point() +
+  scale_x_continuous(breaks = c(5000, 10000))
+
+(p1 + p2 + p3) / (p4 + p5 + p6)
+```
+
+## EDA: All variables
+
+::: panel-tabset
+## Plot
+
+```{r}
+#| ref.label: levittown-pairs
+#| out.width: "80%"
+#| fig.width: 12
+```
+
+## Code
+
+```{r}
+#| label: levittown-pairs
+#| cache: true
+#| echo: true
+#| fig.show: hide
+#| code-line-numbers: "|1"
+
+ggpairs(levittown) +
+  theme(
+    axis.text.y = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, size = 10),
+    strip.text.y = element_text(angle = 0, hjust = 0)
+    )
+```
+:::
+
+## Single vs. multiple predictors
+
+So far we've used a *single predictor variable* to understand variation in a quantitative response variable
+
+. . .
+
+Now we want to use *multiple predictor variables* to understand variation in a quantitative response variable
+
+# Multiple linear regression
+
+## Multiple linear regression (MLR) {.smaller}
+
+Based on the analysis goals, we will use a **multiple linear regression** model of the following form
+
+$$
+\begin{aligned}\hat{\text{sale_price}} ~ = & ~
+\hat{\beta}_0 + \hat{\beta}_1 \text{bedrooms} + \hat{\beta}_2 \text{bathrooms} + \hat{\beta}_3 \text{living_area} \\
+&+ \hat{\beta}_4 \text{lot_size} + \hat{\beta}_5 \text{year_built} + \hat{\beta}_6 \text{property_tax}\end{aligned}
+$$
+
+Similar to simple linear regression, this model assumes that at each combination of the predictor variables, the values `sale_price` follow a Normal distribution.
+
+## Regression Model
+
+**Recall:** The simple linear regression model assumes
+
+$$
+Y|X\sim N(\beta_0 + \beta_1 X, \sigma_{\epsilon}^2)
+$$
+
+. . .
+
+**Similarly:** The multiple linear regression model assumes
+
+$$
+Y|X_1, X_2, \ldots, X_p \sim N(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p, \sigma_{\epsilon}^2)
+$$
+
+## The MLR model
+
+For a given observation $(x_{i1}, x_{i2} \ldots, x_{ip}, y_i)$
+
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon_{i} \hspace{8mm} \epsilon_i \sim N(0,\sigma_\epsilon^2)
+$$
+
+## Prediction
+
+At any combination of the predictors, the mean value of the response $Y$, is
+
+$$
+\mu_{Y|X_1, \ldots, X_p} = \beta_0 + \beta_1 X_{1} + \beta_2 X_2 + \dots + \beta_p X_p
+$$
+
+. . .
+
+Using multiple linear regression, we can estimate the mean response for any combination of predictors
+
+$$
+\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_{1} + \hat{\beta}_2 X_2 + \dots + \hat{\beta}_p X_{p}
+$$
+
+## Model fit {.smaller}
+
+```{r}
+#| echo: true
+
+price_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(sale_price ~ bedrooms + bathrooms + living_area + lot_size +
+        year_built + property_tax, data = levittown)
+
+tidy(price_fit) %>%
+  kable(digits = 3)
+```
+
+## Model equation
+
+$$
+\begin{align}\hat{\text{price}} = & -7148818.957 - 12291.011 \times \text{bedrooms}\\[5pt]  
+&+ 51699.236 \times \text{bathrooms}  + 65.903 \times \text{living area}\\[5pt]
+&- 0.897 \times \text{lot size} +  3760.898 \times \text{year built}\\[5pt] 
+&+ 1.476 \times \text{property tax}
+\end{align}
+$$
+
+## Interpreting $\hat{\beta}_j$ {.smaller}
+
+-   The estimated coefficient $\hat{\beta}_j$ is the expected change in the mean of $y$ when $x_j$ increases by one unit, <i>holding the values of all other predictor variables constant</i>.
+
+. . .
+
+-   **Example:** The estimated coefficient for `living_area` is 65.90. This means for each additional square foot of living area, we expect the sale price of a house in Levittown, NY to increase by \$65.90, on average, holding all other predictor variables constant.
+
+## Prediction {.smaller}
+
+::: question
+What is the predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1,050 square feet of living area, 6,000 square foot lot size, built in 1948 with \$6,306 in property taxes?
+:::
+
+<br>
+
+```{r}
+#| echo: true
+
+-7148818.957 - 12291.011 * 3 + 51699.236 * 1 + 
+  65.903 * 1050 - 0.897 * 6000 + 3760.898 * 1948 + 
+  1.476 * 6306
+```
+
+. . .
+
+The predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with \$6306 in property taxes is **\$265,360**.
+
+## Prediction, revisit
+
+Just like with simple linear regression, we can use the `predict()` function in R to calculate the appropriate intervals for our predicted values:
+
+```{r}
+#| echo: true
+
+new_house <- tibble(
+  bedrooms = 3, bathrooms = 1, 
+  living_area = 1050, lot_size = 6000, 
+  year_built = 1948, property_tax = 6306
+  )
+
+predict(price_fit, new_house)
+```
+
+## Confidence interval for $\hat{\mu}_y$
+
+::: question
+Calculate a 95% confidence interval for the **estimated mean price** of houses in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with \$6306 in property taxes.
+:::
+
+<br>
+
+```{r}
+#| echo: true
+
+predict(price_fit, new_house, type = "conf_int", level = 0.95)
+```
+
+## Prediction interval for $\hat{y}$
+
+::: question
+Calculate a 95% prediction interval for an individual house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with \$6306 in property taxes.
+:::
+
+<br>
+
+```{r}
+#| echo: true
+
+predict(price_fit, new_house, type = "pred_int", level = 0.95)
+```
+
+## Cautions
+
+-   **Do not extrapolate!** Because there are multiple predictor variables, there is the potential to extrapolate in many directions
+-   The multiple regression model only shows **association, not causality**
+    -   To show causality, you must have a carefully designed experiment or carefully account for confounding variables in an observational study
+
+## Recap
+
+::: nonincremental
+-   Introduced multiple linear regression
+
+-   Interpreted a coefficient $\hat{\beta}_j$
+
+-   Used the model to calculate predicted values and the corresponding intervals
+:::

@@ -1,0 +1,198 @@
+---
+title: "AE 4: Exam 1 Review"
+---
+
+::: callout-important
+Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-4-exam-1-review-YOUR_GITHUB_USERNAME` to get started.
+:::
+
+## Packages
+
+```{r load-packages}
+#| message: false
+library(tidyverse)
+library(tidymodels)
+library(ggfortify)
+library(knitr)
+```
+
+## Restaurant tips
+
+What factors are associated with the amount customers tip at a restaurant?
+To answer this question, we will use data collected in 2011 by a student at St. Olaf who worked at a local restaurant.[^1]
+
+[^1]: Dahlquist, Samantha, and Jin Dong.
+    2011.
+    "The Effects of Credit Cards on Tipping." Project for Statistics 212-Statistics for the Sciences, St. Olaf College.
+
+The variables we'll focus on for this analysis are
+
+-   `Tip`: amount of the tip
+-   `Party`: number of people in the party
+
+View the data set to see the remaining variables.
+
+```{r}
+#| message: false
+
+tips <- read_csv("data/tip-data.csv")
+```
+
+## Exploratory analysis
+
+1.  Visualize, summarize, and describe the relationship between `Party` and `Tip`.
+
+```{r}
+# add your code here
+```
+
+## Modeling
+
+Let's start by fitting a model using `Party` to predict the `Tips` at this restaurant.
+
+2.  Write the statistical model.
+
+3.  Fit the regression line and write the regression equation.
+    Name the model `tips_fit` and display the results with `kable()` and a reasonable number of digits.
+
+```{r}
+# add your code here
+```
+
+4.  Interpret the slope.
+
+5.  Does it make sense to interpret the intercept?
+    Explain your reasoning.
+
+## Inference
+
+### Inference for the slope
+
+6.  The following code can be used to create a bootstrap distribution for the slope (and the intercept, though we'll focus primarily on the slope in our inference). Describe what each line of code does, supplemented by any visualizations that might help with your description.
+
+```{r}
+set.seed(1234)
+
+boot_dist <- tips %>%
+  specify(Tip ~ Party) %>%
+  generate(reps = 100, type = "bootstrap") %>%
+  fit()
+```
+
+7.  Use the bootstrap distribution created in Exercise 6, `boot_dist`, to construct a 90% confidence interval for the slope using bootstrapping and the percentile method and interpret it in context of the data.
+
+```{r}
+# add your code here
+```
+
+8.  Conduct a hypothesis test at the equivalent significance level using permutation. State the hypotheses and the significance level you're using explicitly. Also include a visualization of the null distribution of the slope with the observed slope marked as a vertical line.
+
+```{r}
+# add your code here
+```
+
+9.  Check the relevant conditions for Exercises 7 and 8. Are there any violations in conditions that make you reconsider your inferential findings?
+
+```{r}
+# add your code here
+```
+
+10. Now repeat Exercises 7 and 8 using approaches based on mathematical models.
+
+```{r}
+# add your code here
+```
+
+11. Check the relevant conditions for Exercise 9. Are there any violations in conditions that make you reconsider your inferential findings?
+
+```{r}
+# add your code here
+```
+
+### Inference for a prediction
+
+12. Based on your model, predict the tip for a party of 4.
+
+```{r}
+# add your code here
+```
+
+13. Suppose you're asked to construct a confidence and a prediction interval for your finding in Exercise 11.
+    Which one would you expect to be wider and why?
+    In your answer clearly state the difference between these intervals.
+
+14. Now construct the intervals from Exercise 12 and comment on whether your guess is confirmed.
+
+```{r}
+# add your code here
+```
+
+## Model diagnostics
+
+### Leverage (Outliers in x direction)
+
+15. What is the threshold used to identify observations with high leverage? Calculate the threshold and save the value as `leverage_threshold`.
+
+```{r lev-threshold}
+# add your code here
+```
+
+16. Make a plot of the standardized residuals vs. leverage (you can do this with `ggplot()` or with `autoplot(which = 5)`). Use `geom_vline()` to add a vertical line to help identify points with high leverage.
+
+```{r lev-plot}
+# add your code here
+```
+
+17. Let's dig into the data further. Which observations have high leverage? Why do these points have high leverage?
+
+```{r high-lev}
+# add your code here
+```
+
+### Identifying outliers (outliers in y direction)
+
+18. Make a plot of the residuals vs. fitted values and a plot of the square root of the absolute value of standardized residuals vs. fitted (You can use `autoplot(which = c(1, 3))` to display the plots side-by-side).
+
+-   How are the plots similar? How do they differ?
+-   What is an advantage of using the plot of the residuals vs. fitted to check conditions and model diagnostics?
+-   What is an advantage of using the plot of the $\sqrt{|\text{standardized residuals}|}$ vs. fitted to check conditions and model diagnostics?
+
+```{r resid-plots}
+# add your code here
+```
+
+19. Are there any observations that are outliers?
+
+```{r}
+# add your code here
+```
+
+### Cook's distance
+
+20. Make a plot to check Cook's distance (`autoplot(which = 4)`). Based on this plot, are there any points that have a strong influence on the model coefficients?
+
+```{r}
+# add your code here
+```
+
+## Adding another variable
+
+21. Add another variable, `Alcohol`, to your exploratory visualization. Describe any patterns that emerge.
+
+```{r}
+# add your code here
+```
+
+22. Fit a multiple linear regression model predicting `Tip` from `Party` and `Alcohol`. Display the results with `kable()` and a reasonable number of digits.
+
+```{r}
+# add your code here
+```
+
+23. Interpret each of the slopes.
+
+24. Does it make sense to interpret the intercept?
+    Explain your reasoning.
+
+25. According to this model, is the rate of change in tip amount the same for various sizes of parties regardless of alcohol consumption or are they different?
+    Explain your reasoning.

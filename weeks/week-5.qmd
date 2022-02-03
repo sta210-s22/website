@@ -23,15 +23,17 @@ editor: visual
 
 🖥️ [Lecture 8 - Multiple linear regression (MLR)](/slides/lec-8.html)
 
-🖥️ Lecture 9 - Exam 1 review (to be posted)
+🖥️ [Lecture 9 - Exam 1 review](/slides/lec-9.html)
 
 ## Practice
 
-📋 Application Exercise 4 (to be posted)
+📋 [Application Exercise 4 - Exam 1 Review](/ae/ae-4-exam-1-review.html)
 
 ## Perform
 
 ⌨️ [Lab 3 - Coffee ratings](labs/lab-3.html)
+
+✅ [Exam 1](/exams/exam-1.html)
 
 <br><br>
 
