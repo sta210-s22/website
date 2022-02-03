@@ -1488,7 +1488,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
@@ -2608,7 +2608,7 @@
     "href": "ae/ae-4-exam-1-review.html#modeling",
     "title": "AE 4: Exam 1 Review",
     "section": "Modeling",
-    "text": "Modeling\nLet’s start by fitting a model using Party to predict the Tips at this restaurant.\n\nWrite the statistical model.\nFit the regression line and write the regression equation. Name the model tips_fit and display the results with kable() and a reasonable number of digits.\n\n\n# add your code here\n\n\nInterpret the slope.\nDoes it make sense to interpret the intercept? Explain your reasoning."
+    "text": "Modeling\nLet’s start by fitting a model using Party to predict the Tip at this restaurant.\n\nWrite the statistical model.\nFit the regression line and write the regression equation. Name the model tips_fit and display the results with kable() and a reasonable number of digits.\n\n\n# add your code here\n\n\nInterpret the slope.\nDoes it make sense to interpret the intercept? Explain your reasoning."
   },
   {
     "objectID": "ae/ae-4-exam-1-review.html#inference",
