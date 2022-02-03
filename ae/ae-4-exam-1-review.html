@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.3.85">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - AE 2: Bike rentals in DC (continued)</title>
+  <title>STA 210 - Spring 2022 - AE 4: Exam 1 Review</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -112,11 +112,11 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-<meta name="twitter:title" content="STA 210 - Spring 2022 - AE 2: Bike rentals in DC (continued)">
-<meta name="twitter:description" content="Exploring and modeling relationships">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - AE 4: Exam 1 Review">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -128,7 +128,7 @@
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">AE 2: Bike rentals in DC (continued)</h1>
+      <h1 class="quarto-secondary-nav-title">AE 4: Exam 1 Review</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -377,32 +377,29 @@
         <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">On this page</h2>
 <ul>
-<li><a href="#bike-rentals-in-dc" class="nav-link active" data-scroll-target="#bike-rentals-in-dc">Bike rentals in DC</a></li>
-<li><a href="#data" class="nav-link" data-scroll-target="#data">Data</a></li>
-<li><a href="#daily-counts-temperature-and-season" class="nav-link" data-scroll-target="#daily-counts-temperature-and-season">Daily counts, temperature, and season</a>
+<li><a href="#packages" class="nav-link active" data-scroll-target="#packages">Packages</a></li>
+<li><a href="#restaurant-tips" class="nav-link" data-scroll-target="#restaurant-tips">Restaurant tips</a></li>
+<li><a href="#exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis">Exploratory analysis</a></li>
+<li><a href="#modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a></li>
+<li><a href="#inference" class="nav-link" data-scroll-target="#inference">Inference</a>
 <ul class="collapse">
-<li><a href="#exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
-<li><a href="#exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
-<li><a href="#exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
-<li><a href="#exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+<li><a href="#inference-for-the-slope" class="nav-link" data-scroll-target="#inference-for-the-slope">Inference for the slope</a></li>
+<li><a href="#inference-for-a-prediction" class="nav-link" data-scroll-target="#inference-for-a-prediction">Inference for a prediction</a></li>
 </ul></li>
-<li><a href="#modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a>
+<li><a href="#model-diagnostics" class="nav-link" data-scroll-target="#model-diagnostics">Model diagnostics</a>
 <ul class="collapse">
-<li><a href="#exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
-<li><a href="#exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
+<li><a href="#leverage-outliers-in-x-direction" class="nav-link" data-scroll-target="#leverage-outliers-in-x-direction">Leverage (Outliers in x direction)</a></li>
+<li><a href="#identifying-outliers-outliers-in-y-direction" class="nav-link" data-scroll-target="#identifying-outliers-outliers-in-y-direction">Identifying outliers (outliers in y direction)</a></li>
+<li><a href="#cooks-distance" class="nav-link" data-scroll-target="#cooks-distance">Cook’s distance</a></li>
 </ul></li>
-<li><a href="#synthesis" class="nav-link" data-scroll-target="#synthesis">Synthesis</a>
-<ul class="collapse">
-<li><a href="#exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7</a></li>
-</ul></li>
+<li><a href="#adding-another-variable" class="nav-link" data-scroll-target="#adding-another-variable">Adding another variable</a></li>
 </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/ae/ae-2-dcbikeshare.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/ae/ae-4-exam-1-review.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content">
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7">AE 2: Bike rentals in DC (continued)</h1>
-<p class="subtitle lead">Exploring and modeling relationships</p>
+<h1 class="title d-none d-lg-block display-7">AE 4: Exam 1 Review</h1>
 </header>
 
 <div class="callout-important callout callout-style-default callout-captioned">
@@ -415,91 +412,198 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Go to the <a href="https://github.com/sta210-s22">course GitHub organization</a> and locate the repo titled <code>ae-2-dcbikeshare-YOUR_GITHUB_USERNAME</code> to get started.</p>
+<p>Go to the <a href="https://github.com/sta210-s22">course GitHub organization</a> and locate the repo titled <code>ae-4-exam-1-review-YOUR_GITHUB_USERNAME</code> to get started.</p>
 </div>
 </div>
-<section id="bike-rentals-in-dc" class="level2">
-<h2 class="anchored" data-anchor-id="bike-rentals-in-dc">Bike rentals in DC</h2>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>Our dataset contains daily rentals from the Capital Bikeshare in Washington, DC in 2011 and 2012. It was obtained from the <code>dcbikeshare</code> data set in the dsbox R package.</p>
-<p>We will focus on the following variables in the analysis:</p>
+<section id="restaurant-tips" class="level2">
+<h2 class="anchored" data-anchor-id="restaurant-tips">Restaurant tips</h2>
+<p>What factors are associated with the amount customers tip at a restaurant? To answer this question, we will use data collected in 2011 by a student at St.&nbsp;Olaf who worked at a local restaurant.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The variables we’ll focus on for this analysis are</p>
 <ul>
-<li><code>count</code>: total bike rentals</li>
-<li><code>temp_orig</code>: Temperature in degrees Celsius</li>
-<li><code>season</code>: 1 - winter, 2 - spring, 3 - summer, 4 - fall</li>
+<li><code>Tip</code>: amount of the tip</li>
+<li><code>Party</code>: number of people in the party</li>
 </ul>
-<p>Click <a href="https://rstudio-education.github.io/dsbox/reference/dcbikeshare.html">here</a> for the full list of variables and definitions.</p>
+<p>View the data set to see the remaining variables.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bikeshare <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/dcbikeshare.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>See AE 1 for the first part of this analysis.</p>
-</section>
-<section id="daily-counts-temperature-and-season" class="level2">
-<h2 class="anchored" data-anchor-id="daily-counts-temperature-and-season">Daily counts, temperature, and season</h2>
-<section id="exercise-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
-<p>In the raw data, seasons are coded as 1, 2, 3, 4 as numerical values, corresponding to winter, spring, summer, and fall respectively. Recode the <code>season</code> variable to make it a categorical variable (a factor) with levels corresponding to season names, making sure that the levels appear in a reasonable order in the variable (i.e., not alphabetical).</p>
-<div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code developed during livecoding here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tips <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tip-data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-2" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
-<p>Next, let’s look at how the daily bike rentals differ by season. Let’s visualize the distribution of bike rentals by season using density plots. You can think of a density plot as a “smoothed out histogram”. Compare and contrast the distributions. Is this what you expected? Why or why not?</p>
+<section id="exploratory-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-analysis">Exploratory analysis</h2>
+<ol type="1">
+<li>Visualize, summarize, and describe the relationship between <code>Party</code> and <code>Tip</code>.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code developed during livecoding here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>[Add your answer here]</p>
-</section>
-<section id="exercise-3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
-<p>We want to evaluate whether the relationship between temperature and daily bike rentals is the same for each season. To answer this question, first create a scatter plot of daily bike rentals vs.&nbsp;temperature faceted by season.</p>
-<div class="cell">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code developed during livecoding here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="exercise-4" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
-<ul>
-<li>Which season appears to have the <strong>strongest</strong> relationship between temperature and daily bike rentals? Why do you think the relationship is strongest in this season?</li>
-<li>Which season appears to have the <strong>weakest</strong> relationship between temperature and daily bike rentals? Why do you think the relationship is weakest in this season?</li>
-</ul>
-<p>[Add your answer here]</p>
-</section>
 </section>
 <section id="modeling" class="level2">
 <h2 class="anchored" data-anchor-id="modeling">Modeling</h2>
-<section id="exercise-5" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
-<p>Filter your data for the season with the strongest apparent relationship between temperature and daily bike rentals.</p>
+<p>Let’s start by fitting a model using <code>Party</code> to predict the <code>Tips</code> at this restaurant.</p>
+<ol start="2" type="1">
+<li><p>Write the statistical model.</p></li>
+<li><p>Fit the regression line and write the regression equation. Name the model <code>tips_fit</code> and display the results with <code>kable()</code> and a reasonable number of digits.</p></li>
+</ol>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code developed during livecoding here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li><p>Interpret the slope.</p></li>
+<li><p>Does it make sense to interpret the intercept? Explain your reasoning.</p></li>
+</ol>
+</section>
+<section id="inference" class="level2">
+<h2 class="anchored" data-anchor-id="inference">Inference</h2>
+<section id="inference-for-the-slope" class="level3">
+<h3 class="anchored" data-anchor-id="inference-for-the-slope">Inference for the slope</h3>
+<ol start="6" type="1">
+<li>The following code can be used to create a bootstrap distribution for the slope (and the intercept, though we’ll focus primarily on the slope in our inference). Describe what each line of code does, supplemented by any visualizations that might help with your description.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>boot_dist <span class="ot">&lt;-</span> tips <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(Tip <span class="sc">~</span> Party) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">100</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="7" type="1">
+<li>Use the bootstrap distribution created in Exercise 6, <code>boot_dist</code>, to construct a 90% confidence interval for the slope using bootstrapping and the percentile method and interpret it in context of the data.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="8" type="1">
+<li>Conduct a hypothesis test at the equivalent significance level using permutation. State the hypotheses and the significance level you’re using explicitly. Also include a visualization of the null distribution of the slope with the observed slope marked as a vertical line.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="9" type="1">
+<li>Check the relevant conditions for Exercises 7 and 8. Are there any violations in conditions that make you reconsider your inferential findings?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="10" type="1">
+<li>Now repeat Exercises 7 and 8 using approaches based on mathematical models.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="11" type="1">
+<li>Check the relevant conditions for Exercise 9. Are there any violations in conditions that make you reconsider your inferential findings?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-6" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
-<p>Using the data you filtered in <a href="#exercise-5">Exercise 5</a>, fit a linear model for predicting daily bike rentals from temperature for this season.</p>
+<section id="inference-for-a-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="inference-for-a-prediction">Inference for a prediction</h3>
+<ol start="12" type="1">
+<li>Based on your model, predict the tip for a party of 4.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code developed during livecoding here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="13" type="1">
+<li><p>Suppose you’re asked to construct a confidence and a prediction interval for your finding in Exercise 11. Which one would you expect to be wider and why? In your answer clearly state the difference between these intervals.</p></li>
+<li><p>Now construct the intervals from Exercise 12 and comment on whether your guess is confirmed.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="synthesis" class="level2">
-<h2 class="anchored" data-anchor-id="synthesis">Synthesis</h2>
-<section id="exercise-7" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-7">Exercise 7</h3>
-<p>Suppose you work for a bike share company in Durham, NC, and they want to predict daily bike rentals in 2022. What is one reason you might recommend they use your analysis for this task? What is one reason you would recommend they not use your analysis for this task?</p>
-<p>[Add your answer here]</p>
+<section id="model-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="model-diagnostics">Model diagnostics</h2>
+<section id="leverage-outliers-in-x-direction" class="level3">
+<h3 class="anchored" data-anchor-id="leverage-outliers-in-x-direction">Leverage (Outliers in x direction)</h3>
+<ol start="15" type="1">
+<li>What is the threshold used to identify observations with high leverage? Calculate the threshold and save the value as <code>leverage_threshold</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="16" type="1">
+<li>Make a plot of the standardized residuals vs.&nbsp;leverage (you can do this with <code>ggplot()</code> or with <code>autoplot(which = 5)</code>). Use <code>geom_vline()</code> to add a vertical line to help identify points with high leverage.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="17" type="1">
+<li>Let’s dig into the data further. Which observations have high leverage? Why do these points have high leverage?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="identifying-outliers-outliers-in-y-direction" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-outliers-outliers-in-y-direction">Identifying outliers (outliers in y direction)</h3>
+<ol start="18" type="1">
+<li>Make a plot of the residuals vs.&nbsp;fitted values and a plot of the square root of the absolute value of standardized residuals vs.&nbsp;fitted (You can use <code>autoplot(which = c(1, 3))</code> to display the plots side-by-side).</li>
+</ol>
+<ul>
+<li>How are the plots similar? How do they differ?</li>
+<li>What is an advantage of using the plot of the residuals vs.&nbsp;fitted to check conditions and model diagnostics?</li>
+<li>What is an advantage of using the plot of the <span class="math inline">\(\sqrt{|\text{standardized residuals}|}\)</span> vs.&nbsp;fitted to check conditions and model diagnostics?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="19" type="1">
+<li>Are there any observations that are outliers?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cooks-distance" class="level3">
+<h3 class="anchored" data-anchor-id="cooks-distance">Cook’s distance</h3>
+<ol start="20" type="1">
+<li>Make a plot to check Cook’s distance (<code>autoplot(which = 4)</code>). Based on this plot, are there any points that have a strong influence on the model coefficients?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="adding-another-variable" class="level2">
+<h2 class="anchored" data-anchor-id="adding-another-variable">Adding another variable</h2>
+<ol start="21" type="1">
+<li>Add another variable, <code>Alcohol</code>, to your exploratory visualization. Describe any patterns that emerge.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="22" type="1">
+<li>Fit a multiple linear regression model predicting <code>Tip</code> from <code>Party</code> and <code>Alcohol</code>. Display the results with <code>kable()</code> and a reasonable number of digits.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="23" type="1">
+<li><p>Interpret each of the slopes.</p></li>
+<li><p>Does it make sense to interpret the intercept? Explain your reasoning.</p></li>
+<li><p>According to this model, is the rate of change in tip amount the same for various sizes of parties regardless of alcohol consumption or are they different? Explain your reasoning.</p></li>
+</ol>
 
 
 </section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2>Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>Dahlquist, Samantha, and Jin Dong. 2011. “The Effects of Credit Cards on Tipping.” Project for Statistics 212-Statistics for the Sciences, St.&nbsp;Olaf College.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 </main> <!-- /main -->
 <script type="application/javascript">
