@@ -48,7 +48,7 @@ tips <- read_csv("data/tip-data.csv")
 
 ## Modeling
 
-Let's start by fitting a model using `Party` to predict the `Tips` at this restaurant.
+Let's start by fitting a model using `Party` to predict the `Tip` at this restaurant.
 
 2.  Write the statistical model.
 
