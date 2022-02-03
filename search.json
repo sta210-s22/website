@@ -975,30 +975,170 @@
   {
     "objectID": "slides/lec-8.html#announcements",
     "href": "slides/lec-8.html#announcements",
-    "title": "Exam 1 Review",
+    "title": "Multiple linear regression (MLR)",
     "section": "Announcements",
-    "text": "Announcements\n\nLab 3 due tomorrow (Friday) at 5pm on Gradescope, one submission per team\nExam 1 open tomorrow (Friday) at 9am and ends on Monday, Feb 7 at 11:59pm\nNo lab on Monday, take the time to work on your exam"
+    "text": "Announcements\n\nLab 3:\n\n\nAny questions about lab / teamwork?\nDue Friday, Feb 4 at 5pm\n\n\nExam 1:\n\n\nReleased Friday, Feb 4\nMultiple choice questions (mostly conceptual) + open-ended exercises (like lab + homework)\nOpen book, open internet, open questions to me + Rick (head TA) only\nNo communication with others or posting questions on the internet allowed\nWhat can you do to start preparing?\n\nReview readings, assignments, feedback returned\nOrganize your notes\nCome to office hours with questions"
   },
   {
-    "objectID": "slides/lec-8.html#feedback-from-submissions-so-far",
-    "href": "slides/lec-8.html#feedback-from-submissions-so-far",
-    "title": "Exam 1 Review",
-    "section": "Feedback from submissions so far",
-    "text": "Feedback from submissions so far\n\nYou must submit a PDF (not HTML) to Gradescope\nYou must tag your pages when you upload to Gradescope – if you don’t know how to do this, please ask well before the deadline!\nYou must not refer to keys distributed in previous semesters of the course – much of what we’re doing is different and some of it is the same. If you need help, please ask!"
+    "objectID": "slides/lec-8.html#computational-setup",
+    "href": "slides/lec-8.html#computational-setup",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)   # for data wrangling and visualization\nlibrary(tidymodels)  # for modeling\nlibrary(openintro)   # for the duke_forest dataset\nlibrary(scales)      # for pretty axis labels\nlibrary(knitr)       # for pretty tables\nlibrary(patchwork)   # for laying out plots\nlibrary(GGally)      # for pairwise plots\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
   },
   {
-    "objectID": "slides/lec-8.html#exam-1",
-    "href": "slides/lec-8.html#exam-1",
-    "title": "Exam 1 Review",
-    "section": "Exam 1",
-    "text": "Exam 1\n\nInstructions can be found at\nCovers everything we’ve done so far\nOffice hours:\n\nTomorrow’s TA office hours are only for Lab 3 questions\nMonday: I have office hours 10:30-11:30am\n\nAny clarification questions for the exam?\n\nDirect message me or Rick on Slack\nPost on Sakai Conversations, post to “Instructors in this site”"
+    "objectID": "slides/lec-8.html#house-prices-in-levittown",
+    "href": "slides/lec-8.html#house-prices-in-levittown",
+    "title": "Multiple linear regression (MLR)",
+    "section": "House prices in Levittown",
+    "text": "House prices in Levittown\n\nThe data set contains the sales price and characteristics of 85 homes in Levittown, NY that sold between June 2010 and May 2011.\nLevittown was built right after WWII and was the first planned suburban community built using mass production techniques.\nThe article “Levittown, the prototypical American suburb – a history of cities in 50 buildings, day 25” gives an overview of Levittown’s controversial history."
   },
   {
-    "objectID": "slides/lec-8.html#application-exercise",
-    "href": "slides/lec-8.html#application-exercise",
-    "title": "Exam 1 Review",
-    "section": "Application Exercise",
-    "text": "Application Exercise\n\n📋 github.com/sta210-s22/ae-4-exam-1-review\n\n\n\n\nsta210-s22.github.io/website"
+    "objectID": "slides/lec-8.html#analysis-goals",
+    "href": "slides/lec-8.html#analysis-goals",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Analysis goals",
+    "text": "Analysis goals\n\nWe would like to use the characteristics of a house to understand variability in the sales price.\nTo do so, we will fit a multiple linear regression model.\nUsing our model, we can answers questions such as\n\n\nWhat is the relationship between the characteristics of a house in Levittown and its sale price?\nGiven its characteristics, what is the expected sale price of a house in Levittown?"
+  },
+  {
+    "objectID": "slides/lec-8.html#the-data",
+    "href": "slides/lec-8.html#the-data",
+    "title": "Multiple linear regression (MLR)",
+    "section": "The data",
+    "text": "The data\n\nlevittown <- read_csv(here::here(\"slides/data/homeprices.csv\"))\nlevittown\n\n# A tibble: 85 × 7\n   bedrooms bathrooms living_area lot_size year_built property_tax sale_price\n      <dbl>     <dbl>       <dbl>    <dbl>      <dbl>        <dbl>      <dbl>\n 1        4       1          1380     6000       1948         8360     350000\n 2        4       2          1761     7400       1951         5754     360000\n 3        4       2          1564     6000       1948         8982     350000\n 4        5       2          2904     9898       1949        11664     375000\n 5        5       2.5        1942     7788       1948         8120     370000\n 6        4       2          1830     6000       1948         8197     335000\n 7        4       1          1585     6000       1948         6223     295000\n 8        4       1           941     6800       1951         2448     250000\n 9        4       1.5        1481     6000       1948         9087     299990\n10        3       2          1630     5998       1948         9430     375000\n# … with 75 more rows"
+  },
+  {
+    "objectID": "slides/lec-8.html#variables",
+    "href": "slides/lec-8.html#variables",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Variables",
+    "text": "Variables\nPredictors:\n\n\nbedrooms: Number of bedrooms\nbathrooms: Number of bathrooms\nliving_area: Total living area of the house (in square feet)\nlot_size: Total area of the lot (in square feet)\nyear_built: Year the house was built\nproperty_tax: Annual property taxes (in USD)\n\n\nResponse: sale_price: Sales price (in USD)"
+  },
+  {
+    "objectID": "slides/lec-8.html#eda-response-variable",
+    "href": "slides/lec-8.html#eda-response-variable",
+    "title": "Multiple linear regression (MLR)",
+    "section": "EDA: Response variable",
+    "text": "EDA: Response variable"
+  },
+  {
+    "objectID": "slides/lec-8.html#eda-predictor-variables",
+    "href": "slides/lec-8.html#eda-predictor-variables",
+    "title": "Multiple linear regression (MLR)",
+    "section": "EDA: Predictor variables",
+    "text": "EDA: Predictor variables"
+  },
+  {
+    "objectID": "slides/lec-8.html#eda-response-vs.-predictors",
+    "href": "slides/lec-8.html#eda-response-vs.-predictors",
+    "title": "Multiple linear regression (MLR)",
+    "section": "EDA: Response vs. Predictors",
+    "text": "EDA: Response vs. Predictors"
+  },
+  {
+    "objectID": "slides/lec-8.html#eda-all-variables",
+    "href": "slides/lec-8.html#eda-all-variables",
+    "title": "Multiple linear regression (MLR)",
+    "section": "EDA: All variables",
+    "text": "EDA: All variables\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggpairs(levittown) +\n  theme(\n    axis.text.y = element_text(size = 10),\n    axis.text.x = element_text(angle = 45, size = 10),\n    strip.text.y = element_text(angle = 0, hjust = 0)\n    )"
+  },
+  {
+    "objectID": "slides/lec-8.html#single-vs.-multiple-predictors",
+    "href": "slides/lec-8.html#single-vs.-multiple-predictors",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Single vs. multiple predictors",
+    "text": "Single vs. multiple predictors\nSo far we’ve used a single predictor variable to understand variation in a quantitative response variable\n\nNow we want to use multiple predictor variables to understand variation in a quantitative response variable"
+  },
+  {
+    "objectID": "slides/lec-8.html#multiple-linear-regression-mlr",
+    "href": "slides/lec-8.html#multiple-linear-regression-mlr",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Multiple linear regression (MLR)",
+    "text": "Multiple linear regression (MLR)\nBased on the analysis goals, we will use a multiple linear regression model of the following form\n\\[\n\\begin{aligned}\\hat{\\text{sale_price}} ~ = & ~\n\\hat{\\beta}_0 + \\hat{\\beta}_1 \\text{bedrooms} + \\hat{\\beta}_2 \\text{bathrooms} + \\hat{\\beta}_3 \\text{living_area} \\\\\n&+ \\hat{\\beta}_4 \\text{lot_size} + \\hat{\\beta}_5 \\text{year_built} + \\hat{\\beta}_6 \\text{property_tax}\\end{aligned}\n\\]\nSimilar to simple linear regression, this model assumes that at each combination of the predictor variables, the values sale_price follow a Normal distribution."
+  },
+  {
+    "objectID": "slides/lec-8.html#regression-model",
+    "href": "slides/lec-8.html#regression-model",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Regression Model",
+    "text": "Regression Model\nRecall: The simple linear regression model assumes\n\\[\nY|X\\sim N(\\beta_0 + \\beta_1 X, \\sigma_{\\epsilon}^2)\n\\]\n\nSimilarly: The multiple linear regression model assumes\n\\[\nY|X_1, X_2, \\ldots, X_p \\sim N(\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\dots + \\beta_p X_p, \\sigma_{\\epsilon}^2)\n\\]"
+  },
+  {
+    "objectID": "slides/lec-8.html#the-mlr-model",
+    "href": "slides/lec-8.html#the-mlr-model",
+    "title": "Multiple linear regression (MLR)",
+    "section": "The MLR model",
+    "text": "The MLR model\nFor a given observation \\((x_{i1}, x_{i2} \\ldots, x_{ip}, y_i)\\)\n\\[\ny_i = \\beta_0 + \\beta_1 x_{i1} + \\beta_2 x_{i2} + \\dots + \\beta_p x_{ip} + \\epsilon_{i} \\hspace{8mm} \\epsilon_i \\sim N(0,\\sigma_\\epsilon^2)\n\\]"
+  },
+  {
+    "objectID": "slides/lec-8.html#prediction",
+    "href": "slides/lec-8.html#prediction",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Prediction",
+    "text": "Prediction\nAt any combination of the predictors, the mean value of the response \\(Y\\), is\n\\[\n\\mu_{Y|X_1, \\ldots, X_p} = \\beta_0 + \\beta_1 X_{1} + \\beta_2 X_2 + \\dots + \\beta_p X_p\n\\]\n\nUsing multiple linear regression, we can estimate the mean response for any combination of predictors\n\\[\n\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{1} + \\hat{\\beta}_2 X_2 + \\dots + \\hat{\\beta}_p X_{p}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-8.html#model-fit",
+    "href": "slides/lec-8.html#model-fit",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Model fit",
+    "text": "Model fit\n\nprice_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(sale_price ~ bedrooms + bathrooms + living_area + lot_size +\n        year_built + property_tax, data = levittown)\n\ntidy(price_fit) %>%\n  kable(digits = 3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-7148818.957\n3820093.694\n-1.871\n0.065\n\n\nbedrooms\n-12291.011\n9346.727\n-1.315\n0.192\n\n\nbathrooms\n51699.236\n13094.170\n3.948\n0.000\n\n\nliving_area\n65.903\n15.979\n4.124\n0.000\n\n\nlot_size\n-0.897\n4.194\n-0.214\n0.831\n\n\nyear_built\n3760.898\n1962.504\n1.916\n0.059\n\n\nproperty_tax\n1.476\n2.832\n0.521\n0.604"
+  },
+  {
+    "objectID": "slides/lec-8.html#model-equation",
+    "href": "slides/lec-8.html#model-equation",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Model equation",
+    "text": "Model equation\n\\[\n\\begin{align}\\hat{\\text{price}} = & -7148818.957 - 12291.011 \\times \\text{bedrooms}\\\\[5pt]  \n&+ 51699.236 \\times \\text{bathrooms}  + 65.903 \\times \\text{living area}\\\\[5pt]\n&- 0.897 \\times \\text{lot size} +  3760.898 \\times \\text{year built}\\\\[5pt]\n&+ 1.476 \\times \\text{property tax}\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-8.html#interpreting-hatbeta_j",
+    "href": "slides/lec-8.html#interpreting-hatbeta_j",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Interpreting \\(\\hat{\\beta}_j\\)",
+    "text": "Interpreting \\(\\hat{\\beta}_j\\)\n\nThe estimated coefficient \\(\\hat{\\beta}_j\\) is the expected change in the mean of \\(y\\) when \\(x_j\\) increases by one unit, holding the values of all other predictor variables constant.\n\n\n\nExample: The estimated coefficient for living_area is 65.90. This means for each additional square foot of living area, we expect the sale price of a house in Levittown, NY to increase by $65.90, on average, holding all other predictor variables constant."
+  },
+  {
+    "objectID": "slides/lec-8.html#prediction-1",
+    "href": "slides/lec-8.html#prediction-1",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Prediction",
+    "text": "Prediction\n\nWhat is the predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1,050 square feet of living area, 6,000 square foot lot size, built in 1948 with $6,306 in property taxes?\n\n\n\n-7148818.957 - 12291.011 * 3 + 51699.236 * 1 + \n  65.903 * 1050 - 0.897 * 6000 + 3760.898 * 1948 + \n  1.476 * 6306\n\n[1] 265360.4\n\n\n\nThe predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes is $265,360."
+  },
+  {
+    "objectID": "slides/lec-8.html#prediction-revisit",
+    "href": "slides/lec-8.html#prediction-revisit",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Prediction, revisit",
+    "text": "Prediction, revisit\nJust like with simple linear regression, we can use the predict() function in R to calculate the appropriate intervals for our predicted values:\n\nnew_house <- tibble(\n  bedrooms = 3, bathrooms = 1, \n  living_area = 1050, lot_size = 6000, \n  year_built = 1948, property_tax = 6306\n  )\n\npredict(price_fit, new_house)\n\n# A tibble: 1 × 1\n    .pred\n    <dbl>\n1 265360."
+  },
+  {
+    "objectID": "slides/lec-8.html#confidence-interval-for-hatmu_y",
+    "href": "slides/lec-8.html#confidence-interval-for-hatmu_y",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Confidence interval for \\(\\hat{\\mu}_y\\)",
+    "text": "Confidence interval for \\(\\hat{\\mu}_y\\)\n\nCalculate a 95% confidence interval for the estimated mean price of houses in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes.\n\n\n\npredict(price_fit, new_house, type = \"conf_int\", level = 0.95)\n\n# A tibble: 1 × 2\n  .pred_lower .pred_upper\n        <dbl>       <dbl>\n1     238482.     292239."
+  },
+  {
+    "objectID": "slides/lec-8.html#prediction-interval-for-haty",
+    "href": "slides/lec-8.html#prediction-interval-for-haty",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Prediction interval for \\(\\hat{y}\\)",
+    "text": "Prediction interval for \\(\\hat{y}\\)\n\nCalculate a 95% prediction interval for an individual house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes.\n\n\n\npredict(price_fit, new_house, type = \"pred_int\", level = 0.95)\n\n# A tibble: 1 × 2\n  .pred_lower .pred_upper\n        <dbl>       <dbl>\n1     167277.     363444."
+  },
+  {
+    "objectID": "slides/lec-8.html#cautions",
+    "href": "slides/lec-8.html#cautions",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Cautions",
+    "text": "Cautions\n\nDo not extrapolate! Because there are multiple predictor variables, there is the potential to extrapolate in many directions\nThe multiple regression model only shows association, not causality\n\nTo show causality, you must have a carefully designed experiment or carefully account for confounding variables in an observational study"
+  },
+  {
+    "objectID": "slides/lec-8.html#recap",
+    "href": "slides/lec-8.html#recap",
+    "title": "Multiple linear regression (MLR)",
+    "section": "Recap",
+    "text": "Recap\n\n\nIntroduced multiple linear regression\nInterpreted a coefficient \\(\\hat{\\beta}_j\\)\nUsed the model to calculate predicted values and the corresponding intervals\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lec-7.html#computational-setup",
@@ -1248,170 +1388,30 @@
   {
     "objectID": "slides/lec-9.html#announcements",
     "href": "slides/lec-9.html#announcements",
-    "title": "Multiple linear regression (MLR)",
+    "title": "Exam 1 Review",
     "section": "Announcements",
-    "text": "Announcements\n\nLab 3:\n\n\nAny questions about lab / teamwork?\nDue Friday, Feb 4 at 5pm\n\n\nExam 1:\n\n\nReleased Friday, Feb 4\nMultiple choice questions (mostly conceptual) + open-ended exercises (like lab + homework)\nOpen book, open internet, open questions to me + Rick (head TA) only\nNo communication with others or posting questions on the internet allowed\nWhat can you do to start preparing?\n\nReview readings, assignments, feedback returned\nOrganize your notes\nCome to office hours with questions"
+    "text": "Announcements\n\nLab 3 due tomorrow (Friday) at 5pm on Gradescope, one submission per team\nExam 1 open tomorrow (Friday) at 9am and ends on Monday, Feb 7 at 11:59pm\nNo lab on Monday, take the time to work on your exam"
   },
   {
-    "objectID": "slides/lec-9.html#computational-setup",
-    "href": "slides/lec-9.html#computational-setup",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Computational setup",
-    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)   # for data wrangling and visualization\nlibrary(tidymodels)  # for modeling\nlibrary(openintro)   # for the duke_forest dataset\nlibrary(scales)      # for pretty axis labels\nlibrary(knitr)       # for pretty tables\nlibrary(patchwork)   # for laying out plots\nlibrary(GGally)      # for pairwise plots\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
+    "objectID": "slides/lec-9.html#feedback-from-submissions-so-far",
+    "href": "slides/lec-9.html#feedback-from-submissions-so-far",
+    "title": "Exam 1 Review",
+    "section": "Feedback from submissions so far",
+    "text": "Feedback from submissions so far\n\nYou must submit a PDF (not HTML) to Gradescope\nYou must tag your pages when you upload to Gradescope – if you don’t know how to do this, please ask well before the deadline!\nYou must not refer to keys distributed in previous semesters of the course – much of what we’re doing is different and some of it is the same. If you need help, please ask!"
   },
   {
-    "objectID": "slides/lec-9.html#house-prices-in-levittown",
-    "href": "slides/lec-9.html#house-prices-in-levittown",
-    "title": "Multiple linear regression (MLR)",
-    "section": "House prices in Levittown",
-    "text": "House prices in Levittown\n\nThe data set contains the sales price and characteristics of 85 homes in Levittown, NY that sold between June 2010 and May 2011.\nLevittown was built right after WWII and was the first planned suburban community built using mass production techniques.\nThe article “Levittown, the prototypical American suburb – a history of cities in 50 buildings, day 25” gives an overview of Levittown’s controversial history."
+    "objectID": "slides/lec-9.html#exam-1",
+    "href": "slides/lec-9.html#exam-1",
+    "title": "Exam 1 Review",
+    "section": "Exam 1",
+    "text": "Exam 1\n\nInstructions can be found at\nCovers everything we’ve done so far\nOffice hours:\n\nTomorrow’s TA office hours are only for Lab 3 questions\nMonday: I have office hours 10:30-11:30am\n\nAny clarification questions for the exam?\n\nDirect message me or Rick on Slack\nPost on Sakai Conversations, post to “Instructors in this site”"
   },
   {
-    "objectID": "slides/lec-9.html#analysis-goals",
-    "href": "slides/lec-9.html#analysis-goals",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Analysis goals",
-    "text": "Analysis goals\n\nWe would like to use the characteristics of a house to understand variability in the sales price.\nTo do so, we will fit a multiple linear regression model.\nUsing our model, we can answers questions such as\n\n\nWhat is the relationship between the characteristics of a house in Levittown and its sale price?\nGiven its characteristics, what is the expected sale price of a house in Levittown?"
-  },
-  {
-    "objectID": "slides/lec-9.html#the-data",
-    "href": "slides/lec-9.html#the-data",
-    "title": "Multiple linear regression (MLR)",
-    "section": "The data",
-    "text": "The data\n\nlevittown <- read_csv(here::here(\"slides/data/homeprices.csv\"))\nlevittown\n\n# A tibble: 85 × 7\n   bedrooms bathrooms living_area lot_size year_built property_tax sale_price\n      <dbl>     <dbl>       <dbl>    <dbl>      <dbl>        <dbl>      <dbl>\n 1        4       1          1380     6000       1948         8360     350000\n 2        4       2          1761     7400       1951         5754     360000\n 3        4       2          1564     6000       1948         8982     350000\n 4        5       2          2904     9898       1949        11664     375000\n 5        5       2.5        1942     7788       1948         8120     370000\n 6        4       2          1830     6000       1948         8197     335000\n 7        4       1          1585     6000       1948         6223     295000\n 8        4       1           941     6800       1951         2448     250000\n 9        4       1.5        1481     6000       1948         9087     299990\n10        3       2          1630     5998       1948         9430     375000\n# … with 75 more rows"
-  },
-  {
-    "objectID": "slides/lec-9.html#variables",
-    "href": "slides/lec-9.html#variables",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Variables",
-    "text": "Variables\nPredictors:\n\n\nbedrooms: Number of bedrooms\nbathrooms: Number of bathrooms\nliving_area: Total living area of the house (in square feet)\nlot_size: Total area of the lot (in square feet)\nyear_built: Year the house was built\nproperty_tax: Annual property taxes (in USD)\n\n\nResponse: sale_price: Sales price (in USD)"
-  },
-  {
-    "objectID": "slides/lec-9.html#eda-response-variable",
-    "href": "slides/lec-9.html#eda-response-variable",
-    "title": "Multiple linear regression (MLR)",
-    "section": "EDA: Response variable",
-    "text": "EDA: Response variable"
-  },
-  {
-    "objectID": "slides/lec-9.html#eda-predictor-variables",
-    "href": "slides/lec-9.html#eda-predictor-variables",
-    "title": "Multiple linear regression (MLR)",
-    "section": "EDA: Predictor variables",
-    "text": "EDA: Predictor variables"
-  },
-  {
-    "objectID": "slides/lec-9.html#eda-response-vs.-predictors",
-    "href": "slides/lec-9.html#eda-response-vs.-predictors",
-    "title": "Multiple linear regression (MLR)",
-    "section": "EDA: Response vs. Predictors",
-    "text": "EDA: Response vs. Predictors"
-  },
-  {
-    "objectID": "slides/lec-9.html#eda-all-variables",
-    "href": "slides/lec-9.html#eda-all-variables",
-    "title": "Multiple linear regression (MLR)",
-    "section": "EDA: All variables",
-    "text": "EDA: All variables\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggpairs(levittown) +\n  theme(\n    axis.text.y = element_text(size = 10),\n    axis.text.x = element_text(angle = 45, size = 10),\n    strip.text.y = element_text(angle = 0, hjust = 0)\n    )"
-  },
-  {
-    "objectID": "slides/lec-9.html#single-vs.-multiple-predictors",
-    "href": "slides/lec-9.html#single-vs.-multiple-predictors",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Single vs. multiple predictors",
-    "text": "Single vs. multiple predictors\nSo far we’ve used a single predictor variable to understand variation in a quantitative response variable\n\nNow we want to use multiple predictor variables to understand variation in a quantitative response variable"
-  },
-  {
-    "objectID": "slides/lec-9.html#multiple-linear-regression-mlr",
-    "href": "slides/lec-9.html#multiple-linear-regression-mlr",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Multiple linear regression (MLR)",
-    "text": "Multiple linear regression (MLR)\nBased on the analysis goals, we will use a multiple linear regression model of the following form\n\\[\n\\begin{aligned}\\hat{\\text{sale_price}} ~ = & ~\n\\hat{\\beta}_0 + \\hat{\\beta}_1 \\text{bedrooms} + \\hat{\\beta}_2 \\text{bathrooms} + \\hat{\\beta}_3 \\text{living_area} \\\\\n&+ \\hat{\\beta}_4 \\text{lot_size} + \\hat{\\beta}_5 \\text{year_built} + \\hat{\\beta}_6 \\text{property_tax}\\end{aligned}\n\\]\nSimilar to simple linear regression, this model assumes that at each combination of the predictor variables, the values sale_price follow a Normal distribution."
-  },
-  {
-    "objectID": "slides/lec-9.html#regression-model",
-    "href": "slides/lec-9.html#regression-model",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Regression Model",
-    "text": "Regression Model\nRecall: The simple linear regression model assumes\n\\[\nY|X\\sim N(\\beta_0 + \\beta_1 X, \\sigma_{\\epsilon}^2)\n\\]\n\nSimilarly: The multiple linear regression model assumes\n\\[\nY|X_1, X_2, \\ldots, X_p \\sim N(\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\dots + \\beta_p X_p, \\sigma_{\\epsilon}^2)\n\\]"
-  },
-  {
-    "objectID": "slides/lec-9.html#the-mlr-model",
-    "href": "slides/lec-9.html#the-mlr-model",
-    "title": "Multiple linear regression (MLR)",
-    "section": "The MLR model",
-    "text": "The MLR model\nFor a given observation \\((x_{i1}, x_{i2} \\ldots, x_{ip}, y_i)\\)\n\\[\ny_i = \\beta_0 + \\beta_1 x_{i1} + \\beta_2 x_{i2} + \\dots + \\beta_p x_{ip} + \\epsilon_{i} \\hspace{8mm} \\epsilon_i \\sim N(0,\\sigma_\\epsilon^2)\n\\]"
-  },
-  {
-    "objectID": "slides/lec-9.html#prediction",
-    "href": "slides/lec-9.html#prediction",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Prediction",
-    "text": "Prediction\nAt any combination of the predictors, the mean value of the response \\(Y\\), is\n\\[\n\\mu_{Y|X_1, \\ldots, X_p} = \\beta_0 + \\beta_1 X_{1} + \\beta_2 X_2 + \\dots + \\beta_p X_p\n\\]\n\nUsing multiple linear regression, we can estimate the mean response for any combination of predictors\n\\[\n\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{1} + \\hat{\\beta}_2 X_2 + \\dots + \\hat{\\beta}_p X_{p}\n\\]"
-  },
-  {
-    "objectID": "slides/lec-9.html#model-fit",
-    "href": "slides/lec-9.html#model-fit",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Model fit",
-    "text": "Model fit\n\nprice_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(sale_price ~ bedrooms + bathrooms + living_area + lot_size +\n        year_built + property_tax, data = levittown)\n\ntidy(price_fit) %>%\n  kable(digits = 3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-7148818.957\n3820093.694\n-1.871\n0.065\n\n\nbedrooms\n-12291.011\n9346.727\n-1.315\n0.192\n\n\nbathrooms\n51699.236\n13094.170\n3.948\n0.000\n\n\nliving_area\n65.903\n15.979\n4.124\n0.000\n\n\nlot_size\n-0.897\n4.194\n-0.214\n0.831\n\n\nyear_built\n3760.898\n1962.504\n1.916\n0.059\n\n\nproperty_tax\n1.476\n2.832\n0.521\n0.604"
-  },
-  {
-    "objectID": "slides/lec-9.html#model-equation",
-    "href": "slides/lec-9.html#model-equation",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Model equation",
-    "text": "Model equation\n\\[\n\\begin{align}\\hat{\\text{price}} = & -7148818.957 - 12291.011 \\times \\text{bedrooms}\\\\[5pt]  \n&+ 51699.236 \\times \\text{bathrooms}  + 65.903 \\times \\text{living area}\\\\[5pt]\n&- 0.897 \\times \\text{lot size} +  3760.898 \\times \\text{year built}\\\\[5pt]\n&+ 1.476 \\times \\text{property tax}\n\\end{align}\n\\]"
-  },
-  {
-    "objectID": "slides/lec-9.html#interpreting-hatbeta_j",
-    "href": "slides/lec-9.html#interpreting-hatbeta_j",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Interpreting \\(\\hat{\\beta}_j\\)",
-    "text": "Interpreting \\(\\hat{\\beta}_j\\)\n\nThe estimated coefficient \\(\\hat{\\beta}_j\\) is the expected change in the mean of \\(y\\) when \\(x_j\\) increases by one unit, holding the values of all other predictor variables constant.\n\n\n\nExample: The estimated coefficient for living_area is 65.90. This means for each additional square foot of living area, we expect the sale price of a house in Levittown, NY to increase by $65.90, on average, holding all other predictor variables constant."
-  },
-  {
-    "objectID": "slides/lec-9.html#prediction-1",
-    "href": "slides/lec-9.html#prediction-1",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Prediction",
-    "text": "Prediction\n\nWhat is the predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1,050 square feet of living area, 6,000 square foot lot size, built in 1948 with $6,306 in property taxes?\n\n\n\n-7148818.957 - 12291.011 * 3 + 51699.236 * 1 + \n  65.903 * 1050 - 0.897 * 6000 + 3760.898 * 1948 + \n  1.476 * 6306\n\n[1] 265360.4\n\n\n\nThe predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes is $265,360."
-  },
-  {
-    "objectID": "slides/lec-9.html#prediction-revisit",
-    "href": "slides/lec-9.html#prediction-revisit",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Prediction, revisit",
-    "text": "Prediction, revisit\nJust like with simple linear regression, we can use the predict() function in R to calculate the appropriate intervals for our predicted values:\n\nnew_house <- tibble(\n  bedrooms = 3, bathrooms = 1, \n  living_area = 1050, lot_size = 6000, \n  year_built = 1948, property_tax = 6306\n  )\n\npredict(price_fit, new_house)\n\n# A tibble: 1 × 1\n    .pred\n    <dbl>\n1 265360."
-  },
-  {
-    "objectID": "slides/lec-9.html#confidence-interval-for-hatmu_y",
-    "href": "slides/lec-9.html#confidence-interval-for-hatmu_y",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Confidence interval for \\(\\hat{\\mu}_y\\)",
-    "text": "Confidence interval for \\(\\hat{\\mu}_y\\)\n\nCalculate a 95% confidence interval for the estimated mean price of houses in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes.\n\n\n\npredict(price_fit, new_house, type = \"conf_int\", level = 0.95)\n\n# A tibble: 1 × 2\n  .pred_lower .pred_upper\n        <dbl>       <dbl>\n1     238482.     292239."
-  },
-  {
-    "objectID": "slides/lec-9.html#prediction-interval-for-haty",
-    "href": "slides/lec-9.html#prediction-interval-for-haty",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Prediction interval for \\(\\hat{y}\\)",
-    "text": "Prediction interval for \\(\\hat{y}\\)\n\nCalculate a 95% prediction interval for an individual house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes.\n\n\n\npredict(price_fit, new_house, type = \"pred_int\", level = 0.95)\n\n# A tibble: 1 × 2\n  .pred_lower .pred_upper\n        <dbl>       <dbl>\n1     167277.     363444."
-  },
-  {
-    "objectID": "slides/lec-9.html#cautions",
-    "href": "slides/lec-9.html#cautions",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Cautions",
-    "text": "Cautions\n\nDo not extrapolate! Because there are multiple predictor variables, there is the potential to extrapolate in many directions\nThe multiple regression model only shows association, not causality\n\nTo show causality, you must have a carefully designed experiment or carefully account for confounding variables in an observational study"
-  },
-  {
-    "objectID": "slides/lec-9.html#recap",
-    "href": "slides/lec-9.html#recap",
-    "title": "Multiple linear regression (MLR)",
-    "section": "Recap",
-    "text": "Recap\n\n\nIntroduced multiple linear regression\nInterpreted a coefficient \\(\\hat{\\beta}_j\\)\nUsed the model to calculate predicted values and the corresponding intervals\n\n\n\n\n\nsta210-s22.github.io/website"
+    "objectID": "slides/lec-9.html#application-exercise",
+    "href": "slides/lec-9.html#application-exercise",
+    "title": "Exam 1 Review",
+    "section": "Application Exercise",
+    "text": "Application Exercise\n\n📋 github.com/sta210-s22/ae-4-exam-1-review\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lec-3.html#announcements",
@@ -1488,7 +1488,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
