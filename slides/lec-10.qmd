@@ -163,7 +163,7 @@ p6 <- ggplot(loan50, aes(x = annual_income_th, y = interest_rate)) +
     x = "Annual income (in $1000s)"
   )
 
-p1 + p2 / p3
+p4 + p5 / p6
 ```
 
 ## Fit regression model
