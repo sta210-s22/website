@@ -900,7 +900,11 @@
 <section id="interaction-term-in-model" class="slide level2 smaller">
 <h2>Interaction term in model</h2>
 <div class="cell" data-layout-align="center">
-
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>int_cent_int_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">fit</span>(interest_rate <span class="sc">~</span> debt_inc_cent  <span class="sc">+</span>  debt_inc_cent <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>        annual_income_th_cent <span class="sc">+</span> verified_income <span class="sc">*</span> annual_income_th_cent,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>      <span class="at">data =</span> loan50)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1013,42 +1017,42 @@ $ `annual_income_th_cent:verified_incomeVerified`        &lt;dbl&gt; 0.00, 0.00,
 <h2>Looking backward</h2>
 <p>Data manipulation, with <strong>dplyr</strong> (from <strong>tidyverse</strong>):</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>loan50 <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">select</span>(interest_rate, annual_income, debt_to_income, verified_income) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="co"># 1. rescale income</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">annual_income_th =</span> annual_income <span class="sc">/</span> <span class="dv">1000</span>,</span>
-<span id="cb11-6"><a href="#cb11-6"></a>    <span class="co"># 2. mean-center quantitative predictors</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>    <span class="at">debt_inc_cent =</span> debt_to_income <span class="sc">-</span> <span class="fu">mean</span>(debt_to_income),</span>
-<span id="cb11-8"><a href="#cb11-8"></a>    <span class="at">annual_income_th_cent =</span> annual_income_th <span class="sc">-</span> <span class="fu">mean</span>(annual_income_th),</span>
-<span id="cb11-9"><a href="#cb11-9"></a>    <span class="co"># 3. create dummy variables for verified_income</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>    <span class="at">source_verified =</span> <span class="fu">if_else</span>(verified_income <span class="sc">==</span> <span class="st">"Source Verified"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb11-11"><a href="#cb11-11"></a>    <span class="at">verified =</span> <span class="fu">if_else</span>(verified_income <span class="sc">==</span> <span class="st">"Verified"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb11-12"><a href="#cb11-12"></a>    <span class="co"># 4. create interaction variables</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>    <span class="st">`</span><span class="at">annual_income_th_cent:verified_incomeSource Verified</span><span class="st">`</span> <span class="ot">=</span> annual_income_th_cent <span class="sc">*</span> source_verified,</span>
-<span id="cb11-14"><a href="#cb11-14"></a>    <span class="st">`</span><span class="at">annual_income_th_cent:verified_incomeVerified</span><span class="st">`</span> <span class="ot">=</span> annual_income_th_cent <span class="sc">*</span> verified</span>
-<span id="cb11-15"><a href="#cb11-15"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>loan50 <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">select</span>(interest_rate, annual_income, debt_to_income, verified_income) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="co"># 1. rescale income</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="at">annual_income_th =</span> annual_income <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="co"># 2. mean-center quantitative predictors</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="at">debt_inc_cent =</span> debt_to_income <span class="sc">-</span> <span class="fu">mean</span>(debt_to_income),</span>
+<span id="cb12-8"><a href="#cb12-8"></a>    <span class="at">annual_income_th_cent =</span> annual_income_th <span class="sc">-</span> <span class="fu">mean</span>(annual_income_th),</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="co"># 3. create dummy variables for verified_income</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="at">source_verified =</span> <span class="fu">if_else</span>(verified_income <span class="sc">==</span> <span class="st">"Source Verified"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="at">verified =</span> <span class="fu">if_else</span>(verified_income <span class="sc">==</span> <span class="st">"Verified"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb12-12"><a href="#cb12-12"></a>    <span class="co"># 4. create interaction variables</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>    <span class="st">`</span><span class="at">annual_income_th_cent:verified_incomeSource Verified</span><span class="st">`</span> <span class="ot">=</span> annual_income_th_cent <span class="sc">*</span> source_verified,</span>
+<span id="cb12-14"><a href="#cb12-14"></a>    <span class="st">`</span><span class="at">annual_income_th_cent:verified_incomeVerified</span><span class="st">`</span> <span class="ot">=</span> annual_income_th_cent <span class="sc">*</span> verified</span>
+<span id="cb12-15"><a href="#cb12-15"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="looking-forward" class="slide level2 smaller">
 <h2>Looking forward</h2>
 <p><strong>Feature engineering</strong>, with <strong>recipes</strong> (from <strong>tidymodels</strong>):</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>loan_rec <span class="ot">&lt;-</span> <span class="fu">recipe</span>( <span class="sc">~</span> ., <span class="at">data =</span> loan50) <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="co"># 1. rescale income</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">step_mutate</span>(<span class="at">annual_income_th =</span> annual_income <span class="sc">/</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>  <span class="co"># 2. mean-center quantitative predictors</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">step_center</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="co"># 3. create dummy variables for verified_income</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">step_dummy</span>(verified_income) <span class="sc">%&gt;%</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a>  <span class="co"># 4. create interaction variables</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">step_interact</span>(<span class="at">terms =</span> <span class="sc">~</span> annual_income_th<span class="sc">:</span>verified_income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>loan_rec <span class="ot">&lt;-</span> <span class="fu">recipe</span>( <span class="sc">~</span> ., <span class="at">data =</span> loan50) <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="co"># 1. rescale income</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">step_mutate</span>(<span class="at">annual_income_th =</span> annual_income <span class="sc">/</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="co"># 2. mean-center quantitative predictors</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">step_center</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="co"># 3. create dummy variables for verified_income</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">step_dummy</span>(verified_income) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="co"># 4. create interaction variables</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">step_interact</span>(<span class="at">terms =</span> <span class="sc">~</span> annual_income_th<span class="sc">:</span>verified_income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="recipe" class="slide level2">
 <h2>Recipe</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>loan_rec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>loan_rec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>Recipe
 
@@ -1108,7 +1112,7 @@ Interactions with annual_income_th:verified_income</code></pre>
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"13f6c690997fb3f2","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"31f3ce925b08387d","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
