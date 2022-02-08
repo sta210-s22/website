@@ -379,6 +379,7 @@ p1 + p2 +
 ## Interaction term in model {.smaller}
 
 ```{r}
+#| echo: true
 int_cent_int_fit <- linear_reg() %>%
   set_engine("lm") %>%
   fit(interest_rate ~ debt_inc_cent  +  debt_inc_cent + 
