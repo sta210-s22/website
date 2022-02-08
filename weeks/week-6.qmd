@@ -5,18 +5,26 @@ editor: visual
 ---
 
 ::: callout-important
-Due dates:
+Due dates: Exam 1 - Mon, Feb 7 at 11:59pm
 :::
-
-To be posted.
 
 ## Prepare
 
+To be posted.
+
 ## Participate
+
+🖥️ [Lecture 10 - MLR: Types of predictors](/slides/lec-10.html)
 
 ## Practice
 
+Application exercise (to be posted)
+
 ## Perform
+
+No lab
+
+✅ [Exam 1](/exams/exam-1.html)
 
 <br><br>
 

@@ -1,0 +1,473 @@
+---
+title: "Types of predictors"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 0.618,
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+```
+
+# Welcome
+
+## Announcements
+
+::: nonincremental
+-   Congratulations on finishing Exam 1!
+-   Grading of AEs
+-   Questions on feedback vs. regrades
+:::
+
+## Topics
+
+::: nonincremental
+-   Mean-centering quantitative predictors
+
+-   Using indicator variables for categorical predictors
+
+-   Using interaction terms
+:::
+
+## Computational setup
+
+```{r}
+#| echo: true
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(openintro)
+library(patchwork)
+library(knitr)
+library(kableExtra)
+library(colorblindr)
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+# Introduction
+
+## Data: Peer-to-peer lender
+
+Today's data is a sample of 50 loans made through a peer-to-peer lending club.
+The data is in the `loan50` data frame in the **openintro** R package.
+
+```{r}
+loan50 %>%
+  select(annual_income, debt_to_income, verified_income, interest_rate)
+```
+
+## Variables {.smaller}
+
+**Predictors**:
+
+::: nonincremental
+-   `annual_income`: Annual income
+-   `debt_to_income`: Debt-to-income ratio, i.e. the percentage of a borrower's total debt divided by their total income
+-   `verified_income`: Whether borrower's income source and amount have been verified (`Not Verified`, `Source Verified`, `Verified`)
+:::
+
+**Outcome**: `interest_rate`: Interest rate for the loan
+
+## Outcome: `interest_rate`
+
+```{r}
+ggplot(loan50, aes(x = interest_rate)) +
+  geom_density() +
+  labs(title = "Distribution of interest rate")
+```
+
+```{r}
+loan50 %>%
+  summarise(
+    min = min(interest_rate),
+    median = median(interest_rate),
+    max = max(interest_rate)
+  ) %>%
+  kable()
+```
+
+## Predictors
+
+```{r}
+p1 <- ggplot(loan50, aes(y = verified_income)) +
+  geom_bar() +
+  labs(title = "Verified Income")
+
+p2 <- ggplot(loan50, aes(x = debt_to_income)) +
+  geom_histogram(binwidth = 0.25) +
+  labs(title = "Debt to income ratio")
+
+p3 <- ggplot(loan50, aes(x = annual_income)) +
+  geom_histogram(binwidth = 20000) +
+  labs(title = "Annual income")
+
+p1 + p2 / p3
+```
+
+## Data manipulation 1: Rescale income
+
+```{r}
+#| echo: true
+
+loan50 <- loan50 %>%
+  mutate(annual_income_th = annual_income / 1000)
+
+ggplot(loan50, aes(x = annual_income_th)) +
+  geom_histogram(binwidth = 20) +
+  labs(title = "Annual income (in $1000s)")
+```
+
+## Outcome vs. predictors
+
+```{r}
+p4 <- ggplot(loan50, aes(x = verified_income, y = interest_rate)) +
+  geom_boxplot(fill = "#5B888C") +
+  labs(
+    y = "Interest Rate",
+    x = "Income verification"
+  )
+
+p5 <- ggplot(loan50, aes(x = debt_to_income, y = interest_rate)) +
+  geom_point(color = "#5B888C") +
+  labs(
+    y = NULL,
+    x = "Debt to income ratio"
+  )
+
+
+p6 <- ggplot(loan50, aes(x = annual_income_th, y = interest_rate)) +
+  geom_point(color = "#5B888C") +
+  labs(
+    y = NULL,
+    x = "Annual income (in $1000s)"
+  )
+
+p1 + p2 / p3
+```
+
+## Fit regression model
+
+```{r}
+#| echo: true
+int_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(interest_rate ~ debt_to_income + verified_income  + annual_income_th,
+      data = loan50)
+```
+
+## Summarize model results {.smaller}
+
+```{r}
+tidy(int_fit, conf.int = TRUE) %>%
+  kable(digits = 3)
+```
+
+. . .
+
+<br>
+
+::: question
+Describe the subset of borrowers who are expected to get an interest rate of 10.726% based on our model.
+Is this interpretation meaningful?
+Why or why not?
+:::
+
+# Mean-centered variables
+
+## Mean-centering
+
+If we are interested in interpreting the intercept, we can **mean-center** the quantitative predictors in the model.
+
+We can mean-center a quantitative predictor $X_j$ using the following:
+
+$$X_{j_{Cent}} = X_{j}- \bar{X}_{j}$$
+
+. . .
+
+If we mean-center all quantitative variables, then the intercept is interpreted as the expected value of the response variable when all quantitative variables are at their mean value.
+
+## Data manipulation 2: Mean-center numeric predictors
+
+```{r}
+#| echo: true
+loan50 <- loan50 %>%
+  mutate(
+    debt_inc_cent = debt_to_income - mean(debt_to_income), 
+    annual_income_th_cent = annual_income_th - mean(annual_income_th)
+    )
+```
+
+## Visualize mean-centered predictors
+
+```{r}
+p1 <- ggplot(loan50, aes(x = debt_to_income)) +
+  geom_density(fill = "#5B888C", alpha = 0.7) +
+  labs(x = NULL, title = "Debt to income ratio")
+
+p2 <- ggplot(loan50, aes(x = debt_inc_cent)) +
+  geom_density(fill = "#9dbdbf", alpha = 0.7) +
+  labs(x = NULL, title = "Mean-centered\nDebt to income ratio")
+
+p3 <- ggplot(loan50, aes(x = annual_income_th)) +
+  geom_density(fill = "#5B888C", alpha = 0.7) +
+  labs(x = NULL, title = "Annual income (in $1000s)")
+
+p4 <- ggplot(loan50, aes(x = annual_income_th_cent)) +
+  geom_density(fill = "#9dbdbf", alpha = 0.7) +
+  labs(x = NULL, title = "Mean-centered\nAnnual income (in $1000s)")
+
+(p1 + p3) / (p2 + p4)
+```
+
+## Using mean-centered variables in the model {.smaller}
+
+::: question
+How do you expect the model to change if we use the `debt_inc_cent` and `annual_income_cent` in the model?
+:::
+
+. . .
+
+```{r}
+int_cent_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(interest_rate ~ debt_inc_cent + verified_income + annual_income_th_cent, 
+      data = loan50)
+
+tidy(int_cent_fit, conf.int = T)
+```
+
+## Original vs. mean-centered model {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r}
+tidy(int_fit) %>%
+  select(term, estimate) %>%
+  kable(digits = 3)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+tidy(int_cent_fit) %>%
+  select(term, estimate) %>%
+  kable(digits = 3)
+```
+:::
+:::
+
+# Indicator variables
+
+## Indicator variables
+
+-   Suppose there is a categorical variable with $K$ categories (levels)
+
+-   We can make $K$ indicator variables - one indicator for each category
+
+-   An **indicator variable** takes values 1 or 0
+
+    -   1 if the observation belongs to that category
+    -   0 if the observation does not belong to that category
+
+## Data manipulation 3: Create indicator variables for `verified_income`
+
+```{r}
+#| echo: true
+
+loan50 <- loan50 %>%
+  mutate(
+    not_verified = if_else(verified_income == "Not Verified", 1, 0),
+    source_verified = if_else(verified_income == "Source Verified", 1, 0),
+    verified = if_else(verified_income == "Verified", 1, 0)
+  )
+```
+
+. . .
+
+```{r}
+loan50 %>%
+  select(verified_income, not_verified, source_verified, verified) %>%
+  slice(1, 3, 6)
+```
+
+## Indicators in the model {.smaller}
+
+-   We will use $K-1$ of the indicator variables in the model.
+-   The **baseline** is the category that doesn't have a term in the model.
+-   The coefficients of the indicator variables in the model are interpreted as the expected change in the response compared to the baseline, holding all other variables constant.
+-   This approach is also called **dummy coding**.
+
+. . .
+
+```{r}
+loan50 %>%
+  select(verified_income, source_verified, verified) %>%
+  slice(1, 3, 6)
+```
+
+## Interpreting `verified_income` {.smaller}
+
+```{r}
+tidy(int_cent_fit, conf.int  = T) %>%
+  kable(digits = 3) %>%
+  row_spec(c(3,4), background = "#D9E3E4")
+```
+
+. . .
+
+-   The baseline category is `Not verified`.
+-   People with source verified income are expected to take a loan with an interest rate that is 2.211% higher, on average, than the rate on loans to those whose income is not verified, holding all else constant.
+-   People with verified income are expected to take a loan with an interest rate that is 6.880% higher, on average, than the rate on loans to those whose income is not verified, holding all else constant.
+
+# Interaction terms
+
+## Interaction terms
+
+-   Sometimes the relationship between a predictor variable and the response depends on the value of another predictor variable.
+-   This is an **interaction effect**.
+-   To account for this, we can include **interaction terms** in the model.
+
+## Interest rate vs. annual income
+
+The lines are not parallel indicating there is an **interaction effect**.
+The slope of annual income differs based on the income verification.
+
+```{r}
+p1 <- ggplot(loan50, 
+             aes(x = annual_income_th, y = interest_rate)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Annual income (in $1000s)",
+    y = "Interest rate"
+  )
+
+p2 <- ggplot(loan50, 
+             aes(x = annual_income_th, y = interest_rate,
+                 color = verified_income)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Annual income (in $1000s)", y = NULL, color = NULL) +
+  theme(legend.position = c(0.6, 0.9)) +
+  scale_color_OkabeIto()
+
+p1 + p2 +
+  plot_annotation(title = "Interest rate vs. annual income")
+```
+
+## Interaction term in model {.smaller}
+
+```{r}
+int_cent_int_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(interest_rate ~ debt_inc_cent  +  debt_inc_cent + 
+        annual_income_th_cent + verified_income * annual_income_th_cent,
+      data = loan50)
+```
+
+```{r}
+tidy(int_cent_int_fit) %>%
+  kable(digits = 3) %>%
+  row_spec(c(6,7), background = "#D9E3E4")
+```
+
+## Interpreting interaction terms
+
+-   What the interaction means: The effect of annual income on the interest rate differs by -0.016 when the income is source verified compared to when it is not verified, holding all else constant.
+-   Interpreting `annual_income` for source verified: If the income is source verified, we expect the interest rate to decrease by 0.023% (-0.007 + -0.016) for each additional thousand dollars in annual income, holding all else constant.
+
+## Data manipulation 4: Create interaction variables {.smaller}
+
+Defining the interaction variable in the model formula as `verified_income * annual_income_th_cent` is an implicit data manipulation step as well
+
+```{r}
+library(hardhat)
+
+framed <- model_frame(interest_rate ~ debt_inc_cent  +  debt_inc_cent + annual_income_th_cent + verified_income * annual_income_th_cent, data = loan50)
+
+model_matrix(framed$terms, framed$data) %>%
+  glimpse()
+```
+
+# Wrap up
+
+## Recap
+
+-   Mean-centering quantitative predictors
+
+-   Using indicator variables for categorical predictors
+
+-   Using interaction terms
+
+## Looking backward {.smaller}
+
+Data manipulation, with **dplyr** (from **tidyverse**):
+
+```{r}
+#| echo: true
+#| results: hide
+
+loan50 %>%
+  select(interest_rate, annual_income, debt_to_income, verified_income) %>%
+  mutate(
+    # 1. rescale income
+    annual_income_th = annual_income / 1000,
+    # 2. mean-center quantitative predictors
+    debt_inc_cent = debt_to_income - mean(debt_to_income),
+    annual_income_th_cent = annual_income_th - mean(annual_income_th),
+    # 3. create dummy variables for verified_income
+    source_verified = if_else(verified_income == "Source Verified", 1, 0),
+    verified = if_else(verified_income == "Verified", 1, 0),
+    # 4. create interaction variables
+    `annual_income_th_cent:verified_incomeSource Verified` = annual_income_th_cent * source_verified,
+    `annual_income_th_cent:verified_incomeVerified` = annual_income_th_cent * verified
+  )
+```
+
+## Looking forward {.smaller}
+
+**Feature engineering**, with **recipes** (from **tidymodels**):
+
+```{r}
+#| label: recipe
+#| echo: true
+
+loan_rec <- recipe( ~ ., data = loan50) %>%
+  # 1. rescale income
+  step_mutate(annual_income_th = annual_income / 1000) %>%
+  # 2. mean-center quantitative predictors
+  step_center(all_numeric_predictors()) %>%
+  # 3. create dummy variables for verified_income
+  step_dummy(verified_income) %>%
+  # 4. create interaction variables
+  step_interact(terms = ~ annual_income_th:verified_income)
+```
+
+## Recipe
+
+```{r}
+#| echo: true
+
+loan_rec
+```
