@@ -532,6 +532,209 @@
     "text": "Hypothesis testing framework\n\nStart with a null hypothesis, \\(H_0\\) that represents the status quo\nSet an alternative hypothesis, \\(H_A\\) that represents the research question, i.e. what we’re testing for\nConduct a hypothesis test under the assumption that the null hypothesis is true and calculate a p-value (probability of observed or more extreme outcome given that the null hypothesis is true)\n\nif the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis\nif they do, then reject the null hypothesis in favor of the alternative\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
+    "objectID": "slides/lec-10.html#announcements",
+    "href": "slides/lec-10.html#announcements",
+    "title": "Types of predictors",
+    "section": "Announcements",
+    "text": "Announcements\n\n\nCongratulations on finishing Exam 1!\nGrading of AEs\nQuestions on feedback vs. regrades"
+  },
+  {
+    "objectID": "slides/lec-10.html#topics",
+    "href": "slides/lec-10.html#topics",
+    "title": "Types of predictors",
+    "section": "Topics",
+    "text": "Topics\n\n\nMean-centering quantitative predictors\nUsing indicator variables for categorical predictors\nUsing interaction terms"
+  },
+  {
+    "objectID": "slides/lec-10.html#computational-setup",
+    "href": "slides/lec-10.html#computational-setup",
+    "title": "Types of predictors",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\nlibrary(patchwork)\nlibrary(knitr)\nlibrary(kableExtra)\nlibrary(colorblindr)\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
+  },
+  {
+    "objectID": "slides/lec-10.html#data-peer-to-peer-lender",
+    "href": "slides/lec-10.html#data-peer-to-peer-lender",
+    "title": "Types of predictors",
+    "section": "Data: Peer-to-peer lender",
+    "text": "Data: Peer-to-peer lender\nToday’s data is a sample of 50 loans made through a peer-to-peer lending club. The data is in the loan50 data frame in the openintro R package.\n\n\n# A tibble: 50 × 4\n   annual_income debt_to_income verified_income interest_rate\n           <dbl>          <dbl> <fct>                   <dbl>\n 1         59000         0.558  Not Verified            10.9 \n 2         60000         1.31   Not Verified             9.92\n 3         75000         1.06   Verified                26.3 \n 4         75000         0.574  Not Verified             9.92\n 5        254000         0.238  Not Verified             9.43\n 6         67000         1.08   Source Verified          9.92\n 7         28800         0.0997 Source Verified         17.1 \n 8         80000         0.351  Not Verified             6.08\n 9         34000         0.698  Not Verified             7.97\n10         80000         0.167  Source Verified         12.6 \n# … with 40 more rows"
+  },
+  {
+    "objectID": "slides/lec-10.html#variables",
+    "href": "slides/lec-10.html#variables",
+    "title": "Types of predictors",
+    "section": "Variables",
+    "text": "Variables\nPredictors:\n\n\nannual_income: Annual income\ndebt_to_income: Debt-to-income ratio, i.e. the percentage of a borrower’s total debt divided by their total income\nverified_income: Whether borrower’s income source and amount have been verified (Not Verified, Source Verified, Verified)\n\n\nOutcome: interest_rate: Interest rate for the loan"
+  },
+  {
+    "objectID": "slides/lec-10.html#outcome-interest_rate",
+    "href": "slides/lec-10.html#outcome-interest_rate",
+    "title": "Types of predictors",
+    "section": "Outcome: interest_rate",
+    "text": "Outcome: interest_rate\n\n\n\n\n \n  \n    min \n    median \n    max \n  \n \n\n  \n    5.31 \n    9.93 \n    26.3"
+  },
+  {
+    "objectID": "slides/lec-10.html#predictors",
+    "href": "slides/lec-10.html#predictors",
+    "title": "Types of predictors",
+    "section": "Predictors",
+    "text": "Predictors"
+  },
+  {
+    "objectID": "slides/lec-10.html#data-manipulation-1-rescale-income",
+    "href": "slides/lec-10.html#data-manipulation-1-rescale-income",
+    "title": "Types of predictors",
+    "section": "Data manipulation 1: Rescale income",
+    "text": "Data manipulation 1: Rescale income\n\nloan50 <- loan50 %>%\n  mutate(annual_income_th = annual_income / 1000)\n\nggplot(loan50, aes(x = annual_income_th)) +\n  geom_histogram(binwidth = 20) +\n  labs(title = \"Annual income (in $1000s)\")"
+  },
+  {
+    "objectID": "slides/lec-10.html#outcome-vs.-predictors",
+    "href": "slides/lec-10.html#outcome-vs.-predictors",
+    "title": "Types of predictors",
+    "section": "Outcome vs. predictors",
+    "text": "Outcome vs. predictors"
+  },
+  {
+    "objectID": "slides/lec-10.html#fit-regression-model",
+    "href": "slides/lec-10.html#fit-regression-model",
+    "title": "Types of predictors",
+    "section": "Fit regression model",
+    "text": "Fit regression model\n\nint_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(interest_rate ~ debt_to_income + verified_income  + annual_income_th,\n      data = loan50)"
+  },
+  {
+    "objectID": "slides/lec-10.html#summarize-model-results",
+    "href": "slides/lec-10.html#summarize-model-results",
+    "title": "Types of predictors",
+    "section": "Summarize model results",
+    "text": "Summarize model results\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    10.726 \n    1.507 \n    7.116 \n    0.000 \n    7.690 \n    13.762 \n  \n  \n    debt_to_income \n    0.671 \n    0.676 \n    0.993 \n    0.326 \n    -0.690 \n    2.033 \n  \n  \n    verified_incomeSource Verified \n    2.211 \n    1.399 \n    1.581 \n    0.121 \n    -0.606 \n    5.028 \n  \n  \n    verified_incomeVerified \n    6.880 \n    1.801 \n    3.820 \n    0.000 \n    3.253 \n    10.508 \n  \n  \n    annual_income_th \n    -0.021 \n    0.011 \n    -1.804 \n    0.078 \n    -0.043 \n    0.002 \n  \n\n\n\n\n\n\n\n\nDescribe the subset of borrowers who are expected to get an interest rate of 10.726% based on our model. Is this interpretation meaningful? Why or why not?"
+  },
+  {
+    "objectID": "slides/lec-10.html#mean-centering",
+    "href": "slides/lec-10.html#mean-centering",
+    "title": "Types of predictors",
+    "section": "Mean-centering",
+    "text": "Mean-centering\nIf we are interested in interpreting the intercept, we can mean-center the quantitative predictors in the model.\nWe can mean-center a quantitative predictor \\(X_j\\) using the following:\n\\[X_{j_{Cent}} = X_{j}- \\bar{X}_{j}\\]\n\nIf we mean-center all quantitative variables, then the intercept is interpreted as the expected value of the response variable when all quantitative variables are at their mean value."
+  },
+  {
+    "objectID": "slides/lec-10.html#data-manipulation-2-mean-center-numeric-predictors",
+    "href": "slides/lec-10.html#data-manipulation-2-mean-center-numeric-predictors",
+    "title": "Types of predictors",
+    "section": "Data manipulation 2: Mean-center numeric predictors",
+    "text": "Data manipulation 2: Mean-center numeric predictors\n\nloan50 <- loan50 %>%\n  mutate(\n    debt_inc_cent = debt_to_income - mean(debt_to_income), \n    annual_income_th_cent = annual_income_th - mean(annual_income_th)\n    )"
+  },
+  {
+    "objectID": "slides/lec-10.html#visualize-mean-centered-predictors",
+    "href": "slides/lec-10.html#visualize-mean-centered-predictors",
+    "title": "Types of predictors",
+    "section": "Visualize mean-centered predictors",
+    "text": "Visualize mean-centered predictors"
+  },
+  {
+    "objectID": "slides/lec-10.html#using-mean-centered-variables-in-the-model",
+    "href": "slides/lec-10.html#using-mean-centered-variables-in-the-model",
+    "title": "Types of predictors",
+    "section": "Using mean-centered variables in the model",
+    "text": "Using mean-centered variables in the model\n\nHow do you expect the model to change if we use the debt_inc_cent and annual_income_cent in the model?\n\n\n\n\n# A tibble: 5 × 7\n  term                  estimate std.error statistic  p.value conf.low conf.high\n  <chr>                    <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>\n1 (Intercept)             9.44      0.977      9.66  1.50e-12   7.48    11.4    \n2 debt_inc_cent           0.671     0.676      0.993 3.26e- 1  -0.690    2.03   \n3 verified_incomeSourc…   2.21      1.40       1.58  1.21e- 1  -0.606    5.03   \n4 verified_incomeVerif…   6.88      1.80       3.82  4.06e- 4   3.25    10.5    \n5 annual_income_th_cent  -0.0205    0.0114    -1.80  7.79e- 2  -0.0434   0.00238"
+  },
+  {
+    "objectID": "slides/lec-10.html#original-vs.-mean-centered-model",
+    "href": "slides/lec-10.html#original-vs.-mean-centered-model",
+    "title": "Types of predictors",
+    "section": "Original vs. mean-centered model",
+    "text": "Original vs. mean-centered model\n\n\n\n\n\n \n  \n    term \n    estimate \n  \n \n\n  \n    (Intercept) \n    10.726 \n  \n  \n    debt_to_income \n    0.671 \n  \n  \n    verified_incomeSource Verified \n    2.211 \n  \n  \n    verified_incomeVerified \n    6.880 \n  \n  \n    annual_income_th \n    -0.021 \n  \n\n\n\n\n\n\n\n\n\n \n  \n    term \n    estimate \n  \n \n\n  \n    (Intercept) \n    9.444 \n  \n  \n    debt_inc_cent \n    0.671 \n  \n  \n    verified_incomeSource Verified \n    2.211 \n  \n  \n    verified_incomeVerified \n    6.880 \n  \n  \n    annual_income_th_cent \n    -0.021"
+  },
+  {
+    "objectID": "slides/lec-10.html#indicator-variables-1",
+    "href": "slides/lec-10.html#indicator-variables-1",
+    "title": "Types of predictors",
+    "section": "Indicator variables",
+    "text": "Indicator variables\n\nSuppose there is a categorical variable with \\(K\\) categories (levels)\nWe can make \\(K\\) indicator variables - one indicator for each category\nAn indicator variable takes values 1 or 0\n\n1 if the observation belongs to that category\n0 if the observation does not belong to that category"
+  },
+  {
+    "objectID": "slides/lec-10.html#data-manipulation-3-create-indicator-variables-for-verified_income",
+    "href": "slides/lec-10.html#data-manipulation-3-create-indicator-variables-for-verified_income",
+    "title": "Types of predictors",
+    "section": "Data manipulation 3: Create indicator variables for verified_income",
+    "text": "Data manipulation 3: Create indicator variables for verified_income\n\nloan50 <- loan50 %>%\n  mutate(\n    not_verified = if_else(verified_income == \"Not Verified\", 1, 0),\n    source_verified = if_else(verified_income == \"Source Verified\", 1, 0),\n    verified = if_else(verified_income == \"Verified\", 1, 0)\n  )\n\n\n\n\n# A tibble: 3 × 4\n  verified_income not_verified source_verified verified\n  <fct>                  <dbl>           <dbl>    <dbl>\n1 Not Verified               1               0        0\n2 Verified                   0               0        1\n3 Source Verified            0               1        0"
+  },
+  {
+    "objectID": "slides/lec-10.html#indicators-in-the-model",
+    "href": "slides/lec-10.html#indicators-in-the-model",
+    "title": "Types of predictors",
+    "section": "Indicators in the model",
+    "text": "Indicators in the model\n\nWe will use \\(K-1\\) of the indicator variables in the model.\nThe baseline is the category that doesn’t have a term in the model.\nThe coefficients of the indicator variables in the model are interpreted as the expected change in the response compared to the baseline, holding all other variables constant.\nThis approach is also called dummy coding.\n\n\n\n\n# A tibble: 3 × 3\n  verified_income source_verified verified\n  <fct>                     <dbl>    <dbl>\n1 Not Verified                  0        0\n2 Verified                      0        1\n3 Source Verified               1        0"
+  },
+  {
+    "objectID": "slides/lec-10.html#interpreting-verified_income",
+    "href": "slides/lec-10.html#interpreting-verified_income",
+    "title": "Types of predictors",
+    "section": "Interpreting verified_income",
+    "text": "Interpreting verified_income\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    9.444 \n    0.977 \n    9.663 \n    0.000 \n    7.476 \n    11.413 \n  \n  \n    debt_inc_cent \n    0.671 \n    0.676 \n    0.993 \n    0.326 \n    -0.690 \n    2.033 \n  \n  \n    verified_incomeSource Verified \n    2.211 \n    1.399 \n    1.581 \n    0.121 \n    -0.606 \n    5.028 \n  \n  \n    verified_incomeVerified \n    6.880 \n    1.801 \n    3.820 \n    0.000 \n    3.253 \n    10.508 \n  \n  \n    annual_income_th_cent \n    -0.021 \n    0.011 \n    -1.804 \n    0.078 \n    -0.043 \n    0.002 \n  \n\n\n\n\n\n\n\nThe baseline category is Not verified.\nPeople with source verified income are expected to take a loan with an interest rate that is 2.211% higher, on average, than the rate on loans to those whose income is not verified, holding all else constant.\nPeople with verified income are expected to take a loan with an interest rate that is 6.880% higher, on average, than the rate on loans to those whose income is not verified, holding all else constant."
+  },
+  {
+    "objectID": "slides/lec-10.html#interaction-terms-1",
+    "href": "slides/lec-10.html#interaction-terms-1",
+    "title": "Types of predictors",
+    "section": "Interaction terms",
+    "text": "Interaction terms\n\nSometimes the relationship between a predictor variable and the response depends on the value of another predictor variable.\nThis is an interaction effect.\nTo account for this, we can include interaction terms in the model."
+  },
+  {
+    "objectID": "slides/lec-10.html#interest-rate-vs.-annual-income",
+    "href": "slides/lec-10.html#interest-rate-vs.-annual-income",
+    "title": "Types of predictors",
+    "section": "Interest rate vs. annual income",
+    "text": "Interest rate vs. annual income\nThe lines are not parallel indicating there is an interaction effect. The slope of annual income differs based on the income verification."
+  },
+  {
+    "objectID": "slides/lec-10.html#interaction-term-in-model",
+    "href": "slides/lec-10.html#interaction-term-in-model",
+    "title": "Types of predictors",
+    "section": "Interaction term in model",
+    "text": "Interaction term in model\n\n\n\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n  \n \n\n  \n    (Intercept) \n    9.484 \n    0.989 \n    9.586 \n    0.000 \n  \n  \n    debt_inc_cent \n    0.691 \n    0.685 \n    1.009 \n    0.319 \n  \n  \n    annual_income_th_cent \n    -0.007 \n    0.020 \n    -0.341 \n    0.735 \n  \n  \n    verified_incomeSource Verified \n    2.157 \n    1.418 \n    1.522 \n    0.135 \n  \n  \n    verified_incomeVerified \n    7.181 \n    1.870 \n    3.840 \n    0.000 \n  \n  \n    annual_income_th_cent:verified_incomeSource Verified \n    -0.016 \n    0.026 \n    -0.643 \n    0.523 \n  \n  \n    annual_income_th_cent:verified_incomeVerified \n    -0.032 \n    0.033 \n    -0.979 \n    0.333"
+  },
+  {
+    "objectID": "slides/lec-10.html#interpreting-interaction-terms",
+    "href": "slides/lec-10.html#interpreting-interaction-terms",
+    "title": "Types of predictors",
+    "section": "Interpreting interaction terms",
+    "text": "Interpreting interaction terms\n\nWhat the interaction means: The effect of annual income on the interest rate differs by -0.016 when the income is source verified compared to when it is not verified, holding all else constant.\nInterpreting annual_income for source verified: If the income is source verified, we expect the interest rate to decrease by 0.023% (-0.007 + -0.016) for each additional thousand dollars in annual income, holding all else constant."
+  },
+  {
+    "objectID": "slides/lec-10.html#data-manipulation-4-create-interaction-variables",
+    "href": "slides/lec-10.html#data-manipulation-4-create-interaction-variables",
+    "title": "Types of predictors",
+    "section": "Data manipulation 4: Create interaction variables",
+    "text": "Data manipulation 4: Create interaction variables\nDefining the interaction variable in the model formula as verified_income * annual_income_th_cent is an implicit data manipulation step as well\n\n\nRows: 50\nColumns: 9\n$ `(Intercept)`                                          <dbl> 1, 1, 1, 1, 1, …\n$ debt_inc_cent                                          <dbl> -0.16511719, 0.…\n$ annual_income_th_cent                                  <dbl> -27.17, -26.17,…\n$ `verified_incomeNot Verified`                          <dbl> 1, 1, 0, 1, 1, …\n$ `verified_incomeSource Verified`                       <dbl> 0, 0, 0, 0, 0, …\n$ verified_incomeVerified                                <dbl> 0, 0, 1, 0, 0, …\n$ `annual_income_th_cent:verified_incomeNot Verified`    <dbl> -27.17, -26.17,…\n$ `annual_income_th_cent:verified_incomeSource Verified` <dbl> 0.00, 0.00, 0.0…\n$ `annual_income_th_cent:verified_incomeVerified`        <dbl> 0.00, 0.00, -11…"
+  },
+  {
+    "objectID": "slides/lec-10.html#recap",
+    "href": "slides/lec-10.html#recap",
+    "title": "Types of predictors",
+    "section": "Recap",
+    "text": "Recap\n\nMean-centering quantitative predictors\nUsing indicator variables for categorical predictors\nUsing interaction terms"
+  },
+  {
+    "objectID": "slides/lec-10.html#looking-backward",
+    "href": "slides/lec-10.html#looking-backward",
+    "title": "Types of predictors",
+    "section": "Looking backward",
+    "text": "Looking backward\nData manipulation, with dplyr (from tidyverse):\n\nloan50 %>%\n  select(interest_rate, annual_income, debt_to_income, verified_income) %>%\n  mutate(\n    # 1. rescale income\n    annual_income_th = annual_income / 1000,\n    # 2. mean-center quantitative predictors\n    debt_inc_cent = debt_to_income - mean(debt_to_income),\n    annual_income_th_cent = annual_income_th - mean(annual_income_th),\n    # 3. create dummy variables for verified_income\n    source_verified = if_else(verified_income == \"Source Verified\", 1, 0),\n    verified = if_else(verified_income == \"Verified\", 1, 0),\n    # 4. create interaction variables\n    `annual_income_th_cent:verified_incomeSource Verified` = annual_income_th_cent * source_verified,\n    `annual_income_th_cent:verified_incomeVerified` = annual_income_th_cent * verified\n  )"
+  },
+  {
+    "objectID": "slides/lec-10.html#looking-forward",
+    "href": "slides/lec-10.html#looking-forward",
+    "title": "Types of predictors",
+    "section": "Looking forward",
+    "text": "Looking forward\nFeature engineering, with recipes (from tidymodels):\n\nloan_rec <- recipe( ~ ., data = loan50) %>%\n  # 1. rescale income\n  step_mutate(annual_income_th = annual_income / 1000) %>%\n  # 2. mean-center quantitative predictors\n  step_center(all_numeric_predictors()) %>%\n  # 3. create dummy variables for verified_income\n  step_dummy(verified_income) %>%\n  # 4. create interaction variables\n  step_interact(terms = ~ annual_income_th:verified_income)"
+  },
+  {
+    "objectID": "slides/lec-10.html#recipe",
+    "href": "slides/lec-10.html#recipe",
+    "title": "Types of predictors",
+    "section": "Recipe",
+    "text": "Recipe\n\nloan_rec\n\nRecipe\n\nInputs:\n\n      role #variables\n predictor         24\n\nOperations:\n\nVariable mutation\nCentering for all_numeric_predictors()\nDummy variables from verified_income\nInteractions with annual_income_th:verified_income\n\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
     "objectID": "slides/lec-2.html#announcements",
     "href": "slides/lec-2.html#announcements",
     "title": "Simple Linear Regression",
@@ -1488,14 +1691,14 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -2167,28 +2370,28 @@
     "href": "weeks/week-6.html#prepare",
     "title": "Week 6",
     "section": "Prepare",
-    "text": "Prepare"
+    "text": "Prepare\nTo be posted."
   },
   {
     "objectID": "weeks/week-6.html#participate",
     "href": "weeks/week-6.html#participate",
     "title": "Week 6",
     "section": "Participate",
-    "text": "Participate"
+    "text": "Participate\n🖥️ Lecture 10 - MLR: Types of predictors"
   },
   {
     "objectID": "weeks/week-6.html#practice",
     "href": "weeks/week-6.html#practice",
     "title": "Week 6",
     "section": "Practice",
-    "text": "Practice"
+    "text": "Practice\nApplication exercise (to be posted)"
   },
   {
     "objectID": "weeks/week-6.html#perform",
     "href": "weeks/week-6.html#perform",
     "title": "Week 6",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\nNo lab\n✅ Exam 1\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-9.html#prepare",
@@ -3091,7 +3294,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Transforming the response\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of oredictors\n\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "computing-troubleshooting.html",
