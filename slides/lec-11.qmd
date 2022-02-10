@@ -34,7 +34,7 @@ knitr::opts_chunk$set(
 ::: nonincremental
 -   HW 2 posted tomorrow, due in a week
 -   Lab on Monday: Work data selection! (Read project assignment over the weekend)
--   Mid-semester course evaluation (ti be posted)
+-   Mid-semester course evaluation (to be posted)
 :::
 
 ## Topics
