@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.3.119">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
-  <title>STA 210 - Spring 2022 - Multiple linear regression (MLR)</title>
+  <title>STA 210 - Spring 2022 - Model comparison</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -389,7 +389,9 @@
       margin-right: 0; 
     }
   </style>
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Multiple linear regression (MLR)">
+  <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Model comparison">
 <meta name="twitter:description" content="STA 210 - Spring 2022">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
@@ -402,7 +404,7 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Multiple linear regression (MLR)</h1>
+  <h1 class="title">Model comparison</h1>
   <p class="subtitle">STA 210 - Spring 2022</p>
   <p class="author">Dr.&nbsp;Mine Çetinkaya-Rundel</p>
 </section>
@@ -412,96 +414,69 @@
 <h1>Welcome</h1>
 
 </section>
-<section id="announcements" class="slide level2 smaller">
+<section id="announcements" class="slide level2">
 <h2>Announcements</h2>
-<ul>
-<li class="fragment"><p>Lab 3:</p>
 <div>
 <ul>
-<li>Any questions about lab / teamwork?</li>
-<li>Due Friday, Feb 4 at 5pm</li>
+<li>HW 2 posted tomorrow, due in a week</li>
+<li>Lab on Monday: Work data selection! (Read project assignment over the weekend)</li>
+<li>Mid-semester course evaluation (ti be posted)</li>
 </ul>
-</div></li>
-<li class="fragment"><p>Exam 1:</p>
+</div>
+</section>
+<section id="topics" class="slide level2">
+<h2>Topics</h2>
 <div>
 <ul>
-<li>Released Friday, Feb 4</li>
-<li>Multiple choice questions (mostly conceptual) + open-ended exercises (like lab + homework)</li>
-<li>Open book, open internet, open questions to me + Rick (head TA) only</li>
-<li>No communication with others or posting questions on the internet allowed</li>
-<li>What can you do to start preparing?
-<ul>
-<li><p>Review readings, assignments, feedback returned</p></li>
-<li><p>Organize your notes</p></li>
-<li><p>Come to office hours with questions</p></li>
-</ul></li>
+<li>ANOVA for Multiple Linear Regression and sum of squares</li>
+<li>Comparing models with <span class="math inline">\(R^2\)</span> vs.&nbsp;<span class="math inline">\(R^2_{adj}\)</span></li>
+<li>Comparing models with AIC and BIC</li>
+<li>Occam’s razor and parsimony</li>
+<li>Overfitting and spending our data</li>
 </ul>
-</div></li>
-</ul>
+</div>
 </section>
 <section id="computational-setup" class="slide level2">
 <h2>Computational setup</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)   <span class="co"># for data wrangling and visualization</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)  <span class="co"># for modeling</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(openintro)   <span class="co"># for the duke_forest dataset</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(scales)      <span class="co"># for pretty axis labels</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(knitr)       <span class="co"># for pretty tables</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(patchwork)   <span class="co"># for laying out plots</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(GGally)      <span class="co"># for pairwise plots</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
-<section id="considering-multiple-variables" class="title-slide slide level1 center">
-<h1>Considering multiple variables</h1>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
 
 </section>
-<section id="house-prices-in-levittown" class="slide level2">
-<h2>House prices in Levittown</h2>
-<ul>
-<li class="fragment">The data set contains the sales price and characteristics of 85 homes in Levittown, NY that sold between June 2010 and May 2011.</li>
-<li class="fragment">Levittown was built right after WWII and was the first planned suburban community built using mass production techniques.</li>
-<li class="fragment">The article <a href="https://www.theguardian.com/cities/2015/apr/28/levittown-america-prototypical-suburb-history-cities">“Levittown, the prototypical American suburb – a history of cities in 50 buildings, day 25”</a> gives an overview of Levittown’s controversial history.</li>
-</ul>
-</section>
-<section id="analysis-goals" class="slide level2">
-<h2>Analysis goals</h2>
-<ul>
-<li class="fragment"><p>We would like to use the characteristics of a house to understand variability in the sales price.</p></li>
-<li class="fragment"><p>To do so, we will fit a <strong>multiple linear regression model</strong>.</p></li>
-<li class="fragment"><p>Using our model, we can answers questions such as</p>
-<div>
-<ul>
-<li>What is the relationship between the characteristics of a house in Levittown and its sale price?</li>
-<li>Given its characteristics, what is the expected sale price of a house in Levittown?</li>
-</ul>
-</div></li>
-</ul>
-</section>
-<section id="the-data" class="slide level2 smaller">
-<h2>The data</h2>
+<section id="data-restaurant-tips" class="slide level2">
+<h2>Data: Restaurant tips</h2>
+<p>Which variables help us predict the amount customers tip at a restaurant?</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>levittown <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides/data/homeprices.csv"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2"></a>levittown</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-stdout">
-<pre><code># A tibble: 85 × 7
-   bedrooms bathrooms living_area lot_size year_built property_tax sale_price
-      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
- 1        4       1          1380     6000       1948         8360     350000
- 2        4       2          1761     7400       1951         5754     360000
- 3        4       2          1564     6000       1948         8982     350000
- 4        5       2          2904     9898       1949        11664     375000
- 5        5       2.5        1942     7788       1948         8120     370000
- 6        4       2          1830     6000       1948         8197     335000
- 7        4       1          1585     6000       1948         6223     295000
- 8        4       1           941     6800       1951         2448     250000
- 9        4       1.5        1481     6000       1948         9087     299990
-10        3       2          1630     5998       1948         9430     375000
-# … with 75 more rows</code></pre>
+<pre><code># A tibble: 169 × 4
+     Tip Party Meal   Age   
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
+ 1  2.99     1 Dinner Yadult
+ 2  2        1 Dinner Yadult
+ 3  5        1 Dinner SenCit
+ 4  4        3 Dinner Middle
+ 5 10.3      2 Dinner SenCit
+ 6  4.85     2 Dinner Middle
+ 7  5        4 Dinner Yadult
+ 8  4        3 Dinner Middle
+ 9  5        2 Dinner Middle
+10  1.58     1 Dinner SenCit
+# … with 159 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -510,303 +485,600 @@
 <p><strong>Predictors</strong>:</p>
 <div>
 <ul>
-<li><code>bedrooms</code>: Number of bedrooms</li>
-<li><code>bathrooms</code>: Number of bathrooms</li>
-<li><code>living_area</code>: Total living area of the house (in square feet)</li>
-<li><code>lot_size</code>: Total area of the lot (in square feet)</li>
-<li><code>year_built</code>: Year the house was built</li>
-<li><code>property_tax</code>: Annual property taxes (in USD)</li>
+<li><code>Party</code>: Number of people in the party</li>
+<li><code>Meal</code>: Time of day (Lunch, Dinner, Late Night)</li>
+<li><code>Age</code>: Age category of person paying the bill (Yadult, Middle, SenCit)</li>
 </ul>
 </div>
-<p><strong>Response:</strong> <code>sale_price</code>: Sales price (in USD)</p>
+<p><strong>Outcome</strong>: <code>Tip</code>: Amount of tip</p>
 </section>
-<section id="eda-response-variable" class="slide level2">
-<h2>EDA: Response variable</h2>
+<section id="outcome-tip" class="slide level2">
+<h2>Outcome: <code>Tip</code></h2>
 
-<img data-src="lec-8_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
-<section id="eda-predictor-variables" class="slide level2">
-<h2>EDA: Predictor variables</h2>
+<img data-src="lec-11_files/figure-revealjs/unnamed-chunk-5-1.png" width="3000" class="r-stretch quarto-figure-center"></section>
+<section id="predictors" class="slide level2">
+<h2>Predictors</h2>
 
-<img data-src="lec-8_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
-<section id="eda-response-vs.-predictors" class="slide level2">
-<h2>EDA: Response vs.&nbsp;Predictors</h2>
+<img data-src="lec-11_files/figure-revealjs/unnamed-chunk-6-1.png" width="3000" class="r-stretch quarto-figure-center"></section>
+<section id="relevel-categorical-predictors" class="slide level2">
+<h2>Relevel categorical predictors</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>tips <span class="ot">&lt;-</span> tips <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="at">Meal =</span> <span class="fu">fct_relevel</span>(Meal, <span class="st">"Lunch"</span>, <span class="st">"Dinner"</span>, <span class="st">"Late Night"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">Age  =</span> <span class="fu">fct_relevel</span>(Age, <span class="st">"Yadult"</span>, <span class="st">"Middle"</span>, <span class="st">"SenCit"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="predictors-again" class="slide level2">
+<h2>Predictors, again</h2>
 
-<img data-src="lec-8_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
-<section id="eda-all-variables" class="slide level2">
-<h2>EDA: All variables</h2>
-<div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Plot</a></li><li><a href="#tabset-1-2">Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1">
+<img data-src="lec-11_files/figure-revealjs/unnamed-chunk-8-1.png" width="3000" class="r-stretch quarto-figure-center"></section>
+<section id="outcome-vs.-predictors" class="slide level2">
+<h2>Outcome vs.&nbsp;predictors</h2>
+
+<img data-src="lec-11_files/figure-revealjs/unnamed-chunk-9-1.png" width="3600" class="r-stretch quarto-figure-center"></section>
+<section id="fit-and-summarize-model" class="slide level2 smaller">
+<h2>Fit and summarize model</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tip_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> Age, <span class="at">data =</span> tips)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">tidy</span>(tip_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -0.170 </td>
+   <td style="text-align:right;"> 0.366 </td>
+   <td style="text-align:right;"> -0.465 </td>
+   <td style="text-align:right;"> 0.643 </td>
+   <td style="text-align:right;"> -0.893 </td>
+   <td style="text-align:right;"> 0.553 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Party </td>
+   <td style="text-align:right;"> 1.837 </td>
+   <td style="text-align:right;"> 0.124 </td>
+   <td style="text-align:right;"> 14.758 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 1.591 </td>
+   <td style="text-align:right;"> 2.083 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AgeMiddle </td>
+   <td style="text-align:right;"> 1.009 </td>
+   <td style="text-align:right;"> 0.408 </td>
+   <td style="text-align:right;"> 2.475 </td>
+   <td style="text-align:right;"> 0.014 </td>
+   <td style="text-align:right;"> 0.204 </td>
+   <td style="text-align:right;"> 1.813 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AgeSenCit </td>
+   <td style="text-align:right;"> 1.388 </td>
+   <td style="text-align:right;"> 0.485 </td>
+   <td style="text-align:right;"> 2.862 </td>
+   <td style="text-align:right;"> 0.005 </td>
+   <td style="text-align:right;"> 0.430 </td>
+   <td style="text-align:right;"> 2.345 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="fragment">
+<p><br></p>
+<div class="question">
+<p>Is this the best model to explain variation in tips?</p>
+</div>
+</div>
+</section>
+<section id="another-model-summary" class="slide level2">
+<h2>Another model summary</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-8_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:80.0%"></p>
-</figure>
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> df </th>
+   <th style="text-align:right;"> sumsq </th>
+   <th style="text-align:right;"> meansq </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Party </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1188.64 </td>
+   <td style="text-align:right;"> 1188.64 </td>
+   <td style="text-align:right;"> 285.71 </td>
+   <td style="text-align:right;"> 0.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Age </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 38.03 </td>
+   <td style="text-align:right;"> 19.01 </td>
+   <td style="text-align:right;"> 4.57 </td>
+   <td style="text-align:right;"> 0.01 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Residuals </td>
+   <td style="text-align:right;"> 165 </td>
+   <td style="text-align:right;"> 686.44 </td>
+   <td style="text-align:right;"> 4.16 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+</tbody>
+</table>
+
 </div>
-</div>
-</div>
-</div>
-<div id="tabset-1-2">
-<div class="cell" data-layout-align="center" data-hash="lec-8_cache/revealjs/levittown-pairs_cd281d575ae5c06e79e7d321902ee297">
-<div class="sourceCode" id="cb4" data-code-line-numbers="|1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggpairs</span>(levittown) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">theme</span>(</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">strip.text.y =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>, <span class="at">hjust =</span> <span class="dv">0</span>)</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="single-vs.-multiple-predictors" class="slide level2">
-<h2>Single vs.&nbsp;multiple predictors</h2>
-<p>So far we’ve used a <em>single predictor variable</em> to understand variation in a quantitative response variable</p>
-<div class="fragment">
-<p>Now we want to use <em>multiple predictor variables</em> to understand variation in a quantitative response variable</p>
 </div>
 </section></section>
 <section>
-<section id="multiple-linear-regression" class="title-slide slide level1 center">
-<h1>Multiple linear regression</h1>
+<section id="analysis-of-variance-anova" class="title-slide slide level1 center">
+<h1>Analysis of variance (ANOVA)</h1>
 
 </section>
-<section id="multiple-linear-regression-mlr" class="slide level2 smaller">
-<h2>Multiple linear regression (MLR)</h2>
-<p>Based on the analysis goals, we will use a <strong>multiple linear regression</strong> model of the following form</p>
-<p><span class="math display">\[
-\begin{aligned}\hat{\text{sale_price}} ~ = &amp; ~
-\hat{\beta}_0 + \hat{\beta}_1 \text{bedrooms} + \hat{\beta}_2 \text{bathrooms} + \hat{\beta}_3 \text{living_area} \\
-&amp;+ \hat{\beta}_4 \text{lot_size} + \hat{\beta}_5 \text{year_built} + \hat{\beta}_6 \text{property_tax}\end{aligned}
-\]</span></p>
-<p>Similar to simple linear regression, this model assumes that at each combination of the predictor variables, the values <code>sale_price</code> follow a Normal distribution.</p>
+<section id="analysis-of-variance-anova-1" class="slide level2">
+<h2>Analysis of variance (ANOVA)</h2>
+<ul>
+<li class="fragment"><strong>Main Idea:</strong> Decompose the total variation on the outcome into:
+<ul>
+<li class="fragment"><p>the variation that can be explained by the each of the variables in the model</p></li>
+<li class="fragment"><p>the variation that <strong>can’t</strong> be explained by the model (left in the residuals)</p></li>
+</ul></li>
+<li class="fragment">If the variation that can be explained by the variables in the model is greater than the variation in the residuals, this signals that the model might be “valuable” (at least one of the <span class="math inline">\(\beta\)</span>s not equal to 0)</li>
+</ul>
 </section>
-<section id="regression-model" class="slide level2">
-<h2>Regression Model</h2>
-<p><strong>Recall:</strong> The simple linear regression model assumes</p>
-<p><span class="math display">\[
-Y|X\sim N(\beta_0 + \beta_1 X, \sigma_{\epsilon}^2)
-\]</span></p>
-<div class="fragment">
-<p><strong>Similarly:</strong> The multiple linear regression model assumes</p>
-<p><span class="math display">\[
-Y|X_1, X_2, \ldots, X_p \sim N(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p, \sigma_{\epsilon}^2)
-\]</span></p>
-</div>
-</section>
-<section id="the-mlr-model" class="slide level2">
-<h2>The MLR model</h2>
-<p>For a given observation <span class="math inline">\((x_{i1}, x_{i2} \ldots, x_{ip}, y_i)\)</span></p>
-<p><span class="math display">\[
-y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon_{i} \hspace{8mm} \epsilon_i \sim N(0,\sigma_\epsilon^2)
-\]</span></p>
-</section>
-<section id="prediction" class="slide level2">
-<h2>Prediction</h2>
-<p>At any combination of the predictors, the mean value of the response <span class="math inline">\(Y\)</span>, is</p>
-<p><span class="math display">\[
-\mu_{Y|X_1, \ldots, X_p} = \beta_0 + \beta_1 X_{1} + \beta_2 X_2 + \dots + \beta_p X_p
-\]</span></p>
-<div class="fragment">
-<p>Using multiple linear regression, we can estimate the mean response for any combination of predictors</p>
-<p><span class="math display">\[
-\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_{1} + \hat{\beta}_2 X_2 + \dots + \hat{\beta}_p X_{p}
-\]</span></p>
-</div>
-</section>
-<section id="model-fit" class="slide level2 smaller">
-<h2>Model fit</h2>
+<section id="anova-output" class="slide level2">
+<h2>ANOVA output</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>price_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">fit</span>(sale_price <span class="sc">~</span> bedrooms <span class="sc">+</span> bathrooms <span class="sc">+</span> living_area <span class="sc">+</span> lot_size <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>        year_built <span class="sc">+</span> property_tax, <span class="at">data =</span> levittown)</span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">tidy</span>(price_fit) <span class="sc">%&gt;%</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">anova</span>(tip_fit<span class="sc">$</span>fit) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> df </th>
+   <th style="text-align:right;"> sumsq </th>
+   <th style="text-align:right;"> meansq </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+  </tr>
+ </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-7148818.957</td>
-<td style="text-align: right;">3820093.694</td>
-<td style="text-align: right;">-1.871</td>
-<td style="text-align: right;">0.065</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">bedrooms</td>
-<td style="text-align: right;">-12291.011</td>
-<td style="text-align: right;">9346.727</td>
-<td style="text-align: right;">-1.315</td>
-<td style="text-align: right;">0.192</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">bathrooms</td>
-<td style="text-align: right;">51699.236</td>
-<td style="text-align: right;">13094.170</td>
-<td style="text-align: right;">3.948</td>
-<td style="text-align: right;">0.000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">living_area</td>
-<td style="text-align: right;">65.903</td>
-<td style="text-align: right;">15.979</td>
-<td style="text-align: right;">4.124</td>
-<td style="text-align: right;">0.000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">lot_size</td>
-<td style="text-align: right;">-0.897</td>
-<td style="text-align: right;">4.194</td>
-<td style="text-align: right;">-0.214</td>
-<td style="text-align: right;">0.831</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">year_built</td>
-<td style="text-align: right;">3760.898</td>
-<td style="text-align: right;">1962.504</td>
-<td style="text-align: right;">1.916</td>
-<td style="text-align: right;">0.059</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">property_tax</td>
-<td style="text-align: right;">1.476</td>
-<td style="text-align: right;">2.832</td>
-<td style="text-align: right;">0.521</td>
-<td style="text-align: right;">0.604</td>
-</tr>
+  <tr>
+   <td style="text-align:left;"> Party </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1188.64 </td>
+   <td style="text-align:right;"> 1188.64 </td>
+   <td style="text-align:right;"> 285.71 </td>
+   <td style="text-align:right;"> 0.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Age </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 38.03 </td>
+   <td style="text-align:right;"> 19.01 </td>
+   <td style="text-align:right;"> 4.57 </td>
+   <td style="text-align:right;"> 0.01 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Residuals </td>
+   <td style="text-align:right;"> 165 </td>
+   <td style="text-align:right;"> 686.44 </td>
+   <td style="text-align:right;"> 4.16 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
 </tbody>
 </table>
+
 </div>
 </div>
 </section>
-<section id="model-equation" class="slide level2">
-<h2>Model equation</h2>
+<section id="anova-output-with-totals" class="slide level2">
+<h2>ANOVA output, with totals</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> df </th>
+   <th style="text-align:right;"> sumsq </th>
+   <th style="text-align:left;"> meansq </th>
+   <th style="text-align:left;"> statistic </th>
+   <th style="text-align:left;"> p.value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Party </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1188.64 </td>
+   <td style="text-align:left;"> 1188.64 </td>
+   <td style="text-align:left;"> 285.71 </td>
+   <td style="text-align:left;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Age </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 38.03 </td>
+   <td style="text-align:left;"> 19.01 </td>
+   <td style="text-align:left;"> 4.57 </td>
+   <td style="text-align:left;"> 0.01 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Residuals </td>
+   <td style="text-align:right;"> 165 </td>
+   <td style="text-align:right;"> 686.44 </td>
+   <td style="text-align:left;"> 4.16 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 1913.11 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="sum-of-squares" class="slide level2">
+<h2>Sum of squares</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> df </th>
+   <th style="text-align:right;"> sumsq </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Party </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 1188.64 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Age </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 38.03 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Residuals </td>
+   <td style="text-align:right;"> 165 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 686.44 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 1913.11 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span class="math inline">\(SS_{Total}\)</span>: Total sum of squares, variability of outcome, <span class="math inline">\(\sum_{i = 1}^n (y_i - \bar{y})^2\)</span></li>
+<li class="fragment"><span class="math inline">\(SS_{Error}\)</span>: Residual sum of squares, variability of residuals, <span class="math inline">\(\sum_{i = 1}^n (y_i - \hat{y})^2\)</span></li>
+<li class="fragment"><span class="math inline">\(SS_{Model} = SS_{Total} - SS_{Error}\)</span>: Variability explained by the model</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="r-squared-r2" class="slide level2">
+<h2>R-squared, <span class="math inline">\(R^2\)</span></h2>
+<p><strong>Recall</strong>: <span class="math inline">\(R^2\)</span> is the proportion of the variation in the response variable explained by the regression model.</p>
+<div class="fragment">
 <p><span class="math display">\[
-\begin{align}\hat{\text{price}} = &amp; -7148818.957 - 12291.011 \times \text{bedrooms}\\[5pt]  
-&amp;+ 51699.236 \times \text{bathrooms}  + 65.903 \times \text{living area}\\[5pt]
-&amp;- 0.897 \times \text{lot size} +  3760.898 \times \text{year built}\\[5pt]
-&amp;+ 1.476 \times \text{property tax}
-\end{align}
+R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \frac{686.44}{1913.11} = 0.641
 \]</span></p>
-</section>
-<section id="interpreting-hatbeta_j" class="slide level2 smaller">
-<h2>Interpreting <span class="math inline">\(\hat{\beta}_j\)</span></h2>
-<ul>
-<li class="fragment">The estimated coefficient <span class="math inline">\(\hat{\beta}_j\)</span> is the expected change in the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(x_j\)</span> increases by one unit, <i>holding the values of all other predictor variables constant</i>.</li>
-</ul>
-<div class="fragment">
-<ul>
-<li class="fragment"><strong>Example:</strong> The estimated coefficient for <code>living_area</code> is 65.90. This means for each additional square foot of living area, we expect the sale price of a house in Levittown, NY to increase by $65.90, on average, holding all other predictor variables constant.</li>
-</ul>
-</div>
-</section>
-<section id="prediction-1" class="slide level2 smaller">
-<h2>Prediction</h2>
-<div class="question">
-<p>What is the predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1,050 square feet of living area, 6,000 square foot lot size, built in 1948 with $6,306 in property taxes?</p>
-</div>
-<p><br></p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="sc">-</span><span class="fl">7148818.957</span> <span class="sc">-</span> <span class="fl">12291.011</span> <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fl">51699.236</span> <span class="sc">*</span> <span class="dv">1</span> <span class="sc">+</span> </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fl">65.903</span> <span class="sc">*</span> <span class="dv">1050</span> <span class="sc">-</span> <span class="fl">0.897</span> <span class="sc">*</span> <span class="dv">6000</span> <span class="sc">+</span> <span class="fl">3760.898</span> <span class="sc">*</span> <span class="dv">1948</span> <span class="sc">+</span> </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fl">1.476</span> <span class="sc">*</span> <span class="dv">6306</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 265360.4</code></pre>
-</div>
 </div>
 <div class="fragment">
-<p>The predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes is <strong>$265,360</strong>.</p>
-</div>
-</section>
-<section id="prediction-revisit" class="slide level2">
-<h2>Prediction, revisit</h2>
-<p>Just like with simple linear regression, we can use the <code>predict()</code> function in R to calculate the appropriate intervals for our predicted values:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>new_house <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="at">bedrooms =</span> <span class="dv">3</span>, <span class="at">bathrooms =</span> <span class="dv">1</span>, </span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="at">living_area =</span> <span class="dv">1050</span>, <span class="at">lot_size =</span> <span class="dv">6000</span>, </span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="at">year_built =</span> <span class="dv">1948</span>, <span class="at">property_tax =</span> <span class="dv">6306</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  )</span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="fu">predict</span>(price_fit, new_house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">glance</span>(tip_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-    .pred
-    &lt;dbl&gt;
-1 265360.</code></pre>
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.641         0.635  2.04      98.3 1.56e-36     3  -358.  726.  742.
+# … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
 </div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="model-comparison" class="title-slide slide level1 center">
+<h1>Model comparison</h1>
+
+</section>
+<section id="r-squared-r2-1" class="slide level2">
+<h2>R-squared, <span class="math inline">\(R^2\)</span></h2>
+<ul>
+<li class="fragment"><span class="math inline">\(R^2\)</span> will always increase as we add more variables to the model + If we add enough variables, we can always achieve <span class="math inline">\(R^2=100\%\)</span></li>
+<li class="fragment">If we only use <span class="math inline">\(R^2\)</span> to choose a best fit model, we will be prone to choose the model with the most predictor variables</li>
+</ul>
+</section>
+<section id="adjusted-r2" class="slide level2">
+<h2>Adjusted <span class="math inline">\(R^2\)</span></h2>
+<ul>
+<li class="fragment"><strong>Adjusted</strong> <span class="math inline">\(R^2\)</span>: measure that includes a penalty for unnecessary predictor variables</li>
+<li class="fragment">Similar to <span class="math inline">\(R^2\)</span>, it is a measure of the amount of variation in the response that is explained by the regression model</li>
+<li class="fragment">Differs from <span class="math inline">\(R^2\)</span> by using the mean squares rather than sums of squares and therefore adjusting for the number of predictor variables</li>
+</ul>
+</section>
+<section id="r2-and-adjusted-r2" class="slide level2">
+<h2><span class="math inline">\(R^2\)</span> and Adjusted <span class="math inline">\(R^2\)</span></h2>
+<p><span class="math display">\[R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[R^2_{adj} = 1 - \frac{SS_{Error}/(n-p-1)}{SS_{Total}/(n-1)}\]</span></p>
 </div>
 </section>
-<section id="confidence-interval-for-hatmu_y" class="slide level2">
-<h2>Confidence interval for <span class="math inline">\(\hat{\mu}_y\)</span></h2>
-<div class="question">
-<p>Calculate a 95% confidence interval for the <strong>estimated mean price</strong> of houses in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes.</p>
-</div>
-<p><br></p>
+<section id="using-r2-and-adjusted-r2" class="slide level2">
+<h2>Using <span class="math inline">\(R^2\)</span> and Adjusted <span class="math inline">\(R^2\)</span></h2>
+<ul>
+<li class="fragment">Adjusted <span class="math inline">\(R^2\)</span> can be used as a quick assessment to compare the fit of multiple models; however, it should not be the only assessment!</li>
+<li class="fragment">Use <span class="math inline">\(R^2\)</span> when describing the relationship between the response and predictor variables</li>
+</ul>
+</section>
+<section id="comparing-models-with-r2_adj" class="slide level2 smaller">
+<h2>Comparing models with <span class="math inline">\(R^2_{adj}\)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">predict</span>(price_fit, new_house, <span class="at">type =</span> <span class="st">"conf_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>tip_fit_1 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> </span>
+<span id="cb8-4"><a href="#cb8-4"></a>            Age <span class="sc">+</span> </span>
+<span id="cb8-5"><a href="#cb8-5"></a>            Meal,</span>
+<span id="cb8-6"><a href="#cb8-6"></a>      </span>
+<span id="cb8-7"><a href="#cb8-7"></a>      <span class="at">data =</span> tips)</span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="fu">glance</span>(tip_fit_1) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">select</span>(r.squared, adj.r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 2
-  .pred_lower .pred_upper
-        &lt;dbl&gt;       &lt;dbl&gt;
-1     238482.     292239.</code></pre>
+  r.squared adj.r.squared
+      &lt;dbl&gt;         &lt;dbl&gt;
+1     0.674         0.664</code></pre>
 </div>
 </div>
-</section>
-<section id="prediction-interval-for-haty" class="slide level2">
-<h2>Prediction interval for <span class="math inline">\(\hat{y}\)</span></h2>
-<div class="question">
-<p>Calculate a 95% prediction interval for an individual house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes.</p>
-</div>
-<p><br></p>
+</div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">predict</span>(price_fit, new_house, <span class="at">type =</span> <span class="st">"pred_int"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>tip_fit_2 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>            Age <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5"></a>            Meal <span class="sc">+</span> </span>
+<span id="cb10-6"><a href="#cb10-6"></a>            Day, </span>
+<span id="cb10-7"><a href="#cb10-7"></a>      <span class="at">data =</span> tips)</span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="fu">glance</span>(tip_fit_2) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">select</span>(r.squared, adj.r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 2
-  .pred_lower .pred_upper
-        &lt;dbl&gt;       &lt;dbl&gt;
-1     167277.     363444.</code></pre>
+  r.squared adj.r.squared
+      &lt;dbl&gt;         &lt;dbl&gt;
+1     0.683         0.662</code></pre>
+</div>
+</div>
 </div>
 </div>
 </section>
-<section id="cautions" class="slide level2">
-<h2>Cautions</h2>
+<section id="aic-bic" class="slide level2">
+<h2>AIC &amp; BIC</h2>
+<p>Estimators of prediction error and <em>relative</em> quality of models:</p>
+<div class="fragment">
+<p><strong>Akaike’s Information Criterion (AIC)</strong>: <span class="math display">\[AIC = n\log(SS_\text{Error}) - n \log(n) + 2(p+1)\]</span> <br></p>
+</div>
+<div class="fragment">
+<p><strong>Schwarz’s Bayesian Information Criterion (BIC)</strong>: <span class="math display">\[BIC = n\log(SS_\text{Error}) - n\log(n) + log(n)\times(p+1)\]</span></p>
+</div>
+</section>
+<section id="aic-bic-1" class="slide level2">
+<h2>AIC &amp; BIC</h2>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; AIC = \color{blue}{n\log(SS_\text{Error})} - n \log(n) + 2(p+1) \\
+&amp; BIC = \color{blue}{n\log(SS_\text{Error})} - n\log(n) + \log(n)\times(p+1)
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p><br></p>
+<p>First Term: Decreases as <em>p</em> increases</p>
+</div>
+</section>
+<section id="aic-bic-2" class="slide level2">
+<h2>AIC &amp; BIC</h2>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; AIC = n\log(SS_\text{Error}) - \color{blue}{n \log(n)} + 2(p+1) \\
+&amp; BIC = n\log(SS_\text{Error}) - \color{blue}{n\log(n)} + \log(n)\times(p+1)
+\end{aligned}
+\]</span></p>
+<p><br></p>
+<p>Second Term: Fixed for a given sample size <em>n</em></p>
+</section>
+<section id="aic-bic-3" class="slide level2">
+<h2>AIC &amp; BIC</h2>
+<p><span class="math display">\[
+\begin{aligned} &amp; AIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{2(p+1)} \\
+&amp; BIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{\log(n)\times(p+1)}
+\end{aligned}
+\]</span></p>
+<p><br></p>
+<p>Third Term: Increases as <em>p</em> increases</p>
+</section>
+<section id="using-aic-bic" class="slide level2">
+<h2>Using AIC &amp; BIC</h2>
+<p><span class="math display">\[
+\begin{aligned} &amp; AIC = n\log(SS_{Error}) - n \log(n) + \color{red}{2(p+1)} \\
+&amp; BIC = n\log(SS_{Error}) - n\log(n) + \color{red}{\log(n)\times(p+1)}
+\end{aligned}
+\]</span></p>
 <ul>
-<li class="fragment"><strong>Do not extrapolate!</strong> Because there are multiple predictor variables, there is the potential to extrapolate in many directions</li>
-<li class="fragment">The multiple regression model only shows <strong>association, not causality</strong>
+<li class="fragment"><p>Choose model with the smaller value of AIC or BIC</p></li>
+<li class="fragment"><p>If <span class="math inline">\(n \geq 8\)</span>, the <strong>penalty</strong> for BIC is larger than that of AIC, so BIC tends to favor <em>more parsimonious</em> models (i.e.&nbsp;models with fewer terms)</p></li>
+</ul>
+</section>
+<section id="comparing-models-with-aic-and-bic" class="slide level2">
+<h2>Comparing models with AIC and BIC</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>tip_fit_1 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> </span>
+<span id="cb12-4"><a href="#cb12-4"></a>            Age <span class="sc">+</span> </span>
+<span id="cb12-5"><a href="#cb12-5"></a>            Meal,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>      </span>
+<span id="cb12-7"><a href="#cb12-7"></a>      <span class="at">data =</span> tips)</span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="fu">glance</span>(tip_fit_1) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">select</span>(AIC, BIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+    AIC   BIC
+  &lt;dbl&gt; &lt;dbl&gt;
+1  714.  736.</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>tip_fit_2 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> </span>
+<span id="cb14-4"><a href="#cb14-4"></a>            Age <span class="sc">+</span> </span>
+<span id="cb14-5"><a href="#cb14-5"></a>            Meal <span class="sc">+</span> </span>
+<span id="cb14-6"><a href="#cb14-6"></a>            Day, </span>
+<span id="cb14-7"><a href="#cb14-7"></a>      <span class="at">data =</span> tips)</span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">glance</span>(tip_fit_2) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">select</span>(AIC, BIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+    AIC   BIC
+  &lt;dbl&gt; &lt;dbl&gt;
+1  720.  757.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="commonalities-between-criteria" class="slide level2">
+<h2>Commonalities between criteria</h2>
 <ul>
-<li class="fragment">To show causality, you must have a carefully designed experiment or carefully account for confounding variables in an observational study</li>
+<li class="fragment"><span class="math inline">\(R^2_{adj}\)</span>, AIC, and BIC all apply a penalty for more predictors</li>
+<li class="fragment">The penalty for added model complexity attempts to strike a balance between underfitting (too few predictors in the model) and overfitting (too many predictors in the model)</li>
+<li class="fragment">Goal: <strong>Parsimony</strong></li>
+</ul>
+</section>
+<section id="parsimony-and-occams-razor" class="slide level2 smaller">
+<h2>Parsimony and Occam’s razor</h2>
+<ul>
+<li class="fragment"><p>The principle of <strong>parsimony</strong> is attributed to William of Occam (early 14th-century English nominalist philosopher), who insisted that, given a set of equally good explanations for a given phenomenon, <em>the correct explanation is the simplest explanation</em><a href="#/fn1" class="footnote-ref" id="fnref1" role="doc-noteref" onclick="return false;"><sup>1</sup></a></p></li>
+<li class="fragment"><p>Called <strong>Occam’s razor</strong> because he “shaved” his explanations down to the bare minimum</p></li>
+<li class="fragment"><p>Parsimony in modeling:</p>
+<div>
+<ul>
+<li>models should have as few parameters as possible</li>
+<li>linear models should be preferred to non-linear models</li>
+<li>experiments relying on few assumptions should be preferred to those relying on many</li>
+<li>models should be pared down until they are <em>minimal adequate</em></li>
+<li>simple explanations should be preferred to complex explanations</li>
+</ul>
+</div></li>
+</ul>
+</section>
+<section id="in-pursuit-of-occams-razor" class="slide level2">
+<h2>In pursuit of Occam’s razor</h2>
+<ul>
+<li class="fragment"><p>Occam’s razor states that among competing hypotheses that predict equally well, the one with the fewest assumptions should be selected</p></li>
+<li class="fragment"><p>Model selection follows this principle</p></li>
+<li class="fragment"><p>We only want to add another variable to the model if the addition of that variable brings something valuable in terms of predictive power to the model</p></li>
+<li class="fragment"><p>In other words, we prefer the simplest best model, i.e.&nbsp;<strong>parsimonious</strong> model</p></li>
+</ul>
+</section>
+<section id="alternate-views" class="slide level2 smaller">
+<h2>Alternate views</h2>
+<blockquote>
+<p>Sometimes a simple model will outperform a more complex model . . . Nevertheless, I believe that deliberately limiting the complexity of the model is not fruitful when the problem is evidently complex. Instead, if a simple model is found that outperforms some particular complex model, the appropriate response is to define a different complex model that captures whatever aspect of the problem led to the simple model performing well.</p>
+<p><br></p>
+<p>Radford Neal - Bayesian Learning for Neural Networks<a href="#/fn2" class="footnote-ref" id="fnref2" role="doc-noteref" onclick="return false;"><sup>2</sup></a></p>
+</blockquote>
+</section>
+<section id="other-concerns-with-our-approach" class="slide level2 smaller">
+<h2>Other concerns with our approach</h2>
+<ul>
+<li class="fragment">All criteria we considered for model comparison require making predictions for our data and then uses the prediction error (<span class="math inline">\(SS_{Error}\)</span>) somewhere in the formula</li>
+<li class="fragment">But we’re making prediction for the data we used to build the model (estimate the coefficients), which can lead to <strong>overfitting</strong></li>
+<li class="fragment">Instead we should
+<ul>
+<li class="fragment"><p>split our data into testing and training sets</p></li>
+<li class="fragment"><p>“train” the model on the training data and pick a few models we’re genuinely considering as potentially good models</p></li>
+<li class="fragment"><p>test those models on the testing set</p></li>
 </ul></li>
 </ul>
 </section>
 <section id="recap" class="slide level2">
 <h2>Recap</h2>
-<div>
 <ul>
-<li><p>Introduced multiple linear regression</p></li>
-<li><p>Interpreted a coefficient <span class="math inline">\(\hat{\beta}_j\)</span></p></li>
-<li><p>Used the model to calculate predicted values and the corresponding intervals</p></li>
+<li class="fragment"><p>ANOVA for Multiple Linear Regression and sum of squares</p></li>
+<li class="fragment"><p>Comparing models with <span class="math inline">\(R^2\)</span> vs.&nbsp;<span class="math inline">\(R^2_{adj}\)</span></p></li>
+<li class="fragment"><p>Comparing models with AIC and BIC</p></li>
+<li class="fragment"><p>Occam’s razor and parsimony</p></li>
+<li class="fragment"><p>Overfitting and spending our data</p></li>
 </ul>
-</div>
 
 
 <img src="images/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
 </section></section>
+<section class="footnotes footnotes-end-of-document smaller scrollable" role="doc-endnotes"><h2>Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>Source: The R Book by Michael J. Crawley.</p></li>
+<li id="fn2" role="doc-endnote"><p>Suggested blog post: <a href="https://statmodeling.stat.columbia.edu/2012/06/26/occam-2/">Occam</a> by Andrew Gelman</p></li>
+</ol>
+</section>
     </div>
   </div>
 
@@ -844,7 +1116,7 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsi
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"bdbfd57ad05ffdcf","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"48518bd79f05811f","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner

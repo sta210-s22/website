@@ -42,6 +42,244 @@
     "text": "You’re now ready to complete the rest of lab!\nPlease “raise your hand” if you need help as you work on the lab\n\n\n\nsta210-s22.github.io/website"
   },
   {
+    "objectID": "slides/lec-11.html#announcements",
+    "href": "slides/lec-11.html#announcements",
+    "title": "Model comparison",
+    "section": "Announcements",
+    "text": "Announcements\n\n\nHW 2 posted tomorrow, due in a week\nLab on Monday: Work data selection! (Read project assignment over the weekend)\nMid-semester course evaluation (ti be posted)"
+  },
+  {
+    "objectID": "slides/lec-11.html#topics",
+    "href": "slides/lec-11.html#topics",
+    "title": "Model comparison",
+    "section": "Topics",
+    "text": "Topics\n\n\nANOVA for Multiple Linear Regression and sum of squares\nComparing models with \\(R^2\\) vs. \\(R^2_{adj}\\)\nComparing models with AIC and BIC\nOccam’s razor and parsimony\nOverfitting and spending our data"
+  },
+  {
+    "objectID": "slides/lec-11.html#computational-setup",
+    "href": "slides/lec-11.html#computational-setup",
+    "title": "Model comparison",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(patchwork)\nlibrary(knitr)\nlibrary(kableExtra)\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
+  },
+  {
+    "objectID": "slides/lec-11.html#data-restaurant-tips",
+    "href": "slides/lec-11.html#data-restaurant-tips",
+    "title": "Model comparison",
+    "section": "Data: Restaurant tips",
+    "text": "Data: Restaurant tips\nWhich variables help us predict the amount customers tip at a restaurant?\n\n\n\n\n\n# A tibble: 169 × 4\n     Tip Party Meal   Age   \n   <dbl> <dbl> <chr>  <chr> \n 1  2.99     1 Dinner Yadult\n 2  2        1 Dinner Yadult\n 3  5        1 Dinner SenCit\n 4  4        3 Dinner Middle\n 5 10.3      2 Dinner SenCit\n 6  4.85     2 Dinner Middle\n 7  5        4 Dinner Yadult\n 8  4        3 Dinner Middle\n 9  5        2 Dinner Middle\n10  1.58     1 Dinner SenCit\n# … with 159 more rows"
+  },
+  {
+    "objectID": "slides/lec-11.html#variables",
+    "href": "slides/lec-11.html#variables",
+    "title": "Model comparison",
+    "section": "Variables",
+    "text": "Variables\nPredictors:\n\n\nParty: Number of people in the party\nMeal: Time of day (Lunch, Dinner, Late Night)\nAge: Age category of person paying the bill (Yadult, Middle, SenCit)\n\n\nOutcome: Tip: Amount of tip"
+  },
+  {
+    "objectID": "slides/lec-11.html#outcome-tip",
+    "href": "slides/lec-11.html#outcome-tip",
+    "title": "Model comparison",
+    "section": "Outcome: Tip",
+    "text": "Outcome: Tip"
+  },
+  {
+    "objectID": "slides/lec-11.html#predictors",
+    "href": "slides/lec-11.html#predictors",
+    "title": "Model comparison",
+    "section": "Predictors",
+    "text": "Predictors"
+  },
+  {
+    "objectID": "slides/lec-11.html#relevel-categorical-predictors",
+    "href": "slides/lec-11.html#relevel-categorical-predictors",
+    "title": "Model comparison",
+    "section": "Relevel categorical predictors",
+    "text": "Relevel categorical predictors\n\ntips <- tips %>%\n  mutate(\n    Meal = fct_relevel(Meal, \"Lunch\", \"Dinner\", \"Late Night\"),\n    Age  = fct_relevel(Age, \"Yadult\", \"Middle\", \"SenCit\")\n  )"
+  },
+  {
+    "objectID": "slides/lec-11.html#predictors-again",
+    "href": "slides/lec-11.html#predictors-again",
+    "title": "Model comparison",
+    "section": "Predictors, again",
+    "text": "Predictors, again"
+  },
+  {
+    "objectID": "slides/lec-11.html#outcome-vs.-predictors",
+    "href": "slides/lec-11.html#outcome-vs.-predictors",
+    "title": "Model comparison",
+    "section": "Outcome vs. predictors",
+    "text": "Outcome vs. predictors"
+  },
+  {
+    "objectID": "slides/lec-11.html#fit-and-summarize-model",
+    "href": "slides/lec-11.html#fit-and-summarize-model",
+    "title": "Model comparison",
+    "section": "Fit and summarize model",
+    "text": "Fit and summarize model\n\ntip_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(Tip ~ Party + Age, data = tips)\n\ntidy(tip_fit, conf.int = TRUE) %>%\n  kable(digits = 3)\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -0.170 \n    0.366 \n    -0.465 \n    0.643 \n    -0.893 \n    0.553 \n  \n  \n    Party \n    1.837 \n    0.124 \n    14.758 \n    0.000 \n    1.591 \n    2.083 \n  \n  \n    AgeMiddle \n    1.009 \n    0.408 \n    2.475 \n    0.014 \n    0.204 \n    1.813 \n  \n  \n    AgeSenCit \n    1.388 \n    0.485 \n    2.862 \n    0.005 \n    0.430 \n    2.345 \n  \n\n\n\n\n\n\n\n\nIs this the best model to explain variation in tips?"
+  },
+  {
+    "objectID": "slides/lec-11.html#another-model-summary",
+    "href": "slides/lec-11.html#another-model-summary",
+    "title": "Model comparison",
+    "section": "Another model summary",
+    "text": "Another model summary\n\n\n\n \n  \n    term \n    df \n    sumsq \n    meansq \n    statistic \n    p.value \n  \n \n\n  \n    Party \n    1 \n    1188.64 \n    1188.64 \n    285.71 \n    0.00 \n  \n  \n    Age \n    2 \n    38.03 \n    19.01 \n    4.57 \n    0.01 \n  \n  \n    Residuals \n    165 \n    686.44 \n    4.16 \n    NA \n    NA"
+  },
+  {
+    "objectID": "slides/lec-11.html#analysis-of-variance-anova-1",
+    "href": "slides/lec-11.html#analysis-of-variance-anova-1",
+    "title": "Model comparison",
+    "section": "Analysis of variance (ANOVA)",
+    "text": "Analysis of variance (ANOVA)\n\nMain Idea: Decompose the total variation on the outcome into:\n\nthe variation that can be explained by the each of the variables in the model\nthe variation that can’t be explained by the model (left in the residuals)\n\nIf the variation that can be explained by the variables in the model is greater than the variation in the residuals, this signals that the model might be “valuable” (at least one of the \\(\\beta\\)s not equal to 0)"
+  },
+  {
+    "objectID": "slides/lec-11.html#anova-output",
+    "href": "slides/lec-11.html#anova-output",
+    "title": "Model comparison",
+    "section": "ANOVA output",
+    "text": "ANOVA output\n\nanova(tip_fit$fit) %>%\n  tidy() %>%\n  kable(digits = 2)\n\n\n \n  \n    term \n    df \n    sumsq \n    meansq \n    statistic \n    p.value \n  \n \n\n  \n    Party \n    1 \n    1188.64 \n    1188.64 \n    285.71 \n    0.00 \n  \n  \n    Age \n    2 \n    38.03 \n    19.01 \n    4.57 \n    0.01 \n  \n  \n    Residuals \n    165 \n    686.44 \n    4.16 \n    NA \n    NA"
+  },
+  {
+    "objectID": "slides/lec-11.html#anova-output-with-totals",
+    "href": "slides/lec-11.html#anova-output-with-totals",
+    "title": "Model comparison",
+    "section": "ANOVA output, with totals",
+    "text": "ANOVA output, with totals\n\n\n\n \n  \n    term \n    df \n    sumsq \n    meansq \n    statistic \n    p.value \n  \n \n\n  \n    Party \n    1 \n    1188.64 \n    1188.64 \n    285.71 \n    0 \n  \n  \n    Age \n    2 \n    38.03 \n    19.01 \n    4.57 \n    0.01 \n  \n  \n    Residuals \n    165 \n    686.44 \n    4.16 \n     \n     \n  \n  \n    Total \n    168 \n    1913.11"
+  },
+  {
+    "objectID": "slides/lec-11.html#sum-of-squares",
+    "href": "slides/lec-11.html#sum-of-squares",
+    "title": "Model comparison",
+    "section": "Sum of squares",
+    "text": "Sum of squares\n\n\n\n\n\n \n  \n    term \n    df \n    sumsq \n  \n \n\n  \n    Party \n    1 \n    1188.64 \n  \n  \n    Age \n    2 \n    38.03 \n  \n  \n    Residuals \n    165 \n    686.44 \n  \n  \n    Total \n    168 \n    1913.11 \n  \n\n\n\n\n\n\n\n\\(SS_{Total}\\): Total sum of squares, variability of outcome, \\(\\sum_{i = 1}^n (y_i - \\bar{y})^2\\)\n\\(SS_{Error}\\): Residual sum of squares, variability of residuals, \\(\\sum_{i = 1}^n (y_i - \\hat{y})^2\\)\n\\(SS_{Model} = SS_{Total} - SS_{Error}\\): Variability explained by the model"
+  },
+  {
+    "objectID": "slides/lec-11.html#r-squared-r2",
+    "href": "slides/lec-11.html#r-squared-r2",
+    "title": "Model comparison",
+    "section": "R-squared, \\(R^2\\)",
+    "text": "R-squared, \\(R^2\\)\nRecall: \\(R^2\\) is the proportion of the variation in the response variable explained by the regression model.\n\n\\[\nR^2 = \\frac{SS_{Model}}{SS_{Total}} = 1 - \\frac{SS_{Error}}{SS_{Total}} = 1 - \\frac{686.44}{1913.11} = 0.641\n\\]\n\n\n\nglance(tip_fit)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC\n      <dbl>         <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl> <dbl> <dbl>\n1     0.641         0.635  2.04      98.3 1.56e-36     3  -358.  726.  742.\n# … with 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>"
+  },
+  {
+    "objectID": "slides/lec-11.html#r-squared-r2-1",
+    "href": "slides/lec-11.html#r-squared-r2-1",
+    "title": "Model comparison",
+    "section": "R-squared, \\(R^2\\)",
+    "text": "R-squared, \\(R^2\\)\n\n\\(R^2\\) will always increase as we add more variables to the model + If we add enough variables, we can always achieve \\(R^2=100\\%\\)\nIf we only use \\(R^2\\) to choose a best fit model, we will be prone to choose the model with the most predictor variables"
+  },
+  {
+    "objectID": "slides/lec-11.html#adjusted-r2",
+    "href": "slides/lec-11.html#adjusted-r2",
+    "title": "Model comparison",
+    "section": "Adjusted \\(R^2\\)",
+    "text": "Adjusted \\(R^2\\)\n\nAdjusted \\(R^2\\): measure that includes a penalty for unnecessary predictor variables\nSimilar to \\(R^2\\), it is a measure of the amount of variation in the response that is explained by the regression model\nDiffers from \\(R^2\\) by using the mean squares rather than sums of squares and therefore adjusting for the number of predictor variables"
+  },
+  {
+    "objectID": "slides/lec-11.html#r2-and-adjusted-r2",
+    "href": "slides/lec-11.html#r2-and-adjusted-r2",
+    "title": "Model comparison",
+    "section": "\\(R^2\\) and Adjusted \\(R^2\\)",
+    "text": "\\(R^2\\) and Adjusted \\(R^2\\)\n\\[R^2 = \\frac{SS_{Model}}{SS_{Total}} = 1 - \\frac{SS_{Error}}{SS_{Total}}\\]\n\n\\[R^2_{adj} = 1 - \\frac{SS_{Error}/(n-p-1)}{SS_{Total}/(n-1)}\\]"
+  },
+  {
+    "objectID": "slides/lec-11.html#using-r2-and-adjusted-r2",
+    "href": "slides/lec-11.html#using-r2-and-adjusted-r2",
+    "title": "Model comparison",
+    "section": "Using \\(R^2\\) and Adjusted \\(R^2\\)",
+    "text": "Using \\(R^2\\) and Adjusted \\(R^2\\)\n\nAdjusted \\(R^2\\) can be used as a quick assessment to compare the fit of multiple models; however, it should not be the only assessment!\nUse \\(R^2\\) when describing the relationship between the response and predictor variables"
+  },
+  {
+    "objectID": "slides/lec-11.html#comparing-models-with-r2_adj",
+    "href": "slides/lec-11.html#comparing-models-with-r2_adj",
+    "title": "Model comparison",
+    "section": "Comparing models with \\(R^2_{adj}\\)",
+    "text": "Comparing models with \\(R^2_{adj}\\)\n\n\n\ntip_fit_1 <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(Tip ~ Party + \n            Age + \n            Meal,\n      \n      data = tips)\n\nglance(tip_fit_1) %>% \n  select(r.squared, adj.r.squared)\n\n# A tibble: 1 × 2\n  r.squared adj.r.squared\n      <dbl>         <dbl>\n1     0.674         0.664\n\n\n\n\ntip_fit_2 <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(Tip ~ Party + \n            Age + \n            Meal + \n            Day, \n      data = tips)\n\nglance(tip_fit_2) %>% \n  select(r.squared, adj.r.squared)\n\n# A tibble: 1 × 2\n  r.squared adj.r.squared\n      <dbl>         <dbl>\n1     0.683         0.662"
+  },
+  {
+    "objectID": "slides/lec-11.html#aic-bic",
+    "href": "slides/lec-11.html#aic-bic",
+    "title": "Model comparison",
+    "section": "AIC & BIC",
+    "text": "AIC & BIC\nEstimators of prediction error and relative quality of models:\n\nAkaike’s Information Criterion (AIC): \\[AIC = n\\log(SS_\\text{Error}) - n \\log(n) + 2(p+1)\\] \n\n\nSchwarz’s Bayesian Information Criterion (BIC): \\[BIC = n\\log(SS_\\text{Error}) - n\\log(n) + log(n)\\times(p+1)\\]"
+  },
+  {
+    "objectID": "slides/lec-11.html#aic-bic-1",
+    "href": "slides/lec-11.html#aic-bic-1",
+    "title": "Model comparison",
+    "section": "AIC & BIC",
+    "text": "AIC & BIC\n\\[\n\\begin{aligned}\n& AIC = \\color{blue}{n\\log(SS_\\text{Error})} - n \\log(n) + 2(p+1) \\\\\n& BIC = \\color{blue}{n\\log(SS_\\text{Error})} - n\\log(n) + \\log(n)\\times(p+1)\n\\end{aligned}\n\\]\n\n\nFirst Term: Decreases as p increases"
+  },
+  {
+    "objectID": "slides/lec-11.html#aic-bic-2",
+    "href": "slides/lec-11.html#aic-bic-2",
+    "title": "Model comparison",
+    "section": "AIC & BIC",
+    "text": "AIC & BIC\n\\[\n\\begin{aligned}\n& AIC = n\\log(SS_\\text{Error}) - \\color{blue}{n \\log(n)} + 2(p+1) \\\\\n& BIC = n\\log(SS_\\text{Error}) - \\color{blue}{n\\log(n)} + \\log(n)\\times(p+1)\n\\end{aligned}\n\\]\n\nSecond Term: Fixed for a given sample size n"
+  },
+  {
+    "objectID": "slides/lec-11.html#aic-bic-3",
+    "href": "slides/lec-11.html#aic-bic-3",
+    "title": "Model comparison",
+    "section": "AIC & BIC",
+    "text": "AIC & BIC\n\\[\n\\begin{aligned} & AIC = n\\log(SS_\\text{Error}) - n\\log(n) + \\color{blue}{2(p+1)} \\\\\n& BIC = n\\log(SS_\\text{Error}) - n\\log(n) + \\color{blue}{\\log(n)\\times(p+1)}\n\\end{aligned}\n\\]\n\nThird Term: Increases as p increases"
+  },
+  {
+    "objectID": "slides/lec-11.html#using-aic-bic",
+    "href": "slides/lec-11.html#using-aic-bic",
+    "title": "Model comparison",
+    "section": "Using AIC & BIC",
+    "text": "Using AIC & BIC\n\\[\n\\begin{aligned} & AIC = n\\log(SS_{Error}) - n \\log(n) + \\color{red}{2(p+1)} \\\\\n& BIC = n\\log(SS_{Error}) - n\\log(n) + \\color{red}{\\log(n)\\times(p+1)}\n\\end{aligned}\n\\]\n\nChoose model with the smaller value of AIC or BIC\nIf \\(n \\geq 8\\), the penalty for BIC is larger than that of AIC, so BIC tends to favor more parsimonious models (i.e. models with fewer terms)"
+  },
+  {
+    "objectID": "slides/lec-11.html#comparing-models-with-aic-and-bic",
+    "href": "slides/lec-11.html#comparing-models-with-aic-and-bic",
+    "title": "Model comparison",
+    "section": "Comparing models with AIC and BIC",
+    "text": "Comparing models with AIC and BIC\n\n\n\ntip_fit_1 <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(Tip ~ Party + \n            Age + \n            Meal,\n      \n      data = tips)\n\nglance(tip_fit_1) %>% \n  select(AIC, BIC)\n\n# A tibble: 1 × 2\n    AIC   BIC\n  <dbl> <dbl>\n1  714.  736.\n\n\n\n\ntip_fit_2 <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(Tip ~ Party + \n            Age + \n            Meal + \n            Day, \n      data = tips)\n\nglance(tip_fit_2) %>% \n  select(AIC, BIC)\n\n# A tibble: 1 × 2\n    AIC   BIC\n  <dbl> <dbl>\n1  720.  757."
+  },
+  {
+    "objectID": "slides/lec-11.html#commonalities-between-criteria",
+    "href": "slides/lec-11.html#commonalities-between-criteria",
+    "title": "Model comparison",
+    "section": "Commonalities between criteria",
+    "text": "Commonalities between criteria\n\n\\(R^2_{adj}\\), AIC, and BIC all apply a penalty for more predictors\nThe penalty for added model complexity attempts to strike a balance between underfitting (too few predictors in the model) and overfitting (too many predictors in the model)\nGoal: Parsimony"
+  },
+  {
+    "objectID": "slides/lec-11.html#parsimony-and-occams-razor",
+    "href": "slides/lec-11.html#parsimony-and-occams-razor",
+    "title": "Model comparison",
+    "section": "Parsimony and Occam’s razor",
+    "text": "Parsimony and Occam’s razor\n\nThe principle of parsimony is attributed to William of Occam (early 14th-century English nominalist philosopher), who insisted that, given a set of equally good explanations for a given phenomenon, the correct explanation is the simplest explanation1\nCalled Occam’s razor because he “shaved” his explanations down to the bare minimum\nParsimony in modeling:\n\n\nmodels should have as few parameters as possible\nlinear models should be preferred to non-linear models\nexperiments relying on few assumptions should be preferred to those relying on many\nmodels should be pared down until they are minimal adequate\nsimple explanations should be preferred to complex explanations"
+  },
+  {
+    "objectID": "slides/lec-11.html#in-pursuit-of-occams-razor",
+    "href": "slides/lec-11.html#in-pursuit-of-occams-razor",
+    "title": "Model comparison",
+    "section": "In pursuit of Occam’s razor",
+    "text": "In pursuit of Occam’s razor\n\nOccam’s razor states that among competing hypotheses that predict equally well, the one with the fewest assumptions should be selected\nModel selection follows this principle\nWe only want to add another variable to the model if the addition of that variable brings something valuable in terms of predictive power to the model\nIn other words, we prefer the simplest best model, i.e. parsimonious model"
+  },
+  {
+    "objectID": "slides/lec-11.html#alternate-views",
+    "href": "slides/lec-11.html#alternate-views",
+    "title": "Model comparison",
+    "section": "Alternate views",
+    "text": "Alternate views\n\nSometimes a simple model will outperform a more complex model . . . Nevertheless, I believe that deliberately limiting the complexity of the model is not fruitful when the problem is evidently complex. Instead, if a simple model is found that outperforms some particular complex model, the appropriate response is to define a different complex model that captures whatever aspect of the problem led to the simple model performing well.\n\nRadford Neal - Bayesian Learning for Neural Networks2"
+  },
+  {
+    "objectID": "slides/lec-11.html#other-concerns-with-our-approach",
+    "href": "slides/lec-11.html#other-concerns-with-our-approach",
+    "title": "Model comparison",
+    "section": "Other concerns with our approach",
+    "text": "Other concerns with our approach\n\nAll criteria we considered for model comparison require making predictions for our data and then uses the prediction error (\\(SS_{Error}\\)) somewhere in the formula\nBut we’re making prediction for the data we used to build the model (estimate the coefficients), which can lead to overfitting\nInstead we should\n\nsplit our data into testing and training sets\n“train” the model on the training data and pick a few models we’re genuinely considering as potentially good models\ntest those models on the testing set"
+  },
+  {
+    "objectID": "slides/lec-11.html#recap",
+    "href": "slides/lec-11.html#recap",
+    "title": "Model comparison",
+    "section": "Recap",
+    "text": "Recap\n\nANOVA for Multiple Linear Regression and sum of squares\nComparing models with \\(R^2\\) vs. \\(R^2_{adj}\\)\nComparing models with AIC and BIC\nOccam’s razor and parsimony\nOverfitting and spending our data\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
     "objectID": "slides/lec-1.html#meet-the-professor",
     "href": "slides/lec-1.html#meet-the-professor",
     "title": "Welcome to STA 210!",
@@ -1698,7 +1936,7 @@
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -2370,21 +2608,21 @@
     "href": "weeks/week-6.html#prepare",
     "title": "Week 6",
     "section": "Prepare",
-    "text": "Prepare\nTo be posted."
+    "text": "Prepare\nNo reading (take a break after the exam! 😴)"
   },
   {
     "objectID": "weeks/week-6.html#participate",
     "href": "weeks/week-6.html#participate",
     "title": "Week 6",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lecture 10 - MLR: Types of predictors"
+    "text": "Participate\n🖥️ Lecture 10 - MLR: Types of predictors\n🖥️ Lecture 11 - MLR: Model comparison"
   },
   {
     "objectID": "weeks/week-6.html#practice",
     "href": "weeks/week-6.html#practice",
     "title": "Week 6",
     "section": "Practice",
-    "text": "Practice\nApplication exercise (to be posted)"
+    "text": "Practice\nNo application exercises"
   },
   {
     "objectID": "weeks/week-6.html#perform",
@@ -3294,7 +3532,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison + selection\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - SLR\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\nTue, Feb 15\nMLR: Model validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n8\nMon, Feb 21\nLab 4: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nTBA\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "computing-troubleshooting.html",
