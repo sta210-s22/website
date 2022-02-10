@@ -1,0 +1,506 @@
+---
+title: "Model comparison"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 0.618,
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+```
+
+# Welcome
+
+## Announcements
+
+::: nonincremental
+-   HW 2 posted tomorrow, due in a week
+-   Lab on Monday: Work data selection! (Read project assignment over the weekend)
+-   Mid-semester course evaluation (ti be posted)
+:::
+
+## Topics
+
+::: nonincremental
+-   ANOVA for Multiple Linear Regression and sum of squares
+-   Comparing models with $R^2$ vs. $R^2_{adj}$
+-   Comparing models with AIC and BIC
+-   Occam's razor and parsimony
+-   Overfitting and spending our data
+:::
+
+## Computational setup
+
+```{r}
+#| echo: true
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(patchwork)
+library(knitr)
+library(kableExtra)
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+# Introduction
+
+## Data: Restaurant tips
+
+Which variables help us predict the amount customers tip at a restaurant?
+
+```{r}
+tips <- read_csv(here::here("slides", "data/tip-data.csv")) %>%
+  filter(!is.na(Party))
+```
+
+```{r}
+tips %>%
+  select(Tip, Party, Meal, Age)
+```
+
+## Variables {.smaller}
+
+**Predictors**:
+
+::: nonincremental
+-   `Party`: Number of people in the party
+-   `Meal`: Time of day (Lunch, Dinner, Late Night)
+-   `Age`: Age category of person paying the bill (Yadult, Middle, SenCit)
+:::
+
+**Outcome**: `Tip`: Amount of tip
+
+## Outcome: `Tip`
+
+```{r}
+ggplot(tips, aes(x = Tip)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Distribution of tips")
+```
+
+## Predictors
+
+```{r}
+p1 <- ggplot(tips, aes(x = Party)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Number of people in party")
+
+p2 <- ggplot(tips, aes(x = Meal)) +
+  geom_bar() +
+  labs(title = "Meal type")
+
+p3 <- ggplot(tips, aes(x = Age)) +
+  geom_bar() +
+  labs(title = "Age of payer")
+
+p1 + (p2 / p3)
+```
+
+## Relevel categorical predictors
+
+```{r}
+#| echo: true
+
+tips <- tips %>%
+  mutate(
+    Meal = fct_relevel(Meal, "Lunch", "Dinner", "Late Night"),
+    Age  = fct_relevel(Age, "Yadult", "Middle", "SenCit")
+  )
+```
+
+## Predictors, again
+
+```{r}
+p1 <- ggplot(tips, aes(x = Party)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Number of people in party")
+
+p2 <- ggplot(tips, aes(x = Meal, fill = Meal)) +
+  geom_bar() +
+  labs(title = "Meal type") +
+  scale_fill_viridis_d()
+
+p3 <- ggplot(tips, aes(x = Age, fill = Age)) +
+  geom_bar() +
+  labs(title = "Age of payer") +
+  scale_fill_viridis_d(option = "E", end = 0.8)
+
+p1 + (p2 / p3)
+```
+
+## Outcome vs. predictors
+
+```{r}
+#| fig.width: 12
+#| fig.height: 4
+
+p4 <- ggplot(tips, aes(x = Party, y = Tip)) +
+  geom_point(color = "#5B888C")
+
+p5 <- ggplot(tips, aes(x = Meal, y = Tip, fill = Meal)) +
+  geom_boxplot(show.legend = FALSE) +
+  scale_fill_viridis_d()
+
+p6 <- ggplot(tips, aes(x = Age, y = Tip, fill = Age)) +
+  geom_boxplot(show.legend = FALSE) +
+  scale_fill_viridis_d(option = "E", end = 0.8)
+
+p4 + p5 + p6
+```
+
+## Fit and summarize model {.smaller}
+
+```{r}
+#| echo: true
+
+tip_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Tip ~ Party + Age, data = tips)
+
+tidy(tip_fit, conf.int = TRUE) %>%
+  kable(digits = 3)
+```
+
+. . .
+
+<br>
+
+::: question
+Is this the best model to explain variation in tips?
+:::
+
+## Another model summary
+
+```{r}
+anova(tip_fit$fit) %>%
+  tidy() %>%
+  kable(digits = 2)
+```
+
+# Analysis of variance (ANOVA)
+
+## Analysis of variance (ANOVA)
+
+-   **Main Idea:** Decompose the total variation on the outcome into:
+    -   the variation that can be explained by the each of the variables in the model
+
+    -   the variation that **can't** be explained by the model (left in the residuals)
+-   If the variation that can be explained by the variables in the model is greater than the variation in the residuals, this signals that the model might be "valuable" (at least one of the $\beta$s not equal to 0)
+
+## ANOVA output
+
+```{r}
+#| echo: true
+anova(tip_fit$fit) %>%
+  tidy() %>%
+  kable(digits = 2)
+```
+
+## ANOVA output, with totals
+
+```{r}
+anova(tip_fit$fit) %>%
+  tidy() %>%
+  mutate(across(where(is.numeric), round, 2)) %>%
+  janitor::adorn_totals(where = "row", cols = 1:3, fill = "") %>%
+  mutate(
+    statistic = if_else(is.na(statistic), "", statistic),
+    p.value = if_else(is.na(p.value), "", p.value)
+    ) %>%
+  kable()
+```
+
+## Sum of squares
+
+::: columns
+::: {.column width="50%"}
+```{r}
+anova(tip_fit$fit) %>%
+  tidy() %>%
+  mutate(across(where(is.numeric), round, 2)) %>%
+  select(term, df, sumsq) %>%
+  janitor::adorn_totals(where = "row", cols = 1:3, fill = "") %>%
+  kable() %>%
+  column_spec(3, background = "#D9E3E4")
+```
+:::
+
+::: {.column width="50%"}
+-   $SS_{Total}$: Total sum of squares, variability of outcome, $\sum_{i = 1}^n (y_i - \bar{y})^2$
+-   $SS_{Error}$: Residual sum of squares, variability of residuals, $\sum_{i = 1}^n (y_i - \hat{y})^2$
+-   $SS_{Model} = SS_{Total} - SS_{Error}$: Variability explained by the model
+:::
+:::
+
+## R-squared, $R^2$
+
+**Recall**: $R^2$ is the proportion of the variation in the response variable explained by the regression model.
+
+. . .
+
+$$
+R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \frac{686.44}{1913.11} = 0.641
+$$
+
+. . .
+
+```{r}
+#| echo: true
+glance(tip_fit)
+```
+
+# Model comparison
+
+## R-squared, $R^2$
+
+-   $R^2$ will always increase as we add more variables to the model + If we add enough variables, we can always achieve $R^2=100\%$
+-   If we only use $R^2$ to choose a best fit model, we will be prone to choose the model with the most predictor variables
+
+## Adjusted $R^2$
+
+-   **Adjusted** $R^2$: measure that includes a penalty for unnecessary predictor variables
+-   Similar to $R^2$, it is a measure of the amount of variation in the response that is explained by the regression model
+-   Differs from $R^2$ by using the mean squares rather than sums of squares and therefore adjusting for the number of predictor variables
+
+## $R^2$ and Adjusted $R^2$
+
+$$R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}$$
+
+. . .
+
+$$R^2_{adj} = 1 - \frac{SS_{Error}/(n-p-1)}{SS_{Total}/(n-1)}$$
+
+## Using $R^2$ and Adjusted $R^2$
+
+-   Adjusted $R^2$ can be used as a quick assessment to compare the fit of multiple models; however, it should not be the only assessment!
+-   Use $R^2$ when describing the relationship between the response and predictor variables
+
+## Comparing models with $R^2_{adj}$ {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: true
+
+tip_fit_1 <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Tip ~ Party + 
+            Age + 
+            Meal,
+      
+      data = tips)
+
+glance(tip_fit_1) %>% 
+  select(r.squared, adj.r.squared)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+
+tip_fit_2 <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Tip ~ Party + 
+            Age + 
+            Meal + 
+            Day, 
+      data = tips)
+
+glance(tip_fit_2) %>% 
+  select(r.squared, adj.r.squared)
+```
+:::
+:::
+
+## AIC & BIC
+
+Estimators of prediction error and *relative* quality of models:
+
+. . .
+
+**Akaike's Information Criterion (AIC)**: $$AIC = n\log(SS_\text{Error}) - n \log(n) + 2(p+1)$$ <br>
+
+. . .
+
+**Schwarz's Bayesian Information Criterion (BIC)**: $$BIC = n\log(SS_\text{Error}) - n\log(n) + log(n)\times(p+1)$$
+
+## AIC & BIC
+
+$$
+\begin{aligned} 
+& AIC = \color{blue}{n\log(SS_\text{Error})} - n \log(n) + 2(p+1) \\
+& BIC = \color{blue}{n\log(SS_\text{Error})} - n\log(n) + \log(n)\times(p+1) 
+\end{aligned}
+$$
+
+. . .
+
+<br>
+
+First Term: Decreases as *p* increases
+
+## AIC & BIC
+
+$$
+\begin{aligned} 
+& AIC = n\log(SS_\text{Error}) - \color{blue}{n \log(n)} + 2(p+1) \\
+& BIC = n\log(SS_\text{Error}) - \color{blue}{n\log(n)} + \log(n)\times(p+1) 
+\end{aligned}
+$$
+
+<br>
+
+Second Term: Fixed for a given sample size *n*
+
+## AIC & BIC
+
+$$
+\begin{aligned} & AIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{2(p+1)} \\
+& BIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{\log(n)\times(p+1)} 
+\end{aligned}
+$$
+
+<br>
+
+Third Term: Increases as *p* increases
+
+## Using AIC & BIC
+
+$$
+\begin{aligned} & AIC = n\log(SS_{Error}) - n \log(n) + \color{red}{2(p+1)} \\
+& BIC = n\log(SS_{Error}) - n\log(n) + \color{red}{\log(n)\times(p+1)} 
+\end{aligned}
+$$
+
+-   Choose model with the smaller value of AIC or BIC
+
+-   If $n \geq 8$, the **penalty** for BIC is larger than that of AIC, so BIC tends to favor *more parsimonious* models (i.e. models with fewer terms)
+
+## Comparing models with AIC and BIC
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: true
+
+tip_fit_1 <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Tip ~ Party + 
+            Age + 
+            Meal,
+      
+      data = tips)
+
+glance(tip_fit_1) %>% 
+  select(AIC, BIC)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+
+tip_fit_2 <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Tip ~ Party + 
+            Age + 
+            Meal + 
+            Day, 
+      data = tips)
+
+glance(tip_fit_2) %>% 
+  select(AIC, BIC)
+```
+:::
+:::
+
+## Commonalities between criteria
+
+-   $R^2_{adj}$, AIC, and BIC all apply a penalty for more predictors
+-   The penalty for added model complexity attempts to strike a balance between underfitting (too few predictors in the model) and overfitting (too many predictors in the model)
+-   Goal: **Parsimony**
+
+## Parsimony and Occam's razor {.smaller}
+
+-   The principle of **parsimony** is attributed to William of Occam (early 14th-century English nominalist philosopher), who insisted that, given a set of equally good explanations for a given phenomenon, *the correct explanation is the simplest explanation*[^1]
+
+-   Called **Occam's razor** because he "shaved" his explanations down to the bare minimum
+
+-   Parsimony in modeling:
+
+    ::: nonincremental
+    -   models should have as few parameters as possible
+    -   linear models should be preferred to non-linear models
+    -   experiments relying on few assumptions should be preferred to those relying on many
+    -   models should be pared down until they are *minimal adequate*
+    -   simple explanations should be preferred to complex explanations
+    :::
+
+[^1]: Source: The R Book by Michael J. Crawley.
+
+## In pursuit of Occam's razor
+
+-   Occam's razor states that among competing hypotheses that predict equally well, the one with the fewest assumptions should be selected
+
+-   Model selection follows this principle
+
+-   We only want to add another variable to the model if the addition of that variable brings something valuable in terms of predictive power to the model
+
+-   In other words, we prefer the simplest best model, i.e. **parsimonious** model
+
+## Alternate views {.smaller}
+
+> Sometimes a simple model will outperform a more complex model .
+> . . Nevertheless, I believe that deliberately limiting the complexity of the model is not fruitful when the problem is evidently complex.
+> Instead, if a simple model is found that outperforms some particular complex model, the appropriate response is to define a different complex model that captures whatever aspect of the problem led to the simple model performing well.
+>
+> <br>
+>
+> Radford Neal - Bayesian Learning for Neural Networks[^2]
+
+[^2]: Suggested blog post: [Occam](https://statmodeling.stat.columbia.edu/2012/06/26/occam-2/) by Andrew Gelman
+
+## Other concerns with our approach {.smaller}
+
+-   All criteria we considered for model comparison require making predictions for our data and then uses the prediction error ($SS_{Error}$) somewhere in the formula
+-   But we're making prediction for the data we used to build the model (estimate the coefficients), which can lead to **overfitting**
+-   Instead we should
+    -   split our data into testing and training sets
+
+    -   "train" the model on the training data and pick a few models we're genuinely considering as potentially good models
+
+    -   test those models on the testing set
+
+## Recap
+
+-   ANOVA for Multiple Linear Regression and sum of squares
+
+-   Comparing models with $R^2$ vs. $R^2_{adj}$
+
+-   Comparing models with AIC and BIC
+
+-   Occam's razor and parsimony
+
+-   Overfitting and spending our data

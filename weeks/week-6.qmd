@@ -1,6 +1,6 @@
 ---
 title: "Week 6"
-subtitle: "TBA"
+subtitle: "MLR: Model building and comparison"
 editor: visual
 ---
 
@@ -10,15 +10,17 @@ Due dates: Exam 1 - Mon, Feb 7 at 11:59pm
 
 ## Prepare
 
-To be posted.
+No reading (take a break after the exam! 😴)
 
 ## Participate
 
 🖥️ [Lecture 10 - MLR: Types of predictors](/slides/lec-10.html)
 
+🖥️ [Lecture 11 - MLR: Model comparison](/slides/lec-11.html)
+
 ## Practice
 
-Application exercise (to be posted)
+No application exercises
 
 ## Perform
 
