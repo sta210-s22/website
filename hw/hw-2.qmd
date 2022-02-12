@@ -1,6 +1,6 @@
 ---
 title: "HW 2 - Multiple linear regression"
-subtitle: "Due Friday, January 28, 5pm on Gradescope"
+subtitle: "Due Friday, February 18, 5pm on Gradescope"
 editor: visual
 bibliography: references.bib
 ---
