@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.3.119">
+  <meta name="generator" content="quarto-0.9.7">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - HW 2 - To be posted…</title>
+  <title>STA 210 - Spring 2022 - HW 2 - Multiple linear regression</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -11,6 +11,88 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
 
   <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,22 +131,24 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-<meta name="twitter:title" content="STA 210 - Spring 2022 - HW 2 - To be posted…">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - HW 2 - Multiple linear regression">
+<meta name="twitter:description" content="Due Friday, January 28, 5pm on Gradescope">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
 <meta name="twitter:image-width" content="800">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="docked fullcontent">
+<body class="docked">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">HW 2 - To be posted…</h1>
+      <h1 class="quarto-secondary-nav-title">HW 2 - Multiple linear regression</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -309,14 +393,236 @@
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+<ul class="collapse">
+<li><a href="#learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+<li><a href="#getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
+<li><a href="#packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+</ul></li>
+<li><a href="#part-1---conceptual" class="nav-link" data-scroll-target="#part-1---conceptual">Part 1 - Conceptual</a></li>
+<li><a href="#part-2---palmer-penguins" class="nav-link" data-scroll-target="#part-2---palmer-penguins">Part 2 - Palmer penguins</a></li>
+<li><a href="#part-3---perceived-threat-of-covid-19" class="nav-link" data-scroll-target="#part-3---perceived-threat-of-covid-19">Part 3 - Perceived threat of Covid-19</a></li>
+<li><a href="#submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+<li><a href="#grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+<li><a href="#references" class="nav-link" data-scroll-target="#references">References</a></li>
+</ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/hw/hw-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7">HW 2 - To be posted…</h1>
+<h1 class="title d-none d-lg-block display-7">HW 2 - Multiple linear regression</h1>
+<p class="subtitle lead">Due Friday, January 28, 5pm on Gradescope</p>
 </header>
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this assignment, you’ll get to put into practice the multiple linear regression skills you’ve developed.</p>
+<section id="learning-goals" class="level3">
+<h3 class="anchored" data-anchor-id="learning-goals">Learning goals</h3>
+<p>In this assignment, you will…</p>
+<ul>
+<li>Fit and interpret multiple linear regression models with main and interaction effects.</li>
+<li>Compare multiple linear regression models.</li>
+<li>Reason around multiple linear regression concepts.</li>
+<li>Continue developing a workflow for reproducible data analysis.</li>
+</ul>
+</section>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started">Getting started</h3>
+<p>Your repo for this assignment is at <a href="https://github.com/sta210-s22" title="Course GitHub organization">github.com/sta210-s22</a> and starts with the prefix <strong>hw-2</strong>. For more detailed instructions on getting started, see <a href="hw-1.html">HW 1</a>.</p>
+</section>
+<section id="packages" class="level3">
+<h3 class="anchored" data-anchor-id="packages">Packages</h3>
+<p>The following packages will be used in this assignment. You can add other packages as needed.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="part-1---conceptual" class="level2">
+<h2 class="anchored" data-anchor-id="part-1---conceptual">Part 1 - Conceptual</h2>
+<ol type="1">
+<li><p><strong>Dealing with categorical predictors.</strong> Two friends, Elliott and Adrian, want to build a model predicting typing speed (average number of words typed per minute) from whether the person wears glasses or not. Before building the model they want to conduct some exploratory analysis to evaluate the strength of the association between these two variables, but they’re in disagreement about how to evaluate how strongly a categorical predictor is associated with a numerical outcome. Elliott claims that it is not possible to calculate a correlation coefficient to summarize the relationship between a categorical predictor and a numerical outcome, however they’re not sure what a better alternative is. Adrian claims that you can recode a binary predictor as a 0/1 variable (assign one level to be 0 and the other to be 1), thus converting it to a numerical variable. According to Adrian, you can then calculate the correlation coefficient between the predictor and the outcome. Who is right: Elliott or Adrian? If you pick Elliott, can you suggest a better alternative for evaluating the association between the categorical predictor and the numerical outcome?</p></li>
+<li><p><strong>High correlation, good or bad?</strong> Two friends, Frances and Annika, are in disagreement about whether high correlation values are <em>always</em> good in the context of regression. Frances claims that it’s desirable for all variables in the dataset to be highly correlated to each other when building linear models. Annika claims that while it’s desirable for each of the predictors to be highly correlated with the outcome, it is not desirable for the predictors to be highly correlated with each other. Who is right: Frances, Annika, both, or neither? Explain your reasoning using appropriate terminology.</p></li>
+<li><p><strong>Training for the 5K.</strong> Nico signs up for a 5K (a 5,000 metre running race) 30 days prior to the race. They decide to run a 5K every day to train for it, and each day they record the following information: <code>days_since_start</code> (number of days since starting training), <code>days_till_race</code> (number of days left until the race), <code>mood</code> (poor, good, awesome), <code>tiredness</code> (1-not tired to 10-very tired), and <code>time</code> (time it takes to run 5K, recorded as mm:ss). Top few rows of the data they collect is shown below.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">days_since_start</th>
+<th style="text-align: right;">days_till_race</th>
+<th style="text-align: left;">mood</th>
+<th style="text-align: right;">tiredness</th>
+<th style="text-align: right;">time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">good</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">25:45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">poor</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">27:13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: left;">awesome</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">24:13</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">…</td>
+<td style="text-align: right;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: right;">…</td>
+<td style="text-align: right;">…</td>
+</tr>
+</tbody>
+</table>
+<p>Using these data Nico wants to build a model predicting <code>time</code> from the other variables. Should they include all variables shown above in their model? Why or why not?</p></li>
+<li><p><strong>Multiple regression fact checking.</strong> Determine which of the following statements are true and false. For each statement that is false, explain why it is false.</p>
+<ol type="a">
+<li><p>If predictors are colinear, then removing one variable will have no influence on the point estimate of another variable’s coefficient.</p></li>
+<li><p>Suppose a numerical predictor <span class="math inline">\(x\)</span> has a coefficient of <span class="math inline">\(\hat{\beta}_1 = 2.5\)</span> in a multiple regression model. Suppose also that the first observation has <span class="math inline">\(x_{1,1} = 7.2\)</span>, the second observation has a value of <span class="math inline">\(x_{2,1} = 8.2\)</span>, and these two observations have the same values for all other predictors. Then the predicted value of the second observation will be 2.5 higher than the prediction of the first observation based on the multiple regression model.</p></li>
+<li><p>If a regression model’s first predictor has a coefficient of <span class="math inline">\(\hat{\beta}_1 = 5.7\)</span> and if we are able to influence the data so that an observation will have its <span class="math inline">\(x_1\)</span> be 1 larger than it would otherwise, the value <span class="math inline">\(\hat{y}_1\)</span> for this observation would increase by 5.7.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="part-2---palmer-penguins" class="level2">
+<h2 class="anchored" data-anchor-id="part-2---palmer-penguins">Part 2 - Palmer penguins</h2>
+<p>Data were collected and made available by <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php">Dr.&nbsp;Kristen Gorman</a> and the <a href="https://pal.lternet.edu/">Palmer Station, Antarctica LTER</a>, a member of the <a href="https://lternet.edu/">Long Term Ecological Research Network</a>. <span class="citation" data-cites="gorman2014">(<a href="#ref-gorman2014" role="doc-biblioref">Gorman, Williams, and Fraser 2014</a>)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lter_penguins.png" class="img-fluid figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Artwork by @allison_horst</figcaption><p></p>
+</figure>
+</div>
+<p>These data can be found in the <strong>palmerpenguins</strong> package. We’re going to be working with the <code>penguins</code> dataset from this package. The dataset contains data for 344 penguins. There are 3 different species of penguins in this dataset, collected from 3 islands in the Palmer Archipelago, Antarctica.</p>
+<ol start="5" type="1">
+<li><strong>Body mass.</strong> Our first goal is to fit a model predicting body mass (which is more difficult to measure) from bill length, bill depth, flipper length, species, and sex.
+<ol type="a">
+<li><p>Fit a model predicting body mass (which is more difficult to measure) from the other variables listed above.</p></li>
+<li><p>Write the equation of the regression model.</p></li>
+<li><p>Interpret each one of the slopes in this context.</p></li>
+<li><p>Calculate the residual for a male Adelie penguin that weighs 3750 grams with the following body measurements: <code>bill_length_mm</code> = 39.1, <code>bill_depth_mm</code> = 18.7, <code>flipper_length_mm</code> = 181. Does the model overpredict or underpredict this penguin’s weight?</p></li>
+<li><p>Find the <span class="math inline">\(R^2\)</span> of this model and interpret this value in context of the data and the model.</p></li>
+</ol></li>
+</ol>
+<p><img src="images/culmen_depth.png" class="img-fluid" style="float: right;" width="300"></p>
+<ol start="6" type="1">
+<li><strong>Bill depth.</strong> Next we’ll be focusing on bill depth and bill length and also considering species.
+<ol type="a">
+<li><p>Fit a model predicting bill depth from bill length. Find the adjusted R-squared, AIC, and BIC for this model.</p></li>
+<li><p>Then, add a new predictor: species. Fit another model predicting bill depth from bill length and species. Find the adjusted R-squared, AIC, and BIC for this model.</p></li>
+<li><p>Finally, add one more predictor: the interaction between bill length and species. Find the adjusted R-squared, AIC, and BIC for this model.</p></li>
+<li><p>Using the three criteria you recorded for these three models, and with the goal of parsimony, which model is the “best” for predicting bill depth from bill length and/or species.</p></li>
+<li><p>Create a visualization representing your model from part a. Hint: Make a scatterplot of bill depth vs.&nbsp;bill length and add the linear model.</p></li>
+<li><p>Create a visualization representing your model from part b. Hint: Same as part (e), but think about how many lines to plot and whether their slopes should be the same or different.</p></li>
+<li><p>Create a visualization representing your model from part c. Hint: Same as part (f), but think about how many lines to plot and whether their slopes should be the same or different.</p></li>
+<li><p>Based on your visualizations from parts e - g, and with the goal of parsimony, is your answer for which model is the “best” for predicting bill depth from bill length and/or species the same as your answer in part d? Explain your reasoning.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="part-3---perceived-threat-of-covid-19" class="level2">
+<h2 class="anchored" data-anchor-id="part-3---perceived-threat-of-covid-19">Part 3 - Perceived threat of Covid-19</h2>
+<p><span class="citation" data-cites="garbe2020">Garbe, Rau, and Toppe (<a href="#ref-garbe2020" role="doc-biblioref">2020</a>)</span>, published in June 2020, aims to examine the relationship between personality traits, perceived threat of Covid-19 and stockpiling toilet paper. For this study titled <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234232#abstract0">Influence of perceived threat of Covid-19 and HEXACO personality traits on toilet paper stockpiling</a>, researchers conducted an online survey March 23 - 29, 2020 and used the results to fit multiple linear regression models to draw conclusions about their research questions. From their survey, they collected data on adults across 35 countries. Given the small number of responses from people outside of the United States, Canada, and Europe, only responses from people in these three locations were included in the regression analysis.</p>
+<p>Let’s consider their results for the model looking at the effect on <strong>perceived threat of Covid-19</strong>. The model can be found on page 6 of the paper. The perceived threat of Covid was quantified using the responses to the following survey question:</p>
+<blockquote class="blockquote">
+<p>How threatened do you feel by Coronavirus? [Users select on a 10-point visual analogue scale (Not at all threatened to Extremely Threatened)]</p>
+</blockquote>
+<ol start="7" type="1">
+<li><p>Interpret the coefficient of Age (0.072) in the context of the analysis.</p></li>
+<li><p>Interpret the coefficient of Place of residence in the context of the analysis.</p></li>
+<li><p>The model includes an interaction between Place of residence and Emotionality (capturing differential tendencies in to worry and be anxious).</p>
+<ol type="a">
+<li><p>What does the coefficient for the interaction (0.101) mean in the context of the data?</p></li>
+<li><p>Interpret the estimated effect of Emotionality for a person who lives in the US/Canada.</p></li>
+<li><p>Interpret the estimated effect of Emotionality for a person who lives in Europe.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you wrap up the assignment, make sure all documents are updated on your GitHub repo. We will be checking these to make sure you have been practicing how to commit and push changes.</p>
+<p>Remember – you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.</p>
+</div>
+</div>
+<p>To submit your assignment:</p>
+<ul>
+<li>Go to <a href="http://www.gradescope.com/">http://www.gradescope.com</a> and click <em>Log in</em> in the top right corner.</li>
+<li>Click <em>School Credentials</em> ➡️ <em>Duke NetID</em> and log in using your NetID credentials.</li>
+<li>Click on your <em>STA 210</em> course.</li>
+<li>Click on the assignment, and you’ll be prompted to submit it.</li>
+<li>Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be “checked”).</li>
+<li>Select the first page of your PDF submission to be associated with the <em>“Workflow &amp; formatting”</em> section.</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<p>Total points available: 50 points.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ex 1 - 9</td>
+<td>45</td>
+</tr>
+<tr class="even">
+<td>Workflow &amp; formatting</td>
+<td>5<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-garbe2020" class="csl-entry" role="doc-biblioentry">
+Garbe, Lisa, Richard Rau, and Theo Toppe. 2020. <span>“Influence of Perceived Threat of Covid-19 and HEXACO Personality Traits on Toilet Paper Stockpiling.”</span> Edited by Valerio Capraro. <em>PLOS ONE</em> 15 (6): e0234232. <a href="https://doi.org/10.1371/journal.pone.0234232">https://doi.org/10.1371/journal.pone.0234232</a>.
+</div>
+<div id="ref-gorman2014" class="csl-entry" role="doc-biblioentry">
+Gorman, Kristen B., Tony D. Williams, and William R. Fraser. 2014. <span>“Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).”</span> <em>PLOS ONE</em> 9 (3): e90081. <a href="https://doi.org/10.1371/journal.pone.0090081">https://doi.org/10.1371/journal.pone.0090081</a>.
+</div>
+</div>
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2>Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>The “Workflow &amp; formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
