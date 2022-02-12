@@ -1,22 +1,33 @@
 ---
 title: "Week 7"
-subtitle: "TBA"
+subtitle: "MLR: Feature engineering and model evaluation"
 editor: visual
 ---
 
 ::: callout-important
 Due dates:
-:::
 
-To be posted.
+-   HW 2 - Friday, Feb 18
+-   Project ideas - Friday, Feb 18
+:::
 
 ## Prepare
 
+📖 Read Tidy Modeling in R Chp 8: [Feature engineering with recipes](https://www.tmwr.org/recipes.html)
+
+📖 Read Tidy Modeling in R Chp 10: [Resampling for evaluating performance](https://www.tmwr.org/resampling.html)
+
 ## Participate
+
+To be posted.
 
 ## Practice
 
+To be posted.
+
 ## Perform
+
+✍️ [HW 2 - Multiple linear regression](/hw/hw-2.html)
 
 <br><br>
 
