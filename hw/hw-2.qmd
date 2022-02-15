@@ -117,6 +117,7 @@ There are 3 different species of penguins in this dataset, collected from 3 isla
         Find the adjusted R-squared, AIC, and BIC for this model.
 
     d.  Using the three criteria you recorded for these three models, and with the goal of parsimony, which model is the "best" for predicting bill depth from bill length and/or species.
+        Explain your reasoning.
 
     e.  Create a visualization representing your model from part a.
         Hint: Make a scatterplot of bill depth vs. bill length and add the linear model.
