@@ -19,7 +19,9 @@ Due dates:
 
 ## Participate
 
-To be posted.
+🖥️ [Lecture 12 - MLR: Feature engineering](/slides/lec-12.html)
+
+Lecture 13 (to be posted)
 
 ## Practice
 
