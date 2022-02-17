@@ -1,0 +1,600 @@
+---
+title: "Feature engineering"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+```
+
+# Welcome
+
+## Announcements
+
+::: nonincremental
+:::
+
+## Topics
+
+::: nonincremental
+-   Feature engineering with recipes
+-   Workflows to bring together models and recipes
+-   RMSE and $R^2$ for model evaluation
+-   Cross validation
+:::
+
+## Computational setup
+
+```{r}
+#| echo: true
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(gghighlight)
+library(knitr)
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+# Introduction
+
+## The Office
+
+![](images/lec-12/the-office.jpeg)
+
+## Data & goal
+
+-   Data: The data come from [data.world](https://data.world/anujjain7/the-office-imdb-ratings-dataset), by way of [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-17/readme.md)
+
+-   Goal: Predict `imdb_rating` from other variables in the dataset
+
+```{r}
+#| echo: true
+
+office_ratings <- read_csv(here::here("slides", "data/office_ratings.csv"))
+office_ratings
+```
+
+# Modeling
+
+## Train / test
+
+**Step 1:** Create an initial split:
+
+```{r}
+#| echo: true
+
+set.seed(123)
+office_split <- initial_split(office_ratings) # prop = 3/4 by default
+```
+
+**Step 2:** Save training data
+
+```{r}
+#| echo: true
+
+office_train <- training(office_split)
+dim(office_train)
+```
+
+**Step 3:** Save testing data
+
+```{r}
+#| echo: true
+
+office_test  <- testing(office_split)
+dim(office_test)
+```
+
+## Training data
+
+```{r}
+#| echo: true
+
+office_train
+```
+
+## Recap: Feature engineering
+
+-   We prefer simple models when possible, but **parsimony** does not mean sacrificing accuracy (or predictive performance) in the interest of simplicity
+
+-   Variables that go into the model and how they are represented are just as critical to success of the model
+
+-   **Feature engineering** allows us to get creative with our predictors in an effort to make them more useful for our model (to increase its predictive performance)
+
+## Recap: Modeling workflow, revisited
+
+-   Create a **recipe** for feature engineering steps to be applied to the training data
+
+-   Fit the model to the training data after these steps have been applied
+
+-   Using the model estimates from the training data, predict outcomes for the test data
+
+-   Evaluate the performance of the model on the test data
+
+# Building recipes
+
+## Initiate a recipe
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2|3"
+
+office_rec <- recipe(
+  imdb_rating ~ .,    # formula
+  data = office_train # data for cataloguing names and types of variables
+  )
+
+office_rec
+```
+
+## Step 1: Alter roles
+
+`title` isn't a predictor, but we might want to keep it around as an ID
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2"
+
+office_rec <- office_rec %>%
+  update_role(title, new_role = "ID")
+
+office_rec
+```
+
+## Step 2: Add features
+
+New features for day of week and month
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2"
+
+office_rec <- office_rec %>%
+  step_date(air_date, features = c("dow", "month"))
+
+office_rec
+```
+
+## Step 3: Add more features {.smaller}
+
+Identify holidays in `air_date`, then remove `air_date`
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2,3,4,5,6"
+
+office_rec <- office_rec %>%
+  step_holiday(
+    air_date, 
+    holidays = c("USThanksgivingDay", "USChristmasDay", "USNewYearsDay", "USIndependenceDay"), 
+    keep_original_cols = FALSE
+  )
+
+office_rec
+```
+
+## Step 4: Convert numbers to factors {.smaller}
+
+Convert `season` to factor
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2"
+
+office_rec <- office_rec %>%
+  step_num2factor(season, levels = as.character(1:9))
+
+office_rec
+```
+
+## Step 5: Make dummy variables {.smaller}
+
+Convert all nominal (categorical) predictors to factors
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2"
+
+office_rec <- office_rec %>%
+  step_dummy(all_nominal_predictors())
+
+office_rec
+```
+
+## Step 6: Remove zero variance pred.s {.smaller}
+
+Remove all predictors that contain only a single value
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2"
+
+office_rec <- office_rec %>%
+  step_zv(all_predictors())
+
+office_rec
+```
+
+## Putting it altogether {.smaller}
+
+```{r}
+#| label: recipe-altogether
+#| echo: true
+#| results: hide
+
+office_rec <- recipe(imdb_rating ~ ., data = office_train) %>%
+  # make title's role ID
+  update_role(title, new_role = "ID") %>%
+  # extract day of week and month of air_date
+  step_date(air_date, features = c("dow", "month")) %>%
+  # identify holidays and add indicators
+  step_holiday(
+    air_date, 
+    holidays = c("USThanksgivingDay", "USChristmasDay", "USNewYearsDay", "USIndependenceDay"), 
+    keep_original_cols = FALSE
+  ) %>%
+  # turn season into factor
+  step_num2factor(season, levels = as.character(1:9)) %>%
+  # make dummy variables
+  step_dummy(all_nominal_predictors()) %>%
+  # remove zero variance predictors
+  step_zv(all_predictors())
+```
+
+## Putting it altogether
+
+```{r}
+#| echo: true
+
+office_rec
+```
+
+# Building workflows
+
+## Specify model
+
+```{r}
+#| echo: true
+
+office_mod <- linear_reg() %>%
+  set_engine("lm")
+
+office_mod
+```
+
+## Build workflow
+
+**Workflows** bring together models and recipes so that they can be easily applied to both the training and test data.
+
+```{r}
+#| echo: true
+
+office_wflow <- workflow() %>%
+  add_model(office_mod) %>%
+  add_recipe(office_rec)
+```
+
+<br>
+
+*See next slide for workflow...*
+
+## View workflow
+
+```{r}
+#| echo: true
+
+office_wflow
+```
+
+## Fit model to training data {.smaller}
+
+```{r}
+#| echo: true
+
+office_fit <- office_wflow %>%
+  fit(data = office_train)
+
+tidy(office_fit)
+```
+
+<br>
+
+. . .
+
+*So many predictors!*
+
+## Model fit summary
+
+```{r}
+#| echo: true
+
+tidy(office_fit) %>% print(n = 21)
+```
+
+# Evaluate model
+
+## Make predictions for training data
+
+```{r}
+#| echo: true
+
+office_train_pred <- predict(office_fit, office_train) %>%
+  bind_cols(office_train %>% select(imdb_rating, title))
+
+office_train_pred
+```
+
+## R-squared
+
+Percentage of variability in the IMDB ratings explained by the model.
+
+. . .
+
+```{r}
+#| echo: true
+
+rsq(office_train_pred, truth = imdb_rating, estimate = .pred)
+```
+
+. . .
+
+::: question
+Are models with high or low $R^2$ more preferable?
+:::
+
+## RMSE
+
+An alternative model performance statistic: **root mean square error**.
+
+$$ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}} $$
+
+. . .
+
+```{r}
+#| label: rmse-train
+#| echo: true
+
+rmse(office_train_pred, truth = imdb_rating, estimate = .pred)
+```
+
+. . .
+
+::: question
+Are models with high or low RMSE are more preferable?
+:::
+
+## Interpreting RMSE
+
+::: question
+Is this RMSE considered low or high?
+:::
+
+```{r}
+#| ref.label: "rmse-train"
+#| echo: true
+```
+
+<br>
+
+. . .
+
+Depends...
+
+```{r}
+#| echo: true
+
+office_train %>%
+  summarise(min = min(imdb_rating), max = max(imdb_rating))
+```
+
+## But, really...
+
+*who cares about predictions on **training** data?*
+
+## Make predictions for testing data
+
+```{r}
+#| echo: true
+
+office_test_pred <- predict(office_fit, office_test) %>%
+  bind_cols(office_test %>% select(imdb_rating, title))
+
+office_test_pred
+```
+
+## Evaluate performance for testing data
+
+RMSE of model fit to **testing** data
+
+```{r}
+#| echo: true
+
+rmse(office_test_pred, truth = imdb_rating, estimate = .pred)
+```
+
+R-sq of model fit to **testing** data
+
+```{r}
+#| echo: true
+
+rsq(office_test_pred, truth = imdb_rating, estimate = .pred)
+```
+
+## Training vs. testing
+
+```{r}
+rmse_train <- rmse(office_train_pred, truth = imdb_rating, estimate = .pred) %>%
+  pull(.estimate) %>%
+  round(3)
+
+rsq_train <- rsq(office_train_pred, truth = imdb_rating, estimate = .pred) %>%
+  pull(.estimate) %>%
+  round(3)
+
+rmse_test <- rmse(office_test_pred, truth = imdb_rating, estimate = .pred) %>%
+  pull(.estimate) %>%
+  round(3)
+
+rsq_test <- rsq(office_test_pred, truth = imdb_rating, estimate = .pred) %>%
+  pull(.estimate) %>%
+  round(3)
+```
+
+| metric    |          train |          test | comparison                    |
+|:----------|---------------:|--------------:|:------------------------------|
+| RMSE      | `r rmse_train` | `r rmse_test` | RMSE lower for training       |
+| R-squared |  `r rsq_train` |  `r rsq_test` | R-squared higher for training |
+
+## Evaluating performance on training data {.smaller}
+
+-   The training set does not have the capacity to be a good arbiter of performance.
+
+-   It is not an independent piece of information; predicting the training set can only reflect what the model already knows.
+
+-   Suppose you give a class a test, then give them the answers, then provide the same test.
+    The student scores on the second test do not accurately reflect what they know about the subject; these scores would probably be higher than their results on the first test.
+
+# Cross validation
+
+## Cross validation
+
+More specifically, **v-fold cross validation**:
+
+::: columns
+::: {.column width="60%"}
+::: nonincremental
+-   Shuffle your **training** **data** into v partitions
+-   Use 1 partition for validation, and the remaining v-1 partitions for training
+-   Repeat v times
+:::
+:::
+
+::: {.column width="40%"}
+![](images/lec-12/cross-validation.png)
+:::
+:::
+
+::: callout-note
+You might also heard of this referred to as **k-fold cross validation**.
+:::
+
+## 5-fold Cross validation
+
+![](images/lec-12/cross-validation.png)
+
+## Split data
+
+```{r}
+#| echo: true
+
+set.seed(345)
+folds <- vfold_cv(office_train, v = 5)
+folds
+```
+
+## Fit resamples
+
+![](images/lec-12/cross-validation-animated.gif)
+
+## Fit resamples
+
+```{r}
+#| echo: true
+
+set.seed(456)
+
+office_fit_rs <- office_wflow %>%
+  fit_resamples(folds)
+
+office_fit_rs
+```
+
+## Collect CV metrics
+
+```{r}
+#| echo: true
+
+collect_metrics(office_fit_rs)
+```
+
+## Deeper look into CV metrics
+
+```{r}
+#| echo: true
+
+collect_metrics(office_fit_rs, summarize = FALSE)
+```
+
+## Deeper look into CV metrics
+
+```{r}
+cv_metrics <- collect_metrics(office_fit_rs, summarize = FALSE) 
+
+cv_metrics %>%
+  mutate(.estimate = round(.estimate, 3)) %>%
+  pivot_wider(id_cols = id, names_from = .metric, values_from = .estimate) %>%
+  kable(col.names = c("Fold", "RMSE", "R-squared"))
+```
+
+## How does RMSE compare to y?
+
+Cross validation RMSE stats:
+
+```{r}
+cv_metrics %>%
+  filter(.metric == "rsq") %>%
+  summarise(
+    min = min(.estimate),
+    max = max(.estimate),
+    mean = mean(.estimate),
+    sd = sd(.estimate)
+  )
+```
+
+Training data IMDB score stats:
+
+```{r}
+office_ratings %>%
+  summarise(
+    min = min(imdb_rating),
+    max = max(imdb_rating),
+    mean = mean(imdb_rating),
+    sd = sd(imdb_rating)
+  )
+```
+
+## What's next?
+
+![](images/lec-12/post-cv-testing.png)
+
+## Recap
+
+::: nonincremental
+-   Feature engineering with recipes
+-   Workflows to bring together models and recipes
+-   RMSE and $R^2$ for model evaluation
+-   Cross validation
+:::
