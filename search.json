@@ -1775,7 +1775,7 @@
     "href": "slides/lec-13.html#announcements",
     "title": "Feature engineering + Cross validation",
     "section": "Announcements",
-    "text": "Announcements"
+    "text": "Announcements\n\n\nMy Monday office hours moved to 8-9pm"
   },
   {
     "objectID": "slides/lec-13.html#topics",
@@ -1855,11 +1855,32 @@
     "text": "Step 2: Add features\nNew features for day of week and month\n\noffice_rec <- office_rec %>%\n  step_date(air_date, features = c(\"dow\", \"month\"))\n\noffice_rec\n\nRecipe\n\nInputs:\n\n      role #variables\n        ID          1\n   outcome          1\n predictor          4\n\nOperations:\n\nDate features from air_date"
   },
   {
+    "objectID": "slides/lec-13.html#working-with-recipes",
+    "href": "slides/lec-13.html#working-with-recipes",
+    "title": "Feature engineering + Cross validation",
+    "section": "Working with recipes",
+    "text": "Working with recipes\n\nWhen building recipes you in a pipeline, you don’t get to see the effect of the recipe on your data, which can be unsettling\nYou can take a peek at what will happen when you ultimately apply the recipe to your data at the time of fitting the model\nThis requires two functions: prep() to train the recipe and bake() to apply it to your data\n\n\n\n\n\n\n\n\nNote\n\n\nThis is optional, we’ll show the results for demonstrative purposes. It doesn’t need to be part of your modeling pipeline, but I find it assuring to see the effects of the recipe steps as I build the recipe."
+  },
+  {
+    "objectID": "slides/lec-13.html#step-2-prep-and-bake",
+    "href": "slides/lec-13.html#step-2-prep-and-bake",
+    "title": "Feature engineering + Cross validation",
+    "section": "Step 2: Prep and bake",
+    "text": "Step 2: Prep and bake\n\noffice_rec_trained <- prep(office_rec)\nbake(office_rec_trained, office_train) %>%\n  glimpse()\n\nRows: 141\nColumns: 8\n$ season         <dbl> 8, 9, 2, 9, 3, 7, 3, 9, 9, 8, 5, 5, 9, 6, 7, 6, 5, 2, 2…\n$ episode        <dbl> 18, 14, 8, 5, 22, 1, 15, 21, 18, 12, 25, 26, 12, 1, 20,…\n$ title          <fct> \"Last Day in Florida\", \"Vandalism\", \"Performance Review…\n$ total_votes    <dbl> 1429, 1402, 2416, 1515, 2783, 1897, 2283, 2041, 1445, 1…\n$ air_date       <date> 2012-03-08, 2013-01-31, 2005-11-15, 2012-10-25, 2007-0…\n$ imdb_rating    <dbl> 7.8, 7.6, 8.2, 7.1, 9.1, 8.4, 8.3, 8.9, 8.0, 8.0, 8.7, …\n$ air_date_dow   <fct> Thu, Thu, Tue, Thu, Thu, Thu, Thu, Thu, Thu, Thu, Thu, …\n$ air_date_month <fct> Mar, Jan, Nov, Oct, May, Sep, Feb, May, Apr, Jan, May, …"
+  },
+  {
     "objectID": "slides/lec-13.html#step-3-add-more-features",
     "href": "slides/lec-13.html#step-3-add-more-features",
     "title": "Feature engineering + Cross validation",
     "section": "Step 3: Add more features",
     "text": "Step 3: Add more features\nIdentify holidays in air_date, then remove air_date\n\noffice_rec <- office_rec %>%\n  step_holiday(\n    air_date, \n    holidays = c(\"USThanksgivingDay\", \"USChristmasDay\", \"USNewYearsDay\", \"USIndependenceDay\"), \n    keep_original_cols = FALSE\n  )\n\noffice_rec\n\nRecipe\n\nInputs:\n\n      role #variables\n        ID          1\n   outcome          1\n predictor          4\n\nOperations:\n\nDate features from air_date\nHoliday features from air_date"
+  },
+  {
+    "objectID": "slides/lec-13.html#step-3-prep-and-bake",
+    "href": "slides/lec-13.html#step-3-prep-and-bake",
+    "title": "Feature engineering + Cross validation",
+    "section": "Step 3: Prep and bake",
+    "text": "Step 3: Prep and bake\n\noffice_rec_trained <- prep(office_rec)\nbake(office_rec_trained, office_train) %>%\n  glimpse()\n\nRows: 141\nColumns: 11\n$ season                     <dbl> 8, 9, 2, 9, 3, 7, 3, 9, 9, 8, 5, 5, 9, 6, 7…\n$ episode                    <dbl> 18, 14, 8, 5, 22, 1, 15, 21, 18, 12, 25, 26…\n$ title                      <fct> \"Last Day in Florida\", \"Vandalism\", \"Perfor…\n$ total_votes                <dbl> 1429, 1402, 2416, 1515, 2783, 1897, 2283, 2…\n$ imdb_rating                <dbl> 7.8, 7.6, 8.2, 7.1, 9.1, 8.4, 8.3, 8.9, 8.0…\n$ air_date_dow               <fct> Thu, Thu, Tue, Thu, Thu, Thu, Thu, Thu, Thu…\n$ air_date_month             <fct> Mar, Jan, Nov, Oct, May, Sep, Feb, May, Apr…\n$ air_date_USThanksgivingDay <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USChristmasDay    <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USNewYearsDay     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USIndependenceDay <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…"
   },
   {
     "objectID": "slides/lec-13.html#step-4-convert-numbers-to-factors",
@@ -1869,6 +1890,13 @@
     "text": "Step 4: Convert numbers to factors\nConvert season to factor\n\noffice_rec <- office_rec %>%\n  step_num2factor(season, levels = as.character(1:9))\n\noffice_rec\n\nRecipe\n\nInputs:\n\n      role #variables\n        ID          1\n   outcome          1\n predictor          4\n\nOperations:\n\nDate features from air_date\nHoliday features from air_date\nFactor variables from season"
   },
   {
+    "objectID": "slides/lec-13.html#step-4-prep-and-bake",
+    "href": "slides/lec-13.html#step-4-prep-and-bake",
+    "title": "Feature engineering + Cross validation",
+    "section": "Step 4: Prep and bake",
+    "text": "Step 4: Prep and bake\n\noffice_rec_trained <- prep(office_rec)\nbake(office_rec_trained, office_train) %>%\n  glimpse()\n\nRows: 141\nColumns: 11\n$ season                     <fct> 8, 9, 2, 9, 3, 7, 3, 9, 9, 8, 5, 5, 9, 6, 7…\n$ episode                    <dbl> 18, 14, 8, 5, 22, 1, 15, 21, 18, 12, 25, 26…\n$ title                      <fct> \"Last Day in Florida\", \"Vandalism\", \"Perfor…\n$ total_votes                <dbl> 1429, 1402, 2416, 1515, 2783, 1897, 2283, 2…\n$ imdb_rating                <dbl> 7.8, 7.6, 8.2, 7.1, 9.1, 8.4, 8.3, 8.9, 8.0…\n$ air_date_dow               <fct> Thu, Thu, Tue, Thu, Thu, Thu, Thu, Thu, Thu…\n$ air_date_month             <fct> Mar, Jan, Nov, Oct, May, Sep, Feb, May, Apr…\n$ air_date_USThanksgivingDay <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USChristmasDay    <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USNewYearsDay     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USIndependenceDay <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…"
+  },
+  {
     "objectID": "slides/lec-13.html#step-5-make-dummy-variables",
     "href": "slides/lec-13.html#step-5-make-dummy-variables",
     "title": "Feature engineering + Cross validation",
@@ -1876,11 +1904,25 @@
     "text": "Step 5: Make dummy variables\nConvert all nominal (categorical) predictors to factors\n\noffice_rec <- office_rec %>%\n  step_dummy(all_nominal_predictors())\n\noffice_rec\n\nRecipe\n\nInputs:\n\n      role #variables\n        ID          1\n   outcome          1\n predictor          4\n\nOperations:\n\nDate features from air_date\nHoliday features from air_date\nFactor variables from season\nDummy variables from all_nominal_predictors()"
   },
   {
-    "objectID": "slides/lec-13.html#step-6-remove-zero-variance-pred.s",
-    "href": "slides/lec-13.html#step-6-remove-zero-variance-pred.s",
+    "objectID": "slides/lec-13.html#step-5-prep-and-bake",
+    "href": "slides/lec-13.html#step-5-prep-and-bake",
     "title": "Feature engineering + Cross validation",
-    "section": "Step 6: Remove zero variance pred.s",
-    "text": "Step 6: Remove zero variance pred.s\nRemove all predictors that contain only a single value\n\noffice_rec <- office_rec %>%\n  step_zv(all_predictors())\n\noffice_rec\n\nRecipe\n\nInputs:\n\n      role #variables\n        ID          1\n   outcome          1\n predictor          4\n\nOperations:\n\nDate features from air_date\nHoliday features from air_date\nFactor variables from season\nDummy variables from all_nominal_predictors()\nZero variance filter on all_predictors()"
+    "section": "Step 5: Prep and bake",
+    "text": "Step 5: Prep and bake\n\noffice_rec_trained <- prep(office_rec)\nbake(office_rec_trained, office_train) %>%\n  glimpse()\n\nRows: 141\nColumns: 33\n$ episode                    <dbl> 18, 14, 8, 5, 22, 1, 15, 21, 18, 12, 25, 26…\n$ title                      <fct> \"Last Day in Florida\", \"Vandalism\", \"Perfor…\n$ total_votes                <dbl> 1429, 1402, 2416, 1515, 2783, 1897, 2283, 2…\n$ imdb_rating                <dbl> 7.8, 7.6, 8.2, 7.1, 9.1, 8.4, 8.3, 8.9, 8.0…\n$ air_date_USThanksgivingDay <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USChristmasDay    <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USNewYearsDay     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_USIndependenceDay <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ season_X2                  <dbl> 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ season_X3                  <dbl> 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0…\n$ season_X4                  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ season_X5                  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0…\n$ season_X6                  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0…\n$ season_X7                  <dbl> 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1…\n$ season_X8                  <dbl> 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0…\n$ season_X9                  <dbl> 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0…\n$ air_date_dow_Mon           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_dow_Tue           <dbl> 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_dow_Wed           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_dow_Thu           <dbl> 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ air_date_dow_Fri           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_dow_Sat           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_month_Feb         <dbl> 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_month_Mar         <dbl> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_month_Apr         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1…\n$ air_date_month_May         <dbl> 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0…\n$ air_date_month_Jun         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_month_Jul         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_month_Aug         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_month_Sep         <dbl> 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0…\n$ air_date_month_Oct         <dbl> 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_month_Nov         <dbl> 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ air_date_month_Dec         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…"
+  },
+  {
+    "objectID": "slides/lec-13.html#step-6-remove-zero-variance-predictors",
+    "href": "slides/lec-13.html#step-6-remove-zero-variance-predictors",
+    "title": "Feature engineering + Cross validation",
+    "section": "Step 6: Remove zero variance predictors",
+    "text": "Step 6: Remove zero variance predictors\nRemove all predictors that contain only a single value\n\noffice_rec <- office_rec %>%\n  step_zv(all_predictors())\n\noffice_rec\n\nRecipe\n\nInputs:\n\n      role #variables\n        ID          1\n   outcome          1\n predictor          4\n\nOperations:\n\nDate features from air_date\nHoliday features from air_date\nFactor variables from season\nDummy variables from all_nominal_predictors()\nZero variance filter on all_predictors()"
+  },
+  {
+    "objectID": "slides/lec-13.html#step-6-prep-and-bake",
+    "href": "slides/lec-13.html#step-6-prep-and-bake",
+    "title": "Feature engineering + Cross validation",
+    "section": "Step 6: Prep and bake",
+    "text": "Step 6: Prep and bake\n\noffice_rec_trained <- prep(office_rec)\nbake(office_rec_trained, office_train) %>%\n  glimpse()\n\nRows: 141\nColumns: 22\n$ episode            <dbl> 18, 14, 8, 5, 22, 1, 15, 21, 18, 12, 25, 26, 12, 1,…\n$ title              <fct> \"Last Day in Florida\", \"Vandalism\", \"Performance Re…\n$ total_votes        <dbl> 1429, 1402, 2416, 1515, 2783, 1897, 2283, 2041, 144…\n$ imdb_rating        <dbl> 7.8, 7.6, 8.2, 7.1, 9.1, 8.4, 8.3, 8.9, 8.0, 8.0, 8…\n$ season_X2          <dbl> 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ season_X3          <dbl> 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ season_X4          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ season_X5          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, …\n$ season_X6          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, …\n$ season_X7          <dbl> 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, …\n$ season_X8          <dbl> 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, …\n$ season_X9          <dbl> 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, …\n$ air_date_dow_Tue   <dbl> 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ air_date_dow_Thu   <dbl> 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ air_date_month_Feb <dbl> 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ air_date_month_Mar <dbl> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ air_date_month_Apr <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, …\n$ air_date_month_May <dbl> 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, …\n$ air_date_month_Sep <dbl> 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, …\n$ air_date_month_Oct <dbl> 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, …\n$ air_date_month_Nov <dbl> 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, …\n$ air_date_month_Dec <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …"
   },
   {
     "objectID": "slides/lec-13.html#putting-it-altogether",
@@ -1901,14 +1943,14 @@
     "href": "slides/lec-13.html#specify-model",
     "title": "Feature engineering + Cross validation",
     "section": "Specify model",
-    "text": "Specify model\n\noffice_mod <- linear_reg() %>%\n  set_engine(\"lm\")\n\noffice_mod\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
+    "text": "Specify model\n\noffice_spec <- linear_reg() %>%\n  set_engine(\"lm\")\n\noffice_spec\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
   },
   {
     "objectID": "slides/lec-13.html#build-workflow",
     "href": "slides/lec-13.html#build-workflow",
     "title": "Feature engineering + Cross validation",
     "section": "Build workflow",
-    "text": "Build workflow\nWorkflows bring together models and recipes so that they can be easily applied to both the training and test data.\n\noffice_wflow <- workflow() %>%\n  add_model(office_mod) %>%\n  add_recipe(office_rec)\n\n\nSee next slide for workflow…"
+    "text": "Build workflow\nWorkflows bring together models and recipes so that they can be easily applied to both the training and test data.\n\noffice_wflow <- workflow() %>%\n  add_model(office_spec) %>%\n  add_recipe(office_rec)\n\n\nSee next slide for workflow…"
   },
   {
     "objectID": "slides/lec-13.html#view-workflow",
