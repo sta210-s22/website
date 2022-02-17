@@ -32,6 +32,7 @@ knitr::opts_chunk$set(
 ## Announcements
 
 ::: nonincremental
+-   My Monday office hours moved to 8-9pm
 :::
 
 ## Topics
@@ -178,6 +179,29 @@ office_rec <- office_rec %>%
 office_rec
 ```
 
+## Working with recipes {.smaller}
+
+-   When building recipes you in a pipeline, you don't get to see the effect of the recipe on your data, which can be unsettling
+-   You can take a peek at what will happen when you ultimately apply the recipe to your data at the time of fitting the model
+-   This requires two functions: `prep()` to train the recipe and `bake()` to apply it to your data
+
+. . .
+
+::: callout-note
+This is optional, we'll show the results for demonstrative purposes.
+It doesn't need to be part of your modeling pipeline, but I find it assuring to see the effects of the recipe steps as I build the recipe.
+:::
+
+## Step 2: Prep and bake
+
+```{r}
+#| echo: true
+
+office_rec_trained <- prep(office_rec)
+bake(office_rec_trained, office_train) %>%
+  glimpse()
+```
+
 ## Step 3: Add more features {.smaller}
 
 Identify holidays in `air_date`, then remove `air_date`
@@ -196,6 +220,16 @@ office_rec <- office_rec %>%
 office_rec
 ```
 
+## Step 3: Prep and bake {.smaller}
+
+```{r}
+#| echo: true
+
+office_rec_trained <- prep(office_rec)
+bake(office_rec_trained, office_train) %>%
+  glimpse()
+```
+
 ## Step 4: Convert numbers to factors {.smaller}
 
 Convert `season` to factor
@@ -208,6 +242,16 @@ office_rec <- office_rec %>%
   step_num2factor(season, levels = as.character(1:9))
 
 office_rec
+```
+
+## Step 4: Prep and bake {.smaller}
+
+```{r}
+#| echo: true
+
+office_rec_trained <- prep(office_rec)
+bake(office_rec_trained, office_train) %>%
+  glimpse()
 ```
 
 ## Step 5: Make dummy variables {.smaller}
@@ -224,7 +268,17 @@ office_rec <- office_rec %>%
 office_rec
 ```
 
-## Step 6: Remove zero variance pred.s {.smaller}
+## Step 5: Prep and bake {.smaller}
+
+```{r}
+#| echo: true
+
+office_rec_trained <- prep(office_rec)
+bake(office_rec_trained, office_train) %>%
+  glimpse()
+```
+
+## Step 6: Remove zero variance predictors {.smaller}
 
 Remove all predictors that contain only a single value
 
@@ -236,6 +290,16 @@ office_rec <- office_rec %>%
   step_zv(all_predictors())
 
 office_rec
+```
+
+## Step 6: Prep and bake {.smaller}
+
+```{r}
+#| echo: true
+
+office_rec_trained <- prep(office_rec)
+bake(office_rec_trained, office_train) %>%
+  glimpse()
 ```
 
 ## Putting it altogether {.smaller}
@@ -264,7 +328,7 @@ office_rec <- recipe(imdb_rating ~ ., data = office_train) %>%
   step_zv(all_predictors())
 ```
 
-## Putting it altogether
+## Putting it altogether {.smaller}
 
 ```{r}
 #| echo: true
@@ -279,10 +343,10 @@ office_rec
 ```{r}
 #| echo: true
 
-office_mod <- linear_reg() %>%
+office_spec <- linear_reg() %>%
   set_engine("lm")
 
-office_mod
+office_spec
 ```
 
 ## Build workflow
@@ -293,7 +357,7 @@ office_mod
 #| echo: true
 
 office_wflow <- workflow() %>%
-  add_model(office_mod) %>%
+  add_model(office_spec) %>%
   add_recipe(office_rec)
 ```
 

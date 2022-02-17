@@ -1,4 +1,204 @@
 ---
-title: "Lab 4 - To be posted..."
+title: "Lab 4 - The Office, another look"
 editor: visual
 ---
+
+## Introduction
+
+In today's lab you will analyze data from the [schrute](https://bradlindblad.github.io/schrute/) package to predict IMDB scores for episodes of The Office.
+
+::: callout-note
+This is a different data source than the one we've used in class last week.
+:::
+
+### Learning goals
+
+By the end of the lab you will...
+
+-   engineer features based on episode scripts
+-   train a model
+-   perform cross validation
+-   make predictions
+
+## Getting started
+
+-   A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
+-   Go to the [sta210-s22](https://www.github.com/sta210-s22) organization on GitHub. Click on the repo with the prefix **lab-4**. It contains the starter documents you need to complete the lab.
+-   Each person on the team should clone the repository and open a new project in RStudio. Throughout the lab, each person should get a chance to make commits and push to the repo.
+
+## Packages
+
+The following packages are used in the lab.
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(tidymodels)
+library(schrute)
+library(lubridate)
+```
+
+## Data: The Office
+
+The dataset for this lab comes from the [schrute](https://bradlindblad.github.io/schrute/) package and it's called `theoffice`.
+This dataset contains the entire script transcriptions from The Office.
+
+Let's start by taking a peek at the data.
+
+```{r}
+glimpse(theoffice)
+```
+
+There are `r nrow(theoffice)` observations and `r ncol(theoffice)` columns in this dataset.
+The variable names are as follows.
+
+```{r}
+names(theoffice)
+```
+
+Each row in the dataset is a line spoken by a character in a given episode of the show.
+This means some information at the episode level (e.g., `imdb_rating`, `air_date`, etc. are repeated across the rows that belong to a single episode.
+
+The `air_date` variable is coded as a factor, which is undesirable.
+We'll want to parse that variable later into its components during feature engineering.
+So, for now, let's convert it to date.
+
+```{r}
+theoffice <- theoffice %>%
+  mutate(air_date = ymd(as.character(air_date)))
+```
+
+## Exercises
+
+### Exercise 1
+
+Calculate the percentage of lines spoken by Jim, Pam, Michael, and Dwight for each episode of The Office.
+
+```{r lines}
+
+```
+
+### Exercise 2
+
+Identify episodes that touch on Halloween, Valentine's Day, and Christmas.
+
+```{r special-episodes}
+str_detect()
+```
+
+### Exercise 3
+
+Put together a modeling dataset that includes features you've engineered.
+Also add an indicator variable called `michael` which takes the value `1` if Michael Scott (Steve Carrell) was there, and `0` if not.
+Note: Michael Scott (Steve Carrell) left the show at the end of Season 7.
+
+```{r office-df}
+if_else()
+```
+
+### Exercise 4
+
+Split the data into training (75%) and testing (25%).
+
+```{r split}
+set.seed(1122)
+
+```
+
+### Exercise 5
+
+Specify a linear regression model.
+
+```{r model}
+
+```
+
+### Exercise 6
+
+Create a recipe that updates the role of `episode_name` to not be a predictor, removes `air_date` as a predictor, uses `season` as a factor, and removes all zero variance predictors.
+
+```{r recipe}
+
+```
+
+### Exercise 7
+
+Build a workflow for fitting the model specified earlier and using the recipe you developed to preprocess the data.
+
+```{r workflow}
+
+```
+
+### Exercise 8
+
+Fit the model to training data and interpret a couple of the slope coefficients.
+
+```{r fit}
+
+```
+
+### Exercise 9
+
+Perform 5-fold cross validation and view model performance metrics.
+
+```{r cv, message=FALSE, error = TRUE}
+set.seed(345)
+folds <- vfold_cv(___, v = ___)
+folds
+
+set.seed(456)
+office_fit_rs <- ___ %>%
+  ___(___)
+
+___(office_fit_rs)
+```
+
+### Exercise 10
+
+Use your model to make predictions for the testing data and calculate the RMSE.
+Also use the model developed in the [cross validation lesson](https://ids-s1-20.github.io/slides/week-10/w10-d02-cross-validation/w10-d02-cross-validation.html) to make predictions for the testing data and calculate the RMSE as well.
+Which model did a better job in predicting IMDB scores for the testing data?
+
+#### New model
+
+```{r new-model}
+
+```
+
+#### Old model
+
+```{r old-model, error = TRUE}
+office_mod_old <- linear_reg() %>%
+  set_engine("lm")
+
+office_rec_old <- recipe(imdb_rating ~ ., data = office_train) %>%
+  # make title's role ID
+  update_role(title, new_role = "ID") %>%
+  # extract day of week and month of air_date
+  step_date(air_date, features = c("dow", "month")) %>%
+  # identify holidays and add indicators
+  step_holiday(
+    air_date, 
+    holidays = c("USThanksgivingDay", "USChristmasDay", "USNewYearsDay", "USIndependenceDay"), 
+    keep_original_cols = FALSE
+  ) %>%
+  # turn season into factor
+  step_num2factor(season, levels = as.character(1:9)) %>%
+  # make dummy variables
+  step_dummy(all_nominal_predictors()) %>%
+  # remove zero variance predictors
+  step_zv(all_predictors())
+
+office_wflow_old <- workflow() %>%
+  add_model(office_mod_old) %>%
+  add_recipe(office_rec_old)
+
+office_fit_old <- office_wflow_old %>%
+  fit(data = office_train)
+
+tidy(office_fit_old)
+
+___
+```
