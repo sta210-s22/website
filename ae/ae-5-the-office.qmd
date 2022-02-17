@@ -1,0 +1,43 @@
+---
+title: "AE 5: The Office"
+---
+
+::: callout-important
+Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-5-the-office-YOUR_GITHUB_USERNAME` to get started.
+:::
+
+## Packages
+
+```{r load-packages}
+#| message: false
+library(tidyverse)
+library(tidymodels)
+library(gghighlight)
+library(knitr)
+```
+
+## Load data
+
+```{r}
+office_ratings <- read_csv("data/office_ratings.csv")
+```
+
+## Exploratory data analysis
+
+Recreate at least one of the exploratory visualizations from class.
+
+## Test/train split
+
+Split your data into testing and training sets.
+
+## Build a recipe
+
+Build the recipe from class.
+
+------------------------------------------------------------------------
+
+*Time permitting...*
+
+## Workflows and model fitting
+
+Build the modeling workflow and fit the model to the training data after feature engineering with the recipe.

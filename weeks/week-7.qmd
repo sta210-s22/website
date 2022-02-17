@@ -21,15 +21,17 @@ Due dates:
 
 🖥️ [Lecture 12 - MLR: Feature engineering](/slides/lec-12.html)
 
-Lecture 13 (to be posted)
+🖥️ [Lecture 13 - MLR: Cross validation](/slides/lec-13.html)
 
 ## Practice
 
-To be posted.
+📋 [Application Exercise 5 - The Office](/ae/ae-5-the-office.html)
 
 ## Perform
 
 ✍️ [HW 2 - Multiple linear regression](/hw/hw-2.html)
+
+📂 [Project - Topic ideas](/project-description.html)
 
 <br><br>
 
