@@ -63,7 +63,7 @@ ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
 
 ## The Office
 
-![](images/lec-12/the-office.jpeg)
+![](images/lec-13/the-office.jpeg)
 
 ## Data & goal
 
@@ -557,7 +557,7 @@ More specifically, **v-fold cross validation**:
 :::
 
 ::: {.column width="40%"}
-![](images/lec-12/cross-validation.png)
+![](images/lec-13/cross-validation.png)
 :::
 :::
 
@@ -567,7 +567,7 @@ You might also heard of this referred to as **k-fold cross validation**.
 
 ## 5-fold Cross validation
 
-![](images/lec-12/cross-validation.png)
+![](images/lec-13/cross-validation.png)
 
 ## Split data
 
@@ -581,7 +581,7 @@ folds
 
 ## Fit resamples
 
-![](images/lec-12/cross-validation-animated.gif)
+![](images/lec-13/cross-validation-animated.gif)
 
 ## Fit resamples
 
@@ -652,7 +652,7 @@ office_ratings %>%
 
 ## What's next?
 
-![](images/lec-12/post-cv-testing.png)
+![](images/lec-13/post-cv-testing.png)
 
 ## Recap
 
