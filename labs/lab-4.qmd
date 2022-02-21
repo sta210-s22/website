@@ -201,7 +201,7 @@ Given we have limited time in the lab we're not going to ask you to report EDA r
 
 ### Modeling prep
 
-#### Exercise 4
+#### Exercise 5
 
 Split the data into training (75%) and testing (25%).
 Save the training and testing data as `office_train` and `office_test` respectively.
@@ -218,7 +218,7 @@ office_train <- ___(office_split)
 office_test <- ___(___)
 ```
 
-#### Exercise 5
+#### Exercise 6
 
 Specify a linear regression model with engine `"lm"` and call it `office_spec`.
 
@@ -231,7 +231,7 @@ Specify a linear regression model with engine `"lm"` and call it `office_spec`.
 office_spec <- ___
 ```
 
-#### Exercise 6
+#### Exercise 7
 
 Create a recipe that performs feature engineering using the following steps (in the given order):
 
@@ -259,7 +259,7 @@ It's also a good place to let another team member take over the keyboard!
 A team member who hasn't done so yet should pull the changes and make the commits for the next few exercises.
 :::
 
-#### Exercise 7
+#### Exercise 8
 
 Build a model workflow for fitting the model specified earlier and using the recipe you developed to preprocess the data.
 
@@ -276,7 +276,7 @@ office_wflow <- workflow() %>%
 
 ### Model fit and evaluation
 
-#### Exercise 8
+#### Exercise 9
 
 Fit the model to training data, neatly display the model output, and interpret two of the slope coefficients.
 
@@ -292,7 +292,7 @@ office_fit <- office_wflow %>%
 ___
 ```
 
-#### Exercise 9
+#### Exercise 10
 
 Calculate predicted `imdb_rating` for the training data using the `predict()` function.
 Then, bind two columns from the training data to this result: `imdb_rating` and `episode_name`.
@@ -303,7 +303,7 @@ Then, using this data frame, create a scatterplot of predicted and observed IMDB
 
 *Stretch goal.* Add episode names, using `geom_text()`, for episodes with much higher and much lower observed IMDB ratings compared to others.
 
-#### Exercise 10
+#### Exercise 11
 
 Calculate the R-squared and RMSE for this model for predictions on the training data.
 
@@ -316,20 +316,20 @@ It's also a good place to let another team member take over the keyboard!
 A team member who hasn't done so yet should pull the changes and make the commits for the next few exercises.
 :::
 
-#### Exercise 11
+#### Exercise 12
 
-Repeat Exercise 9, but with testing data.
+Repeat Exercise 10, but with testing data.
 
 *Naming suggestion:* Call the resulting data frame `office_test_pred`.
 
-#### Exercise 12
-
-Based on your visualization on Exercise 11, speculate on whether you expect the R-squared and RMSE for this model to be higher or lower for predictions on the testing data compared to those on the training data, or do you expect them to be the same?
-Explain your reasoning.
-
 #### Exercise 13
 
-Check your intuition in Exercise 12 by actually calculating the R-squared and RMSE for this model for predictions on the training data.
+Based on your visualization on Exercise 12, speculate on whether you expect the R-squared and RMSE for this model to be higher or lower for predictions on the testing data compared to those on the training data, or do you expect them to be the same?
+Explain your reasoning.
+
+#### Exercise 14
+
+Check your intuition in Exercise 13 by actually calculating the R-squared and RMSE for this model for predictions on the training data.
 Comment on whether your intuition is confirmed or not.
 
 ## Submission
