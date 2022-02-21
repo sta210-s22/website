@@ -1,0 +1,363 @@
+---
+title: "Lab 4 - The Office"
+subtitle: "Another look"
+editor: visual
+---
+
+## Introduction
+
+In today's lab you will analyze data from the [schrute](https://bradlindblad.github.io/schrute/) package to predict IMDB scores for episodes of The Office.
+
+::: callout-note
+This is a different data source than the one we've used in class last week.
+:::
+
+### Learning goals
+
+By the end of the lab you will...
+
+-   engineer features based on episode scripts
+-   train a model
+-   interpret model coefficients
+-   make predictions
+-   evaluate model performance on training and testing data
+
+## Getting started
+
+-   A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
+-   Go to the [sta210-s22](https://www.github.com/sta210-s22) organization on GitHub. Click on the repo with the prefix **lab-4**. It contains the starter documents you need to complete the lab.
+-   Each person on the team should clone the repository and open a new project in RStudio. Throughout the lab, each person should get a chance to make commits and push to the repo.
+
+## Packages
+
+The following packages are used in the lab.
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(tidymodels)
+library(schrute)
+library(lubridate)
+library(knitr)
+```
+
+## Data: The Office
+
+The dataset for this lab comes from the [schrute](https://bradlindblad.github.io/schrute/) package and it's called `theoffice`.
+This dataset contains the entire script transcriptions from The Office.
+
+Let's start by taking a peek at the data.
+
+```{r}
+glimpse(theoffice)
+```
+
+There are `r nrow(theoffice)` observations and `r ncol(theoffice)` columns in this dataset.
+The variable names are as follows.
+
+```{r}
+names(theoffice)
+```
+
+Each row in the dataset is a line spoken by a character in a given episode of the show.
+This means some information at the episode level (e.g., `imdb_rating`, `air_date`, etc. are repeated across the rows that belong to a single episode.
+
+The `air_date` variable is coded as a factor, which is undesirable.
+We'll want to parse that variable later into its components during feature engineering.
+So, for now, let's convert it to date.
+
+```{r}
+theoffice <- theoffice %>%
+  mutate(air_date = ymd(as.character(air_date)))
+```
+
+Let's take a look at the data to confirm we're happy with how each of the variables are encoded.
+
+```{r}
+glimpse(theoffice)
+```
+
+## Exercises
+
+### Data prep
+
+#### Exercise 1
+
+Identify episodes that touch on Halloween, Valentine's Day, and Christmas.
+
+-   First, convert all `text` to lowercase with `str_to_lower()`.
+-   Then, create three new variables (`halloween_mention`, `valentine_mention`, and `christmas_mention`) where that take on the value `1` if the character string `"halloween"`, `"valentine"`, or `"christmas"` appears in the text, respectively, and `0` otherwise.
+
+Some code is provided below to help you get started.
+
+```{r}
+#| label: special-episodes
+#| eval: false
+
+theoffice <- theoffice %>%
+  mutate(
+    text = ___(text),
+    halloween_mention = if_else(str_detect(text, "___"), ___, ___),
+    valentine_mention = ___,
+    ___ = ___
+  )
+```
+
+#### Exercise 2
+
+In this exercise we'll accomplish two separate tasks.
+And there's a good reason why we're doing it all at once; we're going to drastically change our data frame, from one row per line spoken to one row per episode.
+We'll call the resulting data frame `office_episodes`.
+
+The two tasks are as follows:
+
+-   Task 1. Identify episodes where the word "halloween", "valentine", or "christmas" were ever mentioned, using variables you created above.
+-   Task 2. Calculate the percentage of lines spoken by Jim, Pam, Michael, and Dwight for each episode of The Office.
+
+Below are some instructions and starter code to get you started with these tasks.
+
+-   Start by grouping `theoffice` data by `season`, `episode`, `episode_name`, `imdb_rating`, `total_votes`, and `air_date`. (These variables, except for `season` have the same value for each given episode, hence grouping by them allows us to make sure they appear in the output of this pipeline.)
+-   Use `summarize()` to calculate the desired features at the season-episode level.
+-   Task 1:
+    -   Calculate the number of lines per season per episode, you might name this new variable `n_lines`.
+    -   Then, calculate the proportion of lines in that episode spoken by each of the four `character`s Jim, Pam, Michael, and Dwight. Name these new variables `lines_jim`, `lines_pam`, `lines_michael`, and `lines_dwight`, respectively.
+-   Task 2:
+    -   Create a variable called `halloween` that sums up the `1`s in `halloween_mention` at the season-episode level and takes on the value `"yes"` if the sum is greater than or equal to 1, or `"no"` otherwise.
+    -   Do something similar for new variables `valentine` and `christmas` as well based on values from `valentine_mention` and `christmas_mention`.
+-   Finish up your `summarize()` statement by dropping the groups, so the resulting data frame is no longer grouped and remove `n_lines` (we won't use that variable in our analysis, we only calculated it as an intermediary step).
+
+```{r}
+#| label: episode-data
+#| eval: false
+
+office_episodes <- theoffice %>%
+  group_by(___) %>%
+  summarize(
+    n_lines = n(),
+    lines_jim = sum(character == "___") / n_lines,
+    lines_pam = ___,
+    lines_michael = ___,
+    lines_dwight = ___,
+    halloween = if_else(sum(___) >= 1, "yes", "no"),
+    valentine = if_else(___, "___", "___"),
+    christmas = if_else(___, "___", "___"),
+    .groups = "drop"
+  ) %>%
+  select(-n_lines)
+```
+
+::: callout-note
+Why `summarize()` and not `mutate()`?
+We use `mutate()` to add / modify a column of a data frame.
+The output data frame always has the same number of rows as the input data frame.
+On the other hand, we use `summarize()` to reduce the data frame to either a single row (single summary statistic) or one row per each group (summary statistics at the group level).
+
+And what about that `.groups` argument in summarize?
+Try running your `summarize()` step without it first.
+You'll see that R print out a message saying *"`summarize()` has grouped output by `season`, `episode`. You can override using the `.groups` argument."* `summarize()` will only drop the last group.
+So if you want a data frame that doesn't have a grouping structure as a result of a `summaerize()`, you can explicitly ask for that with `.groups = "drop"`.
+Before you proceed, read the [documentation for `summarize()`](https://dplyr.tidyverse.org/reference/summarise.html), and specifically the explanation for the `.groups` argument to prepare yourself for future instances where you might see this type of message.
+:::
+
+#### Exercise 3
+
+The Michael Scott character (played by Steve Carrell) left the show at the end of Season 7.
+Add an indicator variable, `michael`, that takes on the value `"yes"` if Michael Scott (Steve Carrell) was in the show, and `"no"` if not.
+
+```{r}
+#| label: michael
+#| eval: false
+
+office_episodes <- office_episodes %>%
+  mutate(michael = if_else(season > ___, "___", "___"))
+```
+
+#### Exercise 4
+
+Print out the dimensions (`dim()`) of the new dataset you created as well as the `names()` of the columns in the dataset.
+
+Your new dataset, `office_episodes,` should have 186 rows and 14 columns.
+The column names should be `season`, `episode`, `episode_name`, `imdb_rating`, `total_votes`, `air_date`, `lines_jim`, `lines_pam`, `lines_michael`, `lines_dwight`, `halloween`, `valentine`, `christmas`, and `michael`.
+If you are not matching these numbers or columns, go back and try to figure out where you went wrong.
+Or ask your TA for help!
+
+::: render-commit-push
+This is a good place to render, commit, and push changes to your remote lab repo on GitHub.
+Click the checkbox next to each file in the Git pane to stage the updates you've made, write an informative commit message, and push.
+After you push the changes, the Git pane in RStudio should be empty.
+
+It's also a good place to let another team member take over the keyboard!
+A team member who hasn't done so yet should pull the changes and make the commits for the next few exercises.
+:::
+
+### Exploratory data analysis
+
+This would be a good place to conduct some exploratory data analysis (EDA).
+For example, plot the proportion of lines spoken by each character over time.
+Or calculate the percentage of episodes that mention Halloween, or Valentine's Day, or Christmas.
+Given we have limited time in the lab we're not going to ask you to report EDA results as part of this lab, but we're noting this here to provide suggestions for how you might go about structuring your project.
+
+### Modeling prep
+
+#### Exercise 4
+
+Split the data into training (75%) and testing (25%).
+Save the training and testing data as `office_train` and `office_test` respectively.
+
+*Naming suggestion:* Call the initial split `office_split`, the training data `office_train`, and testing data `office_test`.
+
+```{r}
+#| label: split
+#| eval: false
+
+set.seed(123)
+office_split <- ___(office_episodes)
+office_train <- ___(office_split)
+office_test <- ___(___)
+```
+
+#### Exercise 5
+
+Specify a linear regression model with engine `"lm"` and call it `office_spec`.
+
+*Naming suggestion:* Call the model specification `office_spec`.
+
+```{r}
+#| label: model
+#| eval: false
+
+office_spec <- ___
+```
+
+#### Exercise 6
+
+Create a recipe that performs feature engineering using the following steps (in the given order):
+
+-   `update_role()`: updates the role of `episode_name` to not be a predictor (be an ID)
+-   `step_rm()`: removes `air_date` as a predictor
+-   `step_dummy()`: creates dummy variables for `all_nominal_predictors()`
+-   `step_zv()`: removes all zero variance predictors
+
+*Naming suggestion:* Call the recipe `office_rec`.
+
+```{r}
+#| label: recipe
+#| eval: false
+
+office_rec <- recipe(imdb_rating ~ ., data = office_train) %>%
+  ___
+```
+
+::: render-commit-push
+This is a good place to render, commit, and push changes to your remote lab repo on GitHub.
+Click the checkbox next to each file in the Git pane to stage the updates you've made, write an informative commit message, and push.
+After you push the changes, the Git pane in RStudio should be empty.
+
+It's also a good place to let another team member take over the keyboard!
+A team member who hasn't done so yet should pull the changes and make the commits for the next few exercises.
+:::
+
+#### Exercise 7
+
+Build a model workflow for fitting the model specified earlier and using the recipe you developed to preprocess the data.
+
+*Naming suggestion:* Call the model workflow `office_wflow`.
+
+```{r}
+#| label: wflow
+#| eval: false
+
+office_wflow <- workflow() %>%
+  add_model(___) %>%
+  add_recipe(___)
+```
+
+### Model fit and evaluation
+
+#### Exercise 8
+
+Fit the model to training data, neatly display the model output, and interpret two of the slope coefficients.
+
+*Naming suggestion:* Call the model fit `office_fit`.
+
+```{r}
+#| label: fit-tidy
+#| eval: false
+
+office_fit <- office_wflow %>%
+  fit(data = ___)
+
+___
+```
+
+#### Exercise 9
+
+Calculate predicted `imdb_rating` for the training data using the `predict()` function.
+Then, bind two columns from the training data to this result: `imdb_rating` and `episode_name`.
+The resulting data frame should have three columns: `.pred`, `imdb_rating`, and `episode_name`.
+Then, using this data frame, create a scatterplot of predicted and observed IMDB ratings for the training data.
+
+*Naming suggestion:* Call the resulting data frame `office_train_pred`.
+
+*Stretch goal.* Add episode names, using `geom_text()`, for episodes with much higher and much lower observed IMDB ratings compared to others.
+
+#### Exercise 10
+
+Calculate the R-squared and RMSE for this model for predictions on the training data.
+
+::: render-commit-push
+This is a good place to render, commit, and push changes to your remote lab repo on GitHub.
+Click the checkbox next to each file in the Git pane to stage the updates you've made, write an informative commit message, and push.
+After you push the changes, the Git pane in RStudio should be empty.
+
+It's also a good place to let another team member take over the keyboard!
+A team member who hasn't done so yet should pull the changes and make the commits for the next few exercises.
+:::
+
+#### Exercise 11
+
+Repeat Exercise 9, but with testing data.
+
+*Naming suggestion:* Call the resulting data frame `office_test_pred`.
+
+#### Exercise 12
+
+Based on your visualization on Exercise 11, speculate on whether you expect the R-squared and RMSE for this model to be higher or lower for predictions on the testing data compared to those on the training data, or do you expect them to be the same?
+Explain your reasoning.
+
+#### Exercise 13
+
+Check your intuition in Exercise 12 by actually calculating the R-squared and RMSE for this model for predictions on the training data.
+Comment on whether your intuition is confirmed or not.
+
+## Submission
+
+::: callout-warning
+Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.
+We will be checking these to make sure you have been practicing how to commit and push changes.
+
+Remember -- you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.
+:::
+
+To submit your assignment:
+
+-   Go to [http://www.gradescope.com](http://www.gradescope.com/) and click *Log in* in the top right corner.
+-   Click *School Credentials* ➡️ *Duke NetID* and log in using your NetID credentials.
+-   Click on your *STA 210* course.
+-   Click on the assignment, and you'll be prompted to submit it.
+-   Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be "checked").
+-   Select the first page of your PDF submission to be associated with the *"Workflow & formatting"* section.
+
+## Grading
+
+Total points available: 50 points.
+
+| Component             | Points |
+|-----------------------|--------|
+| Ex 1 - 10             | 45     |
+| Workflow & formatting | 5[^1]  |
+
+[^1]: The "Workflow & formatting" grade is to assess the reproducible workflow.
+    This includes having at least 3 informative commit messages and updating the name and date in the YAML.
