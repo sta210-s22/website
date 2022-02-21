@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.30">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - Lab 2 - College scorecard</title>
+  <title>STA 210 - Spring 2022 - Lab 4 - The Office</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -112,23 +112,23 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Lab 2 - College scorecard">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Lab 4 - The Office">
+<meta name="twitter:description" content="Another look">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
 <meta name="twitter:image-width" content="800">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="docked slimcontent">
+<body class="docked">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Lab 2 - College scorecard</h1>
+      <h1 class="quarto-secondary-nav-title">Lab 4 - The Office</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -383,78 +383,29 @@
 </ul></li>
 <li><a href="#getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
 <li><a href="#packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
-<li><a href="#data-college-scorecard" class="nav-link" data-scroll-target="#data-college-scorecard">Data: College scorecard</a></li>
+<li><a href="#data-the-office" class="nav-link" data-scroll-target="#data-the-office">Data: The Office</a></li>
 <li><a href="#exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
 <ul class="collapse">
-<li><a href="#exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
-<li><a href="#exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
-<li><a href="#exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
-<li><a href="#exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
-<li><a href="#exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
-<li><a href="#exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
-<li><a href="#exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7</a></li>
-<li><a href="#exercise-8" class="nav-link" data-scroll-target="#exercise-8">Exercise 8</a></li>
-<li><a href="#exercise-9" class="nav-link" data-scroll-target="#exercise-9">Exercise 9</a></li>
-<li><a href="#exercise-10" class="nav-link" data-scroll-target="#exercise-10">Exercise 10</a></li>
+<li><a href="#data-prep" class="nav-link" data-scroll-target="#data-prep">Data prep</a></li>
+<li><a href="#exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
+<li><a href="#modeling-prep" class="nav-link" data-scroll-target="#modeling-prep">Modeling prep</a></li>
+<li><a href="#model-fit-and-evaluation" class="nav-link" data-scroll-target="#model-fit-and-evaluation">Model fit and evaluation</a></li>
 </ul></li>
 <li><a href="#submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
 <li><a href="#grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
 </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/labs/lab-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/labs/lab-4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7">Lab 2 - College scorecard</h1>
+<h1 class="title d-none d-lg-block display-7">Lab 4 - The Office</h1>
+<p class="subtitle lead">Another look</p>
 </header>
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In today’s lab, you’ll use simple linear regression to analyze the relationship between the admissions rate and total cost for colleges and universities in the United States.</p>
-<section id="learning-goals" class="level3">
-<h3 class="anchored" data-anchor-id="learning-goals">Learning goals</h3>
-<p>By the end of the lab you will…</p>
-<ul>
-<li>Be able to fit a simple linear regression model using R.</li>
-<li>Be able to interpret the slope and intercept for the model.</li>
-<li>Be able to use statistical inference to draw conclusions about the slope.</li>
-<li>Continue developing a workflow for reproducible data analysis.</li>
-</ul>
-</section>
-</section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
-<ul>
-<li><p>Go to the <a href="https://www.github.com/sta210-s22">sta210-s22</a> organization on GitHub. Click on the repo with the prefix <strong>lab-2</strong>. It contains the starter documents you need to complete the lab.</p></li>
-<li><p>Clone the repo and start a new project in RStudio. See the <a href="labs/lab-1.html">Lab 1 instructions</a> for details on cloning a repo, starting a new R project and configuring git.</p></li>
-</ul>
-</section>
-<section id="packages" class="level2">
-<h2 class="anchored" data-anchor-id="packages">Packages</h2>
-<p>We will use the following package in today’s lab.</p>
-<div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  <span class="co"># for data wrangling + visualization</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels) <span class="co"># for modeling</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)      <span class="co"># for pretty printing of tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="data-college-scorecard" class="level2">
-<h2 class="anchored" data-anchor-id="data-college-scorecard">Data: College scorecard</h2>
-<p>The data for this lab is from the <code>scorecard</code> data set in the <strong>rcfss</strong> R package. It includes information originally obtained from the <a href="https://collegescorecard.ed.gov/data/">U.S. Department of Education’s College Scorecard</a> for 1753 colleges and universities during the 2018 - 2019 academic year.</p>
-<p>The lab focuses on the following variables:</p>
-<ul>
-<li><p><code>admrate</code>: Undergraduate admissions rate (from 0-100%)</p></li>
-<li><p><code>cost</code>: The average annual total cost of attendance, including tuition and fees, books and supplies, and living expenses</p></li>
-<li><p><code>type</code>: Type of college (Public; Private, nonprofit; Private, for-profit)</p></li>
-</ul>
-<p><a href="https://uc-cfss.github.io/rcfss/reference/scorecard.html">Click here</a> to see a full list of variables and definitions.</p>
-<p>Use the code below to load the data set.</p>
-<div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>scorecard <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/scorecard.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<p>In today’s lab you will analyze data from the <a href="https://bradlindblad.github.io/schrute/">schrute</a> package to predict IMDB scores for episodes of The Office.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -465,128 +416,289 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Include axis labels and an informative title for all plots. Use the <code>kable()</code> function to neatly print tables and regression output.</p>
+<p>This is a different data source than the one we’ve used in class last week.</p>
 </div>
 </div>
-<section id="exercise-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
-<p>Create a histogram to examine the distribution of <code>admrate</code> and calculate summary statistics for the center (mean and median) and the spread (standard deviation and IQR).</p>
-</section>
-<section id="exercise-2" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
-<p>Use the results from the previous exercise to describe the distribution of <code>admrate</code>. Include the shape, center, spread, and if there are potential outliers.</p>
-</section>
-<section id="exercise-3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
-<p>Plot the distribution of <code>cost</code> and calculate the appropriate summary statistics. Describe the distribution of <code>cost</code> (shape, center, and spread, and outliers) using the plot and appropriate summary statistics.</p>
-<div class="render-commit-push">
-<p>This is a good place to render, commit, and push changes to your remote lab repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message, and push. After you push the changes, the Git pane in RStudio should be empty.</p>
-</div>
-</section>
-<section id="exercise-4" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
-<p>The goal of this analysis is to fit a regression model that can be used to understand the variability in the cost of college based on the admission rate. Before fitting the model, let’s look at the relationship between the two variables. Create a scatterplot to display the relationship between cost and admissions rate. Describe the relationship between the two variables based on the plot.</p>
-</section>
-<section id="exercise-5" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
-<p>Does the relationship between cost and admissions rate differ by type of college? Modify the plot from the previous exercise visualize the relationship by type of college.</p>
-</section>
-<section id="exercise-6" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
-<p>Describe two new observations from the scatterplot in Exercise 5 that you didn’t see in the scatterplot from Exercise 4.</p>
-<div class="render-commit-push">
-<p>This is a good place to render, commit, and push changes to your remote lab repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message, and push. After you push the changes, the Git pane in RStudio should be empty.</p>
-</div>
-</section>
-<section id="exercise-7" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-7">Exercise 7</h3>
-<p>Fit the linear regression model. Use the <code>kable</code> function to neatly display the results with a reasonable number of decimals.</p>
-</section>
-<section id="exercise-8" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-8">Exercise 8</h3>
-<p>Consider the model from the previous exercise.</p>
+<section id="learning-goals" class="level3">
+<h3 class="anchored" data-anchor-id="learning-goals">Learning goals</h3>
+<p>By the end of the lab you will…</p>
 <ul>
-<li>Interpret the slope in the context of the problem.</li>
-<li>Does the intercept have a meaningful interpretation? If so, write the interpretation in the context of the problem. Otherwise, explain why the interpretation is not meaningful.</li>
+<li>engineer features based on episode scripts</li>
+<li>train a model</li>
+<li>interpret model coefficients</li>
+<li>make predictions</li>
+<li>evaluate model performance on training and testing data</li>
 </ul>
 </section>
-<section id="exercise-9" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-9">Exercise 9</h3>
-<p>Construct a 95% confidence interval for the slope using bootstrapping. Follow these steps to accomplish this:</p>
-<ul>
-<li>First set a seed for simulating reproducibly.</li>
-<li>Then, simulate the bootstrap distribution of the slope using 1,000 bootstrap samples.</li>
-<li>Then, visually estimate the bounds of the bootstrap interval based on a histogram of the distribution of the bootstrapped slopes, using the percentile method.</li>
-<li>And then, use the <code>get_confidence_interval()</code> function to explicitly calculate the bounds of the confidence interval using the percentile method.</li>
-<li>Finally, interpret the confidence interval in the context of the data.</li>
-</ul>
-<div class="render-commit-push">
-<p>This is a good place to render, commit, and push changes to your remote lab repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message, and push. After you push the changes, the Git pane in RStudio should be empty.</p>
-</div>
 </section>
-<section id="exercise-10" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-10">Exercise 10</h3>
-<p>Finally, we want to answer the question “Do the data provide sufficient evidence of a linear relationship between cost and admissions rate, i.e.&nbsp;<span class="math inline">\(\beta_1\)</span> is different from 0?”</p>
-<p>To answer this question we will use a hypothesis test. We can conduct a hypothesis test via simulation (what we’ll do in this lab) or using mathematical models (what we’ll do in the next class).</p>
-<p>Before we can conduct the hypothesis test, let’s first set our hypotheses. Remember that the null hypothesis represents the status quo (nothing going on, i.e.&nbsp;there is no relationship) and the alternative hypothesis represents our research question (there is something going on, i.e.&nbsp;there is a relationship).</p>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
 <ul>
-<li><span class="math inline">\(H_0\)</span>: There is no linear relationship between the admissions rate and cost of colleges in the United States, <span class="math inline">\(\beta_1 = 0\)</span></li>
-<li><span class="math inline">\(H_A\)</span>: There is a linear relationship between the admissions rate and cost of colleges in the United States, <span class="math inline">\(\beta_1 \ne 0\)</span></li>
+<li>A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.</li>
+<li>Go to the <a href="https://www.github.com/sta210-s22">sta210-s22</a> organization on GitHub. Click on the repo with the prefix <strong>lab-4</strong>. It contains the starter documents you need to complete the lab.</li>
+<li>Each person on the team should clone the repository and open a new project in RStudio. Throughout the lab, each person should get a chance to make commits and push to the repo.</li>
 </ul>
-<p>To test these hypotheses, we will use a permutation test, where we</p>
-<ul>
-<li>Simulate new samples from the original sample via permutation under the assumption that the null hypothesis is true</li>
-<li>Fit models to each of the samples and estimate the slope</li>
-<li>Use features of the distribution of the permuted slopes to calculate the p-value for the hypothesis test</li>
-</ul>
-<p>The major difference between constructing a confidence interval and conducting a hypothesis test is that for the hypothesis test we assume that the null hypothesis is true. This requires a simulation scheme that will allow us to measure the natural variability in the data due to sampling but <strong>not</strong> due to cost and admission rate being correlated by permuting permute one variable to eliminate any existing relationship between the variables. To do so, we randomly assign each <code>admrate</code> value to <code>cost</code> of a given university, i.e.&nbsp;<code>cost</code> and <code>admrate</code> are no longer matched for a given university.</p>
-<p>In the following code chunk we</p>
-<ul>
-<li>First set a seed for simulating reproducibly.</li>
-<li>Then, we start with our data frame and specify our model as <code>cost</code> vs.&nbsp;<code>admrate</code>.</li>
-<li>Then, we set our null hypothesis (<code>cost</code> and <code>admrate</code> are independent)</li>
-<li>And then we generate 1000 replicates of our data where, for each replicate, we permute values of <code>admrate</code> to randomly assign them to values of <code>cost</code></li>
-<li>Finally, we fit our model to each of our 1000 permuted datasets</li>
-</ul>
+</section>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<p>The following packages are used in the lab.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>perm_fits <span class="ot">&lt;-</span> scorecard <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(cost <span class="sc">~</span> admrate) <span class="sc">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(schrute)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The resulting dataset <code>perm_fits</code> has <code>nrow(perm_fits)</code> and <code>ncol(perm_fits)</code> columns. The first column, <code>replicate</code> indicates the replicate number of the dataset the models were fit to; the values in this column range between 1 and 1000. The second column, <code>term</code>, tells us which term (intercept of the model or slope of <code>admrate</code>) the <code>estimate</code> value in the third column is for.</p>
+</section>
+<section id="data-the-office" class="level2">
+<h2 class="anchored" data-anchor-id="data-the-office">Data: The Office</h2>
+<p>The dataset for this lab comes from the <a href="https://bradlindblad.github.io/schrute/">schrute</a> package and it’s called <code>theoffice</code>. This dataset contains the entire script transcriptions from The Office.</p>
+<p>Let’s start by taking a peek at the data.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>perm_fits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(theoffice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code># A tibble: 2,000 × 3
-# Groups:   replicate [1,000]
-   replicate term      estimate
-       &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt;
- 1         1 intercept  36857. 
- 2         1 admrate     -781. 
- 3         2 intercept  35901. 
- 4         2 admrate      643. 
- 5         3 intercept  36608. 
- 6         3 admrate     -411. 
- 7         4 intercept  35831. 
- 8         4 admrate      746. 
- 9         5 intercept  36367. 
-10         5 admrate      -51.7
-# … with 1,990 more rows</code></pre>
+<pre><code>Rows: 55,130
+Columns: 12
+$ index            &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16…
+$ season           &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ episode          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ episode_name     &lt;chr&gt; "Pilot", "Pilot", "Pilot", "Pilot", "Pilot", "Pilot",…
+$ director         &lt;chr&gt; "Ken Kwapis", "Ken Kwapis", "Ken Kwapis", "Ken Kwapis…
+$ writer           &lt;chr&gt; "Ricky Gervais;Stephen Merchant;Greg Daniels", "Ricky…
+$ character        &lt;chr&gt; "Michael", "Jim", "Michael", "Jim", "Michael", "Micha…
+$ text             &lt;chr&gt; "All right Jim. Your quarterlies look very good. How …
+$ text_w_direction &lt;chr&gt; "All right Jim. Your quarterlies look very good. How …
+$ imdb_rating      &lt;dbl&gt; 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6…
+$ total_votes      &lt;int&gt; 3706, 3706, 3706, 3706, 3706, 3706, 3706, 3706, 3706,…
+$ air_date         &lt;fct&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005-03-24, 2005-…</code></pre>
 </div>
 </div>
+<p>There are 55130 observations and 12 columns in this dataset. The variable names are as follows.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(theoffice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] "index"            "season"           "episode"          "episode_name"    
+ [5] "director"         "writer"           "character"        "text"            
+ [9] "text_w_direction" "imdb_rating"      "total_votes"      "air_date"        </code></pre>
+</div>
+</div>
+<p>Each row in the dataset is a line spoken by a character in a given episode of the show. This means some information at the episode level (e.g., <code>imdb_rating</code>, <code>air_date</code>, etc. are repeated across the rows that belong to a single episode.</p>
+<p>The <code>air_date</code> variable is coded as a factor, which is undesirable. We’ll want to parse that variable later into its components during feature engineering. So, for now, let’s convert it to date.</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>theoffice <span class="ot">&lt;-</span> theoffice <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">air_date =</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(air_date)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s take a look at the data to confirm we’re happy with how each of the variables are encoded.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(theoffice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Rows: 55,130
+Columns: 12
+$ index            &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16…
+$ season           &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ episode          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ episode_name     &lt;chr&gt; "Pilot", "Pilot", "Pilot", "Pilot", "Pilot", "Pilot",…
+$ director         &lt;chr&gt; "Ken Kwapis", "Ken Kwapis", "Ken Kwapis", "Ken Kwapis…
+$ writer           &lt;chr&gt; "Ricky Gervais;Stephen Merchant;Greg Daniels", "Ricky…
+$ character        &lt;chr&gt; "Michael", "Jim", "Michael", "Jim", "Michael", "Micha…
+$ text             &lt;chr&gt; "All right Jim. Your quarterlies look very good. How …
+$ text_w_direction &lt;chr&gt; "All right Jim. Your quarterlies look very good. How …
+$ imdb_rating      &lt;dbl&gt; 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6…
+$ total_votes      &lt;int&gt; 3706, 3706, 3706, 3706, 3706, 3706, 3706, 3706, 3706,…
+$ air_date         &lt;date&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005-03-24, 2005…</code></pre>
+</div>
+</div>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="data-prep" class="level3">
+<h3 class="anchored" data-anchor-id="data-prep">Data prep</h3>
+<section id="exercise-1" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-1">Exercise 1</h4>
+<p>Identify episodes that touch on Halloween, Valentine’s Day, and Christmas.</p>
 <ul>
-<li>Create a histogram of the slope estimates in <code>perm_fits</code>. (Hint: Filter the dataset for just the slope values, <code>term == "admrate".</code>)</li>
-<li>Estimate the p-value of the hypothesis test based on this distribution.</li>
-<li>State your conclusion for the test in context.</li>
-<li>Indicate whether or not it is consistent with the results of the hypothesis test from the previous exercise. Briefly explain your response.</li>
+<li>First, convert all <code>text</code> to lowercase with <code>str_to_lower()</code>.</li>
+<li>Then, create three new variables (<code>halloween_mention</code>, <code>valentine_mention</code>, and <code>christmas_mention</code>) where that take on the value <code>1</code> if the character string <code>"halloween"</code>, <code>"valentine"</code>, or <code>"christmas"</code> appears in the text, respectively, and <code>0</code> otherwise.</li>
 </ul>
+<p>Some code is provided below to help you get started.</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>theoffice <span class="ot">&lt;-</span> theoffice <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">___</span>(text),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">halloween_mention =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(text, <span class="st">"___"</span>), ___, ___),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">valentine_mention =</span> ___,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">___ =</span> ___</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-2" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-2">Exercise 2</h4>
+<p>In this exercise we’ll accomplish two separate tasks. And there’s a good reason why we’re doing it all at once; we’re going to drastically change our data frame, from one row per line spoken to one row per episode. We’ll call the resulting data frame <code>office_episodes</code>.</p>
+<p>The two tasks are as follows:</p>
+<ul>
+<li>Task 1. Identify episodes where the word “halloween”, “valentine”, or “christmas” were ever mentioned, using variables you created above.</li>
+<li>Task 2. Calculate the percentage of lines spoken by Jim, Pam, Michael, and Dwight for each episode of The Office.</li>
+</ul>
+<p>Below are some instructions and starter code to get you started with these tasks.</p>
+<ul>
+<li>Start by grouping <code>theoffice</code> data by <code>season</code>, <code>episode</code>, <code>episode_name</code>, <code>imdb_rating</code>, <code>total_votes</code>, and <code>air_date</code>. (These variables, except for <code>season</code> have the same value for each given episode, hence grouping by them allows us to make sure they appear in the output of this pipeline.)</li>
+<li>Use <code>summarize()</code> to calculate the desired features at the season-episode level.</li>
+<li>Task 1:
+<ul>
+<li>Calculate the number of lines per season per episode, you might name this new variable <code>n_lines</code>.</li>
+<li>Then, calculate the proportion of lines in that episode spoken by each of the four <code>character</code>s Jim, Pam, Michael, and Dwight. Name these new variables <code>lines_jim</code>, <code>lines_pam</code>, <code>lines_michael</code>, and <code>lines_dwight</code>, respectively.</li>
+</ul></li>
+<li>Task 2:
+<ul>
+<li>Create a variable called <code>halloween</code> that sums up the <code>1</code>s in <code>halloween_mention</code> at the season-episode level and takes on the value <code>"yes"</code> if the sum is greater than or equal to 1, or <code>"no"</code> otherwise.</li>
+<li>Do something similar for new variables <code>valentine</code> and <code>christmas</code> as well based on values from <code>valentine_mention</code> and <code>christmas_mention</code>.</li>
+</ul></li>
+<li>Finish up your <code>summarize()</code> statement by dropping the groups, so the resulting data frame is no longer grouped and remove <code>n_lines</code> (we won’t use that variable in our analysis, we only calculated it as an intermediary step).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>office_episodes <span class="ot">&lt;-</span> theoffice <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(___) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_lines =</span> <span class="fu">n</span>(),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">lines_jim =</span> <span class="fu">sum</span>(character <span class="sc">==</span> <span class="st">"___"</span>) <span class="sc">/</span> n_lines,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">lines_pam =</span> ___,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lines_michael =</span> ___,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lines_dwight =</span> ___,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">halloween =</span> <span class="fu">if_else</span>(<span class="fu">sum</span>(___) <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="st">"yes"</span>, <span class="st">"no"</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">valentine =</span> <span class="fu">if_else</span>(___, <span class="st">"___"</span>, <span class="st">"___"</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">christmas =</span> <span class="fu">if_else</span>(___, <span class="st">"___"</span>, <span class="st">"___"</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n_lines)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why <code>summarize()</code> and not <code>mutate()</code>? We use <code>mutate()</code> to add / modify a column of a data frame. The output data frame always has the same number of rows as the input data frame. On the other hand, we use <code>summarize()</code> to reduce the data frame to either a single row (single summary statistic) or one row per each group (summary statistics at the group level).</p>
+<p>And what about that <code>.groups</code> argument in summarize? Try running your <code>summarize()</code> step without it first. You’ll see that R print out a message saying <em>“<code>summarize()</code> has grouped output by <code>season</code>, <code>episode</code>. You can override using the <code>.groups</code> argument.”</em> <code>summarize()</code> will only drop the last group. So if you want a data frame that doesn’t have a grouping structure as a result of a <code>summaerize()</code>, you can explicitly ask for that with <code>.groups = "drop"</code>. Before you proceed, read the <a href="https://dplyr.tidyverse.org/reference/summarise.html">documentation for <code>summarize()</code></a>, and specifically the explanation for the <code>.groups</code> argument to prepare yourself for future instances where you might see this type of message.</p>
+</div>
+</div>
+</section>
+<section id="exercise-3" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-3">Exercise 3</h4>
+<p>The Michael Scott character (played by Steve Carrell) left the show at the end of Season 7. Add an indicator variable, <code>michael</code>, that takes on the value <code>"yes"</code> if Michael Scott (Steve Carrell) was in the show, and <code>"no"</code> if not.</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>office_episodes <span class="ot">&lt;-</span> office_episodes <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">michael =</span> <span class="fu">if_else</span>(season <span class="sc">&gt;</span> ___, <span class="st">"___"</span>, <span class="st">"___"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-4" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-4">Exercise 4</h4>
+<p>Print out the dimensions (<code>dim()</code>) of the new dataset you created as well as the <code>names()</code> of the columns in the dataset.</p>
+<p>Your new dataset, <code>office_episodes,</code> should have 186 rows and 14 columns. The column names should be <code>season</code>, <code>episode</code>, <code>episode_name</code>, <code>imdb_rating</code>, <code>total_votes</code>, <code>air_date</code>, <code>lines_jim</code>, <code>lines_pam</code>, <code>lines_michael</code>, <code>lines_dwight</code>, <code>halloween</code>, <code>valentine</code>, <code>christmas</code>, and <code>michael</code>. If you are not matching these numbers or columns, go back and try to figure out where you went wrong. Or ask your TA for help!</p>
 <div class="render-commit-push">
 <p>This is a good place to render, commit, and push changes to your remote lab repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message, and push. After you push the changes, the Git pane in RStudio should be empty.</p>
+<p>It’s also a good place to let another team member take over the keyboard! A team member who hasn’t done so yet should pull the changes and make the commits for the next few exercises.</p>
 </div>
+</section>
+</section>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
+<p>This would be a good place to conduct some exploratory data analysis (EDA). For example, plot the proportion of lines spoken by each character over time. Or calculate the percentage of episodes that mention Halloween, or Valentine’s Day, or Christmas. Given we have limited time in the lab we’re not going to ask you to report EDA results as part of this lab, but we’re noting this here to provide suggestions for how you might go about structuring your project.</p>
+</section>
+<section id="modeling-prep" class="level3">
+<h3 class="anchored" data-anchor-id="modeling-prep">Modeling prep</h3>
+<section id="exercise-4-1" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-4-1">Exercise 4</h4>
+<p>Split the data into training (75%) and testing (25%). Save the training and testing data as <code>office_train</code> and <code>office_test</code> respectively.</p>
+<p><em>Naming suggestion:</em> Call the initial split <code>office_split</code>, the training data <code>office_train</code>, and testing data <code>office_test</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>office_split <span class="ot">&lt;-</span> <span class="fu">___</span>(office_episodes)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>office_train <span class="ot">&lt;-</span> <span class="fu">___</span>(office_split)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>office_test <span class="ot">&lt;-</span> <span class="fu">___</span>(___)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-5" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-5">Exercise 5</h4>
+<p>Specify a linear regression model with engine <code>"lm"</code> and call it <code>office_spec</code>.</p>
+<p><em>Naming suggestion:</em> Call the model specification <code>office_spec</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>office_spec <span class="ot">&lt;-</span> ___</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-6" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-6">Exercise 6</h4>
+<p>Create a recipe that performs feature engineering using the following steps (in the given order):</p>
+<ul>
+<li><code>update_role()</code>: updates the role of <code>episode_name</code> to not be a predictor (be an ID)</li>
+<li><code>step_rm()</code>: removes <code>air_date</code> as a predictor</li>
+<li><code>step_dummy()</code>: creates dummy variables for <code>all_nominal_predictors()</code></li>
+<li><code>step_zv()</code>: removes all zero variance predictors</li>
+</ul>
+<p><em>Naming suggestion:</em> Call the recipe <code>office_rec</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>office_rec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(imdb_rating <span class="sc">~</span> ., <span class="at">data =</span> office_train) <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  ___</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="render-commit-push">
+<p>This is a good place to render, commit, and push changes to your remote lab repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message, and push. After you push the changes, the Git pane in RStudio should be empty.</p>
+<p>It’s also a good place to let another team member take over the keyboard! A team member who hasn’t done so yet should pull the changes and make the commits for the next few exercises.</p>
+</div>
+</section>
+<section id="exercise-7" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-7">Exercise 7</h4>
+<p>Build a model workflow for fitting the model specified earlier and using the recipe you developed to preprocess the data.</p>
+<p><em>Naming suggestion:</em> Call the model workflow <code>office_wflow</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>office_wflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(___) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(___)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="model-fit-and-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="model-fit-and-evaluation">Model fit and evaluation</h3>
+<section id="exercise-8" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-8">Exercise 8</h4>
+<p>Fit the model to training data, neatly display the model output, and interpret two of the slope coefficients.</p>
+<p><em>Naming suggestion:</em> Call the model fit <code>office_fit</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>office_fit <span class="ot">&lt;-</span> office_wflow <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(<span class="at">data =</span> ___)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>___</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-9" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-9">Exercise 9</h4>
+<p>Calculate predicted <code>imdb_rating</code> for the training data using the <code>predict()</code> function. Then, bind two columns from the training data to this result: <code>imdb_rating</code> and <code>episode_name</code>. The resulting data frame should have three columns: <code>.pred</code>, <code>imdb_rating</code>, and <code>episode_name</code>. Then, using this data frame, create a scatterplot of predicted and observed IMDB ratings for the training data.</p>
+<p><em>Naming suggestion:</em> Call the resulting data frame <code>office_train_pred</code>.</p>
+<p><em>Stretch goal.</em> Add episode names, using <code>geom_text()</code>, for episodes with much higher and much lower observed IMDB ratings compared to others.</p>
+</section>
+<section id="exercise-10" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-10">Exercise 10</h4>
+<p>Calculate the R-squared and RMSE for this model for predictions on the training data.</p>
+<div class="render-commit-push">
+<p>This is a good place to render, commit, and push changes to your remote lab repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message, and push. After you push the changes, the Git pane in RStudio should be empty.</p>
+<p>It’s also a good place to let another team member take over the keyboard! A team member who hasn’t done so yet should pull the changes and make the commits for the next few exercises.</p>
+</div>
+</section>
+<section id="exercise-11" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-11">Exercise 11</h4>
+<p>Repeat Exercise 9, but with testing data.</p>
+<p><em>Naming suggestion:</em> Call the resulting data frame <code>office_test_pred</code>.</p>
+</section>
+<section id="exercise-12" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-12">Exercise 12</h4>
+<p>Based on your visualization on Exercise 11, speculate on whether you expect the R-squared and RMSE for this model to be higher or lower for predictions on the testing data compared to those on the training data, or do you expect them to be the same? Explain your reasoning.</p>
+</section>
+<section id="exercise-13" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-13">Exercise 13</h4>
+<p>Check your intuition in Exercise 12 by actually calculating the R-squared and RMSE for this model for predictions on the training data. Comment on whether your intuition is confirmed or not.</p>
+</section>
 </section>
 </section>
 <section id="submission" class="level2">
@@ -615,7 +727,7 @@ Warning
 <li>Select the first page of your PDF submission to be associated with the <em>“Workflow &amp; formatting”</em> section.</li>
 </ul>
 </section>
-<section id="grading" class="level2 page-columns page-full">
+<section id="grading" class="level2">
 <h2 class="anchored" data-anchor-id="grading">Grading</h2>
 <p>Total points available: 50 points.</p>
 <table class="table">
@@ -638,8 +750,13 @@ Warning
 </table>
 
 
-<div class="no-row-height column-margin column-container"><li id="fn1" role="doc-endnote"><p><sup>1</sup>&nbsp;The “Workflow &amp; formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML.</p></li></div></section>
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2>Footnotes</h2>
 
+<ol>
+<li id="fn1" role="doc-endnote"><p>The “Workflow &amp; formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
