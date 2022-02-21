@@ -610,8 +610,8 @@ Note
 </section>
 <section id="modeling-prep" class="level3">
 <h3 class="anchored" data-anchor-id="modeling-prep">Modeling prep</h3>
-<section id="exercise-4-1" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-4-1">Exercise 4</h4>
+<section id="exercise-5" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-5">Exercise 5</h4>
 <p>Split the data into training (75%) and testing (25%). Save the training and testing data as <code>office_train</code> and <code>office_test</code> respectively.</p>
 <p><em>Naming suggestion:</em> Call the initial split <code>office_split</code>, the training data <code>office_train</code>, and testing data <code>office_test</code>.</p>
 <div class="cell">
@@ -621,16 +621,16 @@ Note
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>office_test <span class="ot">&lt;-</span> <span class="fu">___</span>(___)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-5" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-5">Exercise 5</h4>
+<section id="exercise-6" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-6">Exercise 6</h4>
 <p>Specify a linear regression model with engine <code>"lm"</code> and call it <code>office_spec</code>.</p>
 <p><em>Naming suggestion:</em> Call the model specification <code>office_spec</code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>office_spec <span class="ot">&lt;-</span> ___</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-6" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-6">Exercise 6</h4>
+<section id="exercise-7" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-7">Exercise 7</h4>
 <p>Create a recipe that performs feature engineering using the following steps (in the given order):</p>
 <ul>
 <li><code>update_role()</code>: updates the role of <code>episode_name</code> to not be a predictor (be an ID)</li>
@@ -648,8 +648,8 @@ Note
 <p>It’s also a good place to let another team member take over the keyboard! A team member who hasn’t done so yet should pull the changes and make the commits for the next few exercises.</p>
 </div>
 </section>
-<section id="exercise-7" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-7">Exercise 7</h4>
+<section id="exercise-8" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-8">Exercise 8</h4>
 <p>Build a model workflow for fitting the model specified earlier and using the recipe you developed to preprocess the data.</p>
 <p><em>Naming suggestion:</em> Call the model workflow <code>office_wflow</code>.</p>
 <div class="cell">
@@ -661,8 +661,8 @@ Note
 </section>
 <section id="model-fit-and-evaluation" class="level3">
 <h3 class="anchored" data-anchor-id="model-fit-and-evaluation">Model fit and evaluation</h3>
-<section id="exercise-8" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-8">Exercise 8</h4>
+<section id="exercise-9" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-9">Exercise 9</h4>
 <p>Fit the model to training data, neatly display the model output, and interpret two of the slope coefficients.</p>
 <p><em>Naming suggestion:</em> Call the model fit <code>office_fit</code>.</p>
 <div class="cell">
@@ -672,32 +672,32 @@ Note
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>___</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-9" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-9">Exercise 9</h4>
+<section id="exercise-10" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-10">Exercise 10</h4>
 <p>Calculate predicted <code>imdb_rating</code> for the training data using the <code>predict()</code> function. Then, bind two columns from the training data to this result: <code>imdb_rating</code> and <code>episode_name</code>. The resulting data frame should have three columns: <code>.pred</code>, <code>imdb_rating</code>, and <code>episode_name</code>. Then, using this data frame, create a scatterplot of predicted and observed IMDB ratings for the training data.</p>
 <p><em>Naming suggestion:</em> Call the resulting data frame <code>office_train_pred</code>.</p>
 <p><em>Stretch goal.</em> Add episode names, using <code>geom_text()</code>, for episodes with much higher and much lower observed IMDB ratings compared to others.</p>
 </section>
-<section id="exercise-10" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-10">Exercise 10</h4>
+<section id="exercise-11" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-11">Exercise 11</h4>
 <p>Calculate the R-squared and RMSE for this model for predictions on the training data.</p>
 <div class="render-commit-push">
 <p>This is a good place to render, commit, and push changes to your remote lab repo on GitHub. Click the checkbox next to each file in the Git pane to stage the updates you’ve made, write an informative commit message, and push. After you push the changes, the Git pane in RStudio should be empty.</p>
 <p>It’s also a good place to let another team member take over the keyboard! A team member who hasn’t done so yet should pull the changes and make the commits for the next few exercises.</p>
 </div>
 </section>
-<section id="exercise-11" class="level4">
-<h4 class="anchored" data-anchor-id="exercise-11">Exercise 11</h4>
-<p>Repeat Exercise 9, but with testing data.</p>
-<p><em>Naming suggestion:</em> Call the resulting data frame <code>office_test_pred</code>.</p>
-</section>
 <section id="exercise-12" class="level4">
 <h4 class="anchored" data-anchor-id="exercise-12">Exercise 12</h4>
-<p>Based on your visualization on Exercise 11, speculate on whether you expect the R-squared and RMSE for this model to be higher or lower for predictions on the testing data compared to those on the training data, or do you expect them to be the same? Explain your reasoning.</p>
+<p>Repeat Exercise 10, but with testing data.</p>
+<p><em>Naming suggestion:</em> Call the resulting data frame <code>office_test_pred</code>.</p>
 </section>
 <section id="exercise-13" class="level4">
 <h4 class="anchored" data-anchor-id="exercise-13">Exercise 13</h4>
-<p>Check your intuition in Exercise 12 by actually calculating the R-squared and RMSE for this model for predictions on the training data. Comment on whether your intuition is confirmed or not.</p>
+<p>Based on your visualization on Exercise 12, speculate on whether you expect the R-squared and RMSE for this model to be higher or lower for predictions on the testing data compared to those on the training data, or do you expect them to be the same? Explain your reasoning.</p>
+</section>
+<section id="exercise-14" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-14">Exercise 14</h4>
+<p>Check your intuition in Exercise 13 by actually calculating the R-squared and RMSE for this model for predictions on the training data. Comment on whether your intuition is confirmed or not.</p>
 </section>
 </section>
 </section>
