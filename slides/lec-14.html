@@ -412,22 +412,12 @@
 <h1>Welcome</h1>
 
 </section>
-<section id="announcements" class="slide level2">
-<h2>Announcements</h2>
-<div>
-<ul>
-<li>My Monday office hours moved to 8-9pm</li>
-</ul>
-</div>
-</section>
 <section id="topics" class="slide level2">
 <h2>Topics</h2>
 <div>
 <ul>
-<li>Feature engineering with recipes</li>
-<li>Workflows to bring together models and recipes</li>
-<li>RMSE and <span class="math inline">\(R^2\)</span> for model evaluation</li>
-<li>Cross validation</li>
+<li>Cross validation for model evaluation</li>
+<li>Cross validation for model comparison</li>
 </ul>
 </div>
 </section>
@@ -437,47 +427,142 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gghighlight)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(schrute)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-goal" class="slide level2 smaller">
+<h2>Data &amp; goal</h2>
+<div>
+<ul>
+<li>Data: The data come from the <a href="https://bradlindblad.github.io/schrute/"><strong>shrute</strong></a> package, and has been transformed using instructions from <a href="../labs/lab-4.html">Lab 4</a></li>
+<li>Goal: Predict <code>imdb_rating</code> from other variables in the dataset</li>
+</ul>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>office_episodes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/office_episodes.csv"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a>office_episodes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 186 × 14
+   season episode episode_name      imdb_rating total_votes air_date   lines_jim
+    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;       &lt;dbl&gt; &lt;date&gt;         &lt;dbl&gt;
+ 1      1       1 Pilot                     7.6        3706 2005-03-24    0.157 
+ 2      1       2 Diversity Day             8.3        3566 2005-03-29    0.123 
+ 3      1       3 Health Care               7.9        2983 2005-04-05    0.172 
+ 4      1       4 The Alliance              8.1        2886 2005-04-12    0.202 
+ 5      1       5 Basketball                8.4        3179 2005-04-19    0.0913
+ 6      1       6 Hot Girl                  7.8        2852 2005-04-26    0.159 
+ 7      2       1 The Dundies               8.7        3213 2005-09-20    0.125 
+ 8      2       2 Sexual Harassment         8.2        2736 2005-09-27    0.0565
+ 9      2       3 Office Olympics           8.4        2742 2005-10-04    0.196 
+10      2       4 The Fire                  8.4        2713 2005-10-11    0.160 
+# … with 176 more rows, and 7 more variables: lines_pam &lt;dbl&gt;,
+#   lines_michael &lt;dbl&gt;, lines_dwight &lt;dbl&gt;, halloween &lt;chr&gt;, valentine &lt;chr&gt;,
+#   christmas &lt;chr&gt;, michael &lt;chr&gt;</code></pre>
+</div>
 </div>
 </section></section>
 <section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
+<section id="modeling-prep" class="title-slide slide level1 center">
+<h1>Modeling prep</h1>
 
 </section>
-<section id="the-office" class="slide level2">
-<h2>The Office</h2>
-
-<img data-src="images/lec-13/the-office.jpeg" class="r-stretch"></section>
-<section id="data-goal" class="slide level2">
-<h2>Data &amp; goal</h2>
-<ul>
-<li class="fragment"><p>Data: The data come from <a href="https://data.world/anujjain7/the-office-imdb-ratings-dataset">data.world</a>, by way of <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-17/readme.md">TidyTuesday</a></p></li>
-<li class="fragment"><p>Goal: Predict <code>imdb_rating</code> from other variables in the dataset</p></li>
-</ul>
+<section id="split-data-into-training-and-testing" class="slide level2">
+<h2>Split data into training and testing</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>office_ratings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/office_ratings.csv"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2"></a>office_ratings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 188 × 6
-   season episode title             imdb_rating total_votes air_date  
-    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;       &lt;dbl&gt; &lt;date&gt;    
- 1      1       1 Pilot                     7.6        3706 2005-03-24
- 2      1       2 Diversity Day             8.3        3566 2005-03-29
- 3      1       3 Health Care               7.9        2983 2005-04-05
- 4      1       4 The Alliance              8.1        2886 2005-04-12
- 5      1       5 Basketball                8.4        3179 2005-04-19
- 6      1       6 Hot Girl                  7.8        2852 2005-04-26
- 7      2       1 The Dundies               8.7        3213 2005-09-20
- 8      2       2 Sexual Harassment         8.2        2736 2005-09-27
- 9      2       3 Office Olympics           8.4        2742 2005-10-04
-10      2       4 The Fire                  8.4        2713 2005-10-11
-# … with 178 more rows</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>office_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(office_episodes)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>office_train <span class="ot">&lt;-</span> <span class="fu">training</span>(office_split)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>office_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(office_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="specify-model" class="slide level2">
+<h2>Specify model</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>office_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>office_spec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Linear Regression Model Specification (regression)
+
+Computational engine: lm </code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="model-1" class="title-slide slide level1 center">
+<h1>Model 1</h1>
+
+</section>
+<section id="from-yesterdays-lab" class="slide level2">
+<h2>From yesterday’s lab</h2>
+<ul>
+<li class="fragment">Create a recipe that uses the new variables we generated</li>
+<li class="fragment">Denotes <code>episode_name</code> as an ID variable and doesn’t use <code>air_date</code> as a predictor</li>
+<li class="fragment">Create dummy variables for all nominal predictors</li>
+<li class="fragment">Remove all zero variance predictors</li>
+</ul>
+</section>
+<section id="create-recipe" class="slide level2">
+<h2>Create recipe</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>office_rec1 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(imdb_rating <span class="sc">~</span> ., <span class="at">data =</span> office_train) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">update_role</span>(episode_name, <span class="at">new_role =</span> <span class="st">"id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">step_rm</span>(air_date) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>())</span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a>office_rec1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Recipe
+
+Inputs:
+
+      role #variables
+        id          1
+   outcome          1
+ predictor         12
+
+Operations:
+
+Delete terms air_date
+Dummy variables from all_nominal_predictors()
+Zero variance filter on all_predictors()</code></pre>
+</div>
+</div>
+</section>
+<section id="create-workflow" class="slide level2">
+<h2>Create workflow</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>office_wflow1 <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">add_model</span>(office_spec) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">add_recipe</span>(office_rec1)</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>office_wflow1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>══ Workflow ════════════════════════════════════════════════════════════════════
+Preprocessor: Recipe
+Model: linear_reg()
+
+── Preprocessor ────────────────────────────────────────────────────────────────
+3 Recipe Steps
+
+• step_rm()
+• step_dummy()
+• step_zv()
+
+── Model ───────────────────────────────────────────────────────────────────────
+Linear Regression Model Specification (regression)
+
+Computational engine: lm </code></pre>
+</div>
+</div>
+</section>
+<section id="fit-model-to-training-data" class="slide level2">
+<h2>Fit model to training data</h2>
+<div class="fragment">
+<p><em>Actually, not so fast!</em></p>
 </div>
 </section></section>
 <section>
@@ -485,104 +570,251 @@
 <h1>Cross validation</h1>
 
 </section>
+<section id="spending-our-data" class="slide level2">
+<h2>Spending our data</h2>
+<ul>
+<li class="fragment">We have already established that the idea of data spending where the test set was recommended for obtaining an unbiased estimate of performance.</li>
+<li class="fragment">However, we usually need to understand the effectiveness of the model <em>before using the test set</em>.</li>
+<li class="fragment">Typically we can’t decide on <em>which</em> final model to take to the test set without making model assessments.</li>
+<li class="fragment">Remedy: Resampling to make model assessments on training data in a way that can generalize to new data.</li>
+</ul>
+</section>
+<section id="resampling-for-model-assessment" class="slide level2">
+<h2>Resampling for model assessment</h2>
+<p><strong>Resampling is only conducted on the training set</strong>. The test set is not involved. For each iteration of resampling, the data are partitioned into two subsamples:</p>
+<ul>
+<li class="fragment">The model is fit with the <strong>analysis set</strong>.</li>
+<li class="fragment">The model is evaluated with the <strong>assessment set</strong>.</li>
+</ul>
+</section>
+<section id="resampling-for-model-assessment-1" class="slide level2">
+<h2>Resampling for model assessment</h2>
+
+<img data-src="images/lec-14/resampling.svg" class="r-stretch quarto-figure-center"><p><br></p>
+<p>Source: Kuhn and Silge. <a href="https://www.tmwr.org/">Tidy modeling with R</a>.</p>
+</section>
+<section id="analysis-and-assessment-sets" class="slide level2">
+<h2>Analysis and assessment sets</h2>
+<ul>
+<li class="fragment">Analysis set is analogous to training set.</li>
+<li class="fragment">Assessment set is analogous to test set.</li>
+<li class="fragment">The terms <em>analysis</em> and <em>assessment</em> avoids confusion with initial split of the data.</li>
+<li class="fragment">These data sets are mutually exclusive.</li>
+</ul>
+</section>
 <section id="cross-validation-1" class="slide level2">
 <h2>Cross validation</h2>
-<p>More specifically, <strong>v-fold cross validation</strong>:</p>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div>
+<p>More specifically, <strong>v-fold cross validation</strong> – commonly used resampling technique:</p>
 <ul>
-<li>Shuffle your <strong>training</strong> <strong>data</strong> into v partitions</li>
-<li>Use 1 partition for validation, and the remaining v-1 partitions for training</li>
-<li>Repeat v times</li>
+<li class="fragment">Randomly split your <strong>training</strong> <strong>data</strong> into v partitions</li>
+<li class="fragment">Use 1 partition for assessment, and the remaining v-1 partitions for analysis</li>
+<li class="fragment">Repeat v times, updating which partition is used for assessment each time</li>
 </ul>
-</div>
-</div><div class="column" style="width:40%;">
-<p><img data-src="images/lec-13/cross-validation.png"></p>
-</div>
-</div>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>You might also heard of this referred to as <strong>k-fold cross validation</strong>.</p>
-</div>
-</div>
+<div class="fragment">
+<p>Let’s give an example where <code>v = 3</code>…</p>
 </div>
 </section>
-<section id="fold-cross-validation" class="slide level2">
-<h2>5-fold Cross validation</h2>
+<section id="cross-validation-step-1" class="slide level2">
+<h2>Cross validation, step 1</h2>
+<p>Randomly split your <strong>training</strong> <strong>data</strong> into 3 partitions:</p>
+<p><br></p>
 
-<img data-src="images/lec-13/cross-validation.png" class="r-stretch"></section>
+<img data-src="images/lec-14/three-CV.svg" class="r-stretch quarto-figure-center"></section>
 <section id="split-data" class="slide level2">
 <h2>Split data</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a>folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(office_train, <span class="at">v =</span> <span class="dv">5</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>folds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">set.seed</span>(<span class="dv">345</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(office_train, <span class="at">v =</span> <span class="dv">3</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>folds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>#  3-fold cross-validation 
+# A tibble: 3 × 2
+  splits          id   
+  &lt;list&gt;          &lt;chr&gt;
+1 &lt;split [92/47]&gt; Fold1
+2 &lt;split [93/46]&gt; Fold2
+3 &lt;split [93/46]&gt; Fold3</code></pre>
+</div>
 </div>
 </section>
+<section id="cross-validation-steps-2-and-3" class="slide level2">
+<h2>Cross validation, steps 2 and 3</h2>
+<div>
+<ul>
+<li>Use 1 partition for assessment, and the remaining v-1 partitions for analysis</li>
+<li>Repeat v times, updating which partition is used for assessment each time</li>
+</ul>
+</div>
+
+<img data-src="images/lec-14/three-CV-iter.svg" class="r-stretch quarto-figure-center"></section>
 <section id="fit-resamples" class="slide level2">
 <h2>Fit resamples</h2>
-
-<img data-src="images/lec-13/cross-validation-animated.gif" class="r-stretch"></section>
-<section id="fit-resamples-1" class="slide level2">
-<h2>Fit resamples</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>office_fit_rs <span class="ot">&lt;-</span> office_wflow <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">fit_resamples</span>(folds)</span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a>office_fit_rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>office_fit_rs1 <span class="ot">&lt;-</span> office_wflow1 <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">fit_resamples</span>(folds)</span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a>office_fit_rs1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># Resampling results
+# 3-fold cross-validation 
+# A tibble: 3 × 4
+  splits          id    .metrics         .notes          
+  &lt;list&gt;          &lt;chr&gt; &lt;list&gt;           &lt;list&gt;          
+1 &lt;split [92/47]&gt; Fold1 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 1]&gt;
+2 &lt;split [93/46]&gt; Fold2 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 1]&gt;
+3 &lt;split [93/46]&gt; Fold3 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 1]&gt;</code></pre>
 </div>
+</div>
+</section>
+<section id="cross-validation-now-what" class="slide level2">
+<h2>Cross validation, now what?</h2>
+<ul>
+<li class="fragment">We’ve fit a bunch of models</li>
+<li class="fragment">Now it’s time to use them to collect metrics (e.g., R-squared, RMSE) on each model and use them to evaluate model fit and how it varies across folds</li>
+</ul>
 </section>
 <section id="collect-cv-metrics" class="slide level2">
 <h2>Collect CV metrics</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">collect_metrics</span>(office_fit_rs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">collect_metrics</span>(office_fit_rs1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric .estimator  mean     n std_err .config             
+  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 rmse    standard   0.351     3  0.0111 Preprocessor1_Model1
+2 rsq     standard   0.546     3  0.0378 Preprocessor1_Model1</code></pre>
+</div>
 </div>
 </section>
 <section id="deeper-look-into-cv-metrics" class="slide level2">
 <h2>Deeper look into CV metrics</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">collect_metrics</span>(office_fit_rs, <span class="at">summarize =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>cv_metrics1 <span class="ot">&lt;-</span> <span class="fu">collect_metrics</span>(office_fit_rs1, <span class="at">summarize =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a>cv_metrics1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  id    .metric .estimator .estimate .config             
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
+1 Fold1 rmse    standard       0.356 Preprocessor1_Model1
+2 Fold1 rsq     standard       0.520 Preprocessor1_Model1
+3 Fold2 rmse    standard       0.367 Preprocessor1_Model1
+4 Fold2 rsq     standard       0.498 Preprocessor1_Model1
+5 Fold3 rmse    standard       0.330 Preprocessor1_Model1
+6 Fold3 rsq     standard       0.621 Preprocessor1_Model1</code></pre>
+</div>
 </div>
 </section>
-<section id="deeper-look-into-cv-metrics-1" class="slide level2">
-<h2>Deeper look into CV metrics</h2>
+<section id="better-tabulation-of-cv-metrics" class="slide level2">
+<h2>Better tabulation of CV metrics</h2>
 <div class="cell" data-layout-align="center">
-
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>cv_metrics1 <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">mutate</span>(<span class="at">.estimate =</span> <span class="fu">round</span>(.estimate, <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> id, <span class="at">names_from =</span> .metric, <span class="at">values_from =</span> .estimate) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Fold"</span>, <span class="st">"RMSE"</span>, <span class="st">"R-squared"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Fold</th>
+<th style="text-align: right;">RMSE</th>
+<th style="text-align: right;">R-squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fold1</td>
+<td style="text-align: right;">0.356</td>
+<td style="text-align: right;">0.520</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fold2</td>
+<td style="text-align: right;">0.367</td>
+<td style="text-align: right;">0.498</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fold3</td>
+<td style="text-align: right;">0.330</td>
+<td style="text-align: right;">0.621</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
-<section id="how-does-rmse-compare-to-y" class="slide level2">
+<section id="how-does-rmse-compare-to-y" class="slide level2 smaller">
 <h2>How does RMSE compare to y?</h2>
 <p>Cross validation RMSE stats:</p>
 <div class="cell" data-layout-align="center">
-
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>cv_metrics1 <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"rmse"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="at">min =</span> <span class="fu">min</span>(.estimate),</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">max =</span> <span class="fu">max</span>(.estimate),</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(.estimate),</span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(.estimate)</span>
+<span id="cb20-8"><a href="#cb20-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+    min   max  mean     sd
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 0.330 0.367 0.351 0.0192</code></pre>
+</div>
 </div>
 <p>Training data IMDB score stats:</p>
 <div class="cell" data-layout-align="center">
-
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>office_episodes <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb22-3"><a href="#cb22-3"></a>    <span class="at">min =</span> <span class="fu">min</span>(imdb_rating),</span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="at">max =</span> <span class="fu">max</span>(imdb_rating),</span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(imdb_rating),</span>
+<span id="cb22-6"><a href="#cb22-6"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(imdb_rating)</span>
+<span id="cb22-7"><a href="#cb22-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+    min   max  mean    sd
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1   6.7   9.7  8.25 0.535</code></pre>
+</div>
 </div>
 </section>
-<section id="whats-next" class="slide level2">
-<h2>What’s next?</h2>
-
-<img data-src="images/lec-13/post-cv-testing.png" class="r-stretch"></section>
+<section id="cross-validation-jargon" class="slide level2">
+<h2>Cross validation jargon</h2>
+<ul>
+<li class="fragment">Referred to as v-fold or k-fold cross validation</li>
+<li class="fragment">Also commonly abbreviated as CV</li>
+</ul>
+</section>
+<section id="cross-validation-for-reals" class="slide level2">
+<h2>Cross validation, for reals</h2>
+<ul>
+<li class="fragment"><p>To illustrate how CV works, we used <code>v = 3</code>:</p>
+<div>
+<ul>
+<li>Analysis sets are 2/3 of the training set</li>
+<li>Each assessment set is a distinct 1/3</li>
+<li>The final resampling estimate of performance averages each of the 3 replicates</li>
+</ul>
+</div></li>
+<li class="fragment"><p>This was useful for illustrative purposes, but <code>v = 3</code> is a poor choice in practice</p></li>
+<li class="fragment"><p>Values of <code>v</code> are most often 5 or 10; we generally prefer 10-fold cross-validation as a default</p></li>
+</ul>
+</section></section>
+<section>
+<section id="application-exercise" class="title-slide slide level1 center">
+<h1>Application exercise</h1>
+<div class="appex">
+<p>📋 <a href="https://github.com/sta210-s22/ae-6-the-office-cv">github.com/sta210-s22/ae-6-the-office-cv</a></p>
+</div>
+</section>
 <section id="recap" class="slide level2">
 <h2>Recap</h2>
 <div>
 <ul>
-<li>Feature engineering with recipes</li>
-<li>Workflows to bring together models and recipes</li>
-<li>RMSE and <span class="math inline">\(R^2\)</span> for model evaluation</li>
-<li>Cross validation</li>
+<li>Cross validation for model evaluation</li>
+<li>Cross validation for model comparison</li>
 </ul>
 </div>
 
@@ -628,7 +860,7 @@
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"1e50ea487bf1db95","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"2823ea1e0cd0873b","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner

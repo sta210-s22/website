@@ -2114,116 +2114,186 @@
     "text": "Recap\n\n\nFeature engineering with recipes\nWorkflows to bring together models and recipes\nRMSE and \\(R^2\\) for model evaluation\nCross validation\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
-    "objectID": "slides/lec-14.html#announcements",
-    "href": "slides/lec-14.html#announcements",
-    "title": "Cross validation",
-    "section": "Announcements",
-    "text": "Announcements\n\n\nMy Monday office hours moved to 8-9pm"
-  },
-  {
     "objectID": "slides/lec-14.html#topics",
     "href": "slides/lec-14.html#topics",
     "title": "Cross validation",
     "section": "Topics",
-    "text": "Topics\n\n\nFeature engineering with recipes\nWorkflows to bring together models and recipes\nRMSE and \\(R^2\\) for model evaluation\nCross validation"
+    "text": "Topics\n\n\nCross validation for model evaluation\nCross validation for model comparison"
   },
   {
     "objectID": "slides/lec-14.html#computational-setup",
     "href": "slides/lec-14.html#computational-setup",
     "title": "Cross validation",
     "section": "Computational setup",
-    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(gghighlight)\nlibrary(knitr)\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
-  },
-  {
-    "objectID": "slides/lec-14.html#the-office",
-    "href": "slides/lec-14.html#the-office",
-    "title": "Cross validation",
-    "section": "The Office",
-    "text": "The Office"
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(schrute)"
   },
   {
     "objectID": "slides/lec-14.html#data-goal",
     "href": "slides/lec-14.html#data-goal",
     "title": "Cross validation",
     "section": "Data & goal",
-    "text": "Data & goal\n\nData: The data come from data.world, by way of TidyTuesday\nGoal: Predict imdb_rating from other variables in the dataset\n\n\noffice_ratings <- read_csv(here::here(\"slides\", \"data/office_ratings.csv\"))\noffice_ratings\n\n# A tibble: 188 × 6\n   season episode title             imdb_rating total_votes air_date  \n    <dbl>   <dbl> <chr>                   <dbl>       <dbl> <date>    \n 1      1       1 Pilot                     7.6        3706 2005-03-24\n 2      1       2 Diversity Day             8.3        3566 2005-03-29\n 3      1       3 Health Care               7.9        2983 2005-04-05\n 4      1       4 The Alliance              8.1        2886 2005-04-12\n 5      1       5 Basketball                8.4        3179 2005-04-19\n 6      1       6 Hot Girl                  7.8        2852 2005-04-26\n 7      2       1 The Dundies               8.7        3213 2005-09-20\n 8      2       2 Sexual Harassment         8.2        2736 2005-09-27\n 9      2       3 Office Olympics           8.4        2742 2005-10-04\n10      2       4 The Fire                  8.4        2713 2005-10-11\n# … with 178 more rows"
+    "text": "Data & goal\n\n\nData: The data come from the shrute package, and has been transformed using instructions from Lab 4\nGoal: Predict imdb_rating from other variables in the dataset\n\n\n\noffice_episodes <- read_csv(here::here(\"slides\", \"data/office_episodes.csv\"))\noffice_episodes\n\n# A tibble: 186 × 14\n   season episode episode_name      imdb_rating total_votes air_date   lines_jim\n    <dbl>   <dbl> <chr>                   <dbl>       <dbl> <date>         <dbl>\n 1      1       1 Pilot                     7.6        3706 2005-03-24    0.157 \n 2      1       2 Diversity Day             8.3        3566 2005-03-29    0.123 \n 3      1       3 Health Care               7.9        2983 2005-04-05    0.172 \n 4      1       4 The Alliance              8.1        2886 2005-04-12    0.202 \n 5      1       5 Basketball                8.4        3179 2005-04-19    0.0913\n 6      1       6 Hot Girl                  7.8        2852 2005-04-26    0.159 \n 7      2       1 The Dundies               8.7        3213 2005-09-20    0.125 \n 8      2       2 Sexual Harassment         8.2        2736 2005-09-27    0.0565\n 9      2       3 Office Olympics           8.4        2742 2005-10-04    0.196 \n10      2       4 The Fire                  8.4        2713 2005-10-11    0.160 \n# … with 176 more rows, and 7 more variables: lines_pam <dbl>,\n#   lines_michael <dbl>, lines_dwight <dbl>, halloween <chr>, valentine <chr>,\n#   christmas <chr>, michael <chr>"
+  },
+  {
+    "objectID": "slides/lec-14.html#split-data-into-training-and-testing",
+    "href": "slides/lec-14.html#split-data-into-training-and-testing",
+    "title": "Cross validation",
+    "section": "Split data into training and testing",
+    "text": "Split data into training and testing\n\nset.seed(123)\noffice_split <- initial_split(office_episodes)\noffice_train <- training(office_split)\noffice_test <- testing(office_split)"
+  },
+  {
+    "objectID": "slides/lec-14.html#specify-model",
+    "href": "slides/lec-14.html#specify-model",
+    "title": "Cross validation",
+    "section": "Specify model",
+    "text": "Specify model\n\noffice_spec <- linear_reg() %>%\n  set_engine(\"lm\")\n\noffice_spec\n\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
+  },
+  {
+    "objectID": "slides/lec-14.html#from-yesterdays-lab",
+    "href": "slides/lec-14.html#from-yesterdays-lab",
+    "title": "Cross validation",
+    "section": "From yesterday’s lab",
+    "text": "From yesterday’s lab\n\nCreate a recipe that uses the new variables we generated\nDenotes episode_name as an ID variable and doesn’t use air_date as a predictor\nCreate dummy variables for all nominal predictors\nRemove all zero variance predictors"
+  },
+  {
+    "objectID": "slides/lec-14.html#create-recipe",
+    "href": "slides/lec-14.html#create-recipe",
+    "title": "Cross validation",
+    "section": "Create recipe",
+    "text": "Create recipe\n\noffice_rec1 <- recipe(imdb_rating ~ ., data = office_train) %>%\n  update_role(episode_name, new_role = \"id\") %>%\n  step_rm(air_date) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors())\n\noffice_rec1\n\nRecipe\n\nInputs:\n\n      role #variables\n        id          1\n   outcome          1\n predictor         12\n\nOperations:\n\nDelete terms air_date\nDummy variables from all_nominal_predictors()\nZero variance filter on all_predictors()"
+  },
+  {
+    "objectID": "slides/lec-14.html#create-workflow",
+    "href": "slides/lec-14.html#create-workflow",
+    "title": "Cross validation",
+    "section": "Create workflow",
+    "text": "Create workflow\n\noffice_wflow1 <- workflow() %>%\n  add_model(office_spec) %>%\n  add_recipe(office_rec1)\n\noffice_wflow1\n\n══ Workflow ════════════════════════════════════════════════════════════════════\nPreprocessor: Recipe\nModel: linear_reg()\n\n── Preprocessor ────────────────────────────────────────────────────────────────\n3 Recipe Steps\n\n• step_rm()\n• step_dummy()\n• step_zv()\n\n── Model ───────────────────────────────────────────────────────────────────────\nLinear Regression Model Specification (regression)\n\nComputational engine: lm"
+  },
+  {
+    "objectID": "slides/lec-14.html#fit-model-to-training-data",
+    "href": "slides/lec-14.html#fit-model-to-training-data",
+    "title": "Cross validation",
+    "section": "Fit model to training data",
+    "text": "Fit model to training data\n\nActually, not so fast!"
+  },
+  {
+    "objectID": "slides/lec-14.html#spending-our-data",
+    "href": "slides/lec-14.html#spending-our-data",
+    "title": "Cross validation",
+    "section": "Spending our data",
+    "text": "Spending our data\n\nWe have already established that the idea of data spending where the test set was recommended for obtaining an unbiased estimate of performance.\nHowever, we usually need to understand the effectiveness of the model before using the test set.\nTypically we can’t decide on which final model to take to the test set without making model assessments.\nRemedy: Resampling to make model assessments on training data in a way that can generalize to new data."
+  },
+  {
+    "objectID": "slides/lec-14.html#resampling-for-model-assessment",
+    "href": "slides/lec-14.html#resampling-for-model-assessment",
+    "title": "Cross validation",
+    "section": "Resampling for model assessment",
+    "text": "Resampling for model assessment\nResampling is only conducted on the training set. The test set is not involved. For each iteration of resampling, the data are partitioned into two subsamples:\n\nThe model is fit with the analysis set.\nThe model is evaluated with the assessment set."
+  },
+  {
+    "objectID": "slides/lec-14.html#resampling-for-model-assessment-1",
+    "href": "slides/lec-14.html#resampling-for-model-assessment-1",
+    "title": "Cross validation",
+    "section": "Resampling for model assessment",
+    "text": "Resampling for model assessment\n\n\nSource: Kuhn and Silge. Tidy modeling with R."
+  },
+  {
+    "objectID": "slides/lec-14.html#analysis-and-assessment-sets",
+    "href": "slides/lec-14.html#analysis-and-assessment-sets",
+    "title": "Cross validation",
+    "section": "Analysis and assessment sets",
+    "text": "Analysis and assessment sets\n\nAnalysis set is analogous to training set.\nAssessment set is analogous to test set.\nThe terms analysis and assessment avoids confusion with initial split of the data.\nThese data sets are mutually exclusive."
   },
   {
     "objectID": "slides/lec-14.html#cross-validation-1",
     "href": "slides/lec-14.html#cross-validation-1",
     "title": "Cross validation",
     "section": "Cross validation",
-    "text": "Cross validation\nMore specifically, v-fold cross validation:\n\n\n\n\nShuffle your training data into v partitions\nUse 1 partition for validation, and the remaining v-1 partitions for training\nRepeat v times\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nYou might also heard of this referred to as k-fold cross validation."
+    "text": "Cross validation\nMore specifically, v-fold cross validation – commonly used resampling technique:\n\nRandomly split your training data into v partitions\nUse 1 partition for assessment, and the remaining v-1 partitions for analysis\nRepeat v times, updating which partition is used for assessment each time\n\n\nLet’s give an example where v = 3…"
   },
   {
-    "objectID": "slides/lec-14.html#fold-cross-validation",
-    "href": "slides/lec-14.html#fold-cross-validation",
+    "objectID": "slides/lec-14.html#cross-validation-step-1",
+    "href": "slides/lec-14.html#cross-validation-step-1",
     "title": "Cross validation",
-    "section": "5-fold Cross validation",
-    "text": "5-fold Cross validation"
+    "section": "Cross validation, step 1",
+    "text": "Cross validation, step 1\nRandomly split your training data into 3 partitions:"
   },
   {
     "objectID": "slides/lec-14.html#split-data",
     "href": "slides/lec-14.html#split-data",
     "title": "Cross validation",
     "section": "Split data",
-    "text": "Split data\n\nset.seed(345)\nfolds <- vfold_cv(office_train, v = 5)\nfolds"
+    "text": "Split data\n\nset.seed(345)\nfolds <- vfold_cv(office_train, v = 3)\nfolds\n\n#  3-fold cross-validation \n# A tibble: 3 × 2\n  splits          id   \n  <list>          <chr>\n1 <split [92/47]> Fold1\n2 <split [93/46]> Fold2\n3 <split [93/46]> Fold3"
+  },
+  {
+    "objectID": "slides/lec-14.html#cross-validation-steps-2-and-3",
+    "href": "slides/lec-14.html#cross-validation-steps-2-and-3",
+    "title": "Cross validation",
+    "section": "Cross validation, steps 2 and 3",
+    "text": "Cross validation, steps 2 and 3\n\n\nUse 1 partition for assessment, and the remaining v-1 partitions for analysis\nRepeat v times, updating which partition is used for assessment each time"
   },
   {
     "objectID": "slides/lec-14.html#fit-resamples",
     "href": "slides/lec-14.html#fit-resamples",
     "title": "Cross validation",
     "section": "Fit resamples",
-    "text": "Fit resamples"
+    "text": "Fit resamples\n\nset.seed(456)\n\noffice_fit_rs1 <- office_wflow1 %>%\n  fit_resamples(folds)\n\noffice_fit_rs1\n\n# Resampling results\n# 3-fold cross-validation \n# A tibble: 3 × 4\n  splits          id    .metrics         .notes          \n  <list>          <chr> <list>           <list>          \n1 <split [92/47]> Fold1 <tibble [2 × 4]> <tibble [0 × 1]>\n2 <split [93/46]> Fold2 <tibble [2 × 4]> <tibble [0 × 1]>\n3 <split [93/46]> Fold3 <tibble [2 × 4]> <tibble [0 × 1]>"
   },
   {
-    "objectID": "slides/lec-14.html#fit-resamples-1",
-    "href": "slides/lec-14.html#fit-resamples-1",
+    "objectID": "slides/lec-14.html#cross-validation-now-what",
+    "href": "slides/lec-14.html#cross-validation-now-what",
     "title": "Cross validation",
-    "section": "Fit resamples",
-    "text": "Fit resamples\n\nset.seed(456)\n\noffice_fit_rs <- office_wflow %>%\n  fit_resamples(folds)\n\noffice_fit_rs"
+    "section": "Cross validation, now what?",
+    "text": "Cross validation, now what?\n\nWe’ve fit a bunch of models\nNow it’s time to use them to collect metrics (e.g., R-squared, RMSE) on each model and use them to evaluate model fit and how it varies across folds"
   },
   {
     "objectID": "slides/lec-14.html#collect-cv-metrics",
     "href": "slides/lec-14.html#collect-cv-metrics",
     "title": "Cross validation",
     "section": "Collect CV metrics",
-    "text": "Collect CV metrics\n\ncollect_metrics(office_fit_rs)"
+    "text": "Collect CV metrics\n\ncollect_metrics(office_fit_rs1)\n\n# A tibble: 2 × 6\n  .metric .estimator  mean     n std_err .config             \n  <chr>   <chr>      <dbl> <int>   <dbl> <chr>               \n1 rmse    standard   0.351     3  0.0111 Preprocessor1_Model1\n2 rsq     standard   0.546     3  0.0378 Preprocessor1_Model1"
   },
   {
     "objectID": "slides/lec-14.html#deeper-look-into-cv-metrics",
     "href": "slides/lec-14.html#deeper-look-into-cv-metrics",
     "title": "Cross validation",
     "section": "Deeper look into CV metrics",
-    "text": "Deeper look into CV metrics\n\ncollect_metrics(office_fit_rs, summarize = FALSE)"
+    "text": "Deeper look into CV metrics\n\ncv_metrics1 <- collect_metrics(office_fit_rs1, summarize = FALSE) \n\ncv_metrics1\n\n# A tibble: 6 × 5\n  id    .metric .estimator .estimate .config             \n  <chr> <chr>   <chr>          <dbl> <chr>               \n1 Fold1 rmse    standard       0.356 Preprocessor1_Model1\n2 Fold1 rsq     standard       0.520 Preprocessor1_Model1\n3 Fold2 rmse    standard       0.367 Preprocessor1_Model1\n4 Fold2 rsq     standard       0.498 Preprocessor1_Model1\n5 Fold3 rmse    standard       0.330 Preprocessor1_Model1\n6 Fold3 rsq     standard       0.621 Preprocessor1_Model1"
   },
   {
-    "objectID": "slides/lec-14.html#deeper-look-into-cv-metrics-1",
-    "href": "slides/lec-14.html#deeper-look-into-cv-metrics-1",
+    "objectID": "slides/lec-14.html#better-tabulation-of-cv-metrics",
+    "href": "slides/lec-14.html#better-tabulation-of-cv-metrics",
     "title": "Cross validation",
-    "section": "Deeper look into CV metrics",
-    "text": "Deeper look into CV metrics"
+    "section": "Better tabulation of CV metrics",
+    "text": "Better tabulation of CV metrics\n\ncv_metrics1 %>%\n  mutate(.estimate = round(.estimate, 3)) %>%\n  pivot_wider(id_cols = id, names_from = .metric, values_from = .estimate) %>%\n  kable(col.names = c(\"Fold\", \"RMSE\", \"R-squared\"))\n\n\n\n\nFold\nRMSE\nR-squared\n\n\n\n\nFold1\n0.356\n0.520\n\n\nFold2\n0.367\n0.498\n\n\nFold3\n0.330\n0.621"
   },
   {
     "objectID": "slides/lec-14.html#how-does-rmse-compare-to-y",
     "href": "slides/lec-14.html#how-does-rmse-compare-to-y",
     "title": "Cross validation",
     "section": "How does RMSE compare to y?",
-    "text": "How does RMSE compare to y?\nCross validation RMSE stats:\n\n\n\nTraining data IMDB score stats:"
+    "text": "How does RMSE compare to y?\nCross validation RMSE stats:\n\ncv_metrics1 %>%\n  filter(.metric == \"rmse\") %>%\n  summarise(\n    min = min(.estimate),\n    max = max(.estimate),\n    mean = mean(.estimate),\n    sd = sd(.estimate)\n  )\n\n# A tibble: 1 × 4\n    min   max  mean     sd\n  <dbl> <dbl> <dbl>  <dbl>\n1 0.330 0.367 0.351 0.0192\n\n\nTraining data IMDB score stats:\n\noffice_episodes %>%\n  summarise(\n    min = min(imdb_rating),\n    max = max(imdb_rating),\n    mean = mean(imdb_rating),\n    sd = sd(imdb_rating)\n  )\n\n# A tibble: 1 × 4\n    min   max  mean    sd\n  <dbl> <dbl> <dbl> <dbl>\n1   6.7   9.7  8.25 0.535"
   },
   {
-    "objectID": "slides/lec-14.html#whats-next",
-    "href": "slides/lec-14.html#whats-next",
+    "objectID": "slides/lec-14.html#cross-validation-jargon",
+    "href": "slides/lec-14.html#cross-validation-jargon",
     "title": "Cross validation",
-    "section": "What’s next?",
-    "text": "What’s next?"
+    "section": "Cross validation jargon",
+    "text": "Cross validation jargon\n\nReferred to as v-fold or k-fold cross validation\nAlso commonly abbreviated as CV"
+  },
+  {
+    "objectID": "slides/lec-14.html#cross-validation-for-reals",
+    "href": "slides/lec-14.html#cross-validation-for-reals",
+    "title": "Cross validation",
+    "section": "Cross validation, for reals",
+    "text": "Cross validation, for reals\n\nTo illustrate how CV works, we used v = 3:\n\n\nAnalysis sets are 2/3 of the training set\nEach assessment set is a distinct 1/3\nThe final resampling estimate of performance averages each of the 3 replicates\n\n\nThis was useful for illustrative purposes, but v = 3 is a poor choice in practice\nValues of v are most often 5 or 10; we generally prefer 10-fold cross-validation as a default"
   },
   {
     "objectID": "slides/lec-14.html#recap",
     "href": "slides/lec-14.html#recap",
     "title": "Cross validation",
     "section": "Recap",
-    "text": "Recap\n\n\nFeature engineering with recipes\nWorkflows to bring together models and recipes\nRMSE and \\(R^2\\) for model evaluation\nCross validation\n\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Recap\n\n\nCross validation for model evaluation\nCross validation for model comparison\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lec-7.html#computational-setup",
@@ -2580,7 +2650,7 @@
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -3602,7 +3672,7 @@
     "href": "weeks/week-8.html#practice",
     "title": "Week 8",
     "section": "Practice",
-    "text": "Practice\nApplication Exercise 6 - Cross validation (to be posted)"
+    "text": "Practice\nApplication Exercise 6 - The office - CV"
   },
   {
     "objectID": "weeks/week-8.html#perform",
@@ -4316,7 +4386,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻\n✍️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "computing-troubleshooting.html",
