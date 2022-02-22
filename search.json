@@ -2573,14 +2573,14 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -3308,14 +3308,14 @@
     "href": "weeks/week-7.html#prepare",
     "title": "Week 7",
     "section": "Prepare",
-    "text": "Prepare\n📖 Read Tidy Modeling in R Chp 8: Feature engineering with recipes\n📖 Read Tidy Modeling in R Chp 10: Resampling for evaluating performance"
+    "text": "Prepare\n📖 Read Tidy Modeling in R Chp 8: Feature engineering with recipes"
   },
   {
     "objectID": "weeks/week-7.html#participate",
     "href": "weeks/week-7.html#participate",
     "title": "Week 7",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lecture 12 - MLR: Feature engineering\n🖥️ Lecture 13 - MLR: Cross validation"
+    "text": "Participate\n🖥️ Lecture 12 - MLR: Feature engineering\n🖥️ Lecture 13 - MLR: Feature engineering (cont.)"
   },
   {
     "objectID": "weeks/week-7.html#practice",
@@ -3588,28 +3588,28 @@
     "href": "weeks/week-8.html#prepare",
     "title": "Week 8",
     "section": "Prepare",
-    "text": "Prepare"
+    "text": "Prepare\n📖 Read Tidy Modeling in R Chp 10: Resampling for evaluating performance"
   },
   {
     "objectID": "weeks/week-8.html#participate",
     "href": "weeks/week-8.html#participate",
     "title": "Week 8",
     "section": "Participate",
-    "text": "Participate"
+    "text": "Participate\n🖥️ Lecture 14 - MLR: Cross validation\n🖥️ Lecture 15 - Exam 2 review"
   },
   {
     "objectID": "weeks/week-8.html#practice",
     "href": "weeks/week-8.html#practice",
     "title": "Week 8",
     "section": "Practice",
-    "text": "Practice"
+    "text": "Practice\nApplication Exercise 6 - Cross validation (to be posted)"
   },
   {
     "objectID": "weeks/week-8.html#perform",
     "href": "weeks/week-8.html#perform",
     "title": "Week 8",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n⌨️ Lab 4 - The Office, another look\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-13.html#prepare",
