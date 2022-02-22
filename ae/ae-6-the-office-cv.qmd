@@ -1,0 +1,97 @@
+---
+title: "AE 6: The Office"
+subtitle: "Cross validation"
+---
+
+::: callout-important
+Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-5-the-office-YOUR_GITHUB_USERNAME` to get started.
+:::
+
+## Packages
+
+```{r}
+#| label: load-pkgs
+#| message: false
+ 
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+```
+
+## Load data
+
+```{r}
+#| label: load-data
+#| message: false
+
+office_episodes <- read_csv("data/office_episodes.csv")
+```
+
+## Split data into training and testing
+
+Split your data into testing and training sets.
+
+```{r}
+#| label: initial-split
+
+# add code here
+```
+
+## Specify model
+
+Specify a linear regression model.
+Call it `office_spec`.
+
+```{r}
+#| label: specify-model
+
+# add code here
+```
+
+## Create recipe
+
+Create the recipe from class.
+Call it `office_rec1`.
+
+```{r}
+#| label: create-recipe
+
+# add code here
+```
+
+## Create workflow
+
+Create the workflow that brings together the model specification and recipe.
+Call it `office_wflow1`.
+
+```{r}
+#| label: create-wflow
+
+# add code here
+```
+
+## Cross validation
+
+Conduct 10-fold cross validation.
+
+```{r}
+#| label: cv-tenfold
+
+# add code here
+```
+
+## Summarize CV metrics
+
+Summarize metrics from your CV resamples.
+
+```{r}
+#| label: cv-summarize
+
+# add code here
+```
+
+## Another model - Model 2
+
+Create a different (simpler, involving fewer variables) recipe and call it `office_rec2`.
+Conduct 10-fold cross validation and summarize metrics.
+Describe how the two models compare to each other based on cross validation metrics.
