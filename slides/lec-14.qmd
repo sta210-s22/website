@@ -15,6 +15,7 @@ format:
 editor: visual
 execute:
   freeze: auto
+  echo: true
 ---
 
 ```{r}
@@ -29,19 +30,11 @@ knitr::opts_chunk$set(
 
 # Welcome
 
-## Announcements
-
-::: nonincremental
--   My Monday office hours moved to 8-9pm
-:::
-
 ## Topics
 
 ::: nonincremental
--   Feature engineering with recipes
--   Workflows to bring together models and recipes
--   RMSE and $R^2$ for model evaluation
--   Cross validation
+-   Cross validation for model evaluation
+-   Cross validation for model comparison
 :::
 
 ## Computational setup
@@ -52,129 +45,202 @@ knitr::opts_chunk$set(
 # load packages
 library(tidyverse)
 library(tidymodels)
-library(gghighlight)
 library(knitr)
-
-# set default theme and larger font size for ggplot2
-ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+library(schrute)
 ```
 
-# Introduction
+## Data & goal {.smaller}
 
-## The Office
-
-![](images/lec-13/the-office.jpeg)
-
-## Data & goal
-
--   Data: The data come from [data.world](https://data.world/anujjain7/the-office-imdb-ratings-dataset), by way of [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-17/readme.md)
-
+::: nonincremental
+-   Data: The data come from the [**shrute**](https://bradlindblad.github.io/schrute/) package, and has been transformed using instructions from [Lab 4](/labs/lab-4.html)
 -   Goal: Predict `imdb_rating` from other variables in the dataset
+:::
 
 ```{r}
 #| echo: true
 
-office_ratings <- read_csv(here::here("slides", "data/office_ratings.csv"))
-office_ratings
+office_episodes <- read_csv(here::here("slides", "data/office_episodes.csv"))
+office_episodes
 ```
+
+# Modeling prep
+
+## Split data into training and testing
+
+```{r}
+set.seed(123)
+office_split <- initial_split(office_episodes)
+office_train <- training(office_split)
+office_test <- testing(office_split)
+```
+
+## Specify model
+
+```{r}
+office_spec <- linear_reg() %>%
+  set_engine("lm")
+
+office_spec
+```
+
+# Model 1
+
+## From yesterday's lab
+
+-   Create a recipe that uses the new variables we generated
+-   Denotes `episode_name` as an ID variable and doesn't use `air_date` as a predictor
+-   Create dummy variables for all nominal predictors
+-   Remove all zero variance predictors
+
+## Create recipe
+
+```{r}
+office_rec1 <- recipe(imdb_rating ~ ., data = office_train) %>%
+  update_role(episode_name, new_role = "id") %>%
+  step_rm(air_date) %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_zv(all_predictors())
+
+office_rec1
+```
+
+## Create workflow
+
+```{r}
+office_wflow1 <- workflow() %>%
+  add_model(office_spec) %>%
+  add_recipe(office_rec1)
+
+office_wflow1
+```
+
+## Fit model to training data
+
+. . .
+
+*Actually, not so fast!*
 
 # Cross validation
 
+## Spending our data
+
+-   We have already established that the idea of data spending where the test set was recommended for obtaining an unbiased estimate of performance.
+-   However, we usually need to understand the effectiveness of the model *before using the test set*.
+-   Typically we can't decide on *which* final model to take to the test set without making model assessments.
+-   Remedy: Resampling to make model assessments on training data in a way that can generalize to new data.
+
+## Resampling for model assessment
+
+**Resampling is only conducted on the training set**.
+The test set is not involved.
+For each iteration of resampling, the data are partitioned into two subsamples:
+
+-   The model is fit with the **analysis set**.
+-   The model is evaluated with the **assessment set**.
+
+## Resampling for model assessment
+
+![](images/lec-14/resampling.svg){fig-align="center"}
+
+<br>
+
+Source: Kuhn and Silge.
+[Tidy modeling with R](https://www.tmwr.org/).
+
+## Analysis and assessment sets
+
+-   Analysis set is analogous to training set.
+-   Assessment set is analogous to test set.
+-   The terms *analysis* and *assessment* avoids confusion with initial split of the data.
+-   These data sets are mutually exclusive.
+
 ## Cross validation
 
-More specifically, **v-fold cross validation**:
+More specifically, **v-fold cross validation** -- commonly used resampling technique:
 
-::: columns
-::: {.column width="60%"}
-::: nonincremental
--   Shuffle your **training** **data** into v partitions
--   Use 1 partition for validation, and the remaining v-1 partitions for training
--   Repeat v times
-:::
-:::
+-   Randomly split your **training** **data** into v partitions
+-   Use 1 partition for assessment, and the remaining v-1 partitions for analysis
+-   Repeat v times, updating which partition is used for assessment each time
 
-::: {.column width="40%"}
-![](images/lec-13/cross-validation.png)
-:::
-:::
+. . .
 
-::: callout-note
-You might also heard of this referred to as **k-fold cross validation**.
-:::
+Let's give an example where `v = 3`...
 
-## 5-fold Cross validation
+## Cross validation, step 1
 
-![](images/lec-13/cross-validation.png)
+Randomly split your **training** **data** into 3 partitions:
+
+<br>
+
+![](images/lec-14/three-CV.svg){fig-align="center"}
 
 ## Split data
 
 ```{r}
 #| echo: true
-#| eval: false
 
 set.seed(345)
-folds <- vfold_cv(office_train, v = 5)
+folds <- vfold_cv(office_train, v = 3)
 folds
 ```
 
-## Fit resamples
+## Cross validation, steps 2 and 3
 
-![](images/lec-13/cross-validation-animated.gif)
+::: nonincremental
+-   Use 1 partition for assessment, and the remaining v-1 partitions for analysis
+-   Repeat v times, updating which partition is used for assessment each time
+:::
+
+![](images/lec-14/three-CV-iter.svg){fig-align="center"}
 
 ## Fit resamples
 
 ```{r}
 #| echo: true
-#| eval: false
 
 set.seed(456)
 
-office_fit_rs <- office_wflow %>%
+office_fit_rs1 <- office_wflow1 %>%
   fit_resamples(folds)
 
-office_fit_rs
+office_fit_rs1
 ```
+
+## Cross validation, now what?
+
+-   We've fit a bunch of models
+-   Now it's time to use them to collect metrics (e.g., R-squared, RMSE) on each model and use them to evaluate model fit and how it varies across folds
 
 ## Collect CV metrics
 
 ```{r}
-#| echo: true
-#| eval: false
-
-collect_metrics(office_fit_rs)
+collect_metrics(office_fit_rs1)
 ```
 
 ## Deeper look into CV metrics
 
 ```{r}
-#| echo: true
-#| eval: false
+cv_metrics1 <- collect_metrics(office_fit_rs1, summarize = FALSE) 
 
-collect_metrics(office_fit_rs, summarize = FALSE)
+cv_metrics1
 ```
 
-## Deeper look into CV metrics
+## Better tabulation of CV metrics
 
 ```{r}
-#| eval: false
-
-cv_metrics <- collect_metrics(office_fit_rs, summarize = FALSE) 
-
-cv_metrics %>%
+cv_metrics1 %>%
   mutate(.estimate = round(.estimate, 3)) %>%
   pivot_wider(id_cols = id, names_from = .metric, values_from = .estimate) %>%
   kable(col.names = c("Fold", "RMSE", "R-squared"))
 ```
 
-## How does RMSE compare to y?
+## How does RMSE compare to y? {.smaller}
 
 Cross validation RMSE stats:
 
 ```{r}
-#| eval: false
-
-cv_metrics %>%
-  filter(.metric == "rsq") %>%
+cv_metrics1 %>%
+  filter(.metric == "rmse") %>%
   summarise(
     min = min(.estimate),
     max = max(.estimate),
@@ -186,9 +252,7 @@ cv_metrics %>%
 Training data IMDB score stats:
 
 ```{r}
-#| eval: false
-
-office_ratings %>%
+office_episodes %>%
   summarise(
     min = min(imdb_rating),
     max = max(imdb_rating),
@@ -197,15 +261,34 @@ office_ratings %>%
   )
 ```
 
-## What's next?
+## Cross validation jargon
 
-![](images/lec-13/post-cv-testing.png)
+-   Referred to as v-fold or k-fold cross validation
+-   Also commonly abbreviated as CV
+
+## Cross validation, for reals
+
+-   To illustrate how CV works, we used `v = 3`:
+
+    ::: nonincremental
+    -   Analysis sets are 2/3 of the training set
+    -   Each assessment set is a distinct 1/3
+    -   The final resampling estimate of performance averages each of the 3 replicates
+    :::
+
+-   This was useful for illustrative purposes, but `v = 3` is a poor choice in practice
+
+-   Values of `v` are most often 5 or 10; we generally prefer 10-fold cross-validation as a default
+
+# Application exercise
+
+::: appex
+📋 [github.com/sta210-s22/ae-6-the-office-cv](https://github.com/sta210-s22/ae-6-the-office-cv)
+:::
 
 ## Recap
 
 ::: nonincremental
--   Feature engineering with recipes
--   Workflows to bring together models and recipes
--   RMSE and $R^2$ for model evaluation
--   Cross validation
+-   Cross validation for model evaluation
+-   Cross validation for model comparison
 :::

@@ -22,7 +22,7 @@ Due dates:
 
 ## Practice
 
-Application Exercise 6 - Cross validation (to be posted)
+[Application Exercise 6 - The office - CV](/ae/ae-6-the-office-cv.html)
 
 ## Perform
 
