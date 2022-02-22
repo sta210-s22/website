@@ -15,13 +15,11 @@ Due dates:
 
 📖 Read Tidy Modeling in R Chp 8: [Feature engineering with recipes](https://www.tmwr.org/recipes.html)
 
-📖 Read Tidy Modeling in R Chp 10: [Resampling for evaluating performance](https://www.tmwr.org/resampling.html)
-
 ## Participate
 
 🖥️ [Lecture 12 - MLR: Feature engineering](/slides/lec-12.html)
 
-🖥️ [Lecture 13 - MLR: Cross validation](/slides/lec-13.html)
+🖥️ [Lecture 13 - MLR: Feature engineering (cont.)](/slides/lec-13.html)
 
 ## Practice
 
