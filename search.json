@@ -2650,7 +2650,7 @@
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -3876,6 +3876,69 @@
     "title": "Movie budgets and revenues",
     "section": "Appendix",
     "text": "Appendix\nBelow is a list of genres in the data set:\n\nmovies %>% \n  distinct(genre) %>%\n  arrange(genre) %>% \n  datatable()"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#packages",
+    "href": "ae/ae-6-the-office-cv.html#packages",
+    "title": "AE 6: The Office",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#load-data",
+    "href": "ae/ae-6-the-office-cv.html#load-data",
+    "title": "AE 6: The Office",
+    "section": "Load data",
+    "text": "Load data\n\noffice_episodes <- read_csv(\"data/office_episodes.csv\")"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#split-data-into-training-and-testing",
+    "href": "ae/ae-6-the-office-cv.html#split-data-into-training-and-testing",
+    "title": "AE 6: The Office",
+    "section": "Split data into training and testing",
+    "text": "Split data into training and testing\nSplit your data into testing and training sets.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#specify-model",
+    "href": "ae/ae-6-the-office-cv.html#specify-model",
+    "title": "AE 6: The Office",
+    "section": "Specify model",
+    "text": "Specify model\nSpecify a linear regression model. Call it office_spec.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#create-recipe",
+    "href": "ae/ae-6-the-office-cv.html#create-recipe",
+    "title": "AE 6: The Office",
+    "section": "Create recipe",
+    "text": "Create recipe\nCreate the recipe from class. Call it office_rec1.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#create-workflow",
+    "href": "ae/ae-6-the-office-cv.html#create-workflow",
+    "title": "AE 6: The Office",
+    "section": "Create workflow",
+    "text": "Create workflow\nCreate the workflow that brings together the model specification and recipe. Call it office_wflow1.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#cross-validation",
+    "href": "ae/ae-6-the-office-cv.html#cross-validation",
+    "title": "AE 6: The Office",
+    "section": "Cross validation",
+    "text": "Cross validation\nConduct 10-fold cross validation.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#summarize-cv-metrics",
+    "href": "ae/ae-6-the-office-cv.html#summarize-cv-metrics",
+    "title": "AE 6: The Office",
+    "section": "Summarize CV metrics",
+    "text": "Summarize CV metrics\nSummarize metrics from your CV resamples.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html#another-model---model-2",
+    "href": "ae/ae-6-the-office-cv.html#another-model---model-2",
+    "title": "AE 6: The Office",
+    "section": "Another model - Model 2",
+    "text": "Another model - Model 2\nCreate a different (simpler, involving fewer variables) recipe and call it office_rec2. Conduct 10-fold cross validation and summarize metrics. Describe how the two models compare to each other based on cross validation metrics."
   },
   {
     "objectID": "ae/ae-2-dcbikeshare.html#bike-rentals-in-dc",
