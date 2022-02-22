@@ -1,22 +1,32 @@
 ---
 title: "Week 8"
-subtitle: "TBA"
+subtitle: "MLR: Cross validation"
 editor: visual
 ---
 
 ::: callout-important
 Due dates:
-:::
 
-To be posted.
+-   Lab 4 - Friday, Feb 25
+:::
 
 ## Prepare
 
+📖 Read Tidy Modeling in R Chp 10: [Resampling for evaluating performance](https://www.tmwr.org/resampling.html)
+
 ## Participate
+
+🖥️ [Lecture 14 - MLR: Cross validation](/slides/lec-14.html)
+
+🖥️ Lecture 15 - Exam 2 review
 
 ## Practice
 
+Application Exercise 6 - Cross validation (to be posted)
+
 ## Perform
+
+⌨️ [Lab 4 - The Office, another look](labs/lab-4.html)
 
 <br><br>
 
