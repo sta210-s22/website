@@ -6,18 +6,18 @@ This page contains an outline of the topics, content, and assignments for the se
 Note that this schedule will be updated as the semester progresses, with all changes documented here.
 
 ::: column-screen-inset-right
-<table style="width:100%;">
+<table style="width:89%;">
 <colgroup>
-<col style="width: 9%" />
-<col style="width: 9%" />
-<col style="width: 9%" />
-<col style="width: 9%" />
-<col style="width: 9%" />
-<col style="width: 9%" />
-<col style="width: 9%" />
-<col style="width: 9%" />
-<col style="width: 9%" />
-<col style="width: 9%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -113,7 +113,8 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"><p><a href="/labs/lab-1.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p></td>
+<td style="text-align: center;"><p><a href="/labs/lab-1.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p>
+<p><a href="https://sakai.duke.edu/access/content/group/779c3ebe-3b88-4bcc-bd01-1813e8396a23/lab-1-key.pdf"><span class="emoji" data-emoji="old_key">🗝️</span></a></p></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -209,7 +210,8 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"><p><a href="/labs/lab-2.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p></td>
+<td style="text-align: center;"><p><a href="/labs/lab-2.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p>
+<p><a href="https://sakai.duke.edu/access/content/group/779c3ebe-3b88-4bcc-bd01-1813e8396a23/lab-2-key.pdf"><span class="emoji" data-emoji="old_key">🗝️</span></a></p></td>
 <td style="text-align: center;"><p><a href="/hw/hw-1.html"><span class="emoji" data-emoji="writing_hand">✍️</span></a></p>
 <p><a href="https://sakai.duke.edu/access/content/group/779c3ebe-3b88-4bcc-bd01-1813e8396a23/hw-1-key.pdf"><span class="emoji" data-emoji="old_key">🗝️</span></a></p></td>
 <td style="text-align: center;"></td>
@@ -222,7 +224,8 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><p><a href="/slides/lab-3.html" title="Lab slides"><span class="emoji" data-emoji="desktop_computer">🖥️</span></a></p></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"><p><a href="/labs/lab-3.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p></td>
+<td style="text-align: center;"><p><a href="/labs/lab-3.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p>
+<p><a href="https://sakai.duke.edu/access/content/group/779c3ebe-3b88-4bcc-bd01-1813e8396a23/lab-3-key.pdf"><span class="emoji" data-emoji="old_key">🗝️</span></a></p></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
