@@ -2034,84 +2034,7 @@
     "href": "slides/lec-13.html#evaluating-performance-on-training-data",
     "title": "Feature engineering",
     "section": "Evaluating performance on training data",
-    "text": "Evaluating performance on training data\n\nThe training set does not have the capacity to be a good arbiter of performance.\nIt is not an independent piece of information; predicting the training set can only reflect what the model already knows.\nSuppose you give a class a test, then give them the answers, then provide the same test. The student scores on the second test do not accurately reflect what they know about the subject; these scores would probably be higher than their results on the first test."
-  },
-  {
-    "objectID": "slides/lec-13.html#cross-validation-1",
-    "href": "slides/lec-13.html#cross-validation-1",
-    "title": "Feature engineering",
-    "section": "Cross validation",
-    "text": "Cross validation\nMore specifically, v-fold cross validation:\n\n\n\n\nShuffle your training data into v partitions\nUse 1 partition for validation, and the remaining v-1 partitions for training\nRepeat v times\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nYou might also heard of this referred to as k-fold cross validation."
-  },
-  {
-    "objectID": "slides/lec-13.html#fold-cross-validation",
-    "href": "slides/lec-13.html#fold-cross-validation",
-    "title": "Feature engineering",
-    "section": "5-fold Cross validation",
-    "text": "5-fold Cross validation"
-  },
-  {
-    "objectID": "slides/lec-13.html#split-data",
-    "href": "slides/lec-13.html#split-data",
-    "title": "Feature engineering",
-    "section": "Split data",
-    "text": "Split data\n\nset.seed(345)\nfolds <- vfold_cv(office_train, v = 5)\nfolds\n\n#  5-fold cross-validation \n# A tibble: 5 × 2\n  splits           id   \n  <list>           <chr>\n1 <split [112/29]> Fold1\n2 <split [113/28]> Fold2\n3 <split [113/28]> Fold3\n4 <split [113/28]> Fold4\n5 <split [113/28]> Fold5"
-  },
-  {
-    "objectID": "slides/lec-13.html#fit-resamples",
-    "href": "slides/lec-13.html#fit-resamples",
-    "title": "Feature engineering",
-    "section": "Fit resamples",
-    "text": "Fit resamples"
-  },
-  {
-    "objectID": "slides/lec-13.html#fit-resamples-1",
-    "href": "slides/lec-13.html#fit-resamples-1",
-    "title": "Feature engineering",
-    "section": "Fit resamples",
-    "text": "Fit resamples\n\nset.seed(456)\n\noffice_fit_rs <- office_wflow %>%\n  fit_resamples(folds)\n\noffice_fit_rs\n\n# Resampling results\n# 5-fold cross-validation \n# A tibble: 5 × 4\n  splits           id    .metrics         .notes          \n  <list>           <chr> <list>           <list>          \n1 <split [112/29]> Fold1 <tibble [2 × 4]> <tibble [0 × 1]>\n2 <split [113/28]> Fold2 <tibble [2 × 4]> <tibble [0 × 1]>\n3 <split [113/28]> Fold3 <tibble [2 × 4]> <tibble [1 × 1]>\n4 <split [113/28]> Fold4 <tibble [2 × 4]> <tibble [0 × 1]>\n5 <split [113/28]> Fold5 <tibble [2 × 4]> <tibble [0 × 1]>"
-  },
-  {
-    "objectID": "slides/lec-13.html#collect-cv-metrics",
-    "href": "slides/lec-13.html#collect-cv-metrics",
-    "title": "Feature engineering",
-    "section": "Collect CV metrics",
-    "text": "Collect CV metrics\n\ncollect_metrics(office_fit_rs)\n\n# A tibble: 2 × 6\n  .metric .estimator  mean     n std_err .config             \n  <chr>   <chr>      <dbl> <int>   <dbl> <chr>               \n1 rmse    standard   0.427     5  0.0961 Preprocessor1_Model1\n2 rsq     standard   0.574     5  0.0379 Preprocessor1_Model1"
-  },
-  {
-    "objectID": "slides/lec-13.html#deeper-look-into-cv-metrics",
-    "href": "slides/lec-13.html#deeper-look-into-cv-metrics",
-    "title": "Feature engineering",
-    "section": "Deeper look into CV metrics",
-    "text": "Deeper look into CV metrics\n\ncollect_metrics(office_fit_rs, summarize = FALSE)\n\n# A tibble: 10 × 5\n   id    .metric .estimator .estimate .config             \n   <chr> <chr>   <chr>          <dbl> <chr>               \n 1 Fold1 rmse    standard       0.284 Preprocessor1_Model1\n 2 Fold1 rsq     standard       0.591 Preprocessor1_Model1\n 3 Fold2 rmse    standard       0.302 Preprocessor1_Model1\n 4 Fold2 rsq     standard       0.687 Preprocessor1_Model1\n 5 Fold3 rmse    standard       0.375 Preprocessor1_Model1\n 6 Fold3 rsq     standard       0.591 Preprocessor1_Model1\n 7 Fold4 rmse    standard       0.368 Preprocessor1_Model1\n 8 Fold4 rsq     standard       0.453 Preprocessor1_Model1\n 9 Fold5 rmse    standard       0.804 Preprocessor1_Model1\n10 Fold5 rsq     standard       0.547 Preprocessor1_Model1"
-  },
-  {
-    "objectID": "slides/lec-13.html#deeper-look-into-cv-metrics-1",
-    "href": "slides/lec-13.html#deeper-look-into-cv-metrics-1",
-    "title": "Feature engineering",
-    "section": "Deeper look into CV metrics",
-    "text": "Deeper look into CV metrics\n\n\n\n\n\nFold\nRMSE\nR-squared\n\n\n\n\nFold1\n0.284\n0.591\n\n\nFold2\n0.302\n0.687\n\n\nFold3\n0.375\n0.591\n\n\nFold4\n0.368\n0.453\n\n\nFold5\n0.804\n0.547"
-  },
-  {
-    "objectID": "slides/lec-13.html#how-does-rmse-compare-to-y",
-    "href": "slides/lec-13.html#how-does-rmse-compare-to-y",
-    "title": "Feature engineering",
-    "section": "How does RMSE compare to y?",
-    "text": "How does RMSE compare to y?\nCross validation RMSE stats:\n\n\n# A tibble: 1 × 4\n    min   max  mean     sd\n  <dbl> <dbl> <dbl>  <dbl>\n1 0.453 0.687 0.574 0.0847\n\n\nTraining data IMDB score stats:\n\n\n# A tibble: 1 × 4\n    min   max  mean    sd\n  <dbl> <dbl> <dbl> <dbl>\n1   6.7   9.7  8.26 0.538"
-  },
-  {
-    "objectID": "slides/lec-13.html#whats-next",
-    "href": "slides/lec-13.html#whats-next",
-    "title": "Feature engineering",
-    "section": "What’s next?",
-    "text": "What’s next?"
-  },
-  {
-    "objectID": "slides/lec-13.html#recap",
-    "href": "slides/lec-13.html#recap",
-    "title": "Feature engineering",
-    "section": "Recap",
-    "text": "Recap\n\n\nFeature engineering with recipes\nWorkflows to bring together models and recipes\nRMSE and \\(R^2\\) for model evaluation\nCross validation\n\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Evaluating performance on training data\n\nThe training set does not have the capacity to be a good arbiter of performance.\nIt is not an independent piece of information; predicting the training set can only reflect what the model already knows.\nSuppose you give a class a test, then give them the answers, then provide the same test. The student scores on the second test do not accurately reflect what they know about the subject; these scores would probably be higher than their results on the first test.\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lec-14.html#topics",
@@ -2643,7 +2566,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  9ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
