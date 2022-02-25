@@ -2464,6 +2464,20 @@
     "text": "Wrap up\nAny questions about the course?\n\n\n\nsta210-s22.github.io/website"
   },
   {
+    "objectID": "slides/lec-15.html#announcements",
+    "href": "slides/lec-15.html#announcements",
+    "title": "Exam 2 review",
+    "section": "Announcements",
+    "text": "Announcements\n\n\nExam 2 is released tomorrow (Friday) at 9am, due at 11:59pm on Monday\nKeys for HW and labs posted"
+  },
+  {
+    "objectID": "slides/lec-15.html#application-exercise",
+    "href": "slides/lec-15.html#application-exercise",
+    "title": "Exam 2 review",
+    "section": "Application exercise",
+    "text": "Application exercise\n\n📋 github.com/sta210-s22/ae-7-exam-2-review\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
     "objectID": "slides/lec-9.html#announcements",
     "href": "slides/lec-9.html#announcements",
     "title": "Exam 1 Review",
@@ -2566,7 +2580,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  9ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
@@ -3595,7 +3609,7 @@
     "href": "weeks/week-8.html#practice",
     "title": "Week 8",
     "section": "Practice",
-    "text": "Practice\nApplication Exercise 6 - The office - CV"
+    "text": "Practice\nApplication Exercise 6 - The office - CV\nApplication Exercise 7 - Exam 2 Review"
   },
   {
     "objectID": "weeks/week-8.html#perform",
@@ -3771,6 +3785,90 @@
     "title": "AE 5: The Office",
     "section": "Workflows and model fitting",
     "text": "Workflows and model fitting\nBuild the modeling workflow and fit the model to the training data after feature engineering with the recipe."
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#packages",
+    "href": "ae/ae-7-exam-2-review.html#packages",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(openintro)\n\n# fix data!\nloans_full_schema <- droplevels(loans_full_schema)"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#goal",
+    "href": "ae/ae-7-exam-2-review.html#goal",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Goal",
+    "text": "Goal\nCreate a model for precicting interest_rate."
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#view-data",
+    "href": "ae/ae-7-exam-2-review.html#view-data",
+    "title": "AE 7: Exam 2 Review",
+    "section": "View data",
+    "text": "View data\nNote the dimensions of the data and the variable names. Review the data dictionary.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#split-data-into-training-and-testing",
+    "href": "ae/ae-7-exam-2-review.html#split-data-into-training-and-testing",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Split data into training and testing",
+    "text": "Split data into training and testing\nSplit your data into testing and training sets.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#write-the-model",
+    "href": "ae/ae-7-exam-2-review.html#write-the-model",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Write the model",
+    "text": "Write the model\nWrite the model for predicting interest rate (interest_rate) from debt to income ratio (debt_to_income), the term of loan (term), the number of inquiries (credit checks) into the applicant’s credit during the last 12 months (inquiries_last_12m), whether there are any bankruptcies listed in the public record for this applicant (bankrupt), and the type of application (application_type). The model should allow for the effect of to income ratio on interest rate to vary by application type.\nAdd model here"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#exploration",
+    "href": "ae/ae-7-exam-2-review.html#exploration",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Exploration",
+    "text": "Exploration\nExplore characteristics of the variables you’ll use for the model using the training data only.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#specify-model",
+    "href": "ae/ae-7-exam-2-review.html#specify-model",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Specify model",
+    "text": "Specify model\nSpecify a linear regression model. Call it office_spec.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#create-recipe",
+    "href": "ae/ae-7-exam-2-review.html#create-recipe",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Create recipe",
+    "text": "Create recipe\n\nPredict interest_rate from debt_to_income, term, inquiries_last_12m, public_record_bankrupt, and application_type.\nMean center debt_to_income.\nMake term a factor.\nCreate a new variable: bankrupt that takes on the value “no” if public_record_bankrupt is 0 and the value “yes” if public_record_bankrupt is 1 or higher. Then, remove public_record_bankrupt.\nInteract application_type with debt_to_income.\nCreate dummy variables where needed and drop any zero variance variables.\n\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#create-workflow",
+    "href": "ae/ae-7-exam-2-review.html#create-workflow",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Create workflow",
+    "text": "Create workflow\nCreate the workflow that brings together the model specification and recipe.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#cross-validation",
+    "href": "ae/ae-7-exam-2-review.html#cross-validation",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Cross validation",
+    "text": "Cross validation\nConduct 10-fold cross validation.\n\n# add code here"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#summarize-cv-metrics",
+    "href": "ae/ae-7-exam-2-review.html#summarize-cv-metrics",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Summarize CV metrics",
+    "text": "Summarize CV metrics\nSummarize metrics from your CV resamples.\n\n# add code here\n\nWhy are we focusing on R-squared and RMSE instead of adjusted R-squared, AIC, BIC?\n[Add response here]"
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html#next-steps",
+    "href": "ae/ae-7-exam-2-review.html#next-steps",
+    "title": "AE 7: Exam 2 Review",
+    "section": "Next steps…",
+    "text": "Next steps…\nDepending on time, either\n\nCreate a workflow for another model with a new recipe (omitting the interaction variable), conduct CV, do model selection between these two, and then interpret the coefficients for the selected model.\nOr interpret the coefficients for the one model you fit.\n\nMake sure to interpret the intercept and slope coefficient for at least one numerical, one categorical, and one interaction predictor."
   },
   {
     "objectID": "ae/ae-0-movies.html#data",
@@ -4372,7 +4470,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\n\n\n\n\nDate\n\n\n\n\nTopic\n\n\n\n\nPrepare\n\n\n\n\nSlides\n\n\n\n\nAE\n\n\n\n\nLab\n\n\n\n\nHW\n\n\n\n\nExam\n\n\n\n\nProject\n\n\n\n\n\n\n\n\n1\n\n\n\n\nWed, Jan 5\n\n\n\n\nLab 0 - Meet + greet\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 6\n\n\n\n\nWelcome to STA 210!\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\n\n\nMon, Jan 10\n\n\n\n\nLab 1 - Meet the toolkit\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 11\n\n\n\n\nSimple linear regression (SLR)\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 13\n\n\n\n\nSLR: Model fitting in R with tidymodels\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 14\n\n\n\n\nReleased: HW 5\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n🗝️\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\n\n\nMon, Jan 17\n\n\n\n\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\n\n\n\n\nSLR: Prediction + model evaluation\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 20\n\n\n\n\nSLR: Simulation-based inference\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\n\n\n\n\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n4\n\n\n\n\nMon, Jan 24\n\n\n\n\nLab 2 - College scorecard\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 25\n\n\n\n\nSLR: Mathematical models for inference\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\n\n\n\n\nSLR: Model diagnostics\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\n\n\n\n\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n🗝️\n\n\n\n\n✍️\n\n\n🗝️\n\n\n\n\n\n\n\n\n\n\n5\n\n\n\n\nMon, Jan 31\n\n\n\n\nLab 3 - Coffee ratings\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n🗝️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\n\n\n\n\nMultiple linear regression (MLR)\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\n\n\n\n\nExam 1 review\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\n\n\n\n\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n✅\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n6\n\n\n\n\nMon, Feb 7\n\n\n\n\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n✅\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\n\n\n\n\nMLR: Types of predictors\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\n\n\n\n\nMLR: Model comparison\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\n\n\n\n\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n7\n\n\n\n\nMon, Feb 14\n\n\n\n\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n📂\n\n\n\n\n\n\n\n\nTue, Feb 15\n\n\n\n\nMLR: Feature engineering\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\n\n\n\n\nMLR: Feature engineering\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\n\n\n\n\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n🗝️\n\n\n\n\n\n\n📂\n\n\n\n\n\n\n8\n\n\n\n\nMon, Feb 21\n\n\n\n\nLab 4: The Office\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\n\n\n\n\nMLR: Cross validation\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\n\n\n\n\nExam 2 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\n\n\n\n\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9\n\n\n\n\nMon, Feb 28\n\n\n\n\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\n\n\n\n\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\n\n\n\n\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\n\n\n\n\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10\n\n\n\n\nMon, Mar 14\n\n\n\n\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\n\n\n\n\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\n\n\n\n\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\n\n\n\n\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n11\n\n\n\n\nMon, Mar 21\n\n\n\n\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\n\n\n\n\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\n\n\n\n\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\n\n\n\n\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n12\n\n\n\n\nMon, Mar 28\n\n\n\n\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\n\n\n\n\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\n\n\n\n\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\n\n\n\n\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n13\n\n\n\n\nMon, Apr 4\n\n\n\n\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\n\n\n\n\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\n\n\n\n\nExam 3 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\n\n\n\n\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n14\n\n\n\n\nMon, Apr 11\n\n\n\n\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\n\n\n\n\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\n\n\n\n\nTBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\n\n\n\n\nDue: HW 5 + Peer review\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n15\n\n\n\n\nMon, Apr 18\n\n\n\n\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\n\n\n\n\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n16\n\n\n\n\nMon, Apr 25\n\n\n\n\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\n\n\n\n\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\n\n\n\n\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\n\n\n\n\nDate\n\n\n\n\nTopic\n\n\n\n\nPrepare\n\n\n\n\nSlides\n\n\n\n\nAE\n\n\n\n\nLab\n\n\n\n\nHW\n\n\n\n\nExam\n\n\n\n\nProject\n\n\n\n\n\n\n\n\n1\n\n\n\n\nWed, Jan 5\n\n\n\n\nLab 0 - Meet + greet\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 6\n\n\n\n\nWelcome to STA 210!\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\n\n\nMon, Jan 10\n\n\n\n\nLab 1 - Meet the toolkit\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 11\n\n\n\n\nSimple linear regression (SLR)\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 13\n\n\n\n\nSLR: Model fitting in R with tidymodels\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 14\n\n\n\n\nReleased: HW 5\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n🗝️\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\n\n\nMon, Jan 17\n\n\n\n\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\n\n\n\n\nSLR: Prediction + model evaluation\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 20\n\n\n\n\nSLR: Simulation-based inference\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 21\n\n\n\n\nReleased: HW 1\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n4\n\n\n\n\nMon, Jan 24\n\n\n\n\nLab 2 - College scorecard\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Jan 25\n\n\n\n\nSLR: Mathematical models for inference\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Jan 27\n\n\n\n\nSLR: Model diagnostics\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Jan 28\n\n\n\n\nDue: HW 1 + Lab 2\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n🗝️\n\n\n\n\n✍️\n\n\n🗝️\n\n\n\n\n\n\n\n\n\n\n5\n\n\n\n\nMon, Jan 31\n\n\n\n\nLab 3 - Coffee ratings\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n💻\n\n\n🗝️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 1\n\n\n\n\nMultiple linear regression (MLR)\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 3\n\n\n\n\nExam 1 review\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 4\n\n\n\n\nReleased: Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n✅\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 3\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n6\n\n\n\n\nMon, Feb 7\n\n\n\n\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n✅\n\n\n\n\n\n\n\n\n\n\nTue, Feb 8\n\n\n\n\nMLR: Types of predictors\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 10\n\n\n\n\nMLR: Model comparison\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 11\n\n\n\n\nReleased: HW 2\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n7\n\n\n\n\nMon, Feb 14\n\n\n\n\nLab: Project topic ideas\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n📂\n\n\n\n\n\n\n\n\nTue, Feb 15\n\n\n\n\nMLR: Feature engineering\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 17\n\n\n\n\nMLR: Feature engineering\n\n\n\n\n\n\n🖥️\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 18\n\n\n\n\nDue: HW 2 + Project topic ideas\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n🗝️\n\n\n\n\n\n\n📂\n\n\n\n\n\n\n8\n\n\n\n\nMon, Feb 21\n\n\n\n\nLab 4: The Office\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Feb 22\n\n\n\n\nMLR: Cross validation\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Feb 24\n\n\n\n\nExam 2 review\n\n\n\n\n\n\n🖥️\n\n\n\n\n📋\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Feb 25\n\n\n\n\nReleased: Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n✅\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 4\n\n\n\n\n\n\n\n\n\n\n💻\n\n\n\n\n\n\n\n\n\n\n\n\n9\n\n\n\n\nMon, Feb 28\n\n\n\n\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n✅\n\n\n\n\n\n\n\n\n\n\nTue, Mar 1\n\n\n\n\nMLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 3\n\n\n\n\nMLR: Model diagnostics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMon, Mar 7\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\n\n\n\n\nSpring break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\n\n\n\n\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10\n\n\n\n\nMon, Mar 14\n\n\n\n\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\n\n\n\n\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\n\n\n\n\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\n\n\n\n\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n11\n\n\n\n\nMon, Mar 21\n\n\n\n\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\n\n\n\n\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\n\n\n\n\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\n\n\n\n\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n12\n\n\n\n\nMon, Mar 28\n\n\n\n\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\n\n\n\n\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\n\n\n\n\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\n\n\n\n\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n13\n\n\n\n\nMon, Apr 4\n\n\n\n\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\n\n\n\n\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\n\n\n\n\nExam 3 review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\n\n\n\n\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n14\n\n\n\n\nMon, Apr 11\n\n\n\n\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\n\n\n\n\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\n\n\n\n\nTBA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\n\n\n\n\nDue: HW 5 + Peer review\n\n\n\n\n\n\n\n\n\n\n\n\n✍️\n\n\n\n\n\n\n\n\n\n\n15\n\n\n\n\nMon, Apr 18\n\n\n\n\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\n\n\n\n\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n16\n\n\n\n\nMon, Apr 25\n\n\n\n\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\n\n\n\n\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\n\n\n\n\nDue: Video comments"
   },
   {
     "objectID": "computing-troubleshooting.html",
@@ -4420,6 +4518,34 @@
     "objectID": "exams/exam-1.html#submission",
     "href": "exams/exam-1.html#submission",
     "title": "Exam 1",
+    "section": "Submission",
+    "text": "Submission\n\nPart 1 - Conceptual: The answers to the multiple choice/short answer questions should be submitted under Test & Quizzes in Sakai.\nPart 2 - Applied: The PDF document for the data analysis portion must be uploaded to Gradescope.\n\nYou must submit a PDF to Gradescope that corresponds to the .qmd file on your GitHub repository in order to receive credit for this portion of the exam.\nYou must upload a PDF, not HTML. Any non-PDF submissions will not be graded.\nMark the pages associated with each question. If any answer for a question spans multiple pages, mark all associated pages.\nMake sure to associate the “Workflow & formatting” section with the first page.\nFailure to mark the pages in Gradescope will result in point deductions. Any pages that are not marked will not be graded.\nMake sure that your uploaded PDF document matches your .qmd and the PDF in your GitHub repository exactly. Points will be deducted for documents that are not reproducible."
+  },
+  {
+    "objectID": "exams/exam-2.html#overview",
+    "href": "exams/exam-2.html#overview",
+    "title": "Exam 2",
+    "section": "Overview",
+    "text": "Overview\nExam 1 will be released on Friday, Feb 25 at 9 am ET and must be completed by Mon, Feb 28 at 11:59 pm.\nThe exam will consist of two parts:\n\nPart 1 - Conceptual: Multiple choice questions on Sakai test and quizzes. This portion may only be submitted one time. Go here to complete Part 1 of the exam.\nPart 2 - Applied: Data analysis in RStudio and submitted in Gradescope (like a usual lab and homework). Go to the GitHub organization for the course and find the exam-2- repo to complete Part 2 of your exam. Add your answers to the exam-2.qmd file in your repo.\n\nBoth portions must be completed and submitted by Mon, Feb 28 at 11:59 pm. Late work will only be accepted in the case of of extenuating circumstances and notification from your academic dean.\n🍀 Good luck! 🍀"
+  },
+  {
+    "objectID": "exams/exam-2.html#academic-integrity",
+    "href": "exams/exam-2.html#academic-integrity",
+    "title": "Exam 2",
+    "section": "Academic Integrity",
+    "text": "Academic Integrity\nBy taking this exam, you pledge to uphold the Duke Community Standard:\n\nI will not lie, cheat, or steal in my academic endeavors;\nI will conduct myself honorably in all my endeavors; and\nI will act if the Standard is compromised."
+  },
+  {
+    "objectID": "exams/exam-2.html#rules-notes",
+    "href": "exams/exam-2.html#rules-notes",
+    "title": "Exam 2",
+    "section": "Rules & Notes",
+    "text": "Rules & Notes\n\nThis is an individual assignment. Everything in your repository and on Sakai is for your eyes only.\nYou may not collaborate or communicate anything about this exam to anyone except the instructor and the head TA (Rick Presman). For example, you may not communicate with other students, other TAs, or post/solicit help on the internet, email or via any other method of communication.\nThe exam is open-book, open-note, so you may use any materials from class as you take the exam.\nOnly head TA and professor office hours will be held during the exam period.\nYou may not email the TAs questions about the exam.\nIf you have questions, direct message the professor or the head TA (Rick Presman) on Slack or post on Sakai Conversations for “Instructors in this site” only or attend my office hours (Monday, 10:30 am - 11:30 am)."
+  },
+  {
+    "objectID": "exams/exam-2.html#submission",
+    "href": "exams/exam-2.html#submission",
+    "title": "Exam 2",
     "section": "Submission",
     "text": "Submission\n\nPart 1 - Conceptual: The answers to the multiple choice/short answer questions should be submitted under Test & Quizzes in Sakai.\nPart 2 - Applied: The PDF document for the data analysis portion must be uploaded to Gradescope.\n\nYou must submit a PDF to Gradescope that corresponds to the .qmd file on your GitHub repository in order to receive credit for this portion of the exam.\nYou must upload a PDF, not HTML. Any non-PDF submissions will not be graded.\nMark the pages associated with each question. If any answer for a question spans multiple pages, mark all associated pages.\nMake sure to associate the “Workflow & formatting” section with the first page.\nFailure to mark the pages in Gradescope will result in point deductions. Any pages that are not marked will not be graded.\nMake sure that your uploaded PDF document matches your .qmd and the PDF in your GitHub repository exactly. Points will be deducted for documents that are not reproducible."
   }
