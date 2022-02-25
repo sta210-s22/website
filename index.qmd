@@ -6,18 +6,18 @@ This page contains an outline of the topics, content, and assignments for the se
 Note that this schedule will be updated as the semester progresses, with all changes documented here.
 
 ::: column-screen-inset-right
-<table style="width:89%;">
+<table style="width:79%;">
 <colgroup>
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -416,8 +416,8 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td><p>Thu, Feb 24</p></td>
 <td><p>Exam 2 review</p></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><a href="/slides/lec-15.html" title="Lecture slides"><span class="emoji" data-emoji="desktop_computer">🖥️</span></a></p></td>
+<td style="text-align: center;"><p><a href="/ae/ae-7-exam-2-review.html" title="Application exercise"><span class="emoji" data-emoji="clipboard">📋</span></a></p></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -432,7 +432,7 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><a href="/exams/exam-2.html"><span class="emoji" data-emoji="white_check_mark">✅</span></a></p></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
@@ -442,7 +442,7 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><a href="/labs/lab-4.html" title="Lab instructions"><span class="emoji" data-emoji="computer">💻</span></a></p></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -468,7 +468,7 @@ Note that this schedule will be updated as the semester progresses, with all cha
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><a href="/exams/exam-2.html"><span class="emoji" data-emoji="white_check_mark">✅</span></a></p></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">

@@ -1,0 +1,31 @@
+---
+title: "Exam 2 review"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+## Announcements
+
+::: nonincremental
+-   Exam 2 is released tomorrow (Friday) at 9am, due at 11:59pm on Monday
+-   Keys for HW and labs posted
+:::
+
+## Application exercise
+
+::: appex
+📋 [github.com/sta210-s22/ae-7-exam-2-review](https://github.com/sta210-s22/ae-7-exam-2-review)
+:::

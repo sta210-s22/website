@@ -1324,10 +1324,10 @@
     },
     "openintro": {
       "Package": "openintro",
-      "Version": "2.2.0",
+      "Version": "2.3.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fab5873428cb42ac7afc12592845dcbb",
+      "Hash": "a46ba5dbd8f59d73235fc3d2193f9e73",
       "Requirements": [
         "airports",
         "cherryblossom",

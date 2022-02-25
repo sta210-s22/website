@@ -1,0 +1,78 @@
+---
+title: "Exam 2"
+subtitle: "STA 210 - Spring 2022"
+editor: visual
+---
+
+# Instructions
+
+## Overview
+
+Exam 1 will be released on Friday, Feb 25 at 9 am ET and must be completed by Mon, Feb 28 at 11:59 pm.
+
+The exam will consist of two parts:
+
+1.  **Part 1 - Conceptual:** Multiple choice questions on Sakai test and quizzes. This portion may only be submitted one time. Go [here](https://sakai.duke.edu/samigo-app/servlet/Login?id=6fa7ebf3-01af-42a6-91ba-3e813d3901221645755471165) to complete Part 1 of the exam.
+2.  **Part 2 - Applied:** Data analysis in RStudio and submitted in Gradescope (like a usual lab and homework). Go to the [GitHub organization](https://github.com/sta210-s22/) for the course and find the **exam-2-** repo to complete Part 2 of your exam. Add your answers to the `exam-2.qmd` file in your repo.
+
+**Both portions must be completed and submitted by Mon, Feb 28 at 11:59 pm**.
+Late work will only be accepted in the case of of extenuating circumstances and notification from your academic dean.
+
+🍀 Good luck!
+🍀
+
+## Academic Integrity
+
+By taking this exam, you pledge to uphold the Duke Community Standard:
+
+-   I will not lie, cheat, or steal in my academic endeavors;
+
+-   I will conduct myself honorably in all my endeavors; and
+
+-   I will act if the Standard is compromised.
+
+## Rules & Notes
+
+-   This is an individual assignment.
+    Everything in your repository and on Sakai is for your eyes only.
+
+-   You may not collaborate or communicate anything about this exam to **anyone** except the instructor and the head TA (Rick Presman).
+    For example, you may not communicate with other students, other TAs, or post/solicit help on the internet, email or via any other method of communication.
+
+-   The exam is open-book, open-note, so you may use any materials from class as you take the exam.
+
+-   Only head TA and professor office hours will be held during the exam period.
+
+-   You may **not** email the TAs questions about the exam.
+
+-   If you have questions, direct message the professor or the head TA (Rick Presman) on Slack or post on Sakai Conversations for "Instructors in this site" only or attend my office hours (Monday, 10:30 am - 11:30 am).
+
+## Submission
+
+-   **Part 1 - Conceptual:** The answers to the multiple choice/short answer questions should be submitted under *Test & Quizzes* in Sakai.
+
+-   **Part 2 - Applied:** The PDF document for the data analysis portion must be uploaded to Gradescope.
+
+    -   You must submit a PDF to Gradescope that corresponds to the `.qmd` file on your GitHub repository in order to receive credit for this portion of the exam.
+
+    -   You must upload a PDF, not HTML.
+        Any non-PDF submissions will **not** be graded.
+
+    -   Mark the pages associated with each question.
+        If any answer for a question spans multiple pages, mark all associated pages.
+
+    -   Make sure to associate the "Workflow & formatting" section with the first page.
+
+    -   Failure to mark the pages in Gradescope will result in point deductions.
+        Any pages that are not marked will **not** be graded.
+
+    -   Make sure that your uploaded PDF document matches your `.qmd` and the PDF in your GitHub repository exactly.
+        Points will be deducted for documents that are not reproducible.
+
+# Grading (50 pts)
+
+| **Part**                             | **Points** |
+|:-------------------------------------|:----------:|
+| **Part 1 - Conceptual** (on Sakai)   |     10     |
+| **Part 2 - Applied** (on Gradescope) |     40     |
+| **Total**                            |     50     |

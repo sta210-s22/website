@@ -4,7 +4,7 @@ subtitle: "Cross validation"
 ---
 
 ::: callout-important
-Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-5-the-office-YOUR_GITHUB_USERNAME` to get started.
+Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-6-the-office-cv-YOUR_GITHUB_USERNAME` to get started.
 :::
 
 ## Packages
