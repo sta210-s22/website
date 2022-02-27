@@ -2580,7 +2580,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
