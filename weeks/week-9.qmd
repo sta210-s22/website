@@ -1,18 +1,20 @@
 ---
 title: "Week 9"
-subtitle: "TBA"
+subtitle: "MLR: Inference + conditions"
 editor: visual
 ---
 
 ::: callout-important
-Due dates:
+Due dates: Exam 1 due on Monday at 11:59pm.
 :::
-
-To be posted.
 
 ## Prepare
 
+No readings this week.
+
 ## Participate
+
+🖥️ [Lecture 15 - MLR: Inference + conditions](/slides/lec-15.html)
 
 ## Practice
 
