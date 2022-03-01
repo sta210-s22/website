@@ -11,6 +11,9 @@ website:
   repo-actions: [edit, issue]
 
   opengraph: true
+  twitter-card:
+    creator: "@minebocek"
+    image: "images/twitter-card.png"
 
   page-footer:
     right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
