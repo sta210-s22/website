@@ -1,0 +1,461 @@
+---
+title: "MLR: Inference"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+
+library(countdown)
+```
+
+# Welcome
+
+## Topics
+
+-   Conditions for inference
+
+-   Multicollinearity
+
+## Computational setup
+
+```{r}
+#| warning: false
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(knitr)      # for tables
+library(patchwork)  # for laying out plots
+library(rms)        # for vif
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+## Data: `rail_trail` {.smaller}
+
+::: nonincremental
+-   The Pioneer Valley Planning Commission (PVPC) collected data for ninety days from April 5, 2005 to November 15, 2005.
+-   Data collectors set up a laser sensor, with breaks in the laser beam recording when a rail-trail user passed the data collection station.
+:::
+
+```{r}
+rail_trail <- read_csv(here::here("slides", "data/rail_trail.csv"))
+rail_trail
+```
+
+Source: [Pioneer Valley Planning Commission](http://www.fvgreenway.org/pdfs/Northampton-Bikepath-Volume-Counts%20_05_LTA.pdf) via the **mosaicData** package.
+
+## Variables {.smaller}
+
+**Outcome**:
+
+`volume` estimated number of trail users that day (number of breaks recorded)
+
+. . .
+
+**Predictors**
+
+::: nonincremental
+-   `hightemp` daily high temperature (in degrees Fahrenheit)
+-   `avgtemp` average of daily low and daily high temperature (in degrees Fahrenheit)
+-   `season` one of "Fall", "Spring", or "Summer"
+-   `cloudcover` measure of cloud cover (in oktas)
+-   `precip` measure of precipitation (in inches)
+-   `day_type` one of "weekday" or "weekend"
+:::
+
+# Conditions for inference
+
+## Full model {.smaller}
+
+Including all available predictors
+
+Fit:
+
+```{r}
+rt_full_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(volume ~ ., data = rail_trail)
+```
+
+. . .
+
+Summarize:
+
+```{r}
+tidy(rt_full_fit)
+```
+
+. . .
+
+Augment:
+
+```{r}
+rt_full_aug <- augment(rt_full_fit$fit)
+```
+
+## Model conditions
+
+1.  Linearity: There is a linear relationship between the response and predictor variables.
+
+2.  Constant Variance: The variability about the least squares line is generally constant.
+
+3.  Normality: The distribution of the residuals is approximately normal.
+
+4.  Independence: The residuals are independent from each other.
+
+## Residuals vs. predicted values
+
+```{r}
+#| label: main_res_pred
+
+ggplot(data = rt_full_aug, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+  labs(x = "Predicted values", y = "Residuals")
+```
+
+## Linearity: Residuals vs. predicted
+
+::: question
+Does the linearity condition appear to be met?
+:::
+
+```{r}
+#| ref.label: main_res_pred
+#| echo: false
+```
+
+## Linearity: Residuals vs. predicted
+
+If there is some pattern in the plot of residuals vs. predicted values, you can look at individual plots of residuals vs. each predictor to try to identify the issue.
+
+## Linearity: Residuals vs. each predictor
+
+```{r}
+#| fig.asp: 0.5
+#| echo: false
+
+p1 <- ggplot(data = rt_full_aug, aes(x = hightemp, y = .resid)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+
+p2 <- ggplot(data = rt_full_aug, aes(x = avgtemp, y = .resid)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+
+p3 <- ggplot(data = rt_full_aug, aes(x = season, y = .resid)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+
+p4 <- ggplot(data = rt_full_aug, aes(x = cloudcover, y = .resid)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+
+p5 <- ggplot(data = rt_full_aug, aes(x = precip, y = .resid)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+
+p6 <- ggplot(data = rt_full_aug, aes(x = day_type, y = .resid)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+
+(p1 + p2 + p3) / (p4 + p5 + p6)
+```
+
+## Checking linearity
+
+-   The plot of residuals vs. predicted shows a fan shaped pattern
+
+-   The plots of residuals vs. high and low temperature also shows a similar pattern and vs. precipitation does not show a random scatter
+
+-   The linearity condition is not satisfied.
+
+## Checking constant variance
+
+::: question
+Does the constant variance condition appear to be satisfied?
+:::
+
+```{r}
+#| ref.label: main_res_pred
+#| echo: false
+```
+
+## Checking constant variance
+
+-   The vertical spread of the residuals is not constant across the plot.
+
+-   The constant variance condition is not satisfied.
+
+## Checking normality
+
+```{r}
+#| fig.asp: 0.8
+#| echo: false
+
+resid_hist <- ggplot(rt_full_aug, aes(x = .resid)) +
+  geom_histogram(binwidth = 50) +
+  labs(x = "Residuals")
+
+resid_box <- ggplot(rt_full_aug, aes(x = .resid)) +
+  geom_boxplot()
+
+resid_hist / resid_box
+```
+
+## Overlaying a density plot on a histogram
+
+::: appex
+📋 [github.com/sta210-s22/ae-8-rail-trail](https://github.com/sta210-s22/ae-8-rail-trail)
+:::
+
+::: columns
+::: {.column width="30%"}
+::: question
+**Ex 3.** Recreate the following visualization in R based on the results of the model.
+:::
+:::
+
+::: {.column width="70%"}
+```{r}
+#| label: density
+#| echo: false
+#| out.width: "100%"
+
+ggplot(rt_full_aug, aes(.resid)) +
+  geom_histogram(aes(y = after_stat(density)), binwidth = 50) +
+  stat_function(
+    fun = dnorm, 
+    args = list(mean = mean(rt_full_aug$.resid), sd = sd(rt_full_aug$.resid)), 
+    lwd = 2, 
+    color = "red"
+  )
+```
+:::
+:::
+
+## Checking independence
+
+-   We can often check the independence condition based on the context of the data and how the observations were collected.
+
+-   If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected.
+
+-   If there is a grouping variable lurking in the background, check the residuals based on that grouping variable.
+
+## Checking independence
+
+Residuals vs. order of data collection:
+
+```{r}
+ggplot(rt_full_aug, aes(y = .resid, x = 1:nrow(rt_full_aug))) +
+  geom_point() +
+  labs(x = "Order of data collection", y = "Residuals")
+```
+
+## Checking independence
+
+Residuals vs. predicted values by `season`:
+
+```{r}
+#| fig.asp: 0.5
+#| echo: false
+
+p1 <- ggplot(rt_full_aug, aes(x = season, fill = season, y = .resid)) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(x = "Season", y = "Residuals")
+
+p2 <- ggplot(rt_full_aug, aes(x = .fitted, color = season, y = .resid)) +
+  geom_point(alpha = 0.5, show.legend = FALSE) +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+  labs(x = "Predicted value", y = "Residuals")
+
+p1 + p2
+```
+
+## Checking independence
+
+Residuals vs. predicted values by `day_type`:
+
+```{r}
+#| fig.asp: 0.5
+#| echo: false
+
+p1 <- ggplot(rt_full_aug, aes(x = day_type, fill = day_type, y = .resid)) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(x = "Dat type", y = "Residuals")
+
+p2 <- ggplot(rt_full_aug, aes(x = .fitted, color = day_type, y = .resid)) +
+  geom_point(alpha = 0.5, show.legend = FALSE) +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+  labs(x = "Predicted value", y = "Residuals")
+
+p1 + p2
+```
+
+## Checking independence
+
+No clear pattern in the residuals vs. order of data collection plot and the model predicts similarly for seasons and day types.
+Independence condition appears to be satisfied, as far as we can evaluate it.
+
+# Multicollinearity
+
+## Why multicollinearity is a problem
+
+-   We can't include two variables that have a perfect linear association with each other
+
+-   If we did so, we could not find unique estimates for the model coefficients
+
+## Example {.smaller}
+
+Suppose the true population regression equation is $y = 3 + 4x$
+
+-   Suppose we try estimating that equation using a model with variables $x$ and $z = x/10$
+
+$$
+\begin{aligned}\hat{y}&= \hat{\beta}_0 + \hat{\beta}_1x  + \hat{\beta}_2z\\
+&= \hat{\beta}_0 + \hat{\beta}_1x  + \hat{\beta}_2\frac{x}{10}\\
+&= \hat{\beta}_0 + \bigg(\hat{\beta}_1 + \frac{\hat{\beta}_2}{10}\bigg)x
+\end{aligned}
+$$
+
+## Example {.smaller}
+
+$$\hat{y} = \hat{\beta}_0 + \bigg(\hat{\beta}_1 + \frac{\hat{\beta}_2}{10}\bigg)x$$
+
+-   We can set $\hat{\beta}_1$ and $\hat{\beta}_2$ to any two numbers such that $\hat{\beta}_1 + \frac{\hat{\beta}_2}{10} = 4$
+
+-   Therefore, we are unable to choose the "best" combination of $\hat{\beta}_1$ and $\hat{\beta}_2$
+
+## Why multicollinearity is a problem
+
+-   When we have almost perfect collinearities (i.e. highly correlated predictor variables), the standard errors for our regression coefficients inflate
+
+-   In other words, we lose precision in our estimates of the regression coefficients
+
+-   This impedes our ability to use the model for inference or prediction
+
+## Detecting Multicollinearity
+
+Multicollinearity may occur when... - There are very high correlations $(r > 0.9)$ among two or more predictor variables, especially when the sample size is small
+
+-   One (or more) predictor variables is an almost perfect linear combination of the others
+
+-   Include a quadratic in the model mean-centering the variable first
+
+-   Including interactions between two or more continuous variables
+
+## Detecting multicollinearity in the EDA
+
+-   Look at a correlation matrix of the predictor variables, including all indicator variables
+    -   Look out for values close to 1 or -1
+-   Look at a scatterplot matrix of the predictor variables
+    -   Look out for plots that show a relatively linear relationship
+
+## Detecting Multicollinearity (VIF)
+
+**Variance Inflation Factor (VIF)**: Measure of multicollinearity in the regression model
+
+$$VIF(\hat{\beta}_j) = \frac{1}{1-R^2_{X_j|X_{-j}}}$$
+
+where $R^2_{X_j|X_{-j}}$ is the proportion of variation $X$ that is explained by the linear combination of the other explanatory variables in the model.
+
+## Detecting Multicollinearity (VIF)
+
+Typically $VIF > 10$ indicates concerning multicollinearity - Variables with similar values of VIF are typically the ones correlated with each other
+
+<br>
+
+Use the `vif()` function in the **rms** R package to calculate VIF
+
+## VIF For SAT Model
+
+```{r echo = T}
+vif(rt_full_fit$fit)
+```
+
+. . .
+
+`hightemp` and `avgtemp` are correlated.
+We need to remove one of these variables and refit the model.
+
+## Model without `hightemp` {.smaller}
+
+```{r}
+m1 <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(volume ~ . - hightemp, data = rail_trail)
+  
+m1 %>%
+  tidy() %>%
+  kable(digits = 3)
+
+glance(m1) %>%
+  select(adj.r.squared, AIC, BIC)
+```
+
+## Model without `avgtemp`
+
+```{r}
+m2 <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(volume ~ . - avgtemp, data = rail_trail)
+  
+m2 %>%
+  tidy() %>%
+  kable(digits = 3)
+
+glance(m2) %>%
+  select(adj.r.squared, AIC, BIC)
+```
+
+## Choosing a model
+
+Model with **hightemp** removed:
+
+```{r}
+#| echo: false
+
+glance(m1) %>%
+  select(adj.r.squared, AIC, BIC) %>% kable(digits = 2)
+```
+
+Model with **avgtemp** removed:
+
+```{r echo = F}
+#| echo: false
+
+glance(m2) %>%
+  select(adj.r.squared, AIC, BIC) %>% kable(digits = 2)
+```
+
+Based on Adjusted $R^2$, AIC, and BIC, the model with **avgtemp** removed is a better fit.
+Therefore, we choose to remove **avgtemp** from the model and leave **hightemp** in the model to deal with the multicollinearity.
+
+## Recap
+
+-   Conditions for inference
+
+-   Multicollinearity

@@ -5,7 +5,7 @@ editor: visual
 ---
 
 ::: callout-important
-Due dates: Exam 1 due on Monday at 11:59pm.
+Due date: Exam 1 released on Fri, Feb 35, due Mon, Feb 28 at 11:59pm
 :::
 
 ## Prepare
@@ -14,11 +14,17 @@ No readings this week.
 
 ## Participate
 
-🖥️ [Lecture 15 - MLR: Inference + conditions](/slides/lec-15.html)
+🖥️ [Lecture 15 - MLR: Inference](/slides/lec-15.html)
+
+🖥️ Lecture 16 - MLR: Model diagnostics + multicollinearity
 
 ## Practice
 
+📋 [Application Exercise 8 - Rail Trail](/ae/ae-8-rail-trail.html)
+
 ## Perform
+
+✅ [Exam 2](/exams/exam-2.html)
 
 <br><br>
 

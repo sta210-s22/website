@@ -1,0 +1,74 @@
+---
+title: "AE 8: Rail Trail"
+---
+
+::: callout-important
+Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-8-rail-trail YOUR_GITHUB_USERNAME` to get started.
+:::
+
+## Packages and data
+
+```{r}
+#| label: load-pkgs-data
+#| message: false
+ 
+library(tidyverse)
+library(tidymodels)
+
+rail_trail <- read_csv("data/rail_trail.csv")
+```
+
+## Exercise 1
+
+Fit a model predicting `volume` from `hightemp` and `season`.
+
+```{r}
+rt_mlr_main_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(volume ~ hightemp + season, data = rail_trail)
+
+tidy(rt_mlr_main_fit)
+```
+
+Recreate the following visualization which displays the three regression lines we can draw based on the results of this model.
+
+![](images/main-effects-lines.png){fig-align="center" width="500"}
+
+```{r}
+#| label: main-effects-lines
+
+# add code here
+```
+
+## Exercise 2
+
+Add an interaction effect between `hightemp` and `season` and comment on the significance of the interaction predictors.
+Time permitting, visualize the interaction model as well.
+
+```{r}
+#| label: interaction-effects
+
+# add code here
+```
+
+## Exercise 3
+
+Fit a model predicting `volume` from all available predictors.
+
+```{r}
+rt_full_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(volume ~ ., data = rail_trail)
+
+tidy(rt_full_fit)
+```
+
+Recreate the following visualization which displays a histogram of residuals and a normal density curve overlaid.
+
+![](images/density-hist.png){fig-align="center" width="500"}
+
+```{r}
+#| label: density-histogram
+
+# add code here
+```
