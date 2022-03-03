@@ -255,7 +255,8 @@ ggplot(rt_mlr_main_aug, aes(x = hightemp, y = volume)) +
 :::
 
 ::: question
-**Ex 2.** Add an interaction effect between `hightemp` and `season` and comment on the significance of the interaction predictors. Time permitting, visualize the interaction model as well.
+**Ex 2.** Add an interaction effect between `hightemp` and `season` and comment on the significance of the interaction predictors.
+Time permitting, visualize the interaction model as well.
 :::
 
 ```{r}
@@ -263,7 +264,6 @@ ggplot(rt_mlr_main_aug, aes(x = hightemp, y = volume)) +
 
 countdown(minutes = 10)
 ```
-
 
 # Confidence interval for $\beta_j$
 

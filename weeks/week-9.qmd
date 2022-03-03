@@ -14,9 +14,9 @@ No readings this week.
 
 ## Participate
 
-🖥️ [Lecture 15 - MLR: Inference](/slides/lec-15.html)
+🖥️ [Lecture 16 - MLR: Inference](/slides/lec-16.html)
 
-🖥️ Lecture 16 - MLR: Model diagnostics + multicollinearity
+🖥️ [Lecture 17 - MLR: Inference conditions + multicollinearity](/slides/lec-17.html)
 
 ## Practice
 
