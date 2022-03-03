@@ -2727,14 +2727,14 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -2893,231 +2893,231 @@
   {
     "objectID": "slides/lec-17.html#topics",
     "href": "slides/lec-17.html#topics",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Topics",
     "text": "Topics\n\nConditions for inference\nMulticollinearity"
   },
   {
     "objectID": "slides/lec-17.html#computational-setup",
     "href": "slides/lec-17.html#computational-setup",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Computational setup",
     "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)      # for tables\nlibrary(patchwork)  # for laying out plots\nlibrary(rms)        # for vif\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
   },
   {
     "objectID": "slides/lec-17.html#data-rail_trail",
     "href": "slides/lec-17.html#data-rail_trail",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Data: rail_trail",
     "text": "Data: rail_trail\n\n\nThe Pioneer Valley Planning Commission (PVPC) collected data for ninety days from April 5, 2005 to November 15, 2005.\nData collectors set up a laser sensor, with breaks in the laser beam recording when a rail-trail user passed the data collection station.\n\n\n\nrail_trail <- read_csv(here::here(\"slides\", \"data/rail_trail.csv\"))\nrail_trail\n\n# A tibble: 90 × 7\n   volume hightemp avgtemp season cloudcover precip day_type\n    <dbl>    <dbl>   <dbl> <chr>       <dbl>  <dbl> <chr>   \n 1    501       83    66.5 Summer       7.60 0      Weekday \n 2    419       73    61   Summer       6.30 0.290  Weekday \n 3    397       74    63   Spring       7.5  0.320  Weekday \n 4    385       95    78   Summer       2.60 0      Weekend \n 5    200       44    48   Spring      10    0.140  Weekday \n 6    375       69    61.5 Spring       6.60 0.0200 Weekday \n 7    417       66    52.5 Spring       2.40 0      Weekday \n 8    629       66    52   Spring       0    0      Weekend \n 9    533       80    67.5 Summer       3.80 0      Weekend \n10    547       79    62   Summer       4.10 0      Weekday \n# … with 80 more rows\n\n\nSource: Pioneer Valley Planning Commission via the mosaicData package."
   },
   {
     "objectID": "slides/lec-17.html#variables",
     "href": "slides/lec-17.html#variables",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Variables",
-    "text": "Variables\nOutcome:\nvolume estimated number of trail users that day (number of breaks recorded)\n\nPredictors\n\n\nhightemp daily high temperature (in degrees Fahrenheit)\navgtemp average of daily low and daily high temperature (in degrees Fahrenheit)\nseason one of “Fall”, “Spring”, or “Summer”\ncloudcover measure of cloud cover (in oktas)\nprecip measure of precipitation (in inches)\nday_type one of “weekday” or “weekend”"
+    "text": "Variables\nOutcome:\nvolume estimated number of trail users that day (number of breaks recorded)\nPredictors\n\n\nhightemp daily high temperature (in degrees Fahrenheit)\navgtemp average of daily low and daily high temperature (in degrees Fahrenheit)\nseason one of “Fall”, “Spring”, or “Summer”\ncloudcover measure of cloud cover (in oktas)\nprecip measure of precipitation (in inches)\nday_type one of “weekday” or “weekend”"
   },
   {
     "objectID": "slides/lec-17.html#full-model",
     "href": "slides/lec-17.html#full-model",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Full model",
     "text": "Full model\nIncluding all available predictors\nFit:\n\nrt_full_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(volume ~ ., data = rail_trail)\n\n\nSummarize:\n\ntidy(rt_full_fit)\n\n# A tibble: 8 × 5\n  term            estimate std.error statistic p.value\n  <chr>              <dbl>     <dbl>     <dbl>   <dbl>\n1 (Intercept)        17.6      76.6      0.230 0.819  \n2 hightemp            7.07      2.42     2.92  0.00450\n3 avgtemp            -2.04      3.14    -0.648 0.519  \n4 seasonSpring       35.9      33.0      1.09  0.280  \n5 seasonSummer       24.2      52.8      0.457 0.649  \n6 cloudcover         -7.25      3.84    -1.89  0.0627 \n7 precip            -95.7      42.6     -2.25  0.0273 \n8 day_typeWeekend    35.9      22.4      1.60  0.113  \n\n\n\n\nAugment:\n\nrt_full_aug <- augment(rt_full_fit$fit)"
   },
   {
     "objectID": "slides/lec-17.html#model-conditions",
     "href": "slides/lec-17.html#model-conditions",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Model conditions",
     "text": "Model conditions\n\nLinearity: There is a linear relationship between the response and predictor variables.\nConstant Variance: The variability about the least squares line is generally constant.\nNormality: The distribution of the residuals is approximately normal.\nIndependence: The residuals are independent from each other."
   },
   {
     "objectID": "slides/lec-17.html#residuals-vs.-predicted-values",
     "href": "slides/lec-17.html#residuals-vs.-predicted-values",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Residuals vs. predicted values",
     "text": "Residuals vs. predicted values\n\nggplot(data = rt_full_aug, aes(x = .fitted, y = .resid)) +\n  geom_point(alpha = 0.5) +\n  geom_hline(yintercept = 0, color = \"red\", linetype = \"dashed\") +\n  labs(x = \"Predicted values\", y = \"Residuals\")"
   },
   {
     "objectID": "slides/lec-17.html#linearity-residuals-vs.-predicted",
     "href": "slides/lec-17.html#linearity-residuals-vs.-predicted",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Linearity: Residuals vs. predicted",
     "text": "Linearity: Residuals vs. predicted\n\nDoes the linearity condition appear to be met?"
   },
   {
     "objectID": "slides/lec-17.html#linearity-residuals-vs.-predicted-1",
     "href": "slides/lec-17.html#linearity-residuals-vs.-predicted-1",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Linearity: Residuals vs. predicted",
     "text": "Linearity: Residuals vs. predicted\nIf there is some pattern in the plot of residuals vs. predicted values, you can look at individual plots of residuals vs. each predictor to try to identify the issue."
   },
   {
     "objectID": "slides/lec-17.html#linearity-residuals-vs.-each-predictor",
     "href": "slides/lec-17.html#linearity-residuals-vs.-each-predictor",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Linearity: Residuals vs. each predictor",
     "text": "Linearity: Residuals vs. each predictor"
   },
   {
     "objectID": "slides/lec-17.html#checking-linearity",
     "href": "slides/lec-17.html#checking-linearity",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking linearity",
     "text": "Checking linearity\n\nThe plot of residuals vs. predicted shows a fan shaped pattern\nThe plots of residuals vs. high and low temperature also shows a similar pattern and vs. precipitation does not show a random scatter\nThe linearity condition is not satisfied."
   },
   {
     "objectID": "slides/lec-17.html#checking-constant-variance",
     "href": "slides/lec-17.html#checking-constant-variance",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking constant variance",
     "text": "Checking constant variance\n\nDoes the constant variance condition appear to be satisfied?"
   },
   {
     "objectID": "slides/lec-17.html#checking-constant-variance-1",
     "href": "slides/lec-17.html#checking-constant-variance-1",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking constant variance",
     "text": "Checking constant variance\n\nThe vertical spread of the residuals is not constant across the plot.\nThe constant variance condition is not satisfied."
   },
   {
     "objectID": "slides/lec-17.html#checking-normality",
     "href": "slides/lec-17.html#checking-normality",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking normality",
     "text": "Checking normality"
   },
   {
     "objectID": "slides/lec-17.html#overlaying-a-density-plot-on-a-histogram",
     "href": "slides/lec-17.html#overlaying-a-density-plot-on-a-histogram",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Overlaying a density plot on a histogram",
     "text": "Overlaying a density plot on a histogram\n\n📋 github.com/sta210-s22/ae-8-rail-trail\n\n\n\n\nEx 3. Recreate the following visualization in R based on the results of the model."
   },
   {
     "objectID": "slides/lec-17.html#checking-independence",
     "href": "slides/lec-17.html#checking-independence",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking independence",
     "text": "Checking independence\n\nWe can often check the independence condition based on the context of the data and how the observations were collected.\nIf the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected.\nIf there is a grouping variable lurking in the background, check the residuals based on that grouping variable."
   },
   {
     "objectID": "slides/lec-17.html#checking-independence-1",
     "href": "slides/lec-17.html#checking-independence-1",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking independence",
     "text": "Checking independence\nResiduals vs. order of data collection:\n\nggplot(rt_full_aug, aes(y = .resid, x = 1:nrow(rt_full_aug))) +\n  geom_point() +\n  labs(x = \"Order of data collection\", y = \"Residuals\")"
   },
   {
     "objectID": "slides/lec-17.html#checking-independence-2",
     "href": "slides/lec-17.html#checking-independence-2",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking independence",
     "text": "Checking independence\nResiduals vs. predicted values by season:"
   },
   {
     "objectID": "slides/lec-17.html#checking-independence-3",
     "href": "slides/lec-17.html#checking-independence-3",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking independence",
     "text": "Checking independence\nResiduals vs. predicted values by day_type:"
   },
   {
     "objectID": "slides/lec-17.html#checking-independence-4",
     "href": "slides/lec-17.html#checking-independence-4",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Checking independence",
     "text": "Checking independence\nNo clear pattern in the residuals vs. order of data collection plot and the model predicts similarly for seasons and day types. Independence condition appears to be satisfied, as far as we can evaluate it."
   },
   {
     "objectID": "slides/lec-17.html#why-multicollinearity-is-a-problem",
     "href": "slides/lec-17.html#why-multicollinearity-is-a-problem",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Why multicollinearity is a problem",
     "text": "Why multicollinearity is a problem\n\nWe can’t include two variables that have a perfect linear association with each other\nIf we did so, we could not find unique estimates for the model coefficients"
   },
   {
     "objectID": "slides/lec-17.html#example",
     "href": "slides/lec-17.html#example",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Example",
     "text": "Example\nSuppose the true population regression equation is \\(y = 3 + 4x\\)\n\nSuppose we try estimating that equation using a model with variables \\(x\\) and \\(z = x/10\\)\n\n\\[\n\\begin{aligned}\\hat{y}&= \\hat{\\beta}_0 + \\hat{\\beta}_1x  + \\hat{\\beta}_2z\\\\\n&= \\hat{\\beta}_0 + \\hat{\\beta}_1x  + \\hat{\\beta}_2\\frac{x}{10}\\\\\n&= \\hat{\\beta}_0 + \\bigg(\\hat{\\beta}_1 + \\frac{\\hat{\\beta}_2}{10}\\bigg)x\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "slides/lec-17.html#example-1",
     "href": "slides/lec-17.html#example-1",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Example",
     "text": "Example\n\\[\\hat{y} = \\hat{\\beta}_0 + \\bigg(\\hat{\\beta}_1 + \\frac{\\hat{\\beta}_2}{10}\\bigg)x\\]\n\nWe can set \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_2\\) to any two numbers such that \\(\\hat{\\beta}_1 + \\frac{\\hat{\\beta}_2}{10} = 4\\)\nTherefore, we are unable to choose the “best” combination of \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_2\\)"
   },
   {
     "objectID": "slides/lec-17.html#why-multicollinearity-is-a-problem-1",
     "href": "slides/lec-17.html#why-multicollinearity-is-a-problem-1",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Why multicollinearity is a problem",
     "text": "Why multicollinearity is a problem\n\nWhen we have almost perfect collinearities (i.e. highly correlated predictor variables), the standard errors for our regression coefficients inflate\nIn other words, we lose precision in our estimates of the regression coefficients\nThis impedes our ability to use the model for inference or prediction"
   },
   {
     "objectID": "slides/lec-17.html#detecting-multicollinearity",
     "href": "slides/lec-17.html#detecting-multicollinearity",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Detecting Multicollinearity",
     "text": "Detecting Multicollinearity\nMulticollinearity may occur when… - There are very high correlations \\((r > 0.9)\\) among two or more predictor variables, especially when the sample size is small\n\nOne (or more) predictor variables is an almost perfect linear combination of the others\nInclude a quadratic in the model mean-centering the variable first\nIncluding interactions between two or more continuous variables"
   },
   {
     "objectID": "slides/lec-17.html#detecting-multicollinearity-in-the-eda",
     "href": "slides/lec-17.html#detecting-multicollinearity-in-the-eda",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Detecting multicollinearity in the EDA",
     "text": "Detecting multicollinearity in the EDA\n\nLook at a correlation matrix of the predictor variables, including all indicator variables\n\nLook out for values close to 1 or -1\n\nLook at a scatterplot matrix of the predictor variables\n\nLook out for plots that show a relatively linear relationship"
   },
   {
     "objectID": "slides/lec-17.html#detecting-multicollinearity-vif",
     "href": "slides/lec-17.html#detecting-multicollinearity-vif",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Detecting Multicollinearity (VIF)",
     "text": "Detecting Multicollinearity (VIF)\nVariance Inflation Factor (VIF): Measure of multicollinearity in the regression model\n\\[VIF(\\hat{\\beta}_j) = \\frac{1}{1-R^2_{X_j|X_{-j}}}\\]\nwhere \\(R^2_{X_j|X_{-j}}\\) is the proportion of variation \\(X\\) that is explained by the linear combination of the other explanatory variables in the model."
   },
   {
     "objectID": "slides/lec-17.html#detecting-multicollinearity-vif-1",
     "href": "slides/lec-17.html#detecting-multicollinearity-vif-1",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Detecting Multicollinearity (VIF)",
     "text": "Detecting Multicollinearity (VIF)\nTypically \\(VIF > 10\\) indicates concerning multicollinearity - Variables with similar values of VIF are typically the ones correlated with each other\n\nUse the vif() function in the rms R package to calculate VIF"
   },
   {
     "objectID": "slides/lec-17.html#vif-for-sat-model",
     "href": "slides/lec-17.html#vif-for-sat-model",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "VIF For SAT Model",
     "text": "VIF For SAT Model\n\nvif(rt_full_fit$fit)\n\n       hightemp         avgtemp    seasonSpring    seasonSummer      cloudcover \n      10.259978       13.086175        2.751577        5.841985        1.587485 \n         precip day_typeWeekend \n       1.295352        1.125741 \n\n\n\nhightemp and avgtemp are correlated. We need to remove one of these variables and refit the model."
   },
   {
     "objectID": "slides/lec-17.html#model-without-hightemp",
     "href": "slides/lec-17.html#model-without-hightemp",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Model without hightemp",
     "text": "Model without hightemp\n\nm1 <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(volume ~ . - hightemp, data = rail_trail)\n  \nm1 %>%\n  tidy() %>%\n  kable(digits = 3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n76.071\n77.204\n0.985\n0.327\n\n\navgtemp\n6.003\n1.583\n3.792\n0.000\n\n\nseasonSpring\n34.555\n34.454\n1.003\n0.319\n\n\nseasonSummer\n13.531\n55.024\n0.246\n0.806\n\n\ncloudcover\n-12.807\n3.488\n-3.672\n0.000\n\n\nprecip\n-110.736\n44.137\n-2.509\n0.014\n\n\nday_typeWeekend\n48.420\n22.993\n2.106\n0.038\n\n\n\n\nglance(m1) %>%\n  select(adj.r.squared, AIC, BIC)\n\n# A tibble: 1 × 3\n  adj.r.squared   AIC   BIC\n          <dbl> <dbl> <dbl>\n1         0.421 1088. 1108."
   },
   {
     "objectID": "slides/lec-17.html#model-without-avgtemp",
     "href": "slides/lec-17.html#model-without-avgtemp",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Model without avgtemp",
     "text": "Model without avgtemp\n\nm2 <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(volume ~ . - avgtemp, data = rail_trail)\n  \nm2 %>%\n  tidy() %>%\n  kable(digits = 3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n8.421\n74.992\n0.112\n0.911\n\n\nhightemp\n5.696\n1.164\n4.895\n0.000\n\n\nseasonSpring\n31.239\n32.082\n0.974\n0.333\n\n\nseasonSummer\n9.424\n47.504\n0.198\n0.843\n\n\ncloudcover\n-8.353\n3.435\n-2.431\n0.017\n\n\nprecip\n-98.904\n42.137\n-2.347\n0.021\n\n\nday_typeWeekend\n37.062\n22.280\n1.663\n0.100\n\n\n\n\nglance(m2) %>%\n  select(adj.r.squared, AIC, BIC)\n\n# A tibble: 1 × 3\n  adj.r.squared   AIC   BIC\n          <dbl> <dbl> <dbl>\n1         0.473 1079. 1099."
   },
   {
     "objectID": "slides/lec-17.html#choosing-a-model",
     "href": "slides/lec-17.html#choosing-a-model",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Choosing a model",
     "text": "Choosing a model\nModel with hightemp removed:\n\n\n\n\n\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.42\n1087.5\n1107.5\n\n\n\n\n\nModel with avgtemp removed:\n\n\n\n\n\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.47\n1079.05\n1099.05\n\n\n\n\n\nBased on Adjusted \\(R^2\\), AIC, and BIC, the model with avgtemp removed is a better fit. Therefore, we choose to remove avgtemp from the model and leave hightemp in the model to deal with the multicollinearity."
   },
   {
     "objectID": "slides/lec-17.html#recap",
     "href": "slides/lec-17.html#recap",
-    "title": "MLR: Inference",
+    "title": "MLR: Inference conditions + multicollinearity",
     "section": "Recap",
     "text": "Recap\n\nConditions for inference\nMulticollinearity\n\n\n\n\nsta210-s22.github.io/website"
   },
@@ -3672,7 +3672,7 @@
     "href": "weeks/week-9.html#participate",
     "title": "Week 9",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lecture 15 - MLR: Inference\n🖥️ Lecture 16 - MLR: Model diagnostics + multicollinearity"
+    "text": "Participate\n🖥️ Lecture 16 - MLR: Inference\n🖥️ Lecture 17 - MLR: Inference conditions + multicollinearity"
   },
   {
     "objectID": "weeks/week-9.html#practice",
@@ -4557,13 +4557,6 @@
     "text": "Grading\nTotal points available: 50 points.\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 9\n45\n\n\nWorkflow & formatting\n51"
   },
   {
-    "objectID": "hw/hw-2.html#references",
-    "href": "hw/hw-2.html#references",
-    "title": "HW 2 - Multiple linear regression",
-    "section": "References",
-    "text": "References\n\n\n\n\nGarbe, Lisa, Richard Rau, and Theo Toppe. 2020. “Influence of Perceived Threat of Covid-19 and HEXACO Personality Traits on Toilet Paper Stockpiling.” Edited by Valerio Capraro. PLOS ONE 15 (6): e0234232. https://doi.org/10.1371/journal.pone.0234232.\n\n\nGorman, Kristen B., Tony D. Williams, and William R. Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLOS ONE 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081."
-  },
-  {
     "objectID": "course-team.html#instructor",
     "href": "course-team.html#instructor",
     "title": "Teaching team",
@@ -4876,7 +4869,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Model diagnostics + Multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n\nFri, Mar 11\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: HW 3 + Project proposals\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nDue: HW 4 + Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nProject peer review of drafts\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nDue: HW 5 + Peer review\n\n\n\n\n✍️\n\n\n\n\n15\nMon, Apr 18\nLab: Work on project\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "computing-troubleshooting.html",
