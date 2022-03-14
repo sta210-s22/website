@@ -128,7 +128,8 @@ This includes:
 
 ### Data dictionary (aka code book)
 
-Submit a data dictionary for all the variables in your data set in the `README` of your project repo.
+Submit a data dictionary for all the variables in your data set in the `README` of your project repo, in the `data` folder.
+Link to this file from your proposal writeup.
 
 ### Submission
 
