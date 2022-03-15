@@ -469,6 +469,244 @@
     "text": "Midori says…"
   },
   {
+    "objectID": "slides/lec-18.html#announcements",
+    "href": "slides/lec-18.html#announcements",
+    "title": "Logistic regression",
+    "section": "Announcements",
+    "text": "Announcements\n\nSchedule changes for the remainder of the semester\nThursday office hours in my office: 213 Old Chem\nAny questions on project proposals?"
+  },
+  {
+    "objectID": "slides/lec-18.html#topics",
+    "href": "slides/lec-18.html#topics",
+    "title": "Logistic regression",
+    "section": "Topics",
+    "text": "Topics\n\nLogistic regression for binary response variable\nRelationship between odds and probabilities\nUse logistic regression model to calculate predicted odds and probabilities"
+  },
+  {
+    "objectID": "slides/lec-18.html#computational-setup",
+    "href": "slides/lec-18.html#computational-setup",
+    "title": "Logistic regression",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(Stat2Data)\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
+  },
+  {
+    "objectID": "slides/lec-18.html#types-of-outcome-variables",
+    "href": "slides/lec-18.html#types-of-outcome-variables",
+    "title": "Logistic regression",
+    "section": "Types of outcome variables",
+    "text": "Types of outcome variables\nQuantitative outcome variable:\n\nSales price of a house in Levittown, NY\nModel: Expected sales price given the number of bedrooms, lot size, etc.\n\n\nCategorical outcone variable:\n\nHigh risk of coronary heart disease\nModel: Probability an adult is high risk of heart disease given their age, total cholesterol, etc."
+  },
+  {
+    "objectID": "slides/lec-18.html#models-for-categorical-outcomes",
+    "href": "slides/lec-18.html#models-for-categorical-outcomes",
+    "title": "Logistic regression",
+    "section": "Models for categorical outcomes",
+    "text": "Models for categorical outcomes\n\n\nLogistic regression\n2 Outcomes\n1: Yes, 0: No\n\nMultinomial logistic regression\n3+ Outcomes\n1: Democrat, 2: Republican, 3: Independent"
+  },
+  {
+    "objectID": "slides/lec-18.html#election-forecasts",
+    "href": "slides/lec-18.html#election-forecasts",
+    "title": "Logistic regression",
+    "section": "2020 election forecasts",
+    "text": "2020 election forecasts\n\nSource: FiveThirtyEight Election Forcasts"
+  },
+  {
+    "objectID": "slides/lec-18.html#nba-finals-predictions",
+    "href": "slides/lec-18.html#nba-finals-predictions",
+    "title": "Logistic regression",
+    "section": "NBA finals predictions",
+    "text": "NBA finals predictions\n\nSource: FiveThirtyEight 2019-20 NBA Predictions"
+  },
+  {
+    "objectID": "slides/lec-18.html#do-teenagers-get-7-hours-of-sleep",
+    "href": "slides/lec-18.html#do-teenagers-get-7-hours-of-sleep",
+    "title": "Logistic regression",
+    "section": "Do teenagers get 7+ hours of sleep?",
+    "text": "Do teenagers get 7+ hours of sleep?\n\n\nStudents in grades 9 - 12 surveyed about health risk behaviors including whether they usually get 7 or more hours of sleep.\nSleep7\n1: yes\n0: no\n\n\ndata(YouthRisk2009)\nsleep <- YouthRisk2009 %>%\n  as_tibble() %>%\n  filter(!is.na(Age), !is.na(Sleep7))\nsleep %>%\n  relocate(Age, Sleep7)\n\n# A tibble: 446 × 6\n     Age Sleep7 Sleep           SmokeLife SmokeDaily MarijuaEver\n   <int>  <int> <fct>           <fct>     <fct>            <int>\n 1    16      1 8 hours         Yes       Yes                  1\n 2    17      0 5 hours         Yes       Yes                  1\n 3    18      0 5 hours         Yes       Yes                  1\n 4    17      1 7 hours         Yes       No                   1\n 5    15      0 4 or less hours No        No                   0\n 6    17      0 6 hours         No        No                   0\n 7    17      1 7 hours         No        No                   0\n 8    16      1 8 hours         Yes       No                   0\n 9    16      1 8 hours         No        No                   0\n10    18      0 4 or less hours Yes       Yes                  1\n# … with 436 more rows"
+  },
+  {
+    "objectID": "slides/lec-18.html#plot-the-data",
+    "href": "slides/lec-18.html#plot-the-data",
+    "title": "Logistic regression",
+    "section": "Plot the data",
+    "text": "Plot the data\n\nggplot(sleep, aes(x = Age, y = Sleep7)) +\n  geom_point() + \n  labs(y = \"Getting 7+ hours of sleep\")"
+  },
+  {
+    "objectID": "slides/lec-18.html#lets-fit-a-linear-regression-model",
+    "href": "slides/lec-18.html#lets-fit-a-linear-regression-model",
+    "title": "Logistic regression",
+    "section": "Let’s fit a linear regression model",
+    "text": "Let’s fit a linear regression model\nOutcome: \\(Y\\) = 1: yes, 0: no"
+  },
+  {
+    "objectID": "slides/lec-18.html#lets-use-proportions",
+    "href": "slides/lec-18.html#lets-use-proportions",
+    "title": "Logistic regression",
+    "section": "Let’s use proportions",
+    "text": "Let’s use proportions\nOutcome: Probability of getting 7+ hours of sleep"
+  },
+  {
+    "objectID": "slides/lec-18.html#what-happens-if-we-zoom-out",
+    "href": "slides/lec-18.html#what-happens-if-we-zoom-out",
+    "title": "Logistic regression",
+    "section": "What happens if we zoom out?",
+    "text": "What happens if we zoom out?\nOutcome: Probability of getting 7+ hours of sleep\n\n🛑 This model produces predictions outside of 0 and 1."
+  },
+  {
+    "objectID": "slides/lec-18.html#lets-try-another-model",
+    "href": "slides/lec-18.html#lets-try-another-model",
+    "title": "Logistic regression",
+    "section": "Let’s try another model",
+    "text": "Let’s try another model\n\n✅ This model (called a logistic regression model) only produces predictions between 0 and 1."
+  },
+  {
+    "objectID": "slides/lec-18.html#the-code",
+    "href": "slides/lec-18.html#the-code",
+    "title": "Logistic regression",
+    "section": "The code",
+    "text": "The code\n\nggplot(sleep_age, aes(x = Age, y = prop)) +\n  geom_point() + \n  geom_hline(yintercept = c(0,1), lty = 2) + \n  stat_smooth(method =\"glm\", method.args = list(family = \"binomial\"), \n              fullrange = TRUE, se = FALSE) +\n  labs(y = \"P(7+ hours of sleep)\") +\n  xlim(1, 40) +\n  ylim(-0.5, 1.5)"
+  },
+  {
+    "objectID": "slides/lec-18.html#different-types-of-models",
+    "href": "slides/lec-18.html#different-types-of-models",
+    "title": "Logistic regression",
+    "section": "Different types of models",
+    "text": "Different types of models\n\n\n\n\n\n\n\n\nMethod\nOutcome\nModel\n\n\n\n\nLinear regression\nQuantitative\n\\(Y = \\beta_0 + \\beta_1~ X\\)\n\n\nLinear regression (transform Y)\nQuantitative\n\\(\\log(Y) = \\beta_0 + \\beta_1~ X\\)\n\n\nLogistic regression\nBinary\n\\(\\log\\big(\\frac{\\pi}{1-\\pi}\\big) = \\beta_0 + \\beta_1 ~ X\\)"
+  },
+  {
+    "objectID": "slides/lec-18.html#binary-response-variable",
+    "href": "slides/lec-18.html#binary-response-variable",
+    "title": "Logistic regression",
+    "section": "Binary response variable",
+    "text": "Binary response variable\n\n\\(Y = 1: \\text{ yes}, 0: \\text{ no}\\)\n\\(\\pi\\): probability that \\(Y=1\\), i.e., \\(P(Y = 1)\\)\n\\(\\frac{\\pi}{1-\\pi}\\): odds that \\(Y = 1\\)\n\\(\\log\\big(\\frac{\\pi}{1-\\pi}\\big)\\): log odds\nGo from \\(\\pi\\) to \\(\\log\\big(\\frac{\\pi}{1-\\pi}\\big)\\) using the logit transformation"
+  },
+  {
+    "objectID": "slides/lec-18.html#odds",
+    "href": "slides/lec-18.html#odds",
+    "title": "Logistic regression",
+    "section": "Odds",
+    "text": "Odds\nSuppose there is a 70% chance it will rain tomorrow\n\nProbability it will rain is \\(\\mathbf{p = 0.7}\\)\nProbability it won’t rain is \\(\\mathbf{1 - p = 0.3}\\)\nOdds it will rain are 7 to 3, 7:3, \\(\\mathbf{\\frac{0.7}{0.3} \\approx 2.33}\\)"
+  },
+  {
+    "objectID": "slides/lec-18.html#are-teenagers-getting-enough-sleep",
+    "href": "slides/lec-18.html#are-teenagers-getting-enough-sleep",
+    "title": "Logistic regression",
+    "section": "Are teenagers getting enough sleep?",
+    "text": "Are teenagers getting enough sleep?\n\nsleep %>%\n  count(Sleep7) %>%\n  mutate(p = round(n / sum(n), 3))\n\n# A tibble: 2 × 3\n  Sleep7     n     p\n   <int> <int> <dbl>\n1      0   150 0.336\n2      1   296 0.664\n\n\n\n\\(P(\\text{7+ hours of sleep}) = P(Y = 1) = p = 0.664\\)\n\n\n\\(P(\\text{< 7 hours of sleep}) = P(Y = 0) = 1 - p = 0.336\\)\n\n\n\\(P(\\text{odds of 7+ hours of sleep}) = \\frac{0.664}{0.336} = 1.976\\)"
+  },
+  {
+    "objectID": "slides/lec-18.html#from-odds-to-probabilities",
+    "href": "slides/lec-18.html#from-odds-to-probabilities",
+    "title": "Logistic regression",
+    "section": "From odds to probabilities",
+    "text": "From odds to probabilities\n\n\nodds\n\\[\\omega = \\frac{\\pi}{1-\\pi}\\]\n\nprobability\n\\[\\pi = \\frac{\\omega}{1 + \\omega}\\]"
+  },
+  {
+    "objectID": "slides/lec-18.html#logistic-regression",
+    "href": "slides/lec-18.html#logistic-regression",
+    "title": "Logistic regression",
+    "section": "Logistic regression",
+    "text": "Logistic regression"
+  },
+  {
+    "objectID": "slides/lec-18.html#from-odds-to-probabilities-1",
+    "href": "slides/lec-18.html#from-odds-to-probabilities-1",
+    "title": "Logistic regression",
+    "section": "From odds to probabilities",
+    "text": "From odds to probabilities\n\nLogistic model: log odds = \\(\\log\\big(\\frac{\\pi}{1-\\pi}\\big) = \\beta_0 + \\beta_1~X\\)\nOdds = \\(\\exp\\big\\{\\log\\big(\\frac{\\pi}{1-\\pi}\\big)\\big\\} = \\frac{\\pi}{1-\\pi}\\)\nCombining (1) and (2) with what we saw earlier\n\n\\[\\text{probability} = \\pi = \\frac{\\exp\\{\\beta_0 + \\beta_1~X\\}}{1 + \\exp\\{\\beta_0 + \\beta_1~X\\}}\\]"
+  },
+  {
+    "objectID": "slides/lec-18.html#logistic-regression-model",
+    "href": "slides/lec-18.html#logistic-regression-model",
+    "title": "Logistic regression",
+    "section": "Logistic regression model",
+    "text": "Logistic regression model\nLogit form: \\[\\log\\big(\\frac{\\pi}{1-\\pi}\\big) = \\beta_0 + \\beta_1~X\\]\n\nProbability form:\n\\[\n\\pi = \\frac{\\exp\\{\\beta_0 + \\beta_1~X\\}}{1 + \\exp\\{\\beta_0 + \\beta_1~X\\}}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-18.html#risk-of-coronary-heart-disease",
+    "href": "slides/lec-18.html#risk-of-coronary-heart-disease",
+    "title": "Logistic regression",
+    "section": "Risk of coronary heart disease",
+    "text": "Risk of coronary heart disease\nThis dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to use age to predict if a randomly selected adult is high risk of having coronary heart disease in the next 10 years.\nhigh_risk:\n\n\n1: High risk of having heart disease in next 10 years\n0: Not high risk of having heart disease in next 10 years\n\n\nage: Age at exam time (in years)"
+  },
+  {
+    "objectID": "slides/lec-18.html#data-heart",
+    "href": "slides/lec-18.html#data-heart",
+    "title": "Logistic regression",
+    "section": "Data: heart",
+    "text": "Data: heart\n\nheart_disease <- read_csv(here::here(\"slides\", \"data/framingham.csv\")) %>%\n  select(age, TenYearCHD) %>%\n  drop_na() %>%\n  mutate(high_risk = as.factor(TenYearCHD)) %>%\n  select(age, high_risk)\n\nheart_disease\n\n# A tibble: 4,240 × 2\n     age high_risk\n   <dbl> <fct>    \n 1    39 0        \n 2    46 0        \n 3    48 0        \n 4    61 1        \n 5    46 0        \n 6    43 0        \n 7    63 1        \n 8    45 0        \n 9    52 0        \n10    43 0        \n# … with 4,230 more rows"
+  },
+  {
+    "objectID": "slides/lec-18.html#high-risk-vs.-age",
+    "href": "slides/lec-18.html#high-risk-vs.-age",
+    "title": "Logistic regression",
+    "section": "High risk vs. age",
+    "text": "High risk vs. age\n\nggplot(heart_disease, aes(x = high_risk, y = age)) +\n  geom_boxplot() +\n  labs(x = \"High risk - 1: yes, 0: no\",\n       y = \"Age\", \n       title = \"Age vs. High risk of heart disease\")"
+  },
+  {
+    "objectID": "slides/lec-18.html#lets-fit-the-model",
+    "href": "slides/lec-18.html#lets-fit-the-model",
+    "title": "Logistic regression",
+    "section": "Let’s fit the model",
+    "text": "Let’s fit the model\n\nheart_disease_fit <- logistic_reg() %>%\n  set_engine(\"glm\") %>%\n  fit(high_risk ~ age, data = heart_disease, family = \"binomial\")\n\ntidy(heart_disease_fit) %>% kable(digits = 3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-5.561\n0.284\n-19.599\n0\n\n\nage\n0.075\n0.005\n14.178\n0"
+  },
+  {
+    "objectID": "slides/lec-18.html#the-model",
+    "href": "slides/lec-18.html#the-model",
+    "title": "Logistic regression",
+    "section": "The model",
+    "text": "The model\n\ntidy(heart_disease_fit) %>% kable(digits = 3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-5.561\n0.284\n-19.599\n0\n\n\nage\n0.075\n0.005\n14.178\n0\n\n\n\n\n\n. . .\n\n\\[\\log\\Big(\\frac{\\hat{\\pi}}{1-\\hat{\\pi}}\\Big) = -5.561 + 0.075 \\times \\text{age}\\] where \\(\\hat{\\pi}\\) is the predicted probability of being high risk"
+  },
+  {
+    "objectID": "slides/lec-18.html#predicted-log-odds",
+    "href": "slides/lec-18.html#predicted-log-odds",
+    "title": "Logistic regression",
+    "section": "Predicted log odds",
+    "text": "Predicted log odds\n\naugment(heart_disease_fit$fit)\n\n# A tibble: 4,240 × 8\n   high_risk   age .fitted .resid .std.resid     .hat .sigma   .cooksd\n   <fct>     <dbl>   <dbl>  <dbl>      <dbl>    <dbl>  <dbl>     <dbl>\n 1 0            39  -2.65  -0.370     -0.370 0.000466  0.895 0.0000165\n 2 0            46  -2.13  -0.475     -0.475 0.000322  0.895 0.0000192\n 3 0            48  -1.98  -0.509     -0.509 0.000288  0.895 0.0000199\n 4 1            61  -1.01   1.62       1.62  0.000706  0.895 0.000968 \n 5 0            46  -2.13  -0.475     -0.475 0.000322  0.895 0.0000192\n 6 0            43  -2.35  -0.427     -0.427 0.000384  0.895 0.0000183\n 7 1            63  -0.858  1.56       1.56  0.000956  0.895 0.00113  \n 8 0            45  -2.20  -0.458     -0.458 0.000342  0.895 0.0000189\n 9 0            52  -1.68  -0.585     -0.585 0.000262  0.895 0.0000244\n10 0            43  -2.35  -0.427     -0.427 0.000384  0.895 0.0000183\n# … with 4,230 more rows\n\n\n\nFor observation 1\n\\[\\text{predicted odds} = \\hat{\\omega} = \\frac{\\hat{\\pi}}{1-\\hat{\\pi}} = \\exp\\{-2.650\\} = 0.071\\]"
+  },
+  {
+    "objectID": "slides/lec-18.html#predicted-probabilities",
+    "href": "slides/lec-18.html#predicted-probabilities",
+    "title": "Logistic regression",
+    "section": "Predicted probabilities",
+    "text": "Predicted probabilities\n\npredict(heart_disease_fit, new_data = heart_disease, type = \"prob\")\n\n# A tibble: 4,240 × 2\n   .pred_0 .pred_1\n     <dbl>   <dbl>\n 1   0.934  0.0660\n 2   0.894  0.106 \n 3   0.878  0.122 \n 4   0.733  0.267 \n 5   0.894  0.106 \n 6   0.913  0.0870\n 7   0.702  0.298 \n 8   0.900  0.0996\n 9   0.843  0.157 \n10   0.913  0.0870\n# … with 4,230 more rows\n\n\n\n\\[\\text{predicted probabilities} = \\hat{\\pi} = \\frac{\\exp\\{-2.650\\}}{1 + \\exp\\{-2.650\\}} = 0.066\\]"
+  },
+  {
+    "objectID": "slides/lec-18.html#predicted-classes",
+    "href": "slides/lec-18.html#predicted-classes",
+    "title": "Logistic regression",
+    "section": "Predicted classes",
+    "text": "Predicted classes\n\npredict(heart_disease_fit, new_data = heart_disease, type = \"class\")\n\n# A tibble: 4,240 × 1\n   .pred_class\n   <fct>      \n 1 0          \n 2 0          \n 3 0          \n 4 0          \n 5 0          \n 6 0          \n 7 0          \n 8 0          \n 9 0          \n10 0          \n# … with 4,230 more rows"
+  },
+  {
+    "objectID": "slides/lec-18.html#default-prediction",
+    "href": "slides/lec-18.html#default-prediction",
+    "title": "Logistic regression",
+    "section": "Default prediction",
+    "text": "Default prediction\nFor a logistic regression, the default prediction is the class.\n\npredict(heart_disease_fit, new_data = heart_disease)\n\n# A tibble: 4,240 × 1\n   .pred_class\n   <fct>      \n 1 0          \n 2 0          \n 3 0          \n 4 0          \n 5 0          \n 6 0          \n 7 0          \n 8 0          \n 9 0          \n10 0          \n# … with 4,230 more rows"
+  },
+  {
+    "objectID": "slides/lec-18.html#observed-vs.-predicted",
+    "href": "slides/lec-18.html#observed-vs.-predicted",
+    "title": "Logistic regression",
+    "section": "Observed vs. predicted",
+    "text": "Observed vs. predicted\n\nWhat does the following table show?\n\n\npredict(heart_disease_fit, new_data = heart_disease) %>%\n  bind_cols(heart_disease) %>%\n  count(high_risk, .pred_class)\n\n# A tibble: 2 × 3\n  high_risk .pred_class     n\n  <fct>     <fct>       <int>\n1 0         0            3596\n2 1         0             644"
+  },
+  {
+    "objectID": "slides/lec-18.html#recap",
+    "href": "slides/lec-18.html#recap",
+    "title": "Logistic regression",
+    "section": "Recap",
+    "text": "Recap\n\nLogistic regression for binary response variable\nRelationship between odds and probabilities\nUsed logistic regression model to calculate predicted odds and probabilities"
+  },
+  {
+    "objectID": "slides/lec-18.html#application-exercise",
+    "href": "slides/lec-18.html#application-exercise",
+    "title": "Logistic regression",
+    "section": "Application exercise",
+    "text": "Application exercise\n\n📋 github.com/sta210-s22/ae-9-odds\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
     "objectID": "slides/lec-12.html#announcements",
     "href": "slides/lec-12.html#announcements",
     "title": "Feature engineering",
@@ -4869,7 +5107,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n\n\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: HW3 + Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nDue: HW 4 + Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nWork on project\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: HW3 + Lab 6\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 7: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 7\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nDue: HW 4 + Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nWork on project\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "computing-troubleshooting.html",
