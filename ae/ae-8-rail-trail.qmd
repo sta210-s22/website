@@ -3,7 +3,7 @@ title: "AE 8: Rail Trail"
 ---
 
 ::: callout-important
-Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-8-rail-trail YOUR_GITHUB_USERNAME` to get started.
+Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-8-rail-trail-YOUR_GITHUB_USERNAME` to get started.
 :::
 
 ## Packages and data
