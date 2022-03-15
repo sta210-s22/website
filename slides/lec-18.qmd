@@ -1,0 +1,423 @@
+---
+title: "Logistic regression"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+
+library(countdown)
+```
+
+# Welcome
+
+## Announcements
+
+-   ...
+
+## Topics
+
+-   Logistic regression for binary response variable
+
+-   Relationship between odds and probabilities
+
+-   Use logistic regression model to calculate predicted odds and probabilities
+
+## Computational setup
+
+```{r}
+#| warning: false
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+library(Stat2Data)
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+# Predicting categorical outcomes
+
+## Types of outcome variables
+
+**Quantitative outcome variable**:
+
+-   Sales price of a house in Levittown, NY
+-   **Model**: Expected sales price given the number of bedrooms, lot size, etc.
+
+. . .
+
+**Categorical outcone variable**:
+
+-   High risk of coronary heart disease
+-   **Model**: Probability an adult is high risk of heart disease given their age, total cholesterol, etc.
+
+## Models for categorical outcomes
+
+::: columns
+::: {.column width="50%"}
+**Logistic regression**
+
+2 Outcomes
+
+1: Yes, 0: No
+:::
+
+::: {.column width="50%"}
+**Multinomial logistic regression**
+
+3+ Outcomes
+
+1: Democrat, 2: Republican, 3: Independent
+:::
+:::
+
+## 2020 election forecasts
+
+![](images/lec-18/fivethirtyeight_president_nc.png){fig-align="center"}
+
+Source: [FiveThirtyEight Election Forcasts](https://projects.fivethirtyeight.com/2020-election-forecast/)
+
+## NBA finals predictions
+
+![](images/lec-18/nba-predictions.png){fig-align="center"}
+
+Source: [FiveThirtyEight 2019-20 NBA Predictions](https://projects.fivethirtyeight.com/2020-nba-predictions/games/?ex_cid=rrpromo)
+
+## Do teenagers get 7+ hours of sleep? {.smaller}
+
+::: columns
+::: {.column width="40%"}
+Students in grades 9 - 12 surveyed about health risk behaviors including whether they usually get 7 or more hours of sleep.
+
+`Sleep7`
+
+1: yes
+
+0: no
+:::
+
+::: {.column width="60%"}
+```{r}
+data(YouthRisk2009)
+sleep <- YouthRisk2009 %>%
+  as_tibble() %>%
+  filter(!is.na(Age), !is.na(Sleep7))
+sleep %>%
+  relocate(Age, Sleep7)
+```
+:::
+:::
+
+## Plot the data
+
+```{r}
+ggplot(sleep, aes(x = Age, y = Sleep7)) +
+  geom_point() + 
+  labs(y = "Getting 7+ hours of sleep")
+```
+
+## Let's fit a linear regression model
+
+**Outcome:** $Y$ = 1: yes, 0: no
+
+```{r}
+#| echo: false
+
+ggplot(sleep, aes(x = Age, y = Sleep7)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(y = "Getting 7+ hours of sleep")
+```
+
+## Let's use proportions
+
+**Outcome:** Probability of getting 7+ hours of sleep
+
+```{r}
+#| echo: false
+
+sleep_age <- sleep %>%
+  group_by(Age) %>%
+  summarise(prop = mean(Sleep7))
+
+ggplot(sleep_age, aes(x = Age, y = prop)) +
+  geom_point() + 
+  geom_hline(yintercept = c(0,1), lty = 2) + 
+  stat_smooth(method = "lm",fullrange = TRUE, se = FALSE) +
+  labs(y = "P(7+ hours of sleep)")
+```
+
+## What happens if we zoom out?
+
+**Outcome:** Probability of getting 7+ hours of sleep
+
+```{r}
+#| echo: false
+
+ggplot(sleep_age, aes(x = Age, y = prop)) +
+  geom_point() + 
+  geom_hline(yintercept = c(0,1), lty = 2) + 
+  stat_smooth(method = "lm",fullrange = TRUE, se = FALSE) +
+  labs(y = "P(7+ hours of sleep)") +
+  xlim(1, 40) +
+  ylim(-1, 2)
+```
+
+🛑 *This model produces predictions outside of 0 and 1.*
+
+## Let's try another model
+
+```{r}
+#| label: logistic-model-plot
+#| echo: false
+
+ggplot(sleep_age, aes(x = Age, y = prop)) +
+  geom_point() + 
+  geom_hline(yintercept = c(0,1), lty = 2) + 
+  stat_smooth(method ="glm", method.args = list(family = "binomial"), 
+              fullrange = TRUE, se = FALSE) +
+  labs(y = "P(7+ hours of sleep)") +
+  xlim(1, 40) +
+  ylim(-0.5, 1.5)
+```
+
+*✅ This model (called a **logistic regression model**) only produces predictions between 0 and 1.*
+
+## The code
+
+```{r}
+#| ref.label: logistic-model-plot
+#| echo: true
+#| fig-show: hide
+```
+
+## Different types of models
+
+| Method                          | Outcome      | Model                                                     |
+|------------------------|------------------------|------------------------|
+| Linear regression               | Quantitative | $Y = \beta_0 + \beta_1~ X$                                |
+| Linear regression (transform Y) | Quantitative | $\log(Y) = \beta_0 + \beta_1~ X$                          |
+| Logistic regression             | Binary       | $\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1 ~ X$ |
+
+# Odds and probabilities
+
+## Binary response variable
+
+-   $Y = 1: \text{ yes}, 0: \text{ no}$
+-   $\pi$: **probability** that $Y=1$, i.e., $P(Y = 1)$
+-   $\frac{\pi}{1-\pi}$: **odds** that $Y = 1$
+-   $\log\big(\frac{\pi}{1-\pi}\big)$: **log odds**
+-   Go from $\pi$ to $\log\big(\frac{\pi}{1-\pi}\big)$ using the **logit transformation**
+
+## Odds
+
+Suppose there is a **70% chance** it will rain tomorrow
+
+-   Probability it will rain is $\mathbf{p = 0.7}$
+-   Probability it won't rain is $\mathbf{1 - p = 0.3}$
+-   Odds it will rain are **7 to 3**, **7:3**, $\mathbf{\frac{0.7}{0.3} \approx 2.33}$
+
+## Are teenagers getting enough sleep?
+
+```{r}
+sleep %>%
+  count(Sleep7) %>%
+  mutate(p = round(n / sum(n), 3))
+```
+
+. . .
+
+$P(\text{7+ hours of sleep}) = P(Y = 1) = p = 0.664$
+
+. . .
+
+$P(\text{< 7 hours of sleep}) = P(Y = 0) = 1 - p = 0.336$
+
+. . .
+
+$P(\text{odds of 7+ hours of sleep}) = \frac{0.664}{0.336} = 1.976$
+
+## From odds to probabilities
+
+::: columns
+::: {.column width="50%"}
+**odds**
+
+$$\omega = \frac{\pi}{1-\pi}$$
+:::
+
+::: {.column width="50%"}
+**probability**
+
+$$\pi = \frac{\omega}{1 + \omega}$$
+:::
+:::
+
+## Logistic regression
+
+## From odds to probabilities
+
+(1) **Logistic model**: log odds = $\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1~X$
+(2) **Odds =** $\exp\big\{\log\big(\frac{\pi}{1-\pi}\big)\big\} = \frac{\pi}{1-\pi}$
+(3) Combining (1) and (2) with what we saw earlier
+
+$$\text{probability} = \pi = \frac{\exp\{\beta_0 + \beta_1~X\}}{1 + \exp\{\beta_0 + \beta_1~X\}}$$
+
+## Logistic regression model
+
+**Logit form**: $$\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1~X$$
+
+. . .
+
+**Probability form**:
+
+$$
+\pi = \frac{\exp\{\beta_0 + \beta_1~X\}}{1 + \exp\{\beta_0 + \beta_1~X\}}
+$$
+
+## Risk of coronary heart disease
+
+This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts.
+We want to use `age` to predict if a randomly selected adult is high risk of having coronary heart disease in the next 10 years.
+
+`high_risk`:
+
+::: nonincremental
+-   1: High risk of having heart disease in next 10 years
+-   0: Not high risk of having heart disease in next 10 years
+:::
+
+`age`: Age at exam time (in years)
+
+## Data: `heart`
+
+```{r}
+heart_disease <- read_csv(here::here("slides", "data/framingham.csv")) %>%
+  select(age, TenYearCHD) %>%
+  drop_na() %>%
+  mutate(high_risk = as.factor(TenYearCHD)) %>%
+  select(age, high_risk)
+
+heart_disease
+```
+
+## High risk vs. age
+
+```{r}
+#| echo: true
+
+ggplot(heart_disease, aes(x = high_risk, y = age)) +
+  geom_boxplot() +
+  labs(x = "High risk - 1: yes, 0: no",
+       y = "Age", 
+       title = "Age vs. High risk of heart disease")
+```
+
+## Let's fit the model
+
+```{r}
+#| echo: true
+
+heart_disease_fit <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(high_risk ~ age, data = heart_disease, family = "binomial")
+
+tidy(heart_disease_fit) %>% kable(digits = 3)
+```
+
+## The model
+
+```{r}
+#| echo: true
+
+tidy(heart_disease_fit) %>% kable(digits = 3)
+```
+
+. . .\
+\
+$$\log\Big(\frac{\hat{\pi}}{1-\hat{\pi}}\Big) = -5.561 + 0.075 \times \text{age}$$ where $\hat{\pi}$ is the predicted probability of being high risk
+
+## Predicted log odds
+
+```{r}
+augment(heart_disease_fit$fit)
+```
+
+. . .
+
+**For observation 1**
+
+$$\text{predicted odds} = \hat{\omega} = \frac{\hat{\pi}}{1-\hat{\pi}} = \exp\{-2.650\} = 0.071$$
+
+## Predicted probabilities
+
+```{r}
+predict(heart_disease_fit, new_data = heart_disease, type = "prob")
+```
+
+. . .
+
+$$\text{predicted probabilities} = \hat{\pi} = \frac{\exp\{-2.650\}}{1 + \exp\{-2.650\}} = 0.066$$
+
+## Predicted classes
+
+```{r}
+predict(heart_disease_fit, new_data = heart_disease, type = "class")
+```
+
+## Default prediction
+
+For a logistic regression, the default prediction is the `class`.
+
+```{r}
+predict(heart_disease_fit, new_data = heart_disease)
+```
+
+## Observed vs. predicted
+
+::: question
+What does the following table show?
+:::
+
+```{r}
+predict(heart_disease_fit, new_data = heart_disease) %>%
+  bind_cols(heart_disease) %>%
+  count(high_risk, .pred_class)
+```
+
+## Recap
+
+-   Logistic regression for binary response variable
+
+-   Relationship between odds and probabilities
+
+-   Used logistic regression model to calculate predicted odds and probabilities
+
+## Application exercise
+
+::: appex
+📋 [github.com/sta210-s22/ae-9-odds](https://github.com/sta210-s22/ae-9-odds)
+:::
