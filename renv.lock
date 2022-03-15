@@ -211,6 +211,14 @@
       "Hash": "2042cd9759cc89a453c4aefef0ce9aae",
       "Requirements": []
     },
+    "Stat2Data": {
+      "Package": "Stat2Data",
+      "Version": "2.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "978eabdf61cd509f70c2e6ed7ab2f624",
+      "Requirements": []
+    },
     "TH.data": {
       "Package": "TH.data",
       "Version": "1.1-0",

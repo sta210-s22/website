@@ -33,7 +33,11 @@ library(countdown)
 
 ## Announcements
 
--   ...
+-   Schedule changes for the remainder of the semester
+
+-   Thursday office hours in my office: 213 Old Chem
+
+-   Any questions on project proposals?
 
 ## Topics
 
