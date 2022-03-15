@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.101">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - Movie budgets and revenues</title>
+  <title>STA 210 - Spring 2022 - AE 9: Odds</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -112,19 +112,11 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
-  <script src="../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-  <link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-  <script src="../site_libs/datatables-binding-0.20/datatables.js"></script>
-  <script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="../site_libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="../site_libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
-  <script src="../site_libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
-  <link href="../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-  <script src="../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Movie budgets and revenues">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - AE 9: Odds">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -136,7 +128,7 @@
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Movie budgets and revenues</h1>
+      <h1 class="quarto-secondary-nav-title">AE 9: Odds</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -385,22 +377,25 @@
         <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">On this page</h2>
 <ul>
-<li><a href="#data" class="nav-link active" data-scroll-target="#data">Data</a></li>
-<li><a href="#analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
+<li><a href="#packages" class="nav-link active" data-scroll-target="#packages">Packages</a></li>
+<li><a href="#linear-regression-vs.-logistic-regression" class="nav-link" data-scroll-target="#linear-regression-vs.-logistic-regression">Linear regression vs.&nbsp;logistic regression</a></li>
+<li><a href="#heart-disease" class="nav-link" data-scroll-target="#heart-disease">Heart disease</a>
 <ul class="collapse">
-<li><a href="#gross-over-time" class="nav-link" data-scroll-target="#gross-over-time">Gross over time</a></li>
-<li><a href="#budget-and-gross" class="nav-link" data-scroll-target="#budget-and-gross">Budget and gross</a></li>
+<li><a href="#data-framingham-study" class="nav-link" data-scroll-target="#data-framingham-study">Data: Framingham study</a></li>
+<li><a href="#outcome-high_risk" class="nav-link" data-scroll-target="#outcome-high_risk">Outcome: <code>high_risk</code></a></li>
+<li><a href="#calculating-probability-and-odds" class="nav-link" data-scroll-target="#calculating-probability-and-odds">Calculating probability and odds</a></li>
+<li><a href="#logistic-regression-model" class="nav-link" data-scroll-target="#logistic-regression-model">Logistic regression model</a></li>
+<li><a href="#calculating-log-odds-odds-and-probabilities" class="nav-link" data-scroll-target="#calculating-log-odds-odds-and-probabilities">Calculating log-odds, odds and probabilities</a></li>
+<li><a href="#comparing-observations" class="nav-link" data-scroll-target="#comparing-observations">Comparing observations</a></li>
 </ul></li>
-<li><a href="#exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-<li><a href="#appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
 </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/ae/ae-0-movies.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/ae/ae-9-odds.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
 
-<div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Movie budgets and revenues</h1></div></header>
+<div class="quarto-title"><h1 class="title d-none d-lg-block display-7">AE 9: Odds</h1></div></header>
 
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -412,138 +407,142 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This application exercise is a demo only. You do not have a corresponding repository for it and you’re not expected to turn in anything for it.</p>
+<p>Go to the <a href="https://github.com/sta210-s22">course GitHub organization</a> and locate the repo titled <code>ae-9-odds-YOUR_GITHUB_USERNAME</code> to get started.</p>
 </div>
 </div>
-<p>We will look at the relationship between budget and revenue for movies made in the United States in 1986 to 2020. The dataset is created based on data from the <a href="https://www.imdb.com/">Internet Movie Database (IMDB)</a>.</p>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for data analysis and visualisation</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)    <span class="co"># for pretty axis labels</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)        <span class="co"># for interactive table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>The <code>movies</code> data set includes basic information about each movie including budget, genre, movie studio, director, etc. A full list of the variables may be found <a href="https://github.com/danielgrijalva/movie-stats">here</a>.</p>
-<div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>movies <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/danielgrijalva/movie-stats/master/movies.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>View the first 10 rows of data.</p>
-<div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>movies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 7,668 × 15
-   name   rating genre  year released score  votes director writer star  country
-   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  
- 1 The S… R      Drama  1980 June 13…   8.4 9.27e5 Stanley… Steph… Jack… United…
- 2 The B… R      Adve…  1980 July 2,…   5.8 6.5 e4 Randal … Henry… Broo… United…
- 3 Star … PG     Acti…  1980 June 20…   8.7 1.2 e6 Irvin K… Leigh… Mark… United…
- 4 Airpl… PG     Come…  1980 July 2,…   7.7 2.21e5 Jim Abr… Jim A… Robe… United…
- 5 Caddy… R      Come…  1980 July 25…   7.3 1.08e5 Harold … Brian… Chev… United…
- 6 Frida… R      Horr…  1980 May 9, …   6.4 1.23e5 Sean S.… Victo… Bets… United…
- 7 The B… R      Acti…  1980 June 20…   7.9 1.88e5 John La… Dan A… John… United…
- 8 Ragin… R      Biog…  1980 Decembe…   8.2 3.3 e5 Martin … Jake … Robe… United…
- 9 Super… PG     Acti…  1980 June 19…   6.8 1.01e5 Richard… Jerry… Gene… United…
-10 The L… R      Biog…  1980 May 16,…   7   1   e4 Walter … Bill … Davi… United…
-# … with 7,658 more rows, and 4 more variables: budget &lt;dbl&gt;, gross &lt;dbl&gt;,
-#   company &lt;chr&gt;, runtime &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>The ___ dataset has ___ observations and ___ variables.</p>
-</section>
-<section id="analysis" class="level2">
-<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
-<section id="gross-over-time" class="level3">
-<h3 class="anchored" data-anchor-id="gross-over-time">Gross over time</h3>
-<p>We begin by looking at how the average gross revenue (<code>gross</code>) has changed over time. Since we want to visualize the results, we will choose a few genres of interest for the analysis.</p>
-<div class="cell">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>genre_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Comedy"</span>, <span class="st">"Action"</span>, <span class="st">"Animation"</span>, <span class="st">"Horror"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then, we will filter for these genres and visualize the average gross revenue over time.</p>
-<div class="cell">
-<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>movies <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genre <span class="sc">%in%</span> genre_list) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genre,year) <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_gross =</span> <span class="fu">mean</span>(gross)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_gross, <span class="at">color=</span> genre)) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_dollar</span>()) <span class="sc">+</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Average Gross Revenue (US Dollars)"</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"Genre"</span>,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Gross Revenue Over Time"</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'genre'. You can override using the
-`.groups` argument.</code></pre>
-</div>
-<div class="cell-output-stderr">
-<pre><code>Warning: Removed 47 rows containing missing values (geom_point).</code></pre>
-</div>
-<div class="cell-output-stderr">
-<pre><code>Warning: Removed 23 row(s) containing missing values (geom_path).</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="ae-0-movies_files/figure-html/plot-rating-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>The plot suggests …</p>
-</section>
-<section id="budget-and-gross" class="level3">
-<h3 class="anchored" data-anchor-id="budget-and-gross">Budget and gross</h3>
-<p>Next, let’s see the relationship between a movie’s budget and its gross revenue.</p>
-<div class="cell">
-<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>movies <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genre <span class="sc">%in%</span> genre_list, budget <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(budget), <span class="at">y =</span> <span class="fu">log</span>(gross), <span class="at">color=</span>genre)) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> genre) <span class="sc">+</span> </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Log-transformed Budget"</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Log-transformed Gross Revenue"</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stderr">
-<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
-</div>
-<div class="cell-output-stderr">
-<pre><code>Warning: Removed 35 rows containing non-finite values (stat_smooth).</code></pre>
-</div>
-<div class="cell-output-stderr">
-<pre><code>Warning: Removed 35 rows containing missing values (geom_point).</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="ae-0-movies_files/figure-html/plot-revenue-1.png" class="img-fluid" width="672"></p>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>heart_disease <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"ae"</span>, <span class="st">"data/framingham.csv"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(totChol, TenYearCHD) <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">high_risk =</span> <span class="fu">as.factor</span>(TenYearCHD)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(totChol, high_risk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-</section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="linear-regression-vs.-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression-vs.-logistic-regression">Linear regression vs.&nbsp;logistic regression</h2>
+<p>State whether a linear regression model or logistic regression model is more appropriate for each scenario:</p>
 <ol type="1">
-<li><p>Suppose we fit a regression model for each genre that uses budget to predict gross revenue. What are the signs of the correlation between <code>budget</code> and <code>gross</code> and the slope in each regression equation?</p></li>
-<li><p>Suppose we fit the regression model from the previous question. Which genre would you expect to have the smallest residuals, on average (<em>residual = observed revenue - predicted revenue</em>)?</p></li>
-<li><p>In the remaining time, discuss the following: Notice in the graph above that <code>budget</code> and <code>gross</code> are log-transformed. Why are the log-transformed values of the variables displayed rather than the original values (in U.S. dollars)?</p></li>
+<li><p>Use age and education to predict if a randomly selected person will vote in the next election.</p></li>
+<li><p>Use budget and run time (in minutes) to predict a movie’s total revenue.</p></li>
+<li><p>Use age and sex to calculate the probability a randomly selected adult will visit Duke Health in the next year.</p></li>
 </ol>
 </section>
-<section id="appendix" class="level2">
-<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
-<p>Below is a list of genres in the data set:</p>
+<section id="heart-disease" class="level2">
+<h2 class="anchored" data-anchor-id="heart-disease">Heart disease</h2>
+<section id="data-framingham-study" class="level3">
+<h3 class="anchored" data-anchor-id="data-framingham-study">Data: Framingham study</h3>
+<p>This data set is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to use the total cholesterol to predict if a randomly selected adult is high risk for heart disease in the next 10 years.</p>
+<ul>
+<li><code>high_risk</code>:
+<ul>
+<li>1: High risk of having heart disease in next 10 years</li>
+<li>0: Not high risk of having heart disease in next 10 years</li>
+</ul></li>
+<li><code>totChol</code>: total cholesterol (mg/dL)</li>
+</ul>
+</section>
+<section id="outcome-high_risk" class="level3">
+<h3 class="anchored" data-anchor-id="outcome-high_risk">Outcome: <code>high_risk</code></h3>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>movies <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(genre) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(genre) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">datatable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> heart_disease, <span class="fu">aes</span>(<span class="at">x =</span> high_risk)) <span class="sc">+</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"High risk"</span>, <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"Low risk"</span>)) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of 10-year risk of heart disease"</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="htmlwidget-dee4ecbcbda31521c319" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dee4ecbcbda31521c319">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19"],["Action","Adventure","Animation","Biography","Comedy","Crime","Drama","Family","Fantasy","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Sport","Thriller","Western"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>genre<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<p><img src="ae-9-odds_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" style="width:70.0%"></p>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>heart_disease <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(high_risk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  high_risk     n
+  &lt;fct&gt;     &lt;int&gt;
+1 0          3555
+2 1           635</code></pre>
+</div>
+</div>
+</section>
+<section id="calculating-probability-and-odds" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-probability-and-odds">Calculating probability and odds</h3>
+<ol type="1">
+<li><p>What is the probability a randomly selected person in the study is <strong>not</strong> high risk for heart disease?</p></li>
+<li><p>What are the <strong>odds</strong> a randomly selected person in the study is <strong>not</strong> high risk for heart disease?</p></li>
+</ol>
+</section>
+<section id="logistic-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression-model">Logistic regression model</h3>
+<p>Fit a logistic regression model to understand the relationship between total cholesterol and risk for heart disease.</p>
+<p>Let <span class="math inline">\(pi\)</span> be the probability an adult is high risk. The statistical model is</p>
+<p><span class="math display">\[\log\Big(\frac{\pi_i}{1-\pi_i}\Big) = \beta_0 + \beta_1 TotChol_i\]</span></p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>heart_disease_fit <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> totChol, <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(heart_disease_fit) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-2.894</td>
+<td style="text-align: right;">0.230</td>
+<td style="text-align: right;">-12.607</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">totChol</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">5.268</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Write the regression equation. Round to 3 digits.</li>
+</ol>
+</section>
+<section id="calculating-log-odds-odds-and-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-log-odds-odds-and-probabilities">Calculating log-odds, odds and probabilities</h3>
+<p>Based on the model, if a randomly selected person has a total cholesterol of 250 mg/dL,</p>
+<ol start="4" type="1">
+<li><p>What are the log-odds they are high risk for heart disease?</p></li>
+<li><p>What are the odds they are high risk for heart disease?</p></li>
+<li><p>What is the probability they are high risk for heart disease? <em>Use the odds to calculate your answer.</em></p></li>
+</ol>
+</section>
+<section id="comparing-observations" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-observations">Comparing observations</h3>
+<p>Suppose a person’s cholesterol changes from 250 mg/dL to 200 mg/dL.</p>
+<ol start="7" type="1">
+<li><p>How do you expect the log-odds that this person is high risk for heart disease to change?</p></li>
+<li><p>How do you expect the odds that this person is high risk for heart disease to change?</p></li>
+</ol>
 
 
+</section>
 </section>
 </main> <!-- /main -->
 <script type="application/javascript">

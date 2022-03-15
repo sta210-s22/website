@@ -4641,6 +4641,27 @@
     "text": "Synthesis\n\nExercise 7\nSuppose you work for a bike share company in Durham, NC, and they want to predict daily bike rentals in 2022. What is one reason you might recommend they use your analysis for this task? What is one reason you would recommend they not use your analysis for this task?\n[Add your answer here]"
   },
   {
+    "objectID": "ae/ae-9-odds.html#packages",
+    "href": "ae/ae-9-odds.html#packages",
+    "title": "AE 9: Odds",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\n\nheart_disease <- read_csv(here::here(\"ae\", \"data/framingham.csv\")) %>%\n  select(totChol, TenYearCHD) %>%\n  drop_na() %>%\n  mutate(high_risk = as.factor(TenYearCHD)) %>%\n  select(totChol, high_risk)"
+  },
+  {
+    "objectID": "ae/ae-9-odds.html#linear-regression-vs.-logistic-regression",
+    "href": "ae/ae-9-odds.html#linear-regression-vs.-logistic-regression",
+    "title": "AE 9: Odds",
+    "section": "Linear regression vs. logistic regression",
+    "text": "Linear regression vs. logistic regression\nState whether a linear regression model or logistic regression model is more appropriate for each scenario:\n\nUse age and education to predict if a randomly selected person will vote in the next election.\nUse budget and run time (in minutes) to predict a movie’s total revenue.\nUse age and sex to calculate the probability a randomly selected adult will visit Duke Health in the next year."
+  },
+  {
+    "objectID": "ae/ae-9-odds.html#heart-disease",
+    "href": "ae/ae-9-odds.html#heart-disease",
+    "title": "AE 9: Odds",
+    "section": "Heart disease",
+    "text": "Heart disease\n\nData: Framingham study\nThis data set is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to use the total cholesterol to predict if a randomly selected adult is high risk for heart disease in the next 10 years.\n\nhigh_risk:\n\n1: High risk of having heart disease in next 10 years\n0: Not high risk of having heart disease in next 10 years\n\ntotChol: total cholesterol (mg/dL)\n\n\n\nOutcome: high_risk\n\nggplot(data = heart_disease, aes(x = high_risk)) + \n  geom_bar() + \n  scale_x_discrete(labels = c(\"1\" = \"High risk\", \"0\" = \"Low risk\")) +\n  labs(\n    title = \"Distribution of 10-year risk of heart disease\", \n    x = NULL)\n\n\n\n\n\nheart_disease %>%\n  count(high_risk)\n\n# A tibble: 2 × 2\n  high_risk     n\n  <fct>     <int>\n1 0          3555\n2 1           635\n\n\n\n\nCalculating probability and odds\n\nWhat is the probability a randomly selected person in the study is not high risk for heart disease?\nWhat are the odds a randomly selected person in the study is not high risk for heart disease?\n\n\n\nLogistic regression model\nFit a logistic regression model to understand the relationship between total cholesterol and risk for heart disease.\nLet \\(pi\\) be the probability an adult is high risk. The statistical model is\n\\[\\log\\Big(\\frac{\\pi_i}{1-\\pi_i}\\Big) = \\beta_0 + \\beta_1 TotChol_i\\]\n\nheart_disease_fit <- logistic_reg() %>%\n  set_engine(\"glm\") %>%\n  fit(high_risk ~ totChol, data = heart_disease, family = \"binomial\")\n\ntidy(heart_disease_fit) %>% kable(digits = 3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-2.894\n0.230\n-12.607\n0\n\n\ntotChol\n0.005\n0.001\n5.268\n0\n\n\n\n\n\n\nWrite the regression equation. Round to 3 digits.\n\n\n\nCalculating log-odds, odds and probabilities\nBased on the model, if a randomly selected person has a total cholesterol of 250 mg/dL,\n\nWhat are the log-odds they are high risk for heart disease?\nWhat are the odds they are high risk for heart disease?\nWhat is the probability they are high risk for heart disease? Use the odds to calculate your answer.\n\n\n\nComparing observations\nSuppose a person’s cholesterol changes from 250 mg/dL to 200 mg/dL.\n\nHow do you expect the log-odds that this person is high risk for heart disease to change?\nHow do you expect the odds that this person is high risk for heart disease to change?"
+  },
+  {
     "objectID": "ae/ae-1-dcbikeshare.html#bike-rentals-in-dc",
     "href": "ae/ae-1-dcbikeshare.html#bike-rentals-in-dc",
     "title": "AE 02: Bike rentals in DC",
