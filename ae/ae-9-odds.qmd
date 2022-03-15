@@ -16,7 +16,7 @@ library(tidyverse)
 library(tidymodels)
 library(knitr)
 
-heart_disease <- read_csv(here::here("data/framingham.csv")) %>%
+heart_disease <- read_csv(here::here("ae", "data/framingham.csv")) %>%
   select(totChol, TenYearCHD) %>%
   drop_na() %>%
   mutate(high_risk = as.factor(TenYearCHD)) %>%
