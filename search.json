@@ -4816,6 +4816,48 @@
     "text": "Another model - Model 2\nCreate a different (simpler, involving fewer variables) recipe and call it office_rec2. Conduct 10-fold cross validation and summarize metrics. Describe how the two models compare to each other based on cross validation metrics."
   },
   {
+    "objectID": "ae/ae-10-odds-ratios.html#packages",
+    "href": "ae/ae-10-odds-ratios.html#packages",
+    "title": "AE 10: Odds ratios",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(palmerpenguins)\nlibrary(knitr)"
+  },
+  {
+    "objectID": "ae/ae-10-odds-ratios.html#data-palmer-penguins",
+    "href": "ae/ae-10-odds-ratios.html#data-palmer-penguins",
+    "title": "AE 10: Odds ratios",
+    "section": "Data: Palmer penguins",
+    "text": "Data: Palmer penguins\nIn this application exercise we’ll work with the penguins data set from the palmerpenguins package. This data set contains measurements and other characteristics for over 300 penguins observed near Palmer Station in Antarctica.\nWe will use the following variables:\n\n\n\n\n\n\n\n\nvariable\nclass\ndescription\n\n\n\n\nspecies\ninteger\nPenguin species (Adelie, Gentoo, Chinstrap)\n\n\nisland\ninteger\nIsland where recorded (Biscoe, Dream, Torgersen)\n\n\nflipper_length_mm\ninteger\nFlipper length in mm\n\n\n\nThe goal of this analysis is to use logistic regression to understand the relationship between flipper length, island, and whether a penguin is from the Adelie species."
+  },
+  {
+    "objectID": "ae/ae-10-odds-ratios.html#response-variable",
+    "href": "ae/ae-10-odds-ratios.html#response-variable",
+    "title": "AE 10: Odds ratios",
+    "section": "Response variable",
+    "text": "Response variable\nWe need to create a new response variable to identify whether a penguin is from the Adelie species.\n\npenguins <- penguins %>%\n  mutate(adelie = factor(if_else(species == \"Adelie\", 1, 0)))\n\n\n# check variable\npenguins %>%\n  count(adelie, species)\n\n# A tibble: 3 × 3\n  adelie species       n\n  <fct>  <fct>     <int>\n1 0      Chinstrap    68\n2 0      Gentoo      124\n3 1      Adelie      152\n\n\n\n# visualize response\nggplot(data = penguins, aes(x = adelie)) + \n  geom_bar() + \n  labs(title = \"Distribution of penguin species\") + \n  scale_x_discrete(labels = c(\"1\" = \"Adelie\", \"0\" = \"Chinstrap/Gentoo\"))"
+  },
+  {
+    "objectID": "ae/ae-10-odds-ratios.html#part-1-odds-ratios",
+    "href": "ae/ae-10-odds-ratios.html#part-1-odds-ratios",
+    "title": "AE 10: Odds ratios",
+    "section": "Part 1: Odds Ratios",
+    "text": "Part 1: Odds Ratios\nLet’s start by looking at the relationship between island and whether a penguin is from the Adelie species.\n\nWhat does the values_fill argument do in the following chunk?\n\n\npenguins %>%\n  count(island, adelie) %>%\n  pivot_wider(names_from = adelie, values_from = n, values_fill = 0)\n\n# A tibble: 3 × 3\n  island      `0`   `1`\n  <fct>     <int> <int>\n1 Biscoe      124    44\n2 Dream        68    56\n3 Torgersen     0    52\n\n\n\nCalculate the odds ratio of a penguin being from the Adelie species for those recorded on Dream compared to those recorded on Biscoe.\nYou want to fit a model using island to predict the odds of being from the Adelie species. Let \\(\\pi\\) be the probability a penguin is from the Adelie species. The model has the following form. What do you expect the value of \\(\\hat{\\beta}_1\\), the estimated coefficient for Dream, to be?\n\n\\[\n\\log\\Big(\\frac{\\pi}{1-\\pi}\\Big) = \\beta_0 + \\beta_1 ~ Dream + \\beta_2 ~ Torgersen\n\\]\n\nFill in the code below to fit the model. Once you do, remove the chunk option eval: false so that the chunk actually gets evaluated.\n\n\nadelie_island <- ___ %>%\n  set_engine(\"___\") %>%\n  fit(___ ~ ___, data = penguins, family = \"binomial\")\n\ntidy(adelie_island)\n\n\nBased on this model, what are the odds of a penguin being from the Adelie species if it was recorded on Biscoe island? on Dream island?"
+  },
+  {
+    "objectID": "ae/ae-10-odds-ratios.html#part-2-add-flipper-length",
+    "href": "ae/ae-10-odds-ratios.html#part-2-add-flipper-length",
+    "title": "AE 10: Odds ratios",
+    "section": "Part 2: Add flipper length",
+    "text": "Part 2: Add flipper length\nLet’s add flipper length to the model.\n\nadelie_island_flipper <- logistic_reg() %>%\n  set_engine(\"glm\") %>%\n  fit(adelie ~ island + flipper_length_mm, data = penguins, family = \"binomial\")\n\ntidy(adelie_island_flipper)\n\n# A tibble: 4 × 5\n  term              estimate std.error statistic  p.value\n  <chr>                <dbl>     <dbl>     <dbl>    <dbl>\n1 (Intercept)         48.0      5.83      8.24   1.73e-16\n2 islandDream         -2.12     0.530    -4.00   6.20e- 5\n3 islandTorgersen     18.3   1305.        0.0141 9.89e- 1\n4 flipper_length_mm   -0.239    0.0286   -8.38   5.14e-17\n\n\n\nWrite the regression equation.\n\n\\[\\log\\Big(\\frac{\\hat{\\pi}}{1 - \\hat{\\pi}}\\Big) = ???\\]\n\nInterpret the coefficient of flipper_length_mm in terms of the log-odds of being from the Adelie species.\nInterpret the coefficient of flipper_length_mm in terms of the odds of being from the Adelie species.\nInterpret the coefficient of Dream in terms of the odds of being from the Adelie species."
+  },
+  {
+    "objectID": "ae/ae-10-odds-ratios.html#part-3-change-in-odds",
+    "href": "ae/ae-10-odds-ratios.html#part-3-change-in-odds",
+    "title": "AE 10: Odds ratios",
+    "section": "Part 3: Change in odds",
+    "text": "Part 3: Change in odds\n\nHow do you expect the log-odds of being from the Adelie species to change when going from a penguin with flipper length 185 mm to a penguin with flipper length 200 mm? Assume both penguins were recorded on the Dream island.\nHow do you expect the odds of being from the Adelie species to change when going from a penguin with flipper length 185 mm to a penguin with flipper length 200 mm? Assume both penguins were recorded on the Dream island."
+  },
+  {
     "objectID": "ae/ae-2-dcbikeshare.html#bike-rentals-in-dc",
     "href": "ae/ae-2-dcbikeshare.html#bike-rentals-in-dc",
     "title": "AE 2: Bike rentals in DC (continued)",
