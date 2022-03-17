@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.106">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - Lab 5 - To be posted…</title>
+  <title>STA 210 - Spring 2022 - Lab 5 - General Social Survey</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -11,6 +11,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
   <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -52,19 +115,19 @@
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Lab 5 - To be posted…">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Lab 5 - General Social Survey">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
 <meta name="twitter:image-width" content="800">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="docked fullcontent">
+<body class="docked">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Lab 5 - To be posted…</h1>
+      <h1 class="quarto-secondary-nav-title">Lab 5 - General Social Survey</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -309,15 +372,166 @@
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+<ul class="collapse">
+<li><a href="#learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+</ul></li>
+<li><a href="#getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
+<li><a href="#packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+<li><a href="#data-general-social-survey" class="nav-link" data-scroll-target="#data-general-social-survey">Data: General Social Survey</a></li>
+<li><a href="#exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+<ul class="collapse">
+<li><a href="#part-i-exploratory-data-analysis" class="nav-link" data-scroll-target="#part-i-exploratory-data-analysis">Part I: Exploratory data analysis</a></li>
+<li><a href="#part-ii-logistic-regression-model" class="nav-link" data-scroll-target="#part-ii-logistic-regression-model">Part II: Logistic regression model</a></li>
+</ul></li>
+<li><a href="#submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+<li><a href="#grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+</ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/labs/lab-5.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
 
-<div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Lab 5 - To be posted…</h1></div></header>
+<div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Lab 5 - General Social Survey</h1></div></header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In today’s lab you will analyze data from the <a href="https://gss.norc.org/">General Social Survey</a>.</p>
+<section id="learning-goals" class="level3">
+<h3 class="anchored" data-anchor-id="learning-goals">Learning goals</h3>
+<p>By the end of the lab you will be able to…</p>
+<ul>
+<li>Use logistic regression to explore the relationship between a binary response variable and multiple predictor variables</li>
+<li>Conduct exploratory data analysis for logistic regression</li>
+<li>Interpret coefficients of logistic regression model</li>
+</ul>
+</section>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<ul>
+<li>A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.</li>
+<li>Go to the <a href="https://www.github.com/sta210-s22">sta210-s22</a> organization on GitHub. Click on the repo with the prefix <strong>lab-5</strong>. It contains the starter documents you need to complete the lab.</li>
+<li>Each person on the team should clone the repository and open a new project in RStudio. Throughout the lab, each person should get a chance to make commits and push to the repo.</li>
+</ul>
+</section>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<p>The following packages are used in the lab.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-general-social-survey" class="level2">
+<h2 class="anchored" data-anchor-id="data-general-social-survey">Data: General Social Survey</h2>
+<p>The General Social Survey (GSS) has been used to measure trends in attitudes and behaviors in American society since 1972. In addition to collecting demographic information, the survey includes questions used to gauge attitudes about government spending priorities, confidence in institutions, lifestyle, and many other topics. A full description of the survey may be found <a href="http://www.norc.org/Research/Projects/Pages/general-social-survey.aspx">here</a>.</p>
+<p>The data for this lab are from the 2016 General Social Survey. The original data set contains 2867 observations and 935 variables. We will use and abbreviated data set that includes the following variables:</p>
+<ul>
+<li><p><code>natmass</code>: Respondent’s answer to the following prompt:</p>
+<p>“We are faced with many problems in this country, none of which can be solved easily or inexpensively. I’m going to name some of these problems, and for each one I’d like you to tell me whether you think we’re spending too much money on it, too little money, or about the right amount…are we spending too much, too little, or about the right amount on mass transportation?”</p></li>
+<li><p><code>age</code>: Age in years.</p></li>
+<li><p><code>sex</code>: Sex recorded as <em>male</em> or <em>female</em></p></li>
+<li><p><code>sei10</code>: Socioeconomic index from 0 to 100</p></li>
+<li><p><code>region</code>: Region where interview took place</p></li>
+<li><p><code>polviews</code>: Respondent’s answer to the following prompt:</p>
+<p>“We hear a lot of talk these days about liberals and conservatives. I’m going to show you a seven-point scale on which the political views that people might hold are arranged from extremely liberal - point 1 - to extremely conservative - point 7. Where would you place yourself on this scale?”</p></li>
+</ul>
+<p>The data are in <code>gss2016.csv</code> in the <code>data</code> folder.</p>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<p>The goal of today’s lab is to use the GSS to examine the relationship between US adults’ political views and attitudes towards government spending on mass transportation projects.</p>
+<section id="part-i-exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="part-i-exploratory-data-analysis">Part I: Exploratory data analysis</h3>
+<ol type="1">
+<li><p>Let’s begin by making a binary variable for respondents’ views on spending on mass transportation. Create a new variable that is equal to “1” if a respondent said spending on mass transportation is about right and “0” otherwise. Then make a plot of the new variable, using informative labels for each category.</p></li>
+<li><p>Recode <code>polviews</code> so it is a factor with levels that are in an order that is consistent with question on the survey. <em>Note how the categories are spelled in the data.</em></p>
+<ul>
+<li>Make a plot of the distribution of <code>polviews</code>.</li>
+<li>Which political view occurs most frequently in this data set?</li>
+</ul></li>
+<li><p>Make a plot displaying the relationship between satisfaction with mass transportation spending and political views. Use the plot to describe the relationship the two variables.</p></li>
+<li><p>We’d like to use <code>age</code> as a quantitative variable in your model; however, it is currently a character data type because some observations are coded as <code>"89 or older"</code>.</p>
+<ul>
+<li>Recode <code>age</code> so that is a numeric variable. <em>Note: Before making the variable numeric, you will need to replace the values <code>"89 or older"</code> with a single value.</em></li>
+<li>Then plot the distribution of age.</li>
+</ul></li>
+</ol>
+</section>
+<section id="part-ii-logistic-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="part-ii-logistic-regression-model">Part II: Logistic regression model</h3>
+<ol start="5" type="1">
+<li><p>Briefly explain why we should use a logistic regression model to predict the odds a randomly selected person is satisfied with spending on mass transportation.</p></li>
+<li><p>Let’s start by fitting a model using the demographic factors - <code>age</code>, <code>sex</code>, <code>sei10</code>, and <code>region</code> - to predict the odds a person is satisfied with spending on mass transportation. Make any necessary adjustments to the variables so the intercept will have a meaningful interpretation. Neatly display the model.</p></li>
+<li><p>Interpret the intercept in the context of the data.</p></li>
+<li><p>Consider the relationship between age and one’s opinion about spending on mass transportation. Interpret the coefficient of age in terms of the <strong>odds</strong> of being satisfied with spending on mass transportation.</p></li>
+</ol>
+</section>
+</section>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you wrap up the assignment, make sure all documents are updated on your GitHub repo. We will be checking these to make sure you have been practicing how to commit and push changes.</p>
+<p>Remember – you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.</p>
+</div>
+</div>
+<p>To submit your assignment:</p>
+<ul>
+<li>Go to <a href="http://www.gradescope.com/">http://www.gradescope.com</a> and click <em>Log in</em> in the top right corner.</li>
+<li>Click <em>School Credentials</em> ➡️ <em>Duke NetID</em> and log in using your NetID credentials.</li>
+<li>Click on your <em>STA 210</em> course.</li>
+<li>Click on the assignment, and you’ll be prompted to submit it.</li>
+<li>Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be “checked”).</li>
+<li>Select the first page of your PDF submission to be associated with the <em>“Workflow &amp; formatting”</em> section.</li>
+</ul>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<p>Total points available: 50 points.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ex 1 - 10</td>
+<td>45</td>
+</tr>
+<tr class="even">
+<td>Workflow &amp; formatting</td>
+<td>5<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+</tr>
+</tbody>
+</table>
 
 
-</main> <!-- /main -->
+</section>
+
+<div id="quarto-appendix" class="default"><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>The “Workflow &amp; formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
