@@ -1,20 +1,28 @@
 ---
 title: "Week 10"
-subtitle: "TBA"
+subtitle: "Logistic regression"
 editor: visual
 ---
 
 ::: callout-important
-Due dates:
+Due dates: Project proposal due Fri, Mar 18 at 5:00 pm.
 :::
-
-To be posted.
 
 ## Prepare
 
+📖 Read Introduction to Modern Statistics, Chp 9: [Logistic regression](https://openintro-ims.netlify.app/model-logistic.html)
+
 ## Participate
 
+🖥️ [Lecture 18 - Logistic regression](/slides/lec-18.html)
+
+🖥️ [Lecture 19 - Probabilities, odds, odds ratios](/slides/lec-18.html)
+
 ## Practice
+
+📋 [Application Exercise 9 - Odds](/ae/ae-9-odds.html)
+
+📋 [Application Exercise 10 - Odds ratios](/ae/ae-10-odds-ratios.html)
 
 ## Perform
 

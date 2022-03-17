@@ -1,0 +1,415 @@
+---
+title: "Probabilities, odds, odds ratios"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+
+library(countdown)
+```
+
+# Welcome
+
+## Announcements
+
+-   Exam 2 scores are posted, please review the feedback asap
+
+-   Project proposals due tomorrow (Friday), at 5pm
+
+## Topics
+
+::: nonincremental
+-   Use the odds ratio to compare the odds of two groups
+
+-   Interpret the coefficients of a logistic regression model with
+
+    -   a single categorical predictor
+    -   a single quantitative predictor
+    -   multiple predictors
+:::
+
+## Computational setup
+
+```{r}
+#| warning: false
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+# Odds ratios
+
+## Risk of coronary heart disease {.smaller}
+
+This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts.
+We want to examine the relationship between various health characteristics and the risk of having heart disease.
+
+-   `high_risk`:
+
+    -   1: High risk of having heart disease in next 10 years
+    -   0: Not high risk of having heart disease in next 10 years
+
+-   `age`: Age at exam time (in years)
+
+-   `education`: 1 = Some High School, 2 = High School or GED, 3 = Some College or Vocational School, 4 = College
+
+```{r}
+#| echo: false
+
+heart_disease <- read_csv(here::here("slides", "data/framingham.csv")) %>%
+  select(age, education, TenYearCHD) %>%
+  drop_na() %>%
+  mutate(high_risk = as_factor(TenYearCHD), 
+         education = as_factor(education))
+```
+
+## High risk vs. education
+
+```{r}
+#| label: mutate-level-names
+#| echo: false
+
+heart_disease <- heart_disease %>%
+  mutate(
+    high_risk_names = if_else(high_risk == "1", "High risk", "Not high risk"),
+    education_names = case_when(
+      education == "1" ~ "Some high school",
+      education == "2" ~ "High school or GED",
+      education == "3" ~ "Some college or vocational school",
+      education == "4" ~ "College"
+    ),
+    education_names = fct_relevel(education_names, "Some high school", "High school or GED", "Some college or vocational school", "College")
+  )
+```
+
+```{r}
+#| label: education-high-risk-table
+#| echo: false
+
+heart_disease %>%
+  count(education_names, high_risk_names) %>%
+  pivot_wider(names_from = high_risk_names, values_from = n) %>%
+  kable(col.names = c("Education", "High risk", "Not high risk"))
+```
+
+## Compare the odds for two groups {.smaller}
+
+```{r}
+#| ref.label: education-high-risk-table
+#| echo: false
+```
+
+-   We want to compare the risk of heart disease for those with a High School diploma/GED and those with a college degree.
+
+-   We'll use the **odds** to compare the two groups
+
+$$
+\text{odds} = \frac{P(\text{success})}{P(\text{failure})} = \frac{\text{# of successes}}{\text{# of failures}}
+$$
+
+## Compare the odds for two groups {.smaller}
+
+```{r}
+#| ref.label: education-high-risk-table
+#| echo: false
+```
+
+-   Odds of having high risk for the **High school or GED** group: $\frac{147}{1106} = 0.133$
+
+-   Odds of having high risk for the **College** group: $\frac{70}{403} = 0.174$
+
+-   Based on this, we see those with a college degree had higher odds of having high risk for heart disease than those with a high school diploma or GED.
+
+## Odds ratio (OR) {.smaller}
+
+```{r}
+#| ref.label: education-high-risk-table
+#| echo: false
+```
+
+Let's summarize the relationship between the two groups.
+To do so, we'll use the **odds ratio (OR)**.
+
+$$
+OR = \frac{\text{odds}_1}{\text{odds}_2} = \frac{\omega_1}{\omega_2}
+$$
+
+## OR: College vs. High school or GED {.smaller}
+
+```{r}
+#| ref.label: education-high-risk-table
+#| echo: false
+```
+
+$$OR = \frac{\text{odds}_{College}}{\text{odds}_{HS}} = \frac{0.174}{0.133} = \mathbf{1.308}$$
+
+. . .
+
+The odds of having high risk for heart disease are 1.30 times higher for those with a college degree than those with a high school diploma or GED.
+
+## OR: College vs. Some high school {.smaller}
+
+```{r}
+#| ref.label: education-high-risk-table
+#| echo: false
+```
+
+$$OR = \frac{\text{odds}_{College}}{\text{odds}_{Some HS}} = \frac{70/403}{323/1397} = 0.751$$
+
+. . .
+
+The odds of having high risk for having heart disease for those with a college degree are 0.751 times the odds of having high risk for heart disease for those with some high school.
+
+## More natural interpretation
+
+-   It's more natural to interpret the odds ratio with a statement with the odds ratio greater than 1.
+
+-   The odds of having high risk for heart disease are 1.33 times higher for those with some high school than those with a college degree.
+
+## Making the table 1
+
+First, rename the levels of the categorical variables:
+
+```{r}
+#| ref.label: mutate-level-names
+```
+
+## Making the table 2
+
+Then, make the table:
+
+```{r}
+#| ref.label: education-high-risk-table
+#| results: hide
+```
+
+## Deeper look into the code
+
+```{r}
+heart_disease %>%
+  count(education_names, high_risk_names)
+```
+
+## Deeper look into the code
+
+```{r}
+#| code-line-numbers: "3"
+
+heart_disease %>%
+  count(education_names, high_risk_names) %>%
+  pivot_wider(names_from = high_risk_names, values_from = n)
+```
+
+## Deeper look into the code
+
+```{r}
+#| code-line-numbers: "4"
+
+heart_disease %>%
+  count(education_names, high_risk_names) %>%
+  pivot_wider(names_from = high_risk_names, values_from = n) %>%
+  kable()
+```
+
+## Deeper look into the code
+
+```{r}
+#| code-line-numbers: "4"
+
+heart_disease %>%
+  count(education_names, high_risk_names) %>%
+  pivot_wider(names_from = high_risk_names, values_from = n) %>%
+  kable(col.names = c("Education", "High risk", "Not high risk"))
+```
+
+# Logistic regression with: categorical predictor
+
+## Categorical predictor {.smaller}
+
+Recall: Education - 1 = Some High School, 2 = High School or GED, 3 = Some College or Vocational School, 4 = College
+
+```{r}
+heart_edu_fit <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(high_risk ~ education, data  = heart_disease, family = "binomial")
+```
+
+```{r}
+#| label: heart-edu-tidy
+
+tidy(heart_edu_fit) %>%
+  kable(digits = 3)
+```
+
+## Interpreting `education4` - log-odds
+
+::: small
+```{r}
+#| ref.label: heart-edu-tidy
+#| echo: false
+```
+:::
+
+The **log-odds** of having high risk for heart disease are expected to be 0.286 less for those with a college degree compared to those with some high school (the baseline group).
+
+## Interpreting `education4` - odds
+
+::: small
+```{r}
+#| ref.label: heart-edu-tidy
+#| echo: false
+```
+:::
+
+The **odds** of having high risk for heart disease for those with a college degree are expected to be `r round(exp(-0.286),3)` (exp(-0.286)) **times** the odds for those with some high school.
+
+## Coefficients + odds ratios
+
+The model coefficient, -0.286, is the expected change in the log-odds when going from the *Some high school* group to the *College* group.
+
+. . .
+
+Therefore, $e^{-0.286}$ = `r round(exp(-0.286),3)` is the expected change in the **odds** when going from the *Some high school* group to the *College* group.
+
+. . .
+
+$$
+OR  = e^{\hat{\beta}_j} = \exp\{\hat{\beta}_j\}
+$$
+
+# Logistic regression: quantitative predictor
+
+## Quantitative predictor
+
+```{r}
+heart_age_fit <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(high_risk ~ age, data  = heart_disease, family = "binomial")
+```
+
+```{r}
+#| label: heart-age-tidy
+
+tidy(heart_age_fit) %>%
+  kable(digits = 3)
+```
+
+## Interpreting `age`: log-odds
+
+::: small
+```{r}
+#| ref.label: heart-age-tidy
+#| echo: false
+```
+:::
+
+For each additional year in age, the log-odds of having high risk for heart disease are expected to increase by 0.076.
+
+## Interpreting `age`: odds
+
+::: small
+```{r}
+#| ref.label: heart-age-tidy
+#| echo: false
+```
+:::
+
+-   For each additional year in age, the odds of having high risk for heart disease are expected to multiply by a factor of `r round(exp(0.076),2)` (`exp(0.076)`).
+-   **Alternate interpretation:** For each additional year in age, the odds of having high risk for heart disease are expected to increase by 8%.
+
+# Logistic regression: multiple predictors
+
+## Multiple predictors
+
+```{r}
+heart_edu_age_fit <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(high_risk ~ education + age, data  = heart_disease, family = "binomial")
+```
+
+```{r}
+#| label: heart-edu-age-tidy
+
+tidy(heart_edu_age_fit) %>%
+  kable(digits = 3)
+```
+
+## Interpretation in terms of log-odds
+
+::: small
+```{r}
+#| ref.label: heart-edu-age-tidy
+#| echo: false
+```
+:::
+
+`education4`: The **log-odds** of having high risk for heart disease are expected to be 0.020 less for those with a college degree compared to those with some high school, **holding age constant.**
+
+## Interpretation in terms of log-odds
+
+::: small
+```{r}
+#| ref.label: heart-edu-age-tidy
+#| echo: false
+```
+:::
+
+`age`: For each additional year in age, the log-odds of having high risk for heart disease are expected to increase by 0.073, **holding education level constant.**
+
+## Interpretation in terms of odds
+
+::: small
+```{r}
+#| ref.label: heart-edu-age-tidy
+#| echo: false
+```
+:::
+
+`education4`: The **odds** of having high risk for heart disease for those with a college degree are expected to be `r round(exp(-0.020),3)` (`exp(-0.020)`) **times** the odds for those with some high school, **holding age constant**.
+
+## Interpretation in terms of odds
+
+::: small
+```{r}
+#| ref.label: heart-edu-age-tidy
+#| echo: false
+```
+:::
+
+`age`: For each additional year in age, the odds having high risk for heart disease are expected to multiply by a factor of `r round(exp(0.073),2)` (`exp(0.073)`), **holding education level constant**.
+
+## Recap
+
+-   Use the odds ratio to compare the odds of two groups
+
+-   Interpret the coefficients of a logistic regression model with
+
+    -   a single categorical predictor
+    -   a single quantitative predictor
+    -   multiple predictors
