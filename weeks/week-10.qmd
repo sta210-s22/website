@@ -22,9 +22,9 @@ Due dates: Project proposal due Fri, Mar 18 at 5:00 pm.
 
 📋 [Application Exercise 9 - Odds](/ae/ae-9-odds.html)
 
-📋 [Application Exercise 10 - Odds ratios](/ae/ae-10-odds-ratios.html)
-
 ## Perform
+
+✍️ [HW 3 - Logistic regression and log transformation](/hw/hw-3.html)
 
 <br><br>
 
