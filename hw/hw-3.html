@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.106">
+  <meta name="generator" content="quarto-0.9.112">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>STA 210 - Spring 2022 - HW 3 - To be posted…</title>
+  <title>STA 210 - Spring 2022 - HW 3 - Logistic regression and log transformation</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -11,6 +11,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
   <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -33,7 +96,7 @@
   <script id="quarto-search-options" type="application/json">{
     "location": "sidebar",
     "copy-button": false,
-    "collapse-after": 2,
+    "collapse-after": 3,
     "panel-placement": "start",
     "type": "textbox",
     "limit": 20,
@@ -49,22 +112,23 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-<meta name="twitter:title" content="STA 210 - Spring 2022 - HW 3 - To be posted…">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - HW 3 - Logistic regression and log transformation">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
 <meta name="twitter:image-width" content="800">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="docked fullcontent">
+<body class="docked">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">HW 3 - To be posted…</h1>
+      <h1 class="quarto-secondary-nav-title">HW 3 - Logistic regression and log transformation</h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -309,14 +373,219 @@
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+<ul class="collapse">
+<li><a href="#learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+<li><a href="#getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
+<li><a href="#packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+</ul></li>
+<li><a href="#part-1---palmer-penguins" class="nav-link" data-scroll-target="#part-1---palmer-penguins">Part 1 - Palmer penguins</a></li>
+<li><a href="#part-2---gdp-and-urban-population" class="nav-link" data-scroll-target="#part-2---gdp-and-urban-population">Part 2 - GDP and Urban population</a></li>
+</ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/hw/hw-3.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
 
-<div class="quarto-title"><h1 class="title d-none d-lg-block display-7">HW 3 - To be posted…</h1></div></header>
+
+<div class="quarto-title"><h1 class="title d-none d-lg-block display-7">HW 3 - Logistic regression and log transformation</h1><p class="subtitle lead">Due Friday, March 25, 5pm on Gradescope</p></div></header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this assignment, you’ll get to put into practice the logistic regression skills you’ve developed.</p>
+<section id="learning-goals" class="level3">
+<h3 class="anchored" data-anchor-id="learning-goals">Learning goals</h3>
+<p>In this assignment, you will…</p>
+<ul>
+<li>Fit and interpret logistic regression models.</li>
+<li>Fit and interpret multiple linear regression models with log transformed outcomes.</li>
+<li>Reason around log transformations of various types.</li>
+<li>Continue developing a workflow for reproducible data analysis.</li>
+</ul>
+</section>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started">Getting started</h3>
+<p>Your repo for this assignment is at <a href="https://github.com/sta210-s22" title="Course GitHub organization">github.com/sta210-s22</a> and starts with the prefix <strong>hw-3</strong>. For more detailed instructions on getting started, see <a href="hw-1.html">HW 1</a>.</p>
+</section>
+<section id="packages" class="level3">
+<h3 class="anchored" data-anchor-id="packages">Packages</h3>
+<p>The following packages will be used in this assignment. You can add other packages as needed.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="part-1---palmer-penguins" class="level2">
+<h2 class="anchored" data-anchor-id="part-1---palmer-penguins">Part 1 - Palmer penguins</h2>
+<p>In this part we’ll go back to the Palmer penguins dataset from <a href="hw-2.html">HW 2</a>.</p>
+<p>We will use the following variables:</p>
+<table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">class</th>
+<th style="text-align: left;">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">Penguin species (Adelie, Gentoo, Chinstrap)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">island</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">Island where recorded (Biscoe, Dream, Torgersen)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">flipper_length_mm</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">Flipper length in mm</td>
+</tr>
+</tbody>
+</table>
+<p>The goal of this analysis is to use logistic regression to understand the relationship between flipper length, island, and whether a penguin is from the Adelie species. First, we need to create a new response variable to identify whether a penguin is from the Adelie species.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">adelie =</span> <span class="fu">factor</span>(<span class="fu">if_else</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>, <span class="dv">1</span>, <span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And let’s check to make sure the new variable looks right before we continue with the analysis.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(adelie, species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  adelie species       n
+  &lt;fct&gt;  &lt;fct&gt;     &lt;int&gt;
+1 0      Chinstrap    68
+2 0      Gentoo      124
+3 1      Adelie      152</code></pre>
+</div>
+</div>
+<p>Let’s start by looking at the relationship between island and whether a penguin is from the Adelie species.</p>
+<ol type="1">
+<li><p>What does the <code>values_fill</code> argument do in the following chunk? The documentation for the function will be helpful in answering this question.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(island, adelie) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> adelie, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  island      `0`   `1`
+  &lt;fct&gt;     &lt;int&gt; &lt;int&gt;
+1 Biscoe      124    44
+2 Dream        68    56
+3 Torgersen     0    52</code></pre>
+</div>
+</div></li>
+</ol>
+<!-- -->
+<ol start="2" type="1">
+<li><p>Calculate the odds ratio of a penguin being from the Adelie species for those recorded on Dream compared to those recorded on Biscoe.</p></li>
+<li><p>You want to fit a model using <code>island</code> to predict the odds of being from the Adelie species. Let <span class="math inline">\(\pi\)</span> be the probability a penguin is from the Adelie species. The model has the following form. What do you expect the value of <span class="math inline">\(\hat{\beta}_1\)</span>, the estimated coefficient for <em>Dream</em>, to be? Explain your reasoning.</p></li>
+</ol>
+<p><span class="math display">\[
+\log\Big(\frac{\pi}{1-\pi}\Big) = \beta_0 + \beta_1 ~ Dream + \beta_2 ~ Torgersen
+\]</span></p>
+<ol start="4" type="1">
+<li>Fit a model predicting <code>adelie</code> from <code>island</code> and display the model output. For the following exercise, use this model.</li>
+<li>Based on this model, what are the <strong>odds</strong> of a penguin being from the Adelie species if it was recorded on Biscoe island? on Dream island?</li>
+<li>Next, add flipper length to the model so that there are two predictors. Display the model output. For the following exercises, use this model.</li>
+<li>Write the regression equation for the model.</li>
+<li>Interpret the coefficient of <code>flipper_length_mm</code> in terms of the log-odds of being from the Adelie species.</li>
+<li>Interpret the coefficient of <code>flipper_length_mm</code> in terms of the odds of being from the Adelie species.</li>
+<li>Interpret the coefficient of <code>Dream</code> in terms of the odds of being from the Adelie species.</li>
+<li>How do you expect the log-odds of being from the Adelie species to change when going from a penguin with flipper length 185 mm to a penguin with flipper length 200 mm? Assume both penguins were recorded on the Dream island.</li>
+<li>How do you expect the odds of being from the Adelie species to change when going from a penguin with flipper length 185 mm to a penguin with flipper length 200 mm? Assume both penguins were recorded on the Dream island.</li>
+</ol>
+</section>
+<section id="part-2---gdp-and-urban-population" class="level2">
+<h2 class="anchored" data-anchor-id="part-2---gdp-and-urban-population">Part 2 - GDP and Urban population</h2>
+<p>Data on countries’ Gross Domestic Product (GDP) and percentage of urban population was collected and made available by <a href="http://data.worldbank.org/">The World Bank</a> in 2020. A description of the variables as defined by The World Bank are provided below.</p>
+<ul>
+<li><strong>GDP:</strong> “GDP per capita is gross domestic product divided by midyear population. GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in current U.S. dollars.”</li>
+<li><strong>Urban Population (% of total):</strong> “Urban population refers to people living in urban areas as defined by national statistical offices. It is calculated using World Bank population estimates and urban ratios from the United Nations World Urbanization Prospects.”</li>
+</ul>
+<p>The data can be found in the <code>data</code> folder of your repository. Read the data and name it <code>gdp_2020</code>.</p>
+<ol start="13" type="1">
+<li>Fit a model predicting GDP from urban population. Then make a plot of residuals vs.&nbsp;fitted for this model. Does the linear model seem appropriate for modeling this relationship? Explain your reasoning.</li>
+<li>Add a new column to the <code>gdp_2020</code> dataset called <code>gdp_log</code> which is the (natural) log of <code>gdp</code>.</li>
+<li>Fit a new model, predicting the log of GDP from urban population. Then make a plot of residuals vs.&nbsp;fitted for this model. Does the model predicting logged GDP or original GDP appear to be a better fit? Explain your reasoning.</li>
+</ol>
+<p>The model output for predicting logged GDP.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">6.107</td>
+<td style="text-align: right;">0.202</td>
+<td style="text-align: right;">30.291</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">urban</td>
+<td style="text-align: right;">0.042</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">13.769</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The linear model for predicting log of GDP can be expressed as follows:</p>
+<p><span class="math display">\[
+\widehat{\log(GDP)} = 6.11 + 0.042 \times urban
+\]</span></p>
+<p>Therefore, the coefficient of <code>urban</code> (0.042) can be interpreted as the change in logged GDP associated with 1 percentage point increase in urban population. The problem is, logged GDP is not a very informative value to talk about. So we need to undo the transformation we’ve done.</p>
+<p>To do so, let’s do a quick review of some properties of logs.</p>
+<ul>
+<li>Subtraction and logs: <span class="math inline">\(log(a) − log(b) = log(\frac{a}{b})\)</span></li>
+<li>Natural logarithm: <span class="math inline">\(e^{log(x)} = x\)</span></li>
+</ul>
+<p>Based on the interpretation of the slope above, the difference between the predicted values of logged GDP for a given value of <code>urban</code> and a value that is 1 percentage point higher is 0.0425. Let’s write this out mathematically, and then use the properties we’ve listed above to work through the equation.</p>
+<p><span class="math display">\[
+\begin{aligned}
+log(\text{GDP for urban } x + 1) - log(\text{GDP for urban } x) &amp;= 0.042 \\
+log\Big( \frac{\text{GDP for urban } x + 1}{\text{GDP for urban } x} \Big) &amp;= 0.042 \\
+e^{log\Big( \frac{\text{GDP for urban } x + 1}{\text{GDP for urban } x} \Big)} &amp;= e^{0.042}\\
+log\Big( \frac{\text{GDP for urban } x + 1}{\text{GDP for urban } x} \Big) &amp;= e^{0.042}
+\end{aligned}
+\]</span></p>
+<ol start="16" type="1">
+<li><p>Based on the derivation above, fill in the blanks in the following sentence for an alternative (and more useful interpretation) of the slope of <code>urban</code>.</p>
+<blockquote class="blockquote">
+<p>For each additional percentage point the urban population is higher, the GDP of a country is expected to be ___, on average, by a factor of ___.</p>
+</blockquote></li>
+</ol>
 
 
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

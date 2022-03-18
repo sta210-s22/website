@@ -3175,7 +3175,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
@@ -3780,6 +3780,13 @@
     "text": "Predictive performance\n\n\n\n\n\nHow consistent are the predictions for different bootstrap datasets?\nHow consistent are the predictions for counties with high school graduation rates in the middle of the plot vs. in the edges?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
+    "objectID": "course-syllabus.html",
+    "href": "course-syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Click here to download a PDF copy of the syllabus."
+  },
+  {
     "objectID": "course-syllabus.html#course-info",
     "href": "course-syllabus.html#course-info",
     "title": "Syllabus",
@@ -3871,11 +3878,11 @@
     "text": "RStudio containers\n🔗 on Duke Container Manager\n\n\nCourse GitHub organization\n🔗 on GitHub\n\n\nDiscussion forum\n🔗 on Sakai\n\n\nLecture streaming and recordings\n🔗 on Panopto\n\n\nGradebook\n🔗 on Sakai\n\n\nVirtual meetings\n🔗 on Sakai"
   },
   {
-    "objectID": "project-description.html#timeline",
-    "href": "project-description.html#timeline",
+    "objectID": "project-description.html",
+    "href": "project-description.html",
     "title": "Project description",
-    "section": "Timeline",
-    "text": "Timeline\nTopic ideas due Fri, Feb 18\nProposal due Fri, Mar 18\nDraft report due Fri, Apr 8\nPeer review due Fri, Apr 15\nFinal report due Mon, Apr 25\nVideo presentation + slides and final GitHub repo due Thu, Apr 28\nPresentation comments due Sat, Apr 30"
+    "section": "",
+    "text": "Topic ideas due Fri, Feb 18\nProposal due Fri, Mar 18\nDraft report due Fri, Apr 8\nPeer review due Fri, Apr 15\nFinal report due Mon, Apr 25\nVideo presentation + slides and final GitHub repo due Thu, Apr 28\nPresentation comments due Sat, Apr 30"
   },
   {
     "objectID": "project-description.html#introduction",
@@ -3955,11 +3962,11 @@
     "text": "Overall grading\nThe grade breakdown is as follows:\n\n\n\nTotal\n100 pts\n\n\n\n\nTopic ideas\n5 pts\n\n\nProject proposal\n10 pts\n\n\nPeer review\n10 pts\n\n\nWritten report\n40 pts\n\n\nSlides + video presentation\n20 pts\n\n\nReproducibility + organization\n5 pts\n\n\nVideo comments\n5 pts\n\n\nPeer teamwork evaluation\n5 pts\n\n\n\nNote: No late project reports or videos are accepted.\n\nGrading summary\nGrading of the project will take into account the following:\n\nContent - What is the quality of research and/or policy question and relevancy of data to those questions?\nCorrectness - Are statistical procedures carried out and explained correctly?\nWriting and Presentation - What is the quality of the statistical presentation, writing, and explanations?\nCreativity and Critical Thought - Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project?\n\nA general breakdown of scoring is as follows:\n\n90%-100%: Outstanding effort. Student understands how to apply all statistical concepts, can put the results into a cogent argument, can identify weaknesses in the argument, and can clearly communicate the results to others.\n80%-89%: Good effort. Student understands most of the concepts, puts together an adequate argument, identifies some weaknesses of their argument, and communicates most results clearly to others.\n70%-79%: Passing effort. Student has misunderstanding of concepts in several areas, has some trouble putting results together in a cogent argument, and communication of results is sometimes unclear.\n60%-69%: Struggling effort. Student is making some effort, but has misunderstanding of many concepts and is unable to put together a cogent argument. Communication of results is unclear.\nBelow 60%: Student is not making a sufficient effort.\n\n\n\nLate work policy\nThere is no late work accepted on this project. Be sure to turn in your work early to avoid any technological mishaps."
   },
   {
-    "objectID": "project-tips-resources.html#data-sources",
-    "href": "project-tips-resources.html#data-sources",
+    "objectID": "project-tips-resources.html",
+    "href": "project-tips-resources.html",
     "title": "Project tips + resources",
-    "section": "Data sources",
-    "text": "Data sources\n\nSome resources that may be helpful as you find data:\n\nR Data Sources for Regression Analysis\nFiveThirtyEight data\nTidyTuesday\n\n\n\nOther data repositories\n\nWorld Health Organization\nThe National Bureau of Economic Research\nInternational Monetary Fund\nGeneral Social Survey\nUnited Nations Data\nUnited Nations Statistics Division\nU.K. Data\nU.S. Data\nU.S. Census Data\nEuropean Statistics\nStatistics Canada\nPew Research\nUNICEF\nCDC\nWorld Bank\nElection Studies"
+    "section": "",
+    "text": "R Data Sources for Regression Analysis\nFiveThirtyEight data\nTidyTuesday\n\n\n\n\n\nWorld Health Organization\nThe National Bureau of Economic Research\nInternational Monetary Fund\nGeneral Social Survey\nUnited Nations Data\nUnited Nations Statistics Division\nU.K. Data\nU.S. Data\nU.S. Census Data\nEuropean Statistics\nStatistics Canada\nPew Research\nUNICEF\nCDC\nWorld Bank\nElection Studies"
   },
   {
     "objectID": "project-tips-resources.html#tips",
@@ -3983,6 +3990,13 @@
     "text": "Additional resources\n\nR for Data Science\nQuarto Documentation\nData visualization\n\nggplot2 Reference\nggplot2: Elegant Graphics for Data Analysis\nData Visualization: A Practice Introduction\nPatchwork R Package"
   },
   {
+    "objectID": "computing-pipelines.html",
+    "href": "computing-pipelines.html",
+    "title": "Pipelines",
+    "section": "",
+    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Use suppressPackageStartupMessages() to eliminate package startup messages\n\nlibrary(knitr)"
+  },
+  {
     "objectID": "computing-pipelines.html#simple-linear-regression",
     "href": "computing-pipelines.html#simple-linear-regression",
     "title": "Pipelines",
@@ -3994,7 +4008,14 @@
     "href": "supplemental/slr-derivations.html",
     "title": "Deriving the Least-Squares Estimates for Simple Linear Regression",
     "section": "",
-    "text": "Note\n\n\n\nThe following supplemental notes were created by Dr. Maria Tackett for STA 210. They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression. Additional supplemental notes will be added throughout the semester.\n\n\nThis document contains the mathematical details for deriving the least-squares estimates for slope (\\(\\beta_1\\)) and intercept (\\(\\beta_0\\)). We obtain the estimates, \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) by finding the values that minimize the sum of squared residuals, as shown in Equation 1.\n\\[\nSSR = \\sum\\limits_{i=1}^{n}[y_i - \\hat{y}_i]^2 = [y_i - (\\hat{\\beta}_0 + \\hat{\\beta}_1 x_i)]^2 = [y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i]^2\n\\qquad(1)\\]\nRecall that we can find the values of \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) that minimize /eq-ssr by taking the partial derivatives of Equation 1 and setting them to 0. Thus, the values of \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) that minimize the respective partial derivative also minimize the sum of squared residuals. The partial derivatives are shown in Equation 2.\n\\[\n\\begin{aligned}\n\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_1} &= -2 \\sum\\limits_{i=1}^{n}x_i(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i)  \\\\\n\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_0} &= -2 \\sum\\limits_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i)\n\\end{aligned}\n\\qquad(2)\\]\nThe derivation of deriving \\(\\hat{\\beta}_0\\) is shown in Equation 3.\n\\[\n\\begin{aligned}\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_0} &= -2 \\sum\\limits_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i) = 0 \\\\&\\Rightarrow -\\sum\\limits_{i=1}^{n}(y_i + \\hat{\\beta}_0 + \\hat{\\beta}_1 x_i) = 0 \\\\&\\Rightarrow - \\sum\\limits_{i=1}^{n}y_i + n\\hat{\\beta}_0 + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i = 0 \\\\&\\Rightarrow n\\hat{\\beta}_0  = \\sum\\limits_{i=1}^{n}y_i - \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i \\\\&\\Rightarrow \\hat{\\beta}_0  = \\frac{1}{n}\\Big(\\sum\\limits_{i=1}^{n}y_i - \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i\\Big)\\\\&\\Rightarrow \\hat{\\beta}_0  = \\bar{y} - \\hat{\\beta}_1 \\bar{x} \\\\\\end{aligned}\n\\qquad(3)\\]\nThe derivation of \\(\\hat{\\beta}_1\\) using the \\(\\hat{\\beta}_0\\) we just derived is shown in Equation 4.\n\\[\n\\begin{aligned}&\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_1} = -2 \\sum\\limits_{i=1}^{n}x_i(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i) = 0  \\\\&\\Rightarrow -\\sum\\limits_{i=1}^{n}x_iy_i + \\hat{\\beta}_0\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = 0 \\\\\\text{(Fill in }\\hat{\\beta}_0\\text{)}&\\Rightarrow -\\sum\\limits_{i=1}^{n}x_iy_i + (\\bar{y} - \\hat{\\beta}_1\\bar{x})\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = 0 \\\\&\\Rightarrow  (\\bar{y} - \\hat{\\beta}_1\\bar{x})\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow \\bar{y}\\sum\\limits_{i=1}^{n}x_i - \\hat{\\beta}_1\\bar{x}\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow n\\bar{y}\\bar{x} - \\hat{\\beta}_1n\\bar{x}^2 + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 - \\hat{\\beta}_1n\\bar{x}^2  = \\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x} \\\\&\\Rightarrow \\hat{\\beta}_1\\Big(\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2\\Big)  = \\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x} \\\\ &\\hat{\\beta}_1 = \\frac{\\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x}}{\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2}\\end{aligned}\n\\qquad(4)\\]\nTo write \\(\\hat{\\beta}_1\\) in a form that’s more recognizable, we will use the following:\n\\[\n\\sum x_iy_i - n\\bar{y}\\bar{x} = \\sum(x - \\bar{x})(y - \\bar{y}) = (n-1)\\text{Cov}(x,y)\n\\qquad(5)\\]\n\\[\n\\sum x_i^2 - n\\bar{x}^2 - \\sum(x - \\bar{x})^2 = (n-1)s_x^2\n\\qquad(6)\\]\nwhere \\(\\text{Cov}(x,y)\\) is the covariance of \\(x\\) and \\(y\\), and \\(s_x^2\\) is the sample variance of \\(x\\) (\\(s_x\\) is the sample standard deviation).\nThus, applying Equation 5 and Equation 6, we have\n\\[\n\\begin{aligned}\\hat{\\beta}_1 &= \\frac{\\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x}}{\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2} \\\\&= \\frac{\\sum\\limits_{i=1}^{n}(x-\\bar{x})(y-\\bar{y})}{\\sum\\limits_{i=1}^{n}(x-\\bar{x})^2}\\\\&= \\frac{(n-1)\\text{Cov}(x,y)}{(n-1)s_x^2}\\\\&= \\frac{\\text{Cov}(x,y)}{s_x^2}\\end{aligned}\n\\qquad(7)\\]\nThe correlation between \\(x\\) and \\(y\\) is \\(r = \\frac{\\text{Cov}(x,y)}{s_x s_y}\\). Thus, \\(\\text{Cov}(x,y) = r s_xs_y\\). Plugging this into Equation 7, we have\n\\[\n\\hat{\\beta}_1 = \\frac{\\text{Cov}(x,y)}{s_x^2} = r\\frac{s_ys_x}{s_x^2} = r\\frac{s_y}{s_x}\n\\qquad(8)\\]"
+    "text": "This document contains the mathematical details for deriving the least-squares estimates for slope (\\(\\beta_1\\)) and intercept (\\(\\beta_0\\)). We obtain the estimates, \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) by finding the values that minimize the sum of squared residuals, as shown in Equation 1.\n\\[\nSSR = \\sum\\limits_{i=1}^{n}[y_i - \\hat{y}_i]^2 = [y_i - (\\hat{\\beta}_0 + \\hat{\\beta}_1 x_i)]^2 = [y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i]^2\n\\qquad(1)\\]\nRecall that we can find the values of \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) that minimize /eq-ssr by taking the partial derivatives of Equation 1 and setting them to 0. Thus, the values of \\(\\hat{\\beta}_1\\) and \\(\\hat{\\beta}_0\\) that minimize the respective partial derivative also minimize the sum of squared residuals. The partial derivatives are shown in Equation 2.\n\\[\n\\begin{aligned}\n\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_1} &= -2 \\sum\\limits_{i=1}^{n}x_i(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i)  \\\\\n\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_0} &= -2 \\sum\\limits_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i)\n\\end{aligned}\n\\qquad(2)\\]\nThe derivation of deriving \\(\\hat{\\beta}_0\\) is shown in Equation 3.\n\\[\n\\begin{aligned}\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_0} &= -2 \\sum\\limits_{i=1}^{n}(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i) = 0 \\\\&\\Rightarrow -\\sum\\limits_{i=1}^{n}(y_i + \\hat{\\beta}_0 + \\hat{\\beta}_1 x_i) = 0 \\\\&\\Rightarrow - \\sum\\limits_{i=1}^{n}y_i + n\\hat{\\beta}_0 + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i = 0 \\\\&\\Rightarrow n\\hat{\\beta}_0  = \\sum\\limits_{i=1}^{n}y_i - \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i \\\\&\\Rightarrow \\hat{\\beta}_0  = \\frac{1}{n}\\Big(\\sum\\limits_{i=1}^{n}y_i - \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i\\Big)\\\\&\\Rightarrow \\hat{\\beta}_0  = \\bar{y} - \\hat{\\beta}_1 \\bar{x} \\\\\\end{aligned}\n\\qquad(3)\\]\nThe derivation of \\(\\hat{\\beta}_1\\) using the \\(\\hat{\\beta}_0\\) we just derived is shown in Equation 4.\n\\[\n\\begin{aligned}&\\frac{\\partial \\text{SSR}}{\\partial \\hat{\\beta}_1} = -2 \\sum\\limits_{i=1}^{n}x_i(y_i - \\hat{\\beta}_0 - \\hat{\\beta}_1 x_i) = 0  \\\\&\\Rightarrow -\\sum\\limits_{i=1}^{n}x_iy_i + \\hat{\\beta}_0\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = 0 \\\\\\text{(Fill in }\\hat{\\beta}_0\\text{)}&\\Rightarrow -\\sum\\limits_{i=1}^{n}x_iy_i + (\\bar{y} - \\hat{\\beta}_1\\bar{x})\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = 0 \\\\&\\Rightarrow  (\\bar{y} - \\hat{\\beta}_1\\bar{x})\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow \\bar{y}\\sum\\limits_{i=1}^{n}x_i - \\hat{\\beta}_1\\bar{x}\\sum\\limits_{i=1}^{n}x_i + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow n\\bar{y}\\bar{x} - \\hat{\\beta}_1n\\bar{x}^2 + \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 = \\sum\\limits_{i=1}^{n}x_iy_i \\\\&\\Rightarrow \\hat{\\beta}_1\\sum\\limits_{i=1}^{n}x_i^2 - \\hat{\\beta}_1n\\bar{x}^2  = \\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x} \\\\&\\Rightarrow \\hat{\\beta}_1\\Big(\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2\\Big)  = \\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x} \\\\ &\\hat{\\beta}_1 = \\frac{\\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x}}{\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2}\\end{aligned}\n\\qquad(4)\\]\nTo write \\(\\hat{\\beta}_1\\) in a form that’s more recognizable, we will use the following:\n\\[\n\\sum x_iy_i - n\\bar{y}\\bar{x} = \\sum(x - \\bar{x})(y - \\bar{y}) = (n-1)\\text{Cov}(x,y)\n\\qquad(5)\\]\n\\[\n\\sum x_i^2 - n\\bar{x}^2 - \\sum(x - \\bar{x})^2 = (n-1)s_x^2\n\\qquad(6)\\]\nwhere \\(\\text{Cov}(x,y)\\) is the covariance of \\(x\\) and \\(y\\), and \\(s_x^2\\) is the sample variance of \\(x\\) (\\(s_x\\) is the sample standard deviation).\nThus, applying Equation 5 and Equation 6, we have\n\\[\n\\begin{aligned}\\hat{\\beta}_1 &= \\frac{\\sum\\limits_{i=1}^{n}x_iy_i - n\\bar{y}\\bar{x}}{\\sum\\limits_{i=1}^{n}x_i^2 -n\\bar{x}^2} \\\\&= \\frac{\\sum\\limits_{i=1}^{n}(x-\\bar{x})(y-\\bar{y})}{\\sum\\limits_{i=1}^{n}(x-\\bar{x})^2}\\\\&= \\frac{(n-1)\\text{Cov}(x,y)}{(n-1)s_x^2}\\\\&= \\frac{\\text{Cov}(x,y)}{s_x^2}\\end{aligned}\n\\qquad(7)\\]\nThe correlation between \\(x\\) and \\(y\\) is \\(r = \\frac{\\text{Cov}(x,y)}{s_x s_y}\\). Thus, \\(\\text{Cov}(x,y) = r s_xs_y\\). Plugging this into Equation 7, we have\n\\[\n\\hat{\\beta}_1 = \\frac{\\text{Cov}(x,y)}{s_x^2} = r\\frac{s_ys_x}{s_x^2} = r\\frac{s_y}{s_x}\n\\qquad(8)\\]"
+  },
+  {
+    "objectID": "supplemental/model-diagnostics-matrix.html",
+    "href": "supplemental/model-diagnostics-matrix.html",
+    "title": "Model Diagnostics",
+    "section": "",
+    "text": "Note\n\n\n\nThe following supplemental notes were created by Dr. Maria Tackett for STA 210. They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression. Additional supplemental notes will be added throughout the semester.\nThis document discusses some of the mathematical details of the model diagnostics - leverage, standardized residuals, and Cook’s distance. We assume the reader knowledge of the matrix form for multiple linear regression. Please see Matrix Form of Linear Regression for a review."
   },
   {
     "objectID": "supplemental/model-diagnostics-matrix.html#introduction",
@@ -4032,6 +4053,13 @@
     "text": "Cook’s Distance\nCook’s distance is a measure of how much each observation influences the model coefficients, and thus the predicted values. The Cook’s distance for the \\(i^{th}\\) observation can be written as\n\\[\nD_i = \\frac{(\\hat{\\mathbf{Y}} -\\hat{\\mathbf{Y}}_{(i)})^T(\\hat{\\mathbf{Y}} -\\hat{\\mathbf{Y}}_{(i)})}{(p+1)\\hat{\\sigma}}\n\\qquad(11)\\]\nwhere \\(\\hat{\\mathbf{Y}}_{(i)}\\) is the vector of predicted values from the model fitted when the \\(i^{th}\\) observation is deleted. Cook’s Distance can be calculated without deleting observations one at a time, since Equation 12 below is mathematically equivalent to Equation 11.\n\\[\nD_i = \\frac{1}{p+1}std.res_i^2\\Bigg[\\frac{h_{ii}}{(1-h_{ii})}\\Bigg] = \\frac{e_i^2}{(p+1)\\hat{\\sigma}^2(1-h_{ii})}\\Bigg[\\frac{h_{ii}}{(1-h_{ii})}\\Bigg]\n\\qquad(12)\\]"
   },
   {
+    "objectID": "supplemental/mlr-matrix.html",
+    "href": "supplemental/mlr-matrix.html",
+    "title": "Matrix Notation for Multiple Linear Regression",
+    "section": "",
+    "text": "Note\n\n\n\nThe following supplemental notes were created by Dr. Maria Tackett for STA 210. They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression. Additional supplemental notes will be added throughout the semester.\nThis document provides the details for the matrix notation for multiple linear regression. We assume the reader has familiarity with some linear algebra. Please see Chapter 1 of An Introduction to Statistical Learning for a brief review of linear algebra."
+  },
+  {
     "objectID": "supplemental/mlr-matrix.html#introduction",
     "href": "supplemental/mlr-matrix.html#introduction",
     "title": "Matrix Notation for Multiple Linear Regression",
@@ -4060,11 +4088,11 @@
     "text": "Variance-covariance matrix of the coefficients\nWe will use two properties to derive the form of the variance-covariance matrix of the coefficients:\n\n\\(E[\\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T] = \\sigma^2I\\)\n\\(\\hat{\\boldsymbol{\\beta}} = \\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1}\\epsilon\\)\n\nFirst, we will show that \\(E[\\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T] = \\sigma^2I\\)\n\\[\n\\begin{aligned}\nE[\\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T] &= E \\begin{bmatrix}\\epsilon_1  & \\epsilon_2 & \\dots & \\epsilon_n \\end{bmatrix}\\begin{bmatrix}\\epsilon_1 \\\\ \\epsilon_2 \\\\ \\vdots \\\\ \\epsilon_n \\end{bmatrix}  \\\\\n& = E \\begin{bmatrix} \\epsilon_1^2  & \\epsilon_1 \\epsilon_2 & \\dots & \\epsilon_1 \\epsilon_n \\\\\n\\epsilon_2 \\epsilon_1 & \\epsilon_2^2 & \\dots & \\epsilon_2 \\epsilon_n \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\n\\epsilon_n \\epsilon_1 & \\epsilon_n \\epsilon_2 & \\dots & \\epsilon_n^2\n\\end{bmatrix} \\\\\n& = \\begin{bmatrix} E[\\epsilon_1^2]  & E[\\epsilon_1 \\epsilon_2] & \\dots & E[\\epsilon_1 \\epsilon_n] \\\\\nE[\\epsilon_2 \\epsilon_1] & E[\\epsilon_2^2] & \\dots & E[\\epsilon_2 \\epsilon_n] \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\nE[\\epsilon_n \\epsilon_1] & E[\\epsilon_n \\epsilon_2] & \\dots & E[\\epsilon_n^2]\n\\end{bmatrix}\n\\end{aligned}\n\\qquad(9)\\]\nRecall, the regression assumption that the errors \\(\\epsilon_i's\\) are Normally distributed with mean 0 and variance \\(\\sigma^2\\). Thus, \\(E(\\epsilon_i^2) = Var(\\epsilon_i) = \\sigma^2\\) for all \\(i\\). Additionally, recall the regression assumption that the errors are uncorrelated, i.e. \\(E(\\epsilon_i \\epsilon_j) = Cov(\\epsilon_i, \\epsilon_j) = 0\\) for all \\(i,j\\). Using these assumptions, we can write Equation 9 as\n\\[\nE[\\mathbf{\\epsilon}\\mathbf{\\epsilon}^T]  = \\begin{bmatrix} \\sigma^2  & 0 & \\dots & 0 \\\\\n0 & \\sigma^2  & \\dots & 0 \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\n0 & 0 & \\dots & \\sigma^2\n\\end{bmatrix} = \\sigma^2 \\mathbf{I}\n\\qquad(10)\\]\nwhere \\(\\mathbf{I}\\) is the \\(n \\times n\\) identity matrix.\nNext, we show that \\(\\hat{\\boldsymbol{\\beta}} = \\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1}\\epsilon\\).\nRecall that the \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{Y}\\) and \\(\\mathbf{Y} = \\mathbf{X}\\mathbf{\\beta} + \\mathbf{\\epsilon}\\). Then,\n\\[\n\\begin{aligned}\n\\hat{\\boldsymbol{\\beta}} &= (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{Y} \\\\\n&= (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T(\\mathbf{X}\\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}) \\\\\n&= \\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T \\mathbf{\\epsilon} \\\\\n\\end{aligned}\n\\qquad(11)\\]\nUsing these two properties, we derive the form of the variance-covariance matrix for the coefficients. Note that the covariance matrix is \\(E[(\\hat{\\boldsymbol{\\beta}} - \\boldsymbol{\\beta})(\\hat{\\boldsymbol{\\beta}} - \\boldsymbol{\\beta})^T]\\)\n\\[\n\\begin{aligned}\nE[(\\hat{\\boldsymbol{\\beta}} - \\boldsymbol{\\beta})(\\hat{\\boldsymbol{\\beta}} - \\boldsymbol{\\beta})^T] &= E[(\\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T \\boldsymbol{\\epsilon} - \\boldsymbol{\\beta})(\\boldsymbol{\\beta} + (\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T \\boldsymbol{\\epsilon} - \\boldsymbol{\\beta})^T]\\\\\n& = E[(\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T \\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T\\mathbf{X}(\\mathbf{X}^T\\mathbf{X})^{-1}] \\\\\n& = (\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T E[\\boldsymbol{\\epsilon}\\boldsymbol{\\epsilon}^T]\\mathbf{X}(\\mathbf{X}^T\\mathbf{X})^{-1}\\\\\n& = (\\mathbf{X}^T\\mathbf{X})^{-1} \\mathbf{X}^T (\\sigma^2\\mathbf{I})\\mathbf{X}(\\mathbf{X}^T\\mathbf{X})^{-1}\\\\\n&= \\sigma^2\\mathbf{I}(\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{X}(\\mathbf{X}^T\\mathbf{X})^{-1}\\\\\n& = \\sigma^2\\mathbf{I}(\\mathbf{X}^T\\mathbf{X})^{-1}\\\\\n&  = \\sigma^2(\\mathbf{X}^T\\mathbf{X})^{-1} \\\\\n\\end{aligned}\n\\qquad(12)\\]"
   },
   {
-    "objectID": "course-faq.html#how-do-i-export-my-assignment-pdf-from-rstudio-to-upload-to-gradescope",
-    "href": "course-faq.html#how-do-i-export-my-assignment-pdf-from-rstudio-to-upload-to-gradescope",
+    "objectID": "course-faq.html",
+    "href": "course-faq.html",
     "title": "FAQ",
-    "section": "How do I export my assignment PDF from RStudio to upload to Gradescope?",
-    "text": "How do I export my assignment PDF from RStudio to upload to Gradescope?\nGo to your Files tab, check the box next to the file you want to download, then click on the blue gear icon on the Files tab to reveal the drop down menu, and select Export… If you have selected multiple files to export, RStudio will zip them up into a single zip file for you. If you’ve selected just a single file, it will only download that. The downloaded file will go to wherever files you download off the internet goes on your computer (usually your Downloads folder)."
+    "section": "",
+    "text": "Go to your Files tab, check the box next to the file you want to download, then click on the blue gear icon on the Files tab to reveal the drop down menu, and select Export… If you have selected multiple files to export, RStudio will zip them up into a single zip file for you. If you’ve selected just a single file, it will only download that. The downloaded file will go to wherever files you download off the internet goes on your computer (usually your Downloads folder)."
   },
   {
     "objectID": "course-faq.html#how-can-i-submit-my-assignment-to-gradescope",
@@ -4079,6 +4107,13 @@
     "title": "FAQ",
     "section": "Can I use a local install of R and RStudio instead of using the RStudio containers?",
     "text": "Can I use a local install of R and RStudio instead of using the RStudio containers?\nThe short answer is, I’d rather you didn’t, to save yourself some headache. But, the long answer is, sure! But you will need to install a specific versions of R and RStudio for everything to work as expected. You will also need to install the R packages we’re using as well as have Git installed on your computer. These are not extremely challenging things to get right, but they are not trivial either, particularly on certain operating systems. Myself and the TAs are always happy to provide help with any computational questions when you’re working in the containers we have provided for you. If you’re working on your local setup, we can’t guarantee being able to resolve your issues, though we’re happy to try.\nIf you want to take this path, here is what you need to do:\n\nDownload and install R 4.1.2: https://cran.r-project.org/\nDownload and install a daily build of RStudio: https://dailies.rstudio.com/\nInstall Quarto CLI: https://quarto.org/docs/getting-started/installation.html\nInstall Git: https://happygitwithr.com/install-git.html\nInstall any necessary packages with install.packages(\"___\")\n\nAnd I’d like to reiterate again that successful installation of these software is not a learning goal of this course. So if any of this seems tedious or intimidating in any way, just use the computing environment we have set up for you. More on that here."
+  },
+  {
+    "objectID": "weeks/week-6.html",
+    "href": "weeks/week-6.html",
+    "title": "Week 6",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates: Exam 1 - Mon, Feb 7 at 11:59pm"
   },
   {
     "objectID": "weeks/week-6.html#prepare",
@@ -4109,6 +4144,13 @@
     "text": "Perform\nNo lab\n✅ Exam 1\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/week-9.html",
+    "href": "weeks/week-9.html",
+    "title": "Week 9",
+    "section": "",
+    "text": "Important\n\n\n\nDue date: Exam 1 released on Fri, Feb 35, due Mon, Feb 28 at 11:59pm"
+  },
+  {
     "objectID": "weeks/week-9.html#prepare",
     "href": "weeks/week-9.html#prepare",
     "title": "Week 9",
@@ -4135,6 +4177,13 @@
     "title": "Week 9",
     "section": "Perform",
     "text": "Perform\n✅ Exam 2\n\n\nBack to course schedule ⏎"
+  },
+  {
+    "objectID": "weeks/week-7.html",
+    "href": "weeks/week-7.html",
+    "title": "Week 7",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates:\n\nHW 2 - Friday, Feb 18\nProject ideas - Friday, Feb 18"
   },
   {
     "objectID": "weeks/week-7.html#prepare",
@@ -4165,6 +4214,13 @@
     "text": "Perform\n✍️ HW 2 - Multiple linear regression\n📂 Project - Topic ideas\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/week-5.html",
+    "href": "weeks/week-5.html",
+    "title": "Week 5",
+    "section": "",
+    "text": "Important\n\n\n\n\nDue date: Lab 2 - Fri, Feb 4, 5pm ET\nExam 1 released on Fri, Feb 4, due Mon, Feb 7 at 11:59pm"
+  },
+  {
     "objectID": "weeks/week-5.html#prepare",
     "href": "weeks/week-5.html#prepare",
     "title": "Week 5",
@@ -4191,6 +4247,13 @@
     "title": "Week 5",
     "section": "Perform",
     "text": "Perform\n⌨️ Lab 3 - Coffee ratings\n✅ Exam 1\n\n\nBack to course schedule ⏎"
+  },
+  {
+    "objectID": "weeks/week-3.html",
+    "href": "weeks/week-3.html",
+    "title": "Week 3",
+    "section": "",
+    "text": "Important\n\n\n\n\nWe’re back to in person classes this week! See here for class locations. And don’t forget to wear your mask! 😷\nDue dates:\n\nAE 2: Fri, Jan 21, 11:59pm ET"
   },
   {
     "objectID": "weeks/week-3.html#prepare",
@@ -4221,6 +4284,13 @@
     "text": "Perform\nNone.\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/week-4.html",
+    "href": "weeks/week-4.html",
+    "title": "Week 4",
+    "section": "",
+    "text": "Important\n\n\n\n\nIf you can’t be in class for the lectures, you can watch the live stream or watch the recording later on Panopto.\nDue dates:\n\nHW 1: Fri, Jan 28, 5pm ET\nLab 1: Fri, Jan 28, 5pm ET"
+  },
+  {
     "objectID": "weeks/week-4.html#prepare",
     "href": "weeks/week-4.html#prepare",
     "title": "Week 4",
@@ -4247,6 +4317,13 @@
     "title": "Week 4",
     "section": "Perform",
     "text": "Perform\n⌨️ Lab 2 - College scorecard\n✍️ HW 1 - In-person voting trends\n\n\nBack to course schedule ⏎"
+  },
+  {
+    "objectID": "weeks/week-15.html",
+    "href": "weeks/week-15.html",
+    "title": "Week 15",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates:\nTo be posted."
   },
   {
     "objectID": "weeks/week-15.html#prepare",
@@ -4277,6 +4354,13 @@
     "text": "Perform\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/week-12.html",
+    "href": "weeks/week-12.html",
+    "title": "Week 12",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates:\nTo be posted."
+  },
+  {
     "objectID": "weeks/week-12.html#prepare",
     "href": "weeks/week-12.html#prepare",
     "title": "Week 12",
@@ -4303,6 +4387,13 @@
     "title": "Week 12",
     "section": "Perform",
     "text": "Perform\n\n\nBack to course schedule ⏎"
+  },
+  {
+    "objectID": "weeks/week-14.html",
+    "href": "weeks/week-14.html",
+    "title": "Week 14",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates:\nTo be posted."
   },
   {
     "objectID": "weeks/week-14.html#prepare",
@@ -4333,6 +4424,13 @@
     "text": "Perform\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/week-2.html",
+    "href": "weeks/week-2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Important\n\n\n\n\nClasses are virtual this week. Find Zoom links here.\nDue dates:\n\nLab 1: Fri, Jan 14, 5pm ET\nAE 1: Sun, Jan 16, 11:59pm ET"
+  },
+  {
     "objectID": "weeks/week-2.html#prepare",
     "href": "weeks/week-2.html#prepare",
     "title": "Week 2",
@@ -4359,6 +4457,13 @@
     "title": "Week 2",
     "section": "Perform",
     "text": "Perform\n⌨️ Lab 1 - Meet the toolkit\n\n\nBack to course schedule ⏎"
+  },
+  {
+    "objectID": "weeks/week-1.html",
+    "href": "weeks/week-1.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "Important\n\n\n\nClasses are virtual this week. Find Zoom links here."
   },
   {
     "objectID": "weeks/week-1.html#prepare",
@@ -4389,6 +4494,13 @@
     "text": "Perform\n⌨️ Lab 0 - Meet + greet\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/week-11.html",
+    "href": "weeks/week-11.html",
+    "title": "Week 11",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates:\nTo be posted."
+  },
+  {
     "objectID": "weeks/week-11.html#prepare",
     "href": "weeks/week-11.html#prepare",
     "title": "Week 11",
@@ -4415,6 +4527,13 @@
     "title": "Week 11",
     "section": "Perform",
     "text": "Perform\n\n\nBack to course schedule ⏎"
+  },
+  {
+    "objectID": "weeks/week-8.html",
+    "href": "weeks/week-8.html",
+    "title": "Week 8",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates:\n\nLab 4 - Friday, Feb 25"
   },
   {
     "objectID": "weeks/week-8.html#prepare",
@@ -4445,6 +4564,13 @@
     "text": "Perform\n⌨️ Lab 4 - The Office, another look\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/week-13.html",
+    "href": "weeks/week-13.html",
+    "title": "Week 13",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates:\nTo be posted."
+  },
+  {
     "objectID": "weeks/week-13.html#prepare",
     "href": "weeks/week-13.html#prepare",
     "title": "Week 13",
@@ -4473,6 +4599,13 @@
     "text": "Perform\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/week-10.html",
+    "href": "weeks/week-10.html",
+    "title": "Week 10",
+    "section": "",
+    "text": "Important\n\n\n\nDue dates: Project proposal due Fri, Mar 18 at 5:00 pm."
+  },
+  {
     "objectID": "weeks/week-10.html#prepare",
     "href": "weeks/week-10.html#prepare",
     "title": "Week 10",
@@ -4491,14 +4624,21 @@
     "href": "weeks/week-10.html#practice",
     "title": "Week 10",
     "section": "Practice",
-    "text": "Practice\n📋 Application Exercise 9 - Odds\n📋 Application Exercise 10 - Odds ratios"
+    "text": "Practice\n📋 Application Exercise 9 - Odds"
   },
   {
     "objectID": "weeks/week-10.html#perform",
     "href": "weeks/week-10.html#perform",
     "title": "Week 10",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n✍️ HW 3 - Logistic regression and log transformation\n\n\nBack to course schedule ⏎"
+  },
+  {
+    "objectID": "ae/ae-4-exam-1-review.html",
+    "href": "ae/ae-4-exam-1-review.html",
+    "title": "AE 4: Exam 1 Review",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-4-exam-1-review-YOUR_GITHUB_USERNAME to get started."
   },
   {
     "objectID": "ae/ae-4-exam-1-review.html#packages",
@@ -4550,6 +4690,13 @@
     "text": "Adding another variable\n\nAdd another variable, Alcohol, to your exploratory visualization. Describe any patterns that emerge.\n\n\n# add your code here\n\n\nFit a multiple linear regression model predicting Tip from Party and Alcohol. Display the results with kable() and a reasonable number of digits.\n\n\n# add your code here\n\n\nInterpret each of the slopes.\nDoes it make sense to interpret the intercept? Explain your reasoning.\nAccording to this model, is the rate of change in tip amount the same for various sizes of parties regardless of alcohol consumption or are they different? Explain your reasoning."
   },
   {
+    "objectID": "ae/ae-8-rail-trail.html",
+    "href": "ae/ae-8-rail-trail.html",
+    "title": "AE 8: Rail Trail",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-8-rail-trail-YOUR_GITHUB_USERNAME to get started."
+  },
+  {
     "objectID": "ae/ae-8-rail-trail.html#packages-and-data",
     "href": "ae/ae-8-rail-trail.html#packages-and-data",
     "title": "AE 8: Rail Trail",
@@ -4578,6 +4725,13 @@
     "text": "Exercise 3\nFit a model predicting volume from all available predictors.\n\nrt_full_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(volume ~ ., data = rail_trail)\n\ntidy(rt_full_fit)\n\n# A tibble: 8 × 5\n  term            estimate std.error statistic p.value\n  <chr>              <dbl>     <dbl>     <dbl>   <dbl>\n1 (Intercept)        17.6      76.6      0.230 0.819  \n2 hightemp            7.07      2.42     2.92  0.00450\n3 avgtemp            -2.04      3.14    -0.648 0.519  \n4 seasonSpring       35.9      33.0      1.09  0.280  \n5 seasonSummer       24.2      52.8      0.457 0.649  \n6 cloudcover         -7.25      3.84    -1.89  0.0627 \n7 precip            -95.7      42.6     -2.25  0.0273 \n8 day_typeWeekend    35.9      22.4      1.60  0.113  \n\n\nRecreate the following visualization which displays a histogram of residuals and a normal density curve overlaid.\n\n\n\n\n\n\n# add code here"
   },
   {
+    "objectID": "ae/ae-3-duke-forest.html",
+    "href": "ae/ae-3-duke-forest.html",
+    "title": "AE 3: Duke Forest houses",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-3-duke-forest-YOUR_GITHUB_USERNAME to get started."
+  },
+  {
     "objectID": "ae/ae-3-duke-forest.html#packages",
     "href": "ae/ae-3-duke-forest.html#packages",
     "title": "AE 3: Duke Forest houses",
@@ -4597,6 +4751,13 @@
     "title": "AE 3: Duke Forest houses",
     "section": "Model conditions",
     "text": "Model conditions\n\nExercise 1\nThe following code produces the residuals vs. fitted values plot for this model. Comment out the layer that defines the y-axis limits and re-create the plot. How does the plot change? Why might we want to define the limits explicitly?\n\ndf_aug <- augment(df_fit$fit)\n\nggplot(df_aug, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0, linetype = \"dashed\") +\n  ylim(-1000000, 1000000) +\n  labs(\n    x = \"Fitted value\", y = \"Residual\",\n    title = \"Residuals vs. fitted values\"\n  )\n\n\n\n\n\n\nExercise 2\nImprove how the values on the axes of the plot are displayed by modifying the code below.\n\nggplot(df_aug, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0, linetype = \"dashed\") +\n  ylim(-1000000, 1000000) +\n  labs(\n    x = \"Fitted value\", y = \"Residual\",\n    title = \"Residuals vs. fitted values\"\n  )"
+  },
+  {
+    "objectID": "ae/ae-5-the-office.html",
+    "href": "ae/ae-5-the-office.html",
+    "title": "AE 5: The Office",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-5-the-office-YOUR_GITHUB_USERNAME to get started."
   },
   {
     "objectID": "ae/ae-5-the-office.html#packages",
@@ -4639,6 +4800,13 @@
     "title": "AE 5: The Office",
     "section": "Workflows and model fitting",
     "text": "Workflows and model fitting\nBuild the modeling workflow and fit the model to the training data after feature engineering with the recipe."
+  },
+  {
+    "objectID": "ae/ae-7-exam-2-review.html",
+    "href": "ae/ae-7-exam-2-review.html",
+    "title": "AE 7: Exam 2 Review",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-7-exam-2-review-YOUR_GITHUB_USERNAME to get started."
   },
   {
     "objectID": "ae/ae-7-exam-2-review.html#packages",
@@ -4725,6 +4893,13 @@
     "text": "Next steps…\nDepending on time, either\n\nCreate a workflow for another model with a new recipe (omitting the interaction variable), conduct CV, do model selection between these two, and then interpret the coefficients for the selected model.\nOr interpret the coefficients for the one model you fit.\n\nMake sure to interpret the intercept and slope coefficient for at least one numerical, one categorical, and one interaction predictor."
   },
   {
+    "objectID": "ae/ae-0-movies.html",
+    "href": "ae/ae-0-movies.html",
+    "title": "Movie budgets and revenues",
+    "section": "",
+    "text": "Important\n\n\n\nThis application exercise is a demo only. You do not have a corresponding repository for it and you’re not expected to turn in anything for it.\nWe will look at the relationship between budget and revenue for movies made in the United States in 1986 to 2020. The dataset is created based on data from the Internet Movie Database (IMDB)."
+  },
+  {
     "objectID": "ae/ae-0-movies.html#data",
     "href": "ae/ae-0-movies.html#data",
     "title": "Movie budgets and revenues",
@@ -4751,6 +4926,13 @@
     "title": "Movie budgets and revenues",
     "section": "Appendix",
     "text": "Appendix\nBelow is a list of genres in the data set:\n\nmovies %>% \n  distinct(genre) %>%\n  arrange(genre) %>% \n  datatable()"
+  },
+  {
+    "objectID": "ae/ae-6-the-office-cv.html",
+    "href": "ae/ae-6-the-office-cv.html",
+    "title": "AE 6: The Office",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-6-the-office-cv-YOUR_GITHUB_USERNAME to get started."
   },
   {
     "objectID": "ae/ae-6-the-office-cv.html#packages",
@@ -4816,6 +4998,13 @@
     "text": "Another model - Model 2\nCreate a different (simpler, involving fewer variables) recipe and call it office_rec2. Conduct 10-fold cross validation and summarize metrics. Describe how the two models compare to each other based on cross validation metrics."
   },
   {
+    "objectID": "ae/ae-10-odds-ratios.html",
+    "href": "ae/ae-10-odds-ratios.html",
+    "title": "AE 10: Odds ratios",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-10-odds-ratios-YOUR_GITHUB_USERNAME to get started."
+  },
+  {
     "objectID": "ae/ae-10-odds-ratios.html#packages",
     "href": "ae/ae-10-odds-ratios.html#packages",
     "title": "AE 10: Odds ratios",
@@ -4858,6 +5047,13 @@
     "text": "Part 3: Change in odds\n\nHow do you expect the log-odds of being from the Adelie species to change when going from a penguin with flipper length 185 mm to a penguin with flipper length 200 mm? Assume both penguins were recorded on the Dream island.\nHow do you expect the odds of being from the Adelie species to change when going from a penguin with flipper length 185 mm to a penguin with flipper length 200 mm? Assume both penguins were recorded on the Dream island."
   },
   {
+    "objectID": "ae/ae-2-dcbikeshare.html",
+    "href": "ae/ae-2-dcbikeshare.html",
+    "title": "AE 2: Bike rentals in DC (continued)",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-2-dcbikeshare-YOUR_GITHUB_USERNAME to get started."
+  },
+  {
     "objectID": "ae/ae-2-dcbikeshare.html#bike-rentals-in-dc",
     "href": "ae/ae-2-dcbikeshare.html#bike-rentals-in-dc",
     "title": "AE 2: Bike rentals in DC (continued)",
@@ -4893,6 +5089,13 @@
     "text": "Synthesis\n\nExercise 7\nSuppose you work for a bike share company in Durham, NC, and they want to predict daily bike rentals in 2022. What is one reason you might recommend they use your analysis for this task? What is one reason you would recommend they not use your analysis for this task?\n[Add your answer here]"
   },
   {
+    "objectID": "ae/ae-9-odds.html",
+    "href": "ae/ae-9-odds.html",
+    "title": "AE 9: Odds",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-9-odds-YOUR_GITHUB_USERNAME to get started."
+  },
+  {
     "objectID": "ae/ae-9-odds.html#packages",
     "href": "ae/ae-9-odds.html#packages",
     "title": "AE 9: Odds",
@@ -4912,6 +5115,13 @@
     "title": "AE 9: Odds",
     "section": "Heart disease",
     "text": "Heart disease\n\nData: Framingham study\nThis data set is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to use the total cholesterol to predict if a randomly selected adult is high risk for heart disease in the next 10 years.\n\nhigh_risk:\n\n1: High risk of having heart disease in next 10 years\n0: Not high risk of having heart disease in next 10 years\n\ntotChol: total cholesterol (mg/dL)\n\n\n\nOutcome: high_risk\n\nggplot(data = heart_disease, aes(x = high_risk)) + \n  geom_bar() + \n  scale_x_discrete(labels = c(\"1\" = \"High risk\", \"0\" = \"Low risk\")) +\n  labs(\n    title = \"Distribution of 10-year risk of heart disease\", \n    x = NULL)\n\n\n\n\n\nheart_disease %>%\n  count(high_risk)\n\n# A tibble: 2 × 2\n  high_risk     n\n  <fct>     <int>\n1 0          3555\n2 1           635\n\n\n\n\nCalculating probability and odds\n\nWhat is the probability a randomly selected person in the study is not high risk for heart disease?\nWhat are the odds a randomly selected person in the study is not high risk for heart disease?\n\n\n\nLogistic regression model\nFit a logistic regression model to understand the relationship between total cholesterol and risk for heart disease.\nLet \\(pi\\) be the probability an adult is high risk. The statistical model is\n\\[\\log\\Big(\\frac{\\pi_i}{1-\\pi_i}\\Big) = \\beta_0 + \\beta_1 TotChol_i\\]\n\nheart_disease_fit <- logistic_reg() %>%\n  set_engine(\"glm\") %>%\n  fit(high_risk ~ totChol, data = heart_disease, family = \"binomial\")\n\ntidy(heart_disease_fit) %>% kable(digits = 3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-2.894\n0.230\n-12.607\n0\n\n\ntotChol\n0.005\n0.001\n5.268\n0\n\n\n\n\n\n\nWrite the regression equation. Round to 3 digits.\n\n\n\nCalculating log-odds, odds and probabilities\nBased on the model, if a randomly selected person has a total cholesterol of 250 mg/dL,\n\nWhat are the log-odds they are high risk for heart disease?\nWhat are the odds they are high risk for heart disease?\nWhat is the probability they are high risk for heart disease? Use the odds to calculate your answer.\n\n\n\nComparing observations\nSuppose a person’s cholesterol changes from 250 mg/dL to 200 mg/dL.\n\nHow do you expect the log-odds that this person is high risk for heart disease to change?\nHow do you expect the odds that this person is high risk for heart disease to change?"
+  },
+  {
+    "objectID": "ae/ae-1-dcbikeshare.html",
+    "href": "ae/ae-1-dcbikeshare.html",
+    "title": "AE 02: Bike rentals in DC",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-1-dcbikeshare-YOUR_GITHUB_USERNAME to get started."
   },
   {
     "objectID": "ae/ae-1-dcbikeshare.html#bike-rentals-in-dc",
@@ -4956,11 +5166,11 @@
     "text": "Synthesis\n\nExercise 15\nSuppose you work for a bike share company in Durham, NC, and they want to predict daily bike rentals in 2022. What is one reason you might recommend they use your analysis for this task? What is one reason you would recommend they not use your analysis for this task?\n[Add your answer here]\n\nThe following exercises will be completed only if time permits.\n\n\nExercise 16\nPick another season. Based on the visualization in Exercise 8, would you expect the slope of the relationship between temperature and daily bike rentals to be smaller or larger than the slope of the model you’ve been working with so far? Explain your reasoning.\n[Add your answer here]\n\n\nExercise 17\nFor this season you picked in Exercise 16, fit a linear model for predicting daily bike rentals from temperature. Note, you will need to filter your data for this season first. Use the output to write out the estimated regression equation and interpret the slope and the intercept of this model.\n\n# add your code here\n\n[Add your answer here]"
   },
   {
-    "objectID": "hw/hw-1.html#introduction",
-    "href": "hw/hw-1.html#introduction",
+    "objectID": "hw/hw-1.html",
+    "href": "hw/hw-1.html",
     "title": "HW 1 - In-person voting trends",
-    "section": "Introduction",
-    "text": "Introduction\nIn this assignment, you’ll use simple linear regression to explore the percent of votes cast in-person in the 2020 U.S. election based on the county’s political leanings.\n\nLearning goals\nIn this assignment, you will…\n\nFit and interpret simple linear regression models\nAssess the conditions for simple linear regression.\nCreate and interpret spatial data visualizations using R.\nContinue developing a workflow for reproducible data analysis."
+    "section": "",
+    "text": "In this assignment, you’ll use simple linear regression to explore the percent of votes cast in-person in the 2020 U.S. election based on the county’s political leanings.\n\n\nIn this assignment, you will…\n\nFit and interpret simple linear regression models\nAssess the conditions for simple linear regression.\nCreate and interpret spatial data visualizations using R.\nContinue developing a workflow for reproducible data analysis."
   },
   {
     "objectID": "hw/hw-1.html#getting-started",
@@ -5005,6 +5215,34 @@
     "text": "Grading\nTotal points available: 50 points.\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 10\n45\n\n\nWorkflow & formatting\n51"
   },
   {
+    "objectID": "hw/hw-3.html",
+    "href": "hw/hw-3.html",
+    "title": "HW 3 - Logistic regression and log transformation",
+    "section": "",
+    "text": "In this assignment, you’ll get to put into practice the logistic regression skills you’ve developed.\n\n\nIn this assignment, you will…\n\nFit and interpret logistic regression models.\nFit and interpret multiple linear regression models with log transformed outcomes.\nReason around log transformations of various types.\nContinue developing a workflow for reproducible data analysis.\n\n\n\n\nYour repo for this assignment is at github.com/sta210-s22 and starts with the prefix hw-3. For more detailed instructions on getting started, see HW 1.\n\n\n\nThe following packages will be used in this assignment. You can add other packages as needed.\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(palmerpenguins)"
+  },
+  {
+    "objectID": "hw/hw-3.html#part-1---palmer-penguins",
+    "href": "hw/hw-3.html#part-1---palmer-penguins",
+    "title": "HW 3 - Logistic regression and log transformation",
+    "section": "Part 1 - Palmer penguins",
+    "text": "Part 1 - Palmer penguins\nIn this part we’ll go back to the Palmer penguins dataset from HW 2.\nWe will use the following variables:\n\n\n\n\n\n\n\n\nvariable\nclass\ndescription\n\n\n\n\nspecies\ninteger\nPenguin species (Adelie, Gentoo, Chinstrap)\n\n\nisland\ninteger\nIsland where recorded (Biscoe, Dream, Torgersen)\n\n\nflipper_length_mm\ninteger\nFlipper length in mm\n\n\n\nThe goal of this analysis is to use logistic regression to understand the relationship between flipper length, island, and whether a penguin is from the Adelie species. First, we need to create a new response variable to identify whether a penguin is from the Adelie species.\n\npenguins <- penguins %>%\n  mutate(adelie = factor(if_else(species == \"Adelie\", 1, 0)))\n\nAnd let’s check to make sure the new variable looks right before we continue with the analysis.\n\npenguins %>%\n  count(adelie, species)\n\n# A tibble: 3 × 3\n  adelie species       n\n  <fct>  <fct>     <int>\n1 0      Chinstrap    68\n2 0      Gentoo      124\n3 1      Adelie      152\n\n\nLet’s start by looking at the relationship between island and whether a penguin is from the Adelie species.\n\nWhat does the values_fill argument do in the following chunk? The documentation for the function will be helpful in answering this question.\n\npenguins %>%\n  count(island, adelie) %>%\n  pivot_wider(names_from = adelie, values_from = n, values_fill = 0)\n\n# A tibble: 3 × 3\n  island      `0`   `1`\n  <fct>     <int> <int>\n1 Biscoe      124    44\n2 Dream        68    56\n3 Torgersen     0    52\n\n\n\n\n\nCalculate the odds ratio of a penguin being from the Adelie species for those recorded on Dream compared to those recorded on Biscoe.\nYou want to fit a model using island to predict the odds of being from the Adelie species. Let \\(\\pi\\) be the probability a penguin is from the Adelie species. The model has the following form. What do you expect the value of \\(\\hat{\\beta}_1\\), the estimated coefficient for Dream, to be? Explain your reasoning.\n\n\\[\n\\log\\Big(\\frac{\\pi}{1-\\pi}\\Big) = \\beta_0 + \\beta_1 ~ Dream + \\beta_2 ~ Torgersen\n\\]\n\nFit a model predicting adelie from island and display the model output. For the following exercise, use this model.\nBased on this model, what are the odds of a penguin being from the Adelie species if it was recorded on Biscoe island? on Dream island?\nNext, add flipper length to the model so that there are two predictors. Display the model output. For the following exercises, use this model.\nWrite the regression equation for the model.\nInterpret the coefficient of flipper_length_mm in terms of the log-odds of being from the Adelie species.\nInterpret the coefficient of flipper_length_mm in terms of the odds of being from the Adelie species.\nInterpret the coefficient of Dream in terms of the odds of being from the Adelie species.\nHow do you expect the log-odds of being from the Adelie species to change when going from a penguin with flipper length 185 mm to a penguin with flipper length 200 mm? Assume both penguins were recorded on the Dream island.\nHow do you expect the odds of being from the Adelie species to change when going from a penguin with flipper length 185 mm to a penguin with flipper length 200 mm? Assume both penguins were recorded on the Dream island."
+  },
+  {
+    "objectID": "hw/hw-3.html#part-2---gdp-and-urban-population",
+    "href": "hw/hw-3.html#part-2---gdp-and-urban-population",
+    "title": "HW 3 - Logistic regression and log transformation",
+    "section": "Part 2 - GDP and Urban population",
+    "text": "Part 2 - GDP and Urban population\nData on countries’ Gross Domestic Product (GDP) and percentage of urban population was collected and made available by The World Bank in 2020. A description of the variables as defined by The World Bank are provided below.\n\nGDP: “GDP per capita is gross domestic product divided by midyear population. GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in current U.S. dollars.”\nUrban Population (% of total): “Urban population refers to people living in urban areas as defined by national statistical offices. It is calculated using World Bank population estimates and urban ratios from the United Nations World Urbanization Prospects.”\n\nThe data can be found in the data folder of your repository. Read the data and name it gdp_2020.\n\nFit a model predicting GDP from urban population. Then make a plot of residuals vs. fitted for this model. Does the linear model seem appropriate for modeling this relationship? Explain your reasoning.\nAdd a new column to the gdp_2020 dataset called gdp_log which is the (natural) log of gdp.\nFit a new model, predicting the log of GDP from urban population. Then make a plot of residuals vs. fitted for this model. Does the model predicting logged GDP or original GDP appear to be a better fit? Explain your reasoning.\n\nThe model output for predicting logged GDP.\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n6.107\n0.202\n30.291\n0\n\n\nurban\n0.042\n0.003\n13.769\n0\n\n\n\n\n\nThe linear model for predicting log of GDP can be expressed as follows:\n\\[\n\\widehat{\\log(GDP)} = 6.11 + 0.042 \\times urban\n\\]\nTherefore, the coefficient of urban (0.042) can be interpreted as the change in logged GDP associated with 1 percentage point increase in urban population. The problem is, logged GDP is not a very informative value to talk about. So we need to undo the transformation we’ve done.\nTo do so, let’s do a quick review of some properties of logs.\n\nSubtraction and logs: \\(log(a) − log(b) = log(\\frac{a}{b})\\)\nNatural logarithm: \\(e^{log(x)} = x\\)\n\nBased on the interpretation of the slope above, the difference between the predicted values of logged GDP for a given value of urban and a value that is 1 percentage point higher is 0.0425. Let’s write this out mathematically, and then use the properties we’ve listed above to work through the equation.\n\\[\n\\begin{aligned}\nlog(\\text{GDP for urban } x + 1) - log(\\text{GDP for urban } x) &= 0.042 \\\\\nlog\\Big( \\frac{\\text{GDP for urban } x + 1}{\\text{GDP for urban } x} \\Big) &= 0.042 \\\\\ne^{log\\Big( \\frac{\\text{GDP for urban } x + 1}{\\text{GDP for urban } x} \\Big)} &= e^{0.042}\\\\\nlog\\Big( \\frac{\\text{GDP for urban } x + 1}{\\text{GDP for urban } x} \\Big) &= e^{0.042}\n\\end{aligned}\n\\]\n\nBased on the derivation above, fill in the blanks in the following sentence for an alternative (and more useful interpretation) of the slope of urban.\n\nFor each additional percentage point the urban population is higher, the GDP of a country is expected to be ___, on average, by a factor of ___."
+  },
+  {
+    "objectID": "hw/hw-5.html",
+    "href": "hw/hw-5.html",
+    "title": "HW 5 - Statistics Experience",
+    "section": "",
+    "text": "The world of statistics and data science is vast and continually growing! The goal of the statistics experience assignments is to help you engage with the statistics and data science communities outside of the classroom.\nYou may submit the statistics experience assignment anytime between now and the deadline.\nEach experience has two parts:\n1️⃣ Have a statistics experience\n2️⃣ Make a slide summarizing on your experience\nYou must complete both parts to receive credit."
+  },
+  {
     "objectID": "hw/hw-5.html#part-1-experience-statistics-outside-of-the-classroom",
     "href": "hw/hw-5.html#part-1-experience-statistics-outside-of-the-classroom",
     "title": "HW 5 - Statistics Experience",
@@ -5026,11 +5264,11 @@
     "text": "Submission\nSubmit the reflection as a PDF under the HW 5 - Statistics Experience assignment on Gradescope by Fri, Apr 15 at 5 pm ET. It must be submitted by the deadline on Gradescope to be considered for grading."
   },
   {
-    "objectID": "hw/hw-2.html#introduction",
-    "href": "hw/hw-2.html#introduction",
+    "objectID": "hw/hw-2.html",
+    "href": "hw/hw-2.html",
     "title": "HW 2 - Multiple linear regression",
-    "section": "Introduction",
-    "text": "Introduction\nIn this assignment, you’ll get to put into practice the multiple linear regression skills you’ve developed.\n\nLearning goals\nIn this assignment, you will…\n\nFit and interpret multiple linear regression models with main and interaction effects.\nCompare multiple linear regression models.\nReason around multiple linear regression concepts.\nContinue developing a workflow for reproducible data analysis.\n\n\n\nGetting started\nYour repo for this assignment is at github.com/sta210-s22 and starts with the prefix hw-2. For more detailed instructions on getting started, see HW 1.\n\n\nPackages\nThe following packages will be used in this assignment. You can add other packages as needed.\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(palmerpenguins)"
+    "section": "",
+    "text": "In this assignment, you’ll get to put into practice the multiple linear regression skills you’ve developed.\n\n\nIn this assignment, you will…\n\nFit and interpret multiple linear regression models with main and interaction effects.\nCompare multiple linear regression models.\nReason around multiple linear regression concepts.\nContinue developing a workflow for reproducible data analysis.\n\n\n\n\nYour repo for this assignment is at github.com/sta210-s22 and starts with the prefix hw-2. For more detailed instructions on getting started, see HW 1.\n\n\n\nThe following packages will be used in this assignment. You can add other packages as needed.\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(palmerpenguins)"
   },
   {
     "objectID": "hw/hw-2.html#part-1---conceptual",
@@ -5068,11 +5306,11 @@
     "text": "Grading\nTotal points available: 50 points.\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 9\n45\n\n\nWorkflow & formatting\n51"
   },
   {
-    "objectID": "course-team.html#instructor",
-    "href": "course-team.html#instructor",
+    "objectID": "course-team.html",
+    "href": "course-team.html",
     "title": "Teaching team",
-    "section": "Instructor",
-    "text": "Instructor\n\nDr. Mine Çetinkaya-Rundel (she/her) is Professor of the Practice and Director of Undergraduate Studies at the Department of Statistical Science at Duke University. Mine’s work focuses on innovation in statistics and data science pedagogy, with an emphasis on computing, reproducible research, student-centered learning, and open-source education as well as pedagogical approaches for enhancing retention of women and under-represented minorities in STEM. Mine also works with RStudio as a Developer Educator.\n\n\n\nOffice hours\nLocation\n\n\n\n\nMondays 10:30 am - 11:30 am\nZoom\n\n\nThursdays 11:00 am - 12:00 pm\nOld Chem 214 (On Zoom until January 18)\n\n\n\nIf these times don’t work for you or you’d like to schedule a one-on-one meeting, you can do so at bit.ly/meet-mine."
+    "section": "",
+    "text": "Dr. Mine Çetinkaya-Rundel (she/her) is Professor of the Practice and Director of Undergraduate Studies at the Department of Statistical Science at Duke University. Mine’s work focuses on innovation in statistics and data science pedagogy, with an emphasis on computing, reproducible research, student-centered learning, and open-source education as well as pedagogical approaches for enhancing retention of women and under-represented minorities in STEM. Mine also works with RStudio as a Developer Educator.\n\n\n\nOffice hours\nLocation\n\n\n\n\nMondays 10:30 am - 11:30 am\nZoom\n\n\nThursdays 11:00 am - 12:00 pm\nOld Chem 214 (On Zoom until January 18)\n\n\n\nIf these times don’t work for you or you’d like to schedule a one-on-one meeting, you can do so at bit.ly/meet-mine."
   },
   {
     "objectID": "course-team.html#teaching-assistants",
@@ -5080,6 +5318,13 @@
     "title": "Teaching team",
     "section": "Teaching assistants",
     "text": "Teaching assistants\n\n\n\n\nName\nOffice hours\nLocation\n\n\n\n\n\nMartha Aboagye\nThursday 7 - 9 pm\nZoom\n\n\n\nRichard Fremgen\nLead TA for Section 3 (5:15 pm)\nTues 7 - 9 pm\nZoom\n\n\n\nEmily Gentles\nLead TA for Section 1 (1:45pm)\nWednesday 1 - 3 pm\nOld Chem 203B (On Zoom until January 18)\n\n\n\nSara Mehta\nMon 2 - 4 pm\nZoom\n\n\n\nRick Presman\nHead TA\nLead TA for Section 2 (3:30pm)\nThursday 3:30 - 4:30 pm\nFri 9 - 10 am\nZoom\n\n\n\nShari Tian\nTue 8 - 10 am\nZoom\n\n\n\nAaditya Warrier\nMon 12pm - 1pm\nFri 1:30 - 2:30 pm\nZoom"
+  },
+  {
+    "objectID": "course-support.html",
+    "href": "course-support.html",
+    "title": "Course support",
+    "section": "",
+    "text": "Most of you will need help at some point and we want to make sure you can identify when that is without getting too frustrated and feel comfortable seeking help."
   },
   {
     "objectID": "course-support.html#lectures-and-labs",
@@ -5145,11 +5390,11 @@
     "text": "Assistance with Zoom or Sakai\nFor technical help with Sakai or Zoom, contact the Duke OIT Service Desk at oit.duke.edu/help. You can also access the self-service help documentation for Zoom here and for Sakai here.\nNote that we will be making minimal use of Sakai in this course (primarily for announcements and grade book). All assignment submission and discussion will take place on GitHub instead.\nZoom will be used for online office hours as well as as a backup option should we need to hold the course online instead of in person."
   },
   {
-    "objectID": "labs/lab-2.html#introduction",
-    "href": "labs/lab-2.html#introduction",
+    "objectID": "labs/lab-2.html",
+    "href": "labs/lab-2.html",
     "title": "Lab 2 - College scorecard",
-    "section": "Introduction",
-    "text": "Introduction\nIn today’s lab, you’ll use simple linear regression to analyze the relationship between the admissions rate and total cost for colleges and universities in the United States.\n\nLearning goals\nBy the end of the lab you will…\n\nBe able to fit a simple linear regression model using R.\nBe able to interpret the slope and intercept for the model.\nBe able to use statistical inference to draw conclusions about the slope.\nContinue developing a workflow for reproducible data analysis."
+    "section": "",
+    "text": "In today’s lab, you’ll use simple linear regression to analyze the relationship between the admissions rate and total cost for colleges and universities in the United States.\n\n\nBy the end of the lab you will…\n\nBe able to fit a simple linear regression model using R.\nBe able to interpret the slope and intercept for the model.\nBe able to use statistical inference to draw conclusions about the slope.\nContinue developing a workflow for reproducible data analysis."
   },
   {
     "objectID": "labs/lab-2.html#getting-started",
@@ -5194,11 +5439,11 @@
     "text": "Grading\nTotal points available: 50 points.\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 10\n45\n\n\nWorkflow & formatting\n51\n\n\n\n\n\n1 The “Workflow & formatting” grade is to assess the reproducible workflow. This includes having at least 3 informative commit messages and updating the name and date in the YAML."
   },
   {
-    "objectID": "labs/lab-4.html#introduction",
-    "href": "labs/lab-4.html#introduction",
+    "objectID": "labs/lab-4.html",
+    "href": "labs/lab-4.html",
     "title": "Lab 4 - The Office",
-    "section": "Introduction",
-    "text": "Introduction\nIn today’s lab you will analyze data from the schrute package to predict IMDB scores for episodes of The Office.\n\n\n\n\n\n\nNote\n\n\n\nThis is a different data source than the one we’ve used in class last week.\n\n\n\nLearning goals\nBy the end of the lab you will…\n\nengineer features based on episode scripts\ntrain a model\ninterpret model coefficients\nmake predictions\nevaluate model performance on training and testing data"
+    "section": "",
+    "text": "In today’s lab you will analyze data from the schrute package to predict IMDB scores for episodes of The Office.\n\n\n\n\n\n\nNote\n\n\n\nThis is a different data source than the one we’ve used in class last week.\n\n\n\n\nBy the end of the lab you will…\n\nengineer features based on episode scripts\ntrain a model\ninterpret model coefficients\nmake predictions\nevaluate model performance on training and testing data"
   },
   {
     "objectID": "labs/lab-4.html#getting-started",
@@ -5243,11 +5488,11 @@
     "text": "Grading\nTotal points available: 50 points.\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 10\n45\n\n\nWorkflow & formatting\n51"
   },
   {
-    "objectID": "labs/lab-5.html#introduction",
-    "href": "labs/lab-5.html#introduction",
+    "objectID": "labs/lab-5.html",
+    "href": "labs/lab-5.html",
     "title": "Lab 5 - General Social Survey",
-    "section": "Introduction",
-    "text": "Introduction\nIn today’s lab you will analyze data from the General Social Survey.\n\nLearning goals\nBy the end of the lab you will be able to…\n\nUse logistic regression to explore the relationship between a binary response variable and multiple predictor variables\nConduct exploratory data analysis for logistic regression\nInterpret coefficients of logistic regression model"
+    "section": "",
+    "text": "In today’s lab you will analyze data from the General Social Survey.\n\n\nBy the end of the lab you will be able to…\n\nUse logistic regression to explore the relationship between a binary response variable and multiple predictor variables\nConduct exploratory data analysis for logistic regression\nInterpret coefficients of logistic regression model"
   },
   {
     "objectID": "labs/lab-5.html#getting-started",
@@ -5296,14 +5541,14 @@
     "href": "labs/lab-0.html",
     "title": "Lab 0 - Meet + greet",
     "section": "",
-    "text": "Today’s lab is short and sweet! We just need you to fill out the “Getting to know you” survey. Please go here to take it. You will need to log on to Sakai to access to survey.\nYour answers can be brief. Some of your answers will be used to guide what application examples might be of interest to a majority of students in the course and some of your answers will be used to help guide team formation. We expect this will take you ~10 minutes."
+    "text": "Your answers can be brief. Some of your answers will be used to guide what application examples might be of interest to a majority of students in the course and some of your answers will be used to help guide team formation. We expect this will take you ~10 minutes."
   },
   {
-    "objectID": "labs/lab-3.html#introduction",
-    "href": "labs/lab-3.html#introduction",
+    "objectID": "labs/lab-3.html",
+    "href": "labs/lab-3.html",
     "title": "Lab 3 - Coffee ratings",
-    "section": "Introduction",
-    "text": "Introduction\nIn today’s lab you will analyze data from over 1,000 different coffees to explore the relationship between a coffee’s aroma and it’s overall quality. You will also begin working with your team and practicing a collaborative data analysis workflow.\n\nLearning goals\nBy the end of the lab you will…\n\nCreate plots and calculate associated statistics to assess model diagnostics.\nPractice collaborating with others using a single Github repo."
+    "section": "",
+    "text": "In today’s lab you will analyze data from over 1,000 different coffees to explore the relationship between a coffee’s aroma and it’s overall quality. You will also begin working with your team and practicing a collaborative data analysis workflow.\n\n\nBy the end of the lab you will…\n\nCreate plots and calculate associated statistics to assess model diagnostics.\nPractice collaborating with others using a single Github repo."
   },
   {
     "objectID": "labs/lab-3.html#meet-your-team",
@@ -5369,11 +5614,11 @@
     "text": "Grading\nTotal points available: 50 points.\n\n\n\nComponent\nPoints\n\n\n\n\nEx 1 - 6\n42\n\n\nWorkflow & formatting\n52\n\n\nComplete team contract\n3"
   },
   {
-    "objectID": "labs/lab-1.html#introduction",
-    "href": "labs/lab-1.html#introduction",
+    "objectID": "labs/lab-1.html",
+    "href": "labs/lab-1.html",
     "title": "Lab 1 - Meet the toolkit",
-    "section": "Introduction",
-    "text": "Introduction\nThis lab will go through much of the same workflow we’ve demonstrated in class. The main goal is to reinforce our understanding of R and RStudio, which we will be using throughout the course both to learn the statistical concepts discussed in the course and to analyze real data and come to informed conclusions.\n\n\n\n\n\n\nNote\n\n\n\nR is the name of the programming language itself and RStudio is a convenient interface.\n\n\nAn additional goal is to reinforce git and GitHub, the collaboration and version control system that we will be using throughout the course.\n\n\n\n\n\n\nNote\n\n\n\nGit is a version control system (like “Track Changes” features from Microsoft Word but more powerful) and GitHub is the home for your Git-based projects on the internet (like DropBox but much better).\n\n\nAs the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer. Before we get to that stage, however, you need to build some basic fluency in R. Today we begin with the fundamental building blocks of R and RStudio: the interface, reading in data, and basic commands.\nTo make versioning simpler, this is a solo lab. In the future, you’ll learn about collaborating on GitHub and producing a single lab report for your lab team, but for now, concentrate on getting the basics down.\n\nLearning goals\nBy the end of the lab, you will…\n\nBe familiar with the workflow using R, RStudio, Git, and GitHub\nGain practice writing a reproducible report using RMarkdown\nPractice version control using GitHub\nBe able to create data visualizations using ggplot2\nBe able to describe variable distributions and the relationship between multiple variables"
+    "section": "",
+    "text": "This lab will go through much of the same workflow we’ve demonstrated in class. The main goal is to reinforce our understanding of R and RStudio, which we will be using throughout the course both to learn the statistical concepts discussed in the course and to analyze real data and come to informed conclusions.\n\n\n\n\n\n\nNote\n\n\n\nR is the name of the programming language itself and RStudio is a convenient interface.\n\n\nAn additional goal is to reinforce git and GitHub, the collaboration and version control system that we will be using throughout the course.\n\n\n\n\n\n\nNote\n\n\n\nGit is a version control system (like “Track Changes” features from Microsoft Word but more powerful) and GitHub is the home for your Git-based projects on the internet (like DropBox but much better).\n\n\nAs the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer. Before we get to that stage, however, you need to build some basic fluency in R. Today we begin with the fundamental building blocks of R and RStudio: the interface, reading in data, and basic commands.\nTo make versioning simpler, this is a solo lab. In the future, you’ll learn about collaborating on GitHub and producing a single lab report for your lab team, but for now, concentrate on getting the basics down.\n\n\nBy the end of the lab, you will…\n\nBe familiar with the workflow using R, RStudio, Git, and GitHub\nGain practice writing a reproducible report using RMarkdown\nPractice version control using GitHub\nBe able to create data visualizations using ggplot2\nBe able to describe variable distributions and the relationship between multiple variables"
   },
   {
     "objectID": "labs/lab-1.html#getting-started",
@@ -5429,14 +5674,14 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 3 + Lab 5\n\n\n\n\n\n\n\n\n\n12\nMon, Mar 28\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nDue: HW 4 + Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nWork on project\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 3 + Lab 5\n\n\n\n\n✍️\n\n\n\n\n12\nMon, Mar 28\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nDue: HW 4 + Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nWork on project\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "computing-troubleshooting.html",
     "href": "computing-troubleshooting.html",
     "title": "Computing troubleshooting",
     "section": "",
-    "text": "If you’re having difficulty launching an RStudio session from your reserved container, go to status.oit.duke.edu and scroll down to Teaching and Learning Tools. Under this heading you’ll find an entry called Container Manager (CMGR Coursework Containers).\n\nIf the status shows something other than Operational, this means there is a known incident with the containers. Check back later to see if it’s been resolved. If there’s a deadline coming up soon, post on the course forum to let us know that there’s an issue. We can look into how quickly it might get resolved and decide on what to do about the deadline accordingly. Note: We don’t anticipate this to happen regularly, the systems are Operational a huge majority of the time!\nIf the status shows Operational, this means the system is expected to be working. Check your internet connection, if need be, restart your computer to ensure a fresh new connection. If your issue persists, post on the course forum with details on what you’ve tried and the errors you see (including verbatim errors and/or screenshots).\nEither way you can also fill out the form here, which will notify our the R TA for the department as well as our undergraduate coordinator. They’ll be able to help diagnose the issue."
+    "text": "If the status shows something other than Operational, this means there is a known incident with the containers. Check back later to see if it’s been resolved. If there’s a deadline coming up soon, post on the course forum to let us know that there’s an issue. We can look into how quickly it might get resolved and decide on what to do about the deadline accordingly. Note: We don’t anticipate this to happen regularly, the systems are Operational a huge majority of the time!\nIf the status shows Operational, this means the system is expected to be working. Check your internet connection, if need be, restart your computer to ensure a fresh new connection. If your issue persists, post on the course forum with details on what you’ve tried and the errors you see (including verbatim errors and/or screenshots).\nEither way you can also fill out the form here, which will notify our the R TA for the department as well as our undergraduate coordinator. They’ll be able to help diagnose the issue."
   },
   {
     "objectID": "course-overview.html",
@@ -5450,62 +5695,20 @@
     "href": "computing-access.html",
     "title": "Computing access",
     "section": "",
-    "text": "To access computing resources for the introductory data science courses offered by the Duke University Department of Statistical Science, go to the Duke Container Manager website, cmgr.oit.duke.edu/containers.\nIf this is your first time accessing the containers, click on reserve STA210 on the Reservations available menu on the right. You only need to do this once, and when you do, you’ll see this container moved to the My reservations menu on the left.\nNext, click on STA110 under My reservations to access the RStudio instance you’ll use for the course."
+    "text": "If this is your first time accessing the containers, click on reserve STA210 on the Reservations available menu on the right. You only need to do this once, and when you do, you’ll see this container moved to the My reservations menu on the left.\nNext, click on STA110 under My reservations to access the RStudio instance you’ll use for the course."
   },
   {
-    "objectID": "exams/exam-1.html#overview",
-    "href": "exams/exam-1.html#overview",
+    "objectID": "exams/exam-1.html",
+    "href": "exams/exam-1.html",
     "title": "Exam 1",
-    "section": "Overview",
-    "text": "Overview\nExam 1 will be released on Friday, Feb 4 at 9 am ET and must be completed by Mon, Feb 7 at 11:59 pm.\nThe exam will consist of two parts:\n\nPart 1 - Conceptual: Multiple choice questions on Sakai test and quizzes. This portion may only be submitted one time. Go here to complete Part 1 of the exam.\nPart 2 - Applied: Data analysis in RStudio and submitted in Gradescope (like a usual lab and homework). Go to the GitHub organization for the course and find the exam-1- repo to complete Part 3 of your exam. Add your answers to the exam-1.qmd file in your repo.\n\nBoth portions must be completed and submitted by Mon, Feb 7 at 11:59 pm. Late work will only be accepted in the case of of extenuating circumstances and notification from your academic dean.\n🍀 Good luck! 🍀"
+    "section": "",
+    "text": "Grading (50 pts)\n\n\n\nPart\nPoints\n\n\n\n\nPart 1 - Conceptual (on Sakai)\n10\n\n\nPart 2 - Applied (on Gradescope)\n40\n\n\nTotal\n50"
   },
   {
-    "objectID": "exams/exam-1.html#academic-integrity",
-    "href": "exams/exam-1.html#academic-integrity",
-    "title": "Exam 1",
-    "section": "Academic Integrity",
-    "text": "Academic Integrity\nBy taking this exam, you pledge to uphold the Duke Community Standard:\n\nI will not lie, cheat, or steal in my academic endeavors;\nI will conduct myself honorably in all my endeavors; and\nI will act if the Standard is compromised."
-  },
-  {
-    "objectID": "exams/exam-1.html#rules-notes",
-    "href": "exams/exam-1.html#rules-notes",
-    "title": "Exam 1",
-    "section": "Rules & Notes",
-    "text": "Rules & Notes\n\nThis is an individual assignment. Everything in your repository and on Sakai is for your eyes only.\nYou may not collaborate or communicate anything about this exam to anyone except the instructor and the head TA (Rick Presman). For example, you may not communicate with other students, other TAs, or post/solicit help on the internet, email or via any other method of communication.\nThe exam is open-book, open-note, so you may use any materials from class as you take the exam.\nOnly head TA and professor office hours will be held during the exam period.\nYou may not email the TAs questions about the exam.\nIf you have questions, direct message the professor or the head TA (Rick Presman) on Slack or post on Sakai Conversations for “Instructors in this site” only or attend my office hours (Monday, 10:30 am - 11:30 am)."
-  },
-  {
-    "objectID": "exams/exam-1.html#submission",
-    "href": "exams/exam-1.html#submission",
-    "title": "Exam 1",
-    "section": "Submission",
-    "text": "Submission\n\nPart 1 - Conceptual: The answers to the multiple choice/short answer questions should be submitted under Test & Quizzes in Sakai.\nPart 2 - Applied: The PDF document for the data analysis portion must be uploaded to Gradescope.\n\nYou must submit a PDF to Gradescope that corresponds to the .qmd file on your GitHub repository in order to receive credit for this portion of the exam.\nYou must upload a PDF, not HTML. Any non-PDF submissions will not be graded.\nMark the pages associated with each question. If any answer for a question spans multiple pages, mark all associated pages.\nMake sure to associate the “Workflow & formatting” section with the first page.\nFailure to mark the pages in Gradescope will result in point deductions. Any pages that are not marked will not be graded.\nMake sure that your uploaded PDF document matches your .qmd and the PDF in your GitHub repository exactly. Points will be deducted for documents that are not reproducible."
-  },
-  {
-    "objectID": "exams/exam-2.html#overview",
-    "href": "exams/exam-2.html#overview",
+    "objectID": "exams/exam-2.html",
+    "href": "exams/exam-2.html",
     "title": "Exam 2",
-    "section": "Overview",
-    "text": "Overview\nExam 1 will be released on Friday, Feb 25 at 9 am ET and must be completed by Mon, Feb 28 at 11:59 pm.\nThe exam will consist of two parts:\n\nPart 1 - Conceptual: Multiple choice questions on Sakai test and quizzes. This portion may only be submitted one time. Go here to complete Part 1 of the exam.\nPart 2 - Applied: Data analysis in RStudio and submitted in Gradescope (like a usual lab and homework). Go to the GitHub organization for the course and find the exam-2- repo to complete Part 2 of your exam. Add your answers to the exam-2.qmd file in your repo.\n\nBoth portions must be completed and submitted by Mon, Feb 28 at 11:59 pm. Late work will only be accepted in the case of of extenuating circumstances and notification from your academic dean.\n🍀 Good luck! 🍀"
-  },
-  {
-    "objectID": "exams/exam-2.html#academic-integrity",
-    "href": "exams/exam-2.html#academic-integrity",
-    "title": "Exam 2",
-    "section": "Academic Integrity",
-    "text": "Academic Integrity\nBy taking this exam, you pledge to uphold the Duke Community Standard:\n\nI will not lie, cheat, or steal in my academic endeavors;\nI will conduct myself honorably in all my endeavors; and\nI will act if the Standard is compromised."
-  },
-  {
-    "objectID": "exams/exam-2.html#rules-notes",
-    "href": "exams/exam-2.html#rules-notes",
-    "title": "Exam 2",
-    "section": "Rules & Notes",
-    "text": "Rules & Notes\n\nThis is an individual assignment. Everything in your repository and on Sakai is for your eyes only.\nYou may not collaborate or communicate anything about this exam to anyone except the instructor and the head TA (Rick Presman). For example, you may not communicate with other students, other TAs, or post/solicit help on the internet, email or via any other method of communication.\nThe exam is open-book, open-note, so you may use any materials from class as you take the exam.\nOnly head TA and professor office hours will be held during the exam period.\nYou may not email the TAs questions about the exam.\nIf you have questions, direct message the professor or the head TA (Rick Presman) on Slack or post on Sakai Conversations for “Instructors in this site” only or attend my office hours (Monday, 10:30 am - 11:30 am)."
-  },
-  {
-    "objectID": "exams/exam-2.html#submission",
-    "href": "exams/exam-2.html#submission",
-    "title": "Exam 2",
-    "section": "Submission",
-    "text": "Submission\n\nPart 1 - Conceptual: The answers to the multiple choice/short answer questions should be submitted under Test & Quizzes in Sakai.\nPart 2 - Applied: The PDF document for the data analysis portion must be uploaded to Gradescope.\n\nYou must submit a PDF to Gradescope that corresponds to the .qmd file on your GitHub repository in order to receive credit for this portion of the exam.\nYou must upload a PDF, not HTML. Any non-PDF submissions will not be graded.\nMark the pages associated with each question. If any answer for a question spans multiple pages, mark all associated pages.\nMake sure to associate the “Workflow & formatting” section with the first page.\nFailure to mark the pages in Gradescope will result in point deductions. Any pages that are not marked will not be graded.\nMake sure that your uploaded PDF document matches your .qmd and the PDF in your GitHub repository exactly. Points will be deducted for documents that are not reproducible."
+    "section": "",
+    "text": "Grading (50 pts)\n\n\n\nPart\nPoints\n\n\n\n\nPart 1 - Conceptual (on Sakai)\n10\n\n\nPart 2 - Applied (on Gradescope)\n40\n\n\nTotal\n50"
   }
 ]
