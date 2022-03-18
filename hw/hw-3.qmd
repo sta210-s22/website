@@ -43,7 +43,7 @@ In this part we'll go back to the Palmer penguins dataset from [HW 2](hw-2.html)
 We will use the following variables:
 
 | variable          | class   | description                                      |
-|:-----------------|:-----------------|:------------------------------------|
+|:------------------|:--------|:-------------------------------------------------|
 | species           | integer | Penguin species (Adelie, Gentoo, Chinstrap)      |
 | island            | integer | Island where recorded (Biscoe, Dream, Torgersen) |
 | flipper_length_mm | integer | Flipper length in mm                             |
@@ -65,7 +65,8 @@ penguins %>%
 
 Let's start by looking at the relationship between island and whether a penguin is from the Adelie species.
 
-1.  What does the `values_fill` argument do in the following chunk? The documentation for the function will be helpful in answering this question.
+1.  What does the `values_fill` argument do in the following chunk?
+    The documentation for the function will be helpful in answering this question.
 
     ```{r}
     penguins %>%
@@ -73,9 +74,8 @@ Let's start by looking at the relationship between island and whether a penguin 
       pivot_wider(names_from = adelie, values_from = n, values_fill = 0)
     ```
 
-```{=html}
 <!-- -->
-```
+
 2.  Calculate the odds ratio of a penguin being from the Adelie species for those recorded on Dream compared to those recorded on Biscoe.
 
 3.  You want to fit a model using `island` to predict the odds of being from the Adelie species.
@@ -162,3 +162,33 @@ $$
 16. Based on the derivation above, fill in the blanks in the following sentence for an alternative (and more useful interpretation) of the slope of `urban`.
 
     > For each additional percentage point the urban population is higher, the GDP of a country is expected to be \_\_\_, on average, by a factor of \_\_\_.
+
+## Submission
+
+::: callout-warning
+Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.
+We will be checking these to make sure you have been practicing how to commit and push changes.
+
+Remember -- you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.
+:::
+
+To submit your assignment:
+
+-   Go to [http://www.gradescope.com](http://www.gradescope.com/) and click *Log in* in the top right corner.
+-   Click *School Credentials* ➡️ *Duke NetID* and log in using your NetID credentials.
+-   Click on your *STA 210* course.
+-   Click on the assignment, and you'll be prompted to submit it.
+-   Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be "checked").
+-   Select the first page of your PDF submission to be associated with the *"Workflow & formatting"* section.
+
+## Grading
+
+Total points available: 50 points.
+
+| Component             | Points |
+|-----------------------|--------|
+| Ex 1 - 9              | 45     |
+| Workflow & formatting | 5[^1]  |
+
+[^1]: The "Workflow & formatting" grade is to assess the reproducible workflow.
+    This includes having at least 3 informative commit messages and updating the name and date in the YAML.
