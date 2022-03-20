@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.112">
+  <meta name="generator" content="quarto-0.9.120">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - Model comparison</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,9 +10,6 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
-    .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -1006,7 +1003,7 @@ R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \f
 <section id="parsimony-and-occams-razor" class="slide level2 smaller">
 <h2>Parsimony and Occam’s razor</h2>
 <ul>
-<li class="fragment"><p>The principle of <strong>parsimony</strong> is attributed to William of Occam (early 14th-century English nominalist philosopher), who insisted that, given a set of equally good explanations for a given phenomenon, <em>the correct explanation is the simplest explanation</em><a href="#/fn1" class="footnote-ref" id="fnref1" role="doc-noteref" onclick="return false;"><sup>1</sup></a></p></li>
+<li class="fragment"><p>The principle of <strong>parsimony</strong> is attributed to William of Occam (early 14th-century English nominalist philosopher), who insisted that, given a set of equally good explanations for a given phenomenon, <em>the correct explanation is the simplest explanation</em><sup>1</sup></p></li>
 <li class="fragment"><p>Called <strong>Occam’s razor</strong> because he “shaved” his explanations down to the bare minimum</p></li>
 <li class="fragment"><p>Parsimony in modeling:</p>
 <div>
@@ -1019,7 +1016,7 @@ R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \f
 </ul>
 </div></li>
 </ul>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn1" role="doc-endnote"><p>Source: The R Book by Michael J. Crawley.</p></li></ol></aside></section>
 <section id="in-pursuit-of-occams-razor" class="slide level2">
 <h2>In pursuit of Occam’s razor</h2>
 <ul>
@@ -1034,9 +1031,9 @@ R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \f
 <blockquote>
 <p>Sometimes a simple model will outperform a more complex model . . . Nevertheless, I believe that deliberately limiting the complexity of the model is not fruitful when the problem is evidently complex. Instead, if a simple model is found that outperforms some particular complex model, the appropriate response is to define a different complex model that captures whatever aspect of the problem led to the simple model performing well.</p>
 <p><br></p>
-<p>Radford Neal - Bayesian Learning for Neural Networks<a href="#/fn2" class="footnote-ref" id="fnref2" role="doc-noteref" onclick="return false;"><sup>2</sup></a></p>
+<p>Radford Neal - Bayesian Learning for Neural Networks<sup>1</sup></p>
 </blockquote>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn2" role="doc-endnote"><p>Suggested blog post: <a href="https://statmodeling.stat.columbia.edu/2012/06/26/occam-2/">Occam</a> by Andrew Gelman</p></li></ol></aside></section>
 <section id="other-concerns-with-our-approach" class="slide level2 smaller">
 <h2>Other concerns with our approach</h2>
 <ul>
@@ -1065,13 +1062,7 @@ R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \f
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
 </section></section>
-<section class="footnotes footnotes-end-of-document smaller scrollable" role="doc-endnotes"><h2>Footnotes</h2>
 
-<ol>
-<li id="fn1" role="doc-endnote"><p>Source: The R Book by Michael J. Crawley.</p></li>
-<li id="fn2" role="doc-endnote"><p>Suggested blog post: <a href="https://statmodeling.stat.columbia.edu/2012/06/26/occam-2/">Occam</a> by Andrew Gelman</p></li>
-</ol>
-</section>
     </div>
   </div>
 
@@ -1109,7 +1100,7 @@ R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \f
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"f29351db191084f6","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"aa2b14baa8d3d522","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
