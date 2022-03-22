@@ -31,16 +31,12 @@ library(countdown)
 
 # Welcome
 
-## Announcements
-
-::: nonincremental
--   announcements...
-:::
-
 ## Topics
 
 ::: nonincremental
--   List of topics...
+-   Bulding predictive logistic regression models
+-   Sensitivity and specificity
+-   Making classification decisions
 :::
 
 ## Computational setup
