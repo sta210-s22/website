@@ -283,9 +283,11 @@ What are the trade-offs associated with each decision?
 
 ## Evaluate the performance
 
-**Receiver operating characteristic (ROC) curve**[^1] which plot true positive rate vs. false positive rate (1 - specificity).
+**Receiver operating characteristic (ROC) curve**<sup>+</sup> which plot true positive rate vs. false positive rate (1 - specificity).
 
-[^1]: Originally developed for operators of military radar receivers, hence the name.
+::: aside
+<sup>+</sup> Originally developed for operators of military radar receivers, hence the name.
+:::
 
 ::: columns
 ::: {.column width="40%"}
