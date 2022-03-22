@@ -1,0 +1,560 @@
+---
+title: "LR: Prediction / classification"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 8, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+
+library(countdown)
+```
+
+# Welcome
+
+## Announcements
+
+::: nonincremental
+-   announcements...
+:::
+
+## Topics
+
+::: nonincremental
+-   List of topics...
+:::
+
+## Computational setup
+
+```{r}
+#| echo: true
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(openintro)
+library(knitr)
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+# Data
+
+## `openintro::email` {.smaller}
+
+These data represent incoming emails for the first three months of 2012 for an email account.
+
+::: nonincremental
+-   Outcome: `spam` - Indicator for whether the email was spam.
+-   Predictors: `spam`, \``to_multiple`, `from`, `cc`, `sent_email`, `time`, `image`, `attach`, `dollar`, `winner`, `inherit`, `viagra`, `password`, `num_char`, `line_breaks`, `format`, `re_subj`, `exclaim_subj`, `urgent_subj`, `exclaim_mess`, `number`.
+:::
+
+See [here](http://openintrostat.github.io/openintro/reference/email.html) for more detailed information on the variables.
+
+## Training and testing split
+
+```{r}
+# Fix random numbers by setting the seed 
+# Enables analysis to be reproducible when random numbers are used 
+set.seed(1116)
+
+# Put 75% of the data into the training set 
+email_split <- initial_split(email)
+
+# Create data frames for the two sets
+email_train <- training(email_split)
+email_test  <- testing(email_split)
+```
+
+## Exploratory analysis
+
+The sample is **unbalanced** with respect to `spam`.
+
+```{r}
+#| echo: false
+
+ggplot(email_train, aes(x = spam)) + 
+  geom_bar() +
+  labs(title = "Distribution of spam in training data")
+```
+
+## Reminder: Modeling workflow
+
+-   Create a recipe for feature engineering steps to be applied to the training data
+
+-   Fit the model to the training data after these steps have been applied
+
+-   Using the model estimates from the training data, predict outcomes for the test data
+
+-   Evaluate the performance of the model on the test data
+
+# Start with a recipe
+
+## Initiate a recipe {.smaller}
+
+```{r initiate-recipe, results="hide"}
+email_rec <- recipe(
+  spam ~ .,          # formula
+  data = email_train  # data to use for cataloging names and types of variables
+  )
+summary(email_rec)
+```
+
+```{r echo=FALSE}
+summary(email_rec) %>% print(n = 21)
+```
+
+## Remove certain variables
+
+```{r}
+email_rec <- email_rec %>%
+  step_rm(from, sent_email)
+```
+
+```{r echo=FALSE}
+email_rec
+```
+
+## Feature engineer date
+
+```{r}
+email_rec <- email_rec %>%
+  step_date(time, features = c("dow", "month")) %>%
+  step_rm(time)
+```
+
+```{r echo=FALSE}
+email_rec
+```
+
+## Discretize numeric variables
+
+```{r}
+email_rec <- email_rec %>%
+  step_cut(cc, attach, dollar, breaks = c(0, 1))
+```
+
+```{r echo=FALSE}
+email_rec
+```
+
+## Create dummy variables
+
+```{r}
+email_rec <- email_rec %>%
+  step_dummy(all_nominal(), -all_outcomes())
+```
+
+```{r echo=FALSE}
+email_rec
+```
+
+## Remove zero variance variables
+
+Variables that contain only a single value
+
+```{r}
+email_rec <- email_rec %>%
+  step_zv(all_predictors())
+```
+
+```{r echo=FALSE}
+email_rec
+```
+
+## All in one place
+
+```{r}
+email_rec <- recipe(spam ~ ., data = email) %>%
+  step_rm(from, sent_email) %>%
+  step_date(time, features = c("dow", "month")) %>%               
+  step_rm(time) %>%
+  step_cut(cc, attach, dollar, breaks = c(0, 1)) %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_zv(all_predictors())
+```
+
+# Build a workflow
+
+## Define model
+
+```{r}
+email_spec <- logistic_reg() %>% 
+  set_engine("glm")
+email_spec
+```
+
+## Define workflow {.smaller}
+
+**Remember:** Workflows bring together models and recipes so that they can be easily applied to both the training and test data.
+
+```{r}
+email_wflow <- workflow() %>% 
+  add_model(email_spec) %>% 
+  add_recipe(email_rec)
+```
+
+```{r echo=FALSE}
+email_wflow
+```
+
+## Fit model to training data {.smaller}
+
+```{r}
+email_fit <- email_wflow %>% 
+  fit(data = email_train)
+
+tidy(email_fit) %>% print(n = 31)
+```
+
+# Make predictions
+
+## Make predictions for test data
+
+```{r}
+email_pred <- predict(email_fit, email_test, type = "prob") %>% 
+  bind_cols(email_test) 
+email_pred
+```
+
+## A closer look at predictions
+
+::: question
+Which of the following 10 emails will be misclassified?
+:::
+
+```{r}
+email_pred %>%
+  arrange(desc(.pred_1)) %>%
+  select(contains("pred"), spam)
+```
+
+# Sensitivity and specificity
+
+## False positive and negative {.smaller}
+
+|                              | Email is spam                 | Email is not spam             |
+|------------------------|------------------------|------------------------|
+| Email classified as spam     | True positive                 | False positive (Type 1 error) |
+| Email classified as not spam | False negative (Type 2 error) | True negative                 |
+
+-   False negative rate = P(classified as not spam \| Email spam) = FN / (TP + FN)
+
+-   False positive rate = P(classified as spam \| Email not spam) = FP / (FP + TN)
+
+## Sensitivity and specificity {.smaller}
+
+|                              | Email is spam                     | Email is not spam                 |
+|----------------------|-------------------------|-------------------------|
+| Email classified as spam     | True positive                     | False positive (**Type 1 error**) |
+| Email classified as not spam | False negative (**Type 2 error**) | True negative                     |
+
+-   Sensitivity = P(classified as spam \| Email spam) = TP / (TP + FN)
+    -   Sensitivity = 1 − False negative rate
+-   Specificity = P(classified as not spam \| Email not spam) = TN / (FP + TN)
+    -   Specificity = 1 − False positive rate
+
+. . .
+
+::: question
+If you were designing a spam filter, would you want sensitivity and specificity to be high or low?
+What are the trade-offs associated with each decision?
+:::
+
+## Evaluate the performance
+
+**Receiver operating characteristic (ROC) curve**[^1] which plot true positive rate vs. false positive rate (1 - specificity).
+
+[^1]: Originally developed for operators of military radar receivers, hence the name.
+
+::: columns
+::: {.column width="40%"}
+```{r}
+#| label: roc-curve
+#| fig.show: hide
+
+email_pred %>%
+  roc_curve(
+    truth = spam,
+    .pred_1,
+    event_level = "second"
+  ) %>%
+  autoplot()
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+#| ref.label: roc-curve
+#| echo: false
+#| out.width: "100%"
+```
+:::
+:::
+
+## ROC curve, under the hood
+
+```{r}
+email_pred %>%
+  roc_curve(
+    truth = spam,
+    .pred_1,
+    event_level = "second"
+  )
+```
+
+## ROC curve
+
+```{r}
+#| echo: false
+
+email_pred %>%
+  roc_curve(
+    truth = spam,
+    .pred_1,
+    event_level = "second"
+  ) %>%
+  autoplot() +
+  annotate("point", x = 0, y = 1, color = "#5B888C") +
+  annotate("point", x = 0, y = 1, color = "#5B888C", size = 3, shape = "circle open") +
+  annotate(
+    "label", x = 0.02, y = 0.99, label = "All spams classified as spam,\nall non-spams classified as nonspam", hjust = 0, color = "#5B888C", fontface = "bold", vjust = 1, fill = "white"
+  ) +
+  annotate("point", x = 1, y = 0, color = "#8F2D56") +
+  annotate("point", x = 1, y = 0, color = "#8F2D56", size = 3, shape = "circle open") +
+  annotate(
+    "label", x = 0.98, y = 0.01, label = "All spams classified as non-spam,\nall non-spams classified as spam", hjust = 1, color = "#8F2D56", fontface = "bold", vjust = 0, fill = "white"
+  ) +
+  annotate(
+    "segment", color = "#5b708c", x = 0, y = 0, xend = 1, yend = 1, size = 2, alpha = 0.5
+  ) +
+  annotate(
+    "label", x = 0.58, y = 0.5, label = "True positive rate\n= false positive rate", hjust = 0, color = "#5b708c", fontface = "bold", fill = "white"
+  )
+```
+
+## Evaluate the performance
+
+```{r}
+#| label: roc-auc
+
+email_pred %>%
+  roc_auc(
+    truth = spam,
+    .pred_1,
+    event_level = "second"
+  )
+```
+
+# Make decisions
+
+## Cutoff probability: 0.5 {.smaller}
+
+::: panel-tabset
+## Output
+
+Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.5**.
+
+```{r}
+#| ref.label: confusion-50
+#| echo: false
+```
+
+## Code
+
+```{r}
+#| label: confusion-50
+#| results: hide
+
+cutoff_prob <- 0.5
+email_pred %>%
+  mutate(
+    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(spam_pred == 1, "Email classified as spam", "Email classified as not spam")
+    ) %>%
+  count(spam_pred, spam) %>%
+  pivot_wider(names_from = spam, values_from = n) %>%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
+```
+:::
+
+## Confusion matrix
+
+Cross-tabulation of observed and predicted classes:
+
+```{r}
+email_pred %>%
+  mutate(spam_predicted = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0))) %>%
+  conf_mat(truth = spam, estimate = spam_predicted)
+```
+
+## Classification
+
+```{r}
+#| fig.asp: 0.6
+#| echo: false
+#| fig.width: 10
+
+email_pred %>%
+  mutate(
+    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),
+    classification = if_else(spam == spam_pred, "Correct classification", "Misclassification")
+  ) %>%
+  ggplot(aes(x = .pred_1, y = spam,
+             color = classification, shape = classification)) +
+  geom_jitter(width = 0, alpha = 0.5, size = 2) +  geom_vline(xintercept = cutoff_prob, linetype = "dashed") +
+  scale_color_manual(values = c("#5B888C", "#8F2D56")) +
+  theme(legend.position = "bottom") +
+  labs(
+    color = NULL, shape = NULL,
+    x = "Predicted probability (.pred_1)",
+    y = "Observed"
+  ) +
+  annotate("label",
+    x = cutoff_prob, y = 2.75,
+    label = paste0("Cutoff probability = ", cutoff_prob)
+  ) +
+  coord_cartesian(clip = "off")
+```
+
+## Cutoff probability: 0.25 {.smaller}
+
+::: panel-tabset
+## Output
+
+Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.25**.
+
+```{r}
+#| ref.label: confusion-25
+#| echo: false
+```
+
+## Code
+
+```{r confusion-25}
+#| label: confusion-25
+#| results: hide
+
+cutoff_prob <- 0.25
+email_pred %>%
+  mutate(
+    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(spam_pred == 1, "Email classified as spam", "Email classified as not spam")
+    ) %>%
+  count(spam_pred, spam) %>%
+  pivot_wider(names_from = spam, values_from = n) %>%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
+```
+:::
+
+## Classification
+
+```{r}
+#| fig.asp: 0.6
+#| echo: false
+#| fig.width: 10
+
+email_pred %>%
+  mutate(
+    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),
+    classification = if_else(spam == spam_pred, "Correct classification", "Misclassification")
+  ) %>%
+  ggplot(aes(x = .pred_1, y = spam,
+             color = classification, shape = classification)) +
+  geom_jitter(width = 0, alpha = 0.5, size = 2) +
+  geom_vline(xintercept = cutoff_prob, linetype = "dashed") +
+  scale_color_manual(values = c("#5B888C", "#8F2D56")) +
+  theme(legend.position = "bottom") +
+  labs(
+    color = NULL, shape = NULL,
+    x = "Predicted probability (.pred_1)",
+    y = "Observed"
+  ) +
+  annotate("label",
+    x = cutoff_prob, y = 2.75,
+    label = paste0("Cutoff probability = ", cutoff_prob)
+  ) +
+  coord_cartesian(clip = "off")
+```
+
+## Cutoff probability: 0.75 {.smaller}
+
+::: panel-tabset
+## Output
+
+Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.75**.
+
+```{r}
+#| ref.label: confusion-75
+#| echo: false
+```
+
+## Code
+
+```{r confusion-75}
+#| label: confusion-75
+#| results: hide
+
+cutoff_prob <- 0.75
+email_pred %>%
+  mutate(
+    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(spam_pred == 1, "Email classified as spam", "Email classified as not spam")
+    ) %>%
+  count(spam_pred, spam) %>%
+  pivot_wider(names_from = spam, values_from = n) %>%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
+```
+:::
+
+## Classification
+
+```{r}
+#| fig.asp: 0.6
+#| echo: false
+#| fig.width: 10
+
+email_pred %>%
+  mutate(
+    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),
+    classification = if_else(spam == spam_pred, "Correct classification", "Misclassification")
+  ) %>%
+  ggplot(aes(x = .pred_1, y = spam, 
+             color = classification, shape = classification)) +  geom_jitter(width = 0, alpha = 0.5, size = 2) +
+  geom_vline(xintercept = cutoff_prob, linetype = "dashed") +
+  scale_color_manual(values = c("#5B888C", "#8F2D56")) +
+  theme(legend.position = "bottom") +
+  labs(
+    color = NULL, shape = NULL,
+    x = "Predicted probability (.pred_1)",
+    y = "Observed"
+  ) +
+  annotate("label",
+    x = cutoff_prob, y = 2.75,
+    label = paste0("Cutoff probability = ", cutoff_prob)
+  ) +
+  coord_cartesian(clip = "off")
+```
