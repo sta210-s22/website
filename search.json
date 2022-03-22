@@ -707,6 +707,230 @@
     "text": "Application exercise\n\n📋 github.com/sta210-s22/ae-9-odds\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
+    "objectID": "slides/lec-20.html#announcements",
+    "href": "slides/lec-20.html#announcements",
+    "title": "LR: Prediction / classification",
+    "section": "Announcements",
+    "text": "Announcements\n\n\nannouncements…"
+  },
+  {
+    "objectID": "slides/lec-20.html#topics",
+    "href": "slides/lec-20.html#topics",
+    "title": "LR: Prediction / classification",
+    "section": "Topics",
+    "text": "Topics\n\n\nList of topics…"
+  },
+  {
+    "objectID": "slides/lec-20.html#computational-setup",
+    "href": "slides/lec-20.html#computational-setup",
+    "title": "LR: Prediction / classification",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\nlibrary(knitr)\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
+  },
+  {
+    "objectID": "slides/lec-20.html#openintroemail",
+    "href": "slides/lec-20.html#openintroemail",
+    "title": "LR: Prediction / classification",
+    "section": "openintro::email",
+    "text": "openintro::email\nThese data represent incoming emails for the first three months of 2012 for an email account.\n\n\nOutcome: spam - Indicator for whether the email was spam.\nPredictors: spam, `to_multiple, from, cc, sent_email, time, image, attach, dollar, winner, inherit, viagra, password, num_char, line_breaks, format, re_subj, exclaim_subj, urgent_subj, exclaim_mess, number.\n\n\nSee here for more detailed information on the variables."
+  },
+  {
+    "objectID": "slides/lec-20.html#training-and-testing-split",
+    "href": "slides/lec-20.html#training-and-testing-split",
+    "title": "LR: Prediction / classification",
+    "section": "Training and testing split",
+    "text": "Training and testing split\n\n# Fix random numbers by setting the seed \n# Enables analysis to be reproducible when random numbers are used \nset.seed(1116)\n\n# Put 75% of the data into the training set \nemail_split <- initial_split(email)\n\n# Create data frames for the two sets\nemail_train <- training(email_split)\nemail_test  <- testing(email_split)"
+  },
+  {
+    "objectID": "slides/lec-20.html#exploratory-analysis",
+    "href": "slides/lec-20.html#exploratory-analysis",
+    "title": "LR: Prediction / classification",
+    "section": "Exploratory analysis",
+    "text": "Exploratory analysis\nThe sample is unbalanced with respect to spam."
+  },
+  {
+    "objectID": "slides/lec-20.html#reminder-modeling-workflow",
+    "href": "slides/lec-20.html#reminder-modeling-workflow",
+    "title": "LR: Prediction / classification",
+    "section": "Reminder: Modeling workflow",
+    "text": "Reminder: Modeling workflow\n\nCreate a recipe for feature engineering steps to be applied to the training data\nFit the model to the training data after these steps have been applied\nUsing the model estimates from the training data, predict outcomes for the test data\nEvaluate the performance of the model on the test data"
+  },
+  {
+    "objectID": "slides/lec-20.html#initiate-a-recipe",
+    "href": "slides/lec-20.html#initiate-a-recipe",
+    "title": "LR: Prediction / classification",
+    "section": "Initiate a recipe",
+    "text": "Initiate a recipe\n\nemail_rec <- recipe(\n  spam ~ .,          # formula\n  data = email_train  # data to use for cataloging names and types of variables\n  )\nsummary(email_rec)\n\n\n\n# A tibble: 21 × 4\n   variable     type    role      source  \n   <chr>        <chr>   <chr>     <chr>   \n 1 to_multiple  nominal predictor original\n 2 from         nominal predictor original\n 3 cc           numeric predictor original\n 4 sent_email   nominal predictor original\n 5 time         date    predictor original\n 6 image        numeric predictor original\n 7 attach       numeric predictor original\n 8 dollar       numeric predictor original\n 9 winner       nominal predictor original\n10 inherit      numeric predictor original\n11 viagra       numeric predictor original\n12 password     numeric predictor original\n13 num_char     numeric predictor original\n14 line_breaks  numeric predictor original\n15 format       nominal predictor original\n16 re_subj      nominal predictor original\n17 exclaim_subj numeric predictor original\n18 urgent_subj  nominal predictor original\n19 exclaim_mess numeric predictor original\n20 number       nominal predictor original\n21 spam         nominal outcome   original"
+  },
+  {
+    "objectID": "slides/lec-20.html#remove-certain-variables",
+    "href": "slides/lec-20.html#remove-certain-variables",
+    "title": "LR: Prediction / classification",
+    "section": "Remove certain variables",
+    "text": "Remove certain variables\n\nemail_rec <- email_rec %>%\n  step_rm(from, sent_email)\n\n\n\nRecipe\n\nInputs:\n\n      role #variables\n   outcome          1\n predictor         20\n\nOperations:\n\nDelete terms from, sent_email"
+  },
+  {
+    "objectID": "slides/lec-20.html#feature-engineer-date",
+    "href": "slides/lec-20.html#feature-engineer-date",
+    "title": "LR: Prediction / classification",
+    "section": "Feature engineer date",
+    "text": "Feature engineer date\n\nemail_rec <- email_rec %>%\n  step_date(time, features = c(\"dow\", \"month\")) %>%\n  step_rm(time)\n\n\n\nRecipe\n\nInputs:\n\n      role #variables\n   outcome          1\n predictor         20\n\nOperations:\n\nDelete terms from, sent_email\nDate features from time\nDelete terms time"
+  },
+  {
+    "objectID": "slides/lec-20.html#discretize-numeric-variables",
+    "href": "slides/lec-20.html#discretize-numeric-variables",
+    "title": "LR: Prediction / classification",
+    "section": "Discretize numeric variables",
+    "text": "Discretize numeric variables\n\nemail_rec <- email_rec %>%\n  step_cut(cc, attach, dollar, breaks = c(0, 1))\n\n\n\nRecipe\n\nInputs:\n\n      role #variables\n   outcome          1\n predictor         20\n\nOperations:\n\nDelete terms from, sent_email\nDate features from time\nDelete terms time\nCut numeric for cc, attach, dollar"
+  },
+  {
+    "objectID": "slides/lec-20.html#create-dummy-variables",
+    "href": "slides/lec-20.html#create-dummy-variables",
+    "title": "LR: Prediction / classification",
+    "section": "Create dummy variables",
+    "text": "Create dummy variables\n\nemail_rec <- email_rec %>%\n  step_dummy(all_nominal(), -all_outcomes())\n\n\n\nRecipe\n\nInputs:\n\n      role #variables\n   outcome          1\n predictor         20\n\nOperations:\n\nDelete terms from, sent_email\nDate features from time\nDelete terms time\nCut numeric for cc, attach, dollar\nDummy variables from all_nominal(), -all_outcomes()"
+  },
+  {
+    "objectID": "slides/lec-20.html#remove-zero-variance-variables",
+    "href": "slides/lec-20.html#remove-zero-variance-variables",
+    "title": "LR: Prediction / classification",
+    "section": "Remove zero variance variables",
+    "text": "Remove zero variance variables\nVariables that contain only a single value\n\nemail_rec <- email_rec %>%\n  step_zv(all_predictors())\n\n\n\nRecipe\n\nInputs:\n\n      role #variables\n   outcome          1\n predictor         20\n\nOperations:\n\nDelete terms from, sent_email\nDate features from time\nDelete terms time\nCut numeric for cc, attach, dollar\nDummy variables from all_nominal(), -all_outcomes()\nZero variance filter on all_predictors()"
+  },
+  {
+    "objectID": "slides/lec-20.html#all-in-one-place",
+    "href": "slides/lec-20.html#all-in-one-place",
+    "title": "LR: Prediction / classification",
+    "section": "All in one place",
+    "text": "All in one place\n\nemail_rec <- recipe(spam ~ ., data = email) %>%\n  step_rm(from, sent_email) %>%\n  step_date(time, features = c(\"dow\", \"month\")) %>%               \n  step_rm(time) %>%\n  step_cut(cc, attach, dollar, breaks = c(0, 1)) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors())"
+  },
+  {
+    "objectID": "slides/lec-20.html#define-model",
+    "href": "slides/lec-20.html#define-model",
+    "title": "LR: Prediction / classification",
+    "section": "Define model",
+    "text": "Define model\n\nemail_spec <- logistic_reg() %>% \n  set_engine(\"glm\")\nemail_spec\n\nLogistic Regression Model Specification (classification)\n\nComputational engine: glm"
+  },
+  {
+    "objectID": "slides/lec-20.html#define-workflow",
+    "href": "slides/lec-20.html#define-workflow",
+    "title": "LR: Prediction / classification",
+    "section": "Define workflow",
+    "text": "Define workflow\nRemember: Workflows bring together models and recipes so that they can be easily applied to both the training and test data.\n\nemail_wflow <- workflow() %>% \n  add_model(email_spec) %>% \n  add_recipe(email_rec)\n\n\n\n══ Workflow ════════════════════════════════════════════════════════════════════\nPreprocessor: Recipe\nModel: logistic_reg()\n\n── Preprocessor ────────────────────────────────────────────────────────────────\n6 Recipe Steps\n\n• step_rm()\n• step_date()\n• step_rm()\n• step_cut()\n• step_dummy()\n• step_zv()\n\n── Model ───────────────────────────────────────────────────────────────────────\nLogistic Regression Model Specification (classification)\n\nComputational engine: glm"
+  },
+  {
+    "objectID": "slides/lec-20.html#fit-model-to-training-data",
+    "href": "slides/lec-20.html#fit-model-to-training-data",
+    "title": "LR: Prediction / classification",
+    "section": "Fit model to training data",
+    "text": "Fit model to training data\n\nemail_fit <- email_wflow %>% \n  fit(data = email_train)\n\ntidy(email_fit) %>% print(n = 31)\n\n# A tibble: 28 × 5\n   term            estimate std.error statistic  p.value\n   <chr>              <dbl>     <dbl>     <dbl>    <dbl>\n 1 (Intercept)     -0.786     0.269     -2.92   3.53e- 3\n 2 image           -1.69      0.948     -1.78   7.52e- 2\n 3 inherit          0.354     0.181      1.95   5.07e- 2\n 4 viagra           2.17    110.         0.0196 9.84e- 1\n 5 password        -0.966     0.406     -2.38   1.74e- 2\n 6 num_char         0.0473    0.0246     1.92   5.47e- 2\n 7 line_breaks     -0.00498   0.00140   -3.55   3.84e- 4\n 8 exclaim_subj    -0.206     0.286     -0.719  4.72e- 1\n 9 exclaim_mess     0.00844   0.00187    4.50   6.83e- 6\n10 to_multiple_X1  -2.62      0.369     -7.10   1.28e-12\n11 cc_X.1.68.      -0.346     0.519     -0.666  5.05e- 1\n12 attach_X.1.21.   2.14      0.398      5.37   7.72e- 8\n13 dollar_X.1.64.   0.134     0.230      0.583  5.60e- 1\n14 winner_yes       2.23      0.438      5.09   3.53e- 7\n15 format_X1       -0.937     0.165     -5.68   1.38e- 8\n16 re_subj_X1      -2.95      0.464     -6.36   1.97e-10\n17 urgent_subj_X1   4.75      1.24       3.83   1.30e- 4\n18 number_small    -0.918     0.173     -5.32   1.03e- 7\n19 number_big      -0.149     0.256     -0.585  5.59e- 1\n20 time_dow_Mon    -0.0738    0.317     -0.233  8.16e- 1\n21 time_dow_Tue     0.149     0.290      0.514  6.07e- 1\n22 time_dow_Wed    -0.0966    0.288     -0.335  7.38e- 1\n23 time_dow_Thu    -0.0648    0.294     -0.220  8.26e- 1\n24 time_dow_Fri     0.00976   0.292      0.0335 9.73e- 1\n25 time_dow_Sat     0.248     0.308      0.803  4.22e- 1\n26 time_month_Feb   0.763     0.187      4.09   4.29e- 5\n27 time_month_Mar   0.549     0.185      2.96   3.03e- 3\n28 time_month_Apr -12.2     384.        -0.0318 9.75e- 1"
+  },
+  {
+    "objectID": "slides/lec-20.html#make-predictions-for-test-data",
+    "href": "slides/lec-20.html#make-predictions-for-test-data",
+    "title": "LR: Prediction / classification",
+    "section": "Make predictions for test data",
+    "text": "Make predictions for test data\n\nemail_pred <- predict(email_fit, email_test, type = \"prob\") %>% \n  bind_cols(email_test) \nemail_pred\n\n# A tibble: 981 × 23\n   .pred_0  .pred_1 spam  to_multiple from     cc sent_email time               \n     <dbl>    <dbl> <fct> <fct>       <fct> <int> <fct>      <dttm>             \n 1   0.959 0.0414   0     0           1         0 0          2012-01-01 07:03:59\n 2   0.995 0.00541  0     1           1         0 1          2012-01-01 17:55:06\n 3   0.999 0.00142  0     0           1         1 1          2012-01-01 19:38:32\n 4   0.997 0.00330  0     0           1         2 0          2012-01-01 23:32:53\n 5   0.988 0.0116   0     0           1         0 0          2012-01-02 05:42:16\n 6   0.999 0.000849 0     0           1         1 0          2012-01-02 15:12:51\n 7   0.994 0.00584  0     0           1         4 0          2012-01-02 16:45:36\n 8   0.864 0.136    0     0           1         0 0          2012-01-02 21:55:03\n 9   0.964 0.0362   0     0           1         0 0          2012-01-03 01:07:17\n10   0.997 0.00324  0     0           1         0 1          2012-01-03 04:34:50\n# … with 971 more rows, and 15 more variables: image <dbl>, attach <dbl>,\n#   dollar <dbl>, winner <fct>, inherit <dbl>, viagra <dbl>, password <dbl>,\n#   num_char <dbl>, line_breaks <int>, format <fct>, re_subj <fct>,\n#   exclaim_subj <dbl>, urgent_subj <fct>, exclaim_mess <dbl>, number <fct>"
+  },
+  {
+    "objectID": "slides/lec-20.html#a-closer-look-at-predictions",
+    "href": "slides/lec-20.html#a-closer-look-at-predictions",
+    "title": "LR: Prediction / classification",
+    "section": "A closer look at predictions",
+    "text": "A closer look at predictions\n\nWhich of the following 10 emails will be misclassified?\n\n\nemail_pred %>%\n  arrange(desc(.pred_1)) %>%\n  select(contains(\"pred\"), spam)\n\n# A tibble: 981 × 3\n   .pred_0 .pred_1 spam \n     <dbl>   <dbl> <fct>\n 1  0.0253   0.975 1    \n 2  0.0919   0.908 1    \n 3  0.106    0.894 0    \n 4  0.126    0.874 1    \n 5  0.129    0.871 0    \n 6  0.173    0.827 1    \n 7  0.201    0.799 0    \n 8  0.232    0.768 0    \n 9  0.233    0.767 1    \n10  0.237    0.763 1    \n# … with 971 more rows"
+  },
+  {
+    "objectID": "slides/lec-20.html#false-positive-and-negative",
+    "href": "slides/lec-20.html#false-positive-and-negative",
+    "title": "LR: Prediction / classification",
+    "section": "False positive and negative",
+    "text": "False positive and negative\n\n\n\n\n\n\n\n\n\nEmail is spam\nEmail is not spam\n\n\n\n\nEmail classified as spam\nTrue positive\nFalse positive (Type 1 error)\n\n\nEmail classified as not spam\nFalse negative (Type 2 error)\nTrue negative\n\n\n\n\nFalse negative rate = P(classified as not spam | Email spam) = FN / (TP + FN)\nFalse positive rate = P(classified as spam | Email not spam) = FP / (FP + TN)"
+  },
+  {
+    "objectID": "slides/lec-20.html#sensitivity-and-specificity-1",
+    "href": "slides/lec-20.html#sensitivity-and-specificity-1",
+    "title": "LR: Prediction / classification",
+    "section": "Sensitivity and specificity",
+    "text": "Sensitivity and specificity\n\n\n\n\n\n\n\n\n\nEmail is spam\nEmail is not spam\n\n\n\n\nEmail classified as spam\nTrue positive\nFalse positive (Type 1 error)\n\n\nEmail classified as not spam\nFalse negative (Type 2 error)\nTrue negative\n\n\n\n\nSensitivity = P(classified as spam | Email spam) = TP / (TP + FN)\n\nSensitivity = 1 − False negative rate\n\nSpecificity = P(classified as not spam | Email not spam) = TN / (FP + TN)\n\nSpecificity = 1 − False positive rate\n\n\n\n\nIf you were designing a spam filter, would you want sensitivity and specificity to be high or low? What are the trade-offs associated with each decision?"
+  },
+  {
+    "objectID": "slides/lec-20.html#evaluate-the-performance",
+    "href": "slides/lec-20.html#evaluate-the-performance",
+    "title": "LR: Prediction / classification",
+    "section": "Evaluate the performance",
+    "text": "Evaluate the performance\nReceiver operating characteristic (ROC) curve1 which plot true positive rate vs. false positive rate (1 - specificity).\n\n\n\nemail_pred %>%\n  roc_curve(\n    truth = spam,\n    .pred_1,\n    event_level = \"second\"\n  ) %>%\n  autoplot()\n\n\n\n\n\n\n\n\n\n\n\n\n\nOriginally developed for operators of military radar receivers, hence the name."
+  },
+  {
+    "objectID": "slides/lec-20.html#roc-curve-under-the-hood",
+    "href": "slides/lec-20.html#roc-curve-under-the-hood",
+    "title": "LR: Prediction / classification",
+    "section": "ROC curve, under the hood",
+    "text": "ROC curve, under the hood\n\nemail_pred %>%\n  roc_curve(\n    truth = spam,\n    .pred_1,\n    event_level = \"second\"\n  )\n\n# A tibble: 981 × 3\n    .threshold specificity sensitivity\n         <dbl>       <dbl>       <dbl>\n 1 -Inf            0                 1\n 2    2.22e-16     0                 1\n 3    2.96e- 8     0.00111           1\n 4    6.36e- 6     0.00223           1\n 5    1.44e- 5     0.00334           1\n 6    2.29e- 5     0.00446           1\n 7    3.09e- 5     0.00557           1\n 8    3.84e- 5     0.00669           1\n 9    4.80e- 5     0.00780           1\n10    6.13e- 5     0.00892           1\n# … with 971 more rows"
+  },
+  {
+    "objectID": "slides/lec-20.html#roc-curve",
+    "href": "slides/lec-20.html#roc-curve",
+    "title": "LR: Prediction / classification",
+    "section": "ROC curve",
+    "text": "ROC curve"
+  },
+  {
+    "objectID": "slides/lec-20.html#evaluate-the-performance-1",
+    "href": "slides/lec-20.html#evaluate-the-performance-1",
+    "title": "LR: Prediction / classification",
+    "section": "Evaluate the performance",
+    "text": "Evaluate the performance\n\nemail_pred %>%\n  roc_auc(\n    truth = spam,\n    .pred_1,\n    event_level = \"second\"\n  )\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 roc_auc binary         0.855"
+  },
+  {
+    "objectID": "slides/lec-20.html#cutoff-probability-0.5",
+    "href": "slides/lec-20.html#cutoff-probability-0.5",
+    "title": "LR: Prediction / classification",
+    "section": "Cutoff probability: 0.5",
+    "text": "Cutoff probability: 0.5\n\nOutputCode\n\n\nSuppose we decide to label an email as spam if the model predicts the probability of spam to be more than 0.5.\n\n\n\n\n\n\nEmail is not spam\nEmail is spam\n\n\n\n\nEmail classified as not spam\n886\n73\n\n\nEmail classified as spam\n11\n11\n\n\n\n\n\n\n\n\ncutoff_prob <- 0.5\nemail_pred %>%\n  mutate(\n    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),\n    spam      = if_else(spam == 1, \"Email is spam\", \"Email is not spam\"),\n    spam_pred = if_else(spam_pred == 1, \"Email classified as spam\", \"Email classified as not spam\")\n    ) %>%\n  count(spam_pred, spam) %>%\n  pivot_wider(names_from = spam, values_from = n) %>%\n  kable(col.names = c(\"\", \"Email is not spam\", \"Email is spam\"))"
+  },
+  {
+    "objectID": "slides/lec-20.html#confusion-matrix",
+    "href": "slides/lec-20.html#confusion-matrix",
+    "title": "LR: Prediction / classification",
+    "section": "Confusion matrix",
+    "text": "Confusion matrix\nCross-tabulation of observed and predicted classes:\n\nemail_pred %>%\n  mutate(spam_predicted = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0))) %>%\n  conf_mat(truth = spam, estimate = spam_predicted)\n\n          Truth\nPrediction   0   1\n         0 886  73\n         1  11  11"
+  },
+  {
+    "objectID": "slides/lec-20.html#classification",
+    "href": "slides/lec-20.html#classification",
+    "title": "LR: Prediction / classification",
+    "section": "Classification",
+    "text": "Classification"
+  },
+  {
+    "objectID": "slides/lec-20.html#cutoff-probability-0.25",
+    "href": "slides/lec-20.html#cutoff-probability-0.25",
+    "title": "LR: Prediction / classification",
+    "section": "Cutoff probability: 0.25",
+    "text": "Cutoff probability: 0.25\n\nOutputCode\n\n\nSuppose we decide to label an email as spam if the model predicts the probability of spam to be more than 0.25.\n\n\n\n\n\n\nEmail is not spam\nEmail is spam\n\n\n\n\nEmail classified as not spam\n824\n39\n\n\nEmail classified as spam\n73\n45\n\n\n\n\n\n\n\n\ncutoff_prob <- 0.25\nemail_pred %>%\n  mutate(\n    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),\n    spam      = if_else(spam == 1, \"Email is spam\", \"Email is not spam\"),\n    spam_pred = if_else(spam_pred == 1, \"Email classified as spam\", \"Email classified as not spam\")\n    ) %>%\n  count(spam_pred, spam) %>%\n  pivot_wider(names_from = spam, values_from = n) %>%\n  kable(col.names = c(\"\", \"Email is not spam\", \"Email is spam\"))"
+  },
+  {
+    "objectID": "slides/lec-20.html#classification-1",
+    "href": "slides/lec-20.html#classification-1",
+    "title": "LR: Prediction / classification",
+    "section": "Classification",
+    "text": "Classification"
+  },
+  {
+    "objectID": "slides/lec-20.html#cutoff-probability-0.75",
+    "href": "slides/lec-20.html#cutoff-probability-0.75",
+    "title": "LR: Prediction / classification",
+    "section": "Cutoff probability: 0.75",
+    "text": "Cutoff probability: 0.75\n\nOutputCode\n\n\nSuppose we decide to label an email as spam if the model predicts the probability of spam to be more than 0.75.\n\n\n\n\n\n\nEmail is not spam\nEmail is spam\n\n\n\n\nEmail classified as not spam\n893\n78\n\n\nEmail classified as spam\n4\n6\n\n\n\n\n\n\n\n\ncutoff_prob <- 0.75\nemail_pred %>%\n  mutate(\n    spam_pred = as_factor(if_else(.pred_1 >= cutoff_prob, 1, 0)),\n    spam      = if_else(spam == 1, \"Email is spam\", \"Email is not spam\"),\n    spam_pred = if_else(spam_pred == 1, \"Email classified as spam\", \"Email classified as not spam\")\n    ) %>%\n  count(spam_pred, spam) %>%\n  pivot_wider(names_from = spam, values_from = n) %>%\n  kable(col.names = c(\"\", \"Email is not spam\", \"Email is spam\"))"
+  },
+  {
+    "objectID": "slides/lec-20.html#classification-2",
+    "href": "slides/lec-20.html#classification-2",
+    "title": "LR: Prediction / classification",
+    "section": "Classification",
+    "text": "Classification\n\n\n\n\n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
     "objectID": "slides/lec-12.html#announcements",
     "href": "slides/lec-12.html#announcements",
     "title": "Feature engineering",
@@ -3175,7 +3399,7 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
@@ -3994,7 +4218,7 @@
     "href": "computing-pipelines.html",
     "title": "Pipelines",
     "section": "",
-    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Use tidymodels_prefer() to resolve common conflicts.\n\nlibrary(knitr)"
+    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Dig deeper into tidy modeling with R at https://www.tmwr.org\n\nlibrary(knitr)"
   },
   {
     "objectID": "computing-pipelines.html#simple-linear-regression",
@@ -4498,42 +4722,42 @@
     "href": "weeks/week-11.html",
     "title": "Week 11",
     "section": "",
-    "text": "Important\n\n\n\nDue dates:\nTo be posted."
+    "text": "Important\n\n\n\nDue dates:\n\nLab 5 - Friday, Mar 25\nHW 3 - Friday, Mar 25"
   },
   {
     "objectID": "weeks/week-11.html#prepare",
     "href": "weeks/week-11.html#prepare",
     "title": "Week 11",
     "section": "Prepare",
-    "text": "Prepare"
+    "text": "Prepare\nNo additional readings this week. Catch up with previously assigned readings if you’ve fallen behind."
   },
   {
     "objectID": "weeks/week-11.html#participate",
     "href": "weeks/week-11.html#participate",
     "title": "Week 11",
     "section": "Participate",
-    "text": "Participate"
+    "text": "Participate\n🖥️ Lecture 20 - LR: Prediction / classification\n🖥️ Lecture 21 - LR: Model validation (to be posted)"
   },
   {
     "objectID": "weeks/week-11.html#practice",
     "href": "weeks/week-11.html#practice",
     "title": "Week 11",
     "section": "Practice",
-    "text": "Practice"
+    "text": "Practice\n📋 Application Exercise 10 (to be posted)"
   },
   {
     "objectID": "weeks/week-11.html#perform",
     "href": "weeks/week-11.html#perform",
     "title": "Week 11",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n✍️ HW 3 - Logistic regression and log transformation\n⌨️ Lab 5 - General Social Survey\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-8.html",
     "href": "weeks/week-8.html",
     "title": "Week 8",
     "section": "",
-    "text": "Important\n\n\n\nDue dates:\n\nLab 4 - Friday, Feb 25"
+    "text": "Important\n\n\n\nDue date: Lab 4 - Friday, Feb 25"
   },
   {
     "objectID": "weeks/week-8.html#prepare",
@@ -4603,7 +4827,7 @@
     "href": "weeks/week-10.html",
     "title": "Week 10",
     "section": "",
-    "text": "Important\n\n\n\nDue dates: Project proposal due Fri, Mar 18 at 5:00 pm."
+    "text": "Important\n\n\n\nDue date: Project proposal due Fri, Mar 18 at 5:00 pm."
   },
   {
     "objectID": "weeks/week-10.html#prepare",
@@ -5639,7 +5863,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 3 + Lab 5\n\n\n\n\n✍️\n\n\n\n\n12\nMon, Mar 28\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nDue: HW 4 + Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nWork on project\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model validation\n\n\n\n\n\n\n\n\n\n\nFri, Mar 25\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 3 + Lab 5\n\n\n\n\n✍️\n\n\n\n\n12\nMon, Mar 28\nLab 6: TBA\n\n\n\n\n\n\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n\n\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n\n\n\n\n\n\n\nDue: Lab 6\n\n\n\n\n\n\n\n\n\n13\nMon, Apr 4\nLab: Work on project drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nTBA\n\n\n\n\n\n\n\n\n\n\nFri, Apr 8\nDue: HW 4 + Project drafts\n\n\n\n\n\n\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n\n\n\n\n\nTue, Apr 12\nWork on project\n\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "computing-troubleshooting.html",
