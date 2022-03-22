@@ -5,9 +5,7 @@ editor: visual
 ---
 
 ::: callout-important
-Due dates:
-
--   Lab 4 - Friday, Feb 25
+Due date: Lab 4 - Friday, Feb 25
 :::
 
 ## Prepare

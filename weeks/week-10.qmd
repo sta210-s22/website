@@ -5,7 +5,7 @@ editor: visual
 ---
 
 ::: callout-important
-Due dates: Project proposal due Fri, Mar 18 at 5:00 pm.
+Due date: Project proposal due Fri, Mar 18 at 5:00 pm.
 :::
 
 ## Prepare

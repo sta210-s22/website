@@ -6,17 +6,31 @@ editor: visual
 
 ::: callout-important
 Due dates:
-:::
 
-To be posted.
+-   Lab 5 - Friday, Mar 25
+-   HW 3 - Friday, Mar 25
+:::
 
 ## Prepare
 
+No additional readings this week.
+Catch up with previously assigned readings if you've fallen behind.
+
 ## Participate
+
+🖥️ [Lecture 20 - LR: Prediction / classification](/slides/lec-20.html)
+
+🖥️ Lecture 21 - LR: Model validation (to be posted)
 
 ## Practice
 
+📋 Application Exercise 10 (to be posted)
+
 ## Perform
+
+✍️ [HW 3 - Logistic regression and log transformation](/hw/hw-3.html)
+
+⌨️ [Lab 5 - General Social Survey](labs/lab-5.html)
 
 <br><br>
 
