@@ -858,7 +858,7 @@
     "href": "slides/lec-20.html#evaluate-the-performance",
     "title": "LR: Prediction / classification",
     "section": "Evaluate the performance",
-    "text": "Evaluate the performance\nReceiver operating characteristic (ROC) curve1 which plot true positive rate vs. false positive rate (1 - specificity).\n\n\n\nemail_pred %>%\n  roc_curve(\n    truth = spam,\n    .pred_1,\n    event_level = \"second\"\n  ) %>%\n  autoplot()\n\n\n\n\n\n\n\n\n\n\n\n\n\nOriginally developed for operators of military radar receivers, hence the name."
+    "text": "Evaluate the performance\nReceiver operating characteristic (ROC) curve+ which plot true positive rate vs. false positive rate (1 - specificity).\n\n\n\n\nemail_pred %>%\n  roc_curve(\n    truth = spam,\n    .pred_1,\n    event_level = \"second\"\n  ) %>%\n  autoplot()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n+ Originally developed for operators of military radar receivers, hence the name."
   },
   {
     "objectID": "slides/lec-20.html#roc-curve-under-the-hood",
