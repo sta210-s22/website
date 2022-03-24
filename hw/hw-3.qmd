@@ -43,7 +43,7 @@ In this part we'll go back to the Palmer penguins dataset from [HW 2](hw-2.html)
 We will use the following variables:
 
 | variable          | class   | description                                      |
-|:------------------|:--------|:-------------------------------------------------|
+|:--------------|:--------------|:-----------------------------------------|
 | species           | integer | Penguin species (Adelie, Gentoo, Chinstrap)      |
 | island            | integer | Island where recorded (Biscoe, Dream, Torgersen) |
 | flipper_length_mm | integer | Flipper length in mm                             |
@@ -155,7 +155,7 @@ $$
 log(\text{GDP for urban } x + 1) - log(\text{GDP for urban } x) &= 0.042 \\
 log\Big( \frac{\text{GDP for urban } x + 1}{\text{GDP for urban } x} \Big) &= 0.042 \\
 e^{log\Big( \frac{\text{GDP for urban } x + 1}{\text{GDP for urban } x} \Big)} &= e^{0.042}\\
-log\Big( \frac{\text{GDP for urban } x + 1}{\text{GDP for urban } x} \Big) &= e^{0.042}
+\frac{\text{GDP for urban } x + 1}{\text{GDP for urban } x} &= e^{0.042}
 \end{aligned}
 $$
 
