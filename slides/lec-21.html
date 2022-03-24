@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.135">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
-  <title>STA 210 - Spring 2022 - Welcome to STA 210!</title>
+  <title>STA 210 - Spring 2022 - LR: Model comparison</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,6 +29,8 @@
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -315,7 +317,7 @@
       margin-right: 0; 
     }
   </style>
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Welcome to STA 210!">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - LR: Model comparison">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -327,7 +329,7 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Welcome to STA 210!</h1>
+  <h1 class="title">LR: Model comparison</h1>
   <p class="subtitle">STA 210 - Spring 2022</p>
   <p class="author">Dr.&nbsp;Mine Çetinkaya-Rundel</p>
 </section>
@@ -337,344 +339,21 @@
 <h1>Welcome</h1>
 
 </section>
-<section id="meet-the-professor" class="slide level2">
-<h2>Meet the professor</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/lec-1/mine.png" alt="Headshot of Dr. Mine Çetinkaya-Rundel" width="200"></p>
-<p></p><figcaption aria-hidden="true">Dr.&nbsp;Mine Çetinkaya-Rundel (she/her)</figcaption><p></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Professor of the Practice &amp; Director of Undergraduate Studies, Department of Statistical Science</li>
-<li>Affiliated Faculty, Computational Media, Arts &amp; Cultures</li>
-<li>Find out more at <a href="https://mine-cr.com">mine-cr.com</a></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="meet-the-tas" class="slide level2">
-<h2>Meet the TAs</h2>
-<ul>
-<li>Martha Aboagye (she/her, UG)</li>
-<li>Rich Fremgen (he/him, MS)</li>
-<li>Emily Gentles (she/her, MS)</li>
-<li>Sara Mehta (she/her, UG)</li>
-<li>Rick Presman (he/him, PhD)</li>
-<li>Shari Tian (she/her, UG)</li>
-<li>Aaditya Warrier (he/him, UG)</li>
-</ul>
-</section>
-<section id="check-out-conversations" class="slide level2">
-<h2>Check out Conversations</h2>
-<ul>
-<li>Go to <a href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b">Conversations 💬</a></li>
-<li>Answer the discussion question: How are you doing?</li>
-</ul>
-</section></section>
-<section>
-<section id="regression-analysis" class="title-slide slide level1 center">
-<h1>Regression analysis</h1>
-
-</section>
-<section id="what-is-regression-analysis" class="slide level2">
-<h2>What is regression analysis</h2>
-<div style="font-size: 0.8em;">
-<blockquote>
-<p>“In statistical modeling, regression analysis is a set of statistical processes for estimating the relationships among variables. It includes many techniques for modeling and analyzing several variables, when <strong>the focus is on the relationship between a dependent variable and one or more independent variables (or predictors)</strong>. More specifically, regression analysis helps one understand how the typical value of the dependent variable (or ‘criterion variable’) changes when any one of the independent variables is varied, while the other independent variables are held fixed.”</p>
-</blockquote>
-</div>
-<p>Source: <a href="https://en.wikipedia.org/wiki/Regression_analysis">Wikipedia</a></p>
-</section>
-<section id="course-faq" class="slide level2">
-<h2>Course FAQ</h2>
-<div>
-<ul>
-<li class="fragment"><strong>What background is assumed for the course?</strong> Introductory statistics or probability course.</li>
-<li class="fragment"><strong>Will we be doing computing?</strong> Yes. We will use R.</li>
-<li class="fragment"><strong>Will we learn the mathematical theory of regression?</strong> Yes and No.&nbsp;The course is primarily focused on application; however, we will discuss some of the mathematics of simple linear regression. The 1-credit course <a href="https://stat.duke.edu/courses/mathematics-regression">STA 211: Mathematics of Regression</a> you can take simultaneously / after dives into more of the mathematics.</li>
-</ul>
-</div>
-</section>
-<section id="course-learning-objectives" class="slide level2">
-<h2>Course learning objectives</h2>
-<ul>
-<li>Analyze real-world data to answer questions about multivariable relationships.</li>
-<li>Fit and evaluate linear and logistic regression models.</li>
-<li>Assess whether a proposed model is appropriate and describe its limitations.</li>
-<li>Use <a href="https://quarto.org/">Quarto</a> to write reproducible reports and GitHub for version control and collaboration.</li>
-<li>Communicate results from statistical analyses to a general audience.</li>
-</ul>
-</section>
-<section id="examples-of-regression-in-practice" class="slide level2">
-<h2>Examples of regression in practice</h2>
-<div>
-<ul>
-<li class="fragment"><a href="https://fivethirtyeight.com/features/new-yorkers-will-pay-56-a-month-to-trim-a-minute-off-their-commute/">New Yorkers Will Pay $56 A Month To Trim A Minute Off Their Commute</a></li>
-<li class="fragment"><a href="https://fivethirtyeight.com/features/how-fivethirtyeights-2020-presidential-forecast-works-and-whats-different-because-of-covid-19/">How FiveThirtyEight’s 2020 Presidential Forecast Works — And What’s Different Because Of COVID-19</a></li>
-<li class="fragment"><a href="https://onlinelibrary.wiley.com/doi/10.1111/1556-4029.12020">Effect of Forensic Evidence on Criminal Justice Case Processing</a></li>
-<li class="fragment"><a href="https://fivethirtyeight.com/features/why-its-so-freaking-hard-to-make-a-good-covid-19-model/">Why it’s so freaking hard to make a good COVID-19 model</a></li>
-</ul>
-</div>
-</section></section>
-<section>
-<section id="course-overview" class="title-slide slide level1 center">
-<h1>Course overview</h1>
-
-</section>
-<section id="homepage" class="slide level2">
-<h2>Homepage</h2>
-<p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
-<ul>
-<li>All course materials</li>
-<li>Links to Sakai, GitHub, RStudio containers, etc.</li>
-<li>Let’s take a tour!</li>
-</ul>
-</section>
-<section id="course-toolkit" class="slide level2">
-<h2>Course toolkit</h2>
-<p>All linked from the course website:</p>
-<ul>
-<li>GitHub organization: <a href="https://github.com/sta210-s22">github.com/sta210-s22</a></li>
-<li>RStudio containers: <a href="https://cmgr.oit.duke.edu/containers">cmgr.oit.duke.edu/containers</a></li>
-<li>Discussion forum: <a href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b">Conversations</a></li>
-<li>Assignment submission and feedback: <a href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/aec742dc-2972-4f02-a35b-1dd3315af889">Gradescope</a></li>
-</ul>
-<div class="callout callout-important callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Important</strong></p>
-</div>
-<div class="callout-content">
-<p>Reserve an RStudio Container (titled STA 210) before lab on Monday!</p>
-</div>
-</div>
-</div>
-</section>
-<section id="activities-prepare-participate-practice-perform" class="slide level2 smaller">
-<h2>Activities: Prepare, Participate, Practice, Perform</h2>
-<ul>
-<li><strong>Prepare:</strong> Introduce new content and prepare for lectures by completing the readings (and sometimes watching the videos)</li>
-<li><strong>Participate:</strong> Attend and actively participate in lectures and labs, office hours, team meetings</li>
-<li><strong>Practice:</strong> Practice applying statistical concepts and computing with application exercises during lecture, graded for completion</li>
-<li><strong>Perform:</strong> Put together what you’ve learned to analyze real-world data
-<ul>
-<li>Lab assignments x 7 (first individual, later team-based)</li>
-<li>Homework assignments x 5 (individual)</li>
-<li>Three take-home exams</li>
-<li>Term project presented during the final exam period</li>
-</ul></li>
-</ul>
-</section>
-<section id="cadence" class="slide level2">
-<h2>Cadence</h2>
-<div>
-<ul>
-<li class="fragment"><strong>Labs:</strong> Start and make large progress on Monday in lab section, finish up by Friday 5pm of that week</li>
-<li class="fragment"><strong>HWs:</strong> Posted Friday morning, due following Friday 5pm</li>
-<li class="fragment"><strong>Exams:</strong> Exam review Thursday in class, exam posted Friday morning, no lab on Monday of following week, due Monday 11:59pm</li>
-<li class="fragment"><strong>Project:</strong> Deadlines throughout the semester, with some lab and lecture time dedicated to working on them, and most work done in teams outside of class</li>
-</ul>
-</div>
-</section>
-<section id="teams" class="slide level2">
-<h2>Teams</h2>
-<ul>
-<li>Team assignments
-<ul>
-<li>Assigned by me</li>
-<li>Application exercises, labs, and project</li>
-<li>Peer evaluation during teamwork and after completion</li>
-</ul></li>
-<li>Expectations and roles
-<ul>
-<li>Everyone is expected to contribute equal <em>effort</em></li>
-<li>Everyone is expected to understand <em>all</em> code turned in</li>
-<li>Individual contribution evaluated by peer evaluation, commits, etc.</li>
-</ul></li>
-</ul>
-</section>
-<section id="grading" class="slide level2 smaller">
-<h2>Grading</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Percentage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Application exercises</td>
-<td>3%</td>
-</tr>
-<tr class="even">
-<td>Homework</td>
-<td>35% (7% x 5)</td>
-</tr>
-<tr class="odd">
-<td>Project</td>
-<td>15%</td>
-</tr>
-<tr class="even">
-<td>Lab</td>
-<td>14% (2% x 7)</td>
-</tr>
-<tr class="odd">
-<td>Exam 01</td>
-<td>10%</td>
-</tr>
-<tr class="even">
-<td>Exam 02</td>
-<td>10%</td>
-</tr>
-<tr class="odd">
-<td>Exam 03</td>
-<td>10%</td>
-</tr>
-<tr class="even">
-<td>Teamwork</td>
-<td>3%</td>
-</tr>
-</tbody>
-</table>
-<p>See <a href="https://sta210-s22.github.io/website/course-syllabus.html">course syllabus</a> for how the final letter grade will be determined.</p>
-</section>
-<section id="support" class="slide level2">
-<h2>Support</h2>
-<ul>
-<li>Attend office hours</li>
-<li>Ask and answer questions on the discussion forum</li>
-<li>Reserve email for questions on personal matters and/or grades</li>
-<li>Read the <a href="https://sta210-s22.github.io/website/course-support.html">course support</a> page</li>
-</ul>
-</section>
 <section id="announcements" class="slide level2">
 <h2>Announcements</h2>
-<ul>
-<li>Posted on Sakai (Announcements tool) and sent via email, be sure to check both regularly</li>
-<li>I’ll assume that you’ve read an announcement by the next “business” day</li>
-<li>I’ll (try my best to) send a weekly update announcement each Friday, outlining the plan for the following week and reminding you what you need to do to prepare, practice, and perform</li>
-</ul>
-</section>
-<section id="diversity-inclusion" class="slide level2 smaller">
-<h2>Diversity + inclusion</h2>
-<p>It is my intent that students from all diverse backgrounds and perspectives be well-served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit.</p>
 <div>
 <ul>
-<li class="fragment">If you have a name that differs from those that appear in your official Duke records, please let me know!</li>
-<li class="fragment">Please let me know your preferred pronouns. You’ll also be able to note this in the Getting to know you survey.</li>
-<li class="fragment">If you feel like your performance in the class is being impacted by your experiences outside of class, please don’t hesitate to come and talk with me. I want to be a resource for you. If you prefer to speak with someone outside of the course, your advisers and deans are excellent resources.</li>
-<li class="fragment">I (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.</li>
+<li>HW 3 and Lab 5 due tomorrow</li>
+<li>Monday’s lab: Work on projects, make sure to get ~10 mins with your TA to review proposal comments and get feedback on plans</li>
+<li>Over the weekend, due Monday night: Complete team peer evaluations</li>
+<li>Office hours reminder: Monday on Zoom, Thursday in person (Old Chem 213)</li>
 </ul>
 </div>
-</section>
-<section id="accessibility" class="slide level2">
-<h2>Accessibility</h2>
-<ul>
-<li><p>The <a href="https://access.duke.edu/students">Student Disability Access Office (SDAO)</a> is available to ensure that students are able to engage with their courses and related assignments.</p></li>
-<li><p>I am committed to making all course materials accessible and I’m always learning how to do this better. If any course component is not accessible to you in any way, please don’t hesitate to let me know.</p></li>
-</ul>
 </section></section>
-<section>
-<section id="course-policies" class="title-slide slide level1 center">
-<h1>Course policies</h1>
-
-</section>
-<section id="covid-policies" class="slide level2">
-<h2>COVID policies</h2>
-<ul>
-<li><p>Wear a mask at all times!</p></li>
-<li><p>Read and follow university guidance</p></li>
-</ul>
-</section>
-<section id="late-work-waivers-regrades-policy" class="slide level2">
-<h2>Late work, waivers, regrades policy</h2>
-<ul>
-<li>We have policies!</li>
-<li>Read about them on the <a href="https://sta210-s22.github.io/website/course-syllabus.html">course syllabus</a> and refer back to them when you need it</li>
-</ul>
-</section>
-<section id="collaboration-policy" class="slide level2">
-<h2>Collaboration policy</h2>
-<ul>
-<li><p>Only work that is clearly assigned as team work should be completed collaboratively.</p></li>
-<li><p>Homeworks must be completed individually. You may <strong>not</strong> directly share answers / code with others, however you are welcome to discuss the problems in general and ask for advice.</p></li>
-<li><p>Exams must be completed individually. You may <strong>not</strong> discuss any aspect of the exam with peers. If you have questions, post as private questions on the course forum, only the teaching team will see and answer.</p></li>
-</ul>
-</section>
-<section id="sharing-reusing-code-policy" class="slide level2">
-<h2>Sharing / reusing code policy</h2>
-<ul>
-<li><p>We are aware that a huge volume of code is available on the web, and many tasks may have solutions posted</p></li>
-<li><p>Unless explicitly stated otherwise, this course’s policy is that you may make use of any online resources (e.g.&nbsp;RStudio Community, StackOverflow, etc.) but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solution(s).</p></li>
-<li><p>Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source</p></li>
-</ul>
-</section>
-<section id="academic-integrity" class="slide level2">
-<h2>Academic integrity</h2>
-<blockquote>
-<p>To uphold the Duke Community Standard:</p>
-<ul>
-<li><p>I will not lie, cheat, or steal in my academic endeavors;</p></li>
-<li><p>I will conduct myself honorably in all my endeavors; and</p></li>
-<li><p>I will act if the Standard is compromised.</p></li>
-</ul>
-</blockquote>
-</section>
-<section id="most-importantly" class="slide level2">
-<h2>Most importantly!</h2>
-<p>Ask if you’re not sure if something violates a policy!</p>
-</section></section>
-<section>
-<section id="making-sta-210-a-success" class="title-slide slide level1 center">
-<h1>Making STA 210 a success</h1>
-
-</section>
-<section id="five-tips-for-success" class="slide level2">
-<h2>Five tips for success</h2>
-<ol type="1">
-<li>Complete all the preparation work before class.</li>
-<li>Ask questions.</li>
-<li>Do the readings.</li>
-<li>Do the homework and lab.</li>
-<li>Don’t procrastinate and don’t let a week pass by with lingering questions.</li>
-</ol>
-</section>
-<section id="learning-during-a-pandemic" class="slide level2">
-<h2>Learning during a pandemic</h2>
-<p>I want to make sure that you learn everything you were hoping to learn from this class. If this requires flexibility, please don’t hesitate to ask.</p>
-<div>
-<ul>
-<li class="fragment">You never owe me personal information about your health (mental or physical) but you’re always welcome to talk to me. If I can’t help, I likely know someone who can.</li>
-<li class="fragment">I want you to learn lots of things from this class, but I primarily want you to stay healthy, balanced, and grounded during this crisis.</li>
-</ul>
-</div>
-</section>
-<section id="this-weeks-tasks" class="slide level2">
-<h2>This week’s tasks</h2>
-<ul>
-<li>Get a GitHub account if you don’t have one (some advice for choosing a username <a href="https://happygitwithr.com/github-acct.html#username-advice" title="Happy Git with R">here</a>)</li>
-<li>Complete the Getting to know you survey if you haven’t yet done so!</li>
-<li>Read the syllabus</li>
-<li>Watch out for next week’s announcement email, in your inbox sometime tomorrow</li>
-</ul>
-</section>
-<section id="midori-says" class="slide level2">
-<h2>Midori says…</h2>
-
-<img data-src="images/lec-1/midori.jpeg" alt="Picture of my cat, Midori, with a speech bubble that says &quot;Read the syllabus and make Mine happy!&quot;" width="700" class="r-stretch quarto-figure-center"></section></section>
 <section id="application-exercise" class="title-slide slide level1 center">
 <h1>Application exercise</h1>
 <div class="appex">
-<p>Or more like demo for today…</p>
-<p>📋 <a href="https://github.com/sta210-s22/ae-0-movies">github.com/sta210-s22/ae-0-movies</a></p>
+<p>📋 <a href="https://github.com/sta210-s22">github.com/sta210-s22/ae-10-flight-delays</a></p>
 </div>
 
 
@@ -693,8 +372,7 @@
   <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
-  <script src="../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
@@ -716,8 +394,8 @@
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"ec674abef225ce1c","url":"https://reveal-multiplex.glitch.me/"},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
 
         // Display controls in the bottom right corner
@@ -888,10 +566,10 @@
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
-          
+          RevealNotes,
           RevealSearch,
           RevealZoom
         ]
