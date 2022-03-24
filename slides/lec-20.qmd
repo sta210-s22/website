@@ -181,7 +181,7 @@ email_rec
 ## All in one place
 
 ```{r}
-email_rec <- recipe(spam ~ ., data = email) %>%
+email_rec <- recipe(spam ~ ., data = email_train) %>%
   step_rm(from, sent_email) %>%
   step_date(time, features = c("dow", "month")) %>%               
   step_rm(time) %>%
@@ -250,7 +250,7 @@ email_pred %>%
 ## False positive and negative {.smaller}
 
 |                              | Email is spam                 | Email is not spam             |
-|------------------------|------------------------|------------------------|
+|------------------------------|-------------------------------|-------------------------------|
 | Email classified as spam     | True positive                 | False positive (Type 1 error) |
 | Email classified as not spam | False negative (Type 2 error) | True negative                 |
 
@@ -261,7 +261,7 @@ email_pred %>%
 ## Sensitivity and specificity {.smaller}
 
 |                              | Email is spam                     | Email is not spam                 |
-|----------------------|-------------------------|-------------------------|
+|------------------------------|-----------------------------------|-----------------------------------|
 | Email classified as spam     | True positive                     | False positive (**Type 1 error**) |
 | Email classified as not spam | False negative (**Type 2 error**) | True negative                     |
 
