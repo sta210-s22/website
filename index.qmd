@@ -1,6 +1,6 @@
 ---
 title: "STA 210: Regression Analysis"
-tbl-colwidths: [5,10,40,5,5,5,5,5,5,5]
+tbl-colwidths: [5,10,30,5,5,5,5,5,5,5]
 ---
 
 This page contains an outline of the topics, content, and assignments for the semester.
