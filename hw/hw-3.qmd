@@ -43,7 +43,7 @@ In this part we'll go back to the Palmer penguins dataset from [HW 2](hw-2.html)
 We will use the following variables:
 
 | variable          | class   | description                                      |
-|:--------------|:--------------|:-----------------------------------------|
+|:------------------|:--------|:-------------------------------------------------|
 | species           | integer | Penguin species (Adelie, Gentoo, Chinstrap)      |
 | island            | integer | Island where recorded (Biscoe, Dream, Torgersen) |
 | flipper_length_mm | integer | Flipper length in mm                             |
