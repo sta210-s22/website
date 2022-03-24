@@ -795,7 +795,7 @@
     "href": "slides/lec-20.html#all-in-one-place",
     "title": "LR: Prediction / classification",
     "section": "All in one place",
-    "text": "All in one place\n\nemail_rec <- recipe(spam ~ ., data = email) %>%\n  step_rm(from, sent_email) %>%\n  step_date(time, features = c(\"dow\", \"month\")) %>%               \n  step_rm(time) %>%\n  step_cut(cc, attach, dollar, breaks = c(0, 1)) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors())"
+    "text": "All in one place\n\nemail_rec <- recipe(spam ~ ., data = email_train) %>%\n  step_rm(from, sent_email) %>%\n  step_date(time, features = c(\"dow\", \"month\")) %>%               \n  step_rm(time) %>%\n  step_cut(cc, attach, dollar, breaks = c(0, 1)) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors())"
   },
   {
     "objectID": "slides/lec-20.html#define-model",
@@ -3399,7 +3399,7 @@
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -4211,7 +4211,7 @@
     "href": "computing-pipelines.html",
     "title": "Pipelines",
     "section": "",
-    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Dig deeper into tidy modeling with R at https://www.tmwr.org\n\nlibrary(knitr)"
+    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Use tidymodels_prefer() to resolve common conflicts.\n\nlibrary(knitr)"
   },
   {
     "objectID": "computing-pipelines.html#simple-linear-regression",

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.128">
+  <meta name="generator" content="quarto-0.9.133">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - LR: Prediction / classification</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -88,7 +88,7 @@
   <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
   <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
   <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -642,7 +642,7 @@ Zero variance filter on all_predictors()</code></pre>
 <section id="all-in-one-place" class="slide level2">
 <h2>All in one place</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>email_rec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(spam <span class="sc">~</span> ., <span class="at">data =</span> email) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>email_rec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(spam <span class="sc">~</span> ., <span class="at">data =</span> email_train) <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">step_rm</span>(from, sent_email) <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">step_date</span>(time, <span class="at">features =</span> <span class="fu">c</span>(<span class="st">"dow"</span>, <span class="st">"month"</span>)) <span class="sc">%&gt;%</span>               </span>
 <span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">step_rm</span>(time) <span class="sc">%&gt;%</span></span>
@@ -810,7 +810,7 @@ Computational engine: glm </code></pre>
 <h2>False positive and negative</h2>
 <table>
 <colgroup>
-<col style="width: 33%">
+<col style="width: 32%">
 <col style="width: 33%">
 <col style="width: 33%">
 </colgroup>
@@ -841,11 +841,11 @@ Computational engine: glm </code></pre>
 </section>
 <section id="sensitivity-and-specificity-1" class="slide level2 smaller">
 <h2>Sensitivity and specificity</h2>
-<table>
+<table style="width:100%;">
 <colgroup>
 <col style="width: 30%">
-<col style="width: 34%">
-<col style="width: 34%">
+<col style="width: 35%">
+<col style="width: 35%">
 </colgroup>
 <thead>
 <tr class="header">
