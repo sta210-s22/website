@@ -49,7 +49,8 @@ library(tidyverse)
 library(tidymodels)
 library(openintro)
 library(knitr)
-library(kableExtra)
+library(kableExtra)  # for table embellishments
+library(Stat2Data)   # for empirical logit
 
 # set default theme and larger font size for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
@@ -76,8 +77,8 @@ We want to examine the relationship between various health characteristics and t
 ## Data prep
 
 ```{r}
-heart_disease <- read_csv("data/framingham.csv") %>%
-  select(age, education, TenYearCHD, currentSmoker) %>%
+heart_disease <- read_csv(here::here("slides", "data/framingham.csv")) %>%
+  select(age, education, TenYearCHD, totChol, currentSmoker) %>%
   drop_na() %>%
   mutate(
     high_risk = as.factor(TenYearCHD),
@@ -88,7 +89,7 @@ heart_disease <- read_csv("data/framingham.csv") %>%
 heart_disease
 ```
 
-# Model
+# Inference for a model
 
 ## Modeling risk of coronary heart disease
 
@@ -126,7 +127,7 @@ $$
 
 ## Confidence interval for $\beta_j$
 
-We can calculate the .vocab[C% confidence interval] for $\beta_j$ as the following: 
+We can calculate the .vocab\[C% confidence interval\] for $\beta_j$ as the following:
 
 $$
 \Large{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}}
@@ -136,11 +137,11 @@ where $z^*$ is calculated from the $N(0,1)$ distribution
 
 . . .
 
-This is an interval for the change in the log-odds for every one unit increase in $x_j$. 
+This is an interval for the change in the log-odds for every one unit increase in $x_j$.
 
 ## Interpretation in terms of the odds
 
-The change in **odds** for every one unit increase in $x_j$. 
+The change in **odds** for every one unit increase in $x_j$.
 
 $$
 \Large{e^{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}}}
@@ -208,12 +209,12 @@ $$
 #| ref.label: risk-model-age-highlight
 ```
 
-**Conclusion:** 
+**Conclusion:**
 
-The p-value is very small, so we reject $H_0$. The data provide sufficient evidence that age is a statistically significant predictor of whether someone is high risk of having heart disease, *after accounting for education*.
+The p-value is very small, so we reject $H_0$.
+The data provide sufficient evidence that age is a statistically significant predictor of whether someone is high risk of having heart disease, *after accounting for education*.
 
-
-# Comparing models 
+# Comparing models
 
 ## Log likelihood
 
@@ -221,29 +222,31 @@ $$
 \log L = \sum\limits_{i=1}^n[y_i \log(\hat{\pi}_i) + (1 - y_i)\log(1 - \hat{\pi}_i)]
 $$
 
-- Measure of how well the model fits the data 
+-   Measure of how well the model fits the data
 
-- Higher values of $\log L$ are better
+-   Higher values of $\log L$ are better
 
-- **Deviance** = $-2 \log L$
-  - $-2 \log L$ follows a $\chi^2$ distribution with $n - p - 1$ degrees of freedom
+-   **Deviance** = $-2 \log L$
+
+    -   $-2 \log L$ follows a $\chi^2$ distribution with $n - p - 1$ degrees of freedom
 
 ## Comparing nested models
 
-- Suppose there are two models: 
-    - Reduced Model includes predictors $x_1, \ldots, x_q$
-    - Full Model includes predictors $x_1, \ldots, x_q, x_{q+1}, \ldots, x_p$
+-   Suppose there are two models:
 
-- We want to test the hypotheses
+    -   Reduced Model includes predictors $x_1, \ldots, x_q$
+    -   Full Model includes predictors $x_1, \ldots, x_q, x_{q+1}, \ldots, x_p$
 
-  $$
-  \begin{aligned}
-  H_0&: \beta_{q+1} = \dots = \beta_p = 0 \\
-  H_A&: \text{ at least 1 }\beta_j \text{ is not } 0
-  \end{aligned}
-  $$
+-   We want to test the hypotheses
 
-- To do so, we will use the **Drop-in-deviance test**, also known as the Nested Likelihood Ratio test
+    $$
+    \begin{aligned}
+    H_0&: \beta_{q+1} = \dots = \beta_p = 0 \\
+    H_A&: \text{ at least 1 }\beta_j \text{ is not } 0
+    \end{aligned}
+    $$
+
+-   To do so, we will use the **Drop-in-deviance test**, also known as the Nested Likelihood Ratio test
 
 ## Drop-in-deviance test
 
@@ -264,8 +267,7 @@ $$
 
 **P-value:** $P(\chi^2 > G)$, calculated using a $\chi^2$ distribution with degrees of freedom equal to the difference in the number of parameters in the full and reduced models
 
-
-## $\chi^2$ distribution 
+## $\chi^2$ distribution
 
 ```{r}
 #| echo: false
@@ -373,13 +375,15 @@ pchisq(test_stat, 1, lower.tail = FALSE)
 
 . . .
 
-**Conclusion:** The p-value is very small, so we reject $H_0$. The data provide sufficient evidence that the coefficient of `currentSmoker` is not equal to 0. Therefore, we should add it to the model.
+**Conclusion:** The p-value is very small, so we reject $H_0$.
+The data provide sufficient evidence that the coefficient of `currentSmoker` is not equal to 0.
+Therefore, we should add it to the model.
 
 ## Drop-in-Deviance test in R
 
-- We can use the **`anova`** function to conduct this test 
+-   We can use the **`anova`** function to conduct this test
 
-- Add **`test = "Chisq"`** to conduct the drop-in-deviance test
+-   Add **`test = "Chisq"`** to conduct the drop-in-deviance test
 
 . . .
 
@@ -388,9 +392,9 @@ anova(risk_fit_reduced$fit, risk_fit_full$fit, test = "Chisq") %>%
   tidy()
 ```
 
-## Model selection 
+## Model selection
 
-Use AIC or BIC for model selection 
+Use AIC or BIC for model selection
 
 $$
 \begin{align}
@@ -417,7 +421,7 @@ glance(risk_fit_full)$AIC
 
 ## Comparing the models using AIC
 
-Let's compare the full and reduced models using AIC. 
+Let's compare the full and reduced models using AIC.
 
 ```{r}
 glance(risk_fit_reduced)$AIC
@@ -440,3 +444,124 @@ glance(risk_fit_full)$BIC
 ::: question
 Based on BIC, which model would you choose?
 :::
+
+# Conditions
+
+## The model {.smaller}
+
+Let's predict `high_risk` from age, total cholesterol, and whether the patient is a current smoker:
+
+```{r}
+risk_fit <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(high_risk ~ age + totChol + currentSmoker, 
+      data = heart_disease, family = "binomial")
+
+tidy(risk_fit, conf.int = TRUE) %>% 
+  kable(digits = 3)
+```
+
+## Conditions for logistic regression
+
+1.  **Linearity:** The log-odds have a linear relationship with the predictors.
+
+2.  **Randomness:** The data were obtained from a random process
+
+3.  **Independence:** The observations are independent from one another.
+
+## Empirical logit
+
+The **empirical logit** is the log of the observed odds:
+
+$$
+\text{logit}(\hat{p}) = \log\Big(\frac{\hat{p}}{1 - \hat{p}}\Big) = \log\Big(\frac{\# \text{Yes}}{\# \text{No}}\Big)
+$$
+
+## Calculating empirical logit (categorical predictor)
+
+If the predictor is categorical, we can calculate the empirical logit for each level of the predictor.
+
+```{r}
+heart_disease %>%
+  count(currentSmoker, high_risk) %>%
+  group_by(currentSmoker) %>%
+  mutate(prop = n/sum(n)) %>%
+  filter(high_risk == "1") %>%
+  mutate(emp_logit = log(prop/(1-prop)))
+```
+
+## Calculating empirical logit (quantitative predictor)
+
+1.  Divide the range of the predictor into intervals with approximately equal number of cases.
+    (If you have enough observations, use 5 - 10 intervals.)
+
+2.  Calculate the mean value of the predictor in each interval.
+
+3.  Compute the empirical logit for each interval.
+
+. . .
+
+Then, create a plot of the empirical logit versus the mean value of the predictor in each interval.
+
+## Empirical logit plot in R (quantitative predictor)
+
+```{r}
+emplogitplot1(high_risk ~ age, 
+              data = heart_disease, 
+              ngroups = 10)
+```
+
+## Empirical logit plot in R (interactions)
+
+```{r}
+emplogitplot2(high_risk ~ age + currentSmoker, data = heart_disease, 
+              ngroups = 10, 
+              putlegend = "bottomright")
+```
+
+## Checking linearity
+
+::: columns
+::: {.column width="50%"}
+```{r}
+emplogitplot1(high_risk ~ age, 
+              data = heart_disease, 
+              ngroups = 10)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+emplogitplot1(high_risk ~ totChol, 
+              data = heart_disease, 
+              ngroups = 10)
+```
+:::
+:::
+
+. . .
+
+`r emo::ji("white_check_mark")` The linearity condition is satisfied.
+There is a linear relationship between the empirical logit and the predictor variables.
+
+## Checking randomness {.smaller}
+
+We can check the randomness condition based on the context of the data and how the observations were collected.
+
+-   Was the sample randomly selected?
+-   If the sample was not randomly selected, ask whether there is reason to believe the observations in the sample differ systematically from the population of interest.
+
+. . .
+
+`r emo::ji("white_check_mark")` The randomness condition is satisfied.
+We do not have reason to believe that the participants in this study differ systematically from adults in the U.S. in regards to health characteristics and risk of heart disease.
+
+## Checking independence
+
+- We can check the independence condition based on the context of the data and how the observations were collected.
+- Independence is most often violated if the data were collected over time or there is a strong spatial relationship between the observations.
+
+. . .
+
+`r emo::ji("white_check_mark")` The independence condition is satisfied.
+It is reasonable to conclude that the participants' health characteristics are independent of one another.
