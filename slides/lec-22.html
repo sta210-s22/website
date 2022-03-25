@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.137">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
-  <title>STA 210 - Spring 2022 - Model comparison</title>
+  <title>STA 210 - Spring 2022 - LR: Inference + conditions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -382,7 +382,7 @@
   </style>
   <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Model comparison">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - LR: Inference + conditions">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Model comparison</h1>
+  <h1 class="title">LR: Inference + conditions</h1>
   <p class="subtitle">STA 210 - Spring 2022</p>
   <p class="author">Dr.&nbsp;Mine Çetinkaya-Rundel</p>
 </section>
@@ -404,25 +404,13 @@
 <h1>Welcome</h1>
 
 </section>
-<section id="announcements" class="slide level2">
-<h2>Announcements</h2>
-<div>
-<ul>
-<li>HW 2 posted tomorrow, due in a week</li>
-<li>Lab on Monday: Work data selection! (Read project assignment over the weekend)</li>
-<li>Mid-semester course evaluation (to be posted)</li>
-</ul>
-</div>
-</section>
 <section id="topics" class="slide level2">
 <h2>Topics</h2>
 <div>
 <ul>
-<li>ANOVA for Multiple Linear Regression and sum of squares</li>
-<li>Comparing models with <span class="math inline">\(R^2\)</span> vs.&nbsp;<span class="math inline">\(R^2_{adj}\)</span></li>
-<li>Comparing models with AIC and BIC</li>
-<li>Occam’s razor and parsimony</li>
-<li>Overfitting and spending our data</li>
+<li>Bulding predictive logistic regression models</li>
+<li>Sensitivity and specificity</li>
+<li>Making classification decisions</li>
 </ul>
 </div>
 </section>
@@ -432,7 +420,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(openintro)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(kableExtra)</span>
 <span id="cb1-7"><a href="#cb1-7"></a></span>
@@ -441,82 +429,185 @@
 </div>
 </section></section>
 <section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
+<section id="data" class="title-slide slide level1 center">
+<h1>Data</h1>
 
 </section>
-<section id="data-restaurant-tips" class="slide level2">
-<h2>Data: Restaurant tips</h2>
-<p>Which variables help us predict the amount customers tip at a restaurant?</p>
-<div class="cell" data-layout-align="center">
-
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
-<pre><code># A tibble: 169 × 4
-     Tip Party Meal   Age   
-   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
- 1  2.99     1 Dinner Yadult
- 2  2        1 Dinner Yadult
- 3  5        1 Dinner SenCit
- 4  4        3 Dinner Middle
- 5 10.3      2 Dinner SenCit
- 6  4.85     2 Dinner Middle
- 7  5        4 Dinner Yadult
- 8  4        3 Dinner Middle
- 9  5        2 Dinner Middle
-10  1.58     1 Dinner SenCit
-# … with 159 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="variables" class="slide level2 smaller">
-<h2>Variables</h2>
-<p><strong>Predictors</strong>:</p>
-<div>
+<section id="risk-of-coronary-heart-disease" class="slide level2 smaller">
+<h2>Risk of coronary heart disease</h2>
+<p>This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to examine the relationship between various health characteristics and the risk of having heart disease.</p>
 <ul>
-<li><code>Party</code>: Number of people in the party</li>
-<li><code>Meal</code>: Time of day (Lunch, Dinner, Late Night)</li>
-<li><code>Age</code>: Age category of person paying the bill (Yadult, Middle, SenCit)</li>
+<li class="fragment"><p><code>high_risk</code>:</p>
+<ul>
+<li class="fragment">1: High risk of having heart disease in next 10 years</li>
+<li class="fragment">0: Not high risk of having heart disease in next 10 years</li>
+</ul></li>
+<li class="fragment"><p><code>age</code>: Age at exam time (in years)</p></li>
+<li class="fragment"><p><code>education</code>: 1 = Some High School, 2 = High School or GED, 3 = Some College or Vocational School, 4 = College</p></li>
+<li class="fragment"><p><code>currentSmoker</code>: 0 = nonsmoker, 1 = smoker</p></li>
 </ul>
-</div>
-<p><strong>Outcome</strong>: <code>Tip</code>: Amount of tip</p>
 </section>
-<section id="outcome-tip" class="slide level2">
-<h2>Outcome: <code>Tip</code></h2>
-
-<img data-src="lec-11_files/figure-revealjs/unnamed-chunk-5-1.png" width="3000" class="r-stretch quarto-figure-center"></section>
-<section id="predictors" class="slide level2">
-<h2>Predictors</h2>
-
-<img data-src="lec-11_files/figure-revealjs/unnamed-chunk-6-1.png" width="3000" class="r-stretch quarto-figure-center"></section>
-<section id="relevel-categorical-predictors" class="slide level2">
-<h2>Relevel categorical predictors</h2>
+<section id="data-prep" class="slide level2">
+<h2>Data prep</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>tips <span class="ot">&lt;-</span> tips <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    <span class="at">Meal =</span> <span class="fu">fct_relevel</span>(Meal, <span class="st">"Lunch"</span>, <span class="st">"Dinner"</span>, <span class="st">"Late Night"</span>),</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">Age  =</span> <span class="fu">fct_relevel</span>(Age, <span class="st">"Yadult"</span>, <span class="st">"Middle"</span>, <span class="st">"SenCit"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>heart_disease <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/framingham.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">select</span>(age, education, TenYearCHD, currentSmoker) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">high_risk =</span> <span class="fu">as.factor</span>(TenYearCHD),</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">education =</span> <span class="fu">as.factor</span>(education),</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">currentSmoker =</span> <span class="fu">as.factor</span>(currentSmoker)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>  )</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>heart_disease</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 4,135 × 5
+     age education TenYearCHD currentSmoker high_risk
+   &lt;dbl&gt; &lt;fct&gt;          &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;    
+ 1    39 4                  0 0             0        
+ 2    46 2                  0 0             0        
+ 3    48 1                  0 1             0        
+ 4    61 3                  1 1             1        
+ 5    46 3                  0 1             0        
+ 6    43 2                  0 0             0        
+ 7    63 1                  1 0             1        
+ 8    45 2                  0 1             0        
+ 9    52 1                  0 0             0        
+10    43 1                  0 1             0        
+# … with 4,125 more rows</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="model" class="title-slide slide level1 center">
+<h1>Model</h1>
+
+</section>
+<section id="modeling-risk-of-coronary-heart-disease" class="slide level2">
+<h2>Modeling risk of coronary heart disease</h2>
+<p>From age and education:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>risk_fit <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> education, </span>
+<span id="cb4-4"><a href="#cb4-4"></a>      <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="predictors-again" class="slide level2">
-<h2>Predictors, again</h2>
-
-<img data-src="lec-11_files/figure-revealjs/unnamed-chunk-8-1.png" width="3000" class="r-stretch quarto-figure-center"></section>
-<section id="outcome-vs.-predictors" class="slide level2">
-<h2>Outcome vs.&nbsp;predictors</h2>
-
-<img data-src="lec-11_files/figure-revealjs/unnamed-chunk-9-1.png" width="3600" class="r-stretch quarto-figure-center"></section>
-<section id="fit-and-summarize-model" class="slide level2 smaller">
-<h2>Fit and summarize model</h2>
+<section id="model-output" class="slide level2 smaller">
+<h2>Model output</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tip_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> Age, <span class="at">data =</span> tips)</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">tidy</span>(tip_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">tidy</span>(risk_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"markdown"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-5.385</td>
+<td style="text-align: right;">0.308</td>
+<td style="text-align: right;">-17.507</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-5.995</td>
+<td style="text-align: right;">-4.788</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.073</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">13.385</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.063</td>
+<td style="text-align: right;">0.084</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education2</td>
+<td style="text-align: right;">-0.242</td>
+<td style="text-align: right;">0.112</td>
+<td style="text-align: right;">-2.162</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">-0.463</td>
+<td style="text-align: right;">-0.024</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education3</td>
+<td style="text-align: right;">-0.235</td>
+<td style="text-align: right;">0.134</td>
+<td style="text-align: right;">-1.761</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">-0.501</td>
+<td style="text-align: right;">0.023</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education4</td>
+<td style="text-align: right;">-0.020</td>
+<td style="text-align: right;">0.148</td>
+<td style="text-align: right;">-0.136</td>
+<td style="text-align: right;">0.892</td>
+<td style="text-align: right;">-0.317</td>
+<td style="text-align: right;">0.266</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span class="math display">\[
+\small{\log\Big(\frac{\hat{\pi}}{1-\hat{\pi}}\Big) = -5.385 + 0.073 ~ \text{age} - 0.242 ~ \text{ed2} - 0.235 ~ \text{ed3} - 0.020 ~ \text{ed4}}
+\]</span></p>
+</section>
+<section id="hypothesis-test-for-beta_j" class="slide level2">
+<h2>Hypothesis test for <span class="math inline">\(\beta_j\)</span></h2>
+<p><strong>Hypotheses:</strong> <span class="math inline">\(H_0: \beta_j = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_j \neq 0\)</span></p>
+<div class="fragment">
+<p><strong>Test Statistic:</strong> <span class="math display">\[z = \frac{\hat{\beta}_j - 0}{SE_{\hat{\beta}_j}}\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>P-value:</strong> <span class="math inline">\(P(|Z| &gt; |z|)\)</span>, where <span class="math inline">\(Z \sim N(0, 1)\)</span>, the Standard Normal distribution</p>
+</div>
+</section>
+<section id="confidence-interval-for-beta_j" class="slide level2">
+<h2>Confidence interval for <span class="math inline">\(\beta_j\)</span></h2>
+<p>We can calculate the .vocab[C% confidence interval] for <span class="math inline">\(\beta_j\)</span> as the following:</p>
+<p><span class="math display">\[
+\Large{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}}
+\]</span></p>
+<p>where <span class="math inline">\(z^*\)</span> is calculated from the <span class="math inline">\(N(0,1)\)</span> distribution</p>
+<div class="fragment">
+<p>This is an interval for the change in the log-odds for every one unit increase in <span class="math inline">\(x_j\)</span>.</p>
+</div>
+</section>
+<section id="interpretation-in-terms-of-the-odds" class="slide level2">
+<h2>Interpretation in terms of the odds</h2>
+<p>The change in <strong>odds</strong> for every one unit increase in <span class="math inline">\(x_j\)</span>.</p>
+<p><span class="math display">\[
+\Large{e^{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}}}
+\]</span></p>
+<div class="fragment">
+<p><strong>Interpretation:</strong> We are <span class="math inline">\(C\%\)</span> confident that for every one unit increase in <span class="math inline">\(x_j\)</span>, the odds multiply by a factor of <span class="math inline">\(e^{\hat{\beta}_j - z^* SE_{\hat{\beta}_j}}\)</span> to <span class="math inline">\(e^{\hat{\beta}_j + z^* SE_{\hat{\beta}_j}}\)</span>, holding all else constant.</p>
+</div>
+</section>
+<section id="coefficient-for-age" class="slide level2 smaller">
+<h2>Coefficient for <code>age</code></h2>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table>
  <thead>
@@ -533,39 +624,48 @@
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> -0.170 </td>
-   <td style="text-align:right;"> 0.366 </td>
-   <td style="text-align:right;"> -0.465 </td>
-   <td style="text-align:right;"> 0.643 </td>
-   <td style="text-align:right;"> -0.893 </td>
-   <td style="text-align:right;"> 0.553 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Party </td>
-   <td style="text-align:right;"> 1.837 </td>
-   <td style="text-align:right;"> 0.124 </td>
-   <td style="text-align:right;"> 14.758 </td>
+   <td style="text-align:right;"> -5.385 </td>
+   <td style="text-align:right;"> 0.308 </td>
+   <td style="text-align:right;"> -17.507 </td>
    <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 1.591 </td>
-   <td style="text-align:right;"> 2.083 </td>
+   <td style="text-align:right;"> -5.995 </td>
+   <td style="text-align:right;"> -4.788 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> AgeMiddle </td>
-   <td style="text-align:right;"> 1.009 </td>
-   <td style="text-align:right;"> 0.408 </td>
-   <td style="text-align:right;"> 2.475 </td>
-   <td style="text-align:right;"> 0.014 </td>
-   <td style="text-align:right;"> 0.204 </td>
-   <td style="text-align:right;"> 1.813 </td>
+   <td style="text-align:left;background-color: #D9E3E4 !important;"> age </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.073 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.005 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.385 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.000 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.063 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.084 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> AgeSenCit </td>
-   <td style="text-align:right;"> 1.388 </td>
-   <td style="text-align:right;"> 0.485 </td>
-   <td style="text-align:right;"> 2.862 </td>
-   <td style="text-align:right;"> 0.005 </td>
-   <td style="text-align:right;"> 0.430 </td>
-   <td style="text-align:right;"> 2.345 </td>
+   <td style="text-align:left;"> education2 </td>
+   <td style="text-align:right;"> -0.242 </td>
+   <td style="text-align:right;"> 0.112 </td>
+   <td style="text-align:right;"> -2.162 </td>
+   <td style="text-align:right;"> 0.031 </td>
+   <td style="text-align:right;"> -0.463 </td>
+   <td style="text-align:right;"> -0.024 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education3 </td>
+   <td style="text-align:right;"> -0.235 </td>
+   <td style="text-align:right;"> 0.134 </td>
+   <td style="text-align:right;"> -1.761 </td>
+   <td style="text-align:right;"> 0.078 </td>
+   <td style="text-align:right;"> -0.501 </td>
+   <td style="text-align:right;"> 0.023 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education4 </td>
+   <td style="text-align:right;"> -0.020 </td>
+   <td style="text-align:right;"> 0.148 </td>
+   <td style="text-align:right;"> -0.136 </td>
+   <td style="text-align:right;"> 0.892 </td>
+   <td style="text-align:right;"> -0.317 </td>
+   <td style="text-align:right;"> 0.266 </td>
   </tr>
 </tbody>
 </table>
@@ -573,116 +673,358 @@
 </div>
 </div>
 <div class="fragment">
-<p><br></p>
+<p><strong>Hypotheses:</strong></p>
+<p><span class="math display">\[
+H_0: \beta_{1} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{1} \neq 0
+\]</span></p>
+</div>
+</section>
+<section id="coefficient-for-age-1" class="slide level2 smaller">
+<h2>Coefficient for <code>age</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -5.385 </td>
+   <td style="text-align:right;"> 0.308 </td>
+   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> -5.995 </td>
+   <td style="text-align:right;"> -4.788 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: #D9E3E4 !important;"> age </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.073 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.005 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.385 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.000 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.063 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.084 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education2 </td>
+   <td style="text-align:right;"> -0.242 </td>
+   <td style="text-align:right;"> 0.112 </td>
+   <td style="text-align:right;"> -2.162 </td>
+   <td style="text-align:right;"> 0.031 </td>
+   <td style="text-align:right;"> -0.463 </td>
+   <td style="text-align:right;"> -0.024 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education3 </td>
+   <td style="text-align:right;"> -0.235 </td>
+   <td style="text-align:right;"> 0.134 </td>
+   <td style="text-align:right;"> -1.761 </td>
+   <td style="text-align:right;"> 0.078 </td>
+   <td style="text-align:right;"> -0.501 </td>
+   <td style="text-align:right;"> 0.023 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education4 </td>
+   <td style="text-align:right;"> -0.020 </td>
+   <td style="text-align:right;"> 0.148 </td>
+   <td style="text-align:right;"> -0.136 </td>
+   <td style="text-align:right;"> 0.892 </td>
+   <td style="text-align:right;"> -0.317 </td>
+   <td style="text-align:right;"> 0.266 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p><strong>Test statistic:</strong></p>
+<p><span class="math display">\[
+z = \frac{0.0733 - 0}{0.00547} = 13.4
+\]</span></p>
+</section>
+<section id="coefficient-for-age-2" class="slide level2 smaller">
+<h2>Coefficient for <code>age</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -5.385 </td>
+   <td style="text-align:right;"> 0.308 </td>
+   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> -5.995 </td>
+   <td style="text-align:right;"> -4.788 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: #D9E3E4 !important;"> age </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.073 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.005 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.385 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.000 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.063 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.084 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education2 </td>
+   <td style="text-align:right;"> -0.242 </td>
+   <td style="text-align:right;"> 0.112 </td>
+   <td style="text-align:right;"> -2.162 </td>
+   <td style="text-align:right;"> 0.031 </td>
+   <td style="text-align:right;"> -0.463 </td>
+   <td style="text-align:right;"> -0.024 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education3 </td>
+   <td style="text-align:right;"> -0.235 </td>
+   <td style="text-align:right;"> 0.134 </td>
+   <td style="text-align:right;"> -1.761 </td>
+   <td style="text-align:right;"> 0.078 </td>
+   <td style="text-align:right;"> -0.501 </td>
+   <td style="text-align:right;"> 0.023 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education4 </td>
+   <td style="text-align:right;"> -0.020 </td>
+   <td style="text-align:right;"> 0.148 </td>
+   <td style="text-align:right;"> -0.136 </td>
+   <td style="text-align:right;"> 0.892 </td>
+   <td style="text-align:right;"> -0.317 </td>
+   <td style="text-align:right;"> 0.266 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p><strong>P-value:</strong></p>
+<p><span class="math display">\[
+P(|Z| &gt; |13.4|) \approx 0
+\]</span></p>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="fl">13.4</span>,<span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 6.046315e-41</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="coefficient-for-age-3" class="slide level2 smaller">
+<h2>Coefficient for <code>age</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -5.385 </td>
+   <td style="text-align:right;"> 0.308 </td>
+   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> -5.995 </td>
+   <td style="text-align:right;"> -4.788 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: #D9E3E4 !important;"> age </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.073 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.005 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.385 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.000 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.063 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.084 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education2 </td>
+   <td style="text-align:right;"> -0.242 </td>
+   <td style="text-align:right;"> 0.112 </td>
+   <td style="text-align:right;"> -2.162 </td>
+   <td style="text-align:right;"> 0.031 </td>
+   <td style="text-align:right;"> -0.463 </td>
+   <td style="text-align:right;"> -0.024 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education3 </td>
+   <td style="text-align:right;"> -0.235 </td>
+   <td style="text-align:right;"> 0.134 </td>
+   <td style="text-align:right;"> -1.761 </td>
+   <td style="text-align:right;"> 0.078 </td>
+   <td style="text-align:right;"> -0.501 </td>
+   <td style="text-align:right;"> 0.023 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> education4 </td>
+   <td style="text-align:right;"> -0.020 </td>
+   <td style="text-align:right;"> 0.148 </td>
+   <td style="text-align:right;"> -0.136 </td>
+   <td style="text-align:right;"> 0.892 </td>
+   <td style="text-align:right;"> -0.317 </td>
+   <td style="text-align:right;"> 0.266 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p><strong>Conclusion:</strong></p>
+<p>The p-value is very small, so we reject <span class="math inline">\(H_0\)</span>. The data provide sufficient evidence that age is a statistically significant predictor of whether someone is high risk of having heart disease, <em>after accounting for education</em>.</p>
+</section></section>
+<section>
+<section id="comparing-models" class="title-slide slide level1 center">
+<h1>Comparing models</h1>
+
+</section>
+<section id="log-likelihood" class="slide level2">
+<h2>Log likelihood</h2>
+<p><span class="math display">\[
+\log L = \sum\limits_{i=1}^n[y_i \log(\hat{\pi}_i) + (1 - y_i)\log(1 - \hat{\pi}_i)]
+\]</span></p>
+<ul>
+<li class="fragment"><p>Measure of how well the model fits the data</p></li>
+<li class="fragment"><p>Higher values of <span class="math inline">\(\log L\)</span> are better</p></li>
+<li class="fragment"><p><strong>Deviance</strong> = <span class="math inline">\(-2 \log L\)</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(-2 \log L\)</span> follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n - p - 1\)</span> degrees of freedom</li>
+</ul></li>
+</ul>
+</section>
+<section id="comparing-nested-models" class="slide level2">
+<h2>Comparing nested models</h2>
+<ul>
+<li class="fragment"><p>Suppose there are two models:</p>
+<ul>
+<li class="fragment">Reduced Model includes predictors <span class="math inline">\(x_1, \ldots, x_q\)</span></li>
+<li class="fragment">Full Model includes predictors <span class="math inline">\(x_1, \ldots, x_q, x_{q+1}, \ldots, x_p\)</span></li>
+</ul></li>
+<li class="fragment"><p>We want to test the hypotheses</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0&amp;: \beta_{q+1} = \dots = \beta_p = 0 \\
+H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
+\end{aligned}
+\]</span></p></li>
+<li class="fragment"><p>To do so, we will use the <strong>Drop-in-deviance test</strong>, also known as the Nested Likelihood Ratio test</p></li>
+</ul>
+</section>
+<section id="drop-in-deviance-test" class="slide level2">
+<h2>Drop-in-deviance test</h2>
+<p><strong>Hypotheses:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0&amp;: \beta_{q+1} = \dots = \beta_p = 0 \\
+H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p><strong>Test Statistic:</strong> <span class="math display">\[G = (-2 \log L_{reduced}) - (-2 \log L_{full})\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>P-value:</strong> <span class="math inline">\(P(\chi^2 &gt; G)\)</span>, calculated using a <span class="math inline">\(\chi^2\)</span> distribution with degrees of freedom equal to the difference in the number of parameters in the full and reduced models</p>
+</div>
+</section>
+<section id="chi2-distribution" class="slide level2">
+<h2><span class="math inline">\(\chi^2\)</span> distribution</h2>
+
+<img data-src="lec-22_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="model-with-age-and-education" class="slide level2 smaller">
+<h2>Model with age and education</h2>
+<div class="cell" data-layout-align="center">
+
+</div>
 <div class="question">
-<p>Is this the best model to explain variation in tips?</p>
+<p>Should we add <code>currentSmoker</code> to this model?</p>
 </div>
-</div>
-</section>
-<section id="another-model-summary" class="slide level2">
-<h2>Another model summary</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table>
  <thead>
   <tr>
    <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> sumsq </th>
-   <th style="text-align:right;"> meansq </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
    <th style="text-align:right;"> statistic </th>
    <th style="text-align:right;"> p.value </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> Party </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1188.64 </td>
-   <td style="text-align:right;"> 1188.64 </td>
-   <td style="text-align:right;"> 285.71 </td>
-   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -5.385 </td>
+   <td style="text-align:right;"> 0.308 </td>
+   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> -5.995 </td>
+   <td style="text-align:right;"> -4.788 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Age </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 38.03 </td>
-   <td style="text-align:right;"> 19.01 </td>
-   <td style="text-align:right;"> 4.57 </td>
-   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:left;"> age </td>
+   <td style="text-align:right;"> 0.073 </td>
+   <td style="text-align:right;"> 0.005 </td>
+   <td style="text-align:right;"> 13.385 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 0.063 </td>
+   <td style="text-align:right;"> 0.084 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Residuals </td>
-   <td style="text-align:right;"> 165 </td>
-   <td style="text-align:right;"> 686.44 </td>
-   <td style="text-align:right;"> 4.16 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</section></section>
-<section>
-<section id="analysis-of-variance-anova" class="title-slide slide level1 center">
-<h1>Analysis of variance (ANOVA)</h1>
-
-</section>
-<section id="analysis-of-variance-anova-1" class="slide level2">
-<h2>Analysis of variance (ANOVA)</h2>
-<ul>
-<li class="fragment"><strong>Main Idea:</strong> Decompose the total variation on the outcome into:
-<ul>
-<li class="fragment"><p>the variation that can be explained by the each of the variables in the model</p></li>
-<li class="fragment"><p>the variation that <strong>can’t</strong> be explained by the model (left in the residuals)</p></li>
-</ul></li>
-<li class="fragment">If the variation that can be explained by the variables in the model is greater than the variation in the residuals, this signals that the model might be “valuable” (at least one of the <span class="math inline">\(\beta\)</span>s not equal to 0)</li>
-</ul>
-</section>
-<section id="anova-output" class="slide level2">
-<h2>ANOVA output</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">anova</span>(tip_fit<span class="sc">$</span>fit) <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> sumsq </th>
-   <th style="text-align:right;"> meansq </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Party </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1188.64 </td>
-   <td style="text-align:right;"> 1188.64 </td>
-   <td style="text-align:right;"> 285.71 </td>
-   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:left;"> education2 </td>
+   <td style="text-align:right;"> -0.242 </td>
+   <td style="text-align:right;"> 0.112 </td>
+   <td style="text-align:right;"> -2.162 </td>
+   <td style="text-align:right;"> 0.031 </td>
+   <td style="text-align:right;"> -0.463 </td>
+   <td style="text-align:right;"> -0.024 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Age </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 38.03 </td>
-   <td style="text-align:right;"> 19.01 </td>
-   <td style="text-align:right;"> 4.57 </td>
-   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:left;"> education3 </td>
+   <td style="text-align:right;"> -0.235 </td>
+   <td style="text-align:right;"> 0.134 </td>
+   <td style="text-align:right;"> -1.761 </td>
+   <td style="text-align:right;"> 0.078 </td>
+   <td style="text-align:right;"> -0.501 </td>
+   <td style="text-align:right;"> 0.023 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Residuals </td>
-   <td style="text-align:right;"> 165 </td>
-   <td style="text-align:right;"> 686.44 </td>
-   <td style="text-align:right;"> 4.16 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> education4 </td>
+   <td style="text-align:right;"> -0.020 </td>
+   <td style="text-align:right;"> 0.148 </td>
+   <td style="text-align:right;"> -0.136 </td>
+   <td style="text-align:right;"> 0.892 </td>
+   <td style="text-align:right;"> -0.317 </td>
+   <td style="text-align:right;"> 0.266 </td>
   </tr>
 </tbody>
 </table>
@@ -690,379 +1032,148 @@
 </div>
 </div>
 </section>
-<section id="anova-output-with-totals" class="slide level2">
-<h2>ANOVA output, with totals</h2>
+<section id="should-we-add-currentsmoker-to-the-model" class="slide level2">
+<h2>Should we add <code>currentSmoker</code> to the model?</h2>
+<p>First model, reduced:</p>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> sumsq </th>
-   <th style="text-align:left;"> meansq </th>
-   <th style="text-align:left;"> statistic </th>
-   <th style="text-align:left;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Party </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1188.64 </td>
-   <td style="text-align:left;"> 1188.64 </td>
-   <td style="text-align:left;"> 285.71 </td>
-   <td style="text-align:left;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Age </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 38.03 </td>
-   <td style="text-align:left;"> 19.01 </td>
-   <td style="text-align:left;"> 4.57 </td>
-   <td style="text-align:left;"> 0.01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Residuals </td>
-   <td style="text-align:right;"> 165 </td>
-   <td style="text-align:right;"> 686.44 </td>
-   <td style="text-align:left;"> 4.16 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Total </td>
-   <td style="text-align:right;"> 168 </td>
-   <td style="text-align:right;"> 1913.11 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-</tbody>
-</table>
-
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>risk_fit_reduced <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> education, </span>
+<span id="cb8-4"><a href="#cb8-4"></a>      <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</section>
-<section id="sum-of-squares" class="slide level2">
-<h2>Sum of squares</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> sumsq </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Party </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 1188.64 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Age </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 38.03 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Residuals </td>
-   <td style="text-align:right;"> 165 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 686.44 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Total </td>
-   <td style="text-align:right;"> 168 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 1913.11 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li class="fragment"><span class="math inline">\(SS_{Total}\)</span>: Total sum of squares, variability of outcome, <span class="math inline">\(\sum_{i = 1}^n (y_i - \bar{y})^2\)</span></li>
-<li class="fragment"><span class="math inline">\(SS_{Error}\)</span>: Residual sum of squares, variability of residuals, <span class="math inline">\(\sum_{i = 1}^n (y_i - \hat{y})^2\)</span></li>
-<li class="fragment"><span class="math inline">\(SS_{Model} = SS_{Total} - SS_{Error}\)</span>: Variability explained by the model</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="r-squared-r2" class="slide level2">
-<h2>R-squared, <span class="math inline">\(R^2\)</span></h2>
-<p><strong>Recall</strong>: <span class="math inline">\(R^2\)</span> is the proportion of the variation in the response variable explained by the regression model.</p>
-<div class="fragment">
-<p><span class="math display">\[
-R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \frac{686.44}{1913.11} = 0.641
-\]</span></p>
-</div>
-<div class="fragment">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">glance</span>(tip_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1     0.641         0.635  2.04      98.3 1.56e-36     3  -358.  726.  742.
-# … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="model-comparison" class="title-slide slide level1 center">
-<h1>Model comparison</h1>
-
-</section>
-<section id="r-squared-r2-1" class="slide level2">
-<h2>R-squared, <span class="math inline">\(R^2\)</span></h2>
-<ul>
-<li class="fragment"><span class="math inline">\(R^2\)</span> will always increase as we add more variables to the model + If we add enough variables, we can always achieve <span class="math inline">\(R^2=100\%\)</span></li>
-<li class="fragment">If we only use <span class="math inline">\(R^2\)</span> to choose a best fit model, we will be prone to choose the model with the most predictor variables</li>
-</ul>
-</section>
-<section id="adjusted-r2" class="slide level2">
-<h2>Adjusted <span class="math inline">\(R^2\)</span></h2>
-<ul>
-<li class="fragment"><strong>Adjusted</strong> <span class="math inline">\(R^2\)</span>: measure that includes a penalty for unnecessary predictor variables</li>
-<li class="fragment">Similar to <span class="math inline">\(R^2\)</span>, it is a measure of the amount of variation in the response that is explained by the regression model</li>
-<li class="fragment">Differs from <span class="math inline">\(R^2\)</span> by using the mean squares rather than sums of squares and therefore adjusting for the number of predictor variables</li>
-</ul>
-</section>
-<section id="r2-and-adjusted-r2" class="slide level2">
-<h2><span class="math inline">\(R^2\)</span> and Adjusted <span class="math inline">\(R^2\)</span></h2>
-<p><span class="math display">\[R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}\]</span></p>
-<div class="fragment">
-<p><span class="math display">\[R^2_{adj} = 1 - \frac{SS_{Error}/(n-p-1)}{SS_{Total}/(n-1)}\]</span></p>
-</div>
-</section>
-<section id="using-r2-and-adjusted-r2" class="slide level2">
-<h2>Using <span class="math inline">\(R^2\)</span> and Adjusted <span class="math inline">\(R^2\)</span></h2>
-<ul>
-<li class="fragment">Adjusted <span class="math inline">\(R^2\)</span> can be used as a quick assessment to compare the fit of multiple models; however, it should not be the only assessment!</li>
-<li class="fragment">Use <span class="math inline">\(R^2\)</span> when describing the relationship between the response and predictor variables</li>
-</ul>
-</section>
-<section id="comparing-models-with-r2_adj" class="slide level2 smaller">
-<h2>Comparing models with <span class="math inline">\(R^2_{adj}\)</span></h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>tip_fit_1 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> </span>
-<span id="cb8-4"><a href="#cb8-4"></a>            Age <span class="sc">+</span> </span>
-<span id="cb8-5"><a href="#cb8-5"></a>            Meal,</span>
-<span id="cb8-6"><a href="#cb8-6"></a>      </span>
-<span id="cb8-7"><a href="#cb8-7"></a>      <span class="at">data =</span> tips)</span>
-<span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="fu">glance</span>(tip_fit_1) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">select</span>(r.squared, adj.r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-  r.squared adj.r.squared
-      &lt;dbl&gt;         &lt;dbl&gt;
-1     0.674         0.664</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>tip_fit_2 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> </span>
-<span id="cb10-4"><a href="#cb10-4"></a>            Age <span class="sc">+</span> </span>
-<span id="cb10-5"><a href="#cb10-5"></a>            Meal <span class="sc">+</span> </span>
-<span id="cb10-6"><a href="#cb10-6"></a>            Day, </span>
-<span id="cb10-7"><a href="#cb10-7"></a>      <span class="at">data =</span> tips)</span>
-<span id="cb10-8"><a href="#cb10-8"></a></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="fu">glance</span>(tip_fit_2) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">select</span>(r.squared, adj.r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-  r.squared adj.r.squared
-      &lt;dbl&gt;         &lt;dbl&gt;
-1     0.683         0.662</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="aic-bic" class="slide level2">
-<h2>AIC &amp; BIC</h2>
-<p>Estimators of prediction error and <em>relative</em> quality of models:</p>
-<div class="fragment">
-<p><strong>Akaike’s Information Criterion (AIC)</strong>: <span class="math display">\[AIC = n\log(SS_\text{Error}) - n \log(n) + 2(p+1)\]</span> <br></p>
-</div>
-<div class="fragment">
-<p><strong>Schwarz’s Bayesian Information Criterion (BIC)</strong>: <span class="math display">\[BIC = n\log(SS_\text{Error}) - n\log(n) + log(n)\times(p+1)\]</span></p>
-</div>
-</section>
-<section id="aic-bic-1" class="slide level2">
-<h2>AIC &amp; BIC</h2>
-<p><span class="math display">\[
-\begin{aligned}
-&amp; AIC = \color{blue}{n\log(SS_\text{Error})} - n \log(n) + 2(p+1) \\
-&amp; BIC = \color{blue}{n\log(SS_\text{Error})} - n\log(n) + \log(n)\times(p+1)
-\end{aligned}
-\]</span></p>
-<div class="fragment">
 <p><br></p>
-<p>First Term: Decreases as <em>p</em> increases</p>
-</div>
-</section>
-<section id="aic-bic-2" class="slide level2">
-<h2>AIC &amp; BIC</h2>
-<p><span class="math display">\[
-\begin{aligned}
-&amp; AIC = n\log(SS_\text{Error}) - \color{blue}{n \log(n)} + 2(p+1) \\
-&amp; BIC = n\log(SS_\text{Error}) - \color{blue}{n\log(n)} + \log(n)\times(p+1)
-\end{aligned}
-\]</span></p>
-<p><br></p>
-<p>Second Term: Fixed for a given sample size <em>n</em></p>
-</section>
-<section id="aic-bic-3" class="slide level2">
-<h2>AIC &amp; BIC</h2>
-<p><span class="math display">\[
-\begin{aligned} &amp; AIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{2(p+1)} \\
-&amp; BIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{\log(n)\times(p+1)}
-\end{aligned}
-\]</span></p>
-<p><br></p>
-<p>Third Term: Increases as <em>p</em> increases</p>
-</section>
-<section id="using-aic-bic" class="slide level2">
-<h2>Using AIC &amp; BIC</h2>
-<p><span class="math display">\[
-\begin{aligned} &amp; AIC = n\log(SS_{Error}) - n \log(n) + \color{red}{2(p+1)} \\
-&amp; BIC = n\log(SS_{Error}) - n\log(n) + \color{red}{\log(n)\times(p+1)}
-\end{aligned}
-\]</span></p>
-<ul>
-<li class="fragment"><p>Choose model with the smaller value of AIC or BIC</p></li>
-<li class="fragment"><p>If <span class="math inline">\(n \geq 8\)</span>, the <strong>penalty</strong> for BIC is larger than that of AIC, so BIC tends to favor <em>more parsimonious</em> models (i.e.&nbsp;models with fewer terms)</p></li>
-</ul>
-</section>
-<section id="comparing-models-with-aic-and-bic" class="slide level2">
-<h2>Comparing models with AIC and BIC</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
+<p>Second model, full:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>tip_fit_1 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> </span>
-<span id="cb12-4"><a href="#cb12-4"></a>            Age <span class="sc">+</span> </span>
-<span id="cb12-5"><a href="#cb12-5"></a>            Meal,</span>
-<span id="cb12-6"><a href="#cb12-6"></a>      </span>
-<span id="cb12-7"><a href="#cb12-7"></a>      <span class="at">data =</span> tips)</span>
-<span id="cb12-8"><a href="#cb12-8"></a></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="fu">glance</span>(tip_fit_1) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">select</span>(AIC, BIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-    AIC   BIC
-  &lt;dbl&gt; &lt;dbl&gt;
-1  714.  736.</code></pre>
+<div class="sourceCode" id="cb9" data-code-line-numbers="2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>risk_fit_full <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> education <span class="sc">+</span> currentSmoker, </span>
+<span id="cb9-4"><a href="#cb9-4"></a>      <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div><div class="column" style="width:50%;">
+</section>
+<section id="should-we-add-currentsmoker-to-the-model-1" class="slide level2">
+<h2>Should we add <code>currentSmoker</code> to the model?</h2>
+<p>Calculate deviance for each model:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>tip_fit_2 <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">fit</span>(Tip <span class="sc">~</span> Party <span class="sc">+</span> </span>
-<span id="cb14-4"><a href="#cb14-4"></a>            Age <span class="sc">+</span> </span>
-<span id="cb14-5"><a href="#cb14-5"></a>            Meal <span class="sc">+</span> </span>
-<span id="cb14-6"><a href="#cb14-6"></a>            Day, </span>
-<span id="cb14-7"><a href="#cb14-7"></a>      <span class="at">data =</span> tips)</span>
-<span id="cb14-8"><a href="#cb14-8"></a></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">glance</span>(tip_fit_2) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">select</span>(AIC, BIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>(dev_reduced <span class="ot">&lt;-</span> <span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code># A tibble: 1 × 2
-    AIC   BIC
-  &lt;dbl&gt; &lt;dbl&gt;
-1  720.  757.</code></pre>
+<pre><code>[1] 3300.135</code></pre>
 </div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>(dev_full <span class="ot">&lt;-</span> <span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3279.359</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Drop-in-deviance test statistic:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>(test_stat <span class="ot">&lt;-</span> dev_reduced <span class="sc">-</span> dev_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 20.77589</code></pre>
 </div>
 </div>
 </div>
 </section>
-<section id="commonalities-between-criteria" class="slide level2">
-<h2>Commonalities between criteria</h2>
-<ul>
-<li class="fragment"><span class="math inline">\(R^2_{adj}\)</span>, AIC, and BIC all apply a penalty for more predictors</li>
-<li class="fragment">The penalty for added model complexity attempts to strike a balance between underfitting (too few predictors in the model) and overfitting (too many predictors in the model)</li>
-<li class="fragment">Goal: <strong>Parsimony</strong></li>
-</ul>
+<section id="should-we-add-currentsmoker-to-the-model-2" class="slide level2">
+<h2>Should we add <code>currentSmoker</code> to the model?</h2>
+<p>Calculate the p-value using a <code>pchisq()</code>, with degrees of freedom equal to the number of new model terms in the second model:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">pchisq</span>(test_stat, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 5.162887e-06</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Conclusion:</strong> The p-value is very small, so we reject <span class="math inline">\(H_0\)</span>. The data provide sufficient evidence that the coefficient of <code>currentSmoker</code> is not equal to 0. Therefore, we should add it to the model.</p>
+</div>
 </section>
-<section id="parsimony-and-occams-razor" class="slide level2 smaller">
-<h2>Parsimony and Occam’s razor</h2>
+<section id="drop-in-deviance-test-in-r" class="slide level2">
+<h2>Drop-in-Deviance test in R</h2>
 <ul>
-<li class="fragment"><p>The principle of <strong>parsimony</strong> is attributed to William of Occam (early 14th-century English nominalist philosopher), who insisted that, given a set of equally good explanations for a given phenomenon, <em>the correct explanation is the simplest explanation</em><sup>1</sup></p></li>
-<li class="fragment"><p>Called <strong>Occam’s razor</strong> because he “shaved” his explanations down to the bare minimum</p></li>
-<li class="fragment"><p>Parsimony in modeling:</p>
-<div>
-<ul>
-<li>models should have as few parameters as possible</li>
-<li>linear models should be preferred to non-linear models</li>
-<li>experiments relying on few assumptions should be preferred to those relying on many</li>
-<li>models should be pared down until they are <em>minimal adequate</em></li>
-<li>simple explanations should be preferred to complex explanations</li>
+<li class="fragment"><p>We can use the <strong><code>anova</code></strong> function to conduct this test</p></li>
+<li class="fragment"><p>Add <strong><code>test = "Chisq"</code></strong> to conduct the drop-in-deviance test</p></li>
 </ul>
-</div></li>
-</ul>
-<aside><ol class="aside-footnotes"><li id="fn1" role="doc-endnote"><p>Source: The R Book by Michael J. Crawley.</p></li></ol></aside></section>
-<section id="in-pursuit-of-occams-razor" class="slide level2">
-<h2>In pursuit of Occam’s razor</h2>
-<ul>
-<li class="fragment"><p>Occam’s razor states that among competing hypotheses that predict equally well, the one with the fewest assumptions should be selected</p></li>
-<li class="fragment"><p>Model selection follows this principle</p></li>
-<li class="fragment"><p>We only want to add another variable to the model if the addition of that variable brings something valuable in terms of predictive power to the model</p></li>
-<li class="fragment"><p>In other words, we prefer the simplest best model, i.e.&nbsp;<strong>parsimonious</strong> model</p></li>
-</ul>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">anova</span>(risk_fit_reduced<span class="sc">$</span>fit, risk_fit_full<span class="sc">$</span>fit, <span class="at">test =</span> <span class="st">"Chisq"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  Resid..Df Resid..Dev    df Deviance     p.value
+      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+1      4130      3300.    NA     NA   NA         
+2      4129      3279.     1     20.8  0.00000516</code></pre>
+</div>
+</div>
+</div>
 </section>
-<section id="alternate-views" class="slide level2 smaller">
-<h2>Alternate views</h2>
-<blockquote>
-<p>Sometimes a simple model will outperform a more complex model . . . Nevertheless, I believe that deliberately limiting the complexity of the model is not fruitful when the problem is evidently complex. Instead, if a simple model is found that outperforms some particular complex model, the appropriate response is to define a different complex model that captures whatever aspect of the problem led to the simple model performing well.</p>
-<p><br></p>
-<p>Radford Neal - Bayesian Learning for Neural Networks<sup>1</sup></p>
-</blockquote>
-<aside><ol class="aside-footnotes"><li id="fn2" role="doc-endnote"><p>Suggested blog post: <a href="https://statmodeling.stat.columbia.edu/2012/06/26/occam-2/">Occam</a> by Andrew Gelman</p></li></ol></aside></section>
-<section id="other-concerns-with-our-approach" class="slide level2 smaller">
-<h2>Other concerns with our approach</h2>
-<ul>
-<li class="fragment">All criteria we considered for model comparison require making predictions for our data and then uses the prediction error (<span class="math inline">\(SS_{Error}\)</span>) somewhere in the formula</li>
-<li class="fragment">But we’re making prediction for the data we used to build the model (estimate the coefficients), which can lead to <strong>overfitting</strong></li>
-<li class="fragment">Instead we should
-<ul>
-<li class="fragment"><p>split our data into testing and training sets</p></li>
-<li class="fragment"><p>“train” the model on the training data and pick a few models we’re genuinely considering as potentially good models</p></li>
-<li class="fragment"><p>test those models on the testing set</p></li>
-</ul></li>
-</ul>
+<section id="model-selection" class="slide level2">
+<h2>Model selection</h2>
+<p>Use AIC or BIC for model selection</p>
+<p><span class="math display">\[
+\begin{align}
+&amp;AIC = - 2 * \log L - \color{purple}{n\log(n)}+ 2(p +1)\\[5pt]
+&amp;BIC =- 2 * \log L - \color{purple}{n\log(n)} + log(n)\times(p+1)
+\end{align}
+\]</span></p>
 </section>
-<section id="recap" class="slide level2">
-<h2>Recap</h2>
-<ul>
-<li class="fragment"><p>ANOVA for Multiple Linear Regression and sum of squares</p></li>
-<li class="fragment"><p>Comparing models with <span class="math inline">\(R^2\)</span> vs.&nbsp;<span class="math inline">\(R^2_{adj}\)</span></p></li>
-<li class="fragment"><p>Comparing models with AIC and BIC</p></li>
-<li class="fragment"><p>Occam’s razor and parsimony</p></li>
-<li class="fragment"><p>Overfitting and spending our data</p></li>
-</ul>
+<section id="aic-from-the-glance-function" class="slide level2">
+<h2>AIC from the <code>glance()</code> function</h2>
+<p>Let’s look at the AIC for the model that includes <code>age</code>, <code>education</code>, and <code>currentSmoker</code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3291.359</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Calculating AIC</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>logLik <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3291.359</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-the-models-using-aic" class="slide level2">
+<h2>Comparing the models using AIC</h2>
+<p>Let’s compare the full and reduced models using AIC.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3310.135</code></pre>
+</div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3291.359</code></pre>
+</div>
+</div>
+<div class="question">
+<p>Based on AIC, which model would you choose?</p>
+</div>
+</section>
+<section id="comparing-the-models-using-bic" class="slide level2">
+<h2>Comparing the models using BIC</h2>
+<p>Let’s compare the full and reduced models using BIC</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>BIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3341.772</code></pre>
+</div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>BIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3329.323</code></pre>
+</div>
+</div>
+<div class="question">
+<p>Based on BIC, which model would you choose?</p>
+</div>
 
 
 <img src="images/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
 </section></section>
-
     </div>
   </div>
 
@@ -1075,8 +1186,6 @@ R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \f
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
-  <script src="../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
@@ -1100,7 +1209,6 @@ R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \f
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"80b80b3894647cc4","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner
@@ -1274,7 +1382,7 @@ R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}} = 1 - \f
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
-          
+          RevealNotes,
           RevealSearch,
           RevealZoom
         ]
