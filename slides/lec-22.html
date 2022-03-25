@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.137">
+  <meta name="generator" content="quarto-0.9.140">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - LR: Inference + conditions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -422,10 +422,11 @@
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(openintro)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(kableExtra)  <span class="co"># for table embellishments</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(Stat2Data)   <span class="co"># for empirical logit</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -450,8 +451,8 @@
 <section id="data-prep" class="slide level2">
 <h2>Data prep</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>heart_disease <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/framingham.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">select</span>(age, education, TenYearCHD, currentSmoker) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>heart_disease <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/framingham.csv"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">select</span>(age, education, TenYearCHD, totChol, currentSmoker) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">high_risk =</span> <span class="fu">as.factor</span>(TenYearCHD),</span>
@@ -461,26 +462,26 @@
 <span id="cb2-9"><a href="#cb2-9"></a></span>
 <span id="cb2-10"><a href="#cb2-10"></a>heart_disease</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code># A tibble: 4,135 × 5
-     age education TenYearCHD currentSmoker high_risk
-   &lt;dbl&gt; &lt;fct&gt;          &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;    
- 1    39 4                  0 0             0        
- 2    46 2                  0 0             0        
- 3    48 1                  0 1             0        
- 4    61 3                  1 1             1        
- 5    46 3                  0 1             0        
- 6    43 2                  0 0             0        
- 7    63 1                  1 0             1        
- 8    45 2                  0 1             0        
- 9    52 1                  0 0             0        
-10    43 1                  0 1             0        
-# … with 4,125 more rows</code></pre>
+<pre><code># A tibble: 4,086 × 6
+     age education TenYearCHD totChol currentSmoker high_risk
+   &lt;dbl&gt; &lt;fct&gt;          &lt;dbl&gt;   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;    
+ 1    39 4                  0     195 0             0        
+ 2    46 2                  0     250 0             0        
+ 3    48 1                  0     245 1             0        
+ 4    61 3                  1     225 1             1        
+ 5    46 3                  0     285 1             0        
+ 6    43 2                  0     228 0             0        
+ 7    63 1                  1     205 0             1        
+ 8    45 2                  0     313 1             0        
+ 9    52 1                  0     260 0             0        
+10    43 1                  0     225 1             0        
+# … with 4,076 more rows</code></pre>
 </div>
 </div>
 </section></section>
 <section>
-<section id="model" class="title-slide slide level1 center">
-<h1>Model</h1>
+<section id="inference-for-a-model" class="title-slide slide level1 center">
+<h1>Inference for a model</h1>
 
 </section>
 <section id="modeling-risk-of-coronary-heart-disease" class="slide level2">
@@ -523,48 +524,48 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-5.385</td>
-<td style="text-align: right;">0.308</td>
-<td style="text-align: right;">-17.507</td>
+<td style="text-align: right;">-5.508</td>
+<td style="text-align: right;">0.311</td>
+<td style="text-align: right;">-17.692</td>
 <td style="text-align: right;">0.000</td>
-<td style="text-align: right;">-5.995</td>
-<td style="text-align: right;">-4.788</td>
+<td style="text-align: right;">-6.125</td>
+<td style="text-align: right;">-4.904</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">age</td>
-<td style="text-align: right;">0.073</td>
-<td style="text-align: right;">0.005</td>
-<td style="text-align: right;">13.385</td>
+<td style="text-align: right;">0.076</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: right;">13.648</td>
 <td style="text-align: right;">0.000</td>
-<td style="text-align: right;">0.063</td>
-<td style="text-align: right;">0.084</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">0.087</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">education2</td>
-<td style="text-align: right;">-0.242</td>
-<td style="text-align: right;">0.112</td>
-<td style="text-align: right;">-2.162</td>
-<td style="text-align: right;">0.031</td>
-<td style="text-align: right;">-0.463</td>
-<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">-0.245</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">-2.172</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">-0.469</td>
+<td style="text-align: right;">-0.026</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">education3</td>
-<td style="text-align: right;">-0.235</td>
-<td style="text-align: right;">0.134</td>
-<td style="text-align: right;">-1.761</td>
-<td style="text-align: right;">0.078</td>
-<td style="text-align: right;">-0.501</td>
-<td style="text-align: right;">0.023</td>
+<td style="text-align: right;">-0.236</td>
+<td style="text-align: right;">0.135</td>
+<td style="text-align: right;">-1.753</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">-0.504</td>
+<td style="text-align: right;">0.024</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">education4</td>
-<td style="text-align: right;">-0.020</td>
-<td style="text-align: right;">0.148</td>
-<td style="text-align: right;">-0.136</td>
-<td style="text-align: right;">0.892</td>
-<td style="text-align: right;">-0.317</td>
-<td style="text-align: right;">0.266</td>
+<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">-0.161</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">-0.323</td>
+<td style="text-align: right;">0.264</td>
 </tr>
 </tbody>
 </table>
@@ -624,48 +625,48 @@
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> -5.385 </td>
-   <td style="text-align:right;"> 0.308 </td>
-   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> -5.508 </td>
+   <td style="text-align:right;"> 0.311 </td>
+   <td style="text-align:right;"> -17.692 </td>
    <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> -5.995 </td>
-   <td style="text-align:right;"> -4.788 </td>
+   <td style="text-align:right;"> -6.125 </td>
+   <td style="text-align:right;"> -4.904 </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: #D9E3E4 !important;"> age </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.073 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.005 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.385 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.076 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.006 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.648 </td>
    <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.000 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.063 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.084 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.065 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.087 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education2 </td>
-   <td style="text-align:right;"> -0.242 </td>
-   <td style="text-align:right;"> 0.112 </td>
-   <td style="text-align:right;"> -2.162 </td>
-   <td style="text-align:right;"> 0.031 </td>
-   <td style="text-align:right;"> -0.463 </td>
-   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> -0.245 </td>
+   <td style="text-align:right;"> 0.113 </td>
+   <td style="text-align:right;"> -2.172 </td>
+   <td style="text-align:right;"> 0.030 </td>
+   <td style="text-align:right;"> -0.469 </td>
+   <td style="text-align:right;"> -0.026 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education3 </td>
-   <td style="text-align:right;"> -0.235 </td>
-   <td style="text-align:right;"> 0.134 </td>
-   <td style="text-align:right;"> -1.761 </td>
-   <td style="text-align:right;"> 0.078 </td>
-   <td style="text-align:right;"> -0.501 </td>
-   <td style="text-align:right;"> 0.023 </td>
+   <td style="text-align:right;"> -0.236 </td>
+   <td style="text-align:right;"> 0.135 </td>
+   <td style="text-align:right;"> -1.753 </td>
+   <td style="text-align:right;"> 0.080 </td>
+   <td style="text-align:right;"> -0.504 </td>
+   <td style="text-align:right;"> 0.024 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education4 </td>
-   <td style="text-align:right;"> -0.020 </td>
-   <td style="text-align:right;"> 0.148 </td>
-   <td style="text-align:right;"> -0.136 </td>
-   <td style="text-align:right;"> 0.892 </td>
-   <td style="text-align:right;"> -0.317 </td>
-   <td style="text-align:right;"> 0.266 </td>
+   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> 0.150 </td>
+   <td style="text-align:right;"> -0.161 </td>
+   <td style="text-align:right;"> 0.872 </td>
+   <td style="text-align:right;"> -0.323 </td>
+   <td style="text-align:right;"> 0.264 </td>
   </tr>
 </tbody>
 </table>
@@ -698,48 +699,48 @@ H_0: \beta_{1} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{1} \neq 0
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> -5.385 </td>
-   <td style="text-align:right;"> 0.308 </td>
-   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> -5.508 </td>
+   <td style="text-align:right;"> 0.311 </td>
+   <td style="text-align:right;"> -17.692 </td>
    <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> -5.995 </td>
-   <td style="text-align:right;"> -4.788 </td>
+   <td style="text-align:right;"> -6.125 </td>
+   <td style="text-align:right;"> -4.904 </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: #D9E3E4 !important;"> age </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.073 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.005 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.385 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.076 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.006 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.648 </td>
    <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.000 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.063 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.084 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.065 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.087 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education2 </td>
-   <td style="text-align:right;"> -0.242 </td>
-   <td style="text-align:right;"> 0.112 </td>
-   <td style="text-align:right;"> -2.162 </td>
-   <td style="text-align:right;"> 0.031 </td>
-   <td style="text-align:right;"> -0.463 </td>
-   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> -0.245 </td>
+   <td style="text-align:right;"> 0.113 </td>
+   <td style="text-align:right;"> -2.172 </td>
+   <td style="text-align:right;"> 0.030 </td>
+   <td style="text-align:right;"> -0.469 </td>
+   <td style="text-align:right;"> -0.026 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education3 </td>
-   <td style="text-align:right;"> -0.235 </td>
-   <td style="text-align:right;"> 0.134 </td>
-   <td style="text-align:right;"> -1.761 </td>
-   <td style="text-align:right;"> 0.078 </td>
-   <td style="text-align:right;"> -0.501 </td>
-   <td style="text-align:right;"> 0.023 </td>
+   <td style="text-align:right;"> -0.236 </td>
+   <td style="text-align:right;"> 0.135 </td>
+   <td style="text-align:right;"> -1.753 </td>
+   <td style="text-align:right;"> 0.080 </td>
+   <td style="text-align:right;"> -0.504 </td>
+   <td style="text-align:right;"> 0.024 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education4 </td>
-   <td style="text-align:right;"> -0.020 </td>
-   <td style="text-align:right;"> 0.148 </td>
-   <td style="text-align:right;"> -0.136 </td>
-   <td style="text-align:right;"> 0.892 </td>
-   <td style="text-align:right;"> -0.317 </td>
-   <td style="text-align:right;"> 0.266 </td>
+   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> 0.150 </td>
+   <td style="text-align:right;"> -0.161 </td>
+   <td style="text-align:right;"> 0.872 </td>
+   <td style="text-align:right;"> -0.323 </td>
+   <td style="text-align:right;"> 0.264 </td>
   </tr>
 </tbody>
 </table>
@@ -770,48 +771,48 @@ z = \frac{0.0733 - 0}{0.00547} = 13.4
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> -5.385 </td>
-   <td style="text-align:right;"> 0.308 </td>
-   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> -5.508 </td>
+   <td style="text-align:right;"> 0.311 </td>
+   <td style="text-align:right;"> -17.692 </td>
    <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> -5.995 </td>
-   <td style="text-align:right;"> -4.788 </td>
+   <td style="text-align:right;"> -6.125 </td>
+   <td style="text-align:right;"> -4.904 </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: #D9E3E4 !important;"> age </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.073 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.005 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.385 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.076 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.006 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.648 </td>
    <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.000 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.063 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.084 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.065 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.087 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education2 </td>
-   <td style="text-align:right;"> -0.242 </td>
-   <td style="text-align:right;"> 0.112 </td>
-   <td style="text-align:right;"> -2.162 </td>
-   <td style="text-align:right;"> 0.031 </td>
-   <td style="text-align:right;"> -0.463 </td>
-   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> -0.245 </td>
+   <td style="text-align:right;"> 0.113 </td>
+   <td style="text-align:right;"> -2.172 </td>
+   <td style="text-align:right;"> 0.030 </td>
+   <td style="text-align:right;"> -0.469 </td>
+   <td style="text-align:right;"> -0.026 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education3 </td>
-   <td style="text-align:right;"> -0.235 </td>
-   <td style="text-align:right;"> 0.134 </td>
-   <td style="text-align:right;"> -1.761 </td>
-   <td style="text-align:right;"> 0.078 </td>
-   <td style="text-align:right;"> -0.501 </td>
-   <td style="text-align:right;"> 0.023 </td>
+   <td style="text-align:right;"> -0.236 </td>
+   <td style="text-align:right;"> 0.135 </td>
+   <td style="text-align:right;"> -1.753 </td>
+   <td style="text-align:right;"> 0.080 </td>
+   <td style="text-align:right;"> -0.504 </td>
+   <td style="text-align:right;"> 0.024 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education4 </td>
-   <td style="text-align:right;"> -0.020 </td>
-   <td style="text-align:right;"> 0.148 </td>
-   <td style="text-align:right;"> -0.136 </td>
-   <td style="text-align:right;"> 0.892 </td>
-   <td style="text-align:right;"> -0.317 </td>
-   <td style="text-align:right;"> 0.266 </td>
+   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> 0.150 </td>
+   <td style="text-align:right;"> -0.161 </td>
+   <td style="text-align:right;"> 0.872 </td>
+   <td style="text-align:right;"> -0.323 </td>
+   <td style="text-align:right;"> 0.264 </td>
   </tr>
 </tbody>
 </table>
@@ -850,48 +851,48 @@ P(|Z| &gt; |13.4|) \approx 0
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> -5.385 </td>
-   <td style="text-align:right;"> 0.308 </td>
-   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> -5.508 </td>
+   <td style="text-align:right;"> 0.311 </td>
+   <td style="text-align:right;"> -17.692 </td>
    <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> -5.995 </td>
-   <td style="text-align:right;"> -4.788 </td>
+   <td style="text-align:right;"> -6.125 </td>
+   <td style="text-align:right;"> -4.904 </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: #D9E3E4 !important;"> age </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.073 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.005 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.385 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.076 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.006 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 13.648 </td>
    <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.000 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.063 </td>
-   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.084 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.065 </td>
+   <td style="text-align:right;background-color: #D9E3E4 !important;"> 0.087 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education2 </td>
-   <td style="text-align:right;"> -0.242 </td>
-   <td style="text-align:right;"> 0.112 </td>
-   <td style="text-align:right;"> -2.162 </td>
-   <td style="text-align:right;"> 0.031 </td>
-   <td style="text-align:right;"> -0.463 </td>
-   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> -0.245 </td>
+   <td style="text-align:right;"> 0.113 </td>
+   <td style="text-align:right;"> -2.172 </td>
+   <td style="text-align:right;"> 0.030 </td>
+   <td style="text-align:right;"> -0.469 </td>
+   <td style="text-align:right;"> -0.026 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education3 </td>
-   <td style="text-align:right;"> -0.235 </td>
-   <td style="text-align:right;"> 0.134 </td>
-   <td style="text-align:right;"> -1.761 </td>
-   <td style="text-align:right;"> 0.078 </td>
-   <td style="text-align:right;"> -0.501 </td>
-   <td style="text-align:right;"> 0.023 </td>
+   <td style="text-align:right;"> -0.236 </td>
+   <td style="text-align:right;"> 0.135 </td>
+   <td style="text-align:right;"> -1.753 </td>
+   <td style="text-align:right;"> 0.080 </td>
+   <td style="text-align:right;"> -0.504 </td>
+   <td style="text-align:right;"> 0.024 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education4 </td>
-   <td style="text-align:right;"> -0.020 </td>
-   <td style="text-align:right;"> 0.148 </td>
-   <td style="text-align:right;"> -0.136 </td>
-   <td style="text-align:right;"> 0.892 </td>
-   <td style="text-align:right;"> -0.317 </td>
-   <td style="text-align:right;"> 0.266 </td>
+   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> 0.150 </td>
+   <td style="text-align:right;"> -0.161 </td>
+   <td style="text-align:right;"> 0.872 </td>
+   <td style="text-align:right;"> -0.323 </td>
+   <td style="text-align:right;"> 0.264 </td>
   </tr>
 </tbody>
 </table>
@@ -983,48 +984,48 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> -5.385 </td>
-   <td style="text-align:right;"> 0.308 </td>
-   <td style="text-align:right;"> -17.507 </td>
+   <td style="text-align:right;"> -5.508 </td>
+   <td style="text-align:right;"> 0.311 </td>
+   <td style="text-align:right;"> -17.692 </td>
    <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> -5.995 </td>
-   <td style="text-align:right;"> -4.788 </td>
+   <td style="text-align:right;"> -6.125 </td>
+   <td style="text-align:right;"> -4.904 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> age </td>
-   <td style="text-align:right;"> 0.073 </td>
-   <td style="text-align:right;"> 0.005 </td>
-   <td style="text-align:right;"> 13.385 </td>
+   <td style="text-align:right;"> 0.076 </td>
+   <td style="text-align:right;"> 0.006 </td>
+   <td style="text-align:right;"> 13.648 </td>
    <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 0.063 </td>
-   <td style="text-align:right;"> 0.084 </td>
+   <td style="text-align:right;"> 0.065 </td>
+   <td style="text-align:right;"> 0.087 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education2 </td>
-   <td style="text-align:right;"> -0.242 </td>
-   <td style="text-align:right;"> 0.112 </td>
-   <td style="text-align:right;"> -2.162 </td>
-   <td style="text-align:right;"> 0.031 </td>
-   <td style="text-align:right;"> -0.463 </td>
-   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> -0.245 </td>
+   <td style="text-align:right;"> 0.113 </td>
+   <td style="text-align:right;"> -2.172 </td>
+   <td style="text-align:right;"> 0.030 </td>
+   <td style="text-align:right;"> -0.469 </td>
+   <td style="text-align:right;"> -0.026 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education3 </td>
-   <td style="text-align:right;"> -0.235 </td>
-   <td style="text-align:right;"> 0.134 </td>
-   <td style="text-align:right;"> -1.761 </td>
-   <td style="text-align:right;"> 0.078 </td>
-   <td style="text-align:right;"> -0.501 </td>
-   <td style="text-align:right;"> 0.023 </td>
+   <td style="text-align:right;"> -0.236 </td>
+   <td style="text-align:right;"> 0.135 </td>
+   <td style="text-align:right;"> -1.753 </td>
+   <td style="text-align:right;"> 0.080 </td>
+   <td style="text-align:right;"> -0.504 </td>
+   <td style="text-align:right;"> 0.024 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> education4 </td>
-   <td style="text-align:right;"> -0.020 </td>
-   <td style="text-align:right;"> 0.148 </td>
-   <td style="text-align:right;"> -0.136 </td>
-   <td style="text-align:right;"> 0.892 </td>
-   <td style="text-align:right;"> -0.317 </td>
-   <td style="text-align:right;"> 0.266 </td>
+   <td style="text-align:right;"> -0.024 </td>
+   <td style="text-align:right;"> 0.150 </td>
+   <td style="text-align:right;"> -0.161 </td>
+   <td style="text-align:right;"> 0.872 </td>
+   <td style="text-align:right;"> -0.323 </td>
+   <td style="text-align:right;"> 0.264 </td>
   </tr>
 </tbody>
 </table>
@@ -1056,11 +1057,11 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>(dev_reduced <span class="ot">&lt;-</span> <span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 3300.135</code></pre>
+<pre><code>[1] 3244.187</code></pre>
 </div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>(dev_full <span class="ot">&lt;-</span> <span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 3279.359</code></pre>
+<pre><code>[1] 3221.901</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1068,7 +1069,7 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>(test_stat <span class="ot">&lt;-</span> dev_reduced <span class="sc">-</span> dev_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 20.77589</code></pre>
+<pre><code>[1] 22.2863</code></pre>
 </div>
 </div>
 </div>
@@ -1079,7 +1080,7 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">pchisq</span>(test_stat, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 5.162887e-06</code></pre>
+<pre><code>[1] 2.348761e-06</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1100,8 +1101,8 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <pre><code># A tibble: 2 × 5
   Resid..Df Resid..Dev    df Deviance     p.value
       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
-1      4130      3300.    NA     NA   NA         
-2      4129      3279.     1     20.8  0.00000516</code></pre>
+1      4081      3244.    NA     NA   NA         
+2      4080      3222.     1     22.3  0.00000235</code></pre>
 </div>
 </div>
 </div>
@@ -1122,7 +1123,7 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 3291.359</code></pre>
+<pre><code>[1] 3233.901</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1130,7 +1131,7 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>logLik <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 3291.359</code></pre>
+<pre><code>[1] 3233.901</code></pre>
 </div>
 </div>
 </div>
@@ -1141,11 +1142,11 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 3310.135</code></pre>
+<pre><code>[1] 3254.187</code></pre>
 </div>
 <div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 3291.359</code></pre>
+<pre><code>[1] 3233.901</code></pre>
 </div>
 </div>
 <div class="question">
@@ -1158,20 +1159,212 @@ H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>BIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 3341.772</code></pre>
+<pre><code>[1] 3285.764</code></pre>
 </div>
 <div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>BIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 3329.323</code></pre>
+<pre><code>[1] 3271.793</code></pre>
 </div>
 </div>
 <div class="question">
 <p>Based on BIC, which model would you choose?</p>
 </div>
+</section></section>
+<section>
+<section id="conditions" class="title-slide slide level1 center">
+<h1>Conditions</h1>
 
+</section>
+<section id="the-model" class="slide level2 smaller">
+<h2>The model</h2>
+<p>Let’s predict <code>high_risk</code> from age, total cholesterol, and whether the patient is a current smoker:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>risk_fit <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> totChol <span class="sc">+</span> currentSmoker, </span>
+<span id="cb32-4"><a href="#cb32-4"></a>      <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5"></a></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="fu">tidy</span>(risk_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-7"><a href="#cb32-7"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> -6.673 </td>
+   <td style="text-align:right;"> 0.378 </td>
+   <td style="text-align:right;"> -17.647 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> -7.423 </td>
+   <td style="text-align:right;"> -5.940 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> age </td>
+   <td style="text-align:right;"> 0.082 </td>
+   <td style="text-align:right;"> 0.006 </td>
+   <td style="text-align:right;"> 14.344 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 0.071 </td>
+   <td style="text-align:right;"> 0.094 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> totChol </td>
+   <td style="text-align:right;"> 0.002 </td>
+   <td style="text-align:right;"> 0.001 </td>
+   <td style="text-align:right;"> 1.940 </td>
+   <td style="text-align:right;"> 0.052 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 0.004 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> currentSmoker1 </td>
+   <td style="text-align:right;"> 0.443 </td>
+   <td style="text-align:right;"> 0.094 </td>
+   <td style="text-align:right;"> 4.733 </td>
+   <td style="text-align:right;"> 0.000 </td>
+   <td style="text-align:right;"> 0.260 </td>
+   <td style="text-align:right;"> 0.627 </td>
+  </tr>
+</tbody>
+</table>
 
-<img src="images/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+</div>
+</div>
+</section>
+<section id="conditions-for-logistic-regression" class="slide level2">
+<h2>Conditions for logistic regression</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Linearity:</strong> The log-odds have a linear relationship with the predictors.</p></li>
+<li class="fragment"><p><strong>Randomness:</strong> The data were obtained from a random process</p></li>
+<li class="fragment"><p><strong>Independence:</strong> The observations are independent from one another.</p></li>
+</ol>
+</section>
+<section id="empirical-logit" class="slide level2">
+<h2>Empirical logit</h2>
+<p>The <strong>empirical logit</strong> is the log of the observed odds:</p>
+<p><span class="math display">\[
+\text{logit}(\hat{p}) = \log\Big(\frac{\hat{p}}{1 - \hat{p}}\Big) = \log\Big(\frac{\# \text{Yes}}{\# \text{No}}\Big)
+\]</span></p>
+</section>
+<section id="calculating-empirical-logit-categorical-predictor" class="slide level2">
+<h2>Calculating empirical logit (categorical predictor)</h2>
+<p>If the predictor is categorical, we can calculate the empirical logit for each level of the predictor.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>heart_disease <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">count</span>(currentSmoker, high_risk) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">group_by</span>(currentSmoker) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="fu">filter</span>(high_risk <span class="sc">==</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">mutate</span>(<span class="at">emp_logit =</span> <span class="fu">log</span>(prop<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>prop)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+# Groups:   currentSmoker [2]
+  currentSmoker high_risk     n  prop emp_logit
+  &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;
+1 0             1           301 0.145     -1.77
+2 1             1           318 0.158     -1.67</code></pre>
+</div>
+</div>
+</section>
+<section id="calculating-empirical-logit-quantitative-predictor" class="slide level2">
+<h2>Calculating empirical logit (quantitative predictor)</h2>
+<ol type="1">
+<li class="fragment"><p>Divide the range of the predictor into intervals with approximately equal number of cases. (If you have enough observations, use 5 - 10 intervals.)</p></li>
+<li class="fragment"><p>Calculate the mean value of the predictor in each interval.</p></li>
+<li class="fragment"><p>Compute the empirical logit for each interval.</p></li>
+</ol>
+<div class="fragment">
+<p>Then, create a plot of the empirical logit versus the mean value of the predictor in each interval.</p>
+</div>
+</section>
+<section id="empirical-logit-plot-in-r-quantitative-predictor" class="slide level2">
+<h2>Empirical logit plot in R (quantitative predictor)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">emplogitplot1</span>(high_risk <span class="sc">~</span> age, </span>
+<span id="cb35-2"><a href="#cb35-2"></a>              <span class="at">data =</span> heart_disease, </span>
+<span id="cb35-3"><a href="#cb35-3"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="lec-22_files/figure-revealjs/unnamed-chunk-26-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="empirical-logit-plot-in-r-interactions" class="slide level2">
+<h2>Empirical logit plot in R (interactions)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">emplogitplot2</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> currentSmoker, <span class="at">data =</span> heart_disease, </span>
+<span id="cb36-2"><a href="#cb36-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, </span>
+<span id="cb36-3"><a href="#cb36-3"></a>              <span class="at">putlegend =</span> <span class="st">"bottomright"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="lec-22_files/figure-revealjs/unnamed-chunk-27-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="checking-linearity" class="slide level2">
+<h2>Checking linearity</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">emplogitplot1</span>(high_risk <span class="sc">~</span> age, </span>
+<span id="cb37-2"><a href="#cb37-2"></a>              <span class="at">data =</span> heart_disease, </span>
+<span id="cb37-3"><a href="#cb37-3"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-22_files/figure-revealjs/unnamed-chunk-28-1.png" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">emplogitplot1</span>(high_risk <span class="sc">~</span> totChol, </span>
+<span id="cb38-2"><a href="#cb38-2"></a>              <span class="at">data =</span> heart_disease, </span>
+<span id="cb38-3"><a href="#cb38-3"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-22_files/figure-revealjs/unnamed-chunk-29-1.png" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>✅ The linearity condition is satisfied. There is a linear relationship between the empirical logit and the predictor variables.</p>
+</div>
+</section>
+<section id="checking-randomness" class="slide level2 smaller">
+<h2>Checking randomness</h2>
+<p>We can check the randomness condition based on the context of the data and how the observations were collected.</p>
+<ul>
+<li class="fragment">Was the sample randomly selected?</li>
+<li class="fragment">If the sample was not randomly selected, ask whether there is reason to believe the observations in the sample differ systematically from the population of interest.</li>
+</ul>
+<div class="fragment">
+<p>✅ The randomness condition is satisfied. We do not have reason to believe that the participants in this study differ systematically from adults in the U.S. in regards to health characteristics and risk of heart disease.</p>
+</div>
+</section>
+<section id="checking-independence" class="slide level2">
+<h2>Checking independence</h2>
+<ul>
+<li class="fragment">We can check the independence condition based on the context of the data and how the observations were collected.</li>
+<li class="fragment">Independence is most often violated if the data were collected over time or there is a strong spatial relationship between the observations.</li>
+</ul>
+<div class="fragment">
+<p>✅ The independence condition is satisfied. It is reasonable to conclude that the participants’ health characteristics are independent of one another.</p>
+
+<p><img src="images/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
+</div>
 </div>
 </section></section>
     </div>

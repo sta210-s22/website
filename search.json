@@ -3329,7 +3329,7 @@
     "href": "slides/lec-22.html#computational-setup",
     "title": "LR: Inference + conditions",
     "section": "Computational setup",
-    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\nlibrary(knitr)\nlibrary(kableExtra)\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\nlibrary(knitr)\nlibrary(kableExtra)  # for table embellishments\nlibrary(Stat2Data)   # for empirical logit\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
   },
   {
     "objectID": "slides/lec-22.html#risk-of-coronary-heart-disease",
@@ -3343,7 +3343,7 @@
     "href": "slides/lec-22.html#data-prep",
     "title": "LR: Inference + conditions",
     "section": "Data prep",
-    "text": "Data prep\n\nheart_disease <- read_csv(\"data/framingham.csv\") %>%\n  select(age, education, TenYearCHD, currentSmoker) %>%\n  drop_na() %>%\n  mutate(\n    high_risk = as.factor(TenYearCHD),\n    education = as.factor(education),\n    currentSmoker = as.factor(currentSmoker)\n  )\n\nheart_disease\n\n# A tibble: 4,135 × 5\n     age education TenYearCHD currentSmoker high_risk\n   <dbl> <fct>          <dbl> <fct>         <fct>    \n 1    39 4                  0 0             0        \n 2    46 2                  0 0             0        \n 3    48 1                  0 1             0        \n 4    61 3                  1 1             1        \n 5    46 3                  0 1             0        \n 6    43 2                  0 0             0        \n 7    63 1                  1 0             1        \n 8    45 2                  0 1             0        \n 9    52 1                  0 0             0        \n10    43 1                  0 1             0        \n# … with 4,125 more rows"
+    "text": "Data prep\n\nheart_disease <- read_csv(here::here(\"slides\", \"data/framingham.csv\")) %>%\n  select(age, education, TenYearCHD, totChol, currentSmoker) %>%\n  drop_na() %>%\n  mutate(\n    high_risk = as.factor(TenYearCHD),\n    education = as.factor(education),\n    currentSmoker = as.factor(currentSmoker)\n  )\n\nheart_disease\n\n# A tibble: 4,086 × 6\n     age education TenYearCHD totChol currentSmoker high_risk\n   <dbl> <fct>          <dbl>   <dbl> <fct>         <fct>    \n 1    39 4                  0     195 0             0        \n 2    46 2                  0     250 0             0        \n 3    48 1                  0     245 1             0        \n 4    61 3                  1     225 1             1        \n 5    46 3                  0     285 1             0        \n 6    43 2                  0     228 0             0        \n 7    63 1                  1     205 0             1        \n 8    45 2                  0     313 1             0        \n 9    52 1                  0     260 0             0        \n10    43 1                  0     225 1             0        \n# … with 4,076 more rows"
   },
   {
     "objectID": "slides/lec-22.html#modeling-risk-of-coronary-heart-disease",
@@ -3357,7 +3357,7 @@
     "href": "slides/lec-22.html#model-output",
     "title": "LR: Inference + conditions",
     "section": "Model output",
-    "text": "Model output\n\ntidy(risk_fit, conf.int = TRUE) %>% \n  kable(format = \"markdown\", digits = 3)\n\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n-5.385\n0.308\n-17.507\n0.000\n-5.995\n-4.788\n\n\nage\n0.073\n0.005\n13.385\n0.000\n0.063\n0.084\n\n\neducation2\n-0.242\n0.112\n-2.162\n0.031\n-0.463\n-0.024\n\n\neducation3\n-0.235\n0.134\n-1.761\n0.078\n-0.501\n0.023\n\n\neducation4\n-0.020\n0.148\n-0.136\n0.892\n-0.317\n0.266\n\n\n\n\n\n\\[\n\\small{\\log\\Big(\\frac{\\hat{\\pi}}{1-\\hat{\\pi}}\\Big) = -5.385 + 0.073 ~ \\text{age} - 0.242 ~ \\text{ed2} - 0.235 ~ \\text{ed3} - 0.020 ~ \\text{ed4}}\n\\]"
+    "text": "Model output\n\ntidy(risk_fit, conf.int = TRUE) %>% \n  kable(format = \"markdown\", digits = 3)\n\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n-5.508\n0.311\n-17.692\n0.000\n-6.125\n-4.904\n\n\nage\n0.076\n0.006\n13.648\n0.000\n0.065\n0.087\n\n\neducation2\n-0.245\n0.113\n-2.172\n0.030\n-0.469\n-0.026\n\n\neducation3\n-0.236\n0.135\n-1.753\n0.080\n-0.504\n0.024\n\n\neducation4\n-0.024\n0.150\n-0.161\n0.872\n-0.323\n0.264\n\n\n\n\n\n\\[\n\\small{\\log\\Big(\\frac{\\hat{\\pi}}{1-\\hat{\\pi}}\\Big) = -5.385 + 0.073 ~ \\text{age} - 0.242 ~ \\text{ed2} - 0.235 ~ \\text{ed3} - 0.020 ~ \\text{ed4}}\n\\]"
   },
   {
     "objectID": "slides/lec-22.html#hypothesis-test-for-beta_j",
@@ -3385,28 +3385,28 @@
     "href": "slides/lec-22.html#coefficient-for-age",
     "title": "LR: Inference + conditions",
     "section": "Coefficient for age",
-    "text": "Coefficient for age\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.385 \n    0.308 \n    -17.507 \n    0.000 \n    -5.995 \n    -4.788 \n  \n  \n    age \n    0.073 \n    0.005 \n    13.385 \n    0.000 \n    0.063 \n    0.084 \n  \n  \n    education2 \n    -0.242 \n    0.112 \n    -2.162 \n    0.031 \n    -0.463 \n    -0.024 \n  \n  \n    education3 \n    -0.235 \n    0.134 \n    -1.761 \n    0.078 \n    -0.501 \n    0.023 \n  \n  \n    education4 \n    -0.020 \n    0.148 \n    -0.136 \n    0.892 \n    -0.317 \n    0.266 \n  \n\n\n\n\n\n\nHypotheses:\n\\[\nH_0: \\beta_{1} = 0 \\hspace{2mm} \\text{ vs } \\hspace{2mm} H_a: \\beta_{1} \\neq 0\n\\]"
+    "text": "Coefficient for age\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.508 \n    0.311 \n    -17.692 \n    0.000 \n    -6.125 \n    -4.904 \n  \n  \n    age \n    0.076 \n    0.006 \n    13.648 \n    0.000 \n    0.065 \n    0.087 \n  \n  \n    education2 \n    -0.245 \n    0.113 \n    -2.172 \n    0.030 \n    -0.469 \n    -0.026 \n  \n  \n    education3 \n    -0.236 \n    0.135 \n    -1.753 \n    0.080 \n    -0.504 \n    0.024 \n  \n  \n    education4 \n    -0.024 \n    0.150 \n    -0.161 \n    0.872 \n    -0.323 \n    0.264 \n  \n\n\n\n\n\n\nHypotheses:\n\\[\nH_0: \\beta_{1} = 0 \\hspace{2mm} \\text{ vs } \\hspace{2mm} H_a: \\beta_{1} \\neq 0\n\\]"
   },
   {
     "objectID": "slides/lec-22.html#coefficient-for-age-1",
     "href": "slides/lec-22.html#coefficient-for-age-1",
     "title": "LR: Inference + conditions",
     "section": "Coefficient for age",
-    "text": "Coefficient for age\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.385 \n    0.308 \n    -17.507 \n    0.000 \n    -5.995 \n    -4.788 \n  \n  \n    age \n    0.073 \n    0.005 \n    13.385 \n    0.000 \n    0.063 \n    0.084 \n  \n  \n    education2 \n    -0.242 \n    0.112 \n    -2.162 \n    0.031 \n    -0.463 \n    -0.024 \n  \n  \n    education3 \n    -0.235 \n    0.134 \n    -1.761 \n    0.078 \n    -0.501 \n    0.023 \n  \n  \n    education4 \n    -0.020 \n    0.148 \n    -0.136 \n    0.892 \n    -0.317 \n    0.266 \n  \n\n\n\n\n\nTest statistic:\n\\[\nz = \\frac{0.0733 - 0}{0.00547} = 13.4\n\\]"
+    "text": "Coefficient for age\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.508 \n    0.311 \n    -17.692 \n    0.000 \n    -6.125 \n    -4.904 \n  \n  \n    age \n    0.076 \n    0.006 \n    13.648 \n    0.000 \n    0.065 \n    0.087 \n  \n  \n    education2 \n    -0.245 \n    0.113 \n    -2.172 \n    0.030 \n    -0.469 \n    -0.026 \n  \n  \n    education3 \n    -0.236 \n    0.135 \n    -1.753 \n    0.080 \n    -0.504 \n    0.024 \n  \n  \n    education4 \n    -0.024 \n    0.150 \n    -0.161 \n    0.872 \n    -0.323 \n    0.264 \n  \n\n\n\n\n\nTest statistic:\n\\[\nz = \\frac{0.0733 - 0}{0.00547} = 13.4\n\\]"
   },
   {
     "objectID": "slides/lec-22.html#coefficient-for-age-2",
     "href": "slides/lec-22.html#coefficient-for-age-2",
     "title": "LR: Inference + conditions",
     "section": "Coefficient for age",
-    "text": "Coefficient for age\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.385 \n    0.308 \n    -17.507 \n    0.000 \n    -5.995 \n    -4.788 \n  \n  \n    age \n    0.073 \n    0.005 \n    13.385 \n    0.000 \n    0.063 \n    0.084 \n  \n  \n    education2 \n    -0.242 \n    0.112 \n    -2.162 \n    0.031 \n    -0.463 \n    -0.024 \n  \n  \n    education3 \n    -0.235 \n    0.134 \n    -1.761 \n    0.078 \n    -0.501 \n    0.023 \n  \n  \n    education4 \n    -0.020 \n    0.148 \n    -0.136 \n    0.892 \n    -0.317 \n    0.266 \n  \n\n\n\n\n\nP-value:\n\\[\nP(|Z| > |13.4|) \\approx 0\n\\]\n\n\n2 * pnorm(13.4,lower.tail = FALSE)\n\n[1] 6.046315e-41"
+    "text": "Coefficient for age\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.508 \n    0.311 \n    -17.692 \n    0.000 \n    -6.125 \n    -4.904 \n  \n  \n    age \n    0.076 \n    0.006 \n    13.648 \n    0.000 \n    0.065 \n    0.087 \n  \n  \n    education2 \n    -0.245 \n    0.113 \n    -2.172 \n    0.030 \n    -0.469 \n    -0.026 \n  \n  \n    education3 \n    -0.236 \n    0.135 \n    -1.753 \n    0.080 \n    -0.504 \n    0.024 \n  \n  \n    education4 \n    -0.024 \n    0.150 \n    -0.161 \n    0.872 \n    -0.323 \n    0.264 \n  \n\n\n\n\n\nP-value:\n\\[\nP(|Z| > |13.4|) \\approx 0\n\\]\n\n\n2 * pnorm(13.4,lower.tail = FALSE)\n\n[1] 6.046315e-41"
   },
   {
     "objectID": "slides/lec-22.html#coefficient-for-age-3",
     "href": "slides/lec-22.html#coefficient-for-age-3",
     "title": "LR: Inference + conditions",
     "section": "Coefficient for age",
-    "text": "Coefficient for age\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.385 \n    0.308 \n    -17.507 \n    0.000 \n    -5.995 \n    -4.788 \n  \n  \n    age \n    0.073 \n    0.005 \n    13.385 \n    0.000 \n    0.063 \n    0.084 \n  \n  \n    education2 \n    -0.242 \n    0.112 \n    -2.162 \n    0.031 \n    -0.463 \n    -0.024 \n  \n  \n    education3 \n    -0.235 \n    0.134 \n    -1.761 \n    0.078 \n    -0.501 \n    0.023 \n  \n  \n    education4 \n    -0.020 \n    0.148 \n    -0.136 \n    0.892 \n    -0.317 \n    0.266 \n  \n\n\n\n\n\nConclusion:\nThe p-value is very small, so we reject \\(H_0\\). The data provide sufficient evidence that age is a statistically significant predictor of whether someone is high risk of having heart disease, after accounting for education."
+    "text": "Coefficient for age\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.508 \n    0.311 \n    -17.692 \n    0.000 \n    -6.125 \n    -4.904 \n  \n  \n    age \n    0.076 \n    0.006 \n    13.648 \n    0.000 \n    0.065 \n    0.087 \n  \n  \n    education2 \n    -0.245 \n    0.113 \n    -2.172 \n    0.030 \n    -0.469 \n    -0.026 \n  \n  \n    education3 \n    -0.236 \n    0.135 \n    -1.753 \n    0.080 \n    -0.504 \n    0.024 \n  \n  \n    education4 \n    -0.024 \n    0.150 \n    -0.161 \n    0.872 \n    -0.323 \n    0.264 \n  \n\n\n\n\n\nConclusion:\nThe p-value is very small, so we reject \\(H_0\\). The data provide sufficient evidence that age is a statistically significant predictor of whether someone is high risk of having heart disease, after accounting for education."
   },
   {
     "objectID": "slides/lec-22.html#log-likelihood",
@@ -3441,7 +3441,7 @@
     "href": "slides/lec-22.html#model-with-age-and-education",
     "title": "LR: Inference + conditions",
     "section": "Model with age and education",
-    "text": "Model with age and education\n\n\n\n\nShould we add currentSmoker to this model?\n\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.385 \n    0.308 \n    -17.507 \n    0.000 \n    -5.995 \n    -4.788 \n  \n  \n    age \n    0.073 \n    0.005 \n    13.385 \n    0.000 \n    0.063 \n    0.084 \n  \n  \n    education2 \n    -0.242 \n    0.112 \n    -2.162 \n    0.031 \n    -0.463 \n    -0.024 \n  \n  \n    education3 \n    -0.235 \n    0.134 \n    -1.761 \n    0.078 \n    -0.501 \n    0.023 \n  \n  \n    education4 \n    -0.020 \n    0.148 \n    -0.136 \n    0.892 \n    -0.317 \n    0.266"
+    "text": "Model with age and education\n\n\n\n\nShould we add currentSmoker to this model?\n\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -5.508 \n    0.311 \n    -17.692 \n    0.000 \n    -6.125 \n    -4.904 \n  \n  \n    age \n    0.076 \n    0.006 \n    13.648 \n    0.000 \n    0.065 \n    0.087 \n  \n  \n    education2 \n    -0.245 \n    0.113 \n    -2.172 \n    0.030 \n    -0.469 \n    -0.026 \n  \n  \n    education3 \n    -0.236 \n    0.135 \n    -1.753 \n    0.080 \n    -0.504 \n    0.024 \n  \n  \n    education4 \n    -0.024 \n    0.150 \n    -0.161 \n    0.872 \n    -0.323 \n    0.264"
   },
   {
     "objectID": "slides/lec-22.html#should-we-add-currentsmoker-to-the-model",
@@ -3455,21 +3455,21 @@
     "href": "slides/lec-22.html#should-we-add-currentsmoker-to-the-model-1",
     "title": "LR: Inference + conditions",
     "section": "Should we add currentSmoker to the model?",
-    "text": "Should we add currentSmoker to the model?\nCalculate deviance for each model:\n\n(dev_reduced <- glance(risk_fit_reduced)$deviance)\n\n[1] 3300.135\n\n(dev_full <- glance(risk_fit_full)$deviance)\n\n[1] 3279.359\n\n\n\nDrop-in-deviance test statistic:\n\n(test_stat <- dev_reduced - dev_full)\n\n[1] 20.77589"
+    "text": "Should we add currentSmoker to the model?\nCalculate deviance for each model:\n\n(dev_reduced <- glance(risk_fit_reduced)$deviance)\n\n[1] 3244.187\n\n(dev_full <- glance(risk_fit_full)$deviance)\n\n[1] 3221.901\n\n\n\nDrop-in-deviance test statistic:\n\n(test_stat <- dev_reduced - dev_full)\n\n[1] 22.2863"
   },
   {
     "objectID": "slides/lec-22.html#should-we-add-currentsmoker-to-the-model-2",
     "href": "slides/lec-22.html#should-we-add-currentsmoker-to-the-model-2",
     "title": "LR: Inference + conditions",
     "section": "Should we add currentSmoker to the model?",
-    "text": "Should we add currentSmoker to the model?\nCalculate the p-value using a pchisq(), with degrees of freedom equal to the number of new model terms in the second model:\n\npchisq(test_stat, 1, lower.tail = FALSE) \n\n[1] 5.162887e-06\n\n\n\nConclusion: The p-value is very small, so we reject \\(H_0\\). The data provide sufficient evidence that the coefficient of currentSmoker is not equal to 0. Therefore, we should add it to the model."
+    "text": "Should we add currentSmoker to the model?\nCalculate the p-value using a pchisq(), with degrees of freedom equal to the number of new model terms in the second model:\n\npchisq(test_stat, 1, lower.tail = FALSE) \n\n[1] 2.348761e-06\n\n\n\nConclusion: The p-value is very small, so we reject \\(H_0\\). The data provide sufficient evidence that the coefficient of currentSmoker is not equal to 0. Therefore, we should add it to the model."
   },
   {
     "objectID": "slides/lec-22.html#drop-in-deviance-test-in-r",
     "href": "slides/lec-22.html#drop-in-deviance-test-in-r",
     "title": "LR: Inference + conditions",
     "section": "Drop-in-Deviance test in R",
-    "text": "Drop-in-Deviance test in R\n\nWe can use the anova function to conduct this test\nAdd test = \"Chisq\" to conduct the drop-in-deviance test\n\n\n\nanova(risk_fit_reduced$fit, risk_fit_full$fit, test = \"Chisq\") %>%\n  tidy()\n\n# A tibble: 2 × 5\n  Resid..Df Resid..Dev    df Deviance     p.value\n      <dbl>      <dbl> <dbl>    <dbl>       <dbl>\n1      4130      3300.    NA     NA   NA         \n2      4129      3279.     1     20.8  0.00000516"
+    "text": "Drop-in-Deviance test in R\n\nWe can use the anova function to conduct this test\nAdd test = \"Chisq\" to conduct the drop-in-deviance test\n\n\n\nanova(risk_fit_reduced$fit, risk_fit_full$fit, test = \"Chisq\") %>%\n  tidy()\n\n# A tibble: 2 × 5\n  Resid..Df Resid..Dev    df Deviance     p.value\n      <dbl>      <dbl> <dbl>    <dbl>       <dbl>\n1      4081      3244.    NA     NA   NA         \n2      4080      3222.     1     22.3  0.00000235"
   },
   {
     "objectID": "slides/lec-22.html#model-selection",
@@ -3483,21 +3483,91 @@
     "href": "slides/lec-22.html#aic-from-the-glance-function",
     "title": "LR: Inference + conditions",
     "section": "AIC from the glance() function",
-    "text": "AIC from the glance() function\nLet’s look at the AIC for the model that includes age, education, and currentSmoker\n\nglance(risk_fit_full)$AIC\n\n[1] 3291.359\n\n\n\nCalculating AIC\n\n- 2 * glance(risk_fit_full)$logLik + 2 * (5 + 1)\n\n[1] 3291.359"
+    "text": "AIC from the glance() function\nLet’s look at the AIC for the model that includes age, education, and currentSmoker\n\nglance(risk_fit_full)$AIC\n\n[1] 3233.901\n\n\n\nCalculating AIC\n\n- 2 * glance(risk_fit_full)$logLik + 2 * (5 + 1)\n\n[1] 3233.901"
   },
   {
     "objectID": "slides/lec-22.html#comparing-the-models-using-aic",
     "href": "slides/lec-22.html#comparing-the-models-using-aic",
     "title": "LR: Inference + conditions",
     "section": "Comparing the models using AIC",
-    "text": "Comparing the models using AIC\nLet’s compare the full and reduced models using AIC.\n\nglance(risk_fit_reduced)$AIC\n\n[1] 3310.135\n\nglance(risk_fit_full)$AIC\n\n[1] 3291.359\n\n\n\nBased on AIC, which model would you choose?"
+    "text": "Comparing the models using AIC\nLet’s compare the full and reduced models using AIC.\n\nglance(risk_fit_reduced)$AIC\n\n[1] 3254.187\n\nglance(risk_fit_full)$AIC\n\n[1] 3233.901\n\n\n\nBased on AIC, which model would you choose?"
   },
   {
     "objectID": "slides/lec-22.html#comparing-the-models-using-bic",
     "href": "slides/lec-22.html#comparing-the-models-using-bic",
     "title": "LR: Inference + conditions",
     "section": "Comparing the models using BIC",
-    "text": "Comparing the models using BIC\nLet’s compare the full and reduced models using BIC\n\nglance(risk_fit_reduced)$BIC\n\n[1] 3341.772\n\nglance(risk_fit_full)$BIC\n\n[1] 3329.323\n\n\n\nBased on BIC, which model would you choose?\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Comparing the models using BIC\nLet’s compare the full and reduced models using BIC\n\nglance(risk_fit_reduced)$BIC\n\n[1] 3285.764\n\nglance(risk_fit_full)$BIC\n\n[1] 3271.793\n\n\n\nBased on BIC, which model would you choose?"
+  },
+  {
+    "objectID": "slides/lec-22.html#the-model",
+    "href": "slides/lec-22.html#the-model",
+    "title": "LR: Inference + conditions",
+    "section": "The model",
+    "text": "The model\nLet’s predict high_risk from age, total cholesterol, and whether the patient is a current smoker:\n\nrisk_fit <- logistic_reg() %>%\n  set_engine(\"glm\") %>%\n  fit(high_risk ~ age + totChol + currentSmoker, \n      data = heart_disease, family = \"binomial\")\n\ntidy(risk_fit, conf.int = TRUE) %>% \n  kable(digits = 3)\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n    conf.low \n    conf.high \n  \n \n\n  \n    (Intercept) \n    -6.673 \n    0.378 \n    -17.647 \n    0.000 \n    -7.423 \n    -5.940 \n  \n  \n    age \n    0.082 \n    0.006 \n    14.344 \n    0.000 \n    0.071 \n    0.094 \n  \n  \n    totChol \n    0.002 \n    0.001 \n    1.940 \n    0.052 \n    0.000 \n    0.004 \n  \n  \n    currentSmoker1 \n    0.443 \n    0.094 \n    4.733 \n    0.000 \n    0.260 \n    0.627"
+  },
+  {
+    "objectID": "slides/lec-22.html#conditions-for-logistic-regression",
+    "href": "slides/lec-22.html#conditions-for-logistic-regression",
+    "title": "LR: Inference + conditions",
+    "section": "Conditions for logistic regression",
+    "text": "Conditions for logistic regression\n\nLinearity: The log-odds have a linear relationship with the predictors.\nRandomness: The data were obtained from a random process\nIndependence: The observations are independent from one another."
+  },
+  {
+    "objectID": "slides/lec-22.html#empirical-logit",
+    "href": "slides/lec-22.html#empirical-logit",
+    "title": "LR: Inference + conditions",
+    "section": "Empirical logit",
+    "text": "Empirical logit\nThe empirical logit is the log of the observed odds:\n\\[\n\\text{logit}(\\hat{p}) = \\log\\Big(\\frac{\\hat{p}}{1 - \\hat{p}}\\Big) = \\log\\Big(\\frac{\\# \\text{Yes}}{\\# \\text{No}}\\Big)\n\\]"
+  },
+  {
+    "objectID": "slides/lec-22.html#calculating-empirical-logit-categorical-predictor",
+    "href": "slides/lec-22.html#calculating-empirical-logit-categorical-predictor",
+    "title": "LR: Inference + conditions",
+    "section": "Calculating empirical logit (categorical predictor)",
+    "text": "Calculating empirical logit (categorical predictor)\nIf the predictor is categorical, we can calculate the empirical logit for each level of the predictor.\n\nheart_disease %>%\n  count(currentSmoker, high_risk) %>%\n  group_by(currentSmoker) %>%\n  mutate(prop = n/sum(n)) %>%\n  filter(high_risk == \"1\") %>%\n  mutate(emp_logit = log(prop/(1-prop)))\n\n# A tibble: 2 × 5\n# Groups:   currentSmoker [2]\n  currentSmoker high_risk     n  prop emp_logit\n  <fct>         <fct>     <int> <dbl>     <dbl>\n1 0             1           301 0.145     -1.77\n2 1             1           318 0.158     -1.67"
+  },
+  {
+    "objectID": "slides/lec-22.html#calculating-empirical-logit-quantitative-predictor",
+    "href": "slides/lec-22.html#calculating-empirical-logit-quantitative-predictor",
+    "title": "LR: Inference + conditions",
+    "section": "Calculating empirical logit (quantitative predictor)",
+    "text": "Calculating empirical logit (quantitative predictor)\n\nDivide the range of the predictor into intervals with approximately equal number of cases. (If you have enough observations, use 5 - 10 intervals.)\nCalculate the mean value of the predictor in each interval.\nCompute the empirical logit for each interval.\n\n\nThen, create a plot of the empirical logit versus the mean value of the predictor in each interval."
+  },
+  {
+    "objectID": "slides/lec-22.html#empirical-logit-plot-in-r-quantitative-predictor",
+    "href": "slides/lec-22.html#empirical-logit-plot-in-r-quantitative-predictor",
+    "title": "LR: Inference + conditions",
+    "section": "Empirical logit plot in R (quantitative predictor)",
+    "text": "Empirical logit plot in R (quantitative predictor)\n\nemplogitplot1(high_risk ~ age, \n              data = heart_disease, \n              ngroups = 10)"
+  },
+  {
+    "objectID": "slides/lec-22.html#empirical-logit-plot-in-r-interactions",
+    "href": "slides/lec-22.html#empirical-logit-plot-in-r-interactions",
+    "title": "LR: Inference + conditions",
+    "section": "Empirical logit plot in R (interactions)",
+    "text": "Empirical logit plot in R (interactions)\n\nemplogitplot2(high_risk ~ age + currentSmoker, data = heart_disease, \n              ngroups = 10, \n              putlegend = \"bottomright\")"
+  },
+  {
+    "objectID": "slides/lec-22.html#checking-linearity",
+    "href": "slides/lec-22.html#checking-linearity",
+    "title": "LR: Inference + conditions",
+    "section": "Checking linearity",
+    "text": "Checking linearity\n\n\n\nemplogitplot1(high_risk ~ age, \n              data = heart_disease, \n              ngroups = 10)\n\n\n\n\n\n\n\n\n\n\nemplogitplot1(high_risk ~ totChol, \n              data = heart_disease, \n              ngroups = 10)\n\n\n\n\n\n\n\n\n\n\n\n✅ The linearity condition is satisfied. There is a linear relationship between the empirical logit and the predictor variables."
+  },
+  {
+    "objectID": "slides/lec-22.html#checking-randomness",
+    "href": "slides/lec-22.html#checking-randomness",
+    "title": "LR: Inference + conditions",
+    "section": "Checking randomness",
+    "text": "Checking randomness\nWe can check the randomness condition based on the context of the data and how the observations were collected.\n\nWas the sample randomly selected?\nIf the sample was not randomly selected, ask whether there is reason to believe the observations in the sample differ systematically from the population of interest.\n\n\n✅ The randomness condition is satisfied. We do not have reason to believe that the participants in this study differ systematically from adults in the U.S. in regards to health characteristics and risk of heart disease."
+  },
+  {
+    "objectID": "slides/lec-22.html#checking-independence",
+    "href": "slides/lec-22.html#checking-independence",
+    "title": "LR: Inference + conditions",
+    "section": "Checking independence",
+    "text": "Checking independence\n\nWe can check the independence condition based on the context of the data and how the observations were collected.\nIndependence is most often violated if the data were collected over time or there is a strong spatial relationship between the observations.\n\n\n✅ The independence condition is satisfied. It is reasonable to conclude that the participants’ health characteristics are independent of one another.\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lec-3.html#announcements",
@@ -3574,14 +3644,14 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -4400,7 +4470,7 @@
     "href": "computing-pipelines.html",
     "title": "Pipelines",
     "section": "",
-    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Dig deeper into tidy modeling with R at https://www.tmwr.org\n\nlibrary(knitr)"
+    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Search for functions across packages at https://www.tidymodels.org/find/\n\nlibrary(knitr)"
   },
   {
     "objectID": "computing-pipelines.html#simple-linear-regression",
