@@ -13,7 +13,7 @@ In this assignment, you'll get to put into practice the logistic regression skil
 In this assignment, you will...
 
 -   Fit and interpret multinomial logistic regression models.
--   ...
+-   Evaluate model conditions
 -   Continue developing a workflow for reproducible data analysis.
 
 ### Getting started
