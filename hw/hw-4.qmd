@@ -37,19 +37,23 @@ library(patchwork)
 
 ## Data
 
-For this assignment, we will analyze data from the eye witness identification experiment in [Carlson and Carlson (2014)](https://www.sciencedirect.com/science/article/pii/S2211368114000229). In this experiment, participants were asked to watch a video of a mock crime (from the first person perspective), spend a few minutes completing a random task, and then identify the perpetrator of the mock crime from a line up shown on the screen. Every lineup in this analysis included the true perpetrator from the video. After viewing the line-up , each participant could make one of the following decisions (**`id`**): 
+For this assignment, we will analyze data from the eye witness identification experiment in [Carlson and Carlson (2014)](https://www.sciencedirect.com/science/article/pii/S2211368114000229).
+In this experiment, participants were asked to watch a video of a mock crime (from the first person perspective), spend a few minutes completing a random task, and then identify the perpetrator of the mock crime from a line up shown on the screen.
+Every lineup in this analysis included the true perpetrator from the video.
+After viewing the line-up , each participant could make one of the following decisions (**`id`**):
 
-- **correct**: correctly identified the true perpetrator
-- **foil**: incorrectly identified the "foil", i.e. a person who looks very similar to the perpetrator
-- **reject**: incorrectly concluded the true perpetrator is not in the lineup
+-   **correct**: correctly identified the true perpetrator
+-   **foil**: incorrectly identified the "foil", i.e. a person who looks very similar to the perpetrator
+-   **reject**: incorrectly concluded the true perpetrator is not in the lineup
 
-The main objective of the analysis is to understand how different conditions of the mock crime and suspect lineup affect the decision made by the participant. We will consider the following conditions to describe the decisions: 
+The main objective of the analysis is to understand how different conditions of the mock crime and suspect lineup affect the decision made by the participant.
+We will consider the following conditions to describe the decisions:
 
-- **`lineup`**: How potential suspects are shown to the participants
-    - **Simultaneous Lineup**: Participants were shown photos of all 6 potential suspects at the same time and were required to make a single decision (identify someone from the lineup or reject the lineup).
-    - **Sequential 5 Lineup**: Photos of the 6 suspects were shown one at a time. The participant was required to make a decision (choose or don't choose) as each photo was shown. Once a decision was made, participants were not allowed to reexamine a photo. If the participant made an identification, the remaining photos were not shown. In each of these lineups the true perpetrator was always the 5<sup>th</sup> photo in the lineup.
-- **`weapon`**:  Whether or not a weapon was present in the video of the mock crime.
-- **`feature`**: Whether or not the perpetrator had a distinctive marking on his face. In this experiment, the distinctive feature was a large "N" sticker on one cheek. (The letter "N" was chosen to represent the first author's alma mater - University of Nebraska.)
+-   **`lineup`**: How potential suspects are shown to the participants
+    -   **Simultaneous Lineup**: Participants were shown photos of all 6 potential suspects at the same time and were required to make a single decision (identify someone from the lineup or reject the lineup).
+    -   **Sequential 5 Lineup**: Photos of the 6 suspects were shown one at a time. The participant was required to make a decision (choose or don't choose) as each photo was shown. Once a decision was made, participants were not allowed to reexamine a photo. If the participant made an identification, the remaining photos were not shown. In each of these lineups the true perpetrator was always the 5<sup>th</sup> photo in the lineup.
+-   **`weapon`**: Whether or not a weapon was present in the video of the mock crime.
+-   **`feature`**: Whether or not the perpetrator had a distinctive marking on his face. In this experiment, the distinctive feature was a large "N" sticker on one cheek. (The letter "N" was chosen to represent the first author's alma mater - University of Nebraska.)
 
 The data may be found in `eyewitness.csv` in the `data` folder.
 
@@ -61,9 +65,9 @@ ew <- ew %>%
   mutate(id = as_factor(id))
 ```
 
-## Exercises 
+## Exercises
 
-1. Let's begin by doing some exploratory data analysis. The univariate (single variable) plots for each of the predictor variables and the response variable are shown below. 
+1.  Let's begin by doing some exploratory data analysis. The univariate (single variable) plots for each of the predictor variables and the response variable are shown below.
 
 ```{r}
 #| echo: false
@@ -91,32 +95,36 @@ p4 <- ggplot(data = ew, aes(x = feature)) +
 (p1 + p2) / (p3 + p4)
 ```
 
-Complete the exploratory data analysis by creating the plots and/or summary statistics to examine the relationship between the response variable (`id`) and each of the explanatory variables (`lineup`, `weapon`, and `feature`). 
+Complete the exploratory data analysis by creating the plots and/or summary statistics to examine the relationship between the response variable (`id`) and each of the explanatory variables (`lineup`, `weapon`, and `feature`).
 
-2. Using the plots/tables from Exercise 1: 
+2.  Using the plots/tables from Exercise 1:
 
-  - What is one thing you learn about the data from the univariate plots?
-  - Based on the bivariate plots, do any of the predictors appear to have a significant effect on the `id`? Briefly explain.
+-   What is one thing you learn about the data from the univariate plots?
+-   Based on the bivariate plots, do any of the predictors appear to have a significant effect on the `id`? Briefly explain.
 
-3. Briefly explain why you should use a multinomial logistic regression model to predict `id` using `lineup`, `weapon` and `feature`. 
+3.  Briefly explain why you should use a multinomial logistic regression model to predict `id` using `lineup`, `weapon` and `feature`.
 
-4. Fit the multinomial logistic model that only includes main effects. Display the model output. 
-  - What is the baseline category for the response variable? 
-  - Interpret the intercepts for each part of the model in terms of the odds.
-  - Interpret the coefficients of `lineup` for each part of the model in terms of the odds.
-    
-5. You want to consider all possible first-order interaction effects (interaction effects between two variables) for the model. 
-  - Use the appropriate test to determine if there is at least one significant interaction effect.
-  - Based on your test, is there evidence of any significant interaction effects?
+4.  Fit the multinomial logistic model that only includes main effects.
+    Display the model output.
 
-*Regardless of your answer to Question 5, use the model that includes the interaction terms for the remainder of the assignment.* 
+-   What is the baseline category for the response variable?
+-   Interpret the intercepts for each part of the model in terms of the odds.
+-   Interpret the coefficients of `lineup` for each part of the model in terms of the odds.
 
-5. According to the model, 
-  - If there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the **log-odds** of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?
-  - If there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the **odds** of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?
-  - Which group of participants (i.e., which set of experimental conditions) is described by the intercept?
+5.  You want to consider all possible first-order interaction effects (interaction effects between two variables) for the model.
 
-6. Are the conditions inference met? List of the conditions, create visualizations and/or summary tables to check the conditions and evaluate whether each condition is met. Include an assessment about each condition and a brief explanation about your conclusion.
+-   Use the appropriate test to determine if there is at least one significant interaction effect.
+-   Based on your test, is there evidence of any significant interaction effects?
+
+*Regardless of your answer to Question 5, use the model that includes the interaction terms for the remainder of the assignment.*
+
+5.  According to the model,
+
+-   If there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the **log-odds** of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?
+-   If there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the **odds** of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?
+-   Which group of participants (i.e., which set of experimental conditions) is described by the intercept?
+
+6.  Are the conditions inference met? List of the conditions, create visualizations and/or summary tables to check the conditions and evaluate whether each condition is met. Include an assessment about each condition and a brief explanation about your conclusion.
 
 ```{r}
 #| include: false
@@ -144,7 +152,6 @@ ew_aug <- augment(ew_fit, new_data = ew) %>%
     reject_resid  = reject - .pred_reject
   )
 ```
-
 
 ```{r}
 #| echo: false
@@ -208,11 +215,10 @@ ew_aug %>%
   kable(digits = 10)
 ```
 
+7.  Use the model to predict the decision made by each participant. Make a table of the predicted vs. the actual decisions.
 
-7. Use the model to predict the decision made by each participant. Make a table of the predicted vs. the actual decisions. 
-
-  - Briefly describe how the predicted decision is determined for each participant. 
-  - What is the misclassification rate? 
+-   Briefly describe how the predicted decision is determined for each participant.
+-   What is the misclassification rate?
 
 ## Submission
 
