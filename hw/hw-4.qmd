@@ -137,10 +137,6 @@ ew_fit <- multinom_reg() %>%
         weapon*feature, data = ew)
 
 ew_fit <- repair_call(ew_fit, data = ew)
-```
-
-```{r}
-#| echo: false
 
 ew_aug <- augment(ew_fit, new_data = ew) %>%
   mutate(
@@ -151,10 +147,6 @@ ew_aug <- augment(ew_fit, new_data = ew) %>%
     foil_resid    = foil - .pred_foil,
     reject_resid  = reject - .pred_reject
   )
-```
-
-```{r}
-#| echo: false
 
 par(mfrow = c(2,2))
 arm::binnedplot(
@@ -180,10 +172,6 @@ arm::binnedplot(
   xlab = "Predicted Probabilities", 
   col.int = FALSE
   )
-```
-
-```{r}
-#| echo: false
 
 # average residuals by ID and lineup
 
