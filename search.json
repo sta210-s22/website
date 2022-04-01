@@ -2545,7 +2545,7 @@
     "href": "slides/lec-23.html#model-result",
     "title": "Multinomial Logistic Regression (MultiLR)",
     "section": "Model result",
-    "text": "Model result\n\nhealth_fit\n\nparsnip model object\n\nFit time:  95ms \nCall:\nnnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, \n    trace = FALSE)\n\nCoefficients:\n      (Intercept)           Age PhysActiveYes\nVgood   1.2053460  0.0009101848    -0.3209047\nGood    1.9476261 -0.0023686122    -1.0014925\nFair    0.9145492  0.0030462534    -1.6454297\nPoor   -1.5211414  0.0221905681    -2.6556343\n\nResidual Deviance: 17588.88 \nAIC: 17612.88"
+    "text": "Model result\n\nhealth_fit\n\nparsnip model object\n\nFit time:  97ms \nCall:\nnnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, \n    trace = FALSE)\n\nCoefficients:\n      (Intercept)           Age PhysActiveYes\nVgood   1.2053460  0.0009101848    -0.3209047\nGood    1.9476261 -0.0023686122    -1.0014925\nFair    0.9145492  0.0030462534    -1.6454297\nPoor   -1.5211414  0.0221905681    -2.6556343\n\nResidual Deviance: 17588.88 \nAIC: 17612.88"
   },
   {
     "objectID": "slides/lec-23.html#next-steps",
@@ -3854,14 +3854,14 @@
     "href": "slides/lec-3.html#step-3-fit-model-estimate-parameters",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "Step 3: Fit model & estimate parameters",
-    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  4ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
+    "text": "Step 3: Fit model & estimate parameters\nusing formula syntax\n\n# #| code-line-numbers: \"|3\"\n\nlinear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nparsnip model object\n\nFit time:  5ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187"
   },
   {
     "objectID": "slides/lec-3.html#a-closer-look-at-model-output",
     "href": "slides/lec-3.html#a-closer-look-at-model-output",
     "title": "SLR: Model fitting in R with tidymodels",
     "section": "A closer look at model output",
-    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  1ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
+    "text": "A closer look at model output\n\nmovie_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(audience ~ critics, data = movie_scores)\n\nmovie_fit\n\nparsnip model object\n\nFit time:  2ms \n\nCall:\nstats::lm(formula = audience ~ critics, data = data)\n\nCoefficients:\n(Intercept)      critics  \n    32.3155       0.5187  \n\n\n\\[\\widehat{\\text{audience}} = 32.3155 + 0.5187 \\times \\text{critics}\\]\n\nNote: The intercept is off by a tiny bit from the hand-calculated intercept, this is likely just rounding error in the hand calculation."
   },
   {
     "objectID": "slides/lec-3.html#the-regression-output",
@@ -5044,35 +5044,35 @@
     "href": "weeks/week-12.html",
     "title": "Week 12",
     "section": "",
-    "text": "Important\n\n\n\nDue dates:\nTo be posted."
+    "text": "Important\n\n\n\nDue dates: None."
   },
   {
     "objectID": "weeks/week-12.html#prepare",
     "href": "weeks/week-12.html#prepare",
     "title": "Week 12",
     "section": "Prepare",
-    "text": "Prepare"
+    "text": "Prepare\n📖 Read Introduction to Modern Statistics, Chp 26: Inference for logistic regression"
   },
   {
     "objectID": "weeks/week-12.html#participate",
     "href": "weeks/week-12.html#participate",
     "title": "Week 12",
     "section": "Participate",
-    "text": "Participate"
+    "text": "Participate\n🖥️ Lecture 22 - LR: Inference + conditions\n🖥️ Lecture 23 - Multinomial logistic regression (MultiLR)"
   },
   {
     "objectID": "weeks/week-12.html#practice",
     "href": "weeks/week-12.html#practice",
     "title": "Week 12",
     "section": "Practice",
-    "text": "Practice"
+    "text": "Practice\nNo application exercises this week."
   },
   {
     "objectID": "weeks/week-12.html#perform",
     "href": "weeks/week-12.html#perform",
     "title": "Week 12",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n✍️ HW 4 - Multinomial logistic regression\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-14.html",
@@ -5198,14 +5198,14 @@
     "href": "weeks/week-11.html#participate",
     "title": "Week 11",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lecture 20 - LR: Prediction / classification\n🖥️ Lecture 21 - LR: Model validation (to be posted)"
+    "text": "Participate\n🖥️ Lecture 20 - LR: Prediction / classification\n🖥️ Lecture 21 - LR: Model validation"
   },
   {
     "objectID": "weeks/week-11.html#practice",
     "href": "weeks/week-11.html#practice",
     "title": "Week 11",
     "section": "Practice",
-    "text": "Practice\n📋 Application Exercise 10 (to be posted)"
+    "text": "Practice\n📋 Application Exercise 10 - Flight delays"
   },
   {
     "objectID": "weeks/week-11.html#perform",
@@ -5254,7 +5254,7 @@
     "href": "weeks/week-13.html",
     "title": "Week 13",
     "section": "",
-    "text": "Important\n\n\n\nDue dates:\nTo be posted."
+    "text": "Important\n\n\n\nDue dates:\n\nLab 6 - Friday, April 8\nHW 4 - Friday, April 8\nProject drafts - Sunday, April 10"
   },
   {
     "objectID": "weeks/week-13.html#prepare",
@@ -5268,21 +5268,21 @@
     "href": "weeks/week-13.html#participate",
     "title": "Week 13",
     "section": "Participate",
-    "text": "Participate"
+    "text": "Participate\n🖥️ Lecture 24 - To be posted\n🖥️ Lecture 25 - To be posted"
   },
   {
     "objectID": "weeks/week-13.html#practice",
     "href": "weeks/week-13.html#practice",
     "title": "Week 13",
     "section": "Practice",
-    "text": "Practice"
+    "text": "Practice\nTo be posted."
   },
   {
     "objectID": "weeks/week-13.html#perform",
     "href": "weeks/week-13.html#perform",
     "title": "Week 13",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n✍️ HW 4 - Multinomial logistic regression\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-10.html",
@@ -5612,6 +5612,62 @@
     "title": "Movie budgets and revenues",
     "section": "Appendix",
     "text": "Appendix\nBelow is a list of genres in the data set:\n\nmovies %>% \n  distinct(genre) %>%\n  arrange(genre) %>% \n  datatable()"
+  },
+  {
+    "objectID": "ae/ae-10-flight-delays.html",
+    "href": "ae/ae-10-flight-delays.html",
+    "title": "AE 10: Flight delays",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-10-flight-delays-YOUR_GITHUB_USERNAME to get started."
+  },
+  {
+    "objectID": "ae/ae-10-flight-delays.html#packages",
+    "href": "ae/ae-10-flight-delays.html#packages",
+    "title": "AE 10: Flight delays",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)"
+  },
+  {
+    "objectID": "ae/ae-10-flight-delays.html#data",
+    "href": "ae/ae-10-flight-delays.html#data",
+    "title": "AE 10: Flight delays",
+    "section": "Data",
+    "text": "Data\nFor this application exercise we will work with a dataset of 25,000 randomly sampled flights that departed one of three NYC airports (JFK, LGA, EWR) in 2013.\n\nflight_data <- read_csv(\"data/flight-data.csv\")\n\nRows: 25000 Columns: 10\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (4): origin, dest, carrier, arr_delay\ndbl  (4): dep_time, flight, air_time, distance\ndttm (1): time_hour\ndate (1): date\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nConvert arr_delay to factor with levels \"late\" (first level) and \"on_time\" (second level). This variable is our outcome and it indicates whether the flight’s arrival was more than 30 minutes.\n\n\nflight_data <- flight_data %>%\n  mutate(arr_delay = as.factor(arr_delay))\n\nlevels(flight_data$arr_delay)\n\n[1] \"late\"    \"on_time\"\n\n\n\nLet’s get started with some data prep: Convert all variables that are character strings to factors.\n\n\n#flight_data <- flight_data %>%\n#  mutate(\n#    origin = as.factor(origin),\n#    carrier = as.factor(carrier),\n#    dest = as.factor(dest)\n#    )\n\nflight_data <- flight_data %>%\n  #go across all columns and convert that are characters to factors\n  #go across all columns and convert if is.character = TRUE to factors\n  #go across all columns and if is.character apply as.factor\n  mutate(across(where(is.character), as.factor))"
+  },
+  {
+    "objectID": "ae/ae-10-flight-delays.html#modeling-prep",
+    "href": "ae/ae-10-flight-delays.html#modeling-prep",
+    "title": "AE 10: Flight delays",
+    "section": "Modeling prep",
+    "text": "Modeling prep\n\nSplit the data into testing (75%) and training (25%), and save each subset.\n\n\nset.seed(222)\n\nflight_split <- initial_split(flight_data)\n\nflight_train <- training(flight_split)\nflight_test <- testing(flight_split)\n\n\nSpecify a logistic regression model that uses the \"glm\" engine.\n\n\nflight_spec <- logistic_reg() %>%\n  set_engine(\"glm\")\n\nNext, we’ll create two recipes and workflows and compare them to each other."
+  },
+  {
+    "objectID": "ae/ae-10-flight-delays.html#model-1-everything-and-the-kitchen-sink",
+    "href": "ae/ae-10-flight-delays.html#model-1-everything-and-the-kitchen-sink",
+    "title": "AE 10: Flight delays",
+    "section": "Model 1: Everything and the kitchen sink",
+    "text": "Model 1: Everything and the kitchen sink\n\nDefine a recipe that predicts arr_delay using all variables except for flight and time_hour, which, in combination, can be used to identify a flight. Also make sure this recipe handles dummy coding as well as issues that can arise due to having categorical variables with some levels apparent in the training set but not in the testing set. Call this recipe flights_rec1.\n\n\nflights_rec1 <- recipe(arr_delay ~ ., data = flight_train) %>%\n  update_role(flight, time_hour, new_role = \"id\") %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors())\n\n\nCreate a workflow that uses flights_rec1 and the model you specified.\n\n\nflight_wflow1 <- workflow() %>%\n  add_recipe(flights_rec1) %>%\n  add_model(flight_spec)\n\n\nFit the this model to the training data using your workflow and display a tidy summary of the model fit.\n\n\nflight_fit1 <- flight_wflow1 %>%\n  fit(data = flight_train)\n\ntidy(flight_fit1)\n\n# A tibble: 119 × 5\n   term          estimate   std.error statistic   p.value\n   <chr>            <dbl>       <dbl>     <dbl>     <dbl>\n 1 (Intercept)  13.3      287.          0.0464  9.63e-  1\n 2 dep_time     -0.00164    0.0000504 -32.6     1.04e-233\n 3 air_time     -0.0349     0.00179   -19.5     1.75e- 84\n 4 distance      0.00533    0.00523     1.02    3.08e-  1\n 5 date          0.000227   0.000198    1.15    2.51e-  1\n 6 origin_JFK    0.0830     0.102       0.815   4.15e-  1\n 7 origin_LGA   -0.0360     0.0983     -0.366   7.14e-  1\n 8 dest_ACK    -12.4      287.         -0.0434  9.65e-  1\n 9 dest_ALB    -12.4      287.         -0.0433  9.65e-  1\n10 dest_ANC     -3.75     928.         -0.00404 9.97e-  1\n# … with 109 more rows\n\n\n\nPredict arr_delay for the testing data using this model.\n\n\nflight_aug1 <- augment(flight_fit1, flight_test)\n\n\nPlot the ROC curve and find the area under the curve. Comment on how well you think this model has done for predicting arrival delay.\n\n\nflight_aug1 %>%\n  roc_curve(\n    truth = arr_delay,\n    .pred_late\n  ) %>%\n  autoplot()\n\n\n\nflight_aug1 %>%\n  roc_auc(\n    truth = arr_delay,\n    .pred_late\n  )\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  <chr>   <chr>          <dbl>\n1 roc_auc binary         0.734"
+  },
+  {
+    "objectID": "ae/ae-10-flight-delays.html#model-2-lets-be-a-bit-more-thoughtful",
+    "href": "ae/ae-10-flight-delays.html#model-2-lets-be-a-bit-more-thoughtful",
+    "title": "AE 10: Flight delays",
+    "section": "Model 2: Let’s be a bit more thoughtful",
+    "text": "Model 2: Let’s be a bit more thoughtful\n\nDefine a new recipe, flights_rec2, that, in addition to what was done in flights_rec1, adds features for day of week and month based on date and also adds indicators for all US holidays (also based on date). A list of these holidays can be found in timeDate::listHolidays(\"US\"). Once these features are added, date should be removed from the data. Then, create a new workflow, fit the same model (logistic regression) to the training data, and do predictions on the testing data. Finally, draw another ROC curve and find the area under the curve. Compare the predictive performance of this new model to the previous one. Based on the area under the curve statistic, which model does better?"
+  },
+  {
+    "objectID": "ae/ae-10-flight-delays.html#putting-it-altogether",
+    "href": "ae/ae-10-flight-delays.html#putting-it-altogether",
+    "title": "AE 10: Flight delays",
+    "section": "Putting it altogether",
+    "text": "Putting it altogether\n\nCreate an ROC curve that plots both models, in different colors, and adds a legend indicating which model is which."
+  },
+  {
+    "objectID": "ae/ae-10-flight-delays.html#acknowledgement",
+    "href": "ae/ae-10-flight-delays.html#acknowledgement",
+    "title": "AE 10: Flight delays",
+    "section": "Acknowledgement",
+    "text": "Acknowledgement\nThis exercise was inspired by https://www.tidymodels.org/start/recipes/."
   },
   {
     "objectID": "ae/ae-6-the-office-cv.html",
