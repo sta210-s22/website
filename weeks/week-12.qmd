@@ -1,22 +1,30 @@
 ---
 title: "Week 12"
-subtitle: "TBA"
+subtitle: "Multinomial logistic regression"
 editor: visual
 ---
 
 ::: callout-important
-Due dates:
+Due dates: None.
 :::
-
-To be posted.
 
 ## Prepare
 
+📖 Read Introduction to Modern Statistics, Chp 26: [Inference for logistic regression](https://openintro-ims.netlify.app/inf-model-logistic.html)
+
 ## Participate
+
+🖥️ [Lecture 22 - LR: Inference + conditions](/slides/lec-22.html)
+
+🖥️ [Lecture 23 - Multinomial logistic regression (MultiLR)](/slides/lec-23.html)
 
 ## Practice
 
+No application exercises this week.
+
 ## Perform
+
+✍️ [HW 4 - Multinomial logistic regression](/hw/hw-4.html)
 
 <br><br>
 

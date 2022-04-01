@@ -6,17 +6,27 @@ editor: visual
 
 ::: callout-important
 Due dates:
-:::
 
-To be posted.
+-   Lab 6 - Friday, April 8
+-   HW 4 - Friday, April 8
+-   Project drafts - Sunday, April 10
+:::
 
 ## Prepare
 
 ## Participate
 
+🖥️ [Lecture 24 - To be posted](/slides/lec-24.html)
+
+🖥️ [Lecture 25 - To be posted](/slides/lec-25.html)
+
 ## Practice
 
+To be posted.
+
 ## Perform
+
+✍️ [HW 4 - Multinomial logistic regression](/hw/hw-4.html)
 
 <br><br>
 

@@ -20,11 +20,11 @@ Catch up with previously assigned readings if you've fallen behind.
 
 🖥️ [Lecture 20 - LR: Prediction / classification](/slides/lec-20.html)
 
-🖥️ Lecture 21 - LR: Model validation (to be posted)
+🖥️ [Lecture 21 - LR: Model validation](/slides/lec-21.html)
 
 ## Practice
 
-📋 Application Exercise 10 (to be posted)
+📋 [Application Exercise 10 - Flight delays](/ae/ae-10-flight-delays.html)
 
 ## Perform
 
