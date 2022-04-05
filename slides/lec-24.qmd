@@ -160,7 +160,6 @@ Why do you think no observations were predicted to have a rating of "Excellent",
 
 ```{r}
 #| echo: false
-#| eval: false
 
 p1 <- ggplot(nhanes_adult, aes(x = HealthGen)) + 
   geom_bar() +
@@ -281,7 +280,6 @@ nhanes_adult <- nhanes_adult %>%
 ## Checking linearity
 
 ```{r}
-#| eval: false
 #| layout-ncol: 2
 
 emplogitplot1(Excellent ~ Age, data = nhanes_adult, ngroups = 5, main = "Excellent vs. Age")
@@ -291,7 +289,6 @@ emplogitplot1(Vgood ~ Age, data = nhanes_adult, ngroups = 5, main = "Vgood vs. A
 ## Checking linearity
 
 ```{r}
-#| eval: false
 #| layout-ncol: 2
 
 emplogitplot1(Good ~ Age, data = nhanes_adult, ngroups = 5, main = "Good vs. Age")
@@ -301,8 +298,6 @@ emplogitplot1(Fair ~ Age, data = nhanes_adult, ngroups = 5, main = "Fair vs. Age
 ## Checking linearity
 
 ```{r}
-#| eval: false
-
 emplogitplot1(Poor ~ Age, data = nhanes_adult, ngroups = 5, main = "Poor vs. Age")
 ```
 
