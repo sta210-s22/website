@@ -233,10 +233,10 @@ anova(reduced_fit$fit, full_fit$fit, test = "Chisq") %>%
 At least one coefficient associated with `Education` is non-zero.
 Therefore, we will include `Education` in the model.
 
-## Model with `Education`
+## Model with `Education` {.smaller}
 
 ```{r}
-tidy(full_fit, conf.int = T)
+tidy(full_fit, conf.int = T) %>% print(n = 28)
 ```
 
 ## Compare NHANES models using AIC
