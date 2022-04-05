@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.186">
+  <meta name="generator" content="quarto-0.9.187">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - LR: Prediction / classification</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -708,37 +708,36 @@ Computational engine: glm </code></pre>
 <span id="cb20-3"><a href="#cb20-3"></a></span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="fu">tidy</span>(email_fit) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">31</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code># A tibble: 28 × 5
-   term            estimate std.error statistic  p.value
-   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
- 1 (Intercept)     -0.786     0.269     -2.92   3.53e- 3
- 2 image           -1.69      0.948     -1.78   7.52e- 2
- 3 inherit          0.354     0.181      1.95   5.07e- 2
- 4 viagra           2.17    110.         0.0196 9.84e- 1
- 5 password        -0.966     0.406     -2.38   1.74e- 2
- 6 num_char         0.0473    0.0246     1.92   5.47e- 2
- 7 line_breaks     -0.00498   0.00140   -3.55   3.84e- 4
- 8 exclaim_subj    -0.206     0.286     -0.719  4.72e- 1
- 9 exclaim_mess     0.00844   0.00187    4.50   6.83e- 6
-10 to_multiple_X1  -2.62      0.369     -7.10   1.28e-12
-11 cc_X.1.68.      -0.346     0.519     -0.666  5.05e- 1
-12 attach_X.1.21.   2.14      0.398      5.37   7.72e- 8
-13 dollar_X.1.64.   0.134     0.230      0.583  5.60e- 1
-14 winner_yes       2.23      0.438      5.09   3.53e- 7
-15 format_X1       -0.937     0.165     -5.68   1.38e- 8
-16 re_subj_X1      -2.95      0.464     -6.36   1.97e-10
-17 urgent_subj_X1   4.75      1.24       3.83   1.30e- 4
-18 number_small    -0.918     0.173     -5.32   1.03e- 7
-19 number_big      -0.149     0.256     -0.585  5.59e- 1
-20 time_dow_Mon    -0.0738    0.317     -0.233  8.16e- 1
-21 time_dow_Tue     0.149     0.290      0.514  6.07e- 1
-22 time_dow_Wed    -0.0966    0.288     -0.335  7.38e- 1
-23 time_dow_Thu    -0.0648    0.294     -0.220  8.26e- 1
-24 time_dow_Fri     0.00976   0.292      0.0335 9.73e- 1
-25 time_dow_Sat     0.248     0.308      0.803  4.22e- 1
-26 time_month_Feb   0.763     0.187      4.09   4.29e- 5
-27 time_month_Mar   0.549     0.185      2.96   3.03e- 3
-28 time_month_Apr -12.2     384.        -0.0318 9.75e- 1</code></pre>
+<pre><code># A tibble: 27 × 5
+   term           estimate std.error statistic  p.value
+   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1 (Intercept)    -0.867     0.259     -3.34   8.32e- 4
+ 2 image          -1.72      0.941     -1.83   6.78e- 2
+ 3 inherit         0.359     0.179      2.01   4.48e- 2
+ 4 viagra          1.90     40.6        0.0469 9.63e- 1
+ 5 password       -0.951     0.405     -2.35   1.88e- 2
+ 6 num_char        0.0475    0.0246     1.93   5.35e- 2
+ 7 line_breaks    -0.00499   0.00140   -3.55   3.78e- 4
+ 8 exclaim_subj   -0.196     0.287     -0.682  4.95e- 1
+ 9 exclaim_mess    0.00845   0.00188    4.49   6.99e- 6
+10 to_multiple_X1 -2.65      0.370     -7.17   7.78e-13
+11 cc_X.1.68.     -0.350     0.518     -0.676  4.99e- 1
+12 attach_X.1.21.  2.17      0.399      5.44   5.19e- 8
+13 dollar_X.1.64.  0.122     0.230      0.529  5.97e- 1
+14 winner_yes      2.25      0.438      5.14   2.79e- 7
+15 format_X1      -0.945     0.165     -5.71   1.10e- 8
+16 re_subj_X1     -2.96      0.463     -6.39   1.61e-10
+17 urgent_subj_X1  4.77      1.26       3.79   1.51e- 4
+18 number_small   -0.928     0.173     -5.36   8.48e- 8
+19 number_big     -0.190     0.256     -0.740  4.59e- 1
+20 time_dow_Mon    0.116     0.307      0.379  7.05e- 1
+21 time_dow_Tue    0.394     0.279      1.41   1.58e- 1
+22 time_dow_Wed   -0.175     0.285     -0.613  5.40e- 1
+23 time_dow_Thu    0.134     0.288      0.467  6.41e- 1
+24 time_dow_Fri    0.101     0.288      0.352  7.25e- 1
+25 time_dow_Sat    0.308     0.310      0.995  3.20e- 1
+26 time_month_Feb  0.767     0.187      4.11   3.99e- 5
+27 time_month_Mar  0.524     0.186      2.82   4.81e- 3</code></pre>
 </div>
 </div>
 </section></section>
@@ -757,16 +756,16 @@ Computational engine: glm </code></pre>
 <pre><code># A tibble: 981 × 23
    .pred_0  .pred_1 spam  to_multiple from     cc sent_email time               
      &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt; &lt;int&gt; &lt;fct&gt;      &lt;dttm&gt;             
- 1   0.959 0.0414   0     0           1         0 0          2012-01-01 07:03:59
- 2   0.995 0.00541  0     1           1         0 1          2012-01-01 17:55:06
- 3   0.999 0.00142  0     0           1         1 1          2012-01-01 19:38:32
- 4   0.997 0.00330  0     0           1         2 0          2012-01-01 23:32:53
- 5   0.988 0.0116   0     0           1         0 0          2012-01-02 05:42:16
- 6   0.999 0.000849 0     0           1         1 0          2012-01-02 15:12:51
- 7   0.994 0.00584  0     0           1         4 0          2012-01-02 16:45:36
- 8   0.864 0.136    0     0           1         0 0          2012-01-02 21:55:03
- 9   0.964 0.0362   0     0           1         0 0          2012-01-03 01:07:17
-10   0.997 0.00324  0     0           1         0 1          2012-01-03 04:34:50
+ 1   0.962 0.0376   0     0           1         0 0          2012-01-01 02:03:59
+ 2   0.995 0.00461  0     1           1         0 1          2012-01-01 12:55:06
+ 3   0.999 0.00127  0     0           1         1 1          2012-01-01 14:38:32
+ 4   0.997 0.00281  0     0           1         2 0          2012-01-01 18:32:53
+ 5   0.987 0.0128   0     0           1         0 0          2012-01-02 00:42:16
+ 6   0.999 0.000886 0     0           1         1 0          2012-01-02 10:12:51
+ 7   0.994 0.00633  0     0           1         4 0          2012-01-02 11:45:36
+ 8   0.851 0.149    0     0           1         0 0          2012-01-02 16:55:03
+ 9   0.968 0.0318   0     0           1         0 0          2012-01-02 20:07:17
+10   0.997 0.00277  0     0           1         0 1          2012-01-02 23:34:50
 # … with 971 more rows, and 15 more variables: image &lt;dbl&gt;, attach &lt;dbl&gt;,
 #   dollar &lt;dbl&gt;, winner &lt;fct&gt;, inherit &lt;dbl&gt;, viagra &lt;dbl&gt;, password &lt;dbl&gt;,
 #   num_char &lt;dbl&gt;, line_breaks &lt;int&gt;, format &lt;fct&gt;, re_subj &lt;fct&gt;,
@@ -787,16 +786,16 @@ Computational engine: glm </code></pre>
 <pre><code># A tibble: 981 × 3
    .pred_0 .pred_1 spam 
      &lt;dbl&gt;   &lt;dbl&gt; &lt;fct&gt;
- 1  0.0253   0.975 1    
- 2  0.0919   0.908 1    
- 3  0.106    0.894 0    
- 4  0.126    0.874 1    
- 5  0.129    0.871 0    
- 6  0.173    0.827 1    
- 7  0.201    0.799 0    
- 8  0.232    0.768 0    
- 9  0.233    0.767 1    
-10  0.237    0.763 1    
+ 1  0.0223   0.978 1    
+ 2  0.107    0.893 0    
+ 3  0.109    0.891 1    
+ 4  0.140    0.860 1    
+ 5  0.149    0.851 0    
+ 6  0.163    0.837 1    
+ 7  0.197    0.803 0    
+ 8  0.207    0.793 0    
+ 9  0.235    0.765 1    
+10  0.240    0.760 1    
 # … with 971 more rows</code></pre>
 </div>
 </div>
@@ -927,15 +926,15 @@ Computational engine: glm </code></pre>
     .threshold specificity sensitivity
          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
  1 -Inf            0                 1
- 2    2.22e-16     0                 1
- 3    2.96e- 8     0.00111           1
- 4    6.36e- 6     0.00223           1
- 5    1.44e- 5     0.00334           1
- 6    2.29e- 5     0.00446           1
- 7    3.09e- 5     0.00557           1
- 8    3.84e- 5     0.00669           1
- 9    4.80e- 5     0.00780           1
-10    6.13e- 5     0.00892           1
+ 2    1.31e-13     0                 1
+ 3    2.63e- 8     0.00111           1
+ 4    5.75e- 6     0.00223           1
+ 5    1.36e- 5     0.00334           1
+ 6    2.33e- 5     0.00446           1
+ 7    2.74e- 5     0.00557           1
+ 8    3.28e- 5     0.00669           1
+ 9    4.59e- 5     0.00780           1
+10    4.78e- 5     0.00892           1
 # … with 971 more rows</code></pre>
 </div>
 </div>
@@ -957,7 +956,7 @@ Computational engine: glm </code></pre>
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-1 roc_auc binary         0.855</code></pre>
+1 roc_auc binary         0.850</code></pre>
 </div>
 </div>
 </section></section>
@@ -986,12 +985,12 @@ Computational engine: glm </code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Email classified as not spam</td>
-<td style="text-align: right;">886</td>
+<td style="text-align: right;">883</td>
 <td style="text-align: right;">73</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Email classified as spam</td>
-<td style="text-align: right;">11</td>
+<td style="text-align: right;">14</td>
 <td style="text-align: right;">11</td>
 </tr>
 </tbody>
@@ -1026,8 +1025,8 @@ Computational engine: glm </code></pre>
 <div class="cell-output-stdout">
 <pre><code>          Truth
 Prediction   0   1
-         0 886  73
-         1  11  11</code></pre>
+         0 883  73
+         1  14  11</code></pre>
 </div>
 </div>
 </section>
@@ -1055,13 +1054,13 @@ Prediction   0   1
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Email classified as not spam</td>
-<td style="text-align: right;">824</td>
-<td style="text-align: right;">39</td>
+<td style="text-align: right;">826</td>
+<td style="text-align: right;">42</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Email classified as spam</td>
-<td style="text-align: right;">73</td>
-<td style="text-align: right;">45</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">42</td>
 </tr>
 </tbody>
 </table>
