@@ -124,85 +124,11 @@ Complete the exploratory data analysis by creating the plots and/or summary stat
 -   If there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the **odds** of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?
 -   Which group of participants (i.e., which set of experimental conditions) is described by the intercept?
 
-6.  Are the conditions inference met? List of the conditions, create visualizations and/or summary tables to check the conditions and evaluate whether each condition is met. Include an assessment about each condition and a brief explanation about your conclusion.
+6.  Are the conditions inference met? List of the conditions, and, **if relevant**, create visualizations to check the conditions and evaluate whether each condition is met. Include an assessment about each condition and a brief explanation about your conclusion.
 
-```{r}
-#| include: false
-#| eval: false
-
-ew_fit <- multinom_reg() %>%
-  set_engine("nnet") %>%
-  fit(id ~ lineup + weapon + feature + 
-        lineup*weapon + lineup*feature + 
-        weapon*feature, data = ew)
-
-ew_fit <- repair_call(ew_fit, data = ew)
-
-ew_aug <- augment(ew_fit, new_data = ew) %>%
-  mutate(
-    correct = if_else(id == "correct", 1, 0),
-    foil    = if_else(id == "foil", 1, 0),
-    reject  = if_else(id == "reject", 1, 0),
-    correct_resid = correct - .pred_correct,
-    foil_resid    = foil - .pred_foil,
-    reject_resid  = reject - .pred_reject
-  )
-
-par(mfrow = c(2,2))
-arm::binnedplot(
-  x = ew_aug$.pred_correct,
-  y = ew_aug$correct_resid, 
-  main = "Correct ID: Residuals vs. Pred. Prob.", 
-  xlab = "Predicted Probabilities", 
-  col.int = FALSE
-  )
-
-arm::binnedplot(
-  x = ew_aug$.pred_foil, 
-  y = ew_aug$foil_resid, 
-  main = "Foil ID: Residuals vs. Pred. Prob.", 
-  xlab = "Predicted Probabilities", 
-  col.int = FALSE
-  )
-
-arm::binnedplot(
-  x = ew_aug$.pred_reject, 
-  y = ew_aug$reject_resid, 
-  main = "Reject ID: Residuals vs. Pred. Prob.", 
-  xlab = "Predicted Probabilities", 
-  col.int = FALSE
-  )
-
-# average residuals by ID and lineup
-
-ew_aug %>%
-  group_by(lineup) %>%
-  summarise(
-    correct_avg = mean(correct_resid),
-    foil_avg = mean(foil_resid),
-    reject_avg = mean(reject_resid)
-  ) %>%
-  kable(digits = 10)
-
-ew_aug %>%
-  group_by(weapon) %>%
-  summarise(
-    correct_avg = mean(correct_resid),
-    foil_avg = mean(foil_resid),
-    reject_avg = mean(reject_resid)
-  ) %>%
-  kable(digits = 10)
-
-ew_aug %>%
-  group_by(feature) %>%
-  summarise(
-    correct_avg = mean(correct_resid),
-    foil_avg = mean(foil_resid),
-    reject_avg = mean(reject_resid)
-  ) %>%
-  kable(digits = 10)
+```{=html}
+<!-- -->
 ```
-
 7.  Use the model to predict the decision made by each participant. Make a table of the predicted vs. the actual decisions.
 
 -   Briefly describe how the predicted decision is determined for each participant.
