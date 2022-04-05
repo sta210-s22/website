@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.180">
+  <meta name="generator" content="quarto-0.9.183">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>STA 210 - Spring 2022 - Lab 1 - Meet the toolkit</title>
   <style>
@@ -376,43 +376,43 @@
         <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">On this page</h2>
 <ul>
-<li><a href="#introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
 <ul class="collapse">
-<li><a href="#learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+<li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
 </ul></li>
-<li><a href="#getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a>
+<li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a>
 <ul class="collapse">
-<li><a href="#log-in-to-rstudio" class="nav-link" data-scroll-target="#log-in-to-rstudio">Log in to RStudio</a></li>
-<li><a href="#set-up-your-ssh-key" class="nav-link" data-scroll-target="#set-up-your-ssh-key">Set up your SSH key</a></li>
-<li><a href="#configure-git" class="nav-link" data-scroll-target="#configure-git">Configure Git</a></li>
-<li><a href="#clone-the-repo-start-new-rstudio-project" class="nav-link" data-scroll-target="#clone-the-repo-start-new-rstudio-project">Clone the repo &amp; start new RStudio project</a></li>
-<li><a href="#r-and-r-studio" class="nav-link" data-scroll-target="#r-and-r-studio">R and R Studio</a></li>
-<li><a href="#yaml" class="nav-link" data-scroll-target="#yaml">YAML</a></li>
-<li><a href="#committing-changes" class="nav-link" data-scroll-target="#committing-changes">Committing changes</a></li>
-<li><a href="#push-changes" class="nav-link" data-scroll-target="#push-changes">Push changes</a></li>
+<li><a href="#log-in-to-rstudio" id="toc-log-in-to-rstudio" class="nav-link" data-scroll-target="#log-in-to-rstudio">Log in to RStudio</a></li>
+<li><a href="#set-up-your-ssh-key" id="toc-set-up-your-ssh-key" class="nav-link" data-scroll-target="#set-up-your-ssh-key">Set up your SSH key</a></li>
+<li><a href="#configure-git" id="toc-configure-git" class="nav-link" data-scroll-target="#configure-git">Configure Git</a></li>
+<li><a href="#clone-the-repo-start-new-rstudio-project" id="toc-clone-the-repo-start-new-rstudio-project" class="nav-link" data-scroll-target="#clone-the-repo-start-new-rstudio-project">Clone the repo &amp; start new RStudio project</a></li>
+<li><a href="#r-and-r-studio" id="toc-r-and-r-studio" class="nav-link" data-scroll-target="#r-and-r-studio">R and R Studio</a></li>
+<li><a href="#yaml" id="toc-yaml" class="nav-link" data-scroll-target="#yaml">YAML</a></li>
+<li><a href="#committing-changes" id="toc-committing-changes" class="nav-link" data-scroll-target="#committing-changes">Committing changes</a></li>
+<li><a href="#push-changes" id="toc-push-changes" class="nav-link" data-scroll-target="#push-changes">Push changes</a></li>
 </ul></li>
-<li><a href="#packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
-<li><a href="#data-ikea-furniture" class="nav-link" data-scroll-target="#data-ikea-furniture">Data: Ikea furniture</a>
+<li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+<li><a href="#data-ikea-furniture" id="toc-data-ikea-furniture" class="nav-link" data-scroll-target="#data-ikea-furniture">Data: Ikea furniture</a>
 <ul class="collapse">
-<li><a href="#data-dictionary" class="nav-link" data-scroll-target="#data-dictionary">Data dictionary</a></li>
-<li><a href="#view-the-data" class="nav-link" data-scroll-target="#view-the-data">View the data</a></li>
+<li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary">Data dictionary</a></li>
+<li><a href="#view-the-data" id="toc-view-the-data" class="nav-link" data-scroll-target="#view-the-data">View the data</a></li>
 </ul></li>
-<li><a href="#exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+<li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
 <ul class="collapse">
-<li><a href="#exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
-<li><a href="#exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
-<li><a href="#exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
-<li><a href="#exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
-<li><a href="#exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
-<li><a href="#exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
-<li><a href="#exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7</a></li>
-<li><a href="#exercise-8" class="nav-link" data-scroll-target="#exercise-8">Exercise 8</a></li>
-<li><a href="#exercise-9" class="nav-link" data-scroll-target="#exercise-9">Exercise 9</a></li>
-<li><a href="#exercise-10" class="nav-link" data-scroll-target="#exercise-10">Exercise 10</a></li>
+<li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+<li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+<li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+<li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+<li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
+<li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
+<li><a href="#exercise-7" id="toc-exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7</a></li>
+<li><a href="#exercise-8" id="toc-exercise-8" class="nav-link" data-scroll-target="#exercise-8">Exercise 8</a></li>
+<li><a href="#exercise-9" id="toc-exercise-9" class="nav-link" data-scroll-target="#exercise-9">Exercise 9</a></li>
+<li><a href="#exercise-10" id="toc-exercise-10" class="nav-link" data-scroll-target="#exercise-10">Exercise 10</a></li>
 </ul></li>
-<li><a href="#submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
-<li><a href="#grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
-<li><a href="#resources-for-additional-practice-optional" class="nav-link" data-scroll-target="#resources-for-additional-practice-optional">Resources for additional practice (optional)</a></li>
+<li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+<li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+<li><a href="#resources-for-additional-practice-optional" id="toc-resources-for-additional-practice-optional" class="nav-link" data-scroll-target="#resources-for-additional-practice-optional">Resources for additional practice (optional)</a></li>
 </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/labs/lab-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
