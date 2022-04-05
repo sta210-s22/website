@@ -160,6 +160,8 @@ Why do you think no observations were predicted to have a rating of "Excellent",
 
 ```{r}
 #| echo: false
+#| out-width: "100%"
+#| fig-width: 10
 
 p1 <- ggplot(nhanes_adult, aes(x = HealthGen)) + 
   geom_bar() +
@@ -181,18 +183,15 @@ p1 + p2
 -   Suppose there are two models:
     -   Reduced model includes predictors $x_1, \ldots, x_q$
     -   Full model includes predictors $x_1, \ldots, x_q, x_{q+1}, \ldots, x_p$
-
 -   We want to test the following hypotheses:
     -   $H_0: \beta_{q+1} = \dots = \beta_p = 0$
     -   $H_A: \text{ at least 1 }\beta_j \text{ is not } 0$
-
 -   To do so, we will use the **drop-in-deviance test** (very similar to logistic regression)
 
 ## Add `Education` to the model? {.smaller}
 
 -   We consider adding the participants' `Education` level to the model.
     -   Education takes values `8thGrade`, `9-11thGrade`, `HighSchool`, `SomeCollege`, and `CollegeGrad`
-
 -   Models we're testing:
     -   Reduced model: `Age`, `PhysActive`
     -   Full model: `Age`, `PhysActive`, `Education`
@@ -223,7 +222,7 @@ reduced_fit <- repair_call(reduced_fit, data = nhanes_adult)
 full_fit <- repair_call(full_fit, data = nhanes_adult)
 ```
 
-## Add `Education` to the model?
+## Add `Education` to the model? {.smaller}
 
 ```{r}
 anova(reduced_fit$fit, full_fit$fit, test = "Chisq") %>%
@@ -238,14 +237,22 @@ Therefore, we will include `Education` in the model.
 ## Model with `Education`
 
 ```{r}
-tidy(full_fit, conf.int = T) %>%
-  kable(digits = 3)
+tidy(full_fit, conf.int = T)
 ```
 
 ## Compare NHANES models using AIC
 
+Reduced model:
+
 ```{r}
 glance(reduced_fit)$AIC
+```
+
+. . .
+
+Full model:
+
+```{r}
 glance(full_fit)$AIC
 ```
 
@@ -282,23 +289,29 @@ nhanes_adult <- nhanes_adult %>%
 ```{r}
 #| layout-ncol: 2
 
-emplogitplot1(Excellent ~ Age, data = nhanes_adult, ngroups = 5, main = "Excellent vs. Age")
-emplogitplot1(Vgood ~ Age, data = nhanes_adult, ngroups = 5, main = "Vgood vs. Age")
+emplogitplot1(Excellent ~ Age, data = nhanes_adult, 
+              ngroups = 10, main = "Excellent vs. Age")
+emplogitplot1(Vgood ~ Age, data = nhanes_adult, 
+              ngroups = 10, main = "Vgood vs. Age")
 ```
 
 ## Checking linearity
 
 ```{r}
 #| layout-ncol: 2
+#| out-width: "100%"
 
-emplogitplot1(Good ~ Age, data = nhanes_adult, ngroups = 5, main = "Good vs. Age")
-emplogitplot1(Fair ~ Age, data = nhanes_adult, ngroups = 5, main = "Fair vs. Age")
+emplogitplot1(Good ~ Age, data = nhanes_adult, 
+              ngroups = 10, main = "Good vs. Age")
+emplogitplot1(Fair ~ Age, data = nhanes_adult, 
+              ngroups = 10, main = "Fair vs. Age")
 ```
 
 ## Checking linearity
 
 ```{r}
-emplogitplot1(Poor ~ Age, data = nhanes_adult, ngroups = 5, main = "Poor vs. Age")
+emplogitplot1(Poor ~ Age, data = nhanes_adult, 
+              ngroups = 10, main = "Poor vs. Age")
 ```
 
 . . .
