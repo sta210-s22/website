@@ -124,3 +124,7 @@ format:
     code-copy: true
     code-overflow: wrap
     toc: true
+
+freeze: auto
+
+editor: visual
