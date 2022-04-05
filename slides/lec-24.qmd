@@ -162,18 +162,17 @@ Why do you think no observations were predicted to have a rating of "Excellent",
 #| echo: false
 #| out-width: "100%"
 #| fig-width: 10
+#| layout-ncol: 2
 
-p1 <- ggplot(nhanes_adult, aes(x = HealthGen)) + 
+ggplot(nhanes_adult, aes(x = HealthGen)) + 
   geom_bar() +
   labs(title = "Self-reported rating of overall health")
 
-p2 <- ggplot(health_aug, aes(x = HealthGen, fill = .pred_class)) + 
+ggplot(health_aug, aes(x = HealthGen, fill = .pred_class)) + 
   geom_bar() +
   scale_fill_OkabeIto() +
   labs(title = "Predicted vs.\nself-reported rating of overall health") +
   theme(legend.position = c(0.8, 0.8))
-
-p1 + p2
 ```
 
 # Model selection for inference
