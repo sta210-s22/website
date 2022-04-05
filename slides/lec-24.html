@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.185">
+  <meta name="generator" content="quarto-0.9.186">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - MultiLR: Prediction + inferential models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -731,25 +731,42 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <p>At least one coefficient associated with <code>Education</code> is non-zero. Therefore, we will include <code>Education</code> in the model.</p>
 </div>
 </section>
-<section id="model-with-education" class="slide level2">
+<section id="model-with-education" class="slide level2 smaller">
 <h2>Model with <code>Education</code></h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">tidy</span>(full_fit, <span class="at">conf.int =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">tidy</span>(full_fit, <span class="at">conf.int =</span> T) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">28</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code># A tibble: 28 × 8
    y.level term         estimate std.error statistic  p.value conf.low conf.high
    &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
- 1 Vgood   (Intercept)   0.582     0.301       1.93  5.36e- 2 -0.00914   1.17   
- 2 Vgood   Age           0.00112   0.00266     0.419 6.75e- 1 -0.00411   0.00634
- 3 Vgood   PhysActiveY… -0.264     0.0985     -2.68  7.33e- 3 -0.457    -0.0711 
- 4 Vgood   Education9 …  0.768     0.308       2.49  1.27e- 2  0.164     1.37   
- 5 Vgood   EducationHi…  0.701     0.280       2.51  1.21e- 2  0.153     1.25   
- 6 Vgood   EducationSo…  0.788     0.271       2.90  3.71e- 3  0.256     1.32   
- 7 Vgood   EducationCo…  0.408     0.268       1.52  1.28e- 1 -0.117     0.933  
- 8 Good    (Intercept)   2.04      0.272       7.51  5.77e-14  1.51      2.57   
- 9 Good    Age          -0.00172   0.00263    -0.651 5.15e- 1 -0.00688   0.00345
-10 Good    PhysActiveY… -0.758     0.0961     -7.88  3.16e-15 -0.946    -0.569  
-# … with 18 more rows</code></pre>
+ 1 Vgood   (Intercept)   5.82e-1   0.301      1.93   5.36e- 2 -0.00914   1.17   
+ 2 Vgood   Age           1.12e-3   0.00266    0.419  6.75e- 1 -0.00411   0.00634
+ 3 Vgood   PhysActiveY… -2.64e-1   0.0985    -2.68   7.33e- 3 -0.457    -0.0711 
+ 4 Vgood   Education9 …  7.68e-1   0.308      2.49   1.27e- 2  0.164     1.37   
+ 5 Vgood   EducationHi…  7.01e-1   0.280      2.51   1.21e- 2  0.153     1.25   
+ 6 Vgood   EducationSo…  7.88e-1   0.271      2.90   3.71e- 3  0.256     1.32   
+ 7 Vgood   EducationCo…  4.08e-1   0.268      1.52   1.28e- 1 -0.117     0.933  
+ 8 Good    (Intercept)   2.04e+0   0.272      7.51   5.77e-14  1.51      2.57   
+ 9 Good    Age          -1.72e-3   0.00263   -0.651  5.15e- 1 -0.00688   0.00345
+10 Good    PhysActiveY… -7.58e-1   0.0961    -7.88   3.16e-15 -0.946    -0.569  
+11 Good    Education9 …  3.60e-1   0.275      1.31   1.90e- 1 -0.179     0.899  
+12 Good    EducationHi…  8.52e-2   0.247      0.345  7.30e- 1 -0.399     0.569  
+13 Good    EducationSo… -1.13e-2   0.239     -0.0472 9.62e- 1 -0.480     0.457  
+14 Good    EducationCo… -8.91e-1   0.236     -3.77   1.65e- 4 -1.35     -0.427  
+15 Fair    (Intercept)   2.12e+0   0.288      7.35   1.91e-13  1.55      2.68   
+16 Fair    Age           3.35e-4   0.00312    0.107  9.14e- 1 -0.00578   0.00645
+17 Fair    PhysActiveY… -1.19e+0   0.115    -10.4    3.50e-25 -1.42     -0.966  
+18 Fair    Education9 … -2.24e-1   0.279     -0.802  4.22e- 1 -0.771     0.323  
+19 Fair    EducationHi… -8.32e-1   0.252     -3.31   9.44e- 4 -1.33     -0.339  
+20 Fair    EducationSo… -1.34e+0   0.246     -5.46   4.71e- 8 -1.82     -0.861  
+21 Fair    EducationCo… -2.51e+0   0.253     -9.91   3.67e-23 -3.00     -2.01   
+22 Poor    (Intercept)  -2.00e-1   0.411     -0.488  6.26e- 1 -1.01      0.605  
+23 Poor    Age           1.79e-2   0.00509    3.53   4.21e- 4  0.00797   0.0279 
+24 Poor    PhysActiveY… -2.27e+0   0.242     -9.38   6.81e-21 -2.74     -1.79   
+25 Poor    Education9 … -3.60e-1   0.353     -1.02   3.08e- 1 -1.05      0.332  
+26 Poor    EducationHi… -1.15e+0   0.334     -3.44   5.86e- 4 -1.81     -0.494  
+27 Poor    EducationSo… -1.07e+0   0.316     -3.40   6.77e- 4 -1.69     -0.454  
+28 Poor    EducationCo… -2.32e+0   0.366     -6.34   2.27e-10 -3.04     -1.60   </code></pre>
 </div>
 </div>
 </section>
