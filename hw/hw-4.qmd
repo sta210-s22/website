@@ -126,9 +126,6 @@ Complete the exploratory data analysis by creating the plots and/or summary stat
 
 6.  Are the conditions inference met? List of the conditions, and, **if relevant**, create visualizations to check the conditions and evaluate whether each condition is met. Include an assessment about each condition and a brief explanation about your conclusion.
 
-```{=html}
-<!-- -->
-```
 7.  Use the model to predict the decision made by each participant. Make a table of the predicted vs. the actual decisions.
 
 -   Briefly describe how the predicted decision is determined for each participant.
