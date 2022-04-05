@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.183">
+  <meta name="generator" content="quarto-0.9.185">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - MultiLR: Prediction + inferential models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -598,10 +598,8 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <div class="question">
 <p>Why do you think no observations were predicted to have a rating of “Excellent”, “Fair”, or “Poor”?</p>
 </div>
-<div class="cell" data-layout-align="center">
 
-</div>
-</section></section>
+<img data-src="lec-24_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section></section>
 <section>
 <section id="model-selection-for-inference" class="title-slide slide level1 center">
 <h1>Model selection for inference</h1>
@@ -1075,29 +1073,60 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <section id="checking-linearity-1" class="slide level2">
 <h2>Checking linearity</h2>
 <div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">emplogitplot1</span>(Excellent <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Excellent vs. Age"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">emplogitplot1</span>(Vgood <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Vgood vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">emplogitplot1</span>(Excellent <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Excellent vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">emplogitplot1</span>(Vgood <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Vgood vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
-
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-24_files/figure-revealjs/unnamed-chunk-16-1.png"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-24_files/figure-revealjs/unnamed-chunk-16-2.png"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section>
 <section id="checking-linearity-2" class="slide level2">
 <h2>Checking linearity</h2>
 <div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">emplogitplot1</span>(Good <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Good vs. Age"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">emplogitplot1</span>(Fair <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Fair vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">emplogitplot1</span>(Good <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Good vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">emplogitplot1</span>(Fair <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Fair vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
-
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-24_files/figure-revealjs/unnamed-chunk-17-1.png"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lec-24_files/figure-revealjs/unnamed-chunk-17-2.png"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section>
 <section id="checking-linearity-3" class="slide level2">
 <h2>Checking linearity</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">emplogitplot1</span>(Poor <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Poor vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">emplogitplot1</span>(Poor <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Poor vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-<div class="fragment">
+<img data-src="lec-24_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"><div class="fragment">
 <p>✅ The linearity condition is satisfied. There is a linear relationship between the empirical logit and the quantitative predictor variable, Age.</p>
 </div>
 </section>
