@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.183">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
-  <title>STA 210 - Spring 2022 - Multinomial Logistic Regression (MultiLR)</title>
+  <title>STA 210 - Spring 2022 - MultiLR: Prediction + inferential models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -380,7 +380,7 @@
       margin-right: 0; 
     }
   </style>
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Multinomial Logistic Regression (MultiLR)">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - MultiLR: Prediction + inferential models">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -392,7 +392,7 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Multinomial Logistic Regression (MultiLR)</h1>
+  <h1 class="title">MultiLR: Prediction + inferential models</h1>
   <p class="subtitle">STA 210 - Spring 2022</p>
   <p class="author">Dr.&nbsp;Mine Çetinkaya-Rundel</p>
 </section>
@@ -406,9 +406,9 @@
 <h2>Topics</h2>
 <div>
 <ul>
-<li><p>Introduce multinomial logistic regression</p></li>
-<li><p>Interpret model coefficients</p></li>
-<li><p>Inference for a coefficient <span class="math inline">\(\beta_{jk}\)</span></p></li>
+<li>Predictions</li>
+<li>Model selection</li>
+<li>Checking conditions</li>
 </ul>
 </div>
 </section>
@@ -421,130 +421,24 @@
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(NHANES)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(colorblindr)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">library</span>(nnet)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section>
-<section>
-<section id="generalized-linear-models" class="title-slide slide level1 center">
-<h1>Generalized Linear Models</h1>
-
-</section>
-<section id="generalized-linear-models-glms" class="slide level2 smaller">
-<h2>Generalized Linear Models (GLMs)</h2>
-<ul>
-<li class="fragment"><p>In practice, there are many different types of outcome variables:</p>
-<div>
-<ul>
-<li><strong>Binary</strong>: Win or Lose</li>
-<li><strong>Nominal</strong>: Democrat, Republican or Third Party candidate</li>
-<li><strong>Ordered</strong>: Movie rating (1 - 5 stars)</li>
-<li>and others…</li>
-</ul>
-</div></li>
-<li class="fragment"><p>Predicting each of these outcomes requires a <strong>generalized linear model</strong>, a broader class of models that <em>generalize</em> the multiple linear regression model</p></li>
-</ul>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Recommended reading for more details about GLMs: <a href="https://bookdown.org/roback/bookdown-bysh/ch-glms.html"><em>Generalized Linear Models: A Unifying Theory</em></a>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="binary-outcome-logistic" class="slide level2">
-<h2>Binary outcome (Logistic)</h2>
-<ul>
-<li class="fragment"><p>Given <span class="math inline">\(P(y_i=1|x_i)= \hat{\pi}_i\hspace{5mm} \text{ and } \hspace{5mm}P(y_i=0|x_i) = 1-\hat{\pi}_i\)</span></p>
-<p><span class="math display">\[
-\log\Big(\frac{\hat{\pi}_i}{1-\hat{\pi}_i}\Big) = \hat{\beta}_0 + \hat{\beta}_1 x_{i}
-\]</span></p></li>
-<li class="fragment"><p>We can calculate <span class="math inline">\(\hat{\pi}_i\)</span> by solving the logit equation:</p>
-<p><span class="math display">\[
-\hat{\pi}_i = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 x_{i}}}{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 x_{i}}}
-\]</span></p></li>
-</ul>
-</section>
-<section id="binary-outcome-logistic-1" class="slide level2 smaller">
-<h2>Binary outcome (Logistic)</h2>
-<ul>
-<li class="fragment"><p>Suppose we consider <span class="math inline">\(y=0\)</span> the <strong>baseline category</strong> such that</p>
-<p><span class="math display">\[
-P(y_i=1|x_i) = \hat{\pi}_{i1} \hspace{2mm}  \text{ and } \hspace{2mm} P(y_i=0|x_i) = \hat{\pi}_{i0}
-\]</span></p></li>
-<li class="fragment"><p>Then the logistic regression model is</p>
-<p><span class="math display">\[
-\log\bigg(\frac{\hat{\pi}_{i1}}{1- \hat{\pi}_{i1}}\bigg) = \log\bigg(\frac{\hat{\pi}_{i1}}{\hat{\pi}_{i0}}\bigg) = \hat{\beta}_0 + \hat{\beta}_1 x_i
-\]</span></p></li>
-<li class="fragment"><p>Slope, <span class="math inline">\(\hat{\beta}_1\)</span>: When <span class="math inline">\(x\)</span> increases by one unit, the odds of <span class="math inline">\(y=1\)</span> versus the baseline <span class="math inline">\(y=0\)</span> are expected to multiply by a factor of <span class="math inline">\(e^{\hat{\beta}_1}\)</span></p></li>
-<li class="fragment"><p>Intercept, <span class="math inline">\(\hat{\beta}_0\)</span>: When <span class="math inline">\(x=0\)</span>, the predicted odds of <span class="math inline">\(y=1\)</span> versus the baseline <span class="math inline">\(y=0\)</span> are <span class="math inline">\(\exp\{\hat{\beta}_0\}\)</span></p></li>
-</ul>
-</section>
-<section id="multinomial-outcome-variable" class="slide level2">
-<h2>Multinomial outcome variable</h2>
-<ul>
-<li class="fragment"><p>Suppose the outcome variable <span class="math inline">\(y\)</span> is categorical and can take values <span class="math inline">\(1, 2, \ldots, K\)</span> such that <span class="math inline">\((K &gt; 2)\)</span></p></li>
-<li class="fragment"><p><strong>Multinomial Distribution:</strong></p>
-<p><span class="math display">\[
-P(y=1) = \pi_1, P(y=2) = \pi_2, \ldots, P(y=K) = \pi_K
-\]</span></p>
-<p>such that <span class="math inline">\(\sum\limits_{k=1}^{K} \pi_k = 1\)</span></p></li>
-</ul>
-</section>
-<section id="multinomial-logistic-regression" class="slide level2 smaller">
-<h2>Multinomial Logistic Regression</h2>
-<ul>
-<li class="fragment"><p>If we have an explanatory variable <span class="math inline">\(x\)</span>, then we want to fit a model such that <span class="math inline">\(P(y = k) = \pi_k\)</span> is a function of <span class="math inline">\(x\)</span></p></li>
-<li class="fragment"><p>Choose a baseline category. Let’s choose <span class="math inline">\(y=1\)</span>. Then,</p>
-<p><span class="math display">\[
-\log\bigg(\frac{\pi_{ik}}{\pi_{i1}}\bigg) = \beta_{0k} + \beta_{1k} x_i
-\]</span></p></li>
-<li class="fragment"><p>In the multinomial logistic model, we have a separate equation for each category of the outcome relative to the baseline category</p>
-<ul>
-<li class="fragment">If the outcome has <span class="math inline">\(K\)</span> possible categories, there will be <span class="math inline">\(K-1\)</span> equations as part of the multinomial logistic model</li>
-</ul></li>
-</ul>
-</section>
-<section id="multinomial-logistic-regression-1" class="slide level2">
-<h2>Multinomial Logistic Regression</h2>
-<ul>
-<li class="fragment"><p>Suppose we have a outcome variable <span class="math inline">\(y\)</span> that can take three possible outcomes that are coded as “A”, “B”, “C”</p></li>
-<li class="fragment"><p>Let “A” be the baseline category. Then</p>
-<p><span class="math display">\[
-\log\bigg(\frac{\pi_{iB}}{\pi_{iA}}\bigg) = \beta_{0B} + \beta_{1B}x_i \\[10pt]
-\log\bigg(\frac{\pi_{iC}}{\pi_{iA}}\bigg) = \beta_{0C} + \beta_{1C} x_i
-\]</span></p></li>
-</ul>
-</section></section>
-<section>
-<section id="data" class="title-slide slide level1 center">
-<h1>Data</h1>
-
 </section>
 <section id="nhanes-data" class="slide level2">
 <h2>NHANES Data</h2>
+<div>
 <ul>
-<li class="fragment"><p><a href="https://www.cdc.gov/nchs/nhanes/index.htm">National Health and Nutrition Examination Survey</a> is conducted by the National Center for Health Statistics (NCHS)</p></li>
-<li class="fragment"><p>The goal is to <em>“assess the health and nutritional status of adults and children in the United States”</em></p></li>
-<li class="fragment"><p>This survey includes an interview and a physical examination</p></li>
+<li><a href="https://www.cdc.gov/nchs/nhanes/index.htm">National Health and Nutrition Examination Survey</a> is conducted by the National Center for Health Statistics (NCHS).</li>
+<li>The goal is to <em>“assess the health and nutritional status of adults and children in the United States”.</em></li>
+<li>This survey includes an interview and a physical examination.</li>
 </ul>
-</section>
-<section id="nhanes-data-1" class="slide level2">
-<h2>NHANES Data</h2>
-<ul>
-<li class="fragment"><p>We will use the data from the <code>NHANES</code> R package</p></li>
-<li class="fragment"><p>Contains 75 variables for the 2009 - 2010 and 2011 - 2012 sample years</p></li>
-<li class="fragment"><p>The data in this package is modified for educational purposes and should <strong>not</strong> be used for research</p></li>
-<li class="fragment"><p>Original data can be obtained from the <a href="https://www.cdc.gov/nchs/data_access/index.htm">NCHS website</a> for research purposes</p></li>
-<li class="fragment"><p>Type <code>?NHANES</code> in console to see list of variables and definitions</p></li>
-</ul>
+</div>
 </section>
 <section id="variables" class="slide level2">
 <h2>Variables</h2>
@@ -553,7 +447,7 @@ P(y=1) = \pi_1, P(y=2) = \pi_2, \ldots, P(y=K) = \pi_K
 <li class="fragment"><p>Outcome: <code>HealthGen</code>: Self-reported rating of participant’s health in general. Excellent, Vgood, Good, Fair, or Poor.</p></li>
 <li class="fragment"><p>Predictors:</p>
 <ul>
-<li class="fragment"><code>Age</code>:Age at time of screening (in years). Participants 80 or older were recorded as 80.</li>
+<li class="fragment"><code>Age</code>: Age at time of screening (in years). Participants 80 or older were recorded as 80.</li>
 <li class="fragment"><code>PhysActive</code>: Participant does moderate to vigorous-intensity sports, fitness or recreational activities.</li>
 </ul></li>
 </ul>
@@ -563,186 +457,281 @@ P(y=1) = \pi_1, P(y=2) = \pi_2, \ldots, P(y=K) = \pi_K
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>nhanes_adult <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">select</span>(HealthGen, Age, PhysActive) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">select</span>(HealthGen, Age, PhysActive, Education) <span class="sc">%&gt;%</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a>  <span class="fu">mutate</span>(<span class="at">obs_num =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="fragment">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">glimpse</span>(nhanes_adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>Rows: 6,710
-Columns: 4
+<pre><code>Rows: 6,465
+Columns: 5
 $ HealthGen  &lt;fct&gt; Good, Good, Good, Good, Vgood, Vgood, Vgood, Vgood, Vgood, …
 $ Age        &lt;int&gt; 34, 34, 34, 49, 45, 45, 45, 66, 58, 54, 50, 33, 60, 56, 56,…
 $ PhysActive &lt;fct&gt; No, No, No, No, Yes, Yes, Yes, Yes, Yes, Yes, Yes, No, No, …
+$ Education  &lt;fct&gt; High School, High School, High School, Some College, Colleg…
 $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …</code></pre>
 </div>
 </div>
-</div>
-</section>
-<section id="exploratory-data-analysis" class="slide level2">
-<h2>Exploratory data analysis</h2>
-
-<img data-src="lec-23_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
-<section id="exploratory-data-analysis-1" class="slide level2">
-<h2>Exploratory data analysis</h2>
-
-<img data-src="lec-23_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section></section>
-<section>
-<section id="fitting-a-multinomial-logistic-regression" class="title-slide slide level1 center">
-<h1>Fitting a multinomial logistic regression</h1>
-
 </section>
 <section id="model-in-r" class="slide level2">
 <h2>Model in R</h2>
-<p>Use the <code>multinom_reg()</code> function with the <code>"nnet"</code> engine:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>health_fit <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">fit</span>(HealthGen <span class="sc">~</span> Age <span class="sc">+</span> PhysActive, <span class="at">data =</span> nhanes_adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">fit</span>(HealthGen <span class="sc">~</span> Age <span class="sc">+</span> PhysActive, <span class="at">data =</span> nhanes_adult)</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>health_fit <span class="ot">&lt;-</span> <span class="fu">repair_call</span>(health_fit, <span class="at">data =</span> nhanes_adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="model-result" class="slide level2">
-<h2>Model result</h2>
+<section id="model-summary" class="slide level2">
+<h2>Model summary</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>health_fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">tidy</span>(health_fit) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>parsnip model object
+<pre><code># A tibble: 12 × 6
+   y.level term            estimate std.error statistic  p.value
+   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Vgood   (Intercept)    1.27        0.154      8.23   1.80e-16
+ 2 Vgood   Age           -0.0000361   0.00259   -0.0139 9.89e- 1
+ 3 Vgood   PhysActiveYes -0.332       0.0949    -3.50   4.72e- 4
+ 4 Good    (Intercept)    1.99        0.150     13.3    2.81e-40
+ 5 Good    Age           -0.00304     0.00256   -1.19   2.35e- 1
+ 6 Good    PhysActiveYes -1.01        0.0921   -11.0    4.80e-28
+ 7 Fair    (Intercept)    1.03        0.174      5.94   2.89e- 9
+ 8 Fair    Age            0.00113     0.00302    0.373  7.09e- 1
+ 9 Fair    PhysActiveYes -1.66        0.109    -15.2    4.14e-52
+10 Poor    (Intercept)   -1.34        0.299     -4.47   7.65e- 6
+11 Poor    Age            0.0193      0.00505    3.83   1.30e- 4
+12 Poor    PhysActiveYes -2.67        0.236    -11.3    1.20e-29</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="predictions" class="title-slide slide level1 center">
+<h1>Predictions</h1>
 
-Fit time:  139ms 
-Call:
-nnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, 
-    trace = FALSE)
-
-Coefficients:
-      (Intercept)           Age PhysActiveYes
-Vgood   1.2053460  0.0009101848    -0.3209047
-Good    1.9476261 -0.0023686122    -1.0014925
-Fair    0.9145492  0.0030462534    -1.6454297
-Poor   -1.5211414  0.0221905681    -2.6556343
-
-Residual Deviance: 17588.88 
-AIC: 17612.88 </code></pre>
+</section>
+<section id="calculating-probabilities" class="slide level2 smaller">
+<h2>Calculating probabilities</h2>
+<ul>
+<li class="fragment"><p>For categories <span class="math inline">\(2,\ldots,K\)</span>, the probability that the <span class="math inline">\(i^{th}\)</span> observation is in the <span class="math inline">\(j^{th}\)</span> category is</p>
+<p><span class="math display">\[
+\hat{\pi}_{ij} = \frac{e^{\hat{\beta}_{0j} + \hat{\beta}_{1j}x_{i1} + \dots + \hat{\beta}_{pj}x_{ip}}}{1 + \sum\limits_{k=2}^K e^{\hat{\beta}_{0k} + \hat{\beta}_{1k}x_{i1} + \dots \hat{\beta}_{pk}x_{ip}}}
+\]</span></p></li>
+<li class="fragment"><p>For the baseline category, <span class="math inline">\(k=1\)</span>, we calculate the probability <span class="math inline">\(\hat{\pi}_{i1}\)</span> as</p>
+<p><span class="math display">\[
+\hat{\pi}_{i1} = 1- \sum\limits_{k=2}^K \hat{\pi}_{ik}
+\]</span></p></li>
+</ul>
+</section>
+<section id="predicted-health-rating" class="slide level2 smaller">
+<h2>Predicted health rating</h2>
+<p>We can use our model to predict a person’s perceived health rating given their age and whether they exercise.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>health_aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(health_fit, <span class="at">new_data =</span> nhanes_adult)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>health_aug</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 6,465 × 11
+   HealthGen   Age PhysActive Education      obs_num .pred_class .pred_Excellent
+   &lt;fct&gt;     &lt;int&gt; &lt;fct&gt;      &lt;fct&gt;            &lt;int&gt; &lt;fct&gt;                 &lt;dbl&gt;
+ 1 Good         34 No         High School          1 Good                 0.0687
+ 2 Good         34 No         High School          2 Good                 0.0687
+ 3 Good         34 No         High School          3 Good                 0.0687
+ 4 Good         49 No         Some College         4 Good                 0.0691
+ 5 Vgood        45 Yes        College Grad         5 Vgood                0.155 
+ 6 Vgood        45 Yes        College Grad         6 Vgood                0.155 
+ 7 Vgood        45 Yes        College Grad         7 Vgood                0.155 
+ 8 Vgood        66 Yes        Some College         8 Vgood                0.157 
+ 9 Vgood        58 Yes        College Grad         9 Vgood                0.156 
+10 Fair         54 Yes        9 - 11th Grade      10 Vgood                0.156 
+# … with 6,455 more rows, and 4 more variables: .pred_Vgood &lt;dbl&gt;,
+#   .pred_Good &lt;dbl&gt;, .pred_Fair &lt;dbl&gt;, .pred_Poor &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="next-steps" class="slide level2">
-<h2>Next steps</h2>
-<div class="question">
-<p>What function do we use to get the model summary, i.e., coefficient estimates.</p>
+<section id="actual-vs.-predicted-health-rating" class="slide level2">
+<h2>Actual vs.&nbsp;predicted health rating</h2>
+<p>For each observation, the predicted perceived health rating is the category with the highest predicted probability.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>health_aug <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"pred"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 6,465 × 6
+   .pred_class .pred_Excellent .pred_Vgood .pred_Good .pred_Fair .pred_Poor
+   &lt;fct&gt;                 &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Good                 0.0687       0.243      0.453     0.201     0.0348 
+ 2 Good                 0.0687       0.243      0.453     0.201     0.0348 
+ 3 Good                 0.0687       0.243      0.453     0.201     0.0348 
+ 4 Good                 0.0691       0.244      0.435     0.205     0.0467 
+ 5 Vgood                0.155        0.393      0.359     0.0868    0.00671
+ 6 Vgood                0.155        0.393      0.359     0.0868    0.00671
+ 7 Vgood                0.155        0.393      0.359     0.0868    0.00671
+ 8 Vgood                0.157        0.400      0.342     0.0904    0.0102 
+ 9 Vgood                0.156        0.397      0.349     0.0890    0.00872
+10 Vgood                0.156        0.396      0.352     0.0883    0.00804
+# … with 6,455 more rows</code></pre>
 </div>
+</div>
+</section>
+<section id="confusion-matrix" class="slide level2">
+<h2>Confusion matrix</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>health_conf <span class="ot">&lt;-</span> health_aug <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">count</span>(HealthGen, .pred_class, <span class="at">.drop =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> .pred_class, <span class="at">values_from =</span> n)</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>health_conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 5 × 6
+  HealthGen Excellent Vgood  Good  Fair  Poor
+  &lt;fct&gt;         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1 Excellent         0   528   210     0     0
+2 Vgood             0  1341   743     0     0
+3 Good              0  1226  1316     0     0
+4 Fair              0   296   625     0     0
+5 Poor              0    24   156     0     0</code></pre>
+</div>
+</div>
+</section>
+<section id="actual-vs.-predicted-health-rating-1" class="slide level2">
+<h2>Actual vs.&nbsp;predicted health rating</h2>
+<div class="question">
+<p>Why do you think no observations were predicted to have a rating of “Excellent”, “Fair”, or “Poor”?</p>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section></section>
+<section>
+<section id="model-selection-for-inference" class="title-slide slide level1 center">
+<h1>Model selection for inference</h1>
+
+</section>
+<section id="comparing-nested-models" class="slide level2 smaller">
+<h2>Comparing nested models</h2>
+<ul>
+<li class="fragment">Suppose there are two models:
+<ul>
+<li class="fragment">Reduced model includes predictors <span class="math inline">\(x_1, \ldots, x_q\)</span></li>
+<li class="fragment">Full model includes predictors <span class="math inline">\(x_1, \ldots, x_q, x_{q+1}, \ldots, x_p\)</span></li>
+</ul></li>
+<li class="fragment">We want to test the following hypotheses:
+<ul>
+<li class="fragment"><span class="math inline">\(H_0: \beta_{q+1} = \dots = \beta_p = 0\)</span></li>
+<li class="fragment"><span class="math inline">\(H_A: \text{ at least 1 }\beta_j \text{ is not } 0\)</span></li>
+</ul></li>
+<li class="fragment">To do so, we will use the <strong>drop-in-deviance test</strong> (very similar to logistic regression)</li>
+</ul>
+</section>
+<section id="add-education-to-the-model" class="slide level2 smaller">
+<h2>Add <code>Education</code> to the model?</h2>
+<ul>
+<li class="fragment">We consider adding the participants’ <code>Education</code> level to the model.
+<ul>
+<li class="fragment">Education takes values <code>8thGrade</code>, <code>9-11thGrade</code>, <code>HighSchool</code>, <code>SomeCollege</code>, and <code>CollegeGrad</code></li>
+</ul></li>
+<li class="fragment">Models we’re testing:
+<ul>
+<li class="fragment">Reduced model: <code>Age</code>, <code>PhysActive</code></li>
+<li class="fragment">Full model: <code>Age</code>, <code>PhysActive</code>, <code>Education</code></li>
+</ul></li>
+</ul>
 <div class="fragment">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">tidy</span>(health_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-error">
-<pre><code>Error in model.frame.default(formula = HealthGen ~ Age + PhysActive, data = data): 'data' must be a data.frame, environment, or list</code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="looking-inside-the-result-of-fit" class="slide level2">
-<h2>Looking inside the result of <code>fit()</code></h2>
-<div class="question">
-<p>What is the name of the dataset in the call? Is it right?</p>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>health_fit<span class="sc">$</span>fit<span class="sc">$</span>call</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>nnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, 
-    trace = FALSE)</code></pre>
-</div>
+<p><span class="math display">\[
+\begin{align}
+&amp;H_0: \beta_{9-11thGrade} = \beta_{HighSchool} = \beta_{SomeCollege} = \beta_{CollegeGrad} = 0\\
+&amp;H_a: \text{ at least one }\beta_j \text{ is not equal to }0
+\end{align}
+\]</span></p>
 </div>
 </section>
-<section id="repair-and-get-back-on-track" class="slide level2">
-<h2>Repair, and get back on track</h2>
+<section id="add-education-to-the-model-1" class="slide level2">
+<h2>Add <code>Education</code> to the model?</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>health_fit <span class="ot">&lt;-</span> <span class="fu">repair_call</span>(health_fit, <span class="at">data =</span> nhanes_adult)</span>
-<span id="cb12-2"><a href="#cb12-2"></a>health_fit<span class="sc">$</span>fit<span class="sc">$</span>call</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>nnet::multinom(formula = HealthGen ~ Age + PhysActive, data = nhanes_adult, 
-    trace = FALSE)</code></pre>
-</div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">tidy</span>(health_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 12 × 6
-   y.level term           estimate std.error statistic  p.value
-   &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
- 1 Vgood   (Intercept)    1.21       0.145       8.33  8.42e-17
- 2 Vgood   Age            0.000910   0.00246     0.369 7.12e- 1
- 3 Vgood   PhysActiveYes -0.321      0.0929     -3.45  5.51e- 4
- 4 Good    (Intercept)    1.95       0.141      13.8   1.39e-43
- 5 Good    Age           -0.00237    0.00242    -0.977 3.29e- 1
- 6 Good    PhysActiveYes -1.00       0.0901    -11.1   1.00e-28
- 7 Fair    (Intercept)    0.915      0.164       5.57  2.61e- 8
- 8 Fair    Age            0.00305    0.00288     1.06  2.90e- 1
- 9 Fair    PhysActiveYes -1.65       0.107     -15.3   5.69e-53
-10 Poor    (Intercept)   -1.52       0.290      -5.24  1.62e- 7
-11 Poor    Age            0.0222     0.00491     4.52  6.11e- 6
-12 Poor    PhysActiveYes -2.66       0.236     -11.3   1.75e-29</code></pre>
-</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>reduced_fit <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">fit</span>(HealthGen <span class="sc">~</span> Age <span class="sc">+</span> PhysActive,</span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="at">data =</span> nhanes_adult)</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a>full_fit <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="fu">fit</span>(HealthGen <span class="sc">~</span> Age <span class="sc">+</span> PhysActive <span class="sc">+</span> Education,</span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="at">data =</span> nhanes_adult)</span>
+<span id="cb14-10"><a href="#cb14-10"></a>  </span>
+<span id="cb14-11"><a href="#cb14-11"></a>reduced_fit <span class="ot">&lt;-</span> <span class="fu">repair_call</span>(reduced_fit, <span class="at">data =</span> nhanes_adult)</span>
+<span id="cb14-12"><a href="#cb14-12"></a>full_fit <span class="ot">&lt;-</span> <span class="fu">repair_call</span>(full_fit, <span class="at">data =</span> nhanes_adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="model-output" class="slide level2">
-<h2>Model output</h2>
+<section id="add-education-to-the-model-2" class="slide level2">
+<h2>Add <code>Education</code> to the model?</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">tidy</span>(health_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 12 × 6
-   y.level term           estimate std.error statistic  p.value
-   &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
- 1 Vgood   (Intercept)    1.21       0.145       8.33  8.42e-17
- 2 Vgood   Age            0.000910   0.00246     0.369 7.12e- 1
- 3 Vgood   PhysActiveYes -0.321      0.0929     -3.45  5.51e- 4
- 4 Good    (Intercept)    1.95       0.141      13.8   1.39e-43
- 5 Good    Age           -0.00237    0.00242    -0.977 3.29e- 1
- 6 Good    PhysActiveYes -1.00       0.0901    -11.1   1.00e-28
- 7 Fair    (Intercept)    0.915      0.164       5.57  2.61e- 8
- 8 Fair    Age            0.00305    0.00288     1.06  2.90e- 1
- 9 Fair    PhysActiveYes -1.65       0.107     -15.3   5.69e-53
-10 Poor    (Intercept)   -1.52       0.290      -5.24  1.62e- 7
-11 Poor    Age            0.0222     0.00491     4.52  6.11e- 6
-12 Poor    PhysActiveYes -2.66       0.236     -11.3   1.75e-29</code></pre>
-</div>
-</div>
-</section>
-<section id="model-output-with-ci" class="slide level2">
-<h2>Model output, with CI</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">tidy</span>(health_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 12 × 8
-   y.level term         estimate std.error statistic  p.value conf.low conf.high
-   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
- 1 Vgood   (Intercept)   1.21e+0   0.145       8.33  8.42e-17  0.922     1.49   
- 2 Vgood   Age           9.10e-4   0.00246     0.369 7.12e- 1 -0.00392   0.00574
- 3 Vgood   PhysActiveY… -3.21e-1   0.0929     -3.45  5.51e- 4 -0.503    -0.139  
- 4 Good    (Intercept)   1.95e+0   0.141      13.8   1.39e-43  1.67      2.22   
- 5 Good    Age          -2.37e-3   0.00242    -0.977 3.29e- 1 -0.00712   0.00238
- 6 Good    PhysActiveY… -1.00e+0   0.0901    -11.1   1.00e-28 -1.18     -0.825  
- 7 Fair    (Intercept)   9.15e-1   0.164       5.57  2.61e- 8  0.592     1.24   
- 8 Fair    Age           3.05e-3   0.00288     1.06  2.90e- 1 -0.00260   0.00869
- 9 Fair    PhysActiveY… -1.65e+0   0.107     -15.3   5.69e-53 -1.86     -1.43   
-10 Poor    (Intercept)  -1.52e+0   0.290      -5.24  1.62e- 7 -2.09     -0.952  
-11 Poor    Age           2.22e-2   0.00491     4.52  6.11e- 6  0.0126    0.0318 
-12 Poor    PhysActiveY… -2.66e+0   0.236     -11.3   1.75e-29 -3.12     -2.19   </code></pre>
-</div>
-</div>
-</section>
-<section id="model-output-with-ci-1" class="slide level2 smaller">
-<h2>Model output, with CI</h2>
-<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">anova</span>(reduced_fit<span class="sc">$</span>fit, full_fit<span class="sc">$</span>fit, <span class="at">test =</span> <span class="st">"Chisq"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table>
 <colgroup>
-<col style="width: 10%">
-<col style="width: 17%">
+<col style="width: 36%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 7%">
 <col style="width: 11%">
-<col style="width: 12%">
-<col style="width: 12%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: right;">Resid. df</th>
+<th style="text-align: right;">Resid. Dev</th>
+<th style="text-align: left;">Test</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">LR stat.</th>
+<th style="text-align: right;">Pr(Chi)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Age + PhysActive</td>
+<td style="text-align: right;">25848</td>
+<td style="text-align: right;">16994.23</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Age + PhysActive + Education</td>
+<td style="text-align: right;">25832</td>
+<td style="text-align: right;">16505.10</td>
+<td style="text-align: left;">1 vs 2</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">489.132</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="fragment">
+<p>At least one coefficient associated with <code>Education</code> is non-zero. Therefore, we will include <code>Education</code> in the model.</p>
+</div>
+</section>
+<section id="model-with-education" class="slide level2">
+<h2>Model with <code>Education</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">tidy</span>(full_fit, <span class="at">conf.int =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 27%">
 <col style="width: 10%">
 <col style="width: 11%">
-<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 11%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -760,317 +749,383 @@ AIC: 17612.88 </code></pre>
 <tr class="odd">
 <td style="text-align: left;">Vgood</td>
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">1.205</td>
-<td style="text-align: right;">0.145</td>
-<td style="text-align: right;">8.325</td>
-<td style="text-align: right;">0.000</td>
-<td style="text-align: right;">0.922</td>
-<td style="text-align: right;">1.489</td>
+<td style="text-align: right;">0.582</td>
+<td style="text-align: right;">0.301</td>
+<td style="text-align: right;">1.930</td>
+<td style="text-align: right;">0.054</td>
+<td style="text-align: right;">-0.009</td>
+<td style="text-align: right;">1.173</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Vgood</td>
 <td style="text-align: left;">Age</td>
 <td style="text-align: right;">0.001</td>
-<td style="text-align: right;">0.002</td>
-<td style="text-align: right;">0.369</td>
-<td style="text-align: right;">0.712</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.419</td>
+<td style="text-align: right;">0.675</td>
 <td style="text-align: right;">-0.004</td>
 <td style="text-align: right;">0.006</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Vgood</td>
 <td style="text-align: left;">PhysActiveYes</td>
-<td style="text-align: right;">-0.321</td>
-<td style="text-align: right;">0.093</td>
-<td style="text-align: right;">-3.454</td>
-<td style="text-align: right;">0.001</td>
-<td style="text-align: right;">-0.503</td>
-<td style="text-align: right;">-0.139</td>
+<td style="text-align: right;">-0.264</td>
+<td style="text-align: right;">0.099</td>
+<td style="text-align: right;">-2.681</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">-0.457</td>
+<td style="text-align: right;">-0.071</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vgood</td>
+<td style="text-align: left;">Education9 - 11th Grade</td>
+<td style="text-align: right;">0.768</td>
+<td style="text-align: right;">0.308</td>
+<td style="text-align: right;">2.493</td>
+<td style="text-align: right;">0.013</td>
+<td style="text-align: right;">0.164</td>
+<td style="text-align: right;">1.372</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vgood</td>
+<td style="text-align: left;">EducationHigh School</td>
+<td style="text-align: right;">0.701</td>
+<td style="text-align: right;">0.280</td>
+<td style="text-align: right;">2.509</td>
+<td style="text-align: right;">0.012</td>
+<td style="text-align: right;">0.153</td>
+<td style="text-align: right;">1.249</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vgood</td>
+<td style="text-align: left;">EducationSome College</td>
+<td style="text-align: right;">0.788</td>
+<td style="text-align: right;">0.271</td>
+<td style="text-align: right;">2.901</td>
+<td style="text-align: right;">0.004</td>
+<td style="text-align: right;">0.256</td>
+<td style="text-align: right;">1.320</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vgood</td>
+<td style="text-align: left;">EducationCollege Grad</td>
+<td style="text-align: right;">0.408</td>
+<td style="text-align: right;">0.268</td>
+<td style="text-align: right;">1.522</td>
+<td style="text-align: right;">0.128</td>
+<td style="text-align: right;">-0.117</td>
+<td style="text-align: right;">0.933</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Good</td>
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">1.948</td>
-<td style="text-align: right;">0.141</td>
-<td style="text-align: right;">13.844</td>
+<td style="text-align: right;">2.041</td>
+<td style="text-align: right;">0.272</td>
+<td style="text-align: right;">7.513</td>
 <td style="text-align: right;">0.000</td>
-<td style="text-align: right;">1.672</td>
-<td style="text-align: right;">2.223</td>
+<td style="text-align: right;">1.508</td>
+<td style="text-align: right;">2.573</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Good</td>
 <td style="text-align: left;">Age</td>
 <td style="text-align: right;">-0.002</td>
-<td style="text-align: right;">0.002</td>
-<td style="text-align: right;">-0.977</td>
-<td style="text-align: right;">0.329</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">-0.651</td>
+<td style="text-align: right;">0.515</td>
 <td style="text-align: right;">-0.007</td>
-<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.003</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Good</td>
 <td style="text-align: left;">PhysActiveYes</td>
-<td style="text-align: right;">-1.001</td>
-<td style="text-align: right;">0.090</td>
-<td style="text-align: right;">-11.120</td>
+<td style="text-align: right;">-0.758</td>
+<td style="text-align: right;">0.096</td>
+<td style="text-align: right;">-7.884</td>
 <td style="text-align: right;">0.000</td>
-<td style="text-align: right;">-1.178</td>
-<td style="text-align: right;">-0.825</td>
+<td style="text-align: right;">-0.946</td>
+<td style="text-align: right;">-0.569</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.915</td>
-<td style="text-align: right;">0.164</td>
-<td style="text-align: right;">5.566</td>
-<td style="text-align: right;">0.000</td>
-<td style="text-align: right;">0.592</td>
-<td style="text-align: right;">1.237</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: left;">Education9 - 11th Grade</td>
+<td style="text-align: right;">0.360</td>
+<td style="text-align: right;">0.275</td>
+<td style="text-align: right;">1.310</td>
+<td style="text-align: right;">0.190</td>
+<td style="text-align: right;">-0.179</td>
+<td style="text-align: right;">0.899</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">Age</td>
-<td style="text-align: right;">0.003</td>
-<td style="text-align: right;">0.003</td>
-<td style="text-align: right;">1.058</td>
-<td style="text-align: right;">0.290</td>
-<td style="text-align: right;">-0.003</td>
-<td style="text-align: right;">0.009</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: left;">EducationHigh School</td>
+<td style="text-align: right;">0.085</td>
+<td style="text-align: right;">0.247</td>
+<td style="text-align: right;">0.345</td>
+<td style="text-align: right;">0.730</td>
+<td style="text-align: right;">-0.399</td>
+<td style="text-align: right;">0.569</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">PhysActiveYes</td>
-<td style="text-align: right;">-1.645</td>
-<td style="text-align: right;">0.107</td>
-<td style="text-align: right;">-15.319</td>
-<td style="text-align: right;">0.000</td>
-<td style="text-align: right;">-1.856</td>
-<td style="text-align: right;">-1.435</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: left;">EducationSome College</td>
+<td style="text-align: right;">-0.011</td>
+<td style="text-align: right;">0.239</td>
+<td style="text-align: right;">-0.047</td>
+<td style="text-align: right;">0.962</td>
+<td style="text-align: right;">-0.480</td>
+<td style="text-align: right;">0.457</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Poor</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-1.521</td>
-<td style="text-align: right;">0.290</td>
-<td style="text-align: right;">-5.238</td>
-<td style="text-align: right;">0.000</td>
-<td style="text-align: right;">-2.090</td>
-<td style="text-align: right;">-0.952</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Poor</td>
-<td style="text-align: left;">Age</td>
-<td style="text-align: right;">0.022</td>
-<td style="text-align: right;">0.005</td>
-<td style="text-align: right;">4.522</td>
-<td style="text-align: right;">0.000</td>
-<td style="text-align: right;">0.013</td>
-<td style="text-align: right;">0.032</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Poor</td>
-<td style="text-align: left;">PhysActiveYes</td>
-<td style="text-align: right;">-2.656</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: left;">EducationCollege Grad</td>
+<td style="text-align: right;">-0.891</td>
 <td style="text-align: right;">0.236</td>
-<td style="text-align: right;">-11.275</td>
+<td style="text-align: right;">-3.767</td>
 <td style="text-align: right;">0.000</td>
-<td style="text-align: right;">-3.117</td>
-<td style="text-align: right;">-2.194</td>
+<td style="text-align: right;">-1.354</td>
+<td style="text-align: right;">-0.427</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">2.116</td>
+<td style="text-align: right;">0.288</td>
+<td style="text-align: right;">7.355</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">1.552</td>
+<td style="text-align: right;">2.680</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.107</td>
+<td style="text-align: right;">0.914</td>
+<td style="text-align: right;">-0.006</td>
+<td style="text-align: right;">0.006</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">PhysActiveYes</td>
+<td style="text-align: right;">-1.191</td>
+<td style="text-align: right;">0.115</td>
+<td style="text-align: right;">-10.367</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-1.416</td>
+<td style="text-align: right;">-0.966</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">Education9 - 11th Grade</td>
+<td style="text-align: right;">-0.224</td>
+<td style="text-align: right;">0.279</td>
+<td style="text-align: right;">-0.802</td>
+<td style="text-align: right;">0.422</td>
+<td style="text-align: right;">-0.771</td>
+<td style="text-align: right;">0.323</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">EducationHigh School</td>
+<td style="text-align: right;">-0.832</td>
+<td style="text-align: right;">0.252</td>
+<td style="text-align: right;">-3.307</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">-1.326</td>
+<td style="text-align: right;">-0.339</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">EducationSome College</td>
+<td style="text-align: right;">-1.343</td>
+<td style="text-align: right;">0.246</td>
+<td style="text-align: right;">-5.462</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-1.825</td>
+<td style="text-align: right;">-0.861</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">EducationCollege Grad</td>
+<td style="text-align: right;">-2.509</td>
+<td style="text-align: right;">0.253</td>
+<td style="text-align: right;">-9.913</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-3.005</td>
+<td style="text-align: right;">-2.013</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-0.200</td>
+<td style="text-align: right;">0.411</td>
+<td style="text-align: right;">-0.488</td>
+<td style="text-align: right;">0.626</td>
+<td style="text-align: right;">-1.005</td>
+<td style="text-align: right;">0.605</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">3.527</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.008</td>
+<td style="text-align: right;">0.028</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">PhysActiveYes</td>
+<td style="text-align: right;">-2.267</td>
+<td style="text-align: right;">0.242</td>
+<td style="text-align: right;">-9.377</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-2.741</td>
+<td style="text-align: right;">-1.793</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">Education9 - 11th Grade</td>
+<td style="text-align: right;">-0.360</td>
+<td style="text-align: right;">0.353</td>
+<td style="text-align: right;">-1.020</td>
+<td style="text-align: right;">0.308</td>
+<td style="text-align: right;">-1.053</td>
+<td style="text-align: right;">0.332</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">EducationHigh School</td>
+<td style="text-align: right;">-1.150</td>
+<td style="text-align: right;">0.334</td>
+<td style="text-align: right;">-3.438</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">-1.805</td>
+<td style="text-align: right;">-0.494</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">EducationSome College</td>
+<td style="text-align: right;">-1.073</td>
+<td style="text-align: right;">0.316</td>
+<td style="text-align: right;">-3.399</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">-1.692</td>
+<td style="text-align: right;">-0.454</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">EducationCollege Grad</td>
+<td style="text-align: right;">-2.322</td>
+<td style="text-align: right;">0.366</td>
+<td style="text-align: right;">-6.342</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-3.039</td>
+<td style="text-align: right;">-1.604</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section>
-<section id="fair-vs.-excellent-health" class="slide level2">
-<h2>Fair vs.&nbsp;Excellent Health</h2>
-<p>The baseline category for the model is <code>Excellent</code>.</p>
-<div class="fragment">
-<p>The model equation for the log-odds a person rates themselves as having “Fair” health vs.&nbsp;“Excellent” is</p>
-<p><span class="math display">\[
-\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}
-\]</span></p>
+<section id="compare-nhanes-models-using-aic" class="slide level2">
+<h2>Compare NHANES models using AIC</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">glance</span>(reduced_fit)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 17018.23</code></pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">glance</span>(full_fit)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 16561.1</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="checking-conditions-for-inference" class="title-slide slide level1 center">
+<h1>Checking conditions for inference</h1>
+
+</section>
+<section id="conditions-for-inference" class="slide level2">
+<h2>Conditions for inference</h2>
+<p>We want to check the following conditions for inference for the multinomial logistic regression model:</p>
+<ol type="1">
+<li class="fragment"><p>Linearity: Is there a linear relationship between the log-odds and the predictor variables?</p></li>
+<li class="fragment"><p>Randomness: Was the sample randomly selected? Or can we reasonably treat it as random?</p></li>
+<li class="fragment"><p>Independence: Are the observations independent?</p></li>
+</ol>
+</section>
+<section id="checking-linearity" class="slide level2">
+<h2>Checking linearity</h2>
+<p>Similar to logistic regression, we will check linearity by examining empirical logit plots between each level of the response and the quantitative predictor variables.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>nhanes_adult <span class="ot">&lt;-</span> nhanes_adult <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-3"><a href="#cb21-3"></a>    <span class="at">Excellent =</span> <span class="fu">factor</span>(<span class="fu">if_else</span>(HealthGen <span class="sc">==</span> <span class="st">"Excellent"</span>, <span class="st">"1"</span>, <span class="st">"0"</span>)),</span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="at">Vgood =</span> <span class="fu">factor</span>(<span class="fu">if_else</span>(HealthGen <span class="sc">==</span> <span class="st">"Vgood"</span>, <span class="st">"1"</span>, <span class="st">"0"</span>)),</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">Good =</span> <span class="fu">factor</span>(<span class="fu">if_else</span>(HealthGen <span class="sc">==</span> <span class="st">"Good"</span>, <span class="st">"1"</span>, <span class="st">"0"</span>)),</span>
+<span id="cb21-6"><a href="#cb21-6"></a>    <span class="at">Fair =</span> <span class="fu">factor</span>(<span class="fu">if_else</span>(HealthGen <span class="sc">==</span> <span class="st">"Fair"</span>, <span class="st">"1"</span>, <span class="st">"0"</span>)),</span>
+<span id="cb21-7"><a href="#cb21-7"></a>    <span class="at">Poor =</span> <span class="fu">factor</span>(<span class="fu">if_else</span>(HealthGen <span class="sc">==</span> <span class="st">"Poor"</span>, <span class="st">"1"</span>, <span class="st">"0"</span>))</span>
+<span id="cb21-8"><a href="#cb21-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="interpretations" class="slide level2 smaller">
-<h2>Interpretations</h2>
-<p><span class="math display">\[
-\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}
-\]</span></p>
-<p>For each additional year in age, the odds a person rates themselves as having fair health versus excellent health are expected to multiply by 1.003 (exp(0.003)), holding physical activity constant.</p>
-<div class="fragment">
-<p>The odds a person who does physical activity will rate themselves as having fair health versus excellent health are expected to be 0.193 (exp(-1.645)) times the odds for a person who doesn’t do physical activity, holding age constant.</p>
+<section id="checking-linearity-1" class="slide level2">
+<h2>Checking linearity</h2>
+<div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">emplogitplot1</span>(Excellent <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Excellent vs. Age"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">emplogitplot1</span>(Vgood <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Vgood vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel">
+
+</div>
 </div>
 </section>
-<section id="interpretations-1" class="slide level2">
-<h2>Interpretations</h2>
-<p><span class="math display">\[
-\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}
-\]</span></p>
-<p>The odds a 0 year old person who doesn’t do physical activity rates themselves as having fair health vs.&nbsp;excellent health are 2.497 (exp(0.915)).</p>
-<div class="fragment">
-<p>⚠️ <strong>Need to mean-center age for the intercept to have a meaningful interpretation!</strong></p>
+<section id="checking-linearity-2" class="slide level2">
+<h2>Checking linearity</h2>
+<div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">emplogitplot1</span>(Good <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Good vs. Age"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">emplogitplot1</span>(Fair <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Fair vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel">
+
+</div>
 </div>
 </section>
-<section id="hypothesis-test-for-beta_jk" class="slide level2">
-<h2>Hypothesis test for <span class="math inline">\(\beta_{jk}\)</span></h2>
-<p>The test of significance for the coefficient <span class="math inline">\(\beta_{jk}\)</span> is</p>
-<p><strong>Hypotheses</strong>: <span class="math inline">\(H_0: \beta_{jk} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{jk} \neq 0\)</span></p>
-<p><strong>Test Statistic</strong>: <span class="math display">\[z = \frac{\hat{\beta}_{jk} - 0}{SE(\hat{\beta_{jk}})}\]</span></p>
-<p><strong>P-value</strong>: <span class="math inline">\(P(|Z| &gt; |z|)\)</span>,</p>
-<p>where <span class="math inline">\(Z \sim N(0, 1)\)</span>, the Standard Normal distribution</p>
+<section id="checking-linearity-3" class="slide level2">
+<h2>Checking linearity</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">emplogitplot1</span>(Poor <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, <span class="at">ngroups =</span> <span class="dv">5</span>, <span class="at">main =</span> <span class="st">"Poor vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>✅ The linearity condition is satisfied. There is a linear relationship between the empirical logit and the quantitative predictor variable, Age.</p>
+</div>
 </section>
-<section id="confidence-interval-for-beta_jk" class="slide level2">
-<h2>Confidence interval for <span class="math inline">\(\beta_{jk}\)</span></h2>
+<section id="checking-randomness" class="slide level2">
+<h2>Checking randomness</h2>
+<p>We can check the randomness condition based on the context of the data and how the observations were collected.</p>
 <ul>
-<li class="fragment"><p>We can calculate the <strong>C% confidence interval</strong> for <span class="math inline">\(\beta_{jk}\)</span> using <span class="math inline">\(\hat{\beta}_{jk} \pm z^* SE(\hat{\beta}_{jk})\)</span>, where <span class="math inline">\(z^*\)</span> is calculated from the <span class="math inline">\(N(0,1)\)</span> distribution.</p></li>
-<li class="fragment"><p>We are <span class="math inline">\(C\%\)</span> confident that for every one unit change in <span class="math inline">\(x_{j}\)</span>, the odds of <span class="math inline">\(y = k\)</span> versus the baseline will multiply by a factor of <span class="math inline">\(\exp\{\hat{\beta}_{jk} - z^* SE(\hat{\beta}_{jk})\}\)</span> to <span class="math inline">\(\exp\{\hat{\beta}_{jk} + z^* SE(\hat{\beta}_{jk})\}\)</span>, holding all else constant.</p></li>
+<li class="fragment"><p>Was the sample randomly selected?</p></li>
+<li class="fragment"><p>If the sample was not randomly selected, ask whether there is reason to believe the observations in the sample differ systematically from the population of interest.</p></li>
 </ul>
-</section>
-<section id="interpreting-cis-for-beta_jk" class="slide level2 smaller">
-<h2>Interpreting CIs for <span class="math inline">\(\beta_{jk}\)</span></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">tidy</span>(health_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">filter</span>(y.level <span class="sc">==</span> <span class="st">"Fair"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 17%">
-<col style="width: 11%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 10%">
-<col style="width: 11%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">y.level</th>
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">conf.low</th>
-<th style="text-align: right;">conf.high</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.915</td>
-<td style="text-align: right;">0.164</td>
-<td style="text-align: right;">5.566</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.592</td>
-<td style="text-align: right;">1.237</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">Age</td>
-<td style="text-align: right;">0.003</td>
-<td style="text-align: right;">0.003</td>
-<td style="text-align: right;">1.058</td>
-<td style="text-align: right;">0.29</td>
-<td style="text-align: right;">-0.003</td>
-<td style="text-align: right;">0.009</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">PhysActiveYes</td>
-<td style="text-align: right;">-1.645</td>
-<td style="text-align: right;">0.107</td>
-<td style="text-align: right;">-15.319</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">-1.856</td>
-<td style="text-align: right;">-1.435</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><br></p>
 <div class="fragment">
-<p>We are 95% confident, that for each additional year in age, the odds a person rates themselves as having fair health versus excellent health will multiply by 0.997 (exp(-0.003)) to 1.009 (exp(0.009)) , holding physical activity constant.</p>
+<p>✅ The randomness condition is satisfied. We do not have reason to believe that the participants in this study differ systematically from adults in the U.S..</p>
 </div>
 </section>
-<section id="interpreting-cis-for-beta_jk-1" class="slide level2 smaller">
-<h2>Interpreting CIs for <span class="math inline">\(\beta_{jk}\)</span></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">tidy</span>(health_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">filter</span>(y.level <span class="sc">==</span> <span class="st">"Fair"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 17%">
-<col style="width: 11%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 10%">
-<col style="width: 11%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">y.level</th>
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">conf.low</th>
-<th style="text-align: right;">conf.high</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.915</td>
-<td style="text-align: right;">0.164</td>
-<td style="text-align: right;">5.566</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.592</td>
-<td style="text-align: right;">1.237</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">Age</td>
-<td style="text-align: right;">0.003</td>
-<td style="text-align: right;">0.003</td>
-<td style="text-align: right;">1.058</td>
-<td style="text-align: right;">0.29</td>
-<td style="text-align: right;">-0.003</td>
-<td style="text-align: right;">0.009</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Fair</td>
-<td style="text-align: left;">PhysActiveYes</td>
-<td style="text-align: right;">-1.645</td>
-<td style="text-align: right;">0.107</td>
-<td style="text-align: right;">-15.319</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">-1.856</td>
-<td style="text-align: right;">-1.435</td>
-</tr>
-</tbody>
-</table>
+<section id="checking-independence" class="slide level2">
+<h2>Checking independence</h2>
+<p>We can check the independence condition based on the context of the data and how the observations were collected.</p>
+<p>Independence is most often violated if the data were collected over time or there is a strong spatial relationship between the observations.</p>
+<div class="fragment">
+<p>✅ The independence condition is satisfied. It is reasonable to conclude that the participants’ health and behavior characteristics are independent of one another.</p>
 </div>
-</div>
-<p><br></p>
-<p>We are 95% confident that the odds a person who does physical activity will rate themselves as having fair health versus excellent health are 0.156 (exp(-1.856 )) to 0.238 (exp(-1.435)) times the odds for a person who doesn’t do physical activity, holding age constant.</p>
 </section>
 <section id="recap" class="slide level2">
 <h2>Recap</h2>
 <ul>
-<li class="fragment"><p>Introduce multinomial logistic regression</p></li>
-<li class="fragment"><p>Interpret model coefficients</p></li>
-<li class="fragment"><p>Inference for a coefficient <span class="math inline">\(\beta_{jk}\)</span></p></li>
+<li class="fragment">Predictions</li>
+<li class="fragment">Model selection for inference</li>
+<li class="fragment">Checking conditions for inference</li>
 </ul>
 
 

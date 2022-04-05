@@ -718,7 +718,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n📂\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n📂\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n📂\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Mar 25\nDue: HW 3 + Lab 5\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n12\nMon, Mar 28\nLab: Work on project drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n✍️\n\n\n\n\n13\nMon, Apr 4\nLab 6: Why Many Americans Don’t Vote\n\n\n\n💻\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction\n📖\n\n\n\n\n\n\n\n\n\nThu, Apr 7\nMultiLR: Inference\n\n\n\n\n\n📂\n\n\n\n\nFri, Apr 8\nDue: HW 4 + Lab 6\n\n\n\n💻\n✍️\n\n\n\n\n\nSun, Apr 10\nDue: Project drafts\n\n\n\n\n\n📂\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Apr 12\nTBA\n📖\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n📂\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n📖\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n✍️\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n📂\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n📂\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n📂\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Mar 25\nDue: HW 3 + Lab 5\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n12\nMon, Mar 28\nLab: Work on project drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n✍️\n\n\n\n\n13\nMon, Apr 4\nLab 6: Why Many Americans Don’t Vote\n\n\n\n💻\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction + inferential models\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Apr 7\nMultiLR: Predictive models\n\n\n\n\n\n📂\n\n\n\n\nFri, Apr 8\nDue: HW 4 + Lab 6\n\n\n\n💻\n✍️\n\n\n\n\n\nSun, Apr 10\nDue: Project drafts\n\n\n\n\n\n📂\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Apr 12\nTBA\n📖\n\n\n\n\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n📂\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n📖\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n✍️\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "supplemental/slr-derivations.html",
@@ -928,7 +928,7 @@
     "href": "hw/hw-4.html#exercises",
     "title": "HW 4 - Multinomial logistic regression",
     "section": "Exercises",
-    "text": "Exercises\n\nLet’s begin by doing some exploratory data analysis. The univariate (single variable) plots for each of the predictor variables and the response variable are shown below.\n\n\n\n\n\n\nComplete the exploratory data analysis by creating the plots and/or summary statistics to examine the relationship between the response variable (id) and each of the explanatory variables (lineup, weapon, and feature).\n\nUsing the plots/tables from Exercise 1:\n\n\nWhat is one thing you learn about the data from the univariate plots?\nBased on the bivariate plots, do any of the predictors appear to have a significant effect on the id? Briefly explain.\n\n\nBriefly explain why you should use a multinomial logistic regression model to predict id using lineup, weapon and feature.\nFit the multinomial logistic model that only includes main effects. Display the model output.\n\n\nWhat is the baseline category for the response variable?\nInterpret the intercepts for each part of the model in terms of the odds.\nInterpret the coefficients of lineup for each part of the model in terms of the odds.\n\n\nYou want to consider all possible first-order interaction effects (interaction effects between two variables) for the model.\n\n\nUse the appropriate test to determine if there is at least one significant interaction effect.\nBased on your test, is there evidence of any significant interaction effects?\n\nRegardless of your answer to Question 5, use the model that includes the interaction terms for the remainder of the assignment.\n\nAccording to the model,\n\n\nIf there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the log-odds of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?\nIf there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the odds of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?\nWhich group of participants (i.e., which set of experimental conditions) is described by the intercept?\n\n\nAre the conditions inference met? List of the conditions, create visualizations and/or summary tables to check the conditions and evaluate whether each condition is met. Include an assessment about each condition and a brief explanation about your conclusion.\nUse the model to predict the decision made by each participant. Make a table of the predicted vs. the actual decisions.\n\n\nBriefly describe how the predicted decision is determined for each participant.\nWhat is the misclassification rate?"
+    "text": "Exercises\n\nLet’s begin by doing some exploratory data analysis. The univariate (single variable) plots for each of the predictor variables and the response variable are shown below.\n\n\n\n\n\n\nComplete the exploratory data analysis by creating the plots and/or summary statistics to examine the relationship between the response variable (id) and each of the explanatory variables (lineup, weapon, and feature).\n\nUsing the plots/tables from Exercise 1:\n\n\nWhat is one thing you learn about the data from the univariate plots?\nBased on the bivariate plots, do any of the predictors appear to have a significant effect on the id? Briefly explain.\n\n\nBriefly explain why you should use a multinomial logistic regression model to predict id using lineup, weapon and feature.\nFit the multinomial logistic model that only includes main effects. Display the model output.\n\n\nWhat is the baseline category for the response variable?\nInterpret the intercepts for each part of the model in terms of the odds.\nInterpret the coefficients of lineup for each part of the model in terms of the odds.\n\n\nYou want to consider all possible first-order interaction effects (interaction effects between two variables) for the model.\n\n\nUse the appropriate test to determine if there is at least one significant interaction effect.\nBased on your test, is there evidence of any significant interaction effects?\n\nRegardless of your answer to Question 5, use the model that includes the interaction terms for the remainder of the assignment.\n\nAccording to the model,\n\n\nIf there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the log-odds of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?\nIf there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the odds of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?\nWhich group of participants (i.e., which set of experimental conditions) is described by the intercept?\n\n\nAre the conditions inference met? List of the conditions, and, if relevant, create visualizations to check the conditions and evaluate whether each condition is met. Include an assessment about each condition and a brief explanation about your conclusion.\n\n\n\nUse the model to predict the decision made by each participant. Make a table of the predicted vs. the actual decisions.\n\n\nBriefly describe how the predicted decision is determined for each participant.\nWhat is the misclassification rate?"
   },
   {
     "objectID": "hw/hw-4.html#submission",
@@ -1890,6 +1890,188 @@
     "text": "Standard error of \\(\\hat{\\beta}_1\\)\n\\[\nSE_{\\hat{\\beta}_1} = \\hat{\\sigma}_\\epsilon\\sqrt{\\frac{1}{(n-1)s_X^2}}\n\\]\n\nor…\n\n\n\n \n  \n    term \n    estimate \n    std.error \n    statistic \n    p.value \n  \n \n\n  \n    (Intercept) \n    116652.33 \n    53302.46 \n    2.19 \n    0.03 \n  \n  \n    area \n    159.48 \n    18.17 \n    8.78 \n    0.00 \n  \n\n\n\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
+    "objectID": "slides/lec-24.html#topics",
+    "href": "slides/lec-24.html#topics",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Topics",
+    "text": "Topics\n\n\nPredictions\nModel selection\nChecking conditions"
+  },
+  {
+    "objectID": "slides/lec-24.html#computational-setup",
+    "href": "slides/lec-24.html#computational-setup",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(NHANES)\nlibrary(knitr)\nlibrary(patchwork)\nlibrary(colorblindr)\nlibrary(pROC)\nlibrary(Stat2Data)\nlibrary(nnet)\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))"
+  },
+  {
+    "objectID": "slides/lec-24.html#nhanes-data",
+    "href": "slides/lec-24.html#nhanes-data",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "NHANES Data",
+    "text": "NHANES Data\n\n\nNational Health and Nutrition Examination Survey is conducted by the National Center for Health Statistics (NCHS).\nThe goal is to “assess the health and nutritional status of adults and children in the United States”.\nThis survey includes an interview and a physical examination."
+  },
+  {
+    "objectID": "slides/lec-24.html#variables",
+    "href": "slides/lec-24.html#variables",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Variables",
+    "text": "Variables\nGoal: Use a person’s age and whether they do regular physical activity to predict their self-reported health rating.\n\nOutcome: HealthGen: Self-reported rating of participant’s health in general. Excellent, Vgood, Good, Fair, or Poor.\nPredictors:\n\nAge: Age at time of screening (in years). Participants 80 or older were recorded as 80.\nPhysActive: Participant does moderate to vigorous-intensity sports, fitness or recreational activities."
+  },
+  {
+    "objectID": "slides/lec-24.html#the-data",
+    "href": "slides/lec-24.html#the-data",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "The data",
+    "text": "The data\n\nnhanes_adult <- NHANES %>%\n  filter(Age >= 18) %>%\n  select(HealthGen, Age, PhysActive, Education) %>%\n  drop_na() %>%\n  mutate(obs_num = 1:n())\n\n\nglimpse(nhanes_adult)\n\nRows: 6,465\nColumns: 5\n$ HealthGen  <fct> Good, Good, Good, Good, Vgood, Vgood, Vgood, Vgood, Vgood, …\n$ Age        <int> 34, 34, 34, 49, 45, 45, 45, 66, 58, 54, 50, 33, 60, 56, 56,…\n$ PhysActive <fct> No, No, No, No, Yes, Yes, Yes, Yes, Yes, Yes, Yes, No, No, …\n$ Education  <fct> High School, High School, High School, Some College, Colleg…\n$ obs_num    <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …"
+  },
+  {
+    "objectID": "slides/lec-24.html#model-in-r",
+    "href": "slides/lec-24.html#model-in-r",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Model in R",
+    "text": "Model in R\n\nhealth_fit <- multinom_reg() %>%\n  set_engine(\"nnet\") %>%\n  fit(HealthGen ~ Age + PhysActive, data = nhanes_adult)\n\nhealth_fit <- repair_call(health_fit, data = nhanes_adult)"
+  },
+  {
+    "objectID": "slides/lec-24.html#model-summary",
+    "href": "slides/lec-24.html#model-summary",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Model summary",
+    "text": "Model summary\n\ntidy(health_fit) %>% print(n = 12)\n\n# A tibble: 12 × 6\n   y.level term            estimate std.error statistic  p.value\n   <chr>   <chr>              <dbl>     <dbl>     <dbl>    <dbl>\n 1 Vgood   (Intercept)    1.27        0.154      8.23   1.80e-16\n 2 Vgood   Age           -0.0000361   0.00259   -0.0139 9.89e- 1\n 3 Vgood   PhysActiveYes -0.332       0.0949    -3.50   4.72e- 4\n 4 Good    (Intercept)    1.99        0.150     13.3    2.81e-40\n 5 Good    Age           -0.00304     0.00256   -1.19   2.35e- 1\n 6 Good    PhysActiveYes -1.01        0.0921   -11.0    4.80e-28\n 7 Fair    (Intercept)    1.03        0.174      5.94   2.89e- 9\n 8 Fair    Age            0.00113     0.00302    0.373  7.09e- 1\n 9 Fair    PhysActiveYes -1.66        0.109    -15.2    4.14e-52\n10 Poor    (Intercept)   -1.34        0.299     -4.47   7.65e- 6\n11 Poor    Age            0.0193      0.00505    3.83   1.30e- 4\n12 Poor    PhysActiveYes -2.67        0.236    -11.3    1.20e-29"
+  },
+  {
+    "objectID": "slides/lec-24.html#calculating-probabilities",
+    "href": "slides/lec-24.html#calculating-probabilities",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Calculating probabilities",
+    "text": "Calculating probabilities\n\nFor categories \\(2,\\ldots,K\\), the probability that the \\(i^{th}\\) observation is in the \\(j^{th}\\) category is\n\\[\n\\hat{\\pi}_{ij} = \\frac{e^{\\hat{\\beta}_{0j} + \\hat{\\beta}_{1j}x_{i1} + \\dots + \\hat{\\beta}_{pj}x_{ip}}}{1 + \\sum\\limits_{k=2}^K e^{\\hat{\\beta}_{0k} + \\hat{\\beta}_{1k}x_{i1} + \\dots \\hat{\\beta}_{pk}x_{ip}}}\n\\]\nFor the baseline category, \\(k=1\\), we calculate the probability \\(\\hat{\\pi}_{i1}\\) as\n\\[\n\\hat{\\pi}_{i1} = 1- \\sum\\limits_{k=2}^K \\hat{\\pi}_{ik}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-24.html#predicted-health-rating",
+    "href": "slides/lec-24.html#predicted-health-rating",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Predicted health rating",
+    "text": "Predicted health rating\nWe can use our model to predict a person’s perceived health rating given their age and whether they exercise.\n\nhealth_aug <- augment(health_fit, new_data = nhanes_adult)\nhealth_aug\n\n# A tibble: 6,465 × 11\n   HealthGen   Age PhysActive Education      obs_num .pred_class .pred_Excellent\n   <fct>     <int> <fct>      <fct>            <int> <fct>                 <dbl>\n 1 Good         34 No         High School          1 Good                 0.0687\n 2 Good         34 No         High School          2 Good                 0.0687\n 3 Good         34 No         High School          3 Good                 0.0687\n 4 Good         49 No         Some College         4 Good                 0.0691\n 5 Vgood        45 Yes        College Grad         5 Vgood                0.155 \n 6 Vgood        45 Yes        College Grad         6 Vgood                0.155 \n 7 Vgood        45 Yes        College Grad         7 Vgood                0.155 \n 8 Vgood        66 Yes        Some College         8 Vgood                0.157 \n 9 Vgood        58 Yes        College Grad         9 Vgood                0.156 \n10 Fair         54 Yes        9 - 11th Grade      10 Vgood                0.156 \n# … with 6,455 more rows, and 4 more variables: .pred_Vgood <dbl>,\n#   .pred_Good <dbl>, .pred_Fair <dbl>, .pred_Poor <dbl>"
+  },
+  {
+    "objectID": "slides/lec-24.html#actual-vs.-predicted-health-rating",
+    "href": "slides/lec-24.html#actual-vs.-predicted-health-rating",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Actual vs. predicted health rating",
+    "text": "Actual vs. predicted health rating\nFor each observation, the predicted perceived health rating is the category with the highest predicted probability.\n\nhealth_aug %>% select(contains(\"pred\"))\n\n# A tibble: 6,465 × 6\n   .pred_class .pred_Excellent .pred_Vgood .pred_Good .pred_Fair .pred_Poor\n   <fct>                 <dbl>       <dbl>      <dbl>      <dbl>      <dbl>\n 1 Good                 0.0687       0.243      0.453     0.201     0.0348 \n 2 Good                 0.0687       0.243      0.453     0.201     0.0348 \n 3 Good                 0.0687       0.243      0.453     0.201     0.0348 \n 4 Good                 0.0691       0.244      0.435     0.205     0.0467 \n 5 Vgood                0.155        0.393      0.359     0.0868    0.00671\n 6 Vgood                0.155        0.393      0.359     0.0868    0.00671\n 7 Vgood                0.155        0.393      0.359     0.0868    0.00671\n 8 Vgood                0.157        0.400      0.342     0.0904    0.0102 \n 9 Vgood                0.156        0.397      0.349     0.0890    0.00872\n10 Vgood                0.156        0.396      0.352     0.0883    0.00804\n# … with 6,455 more rows"
+  },
+  {
+    "objectID": "slides/lec-24.html#confusion-matrix",
+    "href": "slides/lec-24.html#confusion-matrix",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Confusion matrix",
+    "text": "Confusion matrix\n\nhealth_conf <- health_aug %>% \n  count(HealthGen, .pred_class, .drop = FALSE) %>%\n  pivot_wider(names_from = .pred_class, values_from = n)\n\nhealth_conf\n\n# A tibble: 5 × 6\n  HealthGen Excellent Vgood  Good  Fair  Poor\n  <fct>         <int> <int> <int> <int> <int>\n1 Excellent         0   528   210     0     0\n2 Vgood             0  1341   743     0     0\n3 Good              0  1226  1316     0     0\n4 Fair              0   296   625     0     0\n5 Poor              0    24   156     0     0"
+  },
+  {
+    "objectID": "slides/lec-24.html#actual-vs.-predicted-health-rating-1",
+    "href": "slides/lec-24.html#actual-vs.-predicted-health-rating-1",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Actual vs. predicted health rating",
+    "text": "Actual vs. predicted health rating\n\nWhy do you think no observations were predicted to have a rating of “Excellent”, “Fair”, or “Poor”?"
+  },
+  {
+    "objectID": "slides/lec-24.html#comparing-nested-models",
+    "href": "slides/lec-24.html#comparing-nested-models",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Comparing nested models",
+    "text": "Comparing nested models\n\nSuppose there are two models:\n\nReduced model includes predictors \\(x_1, \\ldots, x_q\\)\nFull model includes predictors \\(x_1, \\ldots, x_q, x_{q+1}, \\ldots, x_p\\)\n\nWe want to test the following hypotheses:\n\n\\(H_0: \\beta_{q+1} = \\dots = \\beta_p = 0\\)\n\\(H_A: \\text{ at least 1 }\\beta_j \\text{ is not } 0\\)\n\nTo do so, we will use the drop-in-deviance test (very similar to logistic regression)"
+  },
+  {
+    "objectID": "slides/lec-24.html#add-education-to-the-model",
+    "href": "slides/lec-24.html#add-education-to-the-model",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Add Education to the model?",
+    "text": "Add Education to the model?\n\nWe consider adding the participants’ Education level to the model.\n\nEducation takes values 8thGrade, 9-11thGrade, HighSchool, SomeCollege, and CollegeGrad\n\nModels we’re testing:\n\nReduced model: Age, PhysActive\nFull model: Age, PhysActive, Education\n\n\n\n\\[\n\\begin{align}\n&H_0: \\beta_{9-11thGrade} = \\beta_{HighSchool} = \\beta_{SomeCollege} = \\beta_{CollegeGrad} = 0\\\\\n&H_a: \\text{ at least one }\\beta_j \\text{ is not equal to }0\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "slides/lec-24.html#add-education-to-the-model-1",
+    "href": "slides/lec-24.html#add-education-to-the-model-1",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Add Education to the model?",
+    "text": "Add Education to the model?\n\nreduced_fit <- multinom_reg() %>%\n  set_engine(\"nnet\") %>%\n  fit(HealthGen ~ Age + PhysActive,\n  data = nhanes_adult)\n\nfull_fit <- multinom_reg() %>%\n  set_engine(\"nnet\") %>%\n  fit(HealthGen ~ Age + PhysActive + Education,\n  data = nhanes_adult)\n  \nreduced_fit <- repair_call(reduced_fit, data = nhanes_adult)\nfull_fit <- repair_call(full_fit, data = nhanes_adult)"
+  },
+  {
+    "objectID": "slides/lec-24.html#add-education-to-the-model-2",
+    "href": "slides/lec-24.html#add-education-to-the-model-2",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Add Education to the model?",
+    "text": "Add Education to the model?\n\nanova(reduced_fit$fit, full_fit$fit, test = \"Chisq\") %>%\n  kable(digits = 3)\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel\nResid. df\nResid. Dev\nTest\nDf\nLR stat.\nPr(Chi)\n\n\n\n\nAge + PhysActive\n25848\n16994.23\n\nNA\nNA\nNA\n\n\nAge + PhysActive + Education\n25832\n16505.10\n1 vs 2\n16\n489.132\n0\n\n\n\n\n\n\nAt least one coefficient associated with Education is non-zero. Therefore, we will include Education in the model."
+  },
+  {
+    "objectID": "slides/lec-24.html#model-with-education",
+    "href": "slides/lec-24.html#model-with-education",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Model with Education",
+    "text": "Model with Education\n\ntidy(full_fit, conf.int = T) %>%\n  kable(digits = 3)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ny.level\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\nVgood\n(Intercept)\n0.582\n0.301\n1.930\n0.054\n-0.009\n1.173\n\n\nVgood\nAge\n0.001\n0.003\n0.419\n0.675\n-0.004\n0.006\n\n\nVgood\nPhysActiveYes\n-0.264\n0.099\n-2.681\n0.007\n-0.457\n-0.071\n\n\nVgood\nEducation9 - 11th Grade\n0.768\n0.308\n2.493\n0.013\n0.164\n1.372\n\n\nVgood\nEducationHigh School\n0.701\n0.280\n2.509\n0.012\n0.153\n1.249\n\n\nVgood\nEducationSome College\n0.788\n0.271\n2.901\n0.004\n0.256\n1.320\n\n\nVgood\nEducationCollege Grad\n0.408\n0.268\n1.522\n0.128\n-0.117\n0.933\n\n\nGood\n(Intercept)\n2.041\n0.272\n7.513\n0.000\n1.508\n2.573\n\n\nGood\nAge\n-0.002\n0.003\n-0.651\n0.515\n-0.007\n0.003\n\n\nGood\nPhysActiveYes\n-0.758\n0.096\n-7.884\n0.000\n-0.946\n-0.569\n\n\nGood\nEducation9 - 11th Grade\n0.360\n0.275\n1.310\n0.190\n-0.179\n0.899\n\n\nGood\nEducationHigh School\n0.085\n0.247\n0.345\n0.730\n-0.399\n0.569\n\n\nGood\nEducationSome College\n-0.011\n0.239\n-0.047\n0.962\n-0.480\n0.457\n\n\nGood\nEducationCollege Grad\n-0.891\n0.236\n-3.767\n0.000\n-1.354\n-0.427\n\n\nFair\n(Intercept)\n2.116\n0.288\n7.355\n0.000\n1.552\n2.680\n\n\nFair\nAge\n0.000\n0.003\n0.107\n0.914\n-0.006\n0.006\n\n\nFair\nPhysActiveYes\n-1.191\n0.115\n-10.367\n0.000\n-1.416\n-0.966\n\n\nFair\nEducation9 - 11th Grade\n-0.224\n0.279\n-0.802\n0.422\n-0.771\n0.323\n\n\nFair\nEducationHigh School\n-0.832\n0.252\n-3.307\n0.001\n-1.326\n-0.339\n\n\nFair\nEducationSome College\n-1.343\n0.246\n-5.462\n0.000\n-1.825\n-0.861\n\n\nFair\nEducationCollege Grad\n-2.509\n0.253\n-9.913\n0.000\n-3.005\n-2.013\n\n\nPoor\n(Intercept)\n-0.200\n0.411\n-0.488\n0.626\n-1.005\n0.605\n\n\nPoor\nAge\n0.018\n0.005\n3.527\n0.000\n0.008\n0.028\n\n\nPoor\nPhysActiveYes\n-2.267\n0.242\n-9.377\n0.000\n-2.741\n-1.793\n\n\nPoor\nEducation9 - 11th Grade\n-0.360\n0.353\n-1.020\n0.308\n-1.053\n0.332\n\n\nPoor\nEducationHigh School\n-1.150\n0.334\n-3.438\n0.001\n-1.805\n-0.494\n\n\nPoor\nEducationSome College\n-1.073\n0.316\n-3.399\n0.001\n-1.692\n-0.454\n\n\nPoor\nEducationCollege Grad\n-2.322\n0.366\n-6.342\n0.000\n-3.039\n-1.604"
+  },
+  {
+    "objectID": "slides/lec-24.html#compare-nhanes-models-using-aic",
+    "href": "slides/lec-24.html#compare-nhanes-models-using-aic",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Compare NHANES models using AIC",
+    "text": "Compare NHANES models using AIC\n\nglance(reduced_fit)$AIC\n\n[1] 17018.23\n\nglance(full_fit)$AIC\n\n[1] 16561.1"
+  },
+  {
+    "objectID": "slides/lec-24.html#conditions-for-inference",
+    "href": "slides/lec-24.html#conditions-for-inference",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Conditions for inference",
+    "text": "Conditions for inference\nWe want to check the following conditions for inference for the multinomial logistic regression model:\n\nLinearity: Is there a linear relationship between the log-odds and the predictor variables?\nRandomness: Was the sample randomly selected? Or can we reasonably treat it as random?\nIndependence: Are the observations independent?"
+  },
+  {
+    "objectID": "slides/lec-24.html#checking-linearity",
+    "href": "slides/lec-24.html#checking-linearity",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Checking linearity",
+    "text": "Checking linearity\nSimilar to logistic regression, we will check linearity by examining empirical logit plots between each level of the response and the quantitative predictor variables.\n\nnhanes_adult <- nhanes_adult %>%\n  mutate(\n    Excellent = factor(if_else(HealthGen == \"Excellent\", \"1\", \"0\")),\n    Vgood = factor(if_else(HealthGen == \"Vgood\", \"1\", \"0\")),\n    Good = factor(if_else(HealthGen == \"Good\", \"1\", \"0\")),\n    Fair = factor(if_else(HealthGen == \"Fair\", \"1\", \"0\")),\n    Poor = factor(if_else(HealthGen == \"Poor\", \"1\", \"0\"))\n  )"
+  },
+  {
+    "objectID": "slides/lec-24.html#checking-linearity-1",
+    "href": "slides/lec-24.html#checking-linearity-1",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Checking linearity",
+    "text": "Checking linearity\n\nemplogitplot1(Excellent ~ Age, data = nhanes_adult, ngroups = 5, main = \"Excellent vs. Age\")\nemplogitplot1(Vgood ~ Age, data = nhanes_adult, ngroups = 5, main = \"Vgood vs. Age\")"
+  },
+  {
+    "objectID": "slides/lec-24.html#checking-linearity-2",
+    "href": "slides/lec-24.html#checking-linearity-2",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Checking linearity",
+    "text": "Checking linearity\n\nemplogitplot1(Good ~ Age, data = nhanes_adult, ngroups = 5, main = \"Good vs. Age\")\nemplogitplot1(Fair ~ Age, data = nhanes_adult, ngroups = 5, main = \"Fair vs. Age\")"
+  },
+  {
+    "objectID": "slides/lec-24.html#checking-linearity-3",
+    "href": "slides/lec-24.html#checking-linearity-3",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Checking linearity",
+    "text": "Checking linearity\n\nemplogitplot1(Poor ~ Age, data = nhanes_adult, ngroups = 5, main = \"Poor vs. Age\")\n\n\n✅ The linearity condition is satisfied. There is a linear relationship between the empirical logit and the quantitative predictor variable, Age."
+  },
+  {
+    "objectID": "slides/lec-24.html#checking-randomness",
+    "href": "slides/lec-24.html#checking-randomness",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Checking randomness",
+    "text": "Checking randomness\nWe can check the randomness condition based on the context of the data and how the observations were collected.\n\nWas the sample randomly selected?\nIf the sample was not randomly selected, ask whether there is reason to believe the observations in the sample differ systematically from the population of interest.\n\n\n✅ The randomness condition is satisfied. We do not have reason to believe that the participants in this study differ systematically from adults in the U.S.."
+  },
+  {
+    "objectID": "slides/lec-24.html#checking-independence",
+    "href": "slides/lec-24.html#checking-independence",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Checking independence",
+    "text": "Checking independence\nWe can check the independence condition based on the context of the data and how the observations were collected.\nIndependence is most often violated if the data were collected over time or there is a strong spatial relationship between the observations.\n\n✅ The independence condition is satisfied. It is reasonable to conclude that the participants’ health and behavior characteristics are independent of one another."
+  },
+  {
+    "objectID": "slides/lec-24.html#recap",
+    "href": "slides/lec-24.html#recap",
+    "title": "MultiLR: Prediction + inferential models",
+    "section": "Recap",
+    "text": "Recap\n\nPredictions\nModel selection for inference\nChecking conditions for inference\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
     "objectID": "slides/lab-1.html#what-to-expect-in-lab",
     "href": "slides/lab-1.html#what-to-expect-in-lab",
     "title": "Lab 1 - Meet the toolkit",
@@ -2594,7 +2776,7 @@
     "href": "slides/lec-23.html#model-result",
     "title": "Multinomial Logistic Regression (MultiLR)",
     "section": "Model result",
-    "text": "Model result\n\nhealth_fit\n\nparsnip model object\n\nFit time:  96ms \nCall:\nnnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, \n    trace = FALSE)\n\nCoefficients:\n      (Intercept)           Age PhysActiveYes\nVgood   1.2053460  0.0009101848    -0.3209047\nGood    1.9476261 -0.0023686122    -1.0014925\nFair    0.9145492  0.0030462534    -1.6454297\nPoor   -1.5211414  0.0221905681    -2.6556343\n\nResidual Deviance: 17588.88 \nAIC: 17612.88"
+    "text": "Model result\n\nhealth_fit\n\nparsnip model object\n\nFit time:  139ms \nCall:\nnnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, \n    trace = FALSE)\n\nCoefficients:\n      (Intercept)           Age PhysActiveYes\nVgood   1.2053460  0.0009101848    -0.3209047\nGood    1.9476261 -0.0023686122    -1.0014925\nFair    0.9145492  0.0030462534    -1.6454297\nPoor   -1.5211414  0.0221905681    -2.6556343\n\nResidual Deviance: 17588.88 \nAIC: 17612.88"
   },
   {
     "objectID": "slides/lec-23.html#next-steps",
@@ -6426,32 +6608,25 @@
     "text": "Important\n\n\n\nDue dates:\n\nLab 6 - Friday, April 8\nHW 4 - Friday, April 8\nProject drafts - Sunday, April 10"
   },
   {
-    "objectID": "weeks/week-13.html#prepare",
-    "href": "weeks/week-13.html#prepare",
-    "title": "Week 13",
-    "section": "Prepare",
-    "text": "Prepare"
-  },
-  {
     "objectID": "weeks/week-13.html#participate",
     "href": "weeks/week-13.html#participate",
     "title": "Week 13",
     "section": "Participate",
-    "text": "Participate\n🖥️ Lecture 24 - To be posted\n🖥️ Lecture 25 - To be posted"
+    "text": "Participate\n🖥️ Lecture 24 - MultiLR: Prediction + inferential models\n🖥️ Lecture 25 - MultiLR: Predictive models"
   },
   {
     "objectID": "weeks/week-13.html#practice",
     "href": "weeks/week-13.html#practice",
     "title": "Week 13",
     "section": "Practice",
-    "text": "Practice\nTo be posted."
+    "text": "Practice\n📋 Application Exercise 11 - To be posted"
   },
   {
     "objectID": "weeks/week-13.html#perform",
     "href": "weeks/week-13.html#perform",
     "title": "Week 13",
     "section": "Perform",
-    "text": "Perform\n✍️ HW 4 - Multinomial logistic regression\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n✍️ HW 4 - Multinomial logistic regression\n💻 Lab 6 - Why Many Americans Don’t Vote\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-6.html",
@@ -6493,7 +6668,7 @@
     "href": "computing-pipelines.html",
     "title": "Pipelines",
     "section": "",
-    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Use tidymodels_prefer() to resolve common conflicts.\n\nlibrary(knitr)"
+    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.1.17         \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Use suppressPackageStartupMessages() to eliminate package startup messages\n\nlibrary(knitr)"
   },
   {
     "objectID": "computing-pipelines.html#simple-linear-regression",
