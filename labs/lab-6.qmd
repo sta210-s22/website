@@ -85,20 +85,23 @@ voters <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/maste
 1.  Why do you think the authors chose to only include data from people who were eligible to vote for at least four election cycles?
 
 2.  Let's prepare the data for analysis and modeling.
-    -   The variable `Q30` contains the respondent's political party identification.
-        Make a new variable that simplifies `Q30` into four categories: "Democrat", "Republican", "Independent", "Other" ("Other" also includes respondents who did not answer the question).
-    -   The variable `voter_category` identifies the respondent's past voter behavior.
-        Relevel the variable to make rarely/never the baseline level, followed by sporadic, then always.
 
-3.  In the [FiveThirtyEight article](https://projects.fivethirtyeight.com/non-voters-poll-2020-election/), the authors include visualizations of the relationship between the voter category and demographic variables such as race, age, education, etc. Select two demographic variables. For each variable, interpret the plot to describe its relationship with voter category.
+    -   The variable `Q30` contains the respondent's political party identification. Make a new variable that simplifies `Q30` into four categories: "Democrat", "Republican", "Independent", "Other" ("Other" also includes respondents who did not answer the question).
+    -   The variable `voter_category` identifies the respondent's past voter behavior. Relevel the variable to make rarely/never the baseline level, followed by sporadic, then always.
 
-4.  Fit a model using mean-centered age, race, gender, income, and education to predict voter category. Show the code used to fit the model, but do **not** display the model output.
+3.  In the [FiveThirtyEight article](https://projects.fivethirtyeight.com/non-voters-poll-2020-election/), the authors include visualizations of the relationship between the voter category and demographic variables such as race, age, education, etc.
+    Select two demographic variables.
+    For each variable, interpret the plot to describe its relationship with voter category.
 
-Next, we want to determine whether party identification be added to the model. In order to do this we need to compare two *nested* models. 
+4.  Fit a model using mean-centered age, race, gender, income, and education to predict voter category.
+    Show the code used to fit the model, but do **not** display the model output.
 
-- The *reduced* model is the one we fit so far, including the predictors mean-centered age, race, gender, income, and education.
+Next, we want to determine whether party identification be added to the model.
+In order to do this we need to compare two *nested* models.
 
-- The *full* model is the one that includes, in addition to these predictors, party identification.
+-   The *reduced* model is the one we fit so far, including the predictors mean-centered age, race, gender, income, and education.
+
+-   The *full* model is the one that includes, in addition to these predictors, party identification.
 
 5.  *Should party identification be added to the model?* Use a drop-in-deviance test to determine if party identification should be added to the model. Include the hypotheses in mathematical notation, the output from the test, and the conclusion in the context of the data. Then, neatly display the model you selected.
 
@@ -121,8 +124,7 @@ Next, we want to determine whether party identification be added to the model. I
     Obtain the predicted voter category for each observation.
 
     -   Create a table of the actual versus predicted voter categories and a visualization of the association between the two.
-    -   How well did the model perform?
-        Briefly assess the model performance using 2 - 3 observations from the table and/or visualization to support your response.
+    -   How well did the model perform? Briefly assess the model performance using 2 - 3 observations from the table and/or visualization to support your response.
 
 ## Submission
 
