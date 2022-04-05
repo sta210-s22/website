@@ -11,6 +11,5 @@ staging/
 
 /.quarto/
 _site/
-_freeze/
 *.key
 *speaker.html
