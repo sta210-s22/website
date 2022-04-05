@@ -160,7 +160,7 @@ Recommended reading for more details about GLMs: [*Generalized Linear Models: A 
 
 ## NHANES Data
 
--   We will use the data from the <font class="vocab">`NHANES`</font> R package
+-   We will use the data from the `NHANES` R package
 
 -   Contains 75 variables for the 2009 - 2010 and 2011 - 2012 sample years
 
