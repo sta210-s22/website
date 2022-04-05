@@ -1,0 +1,342 @@
+---
+title: "MultiLR: Prediction + inference"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 8, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+
+library(countdown)
+```
+
+# Welcome
+
+## Topics
+
+::: nonincremental
+-   Predictions
+-   Model selection
+-   Checking conditions
+:::
+
+## Computational setup
+
+```{r}
+#| echo: true
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(NHANES)
+library(knitr)
+library(patchwork)
+library(colorblindr)
+library(pROC)
+library(Stat2Data)
+library(nnet)
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20))
+```
+
+## NHANES Data
+
+::: nonincremental
+-   [National Health and Nutrition Examination Survey](https://www.cdc.gov/nchs/nhanes/index.htm) is conducted by the National Center for Health Statistics (NCHS).
+-   The goal is to *"assess the health and nutritional status of adults and children in the United States".*
+-   This survey includes an interview and a physical examination.
+:::
+
+## Variables
+
+**Goal:** Use a person's age and whether they do regular physical activity to predict their self-reported health rating.
+
+-   Outcome: `HealthGen`: Self-reported rating of participant's health in general.
+    Excellent, Vgood, Good, Fair, or Poor.
+
+-   Predictors:
+
+    -   `Age`: Age at time of screening (in years). Participants 80 or older were recorded as 80.
+    -   `PhysActive`: Participant does moderate to vigorous-intensity sports, fitness or recreational activities.
+
+## The data
+
+```{r}
+nhanes_adult <- NHANES %>%
+  filter(Age >= 18) %>%
+  select(HealthGen, Age, PhysActive, Education) %>%
+  drop_na() %>%
+  mutate(obs_num = 1:n())
+```
+
+```{r}
+glimpse(nhanes_adult)
+```
+
+## Model in R
+
+```{r}
+health_fit <- multinom_reg() %>%
+  set_engine("nnet") %>%
+  fit(HealthGen ~ Age + PhysActive, data = nhanes_adult)
+
+health_fit <- repair_call(health_fit, data = nhanes_adult)
+```
+
+## Model summary
+
+```{r}
+tidy(health_fit) %>% print(n = 12)
+```
+
+# Predictions
+
+## Calculating probabilities {.smaller}
+
+-   For categories $2,\ldots,K$, the probability that the $i^{th}$ observation is in the $j^{th}$ category is
+
+    $$
+    \hat{\pi}_{ij} = \frac{e^{\hat{\beta}_{0j} + \hat{\beta}_{1j}x_{i1} + \dots + \hat{\beta}_{pj}x_{ip}}}{1 + \sum\limits_{k=2}^K e^{\hat{\beta}_{0k} + \hat{\beta}_{1k}x_{i1} + \dots \hat{\beta}_{pk}x_{ip}}}
+    $$
+
+-   For the baseline category, $k=1$, we calculate the probability $\hat{\pi}_{i1}$ as
+
+    $$
+    \hat{\pi}_{i1} = 1- \sum\limits_{k=2}^K \hat{\pi}_{ik}
+    $$
+
+## Predicted health rating {.smaller}
+
+We can use our model to predict a person's perceived health rating given their age and whether they exercise.
+
+```{r}
+health_aug <- augment(health_fit, new_data = nhanes_adult)
+health_aug
+```
+
+## Actual vs. predicted health rating
+
+For each observation, the predicted perceived health rating is the category with the highest predicted probability.
+
+```{r}
+health_aug %>% select(contains("pred"))
+```
+
+## Confusion matrix
+
+```{r}
+health_conf <- health_aug %>% 
+  count(HealthGen, .pred_class, .drop = FALSE) %>%
+  pivot_wider(names_from = .pred_class, values_from = n)
+
+health_conf
+```
+
+## Actual vs. predicted health rating
+
+::: question
+Why do you think no observations were predicted to have a rating of "Excellent", "Fair", or "Poor"?
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+
+p1 <- ggplot(nhanes_adult, aes(x = HealthGen)) + 
+  geom_bar() +
+  labs(title = "Self-reported rating of overall health")
+
+p2 <- ggplot(health_aug, aes(x = HealthGen, fill = .pred_class)) + 
+  geom_bar() +
+  scale_fill_OkabeIto() +
+  labs(title = "Predicted vs.\nself-reported rating of overall health") +
+  theme(legend.position = c(0.8, 0.8))
+
+p1 + p2
+```
+
+# Model selection for inference
+
+## Comparing nested models {.smaller}
+
+-   Suppose there are two models:
+    -   Reduced model includes predictors $x_1, \ldots, x_q$
+    -   Full model includes predictors $x_1, \ldots, x_q, x_{q+1}, \ldots, x_p$
+
+-   We want to test the following hypotheses:
+    -   $H_0: \beta_{q+1} = \dots = \beta_p = 0$
+    -   $H_A: \text{ at least 1 }\beta_j \text{ is not } 0$
+
+-   To do so, we will use the **drop-in-deviance test** (very similar to logistic regression)
+
+## Add `Education` to the model? {.smaller}
+
+-   We consider adding the participants' `Education` level to the model.
+    -   Education takes values `8thGrade`, `9-11thGrade`, `HighSchool`, `SomeCollege`, and `CollegeGrad`
+
+-   Models we're testing:
+    -   Reduced model: `Age`, `PhysActive`
+    -   Full model: `Age`, `PhysActive`, `Education`
+
+. . .
+
+$$
+\begin{align}
+&H_0: \beta_{9-11thGrade} = \beta_{HighSchool} = \beta_{SomeCollege} = \beta_{CollegeGrad} = 0\\
+&H_a: \text{ at least one }\beta_j \text{ is not equal to }0
+\end{align}
+$$
+
+## Add `Education` to the model?
+
+```{r}
+reduced_fit <- multinom_reg() %>%
+  set_engine("nnet") %>%
+  fit(HealthGen ~ Age + PhysActive,
+  data = nhanes_adult)
+
+full_fit <- multinom_reg() %>%
+  set_engine("nnet") %>%
+  fit(HealthGen ~ Age + PhysActive + Education,
+  data = nhanes_adult)
+  
+reduced_fit <- repair_call(reduced_fit, data = nhanes_adult)
+full_fit <- repair_call(full_fit, data = nhanes_adult)
+```
+
+## Add `Education` to the model?
+
+```{r}
+anova(reduced_fit$fit, full_fit$fit, test = "Chisq") %>%
+  kable(digits = 3)
+```
+
+. . .
+
+At least one coefficient associated with `Education` is non-zero.
+Therefore, we will include `Education` in the model.
+
+## Model with `Education`
+
+```{r}
+tidy(full_fit, conf.int = T) %>%
+  kable(digits = 3)
+```
+
+## Compare NHANES models using AIC
+
+```{r}
+glance(reduced_fit)$AIC
+glance(full_fit)$AIC
+```
+
+# Checking conditions for inference
+
+## Conditions for inference
+
+We want to check the following conditions for inference for the multinomial logistic regression model:
+
+1.  Linearity: Is there a linear relationship between the log-odds and the predictor variables?
+
+2.  Randomness: Was the sample randomly selected?
+    Or can we reasonably treat it as random?
+
+3.  Independence: Are the observations independent?
+
+## Checking linearity
+
+Similar to logistic regression, we will check linearity by examining empirical logit plots between each level of the response and the quantitative predictor variables.
+
+```{r}
+nhanes_adult <- nhanes_adult %>%
+  mutate(
+    Excellent = factor(if_else(HealthGen == "Excellent", "1", "0")),
+    Vgood = factor(if_else(HealthGen == "Vgood", "1", "0")),
+    Good = factor(if_else(HealthGen == "Good", "1", "0")),
+    Fair = factor(if_else(HealthGen == "Fair", "1", "0")),
+    Poor = factor(if_else(HealthGen == "Poor", "1", "0"))
+  )
+```
+
+## Checking linearity
+
+```{r}
+#| eval: false
+#| layout-ncol: 2
+
+emplogitplot1(Excellent ~ Age, data = nhanes_adult, ngroups = 5, main = "Excellent vs. Age")
+emplogitplot1(Vgood ~ Age, data = nhanes_adult, ngroups = 5, main = "Vgood vs. Age")
+```
+
+## Checking linearity
+
+```{r}
+#| eval: false
+#| layout-ncol: 2
+
+emplogitplot1(Good ~ Age, data = nhanes_adult, ngroups = 5, main = "Good vs. Age")
+emplogitplot1(Fair ~ Age, data = nhanes_adult, ngroups = 5, main = "Fair vs. Age")
+```
+
+## Checking linearity
+
+```{r}
+#| eval: false
+
+emplogitplot1(Poor ~ Age, data = nhanes_adult, ngroups = 5, main = "Poor vs. Age")
+```
+
+. . .
+
+`r emo::ji("white_check_mark")` The linearity condition is satisfied.
+There is a linear relationship between the empirical logit and the quantitative predictor variable, Age.
+
+## Checking randomness
+
+We can check the randomness condition based on the context of the data and how the observations were collected.
+
+-   Was the sample randomly selected?
+
+-   If the sample was not randomly selected, ask whether there is reason to believe the observations in the sample differ systematically from the population of interest.
+
+. . .
+
+`r emo::ji("white_check_mark")` The randomness condition is satisfied.
+We do not have reason to believe that the participants in this study differ systematically from adults in the U.S..
+
+## Checking independence
+
+We can check the independence condition based on the context of the data and how the observations were collected.
+
+Independence is most often violated if the data were collected over time or there is a strong spatial relationship between the observations.
+
+. . .
+
+`r emo::ji("white_check_mark")` The independence condition is satisfied.
+It is reasonable to conclude that the participants' health and behavior characteristics are independent of one another.
+
+## Recap
+
+-   Predictions
+-   Model selection for inference
+-   Checking conditions for inference
