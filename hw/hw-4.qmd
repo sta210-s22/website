@@ -118,15 +118,18 @@ Complete the exploratory data analysis by creating the plots and/or summary stat
 
 *Regardless of your answer to Question 5, use the model that includes the interaction terms for the remainder of the assignment.*
 
-5.  According to the model,
+6.  According to the model,
 
 -   If there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the **log-odds** of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?
 -   If there was no weapon but the perpetrator had a distinctive feature in the mock crime, how do the **odds** of reject vs. a correct ID change when there is a simultaneous lineup vs. a sequential lineup?
 -   Which group of participants (i.e., which set of experimental conditions) is described by the intercept?
 
-6.  Are the conditions inference met? List of the conditions, and, **if relevant**, create visualizations to check the conditions and evaluate whether each condition is met. Include an assessment about each condition and a brief explanation about your conclusion.
+7.  Are the conditions inference met?
+    List of the conditions, and, **if relevant**, create visualizations to check the conditions and evaluate whether each condition is met.
+    Include an assessment about each condition and a brief explanation about your conclusion.
 
-7.  Use the model to predict the decision made by each participant. Make a table of the predicted vs. the actual decisions.
+8.  Use the model to predict the decision made by each participant.
+    Make a table of the predicted vs. the actual decisions.
 
 -   Briefly describe how the predicted decision is determined for each participant.
 -   What is the misclassification rate?
