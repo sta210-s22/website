@@ -526,3 +526,10 @@ predict(
   type = "prob"
   )
 ```
+
+## Acknowledgements
+
+Inspired by
+
+- https://juliasilge.com/blog/multinomial-volcano-eruptions/
+- https://juliasilge.com/blog/nber-papers/
