@@ -187,13 +187,82 @@ This section also includes initial interpretations and conclusions drawn from th
 ## Peer review {#peer-review}
 
 Critically reviewing others' work is a crucial part of the scientific process, and STA 210 is no exception.
-Each lab team will be assigned another team's project to review.
+Each lab team will be assigned two other teams's projects to review.
 Each team should push their draft to their GitHub repo by the due date.
-One lecture in the following week will be dedicated to the peer review, and all reviews will be due by the end of that week.
+One lab in the following week will be dedicated to the peer review, and all reviews will be due by the end of that lab session.
 
-During the peer review process, you will be provided read-only access to your partner team's GitHub repo.
-Provide your review in the form of GitHub issues to your partner team's GitHub repo.
+During the peer review process, you will be provided read-only access to your partner teams' GitHub repos.
+Provide your review in the form of GitHub issues to your partner team's GitHub repo using the issue template provided.
 The peer review will be graded on the extent to which it comprehensively and constructively addresses the components of the partner team's report: the research context and motivation, exploratory data analysis, modeling, interpretations, and conclusions.
+
+### Pairings
+
+#### Section 1 - M 1:45PM - 3:00PM
+
+| Team being reviewed | Reviewer 1     | Reviewer 2     |
+|---------------------|----------------|----------------|
+| chaa_chaa_chaa      | yay_stats      | stat_over_flow |
+| dekk                | chaa_chaa_chaa | yay_stats      |
+| eight               | dekk           | chaa_chaa_chaa |
+| housecats           | eight          | dekk           |
+| krafthouse          | housecats      | eight          |
+| rrawr               | krafthouse     | housecats      |
+| stat_over_flow      | rrawr          | krafthouse     |
+| yay_stats           | stat_over_flow | rrawr          |
+
+#### Section 2 - M 3:30PM - 4:45PM
+
+| Team being reviewed | Reviewer 1       | Reviewer 2       |
+|---------------------|------------------|------------------|
+| a_plus_plus_plus    | we_r             | tina             |
+| predictors          | a_plus_plus_plus | we_r             |
+| sixers              | predictors       | a_plus_plus_plus |
+| soy_nuggets         | sixers           | predictors       |
+| tina                | soy_nuggets      | sixers           |
+| we_r                | tina             | soy_nuggets      |
+
+#### Section 3 - M 5:15PM - 6:30PM
+
+| Team being reviewed              | Reviewer 1                       | Reviewer 2                       |
+|------------------------|------------------------|------------------------|
+| down_to_earth_goats              | the_three_musketeers             | team_five                        |
+| ginger_and_stats                 | down_to_earth_goats              | the_three_musketeers             |
+| pineapple_wedge_and_diced_papaya | ginger_and_stats                 | down_to_earth_goats              |
+| statchelorettes                  | pineapple_wedge_and_diced_papaya | ginger_and_stats                 |
+| statisix                         | statchelorettes                  | pineapple_wedge_and_diced_papaya |
+| stats_squad                      | statisix                         | statchelorettes                  |
+| team_five                        | stats_squad                      | statisix                         |
+| the_three_musketeers             | team_five                        | stats_squad                      |
+
+### Process and questions
+
+Spend \~30 mins to review each team's project.
+
+-   Find your team name on the **Reviewer 1** and **Reviewer 2** columns.
+-   For each of the columns, find the name of the team to review in the **Team being reviewed** column. You should already have access to this team's repo.
+-   Open the repo of the team you're reviewing, read their project draft, and browser around the rest of their repo.
+-   Then, go to the Issues tab in that repo, click on New issue, and click on Get started for the Peer review issue. Fill out this issue, answering the following questions:
+    -   Peer review by: \[NAME OF TEAM DOING THE REVIEW\]
+
+    -   Names of team members that participated in this review: \[FULL NAMES OF TEAM MEMBERS DOING THE REVIEW\]
+
+    -   Describe the goal of the project.
+
+    -   Describe the data used or collected, if any.
+        If the proposal does not include the use of a specific dataset, comment on whether the project would be strengthened by the inclusion of a dataset.
+
+    -   Describe the approaches, tools, and methods that will be used.
+
+    -   Is there anything that is unclear from the proposal?
+
+    -   Provide constructive feedback on how the team might be able to improve their project.
+        Make sure your feedback includes at least one comment on the statistical modeling aspect of the project, but do feel free to comment on aspects beyond the modeling.
+
+    -   What aspect of this project are you most interested in and would like to see highlighted in the presentation.
+
+    -   Provide constructive feedback on any issues with file and/or code organization.
+
+    -   (Optional) Any further comments or feedback?
 
 ## Written report {#written-report}
 
