@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.233">
+  <meta name="generator" content="quarto-0.9.237">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - SLR: Mathematical models for inference</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -407,7 +407,7 @@
 <section id="computational-setup" class="slide level2">
 <h2>Computational setup</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)   <span class="co"># for data wrangling and visualization</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)  <span class="co"># for modeling</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(openintro)   <span class="co"># for the duke_forest dataset</span></span>
@@ -431,7 +431,7 @@
 <section id="the-regression-model" class="slide level2 smaller">
 <h2>The regression model</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>df_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>df_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">fit</span>(price <span class="sc">~</span> area, <span class="at">data =</span> duke_forest)</span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
@@ -496,7 +496,7 @@
 <section id="bootstrapping-pipeline-i" class="slide level2">
 <h2>Bootstrapping pipeline I</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># #| code-line-numbers: "|1|3|4"</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># #| code-line-numbers: "|1|3|4"</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="co">#| </span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
 <span id="cb3-4"><a href="#cb3-4"></a></span>
@@ -525,7 +525,7 @@ Explanatory: area (numeric)
 <section id="bootstrapping-pipeline-ii" class="slide level2">
 <h2>Bootstrapping pipeline II</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># #| code-line-numbers: "|5"</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># #| code-line-numbers: "|5"</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
 <span id="cb5-4"><a href="#cb5-4"></a></span>
@@ -556,7 +556,7 @@ Explanatory: area (numeric)
 <section id="bootstrapping-pipeline-iii" class="slide level2">
 <h2>Bootstrapping pipeline III</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># #| code-line-numbers: "|6"</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># #| code-line-numbers: "|6"</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
 <span id="cb7-4"><a href="#cb7-4"></a></span>
@@ -586,7 +586,7 @@ Explanatory: area (numeric)
 <section id="bootstrapping-pipeline-iv" class="slide level2">
 <h2>Bootstrapping pipeline IV</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># #| code-line-numbers: "|3"</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># #| code-line-numbers: "|3"</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="fu">set.seed</span>(<span class="dv">119</span>)</span>
 <span id="cb9-4"><a href="#cb9-4"></a></span>
@@ -599,7 +599,7 @@ Explanatory: area (numeric)
 <section id="visualize-the-bootstrap-distribution" class="slide level2">
 <h2>Visualize the bootstrap distribution</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># #| code-line-numbers: "|2"</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># #| code-line-numbers: "|2"</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a></span>
 <span id="cb10-3"><a href="#cb10-3"></a>boot_dist <span class="sc">%&gt;%</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"area"</span>) <span class="sc">%&gt;%</span></span>
@@ -622,7 +622,7 @@ Explanatory: area (numeric)
 <section id="but-first" class="slide level2">
 <h2>But first…</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>obs_fit <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>obs_fit <span class="ot">&lt;-</span> duke_forest <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">specify</span>(price <span class="sc">~</span> area) <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">fit</span>()</span>
 <span id="cb11-4"><a href="#cb11-4"></a></span>
@@ -639,7 +639,7 @@ Explanatory: area (numeric)
 <section id="percentile-method" class="slide level2">
 <h2>Percentile method</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># #| code-line-numbers: "|4"</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># #| code-line-numbers: "|4"</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
 <span id="cb13-3"><a href="#cb13-3"></a>boot_dist <span class="sc">%&gt;%</span></span>
 <span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">get_confidence_interval</span>(</span>
@@ -659,7 +659,7 @@ Explanatory: area (numeric)
 <section id="standard-error-method" class="slide level2">
 <h2>Standard error method</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># #| code-line-numbers: "|4"</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># #| code-line-numbers: "|4"</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a></span>
 <span id="cb15-3"><a href="#cb15-3"></a>boot_dist <span class="sc">%&gt;%</span></span>
 <span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">get_confidence_interval</span>(</span>
@@ -784,7 +784,7 @@ Explanatory: area (numeric)
 <section id="permutation-pipeline-i" class="slide level2">
 <h2>Permutation pipeline I</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># #| code-line-numbers: "|1|3|4"</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># #| code-line-numbers: "|1|3|4"</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="co">#| </span></span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
 <span id="cb18-4"><a href="#cb18-4"></a></span>
@@ -813,7 +813,7 @@ Explanatory: area (numeric)
 <section id="permutation-pipeline-ii" class="slide level2">
 <h2>Permutation pipeline II</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># #| code-line-numbers: "|5"</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># #| code-line-numbers: "|5"</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a></span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
 <span id="cb20-4"><a href="#cb20-4"></a></span>
@@ -844,7 +844,7 @@ Null Hypothesis: independence
 <section id="permutation-pipeline-iii" class="slide level2">
 <h2>Permutation pipeline III</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># #| code-line-numbers: "|6"</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># #| code-line-numbers: "|6"</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a></span>
 <span id="cb22-3"><a href="#cb22-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
 <span id="cb22-4"><a href="#cb22-4"></a></span>
@@ -877,7 +877,7 @@ Null Hypothesis: independence
 <section id="permutation-pipeline-iv" class="slide level2">
 <h2>Permutation pipeline IV</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># #| code-line-numbers: "|7"</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># #| code-line-numbers: "|7"</span></span>
 <span id="cb24-2"><a href="#cb24-2"></a></span>
 <span id="cb24-3"><a href="#cb24-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
 <span id="cb24-4"><a href="#cb24-4"></a></span>
@@ -908,7 +908,7 @@ Null Hypothesis: independence
 <section id="permutation-pipeline-v" class="slide level2">
 <h2>Permutation pipeline V</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># #| code-line-numbers: "|3"</span></span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># #| code-line-numbers: "|3"</span></span>
 <span id="cb26-2"><a href="#cb26-2"></a></span>
 <span id="cb26-3"><a href="#cb26-3"></a><span class="fu">set.seed</span>(<span class="dv">1125</span>)</span>
 <span id="cb26-4"><a href="#cb26-4"></a></span>
@@ -922,7 +922,7 @@ Null Hypothesis: independence
 <section id="visualize-the-null-distribution" class="slide level2">
 <h2>Visualize the null distribution</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># #| code-line-numbers: "|2"</span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># #| code-line-numbers: "|2"</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a></span>
 <span id="cb27-3"><a href="#cb27-3"></a>null_dist <span class="sc">%&gt;%</span></span>
 <span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"area"</span>) <span class="sc">%&gt;%</span></span>
@@ -944,7 +944,7 @@ Null Hypothesis: independence
 <p>What does this warning mean?</p>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">get_p_value</span>(</span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">get_p_value</span>(</span>
 <span id="cb28-2"><a href="#cb28-2"></a>  null_dist,</span>
 <span id="cb28-3"><a href="#cb28-3"></a>  <span class="at">obs_stat =</span> obs_fit,</span>
 <span id="cb28-4"><a href="#cb28-4"></a>  <span class="at">direction =</span> <span class="st">"two-sided"</span></span>
@@ -975,7 +975,7 @@ approximation based on the number of `reps` chosen in the `generate()` step. See
 <section id="the-regression-model-revisited" class="slide level2">
 <h2>The regression model, revisited</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>df_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>df_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">fit</span>(price <span class="sc">~</span> area, <span class="at">data =</span> duke_forest)</span>
 <span id="cb31-4"><a href="#cb31-4"></a></span>
@@ -1181,7 +1181,7 @@ SE_{\hat{\beta}_1} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{(n-1)s_X^2}}
 
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"79bff9d9d50659ad","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"9272855010616591","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
 
         // Display controls in the bottom right corner

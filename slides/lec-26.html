@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.233">
+  <meta name="generator" content="quarto-0.9.237">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - MultiLR: Predictive models (cont.)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -406,16 +406,15 @@
 <h2>Topics</h2>
 <div>
 <ul>
-<li>Predictions</li>
-<li>Model selection</li>
-<li>Checking conditions</li>
+<li>Unbalanced data</li>
+<li>Choosing the “final” model</li>
 </ul>
 </div>
 </section>
 <section id="computational-setup" class="slide level2">
 <h2>Computational setup</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(knitr)</span>
@@ -435,9 +434,9 @@
 <h2>Volcanoes</h2>
 <p>The data come from <a href="https://volcano.si.edu/">The Smithsonian Institution</a>, via <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md">TidyTuesday</a>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>volcano <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/volcano.csv"</span>))</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>volcano <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/volcano.csv"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">names</span>(volcano)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code> [1] "volcano_number"           "volcano_name"            
  [3] "primary_volcano_type"     "last_eruption_year"      
  [5] "country"                  "region"                  
@@ -457,7 +456,7 @@
 <section id="data-prep" class="slide level2">
 <h2>Data prep</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>volcano <span class="ot">&lt;-</span> volcano <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>volcano <span class="ot">&lt;-</span> volcano <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">volcano_type =</span> <span class="fu">case_when</span>(</span>
 <span id="cb4-4"><a href="#cb4-4"></a>      <span class="fu">str_detect</span>(primary_volcano_type, <span class="st">"Stratovolcano"</span>) <span class="sc">~</span> <span class="st">"Stratovolcano"</span>,</span>
@@ -476,7 +475,7 @@
 <section id="split-into-testingtraining" class="slide level2">
 <h2>Split into testing/training</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a>volcano_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(volcano)</span>
 <span id="cb5-4"><a href="#cb5-4"></a>volcano_train <span class="ot">&lt;-</span> <span class="fu">training</span>(volcano_split)</span>
@@ -486,11 +485,11 @@
 <section id="specify-a-model" class="slide level2">
 <h2>Specify a model</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>volcano_spec <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>volcano_spec <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3"></a></span>
 <span id="cb6-4"><a href="#cb6-4"></a>volcano_spec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>Multinomial Regression Model Specification (classification)
 
 Computational engine: nnet </code></pre>
@@ -500,11 +499,11 @@ Computational engine: nnet </code></pre>
 <section id="create-cross-validation-folds" class="slide level2">
 <h2>Create cross validation folds</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">set.seed</span>(<span class="dv">9876</span>)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">set.seed</span>(<span class="dv">9876</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>volcano_folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(volcano_train, <span class="at">v =</span> <span class="dv">5</span>)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>volcano_folds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>#  5-fold cross-validation 
 # A tibble: 5 × 2
   splits            id   
@@ -526,9 +525,9 @@ Computational engine: nnet </code></pre>
 <h2>Unbalanced data</h2>
 <p>Remember that the observed volcano types are unbalanced:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>volcano <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>volcano <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">count</span>(volcano_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   volcano_type      n
   &lt;fct&gt;         &lt;int&gt;
@@ -555,7 +554,7 @@ Computational engine: nnet </code></pre>
 <section id="new-recipe---oversample" class="slide level2">
 <h2>New recipe - oversample</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12" data-code-line-numbers="|7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>volcano_rec3 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="|7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>volcano_rec3 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">step_other</span>(tectonic_settings) <span class="sc">%&gt;%</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">step_other</span>(major_rock_1) <span class="sc">%&gt;%</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
@@ -567,7 +566,7 @@ Computational engine: nnet </code></pre>
 <section id="new-recipe---downsample" class="slide level2">
 <h2>New recipe - downsample</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13" data-code-line-numbers="|7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>volcano_rec4 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="|7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>volcano_rec4 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">step_other</span>(tectonic_settings) <span class="sc">%&gt;%</span></span>
 <span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">step_other</span>(major_rock_1) <span class="sc">%&gt;%</span></span>
 <span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
@@ -579,7 +578,7 @@ Computational engine: nnet </code></pre>
 <section id="new-workflows" class="slide level2">
 <h2>New workflows</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>volcano_wflow3 <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>volcano_wflow3 <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">add_recipe</span>(volcano_rec3) <span class="sc">%&gt;%</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">add_model</span>(volcano_spec)</span>
 <span id="cb14-4"><a href="#cb14-4"></a></span>
@@ -591,7 +590,7 @@ Computational engine: nnet </code></pre>
 <section id="fit-resamples" class="slide level2">
 <h2>Fit resamples</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>volcano_fit_rs3 <span class="ot">&lt;-</span> volcano_wflow3 <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>volcano_fit_rs3 <span class="ot">&lt;-</span> volcano_wflow3 <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">fit_resamples</span>(</span>
 <span id="cb15-3"><a href="#cb15-3"></a>    volcano_folds, </span>
 <span id="cb15-4"><a href="#cb15-4"></a>    <span class="at">control =</span> <span class="fu">control_resamples</span>(<span class="at">save_pred =</span> <span class="cn">TRUE</span>)</span>
@@ -607,16 +606,16 @@ Computational engine: nnet </code></pre>
 <section id="collect-metrics" class="slide level2">
 <h2>Collect metrics</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 6
   .metric  .estimator  mean     n std_err .config             
   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
 1 accuracy multiclass 0.517     5  0.0154 Preprocessor1_Model1
 2 roc_auc  hand_till  0.693     5  0.0270 Preprocessor1_Model1</code></pre>
 </div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 6
   .metric  .estimator  mean     n std_err .config             
   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
@@ -628,7 +627,7 @@ Computational engine: nnet </code></pre>
 <section id="roc-curves---oversampling" class="slide level2">
 <h2>ROC curves - oversampling</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>volcano_fit_rs3 <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>volcano_fit_rs3 <span class="sc">%&gt;%</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">collect_predictions</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
 <span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">roc_curve</span>(</span>
@@ -642,7 +641,7 @@ Computational engine: nnet </code></pre>
 <section id="roc-curves---downsampling" class="slide level2">
 <h2>ROC curves - downsampling</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>volcano_fit_rs4 <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>volcano_fit_rs4 <span class="sc">%&gt;%</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">collect_predictions</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
 <span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">roc_curve</span>(</span>
@@ -669,7 +668,7 @@ Computational engine: nnet </code></pre>
 <p>Let’s stick to the models without over/down sampling.</p>
 <p>From the application exercise:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>volcano_rec2 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>volcano_rec2 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">step_other</span>(tectonic_settings) <span class="sc">%&gt;%</span></span>
 <span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">step_other</span>(major_rock_1) <span class="sc">%&gt;%</span></span>
 <span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
@@ -684,13 +683,13 @@ Computational engine: nnet </code></pre>
 <section id="fitting-the-final-model" class="slide level2">
 <h2>Fitting the final model</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb23" data-code-line-numbers="|1-4|6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>final_fit <span class="ot">&lt;-</span> <span class="fu">last_fit</span>(</span>
+<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="|1-4|6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>final_fit <span class="ot">&lt;-</span> <span class="fu">last_fit</span>(</span>
 <span id="cb23-2"><a href="#cb23-2"></a>  volcano_wflow2, </span>
 <span id="cb23-3"><a href="#cb23-3"></a>  <span class="at">split =</span> volcano_split</span>
 <span id="cb23-4"><a href="#cb23-4"></a>  )</span>
 <span id="cb23-5"><a href="#cb23-5"></a></span>
 <span id="cb23-6"><a href="#cb23-6"></a><span class="fu">collect_metrics</span>(final_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   .metric  .estimator .estimate .config             
   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
@@ -702,9 +701,9 @@ Computational engine: nnet </code></pre>
 <section id="confusion-matrix" class="slide level2">
 <h2>Confusion matrix</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">conf_mat</span>(volcano_type, .pred_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>               Truth
 Prediction      Stratovolcano Shield Other
   Stratovolcano            96     13    38
@@ -716,7 +715,7 @@ Prediction      Stratovolcano Shield Other
 <section id="confusion-matrix---visualized" class="slide level2">
 <h2>Confusion matrix - visualized</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">conf_mat</span>(volcano_type, .pred_class) <span class="sc">%&gt;%</span></span>
 <span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
@@ -725,7 +724,7 @@ Prediction      Stratovolcano Shield Other
 <section id="roc-curve" class="slide level2">
 <h2>ROC curve</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
 <span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">roc_curve</span>(<span class="at">truth =</span> volcano_type, .pred_Stratovolcano<span class="sc">:</span>.pred_Other) <span class="sc">%&gt;%</span></span>
 <span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
@@ -741,7 +740,7 @@ Prediction      Stratovolcano Shield Other
 <section id="prediction" class="slide level2">
 <h2>Prediction</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>final_fitted <span class="ot">&lt;-</span> <span class="fu">extract_workflow</span>(final_fit)</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>final_fitted <span class="ot">&lt;-</span> <span class="fu">extract_workflow</span>(final_fit)</span>
 <span id="cb29-2"><a href="#cb29-2"></a></span>
 <span id="cb29-3"><a href="#cb29-3"></a>new_volcano <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb29-4"><a href="#cb29-4"></a>  <span class="at">latitude =</span> <span class="fl">35.9940</span>,</span>
@@ -756,7 +755,7 @@ Prediction      Stratovolcano Shield Other
 <span id="cb29-13"><a href="#cb29-13"></a>  new_volcano, </span>
 <span id="cb29-14"><a href="#cb29-14"></a>  <span class="at">type =</span> <span class="st">"prob"</span></span>
 <span id="cb29-15"><a href="#cb29-15"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 1
   .pred_value
         &lt;dbl&gt;
