@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.237">
+  <meta name="generator" content="quarto-0.9.238">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - MultiLR: Predictive models (cont.)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -381,10 +381,8 @@
     }
   </style>
 <meta name="twitter:title" content="STA 210 - Spring 2022 - MultiLR: Predictive models (cont.)">
-<meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
+<meta name="twitter:image" content="https://sta210-s22.github.io/website//slides/images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
-<meta name="twitter:image-height" content="418">
-<meta name="twitter:image-width" content="800">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
@@ -436,7 +434,7 @@
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>volcano <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/volcano.csv"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">names</span>(volcano)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code> [1] "volcano_number"           "volcano_name"            
  [3] "primary_volcano_type"     "last_eruption_year"      
  [5] "country"                  "region"                  
@@ -489,7 +487,7 @@
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3"></a></span>
 <span id="cb6-4"><a href="#cb6-4"></a>volcano_spec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>Multinomial Regression Model Specification (classification)
 
 Computational engine: nnet </code></pre>
@@ -503,7 +501,7 @@ Computational engine: nnet </code></pre>
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>volcano_folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(volcano_train, <span class="at">v =</span> <span class="dv">5</span>)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>volcano_folds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>#  5-fold cross-validation 
 # A tibble: 5 × 2
   splits            id   
@@ -527,7 +525,7 @@ Computational engine: nnet </code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>volcano <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">count</span>(volcano_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   volcano_type      n
   &lt;fct&gt;         &lt;int&gt;
@@ -607,7 +605,7 @@ Computational engine: nnet </code></pre>
 <h2>Collect metrics</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 6
   .metric  .estimator  mean     n std_err .config             
   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
@@ -615,7 +613,7 @@ Computational engine: nnet </code></pre>
 2 roc_auc  hand_till  0.693     5  0.0270 Preprocessor1_Model1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 6
   .metric  .estimator  mean     n std_err .config             
   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
@@ -689,7 +687,7 @@ Computational engine: nnet </code></pre>
 <span id="cb23-4"><a href="#cb23-4"></a>  )</span>
 <span id="cb23-5"><a href="#cb23-5"></a></span>
 <span id="cb23-6"><a href="#cb23-6"></a><span class="fu">collect_metrics</span>(final_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   .metric  .estimator .estimate .config             
   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
@@ -703,7 +701,7 @@ Computational engine: nnet </code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">conf_mat</span>(volcano_type, .pred_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>               Truth
 Prediction      Stratovolcano Shield Other
   Stratovolcano            96     13    38
@@ -755,7 +753,7 @@ Prediction      Stratovolcano Shield Other
 <span id="cb29-13"><a href="#cb29-13"></a>  new_volcano, </span>
 <span id="cb29-14"><a href="#cb29-14"></a>  <span class="at">type =</span> <span class="st">"prob"</span></span>
 <span id="cb29-15"><a href="#cb29-15"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 3 × 1
   .pred_value
         &lt;dbl&gt;
