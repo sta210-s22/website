@@ -1,0 +1,337 @@
+---
+title: "MultiLR: Predictive models (cont.)"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    highlight-style: ayu-mirage
+code-link: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 8, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+
+library(countdown)
+```
+
+# Welcome
+
+## Topics
+
+::: nonincremental
+-   Predictions
+-   Model selection
+-   Checking conditions
+:::
+
+## Computational setup
+
+```{r}
+#| echo: true
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+library(colorblindr)
+library(themis)
+
+# set default theme and larger font size for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
+```
+
+# From last time...
+
+## Volcanoes
+
+The data come from [The Smithsonian Institution](https://volcano.si.edu/), via [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md).
+
+```{r}
+#| warning: false
+
+volcano <- read_csv(here::here("slides", "data/volcano.csv"))
+names(volcano)
+```
+
+## Data prep
+
+```{r}
+volcano <- volcano %>%
+  mutate(
+    volcano_type = case_when(
+      str_detect(primary_volcano_type, "Stratovolcano") ~ "Stratovolcano",
+      str_detect(primary_volcano_type, "Shield") ~ "Shield",
+      TRUE ~ "Other"
+    ),
+    volcano_type = fct_relevel(volcano_type, "Stratovolcano", "Shield", "Other")
+  ) %>%
+  select(
+    volcano_type, latitude, longitude, 
+    elevation, tectonic_settings, major_rock_1
+    ) %>%
+  mutate(across(where(is.character), as_factor))
+```
+
+## Split into testing/training
+
+```{r}
+set.seed(1234)
+
+volcano_split <- initial_split(volcano)
+volcano_train <- training(volcano_split)
+volcano_test  <- testing(volcano_split)
+```
+
+## Specify a model
+
+```{r}
+volcano_spec <- multinom_reg() %>%
+  set_engine("nnet")
+
+volcano_spec
+```
+
+## Create cross validation folds
+
+```{r}
+set.seed(9876)
+
+volcano_folds <- vfold_cv(volcano_train, v = 5)
+volcano_folds
+```
+
+# Unbalanced data
+
+## Unbalanced data
+
+Remember that the observed volcano types are unbalanced:
+
+```{r}
+volcano %>% 
+  count(volcano_type)
+```
+
+## Addressing unbalance {.smaller}
+
+To address class unbalance, we generally use
+
+-   **oversampling** data from levels that are less prevalent in the data
+    -   e.g., `step_smote()`: Uses a technique called ["**S**ynthetic **M**inority **O**ver-sampling **Te**chnique"](https://jair.org/index.php/jair/article/view/10302/24590) to generate new examples of the minority class using nearest neighbors of these cases.
+-   **downsampling** data from levels that are more prevalent in the data
+    -   e.g., `step_downsample()`: Removes rows of a data set to make the occurrence of levels in a specific factor level equal.
+
+## New recipe - oversample
+
+```{r}
+#| code-line-numbers: "|7"
+
+volcano_rec3 <- recipe(volcano_type ~ ., data = volcano_train) %>%
+  step_other(tectonic_settings) %>%
+  step_other(major_rock_1) %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_zv(all_predictors()) %>%
+  step_center(all_predictors()) %>%
+  step_smote(volcano_type)
+```
+
+## New recipe - downsample
+
+```{r}
+#| code-line-numbers: "|7"
+
+volcano_rec4 <- recipe(volcano_type ~ ., data = volcano_train) %>%
+  step_other(tectonic_settings) %>%
+  step_other(major_rock_1) %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_zv(all_predictors()) %>%
+  step_center(all_predictors()) %>%
+  step_downsample(volcano_type)
+```
+
+## New workflows
+
+```{r}
+volcano_wflow3 <- workflow() %>%
+  add_recipe(volcano_rec3) %>%
+  add_model(volcano_spec)
+
+volcano_wflow4 <- workflow() %>%
+  add_recipe(volcano_rec4) %>%
+  add_model(volcano_spec)
+```
+
+## Fit resamples
+
+```{r}
+volcano_fit_rs3 <- volcano_wflow3 %>%
+  fit_resamples(
+    volcano_folds, 
+    control = control_resamples(save_pred = TRUE)
+    )
+
+volcano_fit_rs4 <- volcano_wflow4 %>%
+  fit_resamples(
+    volcano_folds, 
+    control = control_resamples(save_pred = TRUE)
+    )
+```
+
+## Collect metrics
+
+```{r}
+collect_metrics(volcano_fit_rs3)
+collect_metrics(volcano_fit_rs4)
+```
+
+## ROC curves - oversampling
+
+```{r}
+volcano_fit_rs3 %>%
+  collect_predictions() %>%
+  group_by(id) %>%
+  roc_curve(
+    truth = volcano_type,
+    .pred_Stratovolcano:.pred_Other
+  ) %>%
+  autoplot()
+```
+
+## ROC curves - downsampling
+
+```{r}
+volcano_fit_rs4 %>%
+  collect_predictions() %>%
+  group_by(id) %>%
+  roc_curve(
+    truth = volcano_type,
+    .pred_Stratovolcano:.pred_Other
+  ) %>%
+  autoplot()
+```
+
+## Addressing unbalance
+
+::: question
+Can you think of any issues resulting from over/down sampling?
+:::
+
+# Final model
+
+## The "chosen" model
+
+Let's stick to the models without over/down sampling.
+
+From the application exercise:
+
+```{r}
+volcano_rec2 <- recipe(volcano_type ~ ., data = volcano_train) %>%
+  step_other(tectonic_settings) %>%
+  step_other(major_rock_1) %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_zv(all_predictors()) %>%
+  step_center(all_predictors())
+
+volcano_wflow2 <- workflow() %>%
+  add_recipe(volcano_rec2) %>%
+  add_model(volcano_spec)
+```
+
+## Fitting the final model
+
+```{r}
+#| code-line-numbers: "|1-4|6"
+
+final_fit <- last_fit(
+  volcano_wflow2, 
+  split = volcano_split
+  )
+
+collect_metrics(final_fit)
+```
+
+## Confusion matrix
+
+```{r}
+collect_predictions(final_fit) %>%
+  conf_mat(volcano_type, .pred_class)
+```
+
+## Confusion matrix - visualized
+
+```{r}
+collect_predictions(final_fit) %>%
+  conf_mat(volcano_type, .pred_class) %>%
+  autoplot()
+```
+
+## ROC curve
+
+```{r}
+collect_predictions(final_fit) %>%
+  roc_curve(truth = volcano_type, .pred_Stratovolcano:.pred_Other) %>%
+  autoplot()
+```
+
+## ROC curve - altogether
+
+::: appex
+📋 [github.com/sta210-s22/ae-11-volcanoes](https://github.com/sta210-s22/ae-11-volcanoes) - Exercise 3
+:::
+
+```{r}
+#| echo: false
+
+collect_predictions(final_fit) %>%
+  roc_curve(truth = volcano_type, .pred_Stratovolcano:.pred_Other) %>%
+  ggplot(aes(1 - specificity, sensitivity, color = .level)) +
+  geom_abline(slope = 1, color = "gray50", lty = 2, alpha = 0.8) +
+  geom_path(size = 1.5, alpha = 0.7) +
+  labs(color = NULL) +
+  scale_color_OkabeIto()
+```
+
+## Prediction
+
+```{r}
+final_fitted <- extract_workflow(final_fit)
+
+new_volcano <- tibble(
+  latitude = 35.9940,
+  longitude = -78.8986,
+  elevation = 404,
+  tectonic_settings = "Subduction zone / Continental crust (>25 km)",
+  major_rock_1 = "Andesite / Basaltic Andesite"
+)
+
+predict(
+  final_fitted, 
+  new_volcano, 
+  type = "prob"
+  )
+```
+
+## Acknowledgements
+
+Inspired by
+
+::: nonincremental
+-   https://juliasilge.com/blog/multinomial-volcano-eruptions/
+-   https://juliasilge.com/blog/nber-papers/
+:::

@@ -8,7 +8,6 @@ editor: visual
 Due dates:
 
 -   Lab 6 - Friday, April 8
--   HW 4 - Friday, April 8
 -   Project drafts - Sunday, April 10
 :::
 

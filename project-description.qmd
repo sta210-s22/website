@@ -224,7 +224,7 @@ The peer review will be graded on the extent to which it comprehensively and con
 #### Section 3 - M 5:15PM - 6:30PM
 
 | Team being reviewed              | Reviewer 1                       | Reviewer 2                       |
-|------------------------|------------------------|------------------------|
+|----------------------------------|----------------------------------|----------------------------------|
 | down_to_earth_goats              | the_three_musketeers             | team_five                        |
 | ginger_and_stats                 | down_to_earth_goats              | the_three_musketeers             |
 | pineapple_wedge_and_diced_papaya | ginger_and_stats                 | down_to_earth_goats              |
