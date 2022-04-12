@@ -36,9 +36,8 @@ library(countdown)
 ## Topics
 
 ::: nonincremental
--   Predictions
--   Model selection
--   Checking conditions
+-   Unbalanced data
+-   Choosing the "final" model
 :::
 
 ## Computational setup

@@ -36,9 +36,8 @@ library(countdown)
 ## Topics
 
 ::: nonincremental
--   Predictions
--   Model selection
--   Checking conditions
+-   Building predictive multinomial logistic regression models
+-   Comparing models
 :::
 
 ## Computational setup
