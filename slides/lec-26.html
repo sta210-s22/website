@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.233">
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
-  <title>STA 210 - Spring 2022 - Logistic regression</title>
+  <title>STA 210 - Spring 2022 - MultiLR: Predictive models (cont.)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -380,7 +380,7 @@
       margin-right: 0; 
     }
   </style>
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Logistic regression">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - MultiLR: Predictive models (cont.)">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:image-height" content="418">
@@ -392,7 +392,7 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Logistic regression</h1>
+  <h1 class="title">MultiLR: Predictive models (cont.)</h1>
   <p class="subtitle">STA 210 - Spring 2022</p>
   <p class="author">Dr.&nbsp;Mine Çetinkaya-Rundel</p>
 </section>
@@ -402,21 +402,15 @@
 <h1>Welcome</h1>
 
 </section>
-<section id="announcements" class="slide level2">
-<h2>Announcements</h2>
-<ul>
-<li class="fragment"><p>Schedule changes for the remainder of the semester</p></li>
-<li class="fragment"><p>Thursday office hours in my office: 213 Old Chem</p></li>
-<li class="fragment"><p>Any questions on project proposals?</p></li>
-</ul>
-</section>
 <section id="topics" class="slide level2">
 <h2>Topics</h2>
+<div>
 <ul>
-<li class="fragment"><p>Logistic regression for binary response variable</p></li>
-<li class="fragment"><p>Relationship between odds and probabilities</p></li>
-<li class="fragment"><p>Use logistic regression model to calculate predicted odds and probabilities</p></li>
+<li>Predictions</li>
+<li>Model selection</li>
+<li>Checking conditions</li>
 </ul>
+</div>
 </section>
 <section id="computational-setup" class="slide level2">
 <h2>Computational setup</h2>
@@ -425,505 +419,361 @@
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(Stat2Data)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(colorblindr)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(themis)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
-<section id="predicting-categorical-outcomes" class="title-slide slide level1 center">
-<h1>Predicting categorical outcomes</h1>
+<section id="from-last-time" class="title-slide slide level1 center">
+<h1>From last time…</h1>
 
 </section>
-<section id="types-of-outcome-variables" class="slide level2">
-<h2>Types of outcome variables</h2>
-<p><strong>Quantitative outcome variable</strong>:</p>
-<ul>
-<li class="fragment">Sales price of a house in Levittown, NY</li>
-<li class="fragment"><strong>Model</strong>: Expected sales price given the number of bedrooms, lot size, etc.</li>
-</ul>
-<div class="fragment">
-<p><strong>Categorical outcone variable</strong>:</p>
-<ul>
-<li class="fragment">High risk of coronary heart disease</li>
-<li class="fragment"><strong>Model</strong>: Probability an adult is high risk of heart disease given their age, total cholesterol, etc.</li>
-</ul>
-</div>
-</section>
-<section id="models-for-categorical-outcomes" class="slide level2">
-<h2>Models for categorical outcomes</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Logistic regression</strong></p>
-<p>2 Outcomes</p>
-<p>1: Yes, 0: No</p>
-</div><div class="column" style="width:50%;">
-<p><strong>Multinomial logistic regression</strong></p>
-<p>3+ Outcomes</p>
-<p>1: Democrat, 2: Republican, 3: Independent</p>
-</div>
-</div>
-</section>
-<section id="election-forecasts" class="slide level2">
-<h2>2020 election forecasts</h2>
-
-<img data-src="images/lec-18/fivethirtyeight_president_nc.png" class="r-stretch quarto-figure-center"><p>Source: <a href="https://projects.fivethirtyeight.com/2020-election-forecast/">FiveThirtyEight Election Forcasts</a></p>
-</section>
-<section id="nba-finals-predictions" class="slide level2">
-<h2>NBA finals predictions</h2>
-
-<img data-src="images/lec-18/nba-predictions.png" class="r-stretch quarto-figure-center"><p>Source: <a href="https://projects.fivethirtyeight.com/2020-nba-predictions/games/?ex_cid=rrpromo">FiveThirtyEight 2019-20 NBA Predictions</a></p>
-</section>
-<section id="do-teenagers-get-7-hours-of-sleep" class="slide level2 smaller">
-<h2>Do teenagers get 7+ hours of sleep?</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p>Students in grades 9 - 12 surveyed about health risk behaviors including whether they usually get 7 or more hours of sleep.</p>
-<p><code>Sleep7</code></p>
-<p>1: yes</p>
-<p>0: no</p>
-</div><div class="column" style="width:60%;">
+<section id="volcanoes" class="slide level2">
+<h2>Volcanoes</h2>
+<p>The data come from <a href="https://volcano.si.edu/">The Smithsonian Institution</a>, via <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md">TidyTuesday</a>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">data</span>(YouthRisk2009)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>sleep <span class="ot">&lt;-</span> YouthRisk2009 <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Age), <span class="sc">!</span><span class="fu">is.na</span>(Sleep7))</span>
-<span id="cb2-5"><a href="#cb2-5"></a>sleep <span class="sc">%&gt;%</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="fu">relocate</span>(Age, Sleep7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>volcano <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/volcano.csv"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">names</span>(volcano)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code># A tibble: 446 × 6
-     Age Sleep7 Sleep           SmokeLife SmokeDaily MarijuaEver
-   &lt;int&gt;  &lt;int&gt; &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;            &lt;int&gt;
- 1    16      1 8 hours         Yes       Yes                  1
- 2    17      0 5 hours         Yes       Yes                  1
- 3    18      0 5 hours         Yes       Yes                  1
- 4    17      1 7 hours         Yes       No                   1
- 5    15      0 4 or less hours No        No                   0
- 6    17      0 6 hours         No        No                   0
- 7    17      1 7 hours         No        No                   0
- 8    16      1 8 hours         Yes       No                   0
- 9    16      1 8 hours         No        No                   0
-10    18      0 4 or less hours Yes       Yes                  1
-# … with 436 more rows</code></pre>
-</div>
-</div>
+<pre><code> [1] "volcano_number"           "volcano_name"            
+ [3] "primary_volcano_type"     "last_eruption_year"      
+ [5] "country"                  "region"                  
+ [7] "subregion"                "latitude"                
+ [9] "longitude"                "elevation"               
+[11] "tectonic_settings"        "evidence_category"       
+[13] "major_rock_1"             "major_rock_2"            
+[15] "major_rock_3"             "major_rock_4"            
+[17] "major_rock_5"             "minor_rock_1"            
+[19] "minor_rock_2"             "minor_rock_3"            
+[21] "minor_rock_4"             "minor_rock_5"            
+[23] "population_within_5_km"   "population_within_10_km" 
+[25] "population_within_30_km"  "population_within_100_km"</code></pre>
 </div>
 </div>
 </section>
-<section id="plot-the-data" class="slide level2">
-<h2>Plot the data</h2>
+<section id="data-prep" class="slide level2">
+<h2>Data prep</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(sleep, <span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> Sleep7)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Getting 7+ hours of sleep"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>volcano <span class="ot">&lt;-</span> volcano <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">volcano_type =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>      <span class="fu">str_detect</span>(primary_volcano_type, <span class="st">"Stratovolcano"</span>) <span class="sc">~</span> <span class="st">"Stratovolcano"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>      <span class="fu">str_detect</span>(primary_volcano_type, <span class="st">"Shield"</span>) <span class="sc">~</span> <span class="st">"Shield"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Other"</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    ),</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="at">volcano_type =</span> <span class="fu">fct_relevel</span>(volcano_type, <span class="st">"Stratovolcano"</span>, <span class="st">"Shield"</span>, <span class="st">"Other"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">select</span>(</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    volcano_type, latitude, longitude, </span>
+<span id="cb4-12"><a href="#cb4-12"></a>    elevation, tectonic_settings, major_rock_1</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as_factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<img data-src="lec-18_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
-<section id="lets-fit-a-linear-regression-model" class="slide level2">
-<h2>Let’s fit a linear regression model</h2>
-<p><strong>Outcome:</strong> <span class="math inline">\(Y\)</span> = 1: yes, 0: no</p>
-
-<img data-src="lec-18_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
-<section id="lets-use-proportions" class="slide level2">
-<h2>Let’s use proportions</h2>
-<p><strong>Outcome:</strong> Probability of getting 7+ hours of sleep</p>
-
-<img data-src="lec-18_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
-<section id="what-happens-if-we-zoom-out" class="slide level2">
-<h2>What happens if we zoom out?</h2>
-<p><strong>Outcome:</strong> Probability of getting 7+ hours of sleep</p>
-
-<img data-src="lec-18_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"><p>🛑 <em>This model produces predictions outside of 0 and 1.</em></p>
 </section>
-<section id="lets-try-another-model" class="slide level2">
-<h2>Let’s try another model</h2>
-
-<img data-src="lec-18_files/figure-revealjs/logistic-model-plot-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"><p><em>✅ This model (called a <strong>logistic regression model</strong>) only produces predictions between 0 and 1.</em></p>
-</section>
-<section id="the-code" class="slide level2">
-<h2>The code</h2>
+<section id="split-into-testingtraining" class="slide level2">
+<h2>Split into testing/training</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(sleep_age, <span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> prop)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span><span class="st">"glm"</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>), </span>
-<span id="cb5-5"><a href="#cb5-5"></a>              <span class="at">fullrange =</span> <span class="cn">TRUE</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"P(7+ hours of sleep)"</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">xlim</span>(<span class="dv">1</span>, <span class="dv">40</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>volcano_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(volcano)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>volcano_train <span class="ot">&lt;-</span> <span class="fu">training</span>(volcano_split)</span>
+<span id="cb5-5"><a href="#cb5-5"></a>volcano_test  <span class="ot">&lt;-</span> <span class="fu">testing</span>(volcano_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="different-types-of-models" class="slide level2">
-<h2>Different types of models</h2>
-<table>
-<colgroup>
-<col style="width: 31%">
-<col style="width: 13%">
-<col style="width: 55%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Method</th>
-<th>Outcome</th>
-<th>Model</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Linear regression</td>
-<td>Quantitative</td>
-<td><span class="math inline">\(Y = \beta_0 + \beta_1~ X\)</span></td>
-</tr>
-<tr class="even">
-<td>Linear regression (transform Y)</td>
-<td>Quantitative</td>
-<td><span class="math inline">\(\log(Y) = \beta_0 + \beta_1~ X\)</span></td>
-</tr>
-<tr class="odd">
-<td>Logistic regression</td>
-<td>Binary</td>
-<td><span class="math inline">\(\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1 ~ X\)</span></td>
-</tr>
-</tbody>
-</table>
+<section id="specify-a-model" class="slide level2">
+<h2>Specify a model</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>volcano_spec <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>volcano_spec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Multinomial Regression Model Specification (classification)
+
+Computational engine: nnet </code></pre>
+</div>
+</div>
+</section>
+<section id="create-cross-validation-folds" class="slide level2">
+<h2>Create cross validation folds</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">set.seed</span>(<span class="dv">9876</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>volcano_folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(volcano_train, <span class="at">v =</span> <span class="dv">5</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>volcano_folds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>#  5-fold cross-validation 
+# A tibble: 5 × 2
+  splits            id   
+  &lt;list&gt;            &lt;chr&gt;
+1 &lt;split [574/144]&gt; Fold1
+2 &lt;split [574/144]&gt; Fold2
+3 &lt;split [574/144]&gt; Fold3
+4 &lt;split [575/143]&gt; Fold4
+5 &lt;split [575/143]&gt; Fold5</code></pre>
+</div>
+</div>
 </section></section>
 <section>
-<section id="odds-and-probabilities" class="title-slide slide level1 center">
-<h1>Odds and probabilities</h1>
+<section id="unbalanced-data" class="title-slide slide level1 center">
+<h1>Unbalanced data</h1>
 
 </section>
-<section id="binary-response-variable" class="slide level2">
-<h2>Binary response variable</h2>
-<ul>
-<li class="fragment"><span class="math inline">\(Y = 1: \text{ yes}, 0: \text{ no}\)</span></li>
-<li class="fragment"><span class="math inline">\(\pi\)</span>: <strong>probability</strong> that <span class="math inline">\(Y=1\)</span>, i.e., <span class="math inline">\(P(Y = 1)\)</span></li>
-<li class="fragment"><span class="math inline">\(\frac{\pi}{1-\pi}\)</span>: <strong>odds</strong> that <span class="math inline">\(Y = 1\)</span></li>
-<li class="fragment"><span class="math inline">\(\log\big(\frac{\pi}{1-\pi}\big)\)</span>: <strong>log odds</strong></li>
-<li class="fragment">Go from <span class="math inline">\(\pi\)</span> to <span class="math inline">\(\log\big(\frac{\pi}{1-\pi}\big)\)</span> using the <strong>logit transformation</strong></li>
-</ul>
-</section>
-<section id="odds" class="slide level2">
-<h2>Odds</h2>
-<p>Suppose there is a <strong>70% chance</strong> it will rain tomorrow</p>
-<ul>
-<li class="fragment">Probability it will rain is <span class="math inline">\(\mathbf{p = 0.7}\)</span></li>
-<li class="fragment">Probability it won’t rain is <span class="math inline">\(\mathbf{1 - p = 0.3}\)</span></li>
-<li class="fragment">Odds it will rain are <strong>7 to 3</strong>, <strong>7:3</strong>, <span class="math inline">\(\mathbf{\frac{0.7}{0.3} \approx 2.33}\)</span></li>
-</ul>
-</section>
-<section id="are-teenagers-getting-enough-sleep" class="slide level2">
-<h2>Are teenagers getting enough sleep?</h2>
+<section id="unbalanced-data-1" class="slide level2">
+<h2>Unbalanced data</h2>
+<p>Remember that the observed volcano types are unbalanced:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>sleep <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">count</span>(Sleep7) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>volcano <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">count</span>(volcano_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code># A tibble: 2 × 3
-  Sleep7     n     p
-   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-1      0   150 0.336
-2      1   296 0.664</code></pre>
-</div>
-</div>
-<div class="fragment">
-<p><span class="math inline">\(P(\text{7+ hours of sleep}) = P(Y = 1) = p = 0.664\)</span></p>
-</div>
-<div class="fragment">
-<p><span class="math inline">\(P(\text{&lt; 7 hours of sleep}) = P(Y = 0) = 1 - p = 0.336\)</span></p>
-</div>
-<div class="fragment">
-<p><span class="math inline">\(P(\text{odds of 7+ hours of sleep}) = \frac{0.664}{0.336} = 1.976\)</span></p>
-</div>
-</section>
-<section id="from-odds-to-probabilities" class="slide level2">
-<h2>From odds to probabilities</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>odds</strong></p>
-<p><span class="math display">\[\omega = \frac{\pi}{1-\pi}\]</span></p>
-</div><div class="column" style="width:50%;">
-<p><strong>probability</strong></p>
-<p><span class="math display">\[\pi = \frac{\omega}{1 + \omega}\]</span></p>
+<pre><code># A tibble: 3 × 2
+  volcano_type      n
+  &lt;fct&gt;         &lt;int&gt;
+1 Stratovolcano   461
+2 Shield          118
+3 Other           379</code></pre>
 </div>
 </div>
 </section>
-<section id="logistic-regression" class="slide level2">
-<h2>Logistic regression</h2>
+<section id="addressing-unbalance" class="slide level2 smaller">
+<h2>Addressing unbalance</h2>
+<p>To address class unbalance, we generally use</p>
+<ul>
+<li class="fragment"><strong>oversampling</strong> data from levels that are less prevalent in the data
+<ul>
+<li class="fragment">e.g., <code>step_smote()</code>: Uses a technique called <a href="https://jair.org/index.php/jair/article/view/10302/24590">“<strong>S</strong>ynthetic <strong>M</strong>inority <strong>O</strong>ver-sampling <strong>Te</strong>chnique”</a> to generate new examples of the minority class using nearest neighbors of these cases.</li>
+</ul></li>
+<li class="fragment"><strong>downsampling</strong> data from levels that are more prevalent in the data
+<ul>
+<li class="fragment">e.g., <code>step_downsample()</code>: Removes rows of a data set to make the occurrence of levels in a specific factor level equal.</li>
+</ul></li>
+</ul>
 </section>
-<section id="from-odds-to-probabilities-1" class="slide level2">
-<h2>From odds to probabilities</h2>
-<ol type="1">
-<li class="fragment"><strong>Logistic model</strong>: log odds = <span class="math inline">\(\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1~X\)</span></li>
-<li class="fragment"><strong>Odds =</strong> <span class="math inline">\(\exp\big\{\log\big(\frac{\pi}{1-\pi}\big)\big\} = \frac{\pi}{1-\pi}\)</span></li>
-<li class="fragment">Combining (1) and (2) with what we saw earlier</li>
-</ol>
-<p><span class="math display">\[\text{probability} = \pi = \frac{\exp\{\beta_0 + \beta_1~X\}}{1 + \exp\{\beta_0 + \beta_1~X\}}\]</span></p>
-</section>
-<section id="logistic-regression-model" class="slide level2">
-<h2>Logistic regression model</h2>
-<p><strong>Logit form</strong>: <span class="math display">\[\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1~X\]</span></p>
-<div class="fragment">
-<p><strong>Probability form</strong>:</p>
-<p><span class="math display">\[
-\pi = \frac{\exp\{\beta_0 + \beta_1~X\}}{1 + \exp\{\beta_0 + \beta_1~X\}}
-\]</span></p>
+<section id="new-recipe---oversample" class="slide level2">
+<h2>New recipe - oversample</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb12" data-code-line-numbers="|7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>volcano_rec3 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">step_other</span>(tectonic_settings) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">step_other</span>(major_rock_1) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">step_center</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">step_smote</span>(volcano_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="risk-of-coronary-heart-disease" class="slide level2">
-<h2>Risk of coronary heart disease</h2>
-<p>This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to use <code>age</code> to predict if a randomly selected adult is high risk of having coronary heart disease in the next 10 years.</p>
-<p><code>high_risk</code>:</p>
+<section id="new-recipe---downsample" class="slide level2">
+<h2>New recipe - downsample</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb13" data-code-line-numbers="|7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>volcano_rec4 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">step_other</span>(tectonic_settings) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">step_other</span>(major_rock_1) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">step_center</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">step_downsample</span>(volcano_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="new-workflows" class="slide level2">
+<h2>New workflows</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>volcano_wflow3 <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">add_recipe</span>(volcano_rec3) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">add_model</span>(volcano_spec)</span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a>volcano_wflow4 <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">add_recipe</span>(volcano_rec4) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">add_model</span>(volcano_spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fit-resamples" class="slide level2">
+<h2>Fit resamples</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>volcano_fit_rs3 <span class="ot">&lt;-</span> volcano_wflow3 <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb15-3"><a href="#cb15-3"></a>    volcano_folds, </span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="at">control =</span> <span class="fu">control_resamples</span>(<span class="at">save_pred =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    )</span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a>volcano_fit_rs4 <span class="ot">&lt;-</span> volcano_wflow4 <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb15-9"><a href="#cb15-9"></a>    volcano_folds, </span>
+<span id="cb15-10"><a href="#cb15-10"></a>    <span class="at">control =</span> <span class="fu">control_resamples</span>(<span class="at">save_pred =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-11"><a href="#cb15-11"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="collect-metrics" class="slide level2">
+<h2>Collect metrics</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric  .estimator  mean     n std_err .config             
+  &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 accuracy multiclass 0.517     5  0.0154 Preprocessor1_Model1
+2 roc_auc  hand_till  0.693     5  0.0270 Preprocessor1_Model1</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric  .estimator  mean     n std_err .config             
+  &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 accuracy multiclass 0.485     5  0.0123 Preprocessor1_Model1
+2 roc_auc  hand_till  0.675     5  0.0219 Preprocessor1_Model1</code></pre>
+</div>
+</div>
+</section>
+<section id="roc-curves---oversampling" class="slide level2">
+<h2>ROC curves - oversampling</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>volcano_fit_rs3 <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">collect_predictions</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">roc_curve</span>(</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">truth =</span> volcano_type,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    .pred_Stratovolcano<span class="sc">:</span>.pred_Other</span>
+<span id="cb20-7"><a href="#cb20-7"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="lec-26_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="roc-curves---downsampling" class="slide level2">
+<h2>ROC curves - downsampling</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>volcano_fit_rs4 <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">collect_predictions</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">roc_curve</span>(</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">truth =</span> volcano_type,</span>
+<span id="cb21-6"><a href="#cb21-6"></a>    .pred_Stratovolcano<span class="sc">:</span>.pred_Other</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="lec-26_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="addressing-unbalance-1" class="slide level2">
+<h2>Addressing unbalance</h2>
+<div class="question">
+<p>Can you think of any issues resulting from over/down sampling?</p>
+</div>
+</section></section>
+<section>
+<section id="final-model" class="title-slide slide level1 center">
+<h1>Final model</h1>
+
+</section>
+<section id="the-chosen-model" class="slide level2">
+<h2>The “chosen” model</h2>
+<p>Let’s stick to the models without over/down sampling.</p>
+<p>From the application exercise:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>volcano_rec2 <span class="ot">&lt;-</span> <span class="fu">recipe</span>(volcano_type <span class="sc">~</span> ., <span class="at">data =</span> volcano_train) <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">step_other</span>(tectonic_settings) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">step_other</span>(major_rock_1) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">step_center</span>(<span class="fu">all_predictors</span>())</span>
+<span id="cb22-7"><a href="#cb22-7"></a></span>
+<span id="cb22-8"><a href="#cb22-8"></a>volcano_wflow2 <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="fu">add_recipe</span>(volcano_rec2) <span class="sc">%&gt;%</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>  <span class="fu">add_model</span>(volcano_spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fitting-the-final-model" class="slide level2">
+<h2>Fitting the final model</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb23" data-code-line-numbers="|1-4|6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>final_fit <span class="ot">&lt;-</span> <span class="fu">last_fit</span>(</span>
+<span id="cb23-2"><a href="#cb23-2"></a>  volcano_wflow2, </span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="at">split =</span> volcano_split</span>
+<span id="cb23-4"><a href="#cb23-4"></a>  )</span>
+<span id="cb23-5"><a href="#cb23-5"></a></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="fu">collect_metrics</span>(final_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  .metric  .estimator .estimate .config             
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
+1 accuracy multiclass     0.629 Preprocessor1_Model1
+2 roc_auc  hand_till      0.734 Preprocessor1_Model1</code></pre>
+</div>
+</div>
+</section>
+<section id="confusion-matrix" class="slide level2">
+<h2>Confusion matrix</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">conf_mat</span>(volcano_type, .pred_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>               Truth
+Prediction      Stratovolcano Shield Other
+  Stratovolcano            96     13    38
+  Shield                    1      0     0
+  Other                    21     16    55</code></pre>
+</div>
+</div>
+</section>
+<section id="confusion-matrix---visualized" class="slide level2">
+<h2>Confusion matrix - visualized</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">conf_mat</span>(volcano_type, .pred_class) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="lec-26_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="roc-curve" class="slide level2">
+<h2>ROC curve</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">collect_predictions</span>(final_fit) <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">roc_curve</span>(<span class="at">truth =</span> volcano_type, .pred_Stratovolcano<span class="sc">:</span>.pred_Other) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="lec-26_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="roc-curve---altogether" class="slide level2">
+<h2>ROC curve - altogether</h2>
+<div class="appex">
+<p>📋 <a href="https://github.com/sta210-s22/ae-11-volcanoes">github.com/sta210-s22/ae-11-volcanoes</a> - Exercise 3</p>
+</div>
+
+<img data-src="lec-26_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="prediction" class="slide level2">
+<h2>Prediction</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>final_fitted <span class="ot">&lt;-</span> <span class="fu">extract_workflow</span>(final_fit)</span>
+<span id="cb29-2"><a href="#cb29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3"></a>new_volcano <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="at">latitude =</span> <span class="fl">35.9940</span>,</span>
+<span id="cb29-5"><a href="#cb29-5"></a>  <span class="at">longitude =</span> <span class="sc">-</span><span class="fl">78.8986</span>,</span>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="at">elevation =</span> <span class="dv">404</span>,</span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="at">tectonic_settings =</span> <span class="st">"Subduction zone / Continental crust (&gt;25 km)"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8"></a>  <span class="at">major_rock_1 =</span> <span class="st">"Andesite / Basaltic Andesite"</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a>)</span>
+<span id="cb29-10"><a href="#cb29-10"></a></span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="fu">predict</span>(</span>
+<span id="cb29-12"><a href="#cb29-12"></a>  final_fitted, </span>
+<span id="cb29-13"><a href="#cb29-13"></a>  new_volcano, </span>
+<span id="cb29-14"><a href="#cb29-14"></a>  <span class="at">type =</span> <span class="st">"prob"</span></span>
+<span id="cb29-15"><a href="#cb29-15"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 3 × 1
+  .pred_value
+        &lt;dbl&gt;
+1      0.381 
+2      0.0379
+3      0.581 </code></pre>
+</div>
+</div>
+</section>
+<section id="acknowledgements" class="slide level2">
+<h2>Acknowledgements</h2>
+<p>Inspired by</p>
 <div>
 <ul>
-<li>1: High risk of having heart disease in next 10 years</li>
-<li>0: Not high risk of having heart disease in next 10 years</li>
+<li>https://juliasilge.com/blog/multinomial-volcano-eruptions/</li>
+<li>https://juliasilge.com/blog/nber-papers/</li>
 </ul>
-</div>
-<p><code>age</code>: Age at exam time (in years)</p>
-</section>
-<section id="data-heart" class="slide level2">
-<h2>Data: <code>heart</code></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>heart_disease <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/framingham.csv"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">select</span>(age, TenYearCHD) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">mutate</span>(<span class="at">high_risk =</span> <span class="fu">as.factor</span>(TenYearCHD)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">select</span>(age, high_risk)</span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a>heart_disease</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4,240 × 2
-     age high_risk
-   &lt;dbl&gt; &lt;fct&gt;    
- 1    39 0        
- 2    46 0        
- 3    48 0        
- 4    61 1        
- 5    46 0        
- 6    43 0        
- 7    63 1        
- 8    45 0        
- 9    52 0        
-10    43 0        
-# … with 4,230 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="high-risk-vs.-age" class="slide level2">
-<h2>High risk vs.&nbsp;age</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(heart_disease, <span class="fu">aes</span>(<span class="at">x =</span> high_risk, <span class="at">y =</span> age)) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"High risk - 1: yes, 0: no"</span>,</span>
-<span id="cb10-4"><a href="#cb10-4"></a>       <span class="at">y =</span> <span class="st">"Age"</span>, </span>
-<span id="cb10-5"><a href="#cb10-5"></a>       <span class="at">title =</span> <span class="st">"Age vs. High risk of heart disease"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="lec-18_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
-<section id="lets-fit-the-model" class="slide level2">
-<h2>Let’s fit the model</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>heart_disease_fit <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age, <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="fu">tidy</span>(heart_disease_fit) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-5.561</td>
-<td style="text-align: right;">0.284</td>
-<td style="text-align: right;">-19.599</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">age</td>
-<td style="text-align: right;">0.075</td>
-<td style="text-align: right;">0.005</td>
-<td style="text-align: right;">14.178</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="the-model" class="slide level2">
-<h2>The model</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">tidy</span>(heart_disease_fit) <span class="sc">%&gt;%</span> <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-5.561</td>
-<td style="text-align: right;">0.284</td>
-<td style="text-align: right;">-19.599</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">age</td>
-<td style="text-align: right;">0.075</td>
-<td style="text-align: right;">0.005</td>
-<td style="text-align: right;">14.178</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>. . .<br>
-<br>
-<span class="math display">\[\log\Big(\frac{\hat{\pi}}{1-\hat{\pi}}\Big) = -5.561 + 0.075 \times \text{age}\]</span> where <span class="math inline">\(\hat{\pi}\)</span> is the predicted probability of being high risk</p>
-</section>
-<section id="predicted-log-odds" class="slide level2">
-<h2>Predicted log odds</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">augment</span>(heart_disease_fit<span class="sc">$</span>fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4,240 × 8
-   high_risk   age .fitted .resid .std.resid     .hat .sigma   .cooksd
-   &lt;fct&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
- 1 0            39  -2.65  -0.370     -0.370 0.000466  0.895 0.0000165
- 2 0            46  -2.13  -0.475     -0.475 0.000322  0.895 0.0000192
- 3 0            48  -1.98  -0.509     -0.509 0.000288  0.895 0.0000199
- 4 1            61  -1.01   1.62       1.62  0.000706  0.895 0.000968 
- 5 0            46  -2.13  -0.475     -0.475 0.000322  0.895 0.0000192
- 6 0            43  -2.35  -0.427     -0.427 0.000384  0.895 0.0000183
- 7 1            63  -0.858  1.56       1.56  0.000956  0.895 0.00113  
- 8 0            45  -2.20  -0.458     -0.458 0.000342  0.895 0.0000189
- 9 0            52  -1.68  -0.585     -0.585 0.000262  0.895 0.0000244
-10 0            43  -2.35  -0.427     -0.427 0.000384  0.895 0.0000183
-# … with 4,230 more rows</code></pre>
-</div>
-</div>
-<div class="fragment">
-<p><strong>For observation 1</strong></p>
-<p><span class="math display">\[\text{predicted odds} = \hat{\omega} = \frac{\hat{\pi}}{1-\hat{\pi}} = \exp\{-2.650\} = 0.071\]</span></p>
-</div>
-</section>
-<section id="predicted-probabilities" class="slide level2">
-<h2>Predicted probabilities</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">predict</span>(heart_disease_fit, <span class="at">new_data =</span> heart_disease, <span class="at">type =</span> <span class="st">"prob"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4,240 × 2
-   .pred_0 .pred_1
-     &lt;dbl&gt;   &lt;dbl&gt;
- 1   0.934  0.0660
- 2   0.894  0.106 
- 3   0.878  0.122 
- 4   0.733  0.267 
- 5   0.894  0.106 
- 6   0.913  0.0870
- 7   0.702  0.298 
- 8   0.900  0.0996
- 9   0.843  0.157 
-10   0.913  0.0870
-# … with 4,230 more rows</code></pre>
-</div>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\text{predicted probabilities} = \hat{\pi} = \frac{\exp\{-2.650\}}{1 + \exp\{-2.650\}} = 0.066\]</span></p>
-</div>
-</section>
-<section id="predicted-classes" class="slide level2">
-<h2>Predicted classes</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">predict</span>(heart_disease_fit, <span class="at">new_data =</span> heart_disease, <span class="at">type =</span> <span class="st">"class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4,240 × 1
-   .pred_class
-   &lt;fct&gt;      
- 1 0          
- 2 0          
- 3 0          
- 4 0          
- 5 0          
- 6 0          
- 7 0          
- 8 0          
- 9 0          
-10 0          
-# … with 4,230 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="default-prediction" class="slide level2">
-<h2>Default prediction</h2>
-<p>For a logistic regression, the default prediction is the <code>class</code>.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">predict</span>(heart_disease_fit, <span class="at">new_data =</span> heart_disease)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4,240 × 1
-   .pred_class
-   &lt;fct&gt;      
- 1 0          
- 2 0          
- 3 0          
- 4 0          
- 5 0          
- 6 0          
- 7 0          
- 8 0          
- 9 0          
-10 0          
-# … with 4,230 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="observed-vs.-predicted" class="slide level2">
-<h2>Observed vs.&nbsp;predicted</h2>
-<div class="question">
-<p>What does the following table show?</p>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">predict</span>(heart_disease_fit, <span class="at">new_data =</span> heart_disease) <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">bind_cols</span>(heart_disease) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">count</span>(high_risk, .pred_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 2 × 3
-  high_risk .pred_class     n
-  &lt;fct&gt;     &lt;fct&gt;       &lt;int&gt;
-1 0         0            3596
-2 1         0             644</code></pre>
-</div>
-</div>
-</section>
-<section id="recap" class="slide level2">
-<h2>Recap</h2>
-<ul>
-<li class="fragment"><p>Logistic regression for binary response variable</p></li>
-<li class="fragment"><p>Relationship between odds and probabilities</p></li>
-<li class="fragment"><p>Used logistic regression model to calculate predicted odds and probabilities</p></li>
-</ul>
-</section>
-<section id="application-exercise" class="slide level2">
-<h2>Application exercise</h2>
-<div class="appex">
-<p>📋 <a href="https://github.com/sta210-s22/ae-9-odds">github.com/sta210-s22/ae-9-odds</a></p>
 </div>
 
 

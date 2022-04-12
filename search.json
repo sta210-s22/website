@@ -1019,7 +1019,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n📂\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n📂\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n📂\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Mar 25\nDue: HW 3 + Lab 5\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n12\nMon, Mar 28\nLab: Work on project drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n✍️\n\n\n\n\n13\nMon, Apr 4\nLab 6: Why Many Americans Don’t Vote\n\n\n\n💻\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction + inferential models\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Apr 7\nMultiLR: Predictive models\n\n🖥️\n\n\n\n📂\n\n\n\n\nFri, Apr 8\nDue: Lab 6\n\n\n\n💻\n\n\n\n\n\n\nSun, Apr 10\nDue: Project drafts\n\n\n\n\n\n📂\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Apr 12\nTBA\n📖\n\n\n\n\n\n\n\n\n\n\nDue: HW 4\n\n\n\n\n✍️\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n📂\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n📖\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n✍️\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n📂\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n📂\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n📂\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Mar 25\nDue: HW 3 + Lab 5\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n12\nMon, Mar 28\nLab: Work on project drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n✍️\n\n\n\n\n13\nMon, Apr 4\nLab 6: Why Many Americans Don’t Vote\n\n\n\n💻\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction + inferential models\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Apr 7\nMultiLR: Predictive models\n\n🖥️\n\n\n\n📂\n\n\n\n\nFri, Apr 8\nDue: Lab 6\n\n\n\n💻\n\n\n\n\n\n\nSun, Apr 10\nDue: Project drafts\n\n\n\n\n\n📂\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Apr 12\nMultiLR: Predictive models (cont.)\n📖\n🖥️\n\n\n\n\n\n\n\n\n\nDue: HW 4\n\n\n\n\n✍️\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n\n\n\n\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n📂\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 18\nWrap-up\n📖\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n✍️\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "hw/hw-3.html",
@@ -2097,7 +2097,7 @@
     "href": "slides/lec-23.html#model-result",
     "title": "Multinomial Logistic Regression (MultiLR)",
     "section": "Model result",
-    "text": "Model result\n\nhealth_fit\n\nparsnip model object\n\nFit time:  115ms \nCall:\nnnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, \n    trace = FALSE)\n\nCoefficients:\n      (Intercept)           Age PhysActiveYes\nVgood   1.2053460  0.0009101848    -0.3209047\nGood    1.9476261 -0.0023686122    -1.0014925\nFair    0.9145492  0.0030462534    -1.6454297\nPoor   -1.5211414  0.0221905681    -2.6556343\n\nResidual Deviance: 17588.88 \nAIC: 17612.88"
+    "text": "Model result\n\nhealth_fit\n\nparsnip model object\n\nFit time:  98ms \nCall:\nnnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, \n    trace = FALSE)\n\nCoefficients:\n      (Intercept)           Age PhysActiveYes\nVgood   1.2053460  0.0009101848    -0.3209047\nGood    1.9476261 -0.0023686122    -1.0014925\nFair    0.9145492  0.0030462534    -1.6454297\nPoor   -1.5211414  0.0221905681    -2.6556343\n\nResidual Deviance: 17588.88 \nAIC: 17612.88"
   },
   {
     "objectID": "slides/lec-23.html#next-steps",
@@ -4592,123 +4592,11 @@
     "text": "Your turn\n\n📋 github.com/sta210-s22/ae-11-volcanoes - Exercise 2"
   },
   {
-    "objectID": "slides/lec-25.html#unbalanced-data-1",
-    "href": "slides/lec-25.html#unbalanced-data-1",
-    "title": "MultiLR: Predictive models",
-    "section": "Unbalanced data",
-    "text": "Unbalanced data\nRemember that the observed volcano types are unbalanced:\n\nvolcano %>% \n  count(volcano_type)\n\n# A tibble: 3 × 2\n  volcano_type      n\n  <fct>         <int>\n1 Stratovolcano   461\n2 Shield          118\n3 Other           379"
-  },
-  {
-    "objectID": "slides/lec-25.html#addressing-unbalance",
-    "href": "slides/lec-25.html#addressing-unbalance",
-    "title": "MultiLR: Predictive models",
-    "section": "Addressing unbalance",
-    "text": "Addressing unbalance\nTo address class unbalance, we generally use\n\noversampling data from levels that are less prevalent in the data\n\ne.g., step_smote(): Uses a technique called “Synthetic Minority Over-sampling Technique” to generate new examples of the minority class using nearest neighbors of these cases.\n\ndownsampling data from levels that are more prevalent in the data\n\ne.g., step_downsample(): Removes rows of a data set to make the occurrence of levels in a specific factor level equal."
-  },
-  {
-    "objectID": "slides/lec-25.html#new-recipes",
-    "href": "slides/lec-25.html#new-recipes",
-    "title": "MultiLR: Predictive models",
-    "section": "New recipes",
-    "text": "New recipes\n\nvolcano_rec3 <- recipe(volcano_type ~ ., data = volcano_train) %>%\n  step_other(tectonic_settings) %>%\n  step_other(major_rock_1) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors()) %>%\n  step_center(all_predictors()) %>%\n  step_smote(volcano_type)\n\nvolcano_rec4 <- recipe(volcano_type ~ ., data = volcano_train) %>%\n  step_other(tectonic_settings) %>%\n  step_other(major_rock_1) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors()) %>%\n  step_center(all_predictors()) %>%\n  step_downsample(volcano_type)"
-  },
-  {
-    "objectID": "slides/lec-25.html#new-workflows",
-    "href": "slides/lec-25.html#new-workflows",
-    "title": "MultiLR: Predictive models",
-    "section": "New workflows",
-    "text": "New workflows\n\nvolcano_wflow3 <- workflow() %>%\n  add_recipe(volcano_rec3) %>%\n  add_model(volcano_spec)\n\nvolcano_wflow4 <- workflow() %>%\n  add_recipe(volcano_rec4) %>%\n  add_model(volcano_spec)"
-  },
-  {
-    "objectID": "slides/lec-25.html#fit-resamples-1",
-    "href": "slides/lec-25.html#fit-resamples-1",
-    "title": "MultiLR: Predictive models",
-    "section": "Fit resamples",
-    "text": "Fit resamples\n\nvolcano_fit_rs3 <- volcano_wflow3 %>%\n  fit_resamples(\n    volcano_folds, \n    control = control_resamples(save_pred = TRUE)\n    )\n\nvolcano_fit_rs4 <- volcano_wflow4 %>%\n  fit_resamples(\n    volcano_folds, \n    control = control_resamples(save_pred = TRUE)\n    )"
-  },
-  {
-    "objectID": "slides/lec-25.html#collect-metrics-1",
-    "href": "slides/lec-25.html#collect-metrics-1",
-    "title": "MultiLR: Predictive models",
-    "section": "Collect metrics",
-    "text": "Collect metrics\n\ncollect_metrics(volcano_fit_rs3)\n\n# A tibble: 2 × 6\n  .metric  .estimator  mean     n std_err .config             \n  <chr>    <chr>      <dbl> <int>   <dbl> <chr>               \n1 accuracy multiclass 0.513     5  0.0131 Preprocessor1_Model1\n2 roc_auc  hand_till  0.695     5  0.0220 Preprocessor1_Model1\n\ncollect_metrics(volcano_fit_rs4)\n\n# A tibble: 2 × 6\n  .metric  .estimator  mean     n std_err .config             \n  <chr>    <chr>      <dbl> <int>   <dbl> <chr>               \n1 accuracy multiclass 0.507     5  0.0199 Preprocessor1_Model1\n2 roc_auc  hand_till  0.685     5  0.0187 Preprocessor1_Model1"
-  },
-  {
-    "objectID": "slides/lec-25.html#roc-curves---oversampling",
-    "href": "slides/lec-25.html#roc-curves---oversampling",
-    "title": "MultiLR: Predictive models",
-    "section": "ROC curves - oversampling",
-    "text": "ROC curves - oversampling\n\nvolcano_fit_rs3 %>%\n  collect_predictions() %>%\n  group_by(id) %>%\n  roc_curve(\n    truth = volcano_type,\n    .pred_Stratovolcano:.pred_Other\n  ) %>%\n  autoplot()"
-  },
-  {
-    "objectID": "slides/lec-25.html#roc-curves---downsampling",
-    "href": "slides/lec-25.html#roc-curves---downsampling",
-    "title": "MultiLR: Predictive models",
-    "section": "ROC curves - downsampling",
-    "text": "ROC curves - downsampling\n\nvolcano_fit_rs4 %>%\n  collect_predictions() %>%\n  group_by(id) %>%\n  roc_curve(\n    truth = volcano_type,\n    .pred_Stratovolcano:.pred_Other\n  ) %>%\n  autoplot()"
-  },
-  {
-    "objectID": "slides/lec-25.html#addressing-unbalance-1",
-    "href": "slides/lec-25.html#addressing-unbalance-1",
-    "title": "MultiLR: Predictive models",
-    "section": "Addressing unbalance",
-    "text": "Addressing unbalance\n\nCan you think of any issues resulting from over/down sampling?"
-  },
-  {
-    "objectID": "slides/lec-25.html#the-chosen-model",
-    "href": "slides/lec-25.html#the-chosen-model",
-    "title": "MultiLR: Predictive models",
-    "section": "The “chosen” model",
-    "text": "The “chosen” model\nLet’s stick to the models without over/down sampling.\nFrom the application exercise:\n\nvolcano_rec2 <- recipe(volcano_type ~ ., data = volcano_train) %>%\n  step_other(tectonic_settings) %>%\n  step_other(major_rock_1) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors()) %>%\n  step_center(all_predictors())\n\nvolcano_wflow2 <- workflow() %>%\n  add_recipe(volcano_rec2) %>%\n  add_model(volcano_spec)"
-  },
-  {
-    "objectID": "slides/lec-25.html#fitting-the-final-model",
-    "href": "slides/lec-25.html#fitting-the-final-model",
-    "title": "MultiLR: Predictive models",
-    "section": "Fitting the final model",
-    "text": "Fitting the final model\n\nfinal_fit <- last_fit(\n  volcano_wflow2, \n  split = volcano_split\n  )\n\ncollect_metrics(final_fit)\n\n# A tibble: 2 × 4\n  .metric  .estimator .estimate .config             \n  <chr>    <chr>          <dbl> <chr>               \n1 accuracy multiclass     0.629 Preprocessor1_Model1\n2 roc_auc  hand_till      0.734 Preprocessor1_Model1"
-  },
-  {
-    "objectID": "slides/lec-25.html#confusion-matrix",
-    "href": "slides/lec-25.html#confusion-matrix",
-    "title": "MultiLR: Predictive models",
-    "section": "Confusion matrix",
-    "text": "Confusion matrix\n\ncollect_predictions(final_fit) %>%\n  conf_mat(volcano_type, .pred_class)\n\n               Truth\nPrediction      Stratovolcano Shield Other\n  Stratovolcano            96     13    38\n  Shield                    1      0     0\n  Other                    21     16    55"
-  },
-  {
-    "objectID": "slides/lec-25.html#confusion-matrix---visualized",
-    "href": "slides/lec-25.html#confusion-matrix---visualized",
-    "title": "MultiLR: Predictive models",
-    "section": "Confusion matrix - visualized",
-    "text": "Confusion matrix - visualized\n\ncollect_predictions(final_fit) %>%\n  conf_mat(volcano_type, .pred_class) %>%\n  autoplot()"
-  },
-  {
-    "objectID": "slides/lec-25.html#roc-curve-1",
-    "href": "slides/lec-25.html#roc-curve-1",
-    "title": "MultiLR: Predictive models",
-    "section": "ROC curve",
-    "text": "ROC curve\n\ncollect_predictions(final_fit) %>%\n  roc_curve(truth = volcano_type, .pred_Stratovolcano:.pred_Other) %>%\n  autoplot()"
-  },
-  {
-    "objectID": "slides/lec-25.html#roc-curve---altogether",
-    "href": "slides/lec-25.html#roc-curve---altogether",
-    "title": "MultiLR: Predictive models",
-    "section": "ROC curve - altogether",
-    "text": "ROC curve - altogether\n\n📋 github.com/sta210-s22/ae-11-volcanoes - Exercise 3"
-  },
-  {
-    "objectID": "slides/lec-25.html#prediction",
-    "href": "slides/lec-25.html#prediction",
-    "title": "MultiLR: Predictive models",
-    "section": "Prediction",
-    "text": "Prediction\n\nfinal_fitted <- extract_workflow(final_fit)\n\nnew_volcano <- tibble(\n  latitude = 35.9940,\n  longitude = -78.8986,\n  elevation = 404,\n  tectonic_settings = \"Subduction zone / Continental crust (>25 km)\",\n  major_rock_1 = \"Andesite / Basaltic Andesite\"\n)\n\npredict(\n  final_fitted, \n  new_volcano, \n  type = \"prob\"\n  )\n\n# A tibble: 3 × 1\n  .pred_value\n        <dbl>\n1      0.381 \n2      0.0379\n3      0.581"
-  },
-  {
     "objectID": "slides/lec-25.html#acknowledgements",
     "href": "slides/lec-25.html#acknowledgements",
     "title": "MultiLR: Predictive models",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\nInspired by\n\nhttps://juliasilge.com/blog/multinomial-volcano-eruptions/\nhttps://juliasilge.com/blog/nber-papers/\n\n\n\n\nsta210-s22.github.io/website"
+    "text": "Acknowledgements\nInspired by\n\n\nhttps://juliasilge.com/blog/multinomial-volcano-eruptions/\nhttps://juliasilge.com/blog/nber-papers/\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lec-9.html#announcements",
@@ -4737,6 +4625,181 @@
     "title": "Exam 1 Review",
     "section": "Application Exercise",
     "text": "Application Exercise\n\n📋 github.com/sta210-s22/ae-4-exam-1-review\n\n\n\n\nsta210-s22.github.io/website"
+  },
+  {
+    "objectID": "slides/lec-26.html#topics",
+    "href": "slides/lec-26.html#topics",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Topics",
+    "text": "Topics\n\n\nPredictions\nModel selection\nChecking conditions"
+  },
+  {
+    "objectID": "slides/lec-26.html#computational-setup",
+    "href": "slides/lec-26.html#computational-setup",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Computational setup",
+    "text": "Computational setup\n\n# load packages\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(colorblindr)\nlibrary(themis)\n\n# set default theme and larger font size for ggplot2\nggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))"
+  },
+  {
+    "objectID": "slides/lec-26.html#volcanoes",
+    "href": "slides/lec-26.html#volcanoes",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Volcanoes",
+    "text": "Volcanoes\nThe data come from The Smithsonian Institution, via TidyTuesday.\n\nvolcano <- read_csv(here::here(\"slides\", \"data/volcano.csv\"))\nnames(volcano)\n\n [1] \"volcano_number\"           \"volcano_name\"            \n [3] \"primary_volcano_type\"     \"last_eruption_year\"      \n [5] \"country\"                  \"region\"                  \n [7] \"subregion\"                \"latitude\"                \n [9] \"longitude\"                \"elevation\"               \n[11] \"tectonic_settings\"        \"evidence_category\"       \n[13] \"major_rock_1\"             \"major_rock_2\"            \n[15] \"major_rock_3\"             \"major_rock_4\"            \n[17] \"major_rock_5\"             \"minor_rock_1\"            \n[19] \"minor_rock_2\"             \"minor_rock_3\"            \n[21] \"minor_rock_4\"             \"minor_rock_5\"            \n[23] \"population_within_5_km\"   \"population_within_10_km\" \n[25] \"population_within_30_km\"  \"population_within_100_km\""
+  },
+  {
+    "objectID": "slides/lec-26.html#data-prep",
+    "href": "slides/lec-26.html#data-prep",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Data prep",
+    "text": "Data prep\n\nvolcano <- volcano %>%\n  mutate(\n    volcano_type = case_when(\n      str_detect(primary_volcano_type, \"Stratovolcano\") ~ \"Stratovolcano\",\n      str_detect(primary_volcano_type, \"Shield\") ~ \"Shield\",\n      TRUE ~ \"Other\"\n    ),\n    volcano_type = fct_relevel(volcano_type, \"Stratovolcano\", \"Shield\", \"Other\")\n  ) %>%\n  select(\n    volcano_type, latitude, longitude, \n    elevation, tectonic_settings, major_rock_1\n    ) %>%\n  mutate(across(where(is.character), as_factor))"
+  },
+  {
+    "objectID": "slides/lec-26.html#split-into-testingtraining",
+    "href": "slides/lec-26.html#split-into-testingtraining",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Split into testing/training",
+    "text": "Split into testing/training\n\nset.seed(1234)\n\nvolcano_split <- initial_split(volcano)\nvolcano_train <- training(volcano_split)\nvolcano_test  <- testing(volcano_split)"
+  },
+  {
+    "objectID": "slides/lec-26.html#specify-a-model",
+    "href": "slides/lec-26.html#specify-a-model",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Specify a model",
+    "text": "Specify a model\n\nvolcano_spec <- multinom_reg() %>%\n  set_engine(\"nnet\")\n\nvolcano_spec\n\nMultinomial Regression Model Specification (classification)\n\nComputational engine: nnet"
+  },
+  {
+    "objectID": "slides/lec-26.html#create-cross-validation-folds",
+    "href": "slides/lec-26.html#create-cross-validation-folds",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Create cross validation folds",
+    "text": "Create cross validation folds\n\nset.seed(9876)\n\nvolcano_folds <- vfold_cv(volcano_train, v = 5)\nvolcano_folds\n\n#  5-fold cross-validation \n# A tibble: 5 × 2\n  splits            id   \n  <list>            <chr>\n1 <split [574/144]> Fold1\n2 <split [574/144]> Fold2\n3 <split [574/144]> Fold3\n4 <split [575/143]> Fold4\n5 <split [575/143]> Fold5"
+  },
+  {
+    "objectID": "slides/lec-26.html#unbalanced-data-1",
+    "href": "slides/lec-26.html#unbalanced-data-1",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Unbalanced data",
+    "text": "Unbalanced data\nRemember that the observed volcano types are unbalanced:\n\nvolcano %>% \n  count(volcano_type)\n\n# A tibble: 3 × 2\n  volcano_type      n\n  <fct>         <int>\n1 Stratovolcano   461\n2 Shield          118\n3 Other           379"
+  },
+  {
+    "objectID": "slides/lec-26.html#addressing-unbalance",
+    "href": "slides/lec-26.html#addressing-unbalance",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Addressing unbalance",
+    "text": "Addressing unbalance\nTo address class unbalance, we generally use\n\noversampling data from levels that are less prevalent in the data\n\ne.g., step_smote(): Uses a technique called “Synthetic Minority Over-sampling Technique” to generate new examples of the minority class using nearest neighbors of these cases.\n\ndownsampling data from levels that are more prevalent in the data\n\ne.g., step_downsample(): Removes rows of a data set to make the occurrence of levels in a specific factor level equal."
+  },
+  {
+    "objectID": "slides/lec-26.html#new-recipe---oversample",
+    "href": "slides/lec-26.html#new-recipe---oversample",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "New recipe - oversample",
+    "text": "New recipe - oversample\n\nvolcano_rec3 <- recipe(volcano_type ~ ., data = volcano_train) %>%\n  step_other(tectonic_settings) %>%\n  step_other(major_rock_1) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors()) %>%\n  step_center(all_predictors()) %>%\n  step_smote(volcano_type)"
+  },
+  {
+    "objectID": "slides/lec-26.html#new-recipe---downsample",
+    "href": "slides/lec-26.html#new-recipe---downsample",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "New recipe - downsample",
+    "text": "New recipe - downsample\n\nvolcano_rec4 <- recipe(volcano_type ~ ., data = volcano_train) %>%\n  step_other(tectonic_settings) %>%\n  step_other(major_rock_1) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors()) %>%\n  step_center(all_predictors()) %>%\n  step_downsample(volcano_type)"
+  },
+  {
+    "objectID": "slides/lec-26.html#new-workflows",
+    "href": "slides/lec-26.html#new-workflows",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "New workflows",
+    "text": "New workflows\n\nvolcano_wflow3 <- workflow() %>%\n  add_recipe(volcano_rec3) %>%\n  add_model(volcano_spec)\n\nvolcano_wflow4 <- workflow() %>%\n  add_recipe(volcano_rec4) %>%\n  add_model(volcano_spec)"
+  },
+  {
+    "objectID": "slides/lec-26.html#fit-resamples",
+    "href": "slides/lec-26.html#fit-resamples",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Fit resamples",
+    "text": "Fit resamples\n\nvolcano_fit_rs3 <- volcano_wflow3 %>%\n  fit_resamples(\n    volcano_folds, \n    control = control_resamples(save_pred = TRUE)\n    )\n\nvolcano_fit_rs4 <- volcano_wflow4 %>%\n  fit_resamples(\n    volcano_folds, \n    control = control_resamples(save_pred = TRUE)\n    )"
+  },
+  {
+    "objectID": "slides/lec-26.html#collect-metrics",
+    "href": "slides/lec-26.html#collect-metrics",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Collect metrics",
+    "text": "Collect metrics\n\ncollect_metrics(volcano_fit_rs3)\n\n# A tibble: 2 × 6\n  .metric  .estimator  mean     n std_err .config             \n  <chr>    <chr>      <dbl> <int>   <dbl> <chr>               \n1 accuracy multiclass 0.517     5  0.0154 Preprocessor1_Model1\n2 roc_auc  hand_till  0.693     5  0.0270 Preprocessor1_Model1\n\ncollect_metrics(volcano_fit_rs4)\n\n# A tibble: 2 × 6\n  .metric  .estimator  mean     n std_err .config             \n  <chr>    <chr>      <dbl> <int>   <dbl> <chr>               \n1 accuracy multiclass 0.485     5  0.0123 Preprocessor1_Model1\n2 roc_auc  hand_till  0.675     5  0.0219 Preprocessor1_Model1"
+  },
+  {
+    "objectID": "slides/lec-26.html#roc-curves---oversampling",
+    "href": "slides/lec-26.html#roc-curves---oversampling",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "ROC curves - oversampling",
+    "text": "ROC curves - oversampling\n\nvolcano_fit_rs3 %>%\n  collect_predictions() %>%\n  group_by(id) %>%\n  roc_curve(\n    truth = volcano_type,\n    .pred_Stratovolcano:.pred_Other\n  ) %>%\n  autoplot()"
+  },
+  {
+    "objectID": "slides/lec-26.html#roc-curves---downsampling",
+    "href": "slides/lec-26.html#roc-curves---downsampling",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "ROC curves - downsampling",
+    "text": "ROC curves - downsampling\n\nvolcano_fit_rs4 %>%\n  collect_predictions() %>%\n  group_by(id) %>%\n  roc_curve(\n    truth = volcano_type,\n    .pred_Stratovolcano:.pred_Other\n  ) %>%\n  autoplot()"
+  },
+  {
+    "objectID": "slides/lec-26.html#addressing-unbalance-1",
+    "href": "slides/lec-26.html#addressing-unbalance-1",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Addressing unbalance",
+    "text": "Addressing unbalance\n\nCan you think of any issues resulting from over/down sampling?"
+  },
+  {
+    "objectID": "slides/lec-26.html#the-chosen-model",
+    "href": "slides/lec-26.html#the-chosen-model",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "The “chosen” model",
+    "text": "The “chosen” model\nLet’s stick to the models without over/down sampling.\nFrom the application exercise:\n\nvolcano_rec2 <- recipe(volcano_type ~ ., data = volcano_train) %>%\n  step_other(tectonic_settings) %>%\n  step_other(major_rock_1) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors()) %>%\n  step_center(all_predictors())\n\nvolcano_wflow2 <- workflow() %>%\n  add_recipe(volcano_rec2) %>%\n  add_model(volcano_spec)"
+  },
+  {
+    "objectID": "slides/lec-26.html#fitting-the-final-model",
+    "href": "slides/lec-26.html#fitting-the-final-model",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Fitting the final model",
+    "text": "Fitting the final model\n\nfinal_fit <- last_fit(\n  volcano_wflow2, \n  split = volcano_split\n  )\n\ncollect_metrics(final_fit)\n\n# A tibble: 2 × 4\n  .metric  .estimator .estimate .config             \n  <chr>    <chr>          <dbl> <chr>               \n1 accuracy multiclass     0.629 Preprocessor1_Model1\n2 roc_auc  hand_till      0.734 Preprocessor1_Model1"
+  },
+  {
+    "objectID": "slides/lec-26.html#confusion-matrix",
+    "href": "slides/lec-26.html#confusion-matrix",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Confusion matrix",
+    "text": "Confusion matrix\n\ncollect_predictions(final_fit) %>%\n  conf_mat(volcano_type, .pred_class)\n\n               Truth\nPrediction      Stratovolcano Shield Other\n  Stratovolcano            96     13    38\n  Shield                    1      0     0\n  Other                    21     16    55"
+  },
+  {
+    "objectID": "slides/lec-26.html#confusion-matrix---visualized",
+    "href": "slides/lec-26.html#confusion-matrix---visualized",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Confusion matrix - visualized",
+    "text": "Confusion matrix - visualized\n\ncollect_predictions(final_fit) %>%\n  conf_mat(volcano_type, .pred_class) %>%\n  autoplot()"
+  },
+  {
+    "objectID": "slides/lec-26.html#roc-curve",
+    "href": "slides/lec-26.html#roc-curve",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "ROC curve",
+    "text": "ROC curve\n\ncollect_predictions(final_fit) %>%\n  roc_curve(truth = volcano_type, .pred_Stratovolcano:.pred_Other) %>%\n  autoplot()"
+  },
+  {
+    "objectID": "slides/lec-26.html#roc-curve---altogether",
+    "href": "slides/lec-26.html#roc-curve---altogether",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "ROC curve - altogether",
+    "text": "ROC curve - altogether\n\n📋 github.com/sta210-s22/ae-11-volcanoes - Exercise 3"
+  },
+  {
+    "objectID": "slides/lec-26.html#prediction",
+    "href": "slides/lec-26.html#prediction",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Prediction",
+    "text": "Prediction\n\nfinal_fitted <- extract_workflow(final_fit)\n\nnew_volcano <- tibble(\n  latitude = 35.9940,\n  longitude = -78.8986,\n  elevation = 404,\n  tectonic_settings = \"Subduction zone / Continental crust (>25 km)\",\n  major_rock_1 = \"Andesite / Basaltic Andesite\"\n)\n\npredict(\n  final_fitted, \n  new_volcano, \n  type = \"prob\"\n  )\n\n# A tibble: 3 × 1\n  .pred_value\n        <dbl>\n1      0.381 \n2      0.0379\n3      0.581"
+  },
+  {
+    "objectID": "slides/lec-26.html#acknowledgements",
+    "href": "slides/lec-26.html#acknowledgements",
+    "title": "MultiLR: Predictive models (cont.)",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nInspired by\n\n\nhttps://juliasilge.com/blog/multinomial-volcano-eruptions/\nhttps://juliasilge.com/blog/nber-papers/\n\n\n\n\n\nsta210-s22.github.io/website"
   },
   {
     "objectID": "slides/lec-16.html#topics",
@@ -6241,7 +6304,7 @@
     "href": "computing-pipelines.html",
     "title": "Pipelines",
     "section": "",
-    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.2.0          \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Learn how to get started at https://www.tidymodels.org/start/\n\nlibrary(knitr)"
+    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.2.0          \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Search for functions across packages at https://www.tidymodels.org/find/\n\nlibrary(knitr)"
   },
   {
     "objectID": "computing-pipelines.html#simple-linear-regression",
@@ -6836,7 +6899,7 @@
     "href": "weeks/week-13.html",
     "title": "Week 13",
     "section": "",
-    "text": "Important\n\n\n\nDue dates:\n\nLab 6 - Friday, April 8\nHW 4 - Friday, April 8\nProject drafts - Sunday, April 10"
+    "text": "Important\n\n\n\nDue dates:\n\nLab 6 - Friday, April 8\nProject drafts - Sunday, April 10"
   },
   {
     "objectID": "weeks/week-13.html#participate",
