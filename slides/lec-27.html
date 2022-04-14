@@ -4,7 +4,7 @@
   <meta name="generator" content="quarto-0.9.246">
 
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
-  <title>STA 210 - Spring 2022 - MLR: Inference</title>
+  <title>STA 210 - Spring 2022 - Exam 3 review</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -17,69 +17,6 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
   <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -380,9 +317,7 @@
       margin-right: 0; 
     }
   </style>
-  <link href="../site_libs/countdown-0.3.5/countdown.css" rel="stylesheet">
-  <script src="../site_libs/countdown-0.3.5/countdown.js"></script>
-<meta name="twitter:title" content="STA 210 - Spring 2022 - MLR: Inference">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Exam 3 review">
 <meta name="twitter:image" content="https://sta210-s22.github.io/website//slides/images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:card" content="summary_large_image">
@@ -392,514 +327,63 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">MLR: Inference</h1>
+  <h1 class="title">Exam 3 review</h1>
   <p class="subtitle">STA 210 - Spring 2022</p>
   <p class="author">Dr.&nbsp;Mine Çetinkaya-Rundel</p>
 </section>
 
-<section>
-<section id="welcome" class="title-slide slide level1 center">
-<h1>Welcome</h1>
-
-</section>
-<section id="topics" class="slide level2">
-<h2>Topics</h2>
+<section id="exam-instructions" class="slide level2">
+<h2>Exam instructions</h2>
 <ul>
-<li class="fragment"><p>Conduct a hypothesis test for <span class="math inline">\(\beta_j\)</span></p></li>
-<li class="fragment"><p>Calculate a confidence interval for <span class="math inline">\(\beta_j\)</span></p></li>
-<li class="fragment"><p>Inference pitfalls</p></li>
+<li class="fragment"><p>The exam is an individual assignment. Everything in your repository is for your eyes only.</p></li>
+<li class="fragment"><p>You may not collaborate or communicate anything about this exam to anyone except the instructor. For example, you may not communicate with other students, the TAs, or post/solicit help on the internet, email or via any other method of communication.</p></li>
+<li class="fragment"><p>The exam is open-book, open-note, so you may use any materials from class as you take the exam.</p></li>
+<li class="fragment"><p>No TA office hours will be held during the exam. You may not email the TAs questions about the exam.</p></li>
+<li class="fragment"><p>If you have questions, email or Slack me.</p></li>
 </ul>
 </section>
-<section id="computational-setup" class="slide level2">
-<h2>Computational setup</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load packages</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(knitr)      <span class="co"># for tables</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(patchwork)  <span class="co"># for laying out plots</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(rms)        <span class="co"># for vif</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="data-rail_trail" class="slide level2 smaller">
-<h2>Data: <code>rail_trail</code></h2>
-<div>
+<section id="exam-coverage-and-format" class="slide level2">
+<h2>Exam coverage and format</h2>
 <ul>
-<li>The Pioneer Valley Planning Commission (PVPC) collected data for ninety days from April 5, 2005 to November 15, 2005.</li>
-<li>Data collectors set up a laser sensor, with breaks in the laser beam recording when a rail-trail user passed the data collection station.</li>
+<li class="fragment"><p>Focuses on content Weeks 09 - 14, but can include material from previous weeks</p></li>
+<li class="fragment"><p>Similar format as previous exams</p>
+<ul>
+<li class="fragment">Part 1: Multiple choice/fill-in-the-blank questions on Sakai</li>
+<li class="fragment">Part 2: Open-ended data analysis in GitHub and submitted on Gradescope</li>
+</ul></li>
 </ul>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>rail_trail <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/rail_trail.csv"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2"></a>rail_trail</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 90 × 7
-   volume hightemp avgtemp season cloudcover precip day_type
-    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   
- 1    501       83    66.5 Summer       7.60 0      Weekday 
- 2    419       73    61   Summer       6.30 0.290  Weekday 
- 3    397       74    63   Spring       7.5  0.320  Weekday 
- 4    385       95    78   Summer       2.60 0      Weekend 
- 5    200       44    48   Spring      10    0.140  Weekday 
- 6    375       69    61.5 Spring       6.60 0.0200 Weekday 
- 7    417       66    52.5 Spring       2.40 0      Weekday 
- 8    629       66    52   Spring       0    0      Weekend 
- 9    533       80    67.5 Summer       3.80 0      Weekend 
-10    547       79    62   Summer       4.10 0      Weekday 
-# … with 80 more rows</code></pre>
-</div>
-</div>
-<p>Source: <a href="http://www.fvgreenway.org/pdfs/Northampton-Bikepath-Volume-Counts%20_05_LTA.pdf">Pioneer Valley Planning Commission</a> via the <strong>mosaicData</strong> package.</p>
 </section>
-<section id="variables" class="slide level2 smaller">
-<h2>Variables</h2>
-<p><strong>Outcome</strong>:</p>
-<p><code>volume</code> estimated number of trail users that day (number of breaks recorded)</p>
-<div class="fragment">
-<p><strong>Predictors</strong></p>
-<div>
+<section id="part-2-of-the-exam" class="slide level2">
+<h2>Part 2 of the exam</h2>
 <ul>
-<li><code>hightemp</code> daily high temperature (in degrees Fahrenheit)</li>
-<li><code>avgtemp</code> average of daily low and daily high temperature (in degrees Fahrenheit)</li>
-<li><code>season</code> one of “Fall”, “Spring”, or “Summer”</li>
-<li><code>cloudcover</code> measure of cloud cover (in oktas)</li>
-<li><code>precip</code> measure of precipitation (in inches)</li>
-<li><code>day_type</code> one of “weekday” or “weekend”</li>
+<li class="fragment"><p><strong>Goal:</strong> Assess your understanding of the course material and how the methods you learned are applied to the analysis of real-world data.</p></li>
+<li class="fragment"><p>Include all of your analysis steps in your exam write up, unless stated otherwise.</p>
+<ul>
+<li class="fragment">For example, if the exam says “assume conditions are met,” You can reference that information in your write up but don’t have to recheck the conditions.</li>
+</ul></li>
 </ul>
-</div>
-</div>
-</section></section>
-<section>
-<section id="conduct-a-hypothesis-test-for-beta_j" class="title-slide slide level1 center">
-<h1>Conduct a hypothesis test for <span class="math inline">\(\beta_j\)</span></h1>
-
 </section>
-<section id="review-simple-linear-regression-slr" class="slide level2">
-<h2>Review: Simple linear regression (SLR)</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(rail_trail, <span class="fu">aes</span>(<span class="at">x =</span> hightemp, <span class="at">y =</span> volume)) <span class="sc">+</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"High temp (F)"</span>, <span class="at">y =</span> <span class="st">"Number of riders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="lec-16_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
-<section id="slr-model-summary" class="slide level2">
-<h2>SLR model summary</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>rt_slr_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">fit</span>(volume <span class="sc">~</span> hightemp, <span class="at">data =</span> rail_trail)</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">tidy</span>(rt_slr_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term        estimate std.error statistic       p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-1 (Intercept)   -17.1     59.4      -0.288 0.774        
-2 hightemp        5.70     0.848     6.72  0.00000000171</code></pre>
-</div>
-</div>
-</section>
-<section id="slr-hypothesis-test" class="slide level2 smaller">
-<h2>SLR hypothesis test</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term        estimate std.error statistic       p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-1 (Intercept)   -17.1     59.4      -0.288 0.774        
-2 hightemp        5.70     0.848     6.72  0.00000000171</code></pre>
-</div>
-</div>
-<ol type="1">
-<li class="fragment"><strong>Set hypotheses:</strong> <span class="math inline">\(H_0: \beta_1 = 0\)</span> and <span class="math inline">\(H_A: \beta_1 \ne 0\)</span></li>
-</ol>
-<div class="fragment">
-<ol start="2" type="1">
-<li class="fragment"><strong>Calculate test statistic and p-value:</strong> The test statistic is <span class="math inline">\(t = 6.72\)</span> with a degrees of freedom of 88, and a p-value &lt; 0.0001.</li>
-</ol>
-</div>
-<div class="fragment">
-<ol start="3" type="1">
-<li class="fragment"><strong>State the conclusion:</strong> With a small p-value, we reject <span class="math inline">\(H_0\)</span>. The data provide strong evidence that high temperature is a helpful predictor for the number of daily riders.</li>
-</ol>
-</div>
-</section>
-<section id="multiple-linear-regression" class="slide level2">
-<h2>Multiple linear regression</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>rt_mlr_main_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">fit</span>(volume <span class="sc">~</span> hightemp <span class="sc">+</span> season, <span class="at">data =</span> rail_trail)</span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">tidy</span>(rt_mlr_main_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4 × 5
-  term         estimate std.error statistic       p.value
-  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-1 (Intercept)   -125.       71.7     -1.75  0.0841       
-2 hightemp         7.54      1.17     6.43  0.00000000692
-3 seasonSpring     5.13     34.3      0.150 0.881        
-4 seasonSummer   -76.8      47.7     -1.61  0.111        </code></pre>
-</div>
-</div>
-</section>
-<section id="mlr-hypothesis-test-hightemp" class="slide level2 smaller">
-<h2>MLR hypothesis test: <code>hightemp</code></h2>
-<ol type="1">
-<li class="fragment"><strong>Set hypotheses:</strong> <span class="math inline">\(H_0: \beta_{hightemp} = 0\)</span> and <span class="math inline">\(H_A: \beta_{hightemp} \ne 0\)</span>, given <code>weekday</code> is in the model</li>
-</ol>
-<div class="fragment">
-<ol start="2" type="1">
-<li class="fragment"><strong>Calculate test statistic and p-value:</strong> The test statistic is <span class="math inline">\(t = 6.43\)</span> with a degrees of freedom of 86, and a p-value &lt; 0.0001.</li>
-</ol>
-</div>
-<div class="fragment">
-<ol start="3" type="1">
-<li class="fragment"><strong>State the conclusion:</strong> With such a small p-value, the data provides strong evidence against <span class="math inline">\(H_0\)</span>, i.e., the data provide strong evidence that high temperature for the day is a helpful predictor in a model that already contains whether the given day is a weekday as a predictor for number of daily riders.</li>
-</ol>
-</div>
-</section>
-<section id="the-model-for-season-spring" class="slide level2 smaller">
-<h2>The model for <code>season = Spring</code></h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-125.23</td>
-<td style="text-align: right;">71.66</td>
-<td style="text-align: right;">-1.75</td>
-<td style="text-align: right;">0.08</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hightemp</td>
-<td style="text-align: right;">7.54</td>
-<td style="text-align: right;">1.17</td>
-<td style="text-align: right;">6.43</td>
-<td style="text-align: right;">0.00</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">seasonSpring</td>
-<td style="text-align: right;">5.13</td>
-<td style="text-align: right;">34.32</td>
-<td style="text-align: right;">0.15</td>
-<td style="text-align: right;">0.88</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">seasonSummer</td>
-<td style="text-align: right;">-76.84</td>
-<td style="text-align: right;">47.71</td>
-<td style="text-align: right;">-1.61</td>
-<td style="text-align: right;">0.11</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><br></p>
-<div class="fragment">
-<p><span class="math display">\[
-\begin{aligned}
-\widehat{volume} &amp;= -125.23 + 7.54 \times \texttt{hightemp} + 5.13 \times \texttt{seasonSpring} - 76.84 \times \texttt{seasonSummer} \\
-&amp;= -125.23 + 7.54 \times \texttt{hightemp} + 5.13 \times 1 - 76.84 \times 0 \\
-&amp;= -120.10 + 7.54 \times \texttt{hightemp}
-\end{aligned}
-\]</span></p>
-</div>
-</section>
-<section id="the-model-for-season-summer" class="slide level2 smaller">
-<h2>The model for <code>season = Summer</code></h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-125.23</td>
-<td style="text-align: right;">71.66</td>
-<td style="text-align: right;">-1.75</td>
-<td style="text-align: right;">0.08</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hightemp</td>
-<td style="text-align: right;">7.54</td>
-<td style="text-align: right;">1.17</td>
-<td style="text-align: right;">6.43</td>
-<td style="text-align: right;">0.00</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">seasonSpring</td>
-<td style="text-align: right;">5.13</td>
-<td style="text-align: right;">34.32</td>
-<td style="text-align: right;">0.15</td>
-<td style="text-align: right;">0.88</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">seasonSummer</td>
-<td style="text-align: right;">-76.84</td>
-<td style="text-align: right;">47.71</td>
-<td style="text-align: right;">-1.61</td>
-<td style="text-align: right;">0.11</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><br></p>
-<div class="fragment">
-<p><span class="math display">\[
-\begin{aligned}
-\widehat{volume} &amp;= -125.23 + 7.54 \times \texttt{hightemp} + 5.13 \times \texttt{seasonSpring} - 76.84 \times \texttt{seasonSummer} \\
-&amp;= -125.23 + 7.54 \times \texttt{hightemp} + 5.13 \times 0 - 76.84 \times 1 \\
-&amp;= -202.07 + 7.54 \times \texttt{hightemp}
-\end{aligned}
-\]</span></p>
-</div>
-</section>
-<section id="the-model-for-season-fall" class="slide level2 smaller">
-<h2>The model for <code>season = Fall</code></h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">-125.23</td>
-<td style="text-align: right;">71.66</td>
-<td style="text-align: right;">-1.75</td>
-<td style="text-align: right;">0.08</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hightemp</td>
-<td style="text-align: right;">7.54</td>
-<td style="text-align: right;">1.17</td>
-<td style="text-align: right;">6.43</td>
-<td style="text-align: right;">0.00</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">seasonSpring</td>
-<td style="text-align: right;">5.13</td>
-<td style="text-align: right;">34.32</td>
-<td style="text-align: right;">0.15</td>
-<td style="text-align: right;">0.88</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">seasonSummer</td>
-<td style="text-align: right;">-76.84</td>
-<td style="text-align: right;">47.71</td>
-<td style="text-align: right;">-1.61</td>
-<td style="text-align: right;">0.11</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><br></p>
-<div class="fragment">
-<p><span class="math display">\[
-\begin{aligned}
-\widehat{volume} &amp;= -125.23 + 7.54 \times \texttt{hightemp} + 5.13 \times \texttt{seasonSpring} - 76.84 \times \texttt{seasonSummer} \\
-&amp;= -125.23 + 7.54 \times \texttt{hightemp} + 5.13 \times 0 - 76.84 \times 0 \\
-&amp;= -125.23 + 7.54 \times \texttt{hightemp}
-\end{aligned}
-\]</span></p>
-</div>
-</section>
-<section id="the-models" class="slide level2">
-<h2>The models</h2>
-<p>Same slope, different intercepts</p>
+<section id="assessment-criteria" class="slide level2 smaller">
+<h2>Assessment criteria</h2>
 <ul>
-<li class="fragment"><code>season = Spring</code>: <span class="math inline">\(-120.10 + 7.54 \times \texttt{hightemp}\)</span></li>
-<li class="fragment"><code>season = Summer</code>: <span class="math inline">\(-202.07 + 7.54 \times \texttt{hightemp}\)</span></li>
-<li class="fragment"><code>season = Fall</code>: <span class="math inline">\(-125.23 + 7.54 \times \texttt{hightemp}\)</span></li>
+<li class="fragment">You can identify the correct approach, analysis method, and/or inferential results required to answer the question.</li>
+<li class="fragment">You understand the correct conditions and diagnostics needed to determine whether the conclusions drawn from the model will be reliable</li>
+<li class="fragment">You can write results and conclusions in a meaningful way that can be understood by a general audience (think a business or research partner)</li>
+<li class="fragment">You can produce a report that is suitable for a professional audience (e.g., narrative is written in complete sentences, all graphs have proper titles and axis labels, there is not extraneous output, all Latex is rendered)</li>
+<li class="fragment">You can conduct the analysis using a reproducible data analysis workflow that incorporates version control</li>
 </ul>
 </section>
 <section id="application-exercise" class="slide level2">
 <h2>Application exercise</h2>
 <div class="appex">
-<p>📋 <a href="https://github.com/sta210-s22/ae-8-rail-trail">github.com/sta210-s22/ae-8-rail-trail</a></p>
-</div>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="question">
-<p><strong>Ex 1.</strong> Recreate the following visualization in R based on the results of the model.</p>
-</div>
-</div><div class="column" style="width:70%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="lec-16_files/figure-revealjs/main-viz-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="application-exercise-1" class="slide level2">
-<h2>Application exercise</h2>
-<div class="appex">
-<p>📋 <a href="https://github.com/sta210-s22/ae-8-rail-trail">github.com/sta210-s22/ae-8-rail-trail</a></p>
-</div>
-<div class="question">
-<p><strong>Ex 2.</strong> Add an interaction effect between <code>hightemp</code> and <code>season</code> and comment on the significance of the interaction predictors. Time permitting, visualize the interaction model as well.</p>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="countdown" id="timer_6232ae1e" style="right:0;bottom:0;" data-warnwhen="0">
-<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="confidence-interval-for-beta_j" class="title-slide slide level1 center">
-<h1>Confidence interval for <span class="math inline">\(\beta_j\)</span></h1>
-
-</section>
-<section id="confidence-interval-for-beta_j-1" class="slide level2 smaller">
-<h2>Confidence interval for <span class="math inline">\(\beta_j\)</span></h2>
-<ul>
-<li class="fragment"><p>The <span class="math inline">\(C%\)</span> confidence interval for <span class="math inline">\(\beta_j\)</span> <span class="math display">\[\hat{\beta}_j \pm t^* SE(\hat{\beta}_j)\]</span> where <span class="math inline">\(t^*\)</span> follows a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n - p - 1\)</span> degrees of freedom.</p></li>
-<li class="fragment"><p>Generically, we are <span class="math inline">\(C%\)</span> confident that the interval LB to UB contains the population coefficient of <span class="math inline">\(x_j\)</span>.</p></li>
-<li class="fragment"><p>In context, we are <span class="math inline">\(C%\)</span> confident that for every one unit increase in <span class="math inline">\(x_j\)</span>, we expect <span class="math inline">\(y\)</span> to change by LB to UB units, holding all else constant.</p></li>
-</ul>
-</section>
-<section id="confidence-interval-for-beta_j-2" class="slide level2">
-<h2>Confidence interval for <span class="math inline">\(\beta_j\)</span></h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">tidy</span>(rt_mlr_main_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4 × 7
-  term         estimate std.error statistic       p.value conf.low conf.high
-  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)   -125.       71.7     -1.75  0.0841         -268.       17.2 
-2 hightemp         7.54      1.17     6.43  0.00000000692     5.21      9.87
-3 seasonSpring     5.13     34.3      0.150 0.881           -63.1      73.4 
-4 seasonSummer   -76.8      47.7     -1.61  0.111          -172.       18.0 </code></pre>
-</div>
-</div>
-</section>
-<section id="ci-for-hightemp" class="slide level2">
-<h2>CI for <code>hightemp</code></h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4 × 7
-  term         estimate std.error statistic       p.value conf.low conf.high
-  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)   -125.       71.7     -1.75  0.0841         -268.       17.2 
-2 hightemp         7.54      1.17     6.43  0.00000000692     5.21      9.87
-3 seasonSpring     5.13     34.3      0.150 0.881           -63.1      73.4 
-4 seasonSummer   -76.8      47.7     -1.61  0.111          -172.       18.0 </code></pre>
-</div>
-</div>
-<p><br></p>
-<p>We are 95% confident that for every degrees Fahrenheit the day is warmer, we expect the number of riders to increase by 5.21 to 9.87, on average, holding season constant.</p>
-</section>
-<section id="ci-for-seasonspring" class="slide level2">
-<h2>CI for <code>seasonSpring</code></h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-stdout">
-<pre><code># A tibble: 4 × 7
-  term         estimate std.error statistic       p.value conf.low conf.high
-  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)   -125.       71.7     -1.75  0.0841         -268.       17.2 
-2 hightemp         7.54      1.17     6.43  0.00000000692     5.21      9.87
-3 seasonSpring     5.13     34.3      0.150 0.881           -63.1      73.4 
-4 seasonSummer   -76.8      47.7     -1.61  0.111          -172.       18.0 </code></pre>
-</div>
-</div>
-<p><br></p>
-<p>We are 95% confident that the number of riders on a Spring day is, on average, lower by 63.1 to higher by 73.4 compared to a Fall day, holding high temperature for the day constant.</p>
-</section></section>
-<section>
-<section id="inference-pitfalls" class="title-slide slide level1 center">
-<h1>Inference pitfalls</h1>
-
-</section>
-<section id="large-sample-sizes" class="slide level2">
-<h2>Large sample sizes</h2>
-<div class="callout callout-caution callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Caution</strong></p>
-</div>
-<div class="callout-content">
-<p>If the sample size is large enough, the test will likely result in rejecting <span class="math inline">\(H_0: \beta_j = 0\)</span> even <span class="math inline">\(x_j\)</span> has a very small effect on <span class="math inline">\(y\)</span>.</p>
-<div>
-<ul>
-<li><p>Consider the <strong>practical significance</strong> of the result not just the statistical significance.</p></li>
-<li><p>Use the confidence interval to draw conclusions instead of relying only p-values.</p></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="small-sample-sizes" class="slide level2">
-<h2>Small sample sizes</h2>
-<div class="callout callout-caution callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Caution</strong></p>
-</div>
-<div class="callout-content">
-<p>If the sample size is small, there may not be enough evidence to reject <span class="math inline">\(H_0: \beta_j=0\)</span>.</p>
-<div>
-<ul>
-<li><p>When you fail to reject the null hypothesis, <strong>DON’T</strong> immediately conclude that the variable has no association with the response.</p></li>
-<li><p>There may be a linear association that is just not strong enough to detect given your data, or there may be a non-linear association.</p></li>
-</ul>
-</div>
-</div>
-</div>
+<p>📋 <a href="https://github.com/sta210-s22/ae-12-exam-3-review/search?q=ae-12-exam-3-review">github.com/sta210-s22/ae-12-exam-3-review</a></p>
 </div>
 
 
 <img src="images/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://sta210-s22.github.io/website/">sta210-s22.github.io/website</a></p>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
