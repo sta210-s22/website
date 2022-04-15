@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.246">
+<meta name="generator" content="quarto-0.9.258">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -415,9 +415,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+
+
+
 <div class="quarto-title-meta">
 
-    
     
     
   </div>
@@ -577,7 +579,7 @@ Note
 <p>The resulting dataset <code>perm_fits</code> has <code>nrow(perm_fits)</code> and <code>ncol(perm_fits)</code> columns. The first column, <code>replicate</code> indicates the replicate number of the dataset the models were fit to; the values in this column range between 1 and 1000. The second column, <code>term</code>, tells us which term (intercept of the model or slope of <code>admrate</code>) the <code>estimate</code> value in the third column is for.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>perm_fits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 2,000 × 3
 # Groups:   replicate [1,000]
    replicate term      estimate

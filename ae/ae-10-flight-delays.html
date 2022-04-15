@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.246">
+<meta name="generator" content="quarto-0.9.258">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -399,9 +399,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+
+
+
 <div class="quarto-title-meta">
 
-    
     
     
   </div>
@@ -435,7 +437,7 @@ Important
 <p>For this application exercise we will work with a dataset of 25,000 randomly sampled flights that departed one of three NYC airports (JFK, LGA, EWR) in 2013.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flight_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/flight-data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
+<div class="cell-output-stderr">
 <pre><code>Rows: 25000 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
@@ -456,7 +458,7 @@ date (1): date
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">arr_delay =</span> <span class="fu">as.factor</span>(arr_delay))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(flight_data<span class="sc">$</span>arr_delay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>[1] "late"    "on_time"</code></pre>
 </div>
 </div>
@@ -527,7 +529,7 @@ date (1): date
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(<span class="at">data =</span> flight_train)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(flight_fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 119 × 5
    term          estimate   std.error statistic   p.value
    &lt;chr&gt;            &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -568,7 +570,7 @@ date (1): date
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">truth =</span> arr_delay,</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    .pred_late</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;

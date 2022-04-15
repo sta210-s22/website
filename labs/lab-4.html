@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.246">
+<meta name="generator" content="quarto-0.9.258">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -409,9 +409,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+
+
+
 <div class="quarto-title-meta">
 
-    
     
     
   </div>
@@ -472,7 +474,7 @@ Note
 <p>Let’s start by taking a peek at the data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(theoffice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>Rows: 55,130
 Columns: 12
 $ index            &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16…
@@ -492,7 +494,7 @@ $ air_date         &lt;fct&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005-03-24, 2
 <p>There are 55130 observations and 12 columns in this dataset. The variable names are as follows.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(theoffice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code> [1] "index"            "season"           "episode"          "episode_name"    
  [5] "director"         "writer"           "character"        "text"            
  [9] "text_w_direction" "imdb_rating"      "total_votes"      "air_date"        </code></pre>
@@ -507,7 +509,7 @@ $ air_date         &lt;fct&gt; 2005-03-24, 2005-03-24, 2005-03-24, 2005-03-24, 2
 <p>Let’s take a look at the data to confirm we’re happy with how each of the variables are encoded.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(theoffice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>Rows: 55,130
 Columns: 12
 $ index            &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16…

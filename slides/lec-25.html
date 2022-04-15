@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.246">
+  <meta name="generator" content="quarto-0.9.258">
 
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - MultiLR: Predictive models</title>
@@ -446,7 +446,7 @@
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>volcano <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/volcano.csv"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">names</span>(volcano)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code> [1] "volcano_number"           "volcano_name"            
  [3] "primary_volcano_type"     "last_eruption_year"      
  [5] "country"                  "region"                  
@@ -467,7 +467,7 @@
 <h2>Volcanoes</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">glimpse</span>(volcano)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>Rows: 958
 Columns: 26
 $ volcano_number           &lt;dbl&gt; 283001, 355096, 342080, 213004, 321040, 28317…
@@ -506,7 +506,7 @@ $ population_within_100_km &lt;dbl&gt; 4071152, 9092, 7634778, 2253483, 393303, 
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>volcano <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">count</span>(primary_volcano_type, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">26</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 26 × 2
    primary_volcano_type     n
    &lt;chr&gt;                &lt;int&gt;
@@ -554,7 +554,7 @@ $ population_within_100_km &lt;dbl&gt; 4071152, 9092, 7634778, 2253483, 393303, 
 <span id="cb8-10"><a href="#cb8-10"></a></span>
 <span id="cb8-11"><a href="#cb8-11"></a>volcano <span class="sc">%&gt;%</span></span>
 <span id="cb8-12"><a href="#cb8-12"></a>  <span class="fu">count</span>(volcano_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   volcano_type      n
   &lt;fct&gt;         &lt;int&gt;
@@ -591,7 +591,7 @@ $ population_within_100_km &lt;dbl&gt; 4071152, 9092, 7634778, 2253483, 393303, 
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>world <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a>world <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 99,338 × 6
     long   lat group order region subregion
    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;    
@@ -704,7 +704,7 @@ $ population_within_100_km &lt;dbl&gt; 4071152, 9092, 7634778, 2253483, 393303, 
 <span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3"></a></span>
 <span id="cb17-4"><a href="#cb17-4"></a>volcano_spec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>Multinomial Regression Model Specification (classification)
 
 Computational engine: nnet </code></pre>
@@ -719,7 +719,7 @@ Computational engine: nnet </code></pre>
 <span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">add_model</span>(volcano_spec)</span>
 <span id="cb19-4"><a href="#cb19-4"></a></span>
 <span id="cb19-5"><a href="#cb19-5"></a>volcano_wflow1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>══ Workflow ════════════════════════════════════════════════════════════════════
 Preprocessor: Recipe
 Model: multinom_reg()
@@ -748,7 +748,7 @@ Computational engine: nnet </code></pre>
 <span id="cb21-2"><a href="#cb21-2"></a></span>
 <span id="cb21-3"><a href="#cb21-3"></a>volcano_folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(volcano_train, <span class="at">v =</span> <span class="dv">5</span>)</span>
 <span id="cb21-4"><a href="#cb21-4"></a>volcano_folds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>#  5-fold cross-validation 
 # A tibble: 5 × 2
   splits            id   
@@ -771,7 +771,7 @@ Computational engine: nnet </code></pre>
 <span id="cb23-5"><a href="#cb23-5"></a>    )</span>
 <span id="cb23-6"><a href="#cb23-6"></a></span>
 <span id="cb23-7"><a href="#cb23-7"></a>volcano_fit_rs1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># Resampling results
 # 5-fold cross-validation 
 # A tibble: 5 × 5
@@ -789,7 +789,7 @@ Computational engine: nnet </code></pre>
 <h2>Collect metrics</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">collect_metrics</span>(volcano_fit_rs1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 2 × 6
   .metric  .estimator  mean     n std_err .config             
   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
@@ -824,7 +824,7 @@ Computational engine: nnet </code></pre>
 <span id="cb28-5"><a href="#cb28-5"></a>    <span class="at">truth =</span> volcano_type,</span>
 <span id="cb28-6"><a href="#cb28-6"></a>    .pred_Stratovolcano<span class="sc">:</span>.pred_Other</span>
 <span id="cb28-7"><a href="#cb28-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 2,175 × 5
 # Groups:   id [5]
    id    .level        .threshold specificity sensitivity

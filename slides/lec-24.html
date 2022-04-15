@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.246">
+  <meta name="generator" content="quarto-0.9.258">
 
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - MultiLR: Prediction + inferential models</title>
@@ -461,7 +461,7 @@
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">glimpse</span>(nhanes_adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>Rows: 6,465
 Columns: 5
 $ HealthGen  &lt;fct&gt; Good, Good, Good, Good, Vgood, Vgood, Vgood, Vgood, Vgood, …
@@ -486,7 +486,7 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <h2>Model summary</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">tidy</span>(health_fit) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 12 × 6
    y.level term            estimate std.error statistic  p.value
    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -529,7 +529,7 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>health_aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(health_fit, <span class="at">new_data =</span> nhanes_adult)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>health_aug</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 6,465 × 11
    HealthGen   Age PhysActive Education      obs_num .pred_class .pred_Excellent
    &lt;fct&gt;     &lt;int&gt; &lt;fct&gt;      &lt;fct&gt;            &lt;int&gt; &lt;fct&gt;                 &lt;dbl&gt;
@@ -553,7 +553,7 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <p>For each observation, the predicted perceived health rating is the category with the highest predicted probability.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>health_aug <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"pred"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 6,465 × 6
    .pred_class .pred_Excellent .pred_Vgood .pred_Good .pred_Fair .pred_Poor
    &lt;fct&gt;                 &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
@@ -579,7 +579,7 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> .pred_class, <span class="at">values_from =</span> n)</span>
 <span id="cb12-4"><a href="#cb12-4"></a></span>
 <span id="cb12-5"><a href="#cb12-5"></a>health_conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 5 × 6
   HealthGen Excellent Vgood  Good  Fair  Poor
   &lt;fct&gt;         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -733,7 +733,7 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <h2>Model with <code>Education</code></h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">tidy</span>(full_fit, <span class="at">conf.int =</span> T) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">28</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code># A tibble: 28 × 8
    y.level term         estimate std.error statistic  p.value conf.low conf.high
    &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
@@ -773,7 +773,7 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <p>Reduced model:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">glance</span>(reduced_fit)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>[1] 17018.23</code></pre>
 </div>
 </div>
@@ -781,7 +781,7 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <p>Full model:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">glance</span>(full_fit)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>[1] 16561.1</code></pre>
 </div>
 </div>
@@ -819,9 +819,10 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <h2>Checking linearity</h2>
 <div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">emplogitplot1</span>(Excellent <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
-<span id="cb23-2"><a href="#cb23-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Excellent vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">emplogitplot1</span>(Vgood <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
-<span id="cb24-2"><a href="#cb24-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Vgood vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-2"><a href="#cb23-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Excellent vs. Age"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="fu">emplogitplot1</span>(Vgood <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
+<span id="cb23-5"><a href="#cb23-5"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Vgood vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -845,10 +846,11 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <section id="checking-linearity-2" class="slide level2">
 <h2>Checking linearity</h2>
 <div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">emplogitplot1</span>(Good <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
-<span id="cb25-2"><a href="#cb25-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Good vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">emplogitplot1</span>(Fair <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
-<span id="cb26-2"><a href="#cb26-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Fair vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">emplogitplot1</span>(Good <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
+<span id="cb24-2"><a href="#cb24-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Good vs. Age"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="fu">emplogitplot1</span>(Fair <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
+<span id="cb24-5"><a href="#cb24-5"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Fair vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -872,8 +874,8 @@ $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 <section id="checking-linearity-3" class="slide level2">
 <h2>Checking linearity</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">emplogitplot1</span>(Poor <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
-<span id="cb27-2"><a href="#cb27-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Poor vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">emplogitplot1</span>(Poor <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_adult, </span>
+<span id="cb25-2"><a href="#cb25-2"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, <span class="at">main =</span> <span class="st">"Poor vs. Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="lec-24_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:90.0%" class="r-stretch quarto-figure-center"><div class="fragment">

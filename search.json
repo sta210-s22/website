@@ -7,6 +7,118 @@
     "text": "If the status shows something other than Operational, this means there is a known incident with the containers. Check back later to see if it’s been resolved. If there’s a deadline coming up soon, post on the course forum to let us know that there’s an issue. We can look into how quickly it might get resolved and decide on what to do about the deadline accordingly. Note: We don’t anticipate this to happen regularly, the systems are Operational a huge majority of the time!\nIf the status shows Operational, this means the system is expected to be working. Check your internet connection, if need be, restart your computer to ensure a fresh new connection. If your issue persists, post on the course forum with details on what you’ve tried and the errors you see (including verbatim errors and/or screenshots).\nEither way you can also fill out the form here, which will notify our the R TA for the department as well as our undergraduate coordinator. They’ll be able to help diagnose the issue."
   },
   {
+    "objectID": "ae/ae-12-exam-3-review.html",
+    "href": "ae/ae-12-exam-3-review.html",
+    "title": "AE 12: Exam 3 Review",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-12-exam-3-review-YOUR_GITHUB_USERNAME to get started."
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#packages",
+    "href": "ae/ae-12-exam-3-review.html#packages",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(Stat2Data)\nlibrary(rms)\nlibrary(nnet)"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#data",
+    "href": "ae/ae-12-exam-3-review.html#data",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Data",
+    "text": "Data\nAs part of a study of the effects of predatory intertidal crab species on snail populations, researchers measured the mean closing forces and the propodus heights of the claws on several crabs of three species.\n\n\nclaws <- read_csv(here::here(\"ae\", \"data/claws.csv\"))\n\nWe will use the following variables:\n\nforce: Closing force of claw (newtons)\nheight: Propodus height (mm)\nspecies: Crab species - Cp(Cancer productus), Hn (Hemigrapsus nudus), Lb(Lophopanopeus bellus)\nlb: 1 if Lophopanopeus bellus species, 0 otherwise\nhn: 1 if Hemigrapsus nudus species, 0 otherwise\ncp: 1 if Cancer productus species, 0 otherwise\nforce_cent: mean centered force\nheight_cent: mean centered height\n\nBefore we get started, let’s make the categorical and indicator variables factors.\n\nclaws <- claws %>%\n  mutate(\n    species = as_factor(species),\n    lb = as_factor(lb),\n    hn = as_factor(hn),\n    cp = as_factor(cp)\n  )"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#probabilities-vs.-odds-vs.-log-odds",
+    "href": "ae/ae-12-exam-3-review.html#probabilities-vs.-odds-vs.-log-odds",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Probabilities vs. odds vs. log-odds",
+    "text": "Probabilities vs. odds vs. log-odds\nWhy we use log-odds as response variable: https://sta210-s22.github.io/website/slides/lec-18.html#/do-teenagers-get-7-hours-of-sleep"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-1",
+    "href": "ae/ae-12-exam-3-review.html#exercise-1",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nFill in the blanks:\n\nUse log-odds to fit the model (outcome)\nUse odds to interpret model results\nUse probabilities to make predictions for individual observations and ultimately to make classification decisions"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-2",
+    "href": "ae/ae-12-exam-3-review.html#exercise-2",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nSuppose we want to use force to determine whether or not a crab is from the Lophopanopeus bellus (Lb) species. Why should we use a logistic regression model for this analysis?\n\nclaws %>%\n  distinct(lb)\n\n# A tibble: 2 × 1\n  lb   \n  <fct>\n1 0    \n2 1"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-3",
+    "href": "ae/ae-12-exam-3-review.html#exercise-3",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nWe will use the mean-centered variables for force in the model. The model output is below. Write the equation of the model produced by R. Don’t forget to fill in the blanks for ….\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n-0.798\n0.358\n-2.233\n0.026\n-1.542\n-0.123\n\n\nforce_cent\n0.043\n0.039\n1.090\n0.276\n-0.034\n0.123\n\n\n\n\n\nLet \\(\\pi\\) be probability that a crab is from Lb species.\n\\[\n\\log\\Big(\\frac{\\hat{\\pi}}{1 - \\hat{\\pi}}\\Big) = -0.798 + 0.043 * force\\_cent\n\\]"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-4",
+    "href": "ae/ae-12-exam-3-review.html#exercise-4",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 4",
+    "text": "Exercise 4\nInterpret the intercept in the context of the data.\n\nmean_force <- round(mean(claws$force), 2)\n\nFor crabs with average closing force (12.13 newtons), we expect odds of the crab being Lophopanopeus bellus is 0.45 (exp(-0.798))."
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-5",
+    "href": "ae/ae-12-exam-3-review.html#exercise-5",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nInterpret the effect of force in the context of the data.\nWhen x goes up by 1 unit, we expect y to change by (slope) units.\nFor each additional unit increase in closing force, the odds of crab being from lb species multiplies on average by a factor of 1.0439379."
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-6",
+    "href": "ae/ae-12-exam-3-review.html#exercise-6",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 6",
+    "text": "Exercise 6\nNow let’s consider adding height_cent to the model. Fit the model that includes height_cent. Then use AIC to choose the model that best fits the data.\n\nlb_fit_2 <- logistic_reg() %>%\n  set_engine(\"glm\") %>%\n  fit(lb ~ force_cent + height_cent, data = claws)\n\ntidy(lb_fit_2, conf.int = TRUE)\n\n# A tibble: 3 × 7\n  term        estimate std.error statistic p.value conf.low conf.high\n  <chr>          <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>\n1 (Intercept)   -1.13     0.463      -2.44  0.0146  -2.17      -0.306\n2 force_cent     0.211    0.0925      2.28  0.0227   0.0563     0.424\n3 height_cent   -0.895    0.398      -2.25  0.0245  -1.82      -0.234\n\nglance(lb_fit_1)$AIC\n\n[1] 50.19535\n\nglance(lb_fit_2)$AIC\n\n[1] 44.11812"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-7",
+    "href": "ae/ae-12-exam-3-review.html#exercise-7",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 7",
+    "text": "Exercise 7\nWhat do the following mean in the context of this data. Explain and calculate them.\n\nSensitivity: P(predict lb | actual lb) = 6 / 12\nSpecificity: P(predict not lb | actual not lb) = 4/ 26\nNegative predictive power: P(actual not lb | predict not lb) = 22 / 28\nPositive predictive power: P(actual lb | predict lb) = 6 / 10\n\n\n\n\nActual\nPredict lb\nPredict not lb\nTOTAL predicted\n\n\n\n\nLb\n6\n6\n12\n\n\nNot lb\n4\n22\n26\n\n\nTOTAL actual\n10\n28\n38"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-8",
+    "href": "ae/ae-12-exam-3-review.html#exercise-8",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 8",
+    "text": "Exercise 8\nWrite the equation of the model.\n\\[\\log\\Big(\\frac{\\hat{\\pi}_{Hn}}{\\hat{\\pi}_{Cp}}\\Big) = \\]\n\\[\\log\\Big(\\frac{\\hat{\\pi}_{Lb}}{\\hat{\\pi}_{Cp}}\\Big) = \\]"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-9",
+    "href": "ae/ae-12-exam-3-review.html#exercise-9",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 9",
+    "text": "Exercise 9\n\nInterpret the intercept for the odds a crab is Hn vs. Cp species.\nInterpret the effect of force on the odds a crab is Lb vs. Cp species."
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-10",
+    "href": "ae/ae-12-exam-3-review.html#exercise-10",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 10",
+    "text": "Exercise 10\nInterpret the effect of force on the odds a crab is in the Hn vs. Lb species.\nCAUTION: We can write an interpretation based on the estimated coefficients; however, we can’t make any inferential conclusions for this question based on the current model. We would need to refit the model with Lb as the baseline category to do so."
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#exercise-11",
+    "href": "ae/ae-12-exam-3-review.html#exercise-11",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Exercise 11",
+    "text": "Exercise 11\nConditions for multinomial logistic (and logistic models as well):\n\nIndependence:\nRandomness:\nLinearity:\n\n\nemplogitplot1(lb ~ force, data = claws, ngroups = 10)\n\nemplogitplot1(lb ~ height, data = claws, ngroups = 10)\n\n\n\n\n\n\n\n\n\n\n\n\n# add code here for other species here\n\n\n\n\n\n# add code here for other species here"
+  },
+  {
+    "objectID": "ae/ae-12-exam-3-review.html#checking-for-multicollinearity-in-logistic-and-multinomial-logistic",
+    "href": "ae/ae-12-exam-3-review.html#checking-for-multicollinearity-in-logistic-and-multinomial-logistic",
+    "title": "AE 12: Exam 3 Review",
+    "section": "Checking for multicollinearity in logistic and multinomial logistic",
+    "text": "Checking for multicollinearity in logistic and multinomial logistic\nSimilar to multiple linear regression, we can also check for multicollinearity in logistic and multinomial logistic models.\n\nUse the vif function to check for multicollinearity in logistic regression.\n\n\n\n\n\nThe vif function doesn’t work for the multinomial logistic regression models, so we can look at a correlation matrix of the predictors as a way to assess if the predictors are highly correlated:"
+  },
+  {
     "objectID": "ae/ae-8-rail-trail.html",
     "href": "ae/ae-8-rail-trail.html",
     "title": "AE 8: Rail Trail",
@@ -546,6 +658,55 @@
     "text": "Workflows and model fitting\nBuild the modeling workflow and fit the model to the training data after feature engineering with the recipe."
   },
   {
+    "objectID": "ae/ae-11-volcanoes.html",
+    "href": "ae/ae-11-volcanoes.html",
+    "title": "AE 11: Multinomial classification",
+    "section": "",
+    "text": "Important\n\n\n\nGo to the course GitHub organization and locate the repo titled ae-11-volcanoes-YOUR_GITHUB_USERNAME to get started."
+  },
+  {
+    "objectID": "ae/ae-11-volcanoes.html#packages",
+    "href": "ae/ae-11-volcanoes.html#packages",
+    "title": "AE 11: Multinomial classification",
+    "section": "Packages",
+    "text": "Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\nlibrary(colorblindr)"
+  },
+  {
+    "objectID": "ae/ae-11-volcanoes.html#data",
+    "href": "ae/ae-11-volcanoes.html#data",
+    "title": "AE 11: Multinomial classification",
+    "section": "Data",
+    "text": "Data\nFor this application exercise we will work with a dataset of on volcanoes. The data come from The Smithsonian Institution via TidyTuesday.\n\nvolcano <- read_csv(here::here(\"ae\", \"data/volcano.csv\"))\n\nRows: 958 Columns: 26\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (18): volcano_name, primary_volcano_type, last_eruption_year, country, r...\ndbl  (8): volcano_number, latitude, longitude, elevation, population_within_...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nFirst, a bit of data prep:\n\nvolcano <- volcano %>%\n  mutate(\n    volcano_type = case_when(\n      str_detect(primary_volcano_type, \"Stratovolcano\") ~ \"Stratovolcano\",\n      str_detect(primary_volcano_type, \"Shield\") ~ \"Shield\",\n      TRUE ~ \"Other\"\n    ),\n    volcano_type = fct_relevel(volcano_type, \"Stratovolcano\", \"Shield\", \"Other\")\n  ) %>%\n  select(\n    volcano_type, latitude, longitude, \n    elevation, tectonic_settings, major_rock_1\n    ) %>%\n  mutate(across(where(is.character), as_factor))"
+  },
+  {
+    "objectID": "ae/ae-11-volcanoes.html#exploratory-data-analysis",
+    "href": "ae/ae-11-volcanoes.html#exploratory-data-analysis",
+    "title": "AE 11: Multinomial classification",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\nCreate a map of volcanoes that is faceted by volcano_type.\n\n\nworld <- map_data(\"world\")\n\nworld_map <- ggplot() +\n  geom_polygon(\n    data = world, \n    aes(\n      x = long, y = lat, group = group),\n      color = \"white\", fill = \"gray50\", \n      size = 0.05, alpha = 0.2\n    ) +\n  theme_minimal() +\n  coord_quickmap() +\n  labs(x = NULL, y = NULL)\n\nworld_map +\n  geom_point(\n    data = volcano,\n    aes(x = longitude, y = latitude,\n        color = volcano_type, \n        shape = volcano_type),\n    alpha = 0.5\n  ) +\n  facet_wrap(~volcano_type) +\n  scale_color_OkabeIto()"
+  },
+  {
+    "objectID": "ae/ae-11-volcanoes.html#build-a-new-model",
+    "href": "ae/ae-11-volcanoes.html#build-a-new-model",
+    "title": "AE 11: Multinomial classification",
+    "section": "Build a new model",
+    "text": "Build a new model\n\nBuild a new model that uses a recipe that includes geographic information (latitude and longitude). How does this model compare to the original? Note:\nUse the same test/train split as well as same cross validation folds. Code for these is provided below.\n\n\n# test/train split\nset.seed(1234)\n\nvolcano_split <- initial_split(volcano)\nvolcano_train <- training(volcano_split)\nvolcano_test  <- testing(volcano_split)\n\n# cv folds\nset.seed(9876)\n\nvolcano_folds <- vfold_cv(volcano_train, v = 5)\nvolcano_folds\n\n#  5-fold cross-validation \n# A tibble: 5 × 2\n  splits            id   \n  <list>            <chr>\n1 <split [574/144]> Fold1\n2 <split [574/144]> Fold2\n3 <split [574/144]> Fold3\n4 <split [575/143]> Fold4\n5 <split [575/143]> Fold5\n\n\nNew recipe, including geographic information:\n\nvolcano_rec2 <- recipe(volcano_type ~ ., data = volcano_train) %>%\n  step_other(tectonic_settings) %>%\n  step_other(major_rock_1) %>%\n  step_dummy(all_nominal_predictors()) %>%\n  step_zv(all_predictors()) %>%\n  step_center(all_predictors())\n\nOriginal model specification and new workflow:\n\nvolcano_spec <- multinom_reg() %>%\n  set_engine(\"nnet\")\n\nvolcano_wflow2 <- workflow() %>%\n  add_recipe(volcano_rec2) %>%\n  add_model(volcano_spec)\n\nvolcano_wflow2\n\n══ Workflow ════════════════════════════════════════════════════════════════════\nPreprocessor: Recipe\nModel: multinom_reg()\n\n── Preprocessor ────────────────────────────────────────────────────────────────\n5 Recipe Steps\n\n• step_other()\n• step_other()\n• step_dummy()\n• step_zv()\n• step_center()\n\n── Model ───────────────────────────────────────────────────────────────────────\nMultinomial Regression Model Specification (classification)\n\nComputational engine: nnet \n\n\nFit resamples:\n\nvolcano_fit_rs2 <- volcano_wflow2 %>%\n  fit_resamples(\n    volcano_folds, \n    control = control_resamples(save_pred = TRUE)\n    )\n\nvolcano_fit_rs2\n\n# Resampling results\n# 5-fold cross-validation \n# A tibble: 5 × 5\n  splits            id    .metrics         .notes           .predictions      \n  <list>            <chr> <list>           <list>           <list>            \n1 <split [574/144]> Fold1 <tibble [2 × 4]> <tibble [0 × 1]> <tibble [144 × 7]>\n2 <split [574/144]> Fold2 <tibble [2 × 4]> <tibble [0 × 1]> <tibble [144 × 7]>\n3 <split [574/144]> Fold3 <tibble [2 × 4]> <tibble [0 × 1]> <tibble [144 × 7]>\n4 <split [575/143]> Fold4 <tibble [2 × 4]> <tibble [0 × 1]> <tibble [143 × 7]>\n5 <split [575/143]> Fold5 <tibble [2 × 4]> <tibble [0 × 1]> <tibble [143 × 7]>\n\n\nCollect metrics:\n\ncollect_metrics(volcano_fit_rs2)\n\n# A tibble: 2 × 6\n  .metric  .estimator  mean     n std_err .config             \n  <chr>    <chr>      <dbl> <int>   <dbl> <chr>               \n1 accuracy multiclass 0.606     5  0.0138 Preprocessor1_Model1\n2 roc_auc  hand_till  0.695     5  0.0245 Preprocessor1_Model1\n\n\nROC curves:\n\nvolcano_fit_rs2 %>%\n  collect_predictions() %>%\n  group_by(id) %>%\n  roc_curve(\n    truth = volcano_type,\n    .pred_Stratovolcano:.pred_Other\n  ) %>%\n  autoplot()"
+  },
+  {
+    "objectID": "ae/ae-11-volcanoes.html#roc-curves",
+    "href": "ae/ae-11-volcanoes.html#roc-curves",
+    "title": "AE 11: Multinomial classification",
+    "section": "ROC curves",
+    "text": "ROC curves\n\nRecreate the ROC curve from the slides.\n\n\nfinal_fit <- last_fit(\n  volcano_wflow2, \n  split = volcano_split\n  )\n\ncollect_predictions(final_fit) %>%\n  roc_curve(truth = volcano_type, .pred_Stratovolcano:.pred_Other) %>%\n  ggplot(aes(x = 1 - specificity, y = sensitivity, color = .level)) +\n  geom_path(size = 1) +\n  scale_color_OkabeIto() +\n  geom_abline(intercept = 0, slope = 1, linetype = \"dashed\", color = \"gray\") +\n  theme_minimal() +\n  labs(color = NULL)"
+  },
+  {
+    "objectID": "ae/ae-11-volcanoes.html#acknowledgement",
+    "href": "ae/ae-11-volcanoes.html#acknowledgement",
+    "title": "AE 11: Multinomial classification",
+    "section": "Acknowledgement",
+    "text": "Acknowledgement\nThis exercise was inspired by https://juliasilge.com/blog/multinomial-volcano-eruptions."
+  },
+  {
     "objectID": "course-faq.html",
     "href": "course-faq.html",
     "title": "FAQ",
@@ -795,7 +956,7 @@
     "href": "labs/lab-1.html#packages",
     "title": "Lab 1 - Meet the toolkit",
     "section": "Packages",
-    "text": "Packages\nWe will use the following package in today’s lab.\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\n\nThe tidyverse is a meta-package. When you load it you get eight packages loaded for you:\n\nggplot2: for data visualization\ndplyr: for data wrangling\ntidyr: for data tidying and rectangling\nreadr: for reading and writing data\ntibble: for modern, tidy data frames\nstringr: for string manipulation\nforcats: for dealing with factors\npurrr: for iteration with functional programming\n\nThe message that’s printed when you load the package tells you which versions of these packages are loaded as well as any conflicts they may have introduced, e.g., the filter() function from dplyr has now masked (overwritten) the filter() function available in base R (and that’s ok, we’ll use dplyr::filter() anyway).\nWe’ll be using functionality from all of these packages throughout the semester, though we’ll always load them all at once with library(tidyverse). You can find out more about the tidyverse and each of the packages that make it up here."
+    "text": "Packages\nWe will use the following package in today’s lab.\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✓ ggplot2 3.3.5     ✓ purrr   0.3.4\n✓ tibble  3.1.6     ✓ dplyr   1.0.7\n✓ tidyr   1.1.4     ✓ stringr 1.4.0\n✓ readr   2.1.1     ✓ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\nx dplyr::filter() masks stats::filter()\nx dplyr::lag()    masks stats::lag()\n\n\nThe tidyverse is a meta-package. When you load it you get eight packages loaded for you:\n\nggplot2: for data visualization\ndplyr: for data wrangling\ntidyr: for data tidying and rectangling\nreadr: for reading and writing data\ntibble: for modern, tidy data frames\nstringr: for string manipulation\nforcats: for dealing with factors\npurrr: for iteration with functional programming\n\nThe message that’s printed when you load the package tells you which versions of these packages are loaded as well as any conflicts they may have introduced, e.g., the filter() function from dplyr has now masked (overwritten) the filter() function available in base R (and that’s ok, we’ll use dplyr::filter() anyway).\nWe’ll be using functionality from all of these packages throughout the semester, though we’ll always load them all at once with library(tidyverse). You can find out more about the tidyverse and each of the packages that make it up here."
   },
   {
     "objectID": "labs/lab-1.html#data-ikea-furniture",
@@ -1019,7 +1180,7 @@
     "href": "index.html",
     "title": "STA 210: Regression Analysis",
     "section": "",
-    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n📂\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n📂\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n📂\n\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Mar 25\nDue: HW 3 + Lab 5\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n12\nMon, Mar 28\nLab: Work on project drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n✍️\n\n\n\n\n13\nMon, Apr 4\nLab 6: Why Many Americans Don’t Vote\n\n\n\n💻\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction + inferential models\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Apr 7\nMultiLR: Predictive models\n\n🖥️\n\n\n\n📂\n\n\n\n\nFri, Apr 8\nDue: Lab 6\n\n\n\n💻 🗝️\n\n\n\n\n\n\nSun, Apr 10\nDue: Project drafts\n\n\n\n\n\n📂\n\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n📂\n\n\n\n\nTue, Apr 12\nMultiLR: Predictive models (cont.)\n📖\n🖥️\n\n\n\n\n\n\n\n\n\nDue: HW 4\n\n\n\n\n✍️\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n🖥️\n\n\n\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n📂\n\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n\n\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n\n\n\n\n\nTue, Apr 19\nWrap-up\n📖\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n✍️\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
+    "text": "Week\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻 🗝️\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n📂\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n\n📂\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model comparison\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 25\nDue: HW 3 + Lab 5\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n12\nMon, Mar 28\nLab: Work on project drafts\n\n\n\n\n\n\n📂\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n✍️\n\n\n\n\n13\nMon, Apr 4\nLab 6: Why Many Americans Don’t Vote\n\n\n\n💻\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction + inferential models\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Apr 7\nMultiLR: Predictive models\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Apr 8\nDue: Lab 6\n\n\n\n💻 🗝️\n\n\n\n\n\n\nSun, Apr 10\nDue: Project drafts\n\n\n\n\n\n\n📂\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n\n📂\n\n\n\nTue, Apr 12\nMultiLR: Predictive models (cont.)\n📖\n🖥️\n\n\n\n\n\n\n\n\n\nDue: HW 4\n\n\n\n\n✍️ 🗝️\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n🖥️\n📋\n\n\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n\n📂\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n\n✅\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n✅\n\n\n\n\nTue, Apr 19\nWrap-up\n📖\n\n\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n✍️\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n\n\n\n\nSat, Apr 30\nDue: Video comments"
   },
   {
     "objectID": "hw/hw-3.html",
@@ -2132,7 +2293,7 @@
     "href": "slides/lec-23.html#model-result",
     "title": "Multinomial Logistic Regression (MultiLR)",
     "section": "Model result",
-    "text": "Model result\n\nhealth_fit\n\nparsnip model object\n\nFit time:  93ms \nCall:\nnnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, \n    trace = FALSE)\n\nCoefficients:\n      (Intercept)           Age PhysActiveYes\nVgood   1.2053460  0.0009101848    -0.3209047\nGood    1.9476261 -0.0023686122    -1.0014925\nFair    0.9145492  0.0030462534    -1.6454297\nPoor   -1.5211414  0.0221905681    -2.6556343\n\nResidual Deviance: 17588.88 \nAIC: 17612.88"
+    "text": "Model result\n\nhealth_fit\n\nparsnip model object\n\nFit time:  113ms \nCall:\nnnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, \n    trace = FALSE)\n\nCoefficients:\n      (Intercept)           Age PhysActiveYes\nVgood   1.2053460  0.0009101848    -0.3209047\nGood    1.9476261 -0.0023686122    -1.0014925\nFair    0.9145492  0.0030462534    -1.6454297\nPoor   -1.5211414  0.0221905681    -2.6556343\n\nResidual Deviance: 17588.88 \nAIC: 17612.88"
   },
   {
     "objectID": "slides/lec-23.html#next-steps",
@@ -5807,14 +5968,14 @@
     "href": "slides/lec-24.html#checking-linearity-1",
     "title": "MultiLR: Prediction + inferential models",
     "section": "Checking linearity",
-    "text": "Checking linearity\n\nemplogitplot1(Excellent ~ Age, data = nhanes_adult, \n              ngroups = 10, main = \"Excellent vs. Age\")\nemplogitplot1(Vgood ~ Age, data = nhanes_adult, \n              ngroups = 10, main = \"Vgood vs. Age\")"
+    "text": "Checking linearity\n\nemplogitplot1(Excellent ~ Age, data = nhanes_adult, \n              ngroups = 10, main = \"Excellent vs. Age\")\n\nemplogitplot1(Vgood ~ Age, data = nhanes_adult, \n              ngroups = 10, main = \"Vgood vs. Age\")"
   },
   {
     "objectID": "slides/lec-24.html#checking-linearity-2",
     "href": "slides/lec-24.html#checking-linearity-2",
     "title": "MultiLR: Prediction + inferential models",
     "section": "Checking linearity",
-    "text": "Checking linearity\n\nemplogitplot1(Good ~ Age, data = nhanes_adult, \n              ngroups = 10, main = \"Good vs. Age\")\nemplogitplot1(Fair ~ Age, data = nhanes_adult, \n              ngroups = 10, main = \"Fair vs. Age\")"
+    "text": "Checking linearity\n\nemplogitplot1(Good ~ Age, data = nhanes_adult, \n              ngroups = 10, main = \"Good vs. Age\")\n\nemplogitplot1(Fair ~ Age, data = nhanes_adult, \n              ngroups = 10, main = \"Fair vs. Age\")"
   },
   {
     "objectID": "slides/lec-24.html#checking-linearity-3",
@@ -6339,7 +6500,7 @@
     "href": "computing-pipelines.html",
     "title": "Pipelines",
     "section": "",
-    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.1.6     ✔ dplyr   1.0.7\n✔ tidyr   1.1.4     ✔ stringr 1.4.0\n✔ readr   2.1.1     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✔ broom        0.7.10         ✔ rsample      0.1.1     \n✔ dials        0.0.10         ✔ tune         0.1.6     \n✔ infer        1.0.1.9000     ✔ workflows    0.2.4     \n✔ modeldata    0.1.1          ✔ workflowsets 0.1.0     \n✔ parsnip      0.1.7          ✔ yardstick    0.0.9     \n✔ recipes      0.2.0          \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n✖ scales::discard() masks purrr::discard()\n✖ dplyr::filter()   masks stats::filter()\n✖ recipes::fixed()  masks stringr::fixed()\n✖ dplyr::lag()      masks stats::lag()\n✖ yardstick::spec() masks readr::spec()\n✖ recipes::step()   masks stats::step()\n• Learn how to get started at https://www.tidymodels.org/start/\n\nlibrary(knitr)"
+    "text": "library(palmerpenguins)\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✓ ggplot2 3.3.5     ✓ purrr   0.3.4\n✓ tibble  3.1.6     ✓ dplyr   1.0.7\n✓ tidyr   1.1.4     ✓ stringr 1.4.0\n✓ readr   2.1.1     ✓ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\nx dplyr::filter() masks stats::filter()\nx dplyr::lag()    masks stats::lag()\n\nlibrary(tidymodels)\n\nRegistered S3 method overwritten by 'tune':\n  method                   from   \n  required_pkgs.model_spec parsnip\n\n\n── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──\n\n\n✓ broom        0.7.10         ✓ rsample      0.1.1     \n✓ dials        0.0.10         ✓ tune         0.1.6     \n✓ infer        1.0.1.9000     ✓ workflows    0.2.4     \n✓ modeldata    0.1.1          ✓ workflowsets 0.1.0     \n✓ parsnip      0.1.7          ✓ yardstick    0.0.9     \n✓ recipes      0.2.0          \n\n\n── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\nx scales::discard() masks purrr::discard()\nx dplyr::filter()   masks stats::filter()\nx recipes::fixed()  masks stringr::fixed()\nx dplyr::lag()      masks stats::lag()\nx yardstick::spec() masks readr::spec()\nx recipes::step()   masks stats::step()\n• Search for functions across packages at https://www.tidymodels.org/find/\n\nlibrary(knitr)"
   },
   {
     "objectID": "computing-pipelines.html#simple-linear-regression",
@@ -6619,35 +6780,28 @@
     "href": "weeks/week-14.html",
     "title": "Week 14",
     "section": "",
-    "text": "Important\n\n\n\nDue dates:\nTo be posted."
-  },
-  {
-    "objectID": "weeks/week-14.html#prepare",
-    "href": "weeks/week-14.html#prepare",
-    "title": "Week 14",
-    "section": "Prepare",
-    "text": "Prepare"
+    "text": "Important\n\n\n\nDue dates: Friday, April 15 - Project peer review of drafts"
   },
   {
     "objectID": "weeks/week-14.html#participate",
     "href": "weeks/week-14.html#participate",
     "title": "Week 14",
     "section": "Participate",
-    "text": "Participate"
+    "text": "Participate\n🖥️ Lecture 26 - MultiLR: Predictive models (cont.)\n🖥️ Lecture 27 - Exam 3 Review"
   },
   {
     "objectID": "weeks/week-14.html#practice",
     "href": "weeks/week-14.html#practice",
     "title": "Week 14",
     "section": "Practice",
-    "text": "Practice"
+    "text": "Practice\n📋 Application Exercise 12 - Exam 3 Review"
   },
   {
     "objectID": "weeks/week-14.html#perform",
     "href": "weeks/week-14.html#perform",
     "title": "Week 14",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n✍️ Project - Peer review of drafts\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-7.html",
@@ -6794,35 +6948,28 @@
     "href": "weeks/week-15.html",
     "title": "Week 15",
     "section": "",
-    "text": "Important\n\n\n\nDue dates:\nTo be posted."
-  },
-  {
-    "objectID": "weeks/week-15.html#prepare",
-    "href": "weeks/week-15.html#prepare",
-    "title": "Week 15",
-    "section": "Prepare",
-    "text": "Prepare"
+    "text": "Important\n\n\n\nDue dates: Tue, Apr 19 - HW 5"
   },
   {
     "objectID": "weeks/week-15.html#participate",
     "href": "weeks/week-15.html#participate",
     "title": "Week 15",
     "section": "Participate",
-    "text": "Participate"
+    "text": "Participate\n🖥️ Lecture 28 - Wrap up"
   },
   {
     "objectID": "weeks/week-15.html#practice",
     "href": "weeks/week-15.html#practice",
     "title": "Week 15",
     "section": "Practice",
-    "text": "Practice"
+    "text": "Practice\nNo application exercises this week"
   },
   {
     "objectID": "weeks/week-15.html#perform",
     "href": "weeks/week-15.html#perform",
     "title": "Week 15",
     "section": "Perform",
-    "text": "Perform\n\n\nBack to course schedule ⏎"
+    "text": "Perform\n✍️ HW 5 - Statistics experience\n\n\nBack to course schedule ⏎"
   },
   {
     "objectID": "weeks/week-8.html",
@@ -6948,7 +7095,7 @@
     "href": "weeks/week-13.html#practice",
     "title": "Week 13",
     "section": "Practice",
-    "text": "Practice\n📋 Application Exercise 11 - To be posted"
+    "text": "Practice\n📋 Application Exercise 11 - Volcanoes"
   },
   {
     "objectID": "weeks/week-13.html#perform",
@@ -7038,6 +7185,13 @@
     "objectID": "exams/exam-1.html",
     "href": "exams/exam-1.html",
     "title": "Exam 1",
+    "section": "",
+    "text": "Grading (50 pts)\n\n\n\nPart\nPoints\n\n\n\n\nPart 1 - Conceptual (on Sakai)\n10\n\n\nPart 2 - Applied (on Gradescope)\n40\n\n\nTotal\n50"
+  },
+  {
+    "objectID": "exams/exam-3.html",
+    "href": "exams/exam-3.html",
+    "title": "Exam 2",
     "section": "",
     "text": "Grading (50 pts)\n\n\n\nPart\nPoints\n\n\n\n\nPart 1 - Conceptual (on Sakai)\n10\n\n\nPart 2 - Applied (on Gradescope)\n40\n\n\nTotal\n50"
   },
