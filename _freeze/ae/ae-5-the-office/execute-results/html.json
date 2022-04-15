@@ -1,0 +1,14 @@
+{
+  "hash": "891345e9139bd961a2b090c5a35f3659",
+  "result": {
+    "markdown": "---\ntitle: \"AE 5: The Office\"\n---\n\n::: callout-important\nGo to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-5-the-office-YOUR_GITHUB_USERNAME` to get started.\n:::\n\n## Packages\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(gghighlight)\nlibrary(knitr)\n```\n:::\n\n## Load data\n\n::: {.cell}\n\n```{.r .cell-code}\noffice_ratings <- read_csv(\"data/office_ratings.csv\")\n```\n\n::: {.cell-output-stderr}\n```\nRows: 188 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (1): title\ndbl  (4): season, episode, imdb_rating, total_votes\ndate (1): air_date\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n```\n:::\n:::\n\n## Exploratory data analysis\n\nRecreate at least one of the exploratory visualizations from class.\n\n## Test/train split\n\nSplit your data into testing and training sets.\n\n## Build a recipe\n\nBuild the recipe from class.\n\n------------------------------------------------------------------------\n\n*Time permitting...*\n\n## Workflows and model fitting\n\nBuild the modeling workflow and fit the model to the training data after feature engineering with the recipe.",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}

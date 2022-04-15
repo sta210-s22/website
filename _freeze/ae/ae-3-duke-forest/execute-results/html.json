@@ -1,0 +1,16 @@
+{
+  "hash": "6ad5348f1bc6b2556f148355742fcc8d",
+  "result": {
+    "markdown": "---\ntitle: \"AE 3: Duke Forest houses\"\nsubtitle: \"Checking model conditions\"\n---\n\n::: callout-important\nGo to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-3-duke-forest-YOUR_GITHUB_USERNAME` to get started.\n:::\n\n## Packages\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\nlibrary(knitr)\n```\n:::\n\n## Predict sale price from area\n\n::: {.cell}\n\n```{.r .cell-code}\ndf_fit <- linear_reg() %>%\n  set_engine(\"lm\") %>%\n  fit(price ~ area, data = duke_forest)\n\ntidy(df_fit) %>%\n  kable(digits = 2)\n```\n\n::: {.cell-output-display}\n|term        |  estimate| std.error| statistic| p.value|\n|:-----------|---------:|---------:|---------:|-------:|\n|(Intercept) | 116652.33|  53302.46|      2.19|    0.03|\n|area        |    159.48|     18.17|      8.78|    0.00|\n:::\n:::\n\n## Model conditions\n\n### Exercise 1\n\nThe following code produces the residuals vs. fitted values plot for this model.\nComment out the layer that defines the y-axis limits and re-create the plot.\nHow does the plot change?\nWhy might we want to define the limits explicitly?\n\n::: {.cell}\n\n```{.r .cell-code}\ndf_aug <- augment(df_fit$fit)\n\nggplot(df_aug, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0, linetype = \"dashed\") +\n  ylim(-1000000, 1000000) +\n  labs(\n    x = \"Fitted value\", y = \"Residual\",\n    title = \"Residuals vs. fitted values\"\n  )\n```\n\n::: {.cell-output-display}\n![](ae-3-duke-forest_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n### Exercise 2\n\nImprove how the values on the axes of the plot are displayed by modifying the code below.\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(df_aug, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0, linetype = \"dashed\") +\n  ylim(-1000000, 1000000) +\n  labs(\n    x = \"Fitted value\", y = \"Residual\",\n    title = \"Residuals vs. fitted values\"\n  )\n```\n\n::: {.cell-output-display}\n![](ae-3-duke-forest_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::",
+    "supporting": [
+      "ae-3-duke-forest_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}

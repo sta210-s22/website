@@ -1,22 +1,26 @@
 ---
 title: "Week 14"
-subtitle: "TBA"
+subtitle: "MultiLR + Exam 3 review"
 editor: visual
 ---
 
 ::: callout-important
-Due dates:
+Due dates: Friday, April 15 - Project peer review of drafts
 :::
-
-To be posted.
-
-## Prepare
 
 ## Participate
 
+🖥️ [Lecture 26 - MultiLR: Predictive models (cont.)](/slides/lec-26.html)
+
+🖥️ [Lecture 27 - Exam 3 Review](/slides/lec-27.html)
+
 ## Practice
 
+📋 [Application Exercise 12 - Exam 3 Review](/ae/ae-12-exam-3-review.html)
+
 ## Perform
+
+✍️ [Project  - Peer review of drafts](/project-description.html#peer-review)
 
 <br><br>
 

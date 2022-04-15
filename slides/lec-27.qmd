@@ -31,18 +31,20 @@ knitr::opts_chunk$set(
 library(countdown)
 ```
 
-## Exam instructions
+## Exam instructions {.smaller}
 
-- The exam is an individual assignment. Everything in your repository is for your eyes only.
+-   The exam is an individual assignment.
+    Everything in your repository is for your eyes only.
 
--  You may not collaborate or communicate anything about this exam to anyone except the instructor. For example, you may not communicate with other students, the TAs, or post/solicit help on the internet, email or via any other method of communication.
+-   You may not collaborate or communicate anything about this exam to anyone except the instructor.
+    For example, you may not communicate with other students, the TAs, or post/solicit help on the internet, email or via any other method of communication.
 
--  The exam is open-book, open-note, so you may use any materials from class as you take the exam.
+-   The exam is open-book, open-note, so you may use any materials from class as you take the exam.
 
--  No TA office hours will be held during the exam.
-You may not email the TAs questions about the exam.
+-   No TA office hours will be held during the exam.
+    You may not email the TAs questions about the exam.
 
-- If you have questions, email or Slack me.
+-   If you have questions, email or Slack me.
 
 ## Exam coverage and format
 
@@ -55,9 +57,9 @@ You may not email the TAs questions about the exam.
 
 ## Part 2 of the exam
 
-- **Goal:** Assess your understanding of the course material and how the methods you learned are applied to the analysis of real-world data.
+-   **Goal:** Assess your understanding of the course material and how the methods you learned are applied to the analysis of real-world data.
 
-- Include all of your analysis steps in your exam write up, unless stated otherwise.
+-   Include all of your analysis steps in your exam write up, unless stated otherwise.
 
     -   For example, if the exam says "assume conditions are met," You can reference that information in your write up but don't have to recheck the conditions.
 
@@ -67,7 +69,7 @@ You may not email the TAs questions about the exam.
 -   You understand the correct conditions and diagnostics needed to determine whether the conclusions drawn from the model will be reliable
 -   You can write results and conclusions in a meaningful way that can be understood by a general audience (think a business or research partner)
 -   You can produce a report that is suitable for a professional audience (e.g., narrative is written in complete sentences, all graphs have proper titles and axis labels, there is not extraneous output, all Latex is rendered)
- -   You can conduct the analysis using a reproducible data analysis workflow that incorporates version control
+-   You can conduct the analysis using a reproducible data analysis workflow that incorporates version control
 
 ## Application exercise
 

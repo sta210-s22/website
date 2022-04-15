@@ -1,22 +1,24 @@
 ---
 title: "Week 15"
-subtitle: "TBA"
+subtitle: "Wrap up"
 editor: visual
 ---
 
 ::: callout-important
-Due dates:
+Due dates: Tue, Apr 19 - HW 5
 :::
-
-To be posted.
-
-## Prepare
 
 ## Participate
 
+🖥️ [Lecture 28 - Wrap up](/slides/lec-28.html)
+
 ## Practice
 
+No application exercises this week
+
 ## Perform
+
+✍️ [HW 5 - Statistics experience](/hw/hw-5.html)
 
 <br><br>
 

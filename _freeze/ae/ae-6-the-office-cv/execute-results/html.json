@@ -1,0 +1,14 @@
+{
+  "hash": "5fda597265f65b6e26978691bda43a3a",
+  "result": {
+    "markdown": "---\ntitle: \"AE 6: The Office\"\nsubtitle: \"Cross validation\"\n---\n\n::: callout-important\nGo to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-6-the-office-cv-YOUR_GITHUB_USERNAME` to get started.\n:::\n\n## Packages\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(knitr)\n```\n:::\n\n## Load data\n\n::: {.cell}\n\n```{.r .cell-code}\noffice_episodes <- read_csv(\"data/office_episodes.csv\")\n```\n:::\n\n## Split data into training and testing\n\nSplit your data into testing and training sets.\n\n::: {.cell}\n\n```{.r .cell-code}\n# add code here\n```\n:::\n\n## Specify model\n\nSpecify a linear regression model.\nCall it `office_spec`.\n\n::: {.cell}\n\n```{.r .cell-code}\n# add code here\n```\n:::\n\n## Create recipe\n\nCreate the recipe from class.\nCall it `office_rec1`.\n\n::: {.cell}\n\n```{.r .cell-code}\n# add code here\n```\n:::\n\n## Create workflow\n\nCreate the workflow that brings together the model specification and recipe.\nCall it `office_wflow1`.\n\n::: {.cell}\n\n```{.r .cell-code}\n# add code here\n```\n:::\n\n## Cross validation\n\nConduct 10-fold cross validation.\n\n::: {.cell}\n\n```{.r .cell-code}\n# add code here\n```\n:::\n\n## Summarize CV metrics\n\nSummarize metrics from your CV resamples.\n\n::: {.cell}\n\n```{.r .cell-code}\n# add code here\n```\n:::\n\n## Another model - Model 2\n\nCreate a different (simpler, involving fewer variables) recipe and call it `office_rec2`.\nConduct 10-fold cross validation and summarize metrics.\nDescribe how the two models compare to each other based on cross validation metrics.",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}

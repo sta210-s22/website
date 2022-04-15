@@ -1,0 +1,177 @@
+---
+title: "AE 11: Multinomial classification"
+---
+
+::: callout-important
+Go to the [course GitHub organization](https://github.com/sta210-s22) and locate the repo titled `ae-11-volcanoes-YOUR_GITHUB_USERNAME` to get started.
+:::
+
+## Packages
+
+```{r}
+#| label: load-pkgs
+#| warning: false
+ 
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+library(colorblindr)
+```
+
+## Data
+
+For this application exercise we will work with a dataset of on volcanoes.
+The data come from [The Smithsonian Institution](https://volcano.si.edu/) via [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md).
+
+```{r}
+volcano <- read_csv(here::here("ae", "data/volcano.csv"))
+```
+
+First, a bit of data prep:
+
+```{r}
+volcano <- volcano %>%
+  mutate(
+    volcano_type = case_when(
+      str_detect(primary_volcano_type, "Stratovolcano") ~ "Stratovolcano",
+      str_detect(primary_volcano_type, "Shield") ~ "Shield",
+      TRUE ~ "Other"
+    ),
+    volcano_type = fct_relevel(volcano_type, "Stratovolcano", "Shield", "Other")
+  ) %>%
+  select(
+    volcano_type, latitude, longitude, 
+    elevation, tectonic_settings, major_rock_1
+    ) %>%
+  mutate(across(where(is.character), as_factor))
+```
+
+## Exploratory data analysis
+
+1.  Create a map of volcanoes that is faceted by `volcano_type`.
+
+```{r}
+world <- map_data("world")
+
+world_map <- ggplot() +
+  geom_polygon(
+    data = world, 
+    aes(
+      x = long, y = lat, group = group),
+      color = "white", fill = "gray50", 
+      size = 0.05, alpha = 0.2
+    ) +
+  theme_minimal() +
+  coord_quickmap() +
+  labs(x = NULL, y = NULL)
+
+world_map +
+  geom_point(
+    data = volcano,
+    aes(x = longitude, y = latitude,
+        color = volcano_type, 
+        shape = volcano_type),
+    alpha = 0.5
+  ) +
+  facet_wrap(~volcano_type) +
+  scale_color_OkabeIto()
+```
+
+## Build a new model
+
+2.  Build a new model that uses a recipe that includes geographic information (latitude and longitude). How does this model compare to the original? **Note:**\
+    Use the same test/train split as well as same cross validation folds. Code for these is provided below.
+
+```{r}
+# test/train split
+set.seed(1234)
+
+volcano_split <- initial_split(volcano)
+volcano_train <- training(volcano_split)
+volcano_test  <- testing(volcano_split)
+
+# cv folds
+set.seed(9876)
+
+volcano_folds <- vfold_cv(volcano_train, v = 5)
+volcano_folds
+```
+
+New recipe, including geographic information:
+
+```{r}
+volcano_rec2 <- recipe(volcano_type ~ ., data = volcano_train) %>%
+  step_other(tectonic_settings) %>%
+  step_other(major_rock_1) %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_zv(all_predictors()) %>%
+  step_center(all_predictors())
+```
+
+Original model specification and new workflow:
+
+```{r}
+volcano_spec <- multinom_reg() %>%
+  set_engine("nnet")
+
+volcano_wflow2 <- workflow() %>%
+  add_recipe(volcano_rec2) %>%
+  add_model(volcano_spec)
+
+volcano_wflow2
+```
+
+Fit resamples:
+
+```{r}
+volcano_fit_rs2 <- volcano_wflow2 %>%
+  fit_resamples(
+    volcano_folds, 
+    control = control_resamples(save_pred = TRUE)
+    )
+
+volcano_fit_rs2
+```
+
+Collect metrics:
+
+```{r}
+collect_metrics(volcano_fit_rs2)
+```
+
+ROC curves:
+
+```{r}
+volcano_fit_rs2 %>%
+  collect_predictions() %>%
+  group_by(id) %>%
+  roc_curve(
+    truth = volcano_type,
+    .pred_Stratovolcano:.pred_Other
+  ) %>%
+  autoplot()
+```
+
+## ROC curves
+
+3.  Recreate the ROC curve from the slides.
+
+```{r}
+final_fit <- last_fit(
+  volcano_wflow2, 
+  split = volcano_split
+  )
+
+collect_predictions(final_fit) %>%
+  roc_curve(truth = volcano_type, .pred_Stratovolcano:.pred_Other) %>%
+  ggplot(aes(x = 1 - specificity, y = sensitivity, color = .level)) +
+  geom_path(size = 1) +
+  scale_color_OkabeIto() +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "gray") +
+  theme_minimal() +
+  labs(color = NULL)
+```
+
+## Acknowledgement
+
+This exercise was inspired by [https://juliasilge.com/blog/multinomial-volcano-eruptions](https://juliasilge.com/blog/multinomial-volcano-eruptions/).
