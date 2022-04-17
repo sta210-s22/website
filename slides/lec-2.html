@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.258">
+  <meta name="generator" content="quarto-0.9.266">
 
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - Simple Linear Regression</title>
@@ -553,12 +553,12 @@ $ fandango_difference        &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
 <h2>Regression model</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p><span class="math display">\[
-\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
+<p>$$</p>
+<span class="math display">\[\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
 &amp;= \color{purple}{\mathbf{f(X)}} + \epsilon \\[8pt]
 &amp;= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \epsilon
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span>
+<p>$$</p>
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -576,10 +576,13 @@ $ fandango_difference        &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
 <h2>Regression model + residuals</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p><span class="math display">\[\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \color{blue}{\textbf{Error}} \\[8pt]
+$$
+<span class="math display">\[\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \color{blue}{\textbf{Error}} \\[8pt]
+
 &amp;= \color{purple}{\mathbf{f(X)}} + \color{blue}{\boldsymbol{\epsilon}} \\[8pt]
 &amp;= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \color{blue}{\boldsymbol{\epsilon}} \\[8pt]
-\end{aligned}\]</span></p>
+\end{aligned}\]</span>
+<p>$$</p>
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -663,19 +666,19 @@ $ fandango_difference        &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
 <p><span class="math display">\[\large{\hat{\beta}_1 = r \frac{s_Y}{s_X}}\]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><span class="math display">\[
-\begin{aligned}
+<p>$$</p>
+<span class="math display">\[\begin{aligned}
 s_X &amp;= 30.1688 \\
 s_Y &amp;=  20.0244 \\
 r &amp;= 0.7814
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span>
+<p>$$</p>
 </div><div class="column" style="width:50%;">
-<p><span class="math display">\[
-\begin{aligned}
+<p>$$</p>
+<span class="math display">\[\begin{aligned}
 \hat{\beta}_1 &amp;= 0.7814 \times \frac{20.0244}{30.1688} \\
-&amp;= 0.5187\end{aligned}
-\]</span></p>
+&amp;= 0.5187\end{aligned}\]</span>
+<p>$$</p>
 </div>
 </div>
 </section>
@@ -690,11 +693,11 @@ r &amp;= 0.7814
 &amp;\hat{\beta}_1 = 0.5187
 \end{aligned}\]</span></p>
 </div><div class="column" style="width:50%;">
-<p><span class="math display">\[
-\begin{aligned}\hat{\beta}_0 &amp;= 63.8767 - 0.5187 \times 60.8493 \\
+<p>$$</p>
+<span class="math display">\[\begin{aligned}\hat{\beta}_0 &amp;= 63.8767 - 0.5187 \times 60.8493 \\
 &amp;= 32.3142
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span>
+<p>$$</p>
 </div>
 </div>
 </section>
@@ -783,16 +786,15 @@ r &amp;= 0.7814
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../site_libs/revealjs/dist/reveal.js"></script>
-
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
-  <script src="../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
-
+    <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+    <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+    <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+    <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+    <script src="../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+    <script src="../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
+    <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
@@ -812,7 +814,7 @@ r &amp;= 0.7814
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"457308a92ec70503","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"df9164f42152bf45","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
  
         // Display controls in the bottom right corner

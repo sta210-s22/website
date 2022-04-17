@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.258">
+<meta name="generator" content="quarto-0.9.266">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -391,39 +391,35 @@ x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np} \end{bmatrix}
 <p>Thus,</p>
 <p><span class="math display">\[\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{\epsilon}\]</span></p>
 <p>Therefore the estimated response for a given combination of explanatory variables and the associated residuals can be written as</p>
-<p><span id="eq-matrix_mean"><span class="math display">\[
-\hat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}} \hspace{10mm} \mathbf{e} = \mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}
-\qquad(4)\]</span></span></p>
+<p>$$</p>
+<p> = = - </p>
+<p>$$ {#eq-matrix_mean}</p>
 </section>
 <section id="estimating-the-coefficients" class="level2">
 <h2 class="anchored" data-anchor-id="estimating-the-coefficients">Estimating the Coefficients</h2>
 <p>The least-squares model is the one that minimizes the sum of the squared residuals. Therefore, we want to find the coefficients, <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that minimizes</p>
-<p><span id="eq-sum_sq_resid"><span class="math display">\[
-\sum\limits_{i=1}^{n} e_{i}^2 = \mathbf{e}^T\mathbf{e} = (\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})^T(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})
-\qquad(5)\]</span></span></p>
+<p>$$</p>
+<p><em>{i=1}^{n} e</em>{i}^2 = ^T = ( - )^T( - )</p>
+<p>$$ {#eq-sum_sq_resid}</p>
 <p>where <span class="math inline">\(\mathbf{e}^T\)</span>, the transpose of the matrix <span class="math inline">\(\mathbf{e}\)</span>.</p>
-<p><span id="eq-model_equation"><span class="math display">\[
-(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}})^T(\mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}) = (\mathbf{Y}^T\mathbf{Y} -
-\mathbf{Y}^T \mathbf{X}\hat{\boldsymbol{\beta}} - (\hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y} +
-\hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}
-\hat{\boldsymbol{\beta}})
-\qquad(6)\]</span></span></p>
-<p>Note that <span class="math inline">\((\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}})^T = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Since these are both constants (i.e.&nbsp;<span class="math inline">\(1\times 1\)</span> vectors), <span class="math inline">\(\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}} = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Thus, <a href="#eq-model_equation">Equation&nbsp;7</a> becomes</p>
-<p><span id="eq-model_equation"><span class="math display">\[
-\mathbf{Y}^T\mathbf{Y} - 2 \mathbf{X}^T\hat{\boldsymbol{\beta}}{}^{T}\mathbf{Y} + \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}
-\hat{\boldsymbol{\beta}}
-\qquad(7)\]</span></span></p>
-<p>Since we want to find the <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that minimizes <a href="#eq-sum_sq_resid">Equation&nbsp;5</a>, will find the value of <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> such that the derivative with respect to <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> is equal to 0.</p>
-<p><span id="eq-ete"><span class="math display">\[
-\begin{aligned}
+<p>$$</p>
+<p>( - )^T( - ) = (^T - ^T - (<sup>{T}</sup>T + <sup>{T}</sup>T )</p>
+<p>$$ {#eq-model_equation}</p>
+<p>Note that <span class="math inline">\((\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}})^T = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Since these are both constants (i.e.&nbsp;<span class="math inline">\(1\times 1\)</span> vectors), <span class="math inline">\(\mathbf{Y^T}\mathbf{X}\hat{\boldsymbol{\beta}} = \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{Y}\)</span>. Thus, <strong>?@eq-model_equation</strong> becomes</p>
+<p>$$</p>
+<p>^T - 2 <sup>T</sup>{T} + <sup>{T}</sup>T </p>
+<p>$$ {#eq-model_equation}</p>
+<p>Since we want to find the <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that minimizes <strong>?@eq-sum_sq_resid</strong>, will find the value of <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> such that the derivative with respect to <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> is equal to 0.</p>
+<p>$$</p>
+<span class="math display">\[\begin{aligned}
 \frac{\partial \mathbf{e}^T\mathbf{e}}{\partial \hat{\boldsymbol{\beta}}} &amp; = \frac{\partial}{\partial \hat{\boldsymbol{\beta}}}(\mathbf{Y}^T\mathbf{Y} - 2 \mathbf{X}^T\hat{\boldsymbol{\beta}}{}^T\mathbf{Y} + \hat{\boldsymbol{\beta}}{}^{T}\mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}}) = 0 \\
 &amp;\Rightarrow - 2 \mathbf{X}^T\mathbf{Y} + 2 \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} = 0 \\
 &amp; \Rightarrow 2 \mathbf{X}^T\mathbf{Y} = 2 \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
 &amp; \Rightarrow \mathbf{X}^T\mathbf{Y} = \mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
 &amp; \Rightarrow (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}\hat{\boldsymbol{\beta}} \\
 &amp; \Rightarrow (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} = \mathbf{I}\hat{\boldsymbol{\beta}}
-\end{aligned}
-\qquad(8)\]</span></span></p>
+\end{aligned}\]</span>
+<p>$$ {#eq-ete}</p>
 <p>Thus, the estimate of the model coefficients is <span class="math inline">\(\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}\)</span>.</p>
 </section>
 <section id="variance-covariance-matrix-of-the-coefficients" class="level2">
@@ -434,8 +430,8 @@ x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np} \end{bmatrix}
 <li><span class="math inline">\(\hat{\boldsymbol{\beta}} = \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\epsilon\)</span></li>
 </ol>
 <p>First, we will show that <span class="math inline">\(E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T] = \sigma^2I\)</span></p>
-<p><span id="eq-expected_error"><span class="math display">\[
-\begin{aligned}
+<p>$$</p>
+<span class="math display">\[\begin{aligned}
 E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T] &amp;= E \begin{bmatrix}\epsilon_1  &amp; \epsilon_2 &amp; \dots &amp; \epsilon_n \end{bmatrix}\begin{bmatrix}\epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{bmatrix}  \\
 &amp; = E \begin{bmatrix} \epsilon_1^2  &amp; \epsilon_1 \epsilon_2 &amp; \dots &amp; \epsilon_1 \epsilon_n \\
 \epsilon_2 \epsilon_1 &amp; \epsilon_2^2 &amp; \dots &amp; \epsilon_2 \epsilon_n \\
@@ -447,29 +443,31 @@ E[\epsilon_2 \epsilon_1] &amp; E[\epsilon_2^2] &amp; \dots &amp; E[\epsilon_2 \e
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 E[\epsilon_n \epsilon_1] &amp; E[\epsilon_n \epsilon_2] &amp; \dots &amp; E[\epsilon_n^2]
 \end{bmatrix}
-\end{aligned}
-\qquad(9)\]</span></span></p>
-<p>Recall, the regression assumption that the errors <span class="math inline">\(\epsilon_i's\)</span> are Normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>. Thus, <span class="math inline">\(E(\epsilon_i^2) = Var(\epsilon_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>. Additionally, recall the regression assumption that the errors are uncorrelated, i.e.&nbsp;<span class="math inline">\(E(\epsilon_i \epsilon_j) = Cov(\epsilon_i, \epsilon_j) = 0\)</span> for all <span class="math inline">\(i,j\)</span>. Using these assumptions, we can write <a href="#eq-expected_error">Equation&nbsp;9</a> as</p>
-<p><span id="eq-expected_error2"><span class="math display">\[
-E[\mathbf{\epsilon}\mathbf{\epsilon}^T]  = \begin{bmatrix} \sigma^2  &amp; 0 &amp; \dots &amp; 0 \\
+\end{aligned}\]</span>
+<p>$$ {#eq-expected_error}</p>
+<p>Recall, the regression assumption that the errors <span class="math inline">\(\epsilon_i's\)</span> are Normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>. Thus, <span class="math inline">\(E(\epsilon_i^2) = Var(\epsilon_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>. Additionally, recall the regression assumption that the errors are uncorrelated, i.e.&nbsp;<span class="math inline">\(E(\epsilon_i \epsilon_j) = Cov(\epsilon_i, \epsilon_j) = 0\)</span> for all <span class="math inline">\(i,j\)</span>. Using these assumptions, we can write <strong>?@eq-expected_error</strong> as</p>
+<p>$$</p>
+E[^T] =
+<span class="math display">\[\begin{bmatrix} \sigma^2  &amp; 0 &amp; \dots &amp; 0 \\
 0 &amp; \sigma^2  &amp; \dots &amp; 0 \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 0 &amp; 0 &amp; \dots &amp; \sigma^2
-\end{bmatrix} = \sigma^2 \mathbf{I}
-\qquad(10)\]</span></span></p>
+\end{bmatrix}\]</span>
+<p>= ^2 </p>
+<p>$$ {#eq-expected_error2}</p>
 <p>where <span class="math inline">\(\mathbf{I}\)</span> is the <span class="math inline">\(n \times n\)</span> identity matrix.</p>
 <p>Next, we show that <span class="math inline">\(\hat{\boldsymbol{\beta}} = \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\epsilon\)</span>.</p>
 <p>Recall that the <span class="math inline">\(\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}\)</span> and <span class="math inline">\(\mathbf{Y} = \mathbf{X}\mathbf{\beta} + \mathbf{\epsilon}\)</span>. Then,</p>
-<p><span id="eq-est-beta"><span class="math display">\[
-\begin{aligned}
+<p>$$</p>
+<span class="math display">\[\begin{aligned}
 \hat{\boldsymbol{\beta}} &amp;= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} \\
 &amp;= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T(\mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}) \\
 &amp;= \boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \mathbf{\epsilon} \\
-\end{aligned}
-\qquad(11)\]</span></span></p>
+\end{aligned}\]</span>
+<p>$$ {#eq-est-beta}</p>
 <p>Using these two properties, we derive the form of the variance-covariance matrix for the coefficients. Note that the covariance matrix is <span class="math inline">\(E[(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})^T]\)</span></p>
-<p><span id="eq-var-cov"><span class="math display">\[
-\begin{aligned}
+<p>$$</p>
+<span class="math display">\[\begin{aligned}
 E[(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})^T] &amp;= E[(\boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon} - \boldsymbol{\beta})(\boldsymbol{\beta} + (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon} - \boldsymbol{\beta})^T]\\
 &amp; = E[(\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T \boldsymbol{\epsilon}\boldsymbol{\epsilon}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}] \\
 &amp; = (\mathbf{X}^T\mathbf{X})^{-1} \mathbf{X}^T E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}^T]\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\\
@@ -477,8 +475,8 @@ E[(\hat{\boldsymbol{\beta}} - \boldsymbol{\beta})(\hat{\boldsymbol{\beta}} - \bo
 &amp;= \sigma^2\mathbf{I}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\\
 &amp; = \sigma^2\mathbf{I}(\mathbf{X}^T\mathbf{X})^{-1}\\
 &amp;  = \sigma^2(\mathbf{X}^T\mathbf{X})^{-1} \\
-\end{aligned}
-\qquad(12)\]</span></span></p>
+\end{aligned}\]</span>
+<p>$$ {#eq-var-cov}</p>
 
 
 </section>
