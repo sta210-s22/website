@@ -1,0 +1,18 @@
+{
+  "hash": "26ab4c4f8a8545db6572e007240e3581",
+  "result": {
+    "markdown": "---\ntitle: \"Wrap up\"\nsubtitle: \"STA 210 - Spring 2022\"\nauthor: \"Dr. Mine Çetinkaya-Rundel\"\nfooter: \"[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)\"\nlogo: \"images/logo.png\"\nformat: \n  revealjs:\n    theme: slides.scss\n    transition: fade\n    slide-number: true\n    incremental: true \n    chalkboard: true\n    highlight-style: ayu-mirage\ncode-link: true\neditor: visual\nexecute:\n  freeze: auto\n  echo: true\n---\n\n\n\n## Remaining deadlines for project {.smaller}\n\n-   [Final report](https://sta210-s22.github.io/website/project-description.html#written-report) due Mon, Apr 25\n\n-   [Video presentation + slides](https://sta210-s22.github.io/website/project-description.html#video-presentation--slides) and [final GitHub repo](https://sta210-s22.github.io/website/project-description.html#reproducibility---organization) due Thu, Apr 28\n\n-   [Presentation comments](https://sta210-s22.github.io/website/project-description.html#presentation-comments) due Sat, Apr 30\n\n-   Peer evaluations due Mon, Apr 25 + Sat, Apr 30\n\n::: question\nAny questions related to projects?\n:::\n\n## Grading\n\n-   Check your grades on Sakai, make sure they match Gradescope, email/Slack me if not by April 30\n-   Watch for new feedback released on Gradescope\n\n## Evaluations\n\n-   Course evaluation\n-   TA evaluation\n\n## Application exercise\n\n::: appex\n📋 [github.com/sta210-s22/ae-13-tale-of-two-creeks](https://github.com/sta210-s22/ae-13-tale-of-two-creeks)\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    function fireSlideChanged(previousSlide, currentSlide) {\n\n      // dispatch for htmlwidgets\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for reveal\n    if (window.Reveal) {\n      window.Reveal.addEventListener(\"slidechanged\", function(event) {\n        fireSlideChanged(event.previousSlide, event.currentSlide);\n      });\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

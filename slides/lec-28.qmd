@@ -1,0 +1,62 @@
+---
+title: "Wrap up"
+subtitle: "STA 210 - Spring 2022"
+author: "Dr. Mine Çetinkaya-Rundel"
+footer: "[sta210-s22.github.io/website](https://sta210-s22.github.io/website/)"
+logo: "images/logo.png"
+format: 
+  revealjs:
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    incremental: true 
+    chalkboard: true
+    highlight-style: ayu-mirage
+code-link: true
+editor: visual
+execute:
+  freeze: auto
+  echo: true
+---
+
+```{r}
+#| include: false
+
+# figure options
+knitr::opts_chunk$set(
+  fig.width = 8, fig.asp = 0.618, out.width = "90%",
+  fig.retina = 3, dpi = 300, fig.align = "center"
+)
+
+library(countdown)
+```
+
+## Remaining deadlines for project {.smaller}
+
+-   [Final report](https://sta210-s22.github.io/website/project-description.html#written-report) due Mon, Apr 25
+
+-   [Video presentation + slides](https://sta210-s22.github.io/website/project-description.html#video-presentation--slides) and [final GitHub repo](https://sta210-s22.github.io/website/project-description.html#reproducibility---organization) due Thu, Apr 28
+
+-   [Presentation comments](https://sta210-s22.github.io/website/project-description.html#presentation-comments) due Sat, Apr 30
+
+-   Peer evaluations due Mon, Apr 25 + Sat, Apr 30
+
+::: question
+Any questions related to projects?
+:::
+
+## Grading
+
+-   Check your grades on Sakai, make sure they match Gradescope, email/Slack me if not by April 30
+-   Watch for new feedback released on Gradescope
+
+## Evaluations
+
+-   Course evaluation
+-   TA evaluation
+
+## Application exercise
+
+::: appex
+📋 [github.com/sta210-s22/ae-13-tale-of-two-creeks](https://github.com/sta210-s22/ae-13-tale-of-two-creeks)
+:::
