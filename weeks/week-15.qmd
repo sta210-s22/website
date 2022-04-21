@@ -14,7 +14,7 @@ Due dates: Tue, Apr 19 - HW 5
 
 ## Practice
 
-No application exercises this week
+📋 [Application Exercise 13 - A Tale of Two Creeks](https://github.com/sta210-s22/ae-13-tale-of-two-creeks)
 
 ## Perform
 
