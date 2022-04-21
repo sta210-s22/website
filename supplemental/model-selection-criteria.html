@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>STA 210 - Spring 2022 - Week 7</title>
+<title>STA 210 - Spring 2022 - Model Selection Criteria: AIC &amp; BIC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,8 +23,7 @@ ul.task-list{list-style: none;}
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
-<link href="../weeks/week-8.html" rel="next">
-<link href="../weeks/week-6.html" rel="prev">
+<link href="../supplemental/log-transformations.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -61,9 +60,10 @@ ul.task-list{list-style: none;}
 }
 </style>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Week 7">
-<meta name="twitter:image" content="https://sta210-s22.github.io/website//weeks/images/twitter-card.png">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Model Selection Criteria: AIC &amp; BIC">
+<meta name="twitter:image" content="https://sta210-s22.github.io/website//supplemental/images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -74,7 +74,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Week 7</h1>
+      <h1 class="quarto-secondary-nav-title">Model Selection Criteria: AIC &amp; BIC</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -207,12 +207,12 @@ ul.task-list{list-style: none;}
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Weekly materials</a>
-      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Weekly materials</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-1.html" class="sidebar-item-text sidebar-link">Week 1</a>
@@ -245,7 +245,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-7.html" class="sidebar-item-text sidebar-link active">Week 7</a>
+  <a href="../weeks/week-7.html" class="sidebar-item-text sidebar-link">Week 7</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -292,12 +292,12 @@ ul.task-list{list-style: none;}
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Supplemental notes</a>
-      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Supplemental notes</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+    <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../supplemental/slr-derivations.html" class="sidebar-item-text sidebar-link">SLR derivations</a>
@@ -320,7 +320,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../supplemental/model-selection-criteria.html" class="sidebar-item-text sidebar-link">Model selection criteria</a>
+  <a href="../supplemental/model-selection-criteria.html" class="sidebar-item-text sidebar-link active">Model selection criteria</a>
   </div>
 </li>
     </ul>
@@ -334,20 +334,18 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prepare" id="toc-prepare" class="nav-link active" data-scroll-target="#prepare">Prepare</a></li>
-  <li><a href="#participate" id="toc-participate" class="nav-link" data-scroll-target="#participate">Participate</a></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">Practice</a></li>
-  <li><a href="#perform" id="toc-perform" class="nav-link" data-scroll-target="#perform">Perform</a></li>
+  <li><a href="#maximum-likelihood-estimation-of-boldsymbolbeta-and-sigma" id="toc-maximum-likelihood-estimation-of-boldsymbolbeta-and-sigma" class="nav-link active" data-scroll-target="#maximum-likelihood-estimation-of-boldsymbolbeta-and-sigma">Maximum Likelihood Estimation of <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma\)</span></a></li>
+  <li><a href="#aic" id="toc-aic" class="nav-link" data-scroll-target="#aic">AIC</a></li>
+  <li><a href="#bic" id="toc-bic" class="nav-link" data-scroll-target="#bic">BIC</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/weeks/week-7.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/supplemental/model-selection-criteria.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Week 7</h1>
-<p class="subtitle lead">MLR: Feature engineering and model evaluation</p>
+<h1 class="title d-none d-lg-block">Model Selection Criteria: AIC &amp; BIC</h1>
 </div>
 
 
@@ -363,44 +361,64 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Important
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Due dates:</p>
-<ul>
-<li>HW 2 - Friday, Feb 18</li>
-<li>Project ideas - Friday, Feb 18</li>
-</ul>
+<p>The following supplemental notes were created by <a href="https://www.mariatackett.net/">Dr.&nbsp;Maria Tackett</a> for STA 210. They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression. Additional supplemental notes will be added throughout the semester.</p>
 </div>
 </div>
-<section id="prepare" class="level2">
-<h2 class="anchored" data-anchor-id="prepare">Prepare</h2>
-<p>📖 Read Tidy Modeling in R Chp 8: <a href="https://www.tmwr.org/recipes.html">Feature engineering with recipes</a></p>
+<p>This document discusses some of the mathematical details of Akaike’s Information Criterion (AIC) and Schwarz’s Bayesian Information Criterion (BIC). We assume the reader knowledge of the matrix form for multiple linear regression.Please see <a href="https://sta210-s22.github.io/website/supplemental/mlr-matrix.html">Matrix Notation for Multiple Linear Regression</a> for a review.</p>
+<section id="maximum-likelihood-estimation-of-boldsymbolbeta-and-sigma" class="level2">
+<h2 class="anchored" data-anchor-id="maximum-likelihood-estimation-of-boldsymbolbeta-and-sigma">Maximum Likelihood Estimation of <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma\)</span></h2>
+<p>To understand the formulas for AIC and BIC, we will first briefly explain the likelihood function and maximum likelihood estimates for regression.</p>
+<p>Let <span class="math inline">\(\mathbf{Y}\)</span> be <span class="math inline">\(n \times 1\)</span> matrix of responses, <span class="math inline">\(\mathbf{X}\)</span>, the <span class="math inline">\(n \times (p+1)\)</span> matrix of predictors, and <span class="math inline">\(\boldsymbol{\beta}\)</span>, <span class="math inline">\((p+1) \times 1\)</span> matrix of coefficients. If the multiple linear regression model is correct then,</p>
+<p><span id="eq-norm-assumption"><span class="math display">\[
+\mathbf{Y} \sim N(\mathbf{X}\boldsymbol{\beta}, \sigma^2)
+\qquad(1)\]</span></span></p>
+<p>When we do linear regression, our goal is to estimate the unknown parameters <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> from <a href="#eq-norm-assumption">Equation&nbsp;1</a>. In <a href="https://sta210-s22.github.io/website/supplemental/mlr-matrix.html">Matrix Notation for Multiple Linear Regression</a>, we showed a way to estimate these parameters using matrix alegbra. Another approach for estimating <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> is using <em>maximum likelihood estimation</em>.</p>
+<p>A <strong>likelihood function</strong> is used to summarise the evidence from the data in support of each possible value of a model parameter. Using <a href="#eq-norm-assumption">Equation&nbsp;1</a>, we will write the likelihood function for linear regression as</p>
+<p><span id="eq-lr"><span class="math display">\[
+L(\mathbf{X}, \mathbf{Y}|\boldsymbol{\beta}, \sigma^2) = \prod\limits_{i=1}^n (2\pi \sigma^2)^{-\frac{1}{2}} \exp\bigg\{-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(Y_i - \mathbf{X}_i \boldsymbol{\beta})^T(Y_i - \mathbf{X}_i \boldsymbol{\beta})\bigg\}
+\qquad(2)\]</span></span></p>
+<p>where <span class="math inline">\(Y_i\)</span> is the <span class="math inline">\(i^{th}\)</span> response and <span class="math inline">\(\mathbf{X}_i\)</span> is the vector of predictors for the <span class="math inline">\(i^{th}\)</span> observation. One approach estimating <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> is to find the values of those parameters that maximize the likelihood in <a href="#eq-lr">Equation&nbsp;2</a>, i.e.&nbsp;<strong>maximum likelhood estimation</strong>. To make the calculations more manageable, instead of maximizing the likelihood function, we will instead maximize its logarithm, i.e.&nbsp;the log-likelihood function. The values of the parameters that maximize the log-likelihood function are those that maximize the likelihood function. The log-likelihood function we will maximize is</p>
+<p><span id="eq-logL"><span class="math display">\[
+\begin{aligned}
+\log L(\mathbf{X}, \mathbf{Y}|\boldsymbol{\beta}, \sigma^2) &amp;= \sum\limits_{i=1}^n -\frac{1}{2}\log(2\pi\sigma^2) -\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(Y_i - \mathbf{X}_i \boldsymbol{\beta})^T(Y_i - \mathbf{X}_i \boldsymbol{\beta}) \\
+&amp;= -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})^T(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})\\
+\end{aligned}
+\qquad(3)\]</span></span></p>
+<!-- insert details MLES -->
+<p>The maximum likelihood estimate of <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> are <span id="eq-mle"><span class="math display">\[
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} \hspace{10mm} \hat{\sigma}^2 = \frac{1}{n}(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})^T(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta}) = \frac{1}{n}RSS
+\qquad(4)\]</span></span></p>
+<p>where <span class="math inline">\(RSS\)</span> is the residual sum of squares. Note that the maximum likelihood estimate is not exactly equal to the estimate of <span class="math inline">\(\sigma^2\)</span> we typically use <span class="math inline">\(\frac{RSS}{n-p-1}\)</span>. This is because the maximum likelihood estimate of <span class="math inline">\(\sigma^2\)</span> in <a href="#eq-mle">Equation&nbsp;4</a> is a <em>biased</em> estimator of <span class="math inline">\(\sigma^2\)</span>. When <span class="math inline">\(n\)</span> is much larger than the number of predictors <span class="math inline">\(p\)</span>, then the differences in these two estimates are trivial.</p>
 </section>
-<section id="participate" class="level2">
-<h2 class="anchored" data-anchor-id="participate">Participate</h2>
-<p>🖥️ <a href="../slides/lec-12.html">Lecture 12 - MLR: Feature engineering</a></p>
-<p>🖥️ <a href="../slides/lec-13.html">Lecture 13 - MLR: Feature engineering (cont.)</a></p>
+<section id="aic" class="level2">
+<h2 class="anchored" data-anchor-id="aic">AIC</h2>
+<p>Akaike’s Information Criterion (AIC) is</p>
+<p><span id="eq-aic"><span class="math display">\[
+AIC = -2 \log L + 2(p+1)
+\qquad(5)\]</span></span></p>
+<p>where <span class="math inline">\(\log L\)</span> is the log-likelihood. This is the general form of AIC that can be applied to a variety of models, but for now, let’s focus on AIC for mutliple linear regression.</p>
+<p><span id="eq-aic-reg"><span class="math display">\[
+\begin{aligned}
+AIC &amp;= -2 \log L + 2(p+1) \\
+&amp;= -2\bigg[-\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})^T(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})\bigg] + 2(p+1) \\
+&amp;= n\log\big(2\pi\frac{RSS}{n}\big) + \frac{1}{RSS/n}RSS \\
+&amp;= n\log(2\pi) + n\log(RSS) - n\log(n) + 2(p+1)
+\end{aligned}
+\qquad(6)\]</span></span></p>
 </section>
-<section id="practice" class="level2">
-<h2 class="anchored" data-anchor-id="practice">Practice</h2>
-<p>📋 <a href="../ae/ae-5-the-office.html">Application Exercise 5 - The Office</a></p>
-</section>
-<section id="perform" class="level2">
-<h2 class="anchored" data-anchor-id="perform">Perform</h2>
-<p>✍️ <a href="../hw/hw-2.html">HW 2 - Multiple linear regression</a></p>
-<p>📂 <a href="../project-description.html">Project - Topic ideas</a></p>
-<p><br><br></p>
-<div style="font-size: 0.875em;">
-<p>Back to <a href="../" title="Course schedule">course schedule</a> ⏎</p>
-</div>
+<section id="bic" class="level2">
+<h2 class="anchored" data-anchor-id="bic">BIC</h2>
+<p>[To be added.]</p>
 
 
 </section>
@@ -584,14 +602,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week-6.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 6</span>
+      <a href="../supplemental/log-transformations.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Log transformations</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-8.html" class="pagination-link">
-        <span class="nav-page-text">Week 8</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

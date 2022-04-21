@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>STA 210 - Spring 2022 - Week 7</title>
+<title>STA 210 - Spring 2022 - Log Transformations in Linear Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,8 +23,8 @@ ul.task-list{list-style: none;}
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
-<link href="../weeks/week-8.html" rel="next">
-<link href="../weeks/week-6.html" rel="prev">
+<link href="../supplemental/model-selection-criteria.html" rel="next">
+<link href="../supplemental/mlr-matrix.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -61,9 +61,10 @@ ul.task-list{list-style: none;}
 }
 </style>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="twitter:title" content="STA 210 - Spring 2022 - Week 7">
-<meta name="twitter:image" content="https://sta210-s22.github.io/website//weeks/images/twitter-card.png">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Log Transformations in Linear Regression">
+<meta name="twitter:image" content="https://sta210-s22.github.io/website//supplemental/images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -74,7 +75,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Week 7</h1>
+      <h1 class="quarto-secondary-nav-title">Log Transformations in Linear Regression</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -207,12 +208,12 @@ ul.task-list{list-style: none;}
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Weekly materials</a>
-      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Weekly materials</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week-1.html" class="sidebar-item-text sidebar-link">Week 1</a>
@@ -245,7 +246,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-7.html" class="sidebar-item-text sidebar-link active">Week 7</a>
+  <a href="../weeks/week-7.html" class="sidebar-item-text sidebar-link">Week 7</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -292,12 +293,12 @@ ul.task-list{list-style: none;}
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Supplemental notes</a>
-      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Supplemental notes</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+    <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../supplemental/slr-derivations.html" class="sidebar-item-text sidebar-link">SLR derivations</a>
@@ -315,7 +316,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../supplemental/log-transformations.html" class="sidebar-item-text sidebar-link">Log transformations</a>
+  <a href="../supplemental/log-transformations.html" class="sidebar-item-text sidebar-link active">Log transformations</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -334,20 +335,22 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prepare" id="toc-prepare" class="nav-link active" data-scroll-target="#prepare">Prepare</a></li>
-  <li><a href="#participate" id="toc-participate" class="nav-link" data-scroll-target="#participate">Participate</a></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">Practice</a></li>
-  <li><a href="#perform" id="toc-perform" class="nav-link" data-scroll-target="#perform">Perform</a></li>
+  <li><a href="#log-transformation-on-the-response-variable" id="toc-log-transformation-on-the-response-variable" class="nav-link active" data-scroll-target="#log-transformation-on-the-response-variable">Log-transformation on the response variable</a>
+  <ul class="collapse">
+  <li><a href="#mean-median-and-log-transformations" id="toc-mean-median-and-log-transformations" class="nav-link" data-scroll-target="#mean-median-and-log-transformations">Mean, Median, and Log Transformations</a></li>
+  <li><a href="#interpretaton-of-model-coefficients" id="toc-interpretaton-of-model-coefficients" class="nav-link" data-scroll-target="#interpretaton-of-model-coefficients">Interpretaton of model coefficients</a></li>
+  </ul></li>
+  <li><a href="#log-transformation-on-the-predictor-variable" id="toc-log-transformation-on-the-predictor-variable" class="nav-link" data-scroll-target="#log-transformation-on-the-predictor-variable">Log-transformation on the predictor variable</a></li>
+  <li><a href="#log-transformation-on-the-the-response-and-predictor-variable" id="toc-log-transformation-on-the-the-response-and-predictor-variable" class="nav-link" data-scroll-target="#log-transformation-on-the-the-response-and-predictor-variable">Log-transformation on the the response and predictor variable</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/weeks/week-7.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/supplemental/log-transformations.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Week 7</h1>
-<p class="subtitle lead">MLR: Feature engineering and model evaluation</p>
+<h1 class="title d-none d-lg-block">Log Transformations in Linear Regression</h1>
 </div>
 
 
@@ -363,44 +366,159 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Important
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Due dates:</p>
-<ul>
-<li>HW 2 - Friday, Feb 18</li>
-<li>Project ideas - Friday, Feb 18</li>
-</ul>
+<p>The following supplemental notes were created by <a href="https://www.mariatackett.net/">Dr.&nbsp;Maria Tackett</a> for STA 210. They are provided for students who want to dive deeper into the mathematics behind regression and reflect some of the material covered in STA 211: Mathematics of Regression. Additional supplemental notes will be added throughout the semester.</p>
 </div>
 </div>
-<section id="prepare" class="level2">
-<h2 class="anchored" data-anchor-id="prepare">Prepare</h2>
-<p>📖 Read Tidy Modeling in R Chp 8: <a href="https://www.tmwr.org/recipes.html">Feature engineering with recipes</a></p>
-</section>
-<section id="participate" class="level2">
-<h2 class="anchored" data-anchor-id="participate">Participate</h2>
-<p>🖥️ <a href="../slides/lec-12.html">Lecture 12 - MLR: Feature engineering</a></p>
-<p>🖥️ <a href="../slides/lec-13.html">Lecture 13 - MLR: Feature engineering (cont.)</a></p>
-</section>
-<section id="practice" class="level2">
-<h2 class="anchored" data-anchor-id="practice">Practice</h2>
-<p>📋 <a href="../ae/ae-5-the-office.html">Application Exercise 5 - The Office</a></p>
-</section>
-<section id="perform" class="level2">
-<h2 class="anchored" data-anchor-id="perform">Perform</h2>
-<p>✍️ <a href="../hw/hw-2.html">HW 2 - Multiple linear regression</a></p>
-<p>📂 <a href="../project-description.html">Project - Topic ideas</a></p>
-<p><br><br></p>
-<div style="font-size: 0.875em;">
-<p>Back to <a href="../" title="Course schedule">course schedule</a> ⏎</p>
+<p>This document provides details about the model interpretation when the predictor and/or response variables are log-transformed. For simplicity, we will discuss transformations for the simple linear regression model as shown in <a href="#eq-orig">Equation&nbsp;1</a>.</p>
+<p><span id="eq-orig"><span class="math display">\[
+\label{orig}
+y = \beta_0 + \beta_1 x
+\qquad(1)\]</span></span></p>
+<p>All results and interpretations can be easily extended to transformations in multiple regression models.</p>
+<p>Note: <em>log</em> refers to the natural logarithm.</p>
+<section id="log-transformation-on-the-response-variable" class="level2">
+<h2 class="anchored" data-anchor-id="log-transformation-on-the-response-variable">Log-transformation on the response variable</h2>
+<p>Suppose we fit a linear regression model with <span class="math inline">\(\log(y)\)</span>, the log-transformed <span class="math inline">\(y\)</span>, as the response variable. Under this model, we assume a linear relationship exists between <span class="math inline">\(x\)</span> and <span class="math inline">\(\log(y)\)</span>, such that <span class="math inline">\(\log(y) \sim N(\beta_0 + \beta_1 x, \sigma^2)\)</span> for some <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>. In other words, we can model the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(\log(y)\)</span> using the model in <a href="#eq-log-y">Equation&nbsp;2</a>.</p>
+<p><span id="eq-log-y"><span class="math display">\[
+\log(y) = \beta_0 + \beta_1 x
+\qquad(2)\]</span></span></p>
+<p>If we interpret the model in terms of <span class="math inline">\(\log(y)\)</span>, then we can use the usual interpretations for slope and intercept. When reporting results, however, it is best to give all interpretations in terms of the original response variable <span class="math inline">\(y\)</span>, since interpretations using log-transformed variables are often more difficult to truly understand.</p>
+<p>In order to get back on the original scale, we need to use the exponential function (also known as the anti-log), <span class="math inline">\(\exp\{x\} = e^x\)</span>. Therefore, we use the model in <a href="#eq-log-y">Equation&nbsp;2</a> for interpretations and predictions, we will use <a href="#eq-exp-y">Equation&nbsp;3</a> to state our conclusions in terms of <span class="math inline">\(y\)</span>.</p>
+<p><span id="eq-exp-y"><span class="math display">\[
+\begin{aligned}
+&amp;\exp\{\log(y)\} = \exp\{\beta_0 + \beta_1 x\} \\[10pt]
+\Rightarrow &amp;y = \exp\{\beta_0 + \beta_1 x\} \\[10pt]
+\Rightarrow &amp;y = \exp\{\beta_0\}\exp\{\beta_1 x\}
+\end{aligned}
+\qquad(3)\]</span></span></p>
+<p>In order to interpret the slope and intercept, we need to first understand the relationship between the mean, median and log transformations.</p>
+<section id="mean-median-and-log-transformations" class="level3">
+<h3 class="anchored" data-anchor-id="mean-median-and-log-transformations">Mean, Median, and Log Transformations</h3>
+<p>Suppose we have a dataset <code>y</code> that contains the following observations:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 5 6 7 8</code></pre>
 </div>
+</div>
+<p>If we log-transform the values of <code>y</code> then calculate the mean and median, we have</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: right;">mean_log_y</th>
+<th style="text-align: right;">median_log_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1.70503</td>
+<td style="text-align: right;">1.79176</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>If we calculate the mean and median of <code>y</code>, then log-transform the mean and median, we have</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: right;">log_mean</th>
+<th style="text-align: right;">log_median</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1.75786</td>
+<td style="text-align: right;">1.79176</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This is a simple illustration to show</p>
+<ol type="1">
+<li><p><span class="math inline">\(\text{Mean}[{\log(y)}] \neq \log[\text{Mean}(y)]\)</span> - the mean and log are not commutable</p></li>
+<li><p><span class="math inline">\(\text{Median}[\log(y)] = \log[\text{Median}(y)]\)</span> - the median and log are commutable</p></li>
+</ol>
+</section>
+<section id="interpretaton-of-model-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="interpretaton-of-model-coefficients">Interpretaton of model coefficients</h3>
+<p>Using <a href="#eq-log-y">Equation&nbsp;2</a>, the mean <span class="math inline">\(\log(y)\)</span> for any given value of <span class="math inline">\(x\)</span> is <span class="math inline">\(\beta_0 + \beta_1 x\)</span>; however, this does <strong>not</strong> indicate that the mean of <span class="math inline">\(y = \exp\{\beta_0 + \beta_1 x\}\)</span> (see previous section). From the assumptions of linear regression, we assume that for any given value of <span class="math inline">\(x\)</span>, the distribution of <span class="math inline">\(\log(y)\)</span> is Normal, and therefore symmetric. Thus the median of <span class="math inline">\(\log(y)\)</span> is equal to the mean of <span class="math inline">\(\log(y)\)</span>, i.e <span class="math inline">\(\text{Median}(\log(y)) = \beta_0 + \beta_1 x\)</span>.</p>
+<p>Since the log and the median are commutable, <span class="math inline">\(\text{Median}(\log(y)) = \beta_0 + \beta_1 x \Rightarrow \text{Median}(y) = \exp\{\beta_0 + \beta_1 x\}\)</span>. Thus, when we log-transform the response variable, the interpretation of the intercept and slope are in terms of the effect on the <strong>median</strong> of <span class="math inline">\(y\)</span>.</p>
+<p><strong>Intercept</strong>: The intercept is expected median of <span class="math inline">\(y\)</span> when the predictor variable equals 0. Therefore, when <span class="math inline">\(x=0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\log(y) = \beta_0 + \beta_1 \times 0 = \beta_0 \\[10pt]
+\Rightarrow &amp;y = \exp\{\beta_0\}
+\end{aligned}
+\]</span></p>
+<p>Interpretation: When <span class="math inline">\(x=0\)</span>, the median of <span class="math inline">\(y\)</span> is expected to be <span class="math inline">\(\exp\{\beta_0\}\)</span>.</p>
+<p><strong>Slope</strong>: The slope is the expected change in the median of <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> increases by 1 unit. The change in the median of <span class="math inline">\(y\)</span> is</p>
+<p><span class="math display">\[
+\exp\{[\beta_0 + \beta_1 (x+1)] - [\beta_0 + \beta_1 x]\} = \frac{\exp\{\beta_0 + \beta_1 (x+1)\}}{\exp\{\beta_0 + \beta_1 x\}} = \frac{\exp\{\beta_0\}\exp\{\beta_1 x\}\exp\{\beta_1\}}{\exp\{\beta_0\}\exp\{\beta_1 x\}} = \exp\{\beta_1\}
+\]</span></p>
+<p>Thus, the median of <span class="math inline">\(y\)</span> for <span class="math inline">\(x+1\)</span> is <span class="math inline">\(\exp\{\beta_1\}\)</span> times the median of <span class="math inline">\(y\)</span> for <span class="math inline">\(x\)</span>.</p>
+<p>Interpretation: When <span class="math inline">\(x\)</span> increases by one unit, the median of <span class="math inline">\(y\)</span> is expected to multiply by a factor of <span class="math inline">\(\exp\{\beta_1\}\)</span>.</p>
+</section>
+</section>
+<section id="log-transformation-on-the-predictor-variable" class="level2">
+<h2 class="anchored" data-anchor-id="log-transformation-on-the-predictor-variable">Log-transformation on the predictor variable</h2>
+<p>Suppose we fit a linear regression model with <span class="math inline">\(\log(x)\)</span>, the log-transformed <span class="math inline">\(x\)</span>, as the predictor variable. Under this model, we assume a linear relationship exists between <span class="math inline">\(\log(x)\)</span> and <span class="math inline">\(y\)</span>, such that <span class="math inline">\(y \sim N(\beta_0 + \beta_1 \log(x), \sigma^2)\)</span> for some <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>. In other words, we can model the relationship between <span class="math inline">\(\log(x)\)</span> and <span class="math inline">\(y\)</span> using the model in #eq-log-x.</p>
+<p><span id="eq-log-x"><span class="math display">\[
+y = \beta_0 + \beta_1 \log(x)
+\qquad(4)\]</span></span></p>
+<p><strong>Intercept</strong>: The intercept is the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(\log(x) = 0\)</span>, i.e.&nbsp;<span class="math inline">\(x = 1\)</span>.</p>
+<p>Interpretation: When <span class="math inline">\(x = 1\)</span> <span class="math inline">\((\log(x) = 0)\)</span>, the mean of <span class="math inline">\(y\)</span> is expected to be <span class="math inline">\(\beta_0\)</span>.</p>
+<p><strong>Slope</strong>: The slope is interpreted in terms of the change in the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> is multiplied by a factor of <span class="math inline">\(C\)</span>, since <span class="math inline">\(\log(Cx) = \log(x) + \log(C)\)</span>. Thus, when <span class="math inline">\(x\)</span> is multiplied by a factor of <span class="math inline">\(C\)</span>, the change in the mean of <span class="math inline">\(y\)</span> is</p>
+<p><span class="math display">\[
+\begin{aligned}
+[\beta_0 + \beta_1 \log(Cx)] - [\beta_0 + \beta_1 \log(x)] &amp;= \beta_1 [\log(Cx) - \log(x)] \\[10pt]
+&amp; = \beta_1[\log(C) + \log(x) - \log(x)] \\[10pt]
+&amp; = \beta_1 \log(C)
+\end{aligned}
+\]</span></p>
+<p>Thus the mean of <span class="math inline">\(y\)</span> changes by <span class="math inline">\(\beta_1 \log(C)\)</span> units.</p>
+<p>Interpretation: When <span class="math inline">\(x\)</span> is multiplied by a factor of <span class="math inline">\(C\)</span>, the mean of <span class="math inline">\(y\)</span> is expected to change by <span class="math inline">\(\beta_1 \log(C)\)</span> units. For example, if <span class="math inline">\(x\)</span> is doubled, then the mean of <span class="math inline">\(y\)</span> is expected to change by <span class="math inline">\(\beta_1 \log(2)\)</span> units.</p>
+</section>
+<section id="log-transformation-on-the-the-response-and-predictor-variable" class="level2">
+<h2 class="anchored" data-anchor-id="log-transformation-on-the-the-response-and-predictor-variable">Log-transformation on the the response and predictor variable</h2>
+<p>Suppose we fit a linear regression model with <span class="math inline">\(\log(x)\)</span>, the log-transformed <span class="math inline">\(x\)</span>, as the predictor variable and <span class="math inline">\(\log(y)\)</span>, the log-transformed <span class="math inline">\(y\)</span>, as the response variable. Under this model, we assume a linear relationship exists between <span class="math inline">\(\log(x)\)</span> and <span class="math inline">\(\log(y)\)</span>, such that <span class="math inline">\(\log(y) \sim N(\beta_0 + \beta_1 \log(x), \sigma^2)\)</span> for some <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>. In other words, we can model the relationship between <span class="math inline">\(\log(x)\)</span> and <span class="math inline">\(\log(y)\)</span> using the model in <a href="#eq-log-x-y">Equation&nbsp;5</a>.</p>
+<p><span id="eq-log-x-y"><span class="math display">\[
+\log(y) = \beta_0 + \beta_1 \log(x)
+\qquad(5)\]</span></span></p>
+<p>Because the response variable is log-transformed, the interpretations on the original scale will be in terms of the median of <span class="math inline">\(y\)</span> (see the section on the log-transformed response variable for more detail).</p>
+<p><strong>Intercept</strong>: The intercept is the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(\log(x) = 0\)</span>, i.e.&nbsp;<span class="math inline">\(x = 1\)</span>. Therefore, when <span class="math inline">\(\log(x) = 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\log(y) = \beta_0 + \beta_1 \times 0 = \beta_0 \\[10pt]
+\Rightarrow &amp;y = \exp\{\beta_0\}
+\end{aligned}
+\]</span></p>
+<p>Interpretation: When <span class="math inline">\(x = 1\)</span> <span class="math inline">\((\log(x) = 0)\)</span>, the median of <span class="math inline">\(y\)</span> is expected to be <span class="math inline">\(\exp\{\beta_0\}\)</span>.</p>
+<p><strong>Slope</strong>: The slope is interpreted in terms of the change in the median <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> is multiplied by a factor of <span class="math inline">\(C\)</span>, since <span class="math inline">\(\log(Cx) = \log(x) + \log(C)\)</span>. Thus, when <span class="math inline">\(x\)</span> is multiplied by a factor of <span class="math inline">\(C\)</span>, the change in the median of <span class="math inline">\(y\)</span> is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\exp\{[\beta_0 + \beta_1 \log(Cx)] - [\beta_0 + \beta_1 \log(x)]\} &amp;=
+\exp\{\beta_1 [\log(Cx) - \log(x)]\} \\[10pt]
+&amp; = \exp\{\beta_1[\log(C) + \log(x) - \log(x)]\} \\[10pt]
+&amp; = \exp\{\beta_1 \log(C)\} = C^{\beta_1}
+\end{aligned}
+\]</span></p>
+<p>Thus, the median of <span class="math inline">\(y\)</span> for <span class="math inline">\(Cx\)</span> is <span class="math inline">\(C^{\beta_1}\)</span> times the median of <span class="math inline">\(y\)</span> for <span class="math inline">\(x\)</span>.</p>
+<p>Interpretation: When <span class="math inline">\(x\)</span> is multiplied by a factor of <span class="math inline">\(C\)</span>, the median of <span class="math inline">\(y\)</span> is expected to multiple by a factor of <span class="math inline">\(C^{\beta_1}\)</span>. For example, if <span class="math inline">\(x\)</span> is doubled, then the median of <span class="math inline">\(y\)</span> is expected to multiply by <span class="math inline">\(2^{\beta_1}\)</span>.</p>
 
 
 </section>
@@ -584,13 +702,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week-6.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 6</span>
+      <a href="../supplemental/mlr-matrix.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">MLR matrix notation</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-8.html" class="pagination-link">
-        <span class="nav-page-text">Week 8</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../supplemental/model-selection-criteria.html" class="pagination-link">
+        <span class="nav-page-text">Model selection criteria</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
