@@ -114,6 +114,10 @@ website:
             text: Model diagnostics
           - href: supplemental/mlr-matrix.qmd
             text: MLR matrix notation
+          - href: supplemental/log-transformations.qmd
+            text: Log transformations
+          - href: supplemental/model-selection-criteria.qmd
+            text: Model selection criteria
 
 format:
   html:
