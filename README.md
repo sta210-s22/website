@@ -9,7 +9,7 @@
 
 ## Attribution
 
-Much of the content is nased on [STA 210 - Fall 2021](https://github.com/sta210-fa21/) by Dr. Maria Tackett.
+Much of the content is based on [STA 210 - Fall 2021](https://github.com/sta210-fa21/) by Dr. Maria Tackett.
 
 <hr> 
 
