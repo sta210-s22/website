@@ -7,4 +7,4 @@ To access computing resources for the introductory data science courses offered 
 If this is your first time accessing the containers, click on `reserve STA210` on the *Reservations available* menu on the right.
 You only need to do this once, and when you do, you'll see this container moved to the *My reservations* menu on the left.
 
-Next, click on `STA110` under *My reservations* to access the RStudio instance you'll use for the course.
+Next, click on `STA210` under *My reservations* to access the RStudio instance you'll use for the course.
