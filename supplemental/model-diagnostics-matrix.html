@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.280">
+<meta name="generator" content="quarto-0.9.290">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -55,6 +55,11 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>
+.quarto-title-banner {
+  
+}
+</style>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -393,31 +398,31 @@ x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np} \end{bmatrix}
 <p>Thus,</p>
 <p><span class="math display">\[\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \mathbf{\epsilon}\]</span></p>
 <p>Therefore the estimated response for a given combination of explanatory variables and the associated residuals can be written as</p>
-<p>$$</p>
-<p> = = - </p>
-<p>$$ {#eq-matrix_mean}</p>
+<p><span id="eq-matrix_mean"><span class="math display">\[
+\hat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}} \hspace{10mm} \mathbf{e} = \mathbf{Y} - \mathbf{X}\hat{\boldsymbol{\beta}}
+\qquad(4)\]</span></span></p>
 </section>
 <section id="hat-matrix-leverage" class="level2">
 <h2 class="anchored" data-anchor-id="hat-matrix-leverage">Hat Matrix &amp; Leverage</h2>
 <p>Recall from the notes <a href="../supplemental/mlr-matrix.html">Matrix Form of Linear Regression</a> that <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> can be written as the following:</p>
-<p>$$</p>
-<p> = (<sup>T)</sup>{-1}^T</p>
-<p>$$ {#eq-beta-hat}</p>
-<p>Combining <strong>?@eq-matrix_mean</strong> and <strong>?@eq-beta-hat</strong>, we can write <span class="math inline">\(\hat{\mathbf{Y}}\)</span> as the following:</p>
-<p>$$</p>
-<span class="math display">\[\begin{aligned}
+<p><span id="eq-beta-hat"><span class="math display">\[
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}
+\qquad(5)\]</span></span></p>
+<p>Combining <a href="#eq-matrix_mean">Equation&nbsp;4</a> and <a href="#eq-beta-hat">Equation&nbsp;5</a>, we can write <span class="math inline">\(\hat{\mathbf{Y}}\)</span> as the following:</p>
+<p><span id="eq-y-hat"><span class="math display">\[
+\begin{aligned}
 \hat{\mathbf{Y}} &amp;= \mathbf{X}\hat{\boldsymbol{\beta}} \\[10pt]
 &amp;= \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}\\
-\end{aligned}\]</span>
-<p>$$ {#eq-y-hat}</p>
-<p>We define the <strong>hat matrix</strong> as an <span class="math inline">\(n \times n\)</span> matrix of the form <span class="math inline">\(\mathbf{H} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\)</span>. Thus <strong>?@eq-y-hat</strong> becomes</p>
-<p>$$</p>
-<p> = </p>
-<p>$$ {#eq-y-hat-matrix}</p>
+\end{aligned}
+\qquad(6)\]</span></span></p>
+<p>We define the <strong>hat matrix</strong> as an <span class="math inline">\(n \times n\)</span> matrix of the form <span class="math inline">\(\mathbf{H} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\)</span>. Thus <a href="#eq-y-hat">Equation&nbsp;6</a> becomes</p>
+<p><span id="eq-y-hat-matrix"><span class="math display">\[
+\hat{\mathbf{Y}} = \mathbf{H}\mathbf{Y}
+\qquad(7)\]</span></span></p>
 <p>The diagonal elements of the hat matrix are a measure of how far the predictor variables of each observation are from the means of the predictor variables. For example, <span class="math inline">\(h_{ii}\)</span> is a measure of how far the values of the predictor variables for the <span class="math inline">\(i^{th}\)</span> observation, <span class="math inline">\(x_{i1}, x_{i2}, \ldots, x_{ip}\)</span>, are from the mean values of the predictor variables, <span class="math inline">\(\bar{x}_1, \bar{x}_2, \ldots, \bar{x}_p\)</span>. In the case of simple linear regression, the <span class="math inline">\(i^{th}\)</span> diagonal, <span class="math inline">\(h_{ii}\)</span>, can be written as</p>
-<p>$$</p>
-<p>h_{ii} = + </p>
-<p>$$</p>
+<p><span class="math display">\[
+h_{ii} =  \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{j=1}^{n}(x_j-\bar{x})^2}
+\]</span></p>
 <p>We call these diagonal elements, the <strong>leverage</strong> of each observation.</p>
 <p>The diagonal elements of the hat matrix have the following properties:</p>
 <ul>
@@ -426,47 +431,47 @@ x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np} \end{bmatrix}
 <li>The mean hat value is <span class="math inline">\(\bar{h} = \frac{\sum\limits_{i=1}^{n} h_{ii}}{n} = \frac{p+1}{n}\)</span>.</li>
 </ul>
 <p>Using these properties, we consider a point to have <strong>high leverage</strong> if it has a leverage value that is more than 2 times the average. In other words, observations with leverage greater than <span class="math inline">\(\frac{2(p+1)}{n}\)</span> are considered to be <strong>high leverage</strong> points, i.e.&nbsp;outliers in the predictor variables. We are interested in flagging high leverage points, because they may have an influence on the regression coefficients.</p>
-<p>When there are high leverage points in the data, the regression line will tend towards those points; therefore, one property of high leverage points is that they tend to have small residuals. We will show this by rewriting the residuals from <strong>?@eq-matrix_mean</strong> using <strong>?@eq-y-hat-matrix</strong>.</p>
-<p>$$</p>
-<span class="math display">\[\begin{aligned}
+<p>When there are high leverage points in the data, the regression line will tend towards those points; therefore, one property of high leverage points is that they tend to have small residuals. We will show this by rewriting the residuals from <a href="#eq-matrix_mean">Equation&nbsp;4</a> using <a href="#eq-y-hat-matrix">Equation&nbsp;7</a>.</p>
+<p><span id="eq-resid-hat"><span class="math display">\[
+\begin{aligned}
 \mathbf{e} &amp;= \mathbf{Y} - \hat{\mathbf{Y}} \\[10pt]
 &amp; = \mathbf{Y} - \mathbf{H}\mathbf{Y} \\[10pt]
 &amp;= (1-\mathbf{H})\mathbf{Y}
-\end{aligned}\]</span>
-<p>$$ {#eq-resid-hat}</p>
-<p>Note that the identity matrix and hat matrix are <strong>idempotent</strong>, i.e.&nbsp;<span class="math inline">\(\mathbf{I}\mathbf{I} = \mathbf{I}\)</span>, <span class="math inline">\(\mathbf{H}\mathbf{H} = \mathbf{H}\)</span>. Thus, <span class="math inline">\((\mathbf{I} - \mathbf{H})\)</span> is also idempotent. These matrices are also symmetric. Using these properties and <strong>?@eq-resid-hat</strong>, we have that the variance-covariance matrix of the residuals <span class="math inline">\(\boldsymbol{e}\)</span>, is</p>
-<p>$$</p>
-<span class="math display">\[\begin{aligned}
+\end{aligned}
+\qquad(8)\]</span></span></p>
+<p>Note that the identity matrix and hat matrix are <strong>idempotent</strong>, i.e.&nbsp;<span class="math inline">\(\mathbf{I}\mathbf{I} = \mathbf{I}\)</span>, <span class="math inline">\(\mathbf{H}\mathbf{H} = \mathbf{H}\)</span>. Thus, <span class="math inline">\((\mathbf{I} - \mathbf{H})\)</span> is also idempotent. These matrices are also symmetric. Using these properties and <a href="#eq-resid-hat">Equation&nbsp;8</a>, we have that the variance-covariance matrix of the residuals <span class="math inline">\(\boldsymbol{e}\)</span>, is</p>
+<p><span id="eq-resid-var"><span class="math display">\[
+\begin{aligned}
 Var(\mathbf{e}) &amp;= \mathbf{e}\mathbf{e}^T \\[10pt]
 &amp;=  (1-\mathbf{H})Var(\mathbf{Y})^T(1-\mathbf{H})^T \\[10pt]
 &amp;= (1-\mathbf{H})\hat{\sigma}^2(1-\mathbf{H})^T  \\[10pt]
 &amp;= \hat{\sigma}^2(1-\mathbf{H})(1-\mathbf{H})  \\[10pt]
 &amp;= \hat{\sigma}^2(1-\mathbf{H})
-\end{aligned}\]</span>
-<p>$$ {#eq-resid-var}</p>
+\end{aligned}
+\qquad(9)\]</span></span></p>
 <p>where <span class="math inline">\(\hat{\sigma}^2 = \frac{\sum_{i=1}^{n}e_i^2}{n-p-1}\)</span> is the estimated regression variance. Thus, the variance of the <span class="math inline">\(i^{th}\)</span> residual is <span class="math inline">\(Var(e_i) = \hat{\sigma}^2(1-h_{ii})\)</span>. Therefore, the higher the leverage, the smaller the variance of the residual. Because the expected value of the residuals is 0, we conclude that points with high leverage tend to have smaller residuals than points with lower leverage.</p>
 </section>
 <section id="standardized-residuals" class="level2">
 <h2 class="anchored" data-anchor-id="standardized-residuals">Standardized Residuals</h2>
 <p>In general, we standardize a value by shifting by the expected value and rescaling by the standard deviation (or standard error). Thus, the <span class="math inline">\(i^{th}\)</span> standardized residual takes the form</p>
-<p>$$</p>
-<p>std.res_i = </p>
-<p>$$</p>
-<p>The expected value of the residuals is 0, i.e.&nbsp;<span class="math inline">\(E(e_i) = 0\)</span>. From <strong>?@eq-resid-var</strong>), the standard error of the residual is <span class="math inline">\(SE(e_i) = \hat{\sigma}\sqrt{1-h_{ii}}\)</span>. Therefore,</p>
-<p>$$</p>
-<p>std.res_i = </p>
-<p>$$ {#eq-std-resid}</p>
+<p><span class="math display">\[
+std.res_i = \frac{e_i - E(e_i)}{SE(e_i)}
+\]</span></p>
+<p>The expected value of the residuals is 0, i.e.&nbsp;<span class="math inline">\(E(e_i) = 0\)</span>. From <a href="#eq-resid-var">Equation&nbsp;9</a>), the standard error of the residual is <span class="math inline">\(SE(e_i) = \hat{\sigma}\sqrt{1-h_{ii}}\)</span>. Therefore,</p>
+<p><span id="eq-std-resid"><span class="math display">\[
+std.res_i = \frac{e_i}{\hat{\sigma}\sqrt{1-h_{ii}}}
+\qquad(10)\]</span></span></p>
 </section>
 <section id="cooks-distance" class="level2">
 <h2 class="anchored" data-anchor-id="cooks-distance">Cook’s Distance</h2>
 <p>Cook’s distance is a measure of how much each observation influences the model coefficients, and thus the predicted values. The Cook’s distance for the <span class="math inline">\(i^{th}\)</span> observation can be written as</p>
-<p>$$</p>
-<p>D_i = </p>
-<p>$$ {#eq-cooksd}</p>
-<p>where <span class="math inline">\(\hat{\mathbf{Y}}_{(i)}\)</span> is the vector of predicted values from the model fitted when the <span class="math inline">\(i^{th}\)</span> observation is deleted. Cook’s Distance can be calculated without deleting observations one at a time, since <strong>?@eq-cooksd-v2</strong> below is mathematically equivalent to <strong>?@eq-cooksd</strong>.</p>
-<p>$$</p>
-<p>D_i = std.res_i^2= </p>
-<p>$$ {#eq-cooksd-v2}</p>
+<p><span id="eq-cooksd"><span class="math display">\[
+D_i = \frac{(\hat{\mathbf{Y}} -\hat{\mathbf{Y}}_{(i)})^T(\hat{\mathbf{Y}} -\hat{\mathbf{Y}}_{(i)})}{(p+1)\hat{\sigma}}
+\qquad(11)\]</span></span></p>
+<p>where <span class="math inline">\(\hat{\mathbf{Y}}_{(i)}\)</span> is the vector of predicted values from the model fitted when the <span class="math inline">\(i^{th}\)</span> observation is deleted. Cook’s Distance can be calculated without deleting observations one at a time, since <a href="#eq-cooksd-v2">Equation&nbsp;12</a> below is mathematically equivalent to <a href="#eq-cooksd">Equation&nbsp;11</a>.</p>
+<p><span id="eq-cooksd-v2"><span class="math display">\[
+D_i = \frac{1}{p+1}std.res_i^2\Bigg[\frac{h_{ii}}{(1-h_{ii})}\Bigg] = \frac{e_i^2}{(p+1)\hat{\sigma}^2(1-h_{ii})}\Bigg[\frac{h_{ii}}{(1-h_{ii})}\Bigg]
+\qquad(12)\]</span></span></p>
 
 
 </section>
@@ -590,7 +595,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.blur();
     // flash "checked"
     button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
     setTimeout(function() {
+      button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
