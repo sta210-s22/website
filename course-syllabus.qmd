@@ -161,16 +161,16 @@ More information about the project will be provided during the semester.
 
 The final course grade will be calculated as follows:
 
-| Category              | Percentage   |
-|-----------------------|--------------|
-| Application exercises | 3%           |
-| Homework              | 35% (7% x 5) |
-| Project               | 15%          |
-| Lab                   | 14% (2% x 7) |
-| Exam 01               | 10%          |
-| Exam 02               | 10%          |
-| Exam 03               | 10%          |
-| Teamwork              | 3%           |
+| Category              | Percentage      |
+|-----------------------|-----------------|
+| Application exercises | 3%              |
+| Homework              | 35% (7% x 5)    |
+| Project               | 15%             |
+| Lab                   | 14% (2.33% x 6) |
+| Exam 01               | 10%             |
+| Exam 02               | 10%             |
+| Exam 03               | 10%             |
+| Teamwork              | 3%              |
 
 The final letter grade will be determined based on the following thresholds:
 
