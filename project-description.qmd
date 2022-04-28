@@ -429,6 +429,35 @@ Additionally, the question should be (i) substantive (i.e. it shouldn't be "Why 
 
 *This portion of the project will be assessed individually.*
 
+### Pairings
+
+Find your team name in the first column, watch videos from teams in the second column and leave comments.
+
+| Reviewer                         | First video to review            | Second video to review           |
+|:-----------------------|:-----------------------|:-----------------------|
+| Ginger and Stats                 | Eight                            | We R                             |
+| Krafthouse                       | Ginger and Stats                 | Eight                            |
+| Soy Nuggets                      | Krafthouse                       | Ginger and Stats                 |
+| Down To Earth Goats              | Soy Nuggets                      | Krafthouse                       |
+| A+++                             | Down To Earth Goats              | Soy Nuggets                      |
+| Team Five                        | A+++                             | Down To Earth Goats              |
+| Rrawr                            | Team Five                        | A+++                             |
+| Housecats                        | Rrawr                            | Team Five                        |
+| Dekk                             | Housecats                        | Rrawr                            |
+| Stat OverFlow                    | Dekk                             | Housecats                        |
+| The Three Musketeers             | Stat OverFlow                    | Dekk                             |
+| Predictors                       | The Three Musketeers             | Stat OverFlow                    |
+| Stats Squad                      | Predictors                       | The Three Musketeers             |
+| Statisix                         | Stats Squad                      | Predictors                       |
+| Sixers                           | Statisix                         | Stats Squad                      |
+| Yay Stats                        | Sixers                           | Statisix                         |
+| TINA                             | Yay Stats                        | Sixers                           |
+| Statchelorettes                  | TINA                             | Yay Stats                        |
+| Pineapple Wedge and Diced Papaya | Statchelorettes                  | TINA                             |
+| Chaa Chaa Chaa                   | Pineapple Wedge and Diced Papaya | Statchelorettes                  |
+| We R                             | Chaa Chaa Chaa                   | Pineapple Wedge and Diced Papaya |
+| Eight                            | We R                             | Chaa Chaa Chaa                   |
+
 ## Reproducibility + organization
 
 All written work (with exception of presentation slides) should be reproducible, and the GitHub repo should be neatly organized.
