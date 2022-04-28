@@ -224,7 +224,7 @@ The peer review will be graded on the extent to which it comprehensively and con
 #### Section 3 - M 5:15PM - 6:30PM
 
 | Team being reviewed              | Reviewer 1                       | Reviewer 2                       |
-|----------------------------------|----------------------------------|----------------------------------|
+|------------------------|------------------------|------------------------|
 | down_to_earth_goats              | the_three_musketeers             | team_five                        |
 | ginger_and_stats                 | down_to_earth_goats              | the_three_musketeers             |
 | pineapple_wedge_and_diced_papaya | ginger_and_stats                 | down_to_earth_goats              |
@@ -417,9 +417,6 @@ Once your video is ready, upload the video to Warpwire, then embed the video in 
 -   Select your video, then click "Insert 1 item." This will embed your video in the conversation.
 -   Under the video, paste the URL to your video.
 -   You're done!
-
-You can see the Teaching Team example in Sakai.
-\[**TO DO:** Post example\]
 
 ## Presentation comments {#presentation-comments}
 
