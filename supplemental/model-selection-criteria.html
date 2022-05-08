@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.339">
+<meta name="generator" content="quarto-0.9.370">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,7 +81,7 @@ ul.task-list{list-style: none;}
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
-      <a href="../">
+      <a href="../" class="sidebar-logo-link">
       <img src="../images/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
       <div class="sidebar-tools-main tools-wide">
@@ -390,7 +390,8 @@ L(\mathbf{X}, \mathbf{Y}|\boldsymbol{\beta}, \sigma^2) = \prod\limits_{i=1}^n (2
 \end{aligned}
 \qquad(3)\]</span></span></p>
 <!-- insert details MLES -->
-<p>The maximum likelihood estimate of <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> are <span id="eq-mle"><span class="math display">\[
+<p>The maximum likelihood estimate of <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> are</p>
+<p><span id="eq-mle"><span class="math display">\[
 \hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} \hspace{10mm} \hat{\sigma}^2 = \frac{1}{n}(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})^T(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta}) = \frac{1}{n}RSS
 \qquad(4)\]</span></span></p>
 <p>where <span class="math inline">\(RSS\)</span> is the residual sum of squares. Note that the maximum likelihood estimate is not exactly equal to the estimate of <span class="math inline">\(\sigma^2\)</span> we typically use <span class="math inline">\(\frac{RSS}{n-p-1}\)</span>. This is because the maximum likelihood estimate of <span class="math inline">\(\sigma^2\)</span> in <a href="#eq-mle">Equation&nbsp;4</a> is a <em>biased</em> estimator of <span class="math inline">\(\sigma^2\)</span>. When <span class="math inline">\(n\)</span> is much larger than the number of predictors <span class="math inline">\(p\)</span>, then the differences in these two estimates are trivial.</p>

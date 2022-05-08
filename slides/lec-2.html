@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.339">
+  <meta name="generator" content="quarto-0.9.370">
 
   <meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
   <title>STA 210 - Spring 2022 - Simple Linear Regression</title>
@@ -552,12 +552,12 @@ $ fandango_difference        &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
 <h2>Regression model</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p><span class="math display">\[
-\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
+<p>$$</p>
+<span class="math display">\[\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
 &amp;= \color{purple}{\mathbf{f(X)}} + \epsilon \\[8pt]
 &amp;= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \epsilon
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span>
+<p>$$</p>
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -575,10 +575,13 @@ $ fandango_difference        &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
 <h2>Regression model + residuals</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p><span class="math display">\[\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \color{blue}{\textbf{Error}} \\[8pt]
+$$
+<span class="math display">\[\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \color{blue}{\textbf{Error}} \\[8pt]
+
 &amp;= \color{purple}{\mathbf{f(X)}} + \color{blue}{\boldsymbol{\epsilon}} \\[8pt]
 &amp;= \color{purple}{\boldsymbol{\mu_{Y|X}}} + \color{blue}{\boldsymbol{\epsilon}} \\[8pt]
-\end{aligned}\]</span></p>
+\end{aligned}\]</span>
+<p>$$</p>
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -689,11 +692,11 @@ r &amp;= 0.7814
 &amp;\hat{\beta}_1 = 0.5187
 \end{aligned}\]</span></p>
 </div><div class="column" style="width:50%;">
-<p><span class="math display">\[
-\begin{aligned}\hat{\beta}_0 &amp;= 63.8767 - 0.5187 \times 60.8493 \\
+<p>$$</p>
+<span class="math display">\[\begin{aligned}\hat{\beta}_0 &amp;= 63.8767 - 0.5187 \times 60.8493 \\
 &amp;= 32.3142
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span>
+<p>$$</p>
 </div>
 </div>
 </section>
@@ -736,13 +739,13 @@ r &amp;= 0.7814
 <section id="making-a-prediction" class="slide level2">
 <h2>Making a prediction</h2>
 <p>Suppose that a movie has a critics score of 50. According to this model, what is the movie’s predicted audience score?</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p>$$</p>
+<span class="math display">\[\begin{aligned}
 \widehat{\text{audience}} &amp;= 32.3142 + 0.5187 \times \text{critics} \\
 &amp;= 32.3142 + 0.5187 \times 50 \\
 &amp;= 58.2492
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span>
+<p>$$</p>
 </section>
 <section id="extrapolation" class="slide level2">
 <h2>Extrapolation</h2>
@@ -811,7 +814,7 @@ r &amp;= 0.7814
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"e5c51f353bb90c48","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"66442a278f603fe0","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
  
         // Display controls in the bottom right corner
