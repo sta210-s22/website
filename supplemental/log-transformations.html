@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.370">
+<meta name="generator" content="quarto-0.9.403">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -59,7 +59,7 @@ ul.task-list{list-style: none;}
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="twitter:title" content="STA 210 - Spring 2022 - Log Transformations in Linear Regression">
-<meta name="twitter:image" content="https:/sta210-s22.github.io/website/supplemental/images/twitter-card.png">
+<meta name="twitter:image" content="https://sta210-s22.github.io/website/supplemental/images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -378,7 +378,7 @@ Note
 <p><span id="eq-orig"><span class="math display">\[
 \label{orig}
 y = \beta_0 + \beta_1 x
-\qquad(1)\]</span></span></p>
+\tag{1}\]</span></span></p>
 <p>All results and interpretations can be easily extended to transformations in multiple regression models.</p>
 <p>Note: <em>log</em> refers to the natural logarithm.</p>
 <section id="log-transformation-on-the-response-variable" class="level2">
@@ -386,7 +386,7 @@ y = \beta_0 + \beta_1 x
 <p>Suppose we fit a linear regression model with <span class="math inline">\(\log(y)\)</span>, the log-transformed <span class="math inline">\(y\)</span>, as the response variable. Under this model, we assume a linear relationship exists between <span class="math inline">\(x\)</span> and <span class="math inline">\(\log(y)\)</span>, such that <span class="math inline">\(\log(y) \sim N(\beta_0 + \beta_1 x, \sigma^2)\)</span> for some <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>. In other words, we can model the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(\log(y)\)</span> using the model in <a href="#eq-log-y">Equation&nbsp;2</a>.</p>
 <p><span id="eq-log-y"><span class="math display">\[
 \log(y) = \beta_0 + \beta_1 x
-\qquad(2)\]</span></span></p>
+\tag{2}\]</span></span></p>
 <p>If we interpret the model in terms of <span class="math inline">\(\log(y)\)</span>, then we can use the usual interpretations for slope and intercept. When reporting results, however, it is best to give all interpretations in terms of the original response variable <span class="math inline">\(y\)</span>, since interpretations using log-transformed variables are often more difficult to truly understand.</p>
 <p>In order to get back on the original scale, we need to use the exponential function (also known as the anti-log), <span class="math inline">\(\exp\{x\} = e^x\)</span>. Therefore, we use the model in <a href="#eq-log-y">Equation&nbsp;2</a> for interpretations and predictions, we will use <a href="#eq-exp-y">Equation&nbsp;3</a> to state our conclusions in terms of <span class="math inline">\(y\)</span>.</p>
 <p><span id="eq-exp-y"><span class="math display">\[
@@ -395,7 +395,7 @@ y = \beta_0 + \beta_1 x
 \Rightarrow &amp;y = \exp\{\beta_0 + \beta_1 x\} \\[10pt]
 \Rightarrow &amp;y = \exp\{\beta_0\}\exp\{\beta_1 x\}
 \end{aligned}
-\qquad(3)\]</span></span></p>
+\tag{3}\]</span></span></p>
 <p>In order to interpret the slope and intercept, we need to first understand the relationship between the mean, median and log transformations.</p>
 <section id="mean-median-and-log-transformations" class="level3">
 <h3 class="anchored" data-anchor-id="mean-median-and-log-transformations">Mean, Median, and Log Transformations</h3>
@@ -474,7 +474,7 @@ y = \beta_0 + \beta_1 x
 <p>Suppose we fit a linear regression model with <span class="math inline">\(\log(x)\)</span>, the log-transformed <span class="math inline">\(x\)</span>, as the predictor variable. Under this model, we assume a linear relationship exists between <span class="math inline">\(\log(x)\)</span> and <span class="math inline">\(y\)</span>, such that <span class="math inline">\(y \sim N(\beta_0 + \beta_1 \log(x), \sigma^2)\)</span> for some <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>. In other words, we can model the relationship between <span class="math inline">\(\log(x)\)</span> and <span class="math inline">\(y\)</span> using the model in #eq-log-x.</p>
 <p><span id="eq-log-x"><span class="math display">\[
 y = \beta_0 + \beta_1 \log(x)
-\qquad(4)\]</span></span></p>
+\tag{4}\]</span></span></p>
 <p><strong>Intercept</strong>: The intercept is the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(\log(x) = 0\)</span>, i.e.&nbsp;<span class="math inline">\(x = 1\)</span>.</p>
 <p>Interpretation: When <span class="math inline">\(x = 1\)</span> <span class="math inline">\((\log(x) = 0)\)</span>, the mean of <span class="math inline">\(y\)</span> is expected to be <span class="math inline">\(\beta_0\)</span>.</p>
 <p><strong>Slope</strong>: The slope is interpreted in terms of the change in the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> is multiplied by a factor of <span class="math inline">\(C\)</span>, since <span class="math inline">\(\log(Cx) = \log(x) + \log(C)\)</span>. Thus, when <span class="math inline">\(x\)</span> is multiplied by a factor of <span class="math inline">\(C\)</span>, the change in the mean of <span class="math inline">\(y\)</span> is</p>
@@ -493,7 +493,7 @@ y = \beta_0 + \beta_1 \log(x)
 <p>Suppose we fit a linear regression model with <span class="math inline">\(\log(x)\)</span>, the log-transformed <span class="math inline">\(x\)</span>, as the predictor variable and <span class="math inline">\(\log(y)\)</span>, the log-transformed <span class="math inline">\(y\)</span>, as the response variable. Under this model, we assume a linear relationship exists between <span class="math inline">\(\log(x)\)</span> and <span class="math inline">\(\log(y)\)</span>, such that <span class="math inline">\(\log(y) \sim N(\beta_0 + \beta_1 \log(x), \sigma^2)\)</span> for some <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>. In other words, we can model the relationship between <span class="math inline">\(\log(x)\)</span> and <span class="math inline">\(\log(y)\)</span> using the model in <a href="#eq-log-x-y">Equation&nbsp;5</a>.</p>
 <p><span id="eq-log-x-y"><span class="math display">\[
 \log(y) = \beta_0 + \beta_1 \log(x)
-\qquad(5)\]</span></span></p>
+\tag{5}\]</span></span></p>
 <p>Because the response variable is log-transformed, the interpretations on the original scale will be in terms of the median of <span class="math inline">\(y\)</span> (see the section on the log-transformed response variable for more detail).</p>
 <p><strong>Intercept</strong>: The intercept is the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(\log(x) = 0\)</span>, i.e.&nbsp;<span class="math inline">\(x = 1\)</span>. Therefore, when <span class="math inline">\(\log(x) = 0\)</span>,</p>
 <p><span class="math display">\[

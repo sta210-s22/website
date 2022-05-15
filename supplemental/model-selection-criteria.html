@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.370">
+<meta name="generator" content="quarto-0.9.403">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,7 @@ ul.task-list{list-style: none;}
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="twitter:title" content="STA 210 - Spring 2022 - Model Selection Criteria: AIC &amp; BIC">
-<meta name="twitter:image" content="https:/sta210-s22.github.io/website/supplemental/images/twitter-card.png">
+<meta name="twitter:image" content="https://sta210-s22.github.io/website/supplemental/images/twitter-card.png">
 <meta name="twitter:creator" content="@minebocek">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -376,24 +376,24 @@ Note
 <p>Let <span class="math inline">\(\mathbf{Y}\)</span> be <span class="math inline">\(n \times 1\)</span> matrix of responses, <span class="math inline">\(\mathbf{X}\)</span>, the <span class="math inline">\(n \times (p+1)\)</span> matrix of predictors, and <span class="math inline">\(\boldsymbol{\beta}\)</span>, <span class="math inline">\((p+1) \times 1\)</span> matrix of coefficients. If the multiple linear regression model is correct then,</p>
 <p><span id="eq-norm-assumption"><span class="math display">\[
 \mathbf{Y} \sim N(\mathbf{X}\boldsymbol{\beta}, \sigma^2)
-\qquad(1)\]</span></span></p>
+\tag{1}\]</span></span></p>
 <p>When we do linear regression, our goal is to estimate the unknown parameters <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> from <a href="#eq-norm-assumption">Equation&nbsp;1</a>. In <a href="https://sta210-s22.github.io/website/supplemental/mlr-matrix.html">Matrix Notation for Multiple Linear Regression</a>, we showed a way to estimate these parameters using matrix alegbra. Another approach for estimating <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> is using <em>maximum likelihood estimation</em>.</p>
 <p>A <strong>likelihood function</strong> is used to summarise the evidence from the data in support of each possible value of a model parameter. Using <a href="#eq-norm-assumption">Equation&nbsp;1</a>, we will write the likelihood function for linear regression as</p>
 <p><span id="eq-lr"><span class="math display">\[
 L(\mathbf{X}, \mathbf{Y}|\boldsymbol{\beta}, \sigma^2) = \prod\limits_{i=1}^n (2\pi \sigma^2)^{-\frac{1}{2}} \exp\bigg\{-\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(Y_i - \mathbf{X}_i \boldsymbol{\beta})^T(Y_i - \mathbf{X}_i \boldsymbol{\beta})\bigg\}
-\qquad(2)\]</span></span></p>
+\tag{2}\]</span></span></p>
 <p>where <span class="math inline">\(Y_i\)</span> is the <span class="math inline">\(i^{th}\)</span> response and <span class="math inline">\(\mathbf{X}_i\)</span> is the vector of predictors for the <span class="math inline">\(i^{th}\)</span> observation. One approach estimating <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> is to find the values of those parameters that maximize the likelihood in <a href="#eq-lr">Equation&nbsp;2</a>, i.e.&nbsp;<strong>maximum likelhood estimation</strong>. To make the calculations more manageable, instead of maximizing the likelihood function, we will instead maximize its logarithm, i.e.&nbsp;the log-likelihood function. The values of the parameters that maximize the log-likelihood function are those that maximize the likelihood function. The log-likelihood function we will maximize is</p>
 <p><span id="eq-logL"><span class="math display">\[
 \begin{aligned}
 \log L(\mathbf{X}, \mathbf{Y}|\boldsymbol{\beta}, \sigma^2) &amp;= \sum\limits_{i=1}^n -\frac{1}{2}\log(2\pi\sigma^2) -\frac{1}{2\sigma^2}\sum\limits_{i=1}^n(Y_i - \mathbf{X}_i \boldsymbol{\beta})^T(Y_i - \mathbf{X}_i \boldsymbol{\beta}) \\
 &amp;= -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})^T(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})\\
 \end{aligned}
-\qquad(3)\]</span></span></p>
+\tag{3}\]</span></span></p>
 <!-- insert details MLES -->
 <p>The maximum likelihood estimate of <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma^2\)</span> are</p>
 <p><span id="eq-mle"><span class="math display">\[
 \hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y} \hspace{10mm} \hat{\sigma}^2 = \frac{1}{n}(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta})^T(\mathbf{Y} - \mathbf{X} \boldsymbol{\beta}) = \frac{1}{n}RSS
-\qquad(4)\]</span></span></p>
+\tag{4}\]</span></span></p>
 <p>where <span class="math inline">\(RSS\)</span> is the residual sum of squares. Note that the maximum likelihood estimate is not exactly equal to the estimate of <span class="math inline">\(\sigma^2\)</span> we typically use <span class="math inline">\(\frac{RSS}{n-p-1}\)</span>. This is because the maximum likelihood estimate of <span class="math inline">\(\sigma^2\)</span> in <a href="#eq-mle">Equation&nbsp;4</a> is a <em>biased</em> estimator of <span class="math inline">\(\sigma^2\)</span>. When <span class="math inline">\(n\)</span> is much larger than the number of predictors <span class="math inline">\(p\)</span>, then the differences in these two estimates are trivial.</p>
 </section>
 <section id="aic" class="level2">
@@ -401,7 +401,7 @@ L(\mathbf{X}, \mathbf{Y}|\boldsymbol{\beta}, \sigma^2) = \prod\limits_{i=1}^n (2
 <p>Akaike’s Information Criterion (AIC) is</p>
 <p><span id="eq-aic"><span class="math display">\[
 AIC = -2 \log L + 2(p+1)
-\qquad(5)\]</span></span></p>
+\tag{5}\]</span></span></p>
 <p>where <span class="math inline">\(\log L\)</span> is the log-likelihood. This is the general form of AIC that can be applied to a variety of models, but for now, let’s focus on AIC for mutliple linear regression.</p>
 <p><span id="eq-aic-reg"><span class="math display">\[
 \begin{aligned}
@@ -410,7 +410,7 @@ AIC &amp;= -2 \log L + 2(p+1) \\
 &amp;= n\log\big(2\pi\frac{RSS}{n}\big) + \frac{1}{RSS/n}RSS \\
 &amp;= n\log(2\pi) + n\log(RSS) - n\log(n) + 2(p+1)
 \end{aligned}
-\qquad(6)\]</span></span></p>
+\tag{6}\]</span></span></p>
 </section>
 <section id="bic" class="level2">
 <h2 class="anchored" data-anchor-id="bic">BIC</h2>
