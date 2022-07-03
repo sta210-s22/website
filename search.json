@@ -2751,6 +2751,13 @@
     "text": "ROC curve\nROC curves for multiclass outcomes use a one-vs-all approach: calculate multiple curves, one per level vs. all other levels.\n\nvolcano_fit_rs1 %>%\n  collect_predictions() %>%\n  group_by(id) %>%\n  roc_curve(\n    truth = volcano_type,\n    .pred_Stratovolcano:.pred_Other\n  ) %>%\n  autoplot()"
   },
   {
+    "objectID": "slides/lec-25.html#roc-curve-output",
+    "href": "slides/lec-25.html#roc-curve-output",
+    "title": "MultiLR: Predictive models",
+    "section": "ROC curve",
+    "text": "ROC curve"
+  },
+  {
     "objectID": "slides/lec-25.html#roc-curve---under-the-hood",
     "href": "slides/lec-25.html#roc-curve---under-the-hood",
     "title": "MultiLR: Predictive models",
