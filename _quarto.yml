@@ -11,8 +11,6 @@ website:
   repo-actions: [edit, issue]
 
   open-graph: true
-    locale: es_ES
-    site-name: "STA 210 - Spring 2022"
 
   twitter-card:
     creator: "@minebocek"
