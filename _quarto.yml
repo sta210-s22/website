@@ -10,7 +10,10 @@ website:
   repo-url: https://github.com/sta210-s22/website
   repo-actions: [edit, issue]
 
-  opengraph: true
+  open-graph: true
+    locale: es_ES
+    site-name: "STA 210 - Spring 2022"
+
   twitter-card:
     creator: "@minebocek"
     image: "images/twitter-card.png"
